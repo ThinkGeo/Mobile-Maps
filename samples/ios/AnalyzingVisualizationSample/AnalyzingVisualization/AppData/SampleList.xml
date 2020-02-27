@@ -1,0 +1,26 @@
+<StyleList>
+  <Sample Name="Cluster Style" Class="ClusterPointStyleViewController"  Image="cluster-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Custom Style" Class="CustomStyleViewContoller"  Image="custom-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Filter Style" Class="FilterStyleViewController"  Image="filter-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Class Break Style" Class="ClassBreakStyleViewController" Image="class-break-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Dot Densty Style" Class="DotDenstyStyleViewContoller"  Image="dot-densty-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Heat Style" Class="HeatStyleViewContoller"  Image="heat-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Icon Style" Class="IconStyleViewController"  Image="icon-style">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Isoline Line Style" Class="IsolineStyleViewContoller"  Image="isoline-line-style">
+    <Description></Description>
+  </Sample>
+</StyleList>

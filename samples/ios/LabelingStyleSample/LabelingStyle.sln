@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelingStyle", "LabelingStyle\LabelingStyle.csproj", "{210490A1-19B6-4E6F-9B30-11F66C187D8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Debug|iPhone.ActiveCfg = Debug|iPhoneSimulator
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Debug|iPhone.Build.0 = Debug|iPhoneSimulator
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Release|iPhone.ActiveCfg = Release|iPhone
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Release|iPhone.Build.0 = Release|iPhone
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{210490A1-19B6-4E6F-9B30-11F66C187D8B}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC7DB417-6AB6-4389-BE04-AA787C1E67C7}
+	EndGlobalSection
+EndGlobal

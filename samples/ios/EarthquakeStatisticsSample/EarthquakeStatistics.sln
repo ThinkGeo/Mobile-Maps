@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarthquakeStatistics", "EarthquakeStatistics\EarthquakeStatistics.csproj", "{FCA23344-8444-4B36-A21B-68F126FD4DD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Debug|iPhone.Build.0 = Debug|iPhone
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Release|iPhone.ActiveCfg = Release|iPhone
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Release|iPhone.Build.0 = Release|iPhone
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{FCA23344-8444-4B36-A21B-68F126FD4DD0}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A34F0F1-7003-4126-A008-D2652BCD9284}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MapContainer"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minHeight="25px"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ToolsLinearLayout"
+        android:background="@drawable/linearlayoutStyle">
+        <RelativeLayout
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/radioGroup1">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:layout_marginRight="15dp"
+                    android:textSize="10sp"
+                    android:textColor="@layout/RadioButtonTextColorSelector"
+                    android:drawableTop="@drawable/pan"
+                    android:id="@+id/PanButton"
+                    android:text="@string/Pan" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:layout_marginRight="15dp"
+                    android:textSize="10sp"
+                    android:textColor="@layout/RadioButtonTextColorSelector"
+                    android:drawableTop="@drawable/drawPoint"
+                    android:id="@+id/DrawPointButton"
+                    android:text="@string/Pin" />
+                <Button
+                    android:id="@+id/ClearButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clear"
+                    android:textSize="10sp"
+                    android:background="@null"
+                    android:layout_alignParentRight="true"
+                    android:drawableTop="@drawable/clear"
+                    android:textColor="@android:color/white" />
+            </RadioGroup>
+        <!--<ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@layout/SearchButtonLayout"
+                android:id="@+id/searchicon"
+                android:layout_alignParentRight="true" />-->
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Sites"
+                android:textSize="10sp"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:drawableTop="@drawable/searchicon"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>
