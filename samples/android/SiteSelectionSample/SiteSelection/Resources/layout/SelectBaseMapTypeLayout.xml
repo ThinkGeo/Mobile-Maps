@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+  <!--<GridView
+           android:id="@+id/gridview"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:numColumns="4"
+           android:verticalSpacing="10dip"
+           android:horizontalSpacing="10dip"
+           android:stretchMode="columnWidth"
+           android:gravity="center"
+         />-->
+  <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup1">
+
+    <RadioButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="ThinkGeoCloudMap Light"
+        android:drawableRight="@drawable/displaytype_wmk"
+        android:layout_marginRight="5dp"
+        android:id="@+id/wmkRoadRadioButton" />
+
+    <RadioButton
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:text="ThinkGeoCloudMap Aerial"
+      android:drawableRight="@drawable/displaytype_bing_aerial"
+      android:layout_marginRight="5dp"
+      android:id="@+id/wmkAerialRadioButton" />
+
+    <RadioButton
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:text="ThinkGeoCloudMap Hybrid"
+      android:drawableRight="@drawable/displaytype_bing_aerial"
+      android:layout_marginRight="5dp"
+      android:id="@+id/wmkAerialWithLabelsRadioButton" />
+
+    <RadioButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Street Map"
+        android:drawableRight="@drawable/displaytype_osm"
+        android:layout_marginRight="5dp"
+        android:id="@+id/osmRadioButton" />
+
+    <RadioButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Bing Maps Aerial"
+        android:drawableRight="@drawable/displaytype_bing_aerial"
+        android:layout_marginRight="5dp"
+        android:id="@+id/bingaRadioButton" />
+
+    <RadioButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Bing Maps Road"
+        android:drawableRight="@drawable/displaytype_bing_road"
+        android:layout_marginRight="5dp"
+        android:id="@+id/bingrRadioButton" />
+  </RadioGroup>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:text="Ok"
+      android:id="@+id/OkButton"/>
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:text="Cancel"
+      android:id="@+id/CancelButton"/>
+  </LinearLayout>
+</LinearLayout>

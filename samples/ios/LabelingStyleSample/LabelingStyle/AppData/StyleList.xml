@@ -1,0 +1,17 @@
+<StyleList>
+  <Sample Name="Label Styling" Class="LabelStylingViewController" Image="styling">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Labeling Points" Class="LabelingPointsViewContoller"  Image="points">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Labeling Lines" Class="LabelingLinesViewContoller"  Image="lines">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Labeling Polygons" Class="LabelingPolygonsViewContoller"  Image="polygons">
+    <Description></Description>
+  </Sample>
+  <Sample Name="Custom Labeling" Class="CustomLabelingViewContoller"  Image="custom">
+    <Description></Description>
+  </Sample>
+</StyleList>

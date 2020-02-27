@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FCA23344-8444-4B36-A21B-68F126FD4DD0}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MapSuiteEarthquakeStatistics</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>EarthquakeStatistics</AssemblyName>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>False</MtouchProfiling>
+    <MtouchFastDev>False</MtouchFastDev>
+    <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchUseLlvm>False</MtouchUseLlvm>
+    <MtouchUseThumb>False</MtouchUseThumb>
+    <MtouchUseSGen>False</MtouchUseSGen>
+    <MtouchUseRefCounting>False</MtouchUseRefCounting>
+    <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
+    <MtouchI18n />
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <OptimizePNGs>false</OptimizePNGs>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchFloat32>true</MtouchFloat32>
+    <OptimizePNGs>true</OptimizePNGs>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchProfiling>False</MtouchProfiling>
+    <MtouchExtraArgs>
+    </MtouchExtraArgs>
+    <MtouchFastDev>False</MtouchFastDev>
+    <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchUseLlvm>False</MtouchUseLlvm>
+    <MtouchUseThumb>False</MtouchUseThumb>
+    <MtouchUseSGen>False</MtouchUseSGen>
+    <MtouchUseRefCounting>False</MtouchUseRefCounting>
+    <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
+    <MtouchI18n />
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaPackageName>ThinkGeo_Earthquakes</IpaPackageName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <OptimizePNGs>true</OptimizePNGs>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaPackageName>ThinkGeo_Earthquakes</IpaPackageName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>MapSuiteEarthquakeStatistics.Application</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseMapTypeController.cs" />
+    <Compile Include="Controllers\MainFormViewController.cs" />
+    <Compile Include="Controllers\MainFormViewController.designer.cs">
+      <DependentUpon>MainFormViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\MainOptionsFormViewController.cs" />
+    <Compile Include="Controllers\MainOptionsFormViewController.designer.cs">
+      <DependentUpon>MainOptionsFormViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UIRangeSlider\CERangeSliderKnobLayer.cs" />
+    <Compile Include="Controllers\UIRangeSlider\RangeChangedEventArgs.cs" />
+    <Compile Include="Controllers\UIRangeSlider\RangeSliderView.cs" />
+    <Compile Include="Controllers\UIRangeSlider\UIRangeSlider.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Model\BaseMapType.cs" />
+    <Compile Include="Model\DataTable\DataTableSource.cs" />
+    <Compile Include="Model\DataTable\EarthquakeRow.cs" />
+    <Compile Include="Model\DataTable\RowModel.cs" />
+    <Compile Include="Model\DataTable\SectionModel.cs" />
+    <Compile Include="Shared\EarthquakeConstant.cs" />
+    <Compile Include="Model\EarthquakeToolBar.cs" />
+    <Compile Include="Shared\Global.cs" />
+    <Compile Include="Model\QueryConfiguration.cs" />
+    <Content Include="AppData\SampleData\usEarthquake_Simplified.dbf" />
+    <Content Include="AppData\SampleData\usEarthquake_Simplified.ids" />
+    <Content Include="AppData\SampleData\usEarthquake_Simplified.idx" />
+    <Content Include="AppData\SampleData\usEarthquake_Simplified.shp" />
+    <Content Include="AppData\SampleData\usEarthquake_Simplified.shx" />
+    <BundleResource Include="Resources\location.png" />
+    <BundleResource Include="Resources\location%402x.png" />
+    <BundleResource Include="Resources\location%403x.png" />
+    <BundleResource Include="Resources\pan.png" />
+    <BundleResource Include="Resources\pan%402x.png" />
+    <BundleResource Include="Resources\pan%403x.png" />
+    <BundleResource Include="Resources\polygon.png" />
+    <BundleResource Include="Resources\polygon%402x.png" />
+    <BundleResource Include="Resources\polygon%403.png" />
+    <BundleResource Include="Resources\rectangle.png" />
+    <BundleResource Include="Resources\rectangle%402x.png" />
+    <BundleResource Include="Resources\rectangle%403x.png" />
+    <BundleResource Include="Resources\recycle.png" />
+    <BundleResource Include="Resources\recycle%402x.png" />
+    <BundleResource Include="Resources\recycle%403x.png" />
+    <BundleResource Include="Resources\search.png" />
+    <BundleResource Include="Resources\search%402x.png" />
+    <BundleResource Include="Resources\search%403x.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
+    <BundleResource Include="Resources\splash.png" />
+    <BundleResource Include="Resources\splash%402x.png" />
+    <BundleResource Include="Resources\splash%403x.png" />
+    <None Include="app.config" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="AppData\SampleData\Countries02.dbf" />
+    <Content Include="AppData\SampleData\Countries02.ids" />
+    <Content Include="AppData\SampleData\Countries02.idx" />
+    <Content Include="AppData\SampleData\Countries02.shp" />
+    <Content Include="AppData\SampleData\Countries02.shx" />
+    <Content Include="AppData\SampleData\usEarthquake.dbf" />
+    <Content Include="AppData\SampleData\usEarthquake.ids" />
+    <Content Include="AppData\SampleData\usEarthquake.idx" />
+    <Content Include="AppData\SampleData\usEarthquake.shp" />
+    <Content Include="AppData\SampleData\usEarthquake.shx" />
+    <InterfaceDefinition Include="MainForm.storyboard" />
+    <None Include="packages.config" />
+    <InterfaceDefinition Include="Splash.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678">
+      <HintPath>..\packages\MapSuiteDependency-GeoAPI.10.6.0\lib\xamarinios10\GeoAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GeoAPI.Bootstrapper.NetTopologySuite, Version=1.14.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1">
+      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\GeoAPI.Bootstrapper.NetTopologySuite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NetTopologySuite, Version=1.14.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1">
+      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\NetTopologySuite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\MapSuiteDependency-NewtonsoftJson.10.6.0\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PowerCollections, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2573bf8a1bdddcd5">
+      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\PowerCollections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <HintPath>..\packages\MapSuiteDependency-SkiaSharp.10.6.0\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="ThinkGeo.Cloud.Client, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.Cloud.Client.10.6.0\lib\xamarinios10\ThinkGeo.Cloud.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.10.6.7\lib\xamarinios10\ThinkGeo.MapSuite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.iOS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\MapSuiteMobileForiOS-BareBone.10.6.5\lib\xamarinios10\ThinkGeo.MapSuite.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Grids, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Grids.10.6.0\lib\xamarinios10\ThinkGeo.MapSuite.Layers.Grids.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Heat, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Heat.10.6.0\lib\xamarinios10\ThinkGeo.MapSuite.Layers.Heat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.IsoLine, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.6.0\lib\xamarinios10\ThinkGeo.MapSuite.Layers.IsoLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.ShapeFile, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.ShapeFile.10.6.0\lib\xamarinios10\ThinkGeo.MapSuite.Layers.ShapeFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Styles.ClassBreak, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Styles.ClassBreak.10.6.0\lib\xamarinios10\ThinkGeo.MapSuite.Styles.ClassBreak.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app-pro@2x~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app-store.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app@2x~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app@2x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app@3x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\notification@2x~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\notification@2x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\notification@3x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\notification~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\settings@2x~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\settings@2x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\settings@3x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\settings~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\spotlight@2x~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\spotlight@2x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\spotlight@3x~iphone.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\spotlight~ipad.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
