@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="304">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="303">
+            <objects>
+                <viewController id="304" sceneMemberID="viewController" customClass="MainFormViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="301"/>
+                        <viewControllerLayoutGuide type="bottom" id="302"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="305">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="308" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="309"/>
+                                </items>
+                                <color key="tintColor" colorSpace="calibratedRGB" red="0.403921568627451" green="0.403921568627451" blue="0.403921568627451" alpha="1"/>
+                                <constraints>
+                                    <constraint id="312" firstAttribute="height" constant="44"/>
+                                </constraints>
+                            </toolbar>
+                            <view contentMode="scaleToFill" id="315" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="492" width="414" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="320" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="319" firstAttribute="height" constant="200"/>
+                                    <constraint id="323" firstItem="320" firstAttribute="left" secondItem="315" secondAttribute="left"/>
+                                    <constraint id="324" firstAttribute="bottom" secondItem="320" secondAttribute="bottom"/>
+                                    <constraint id="325" firstAttribute="right" secondItem="320" secondAttribute="right"/>
+                                    <constraint id="326" firstItem="320" firstAttribute="top" secondItem="315" secondAttribute="top"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint id="310" firstItem="308" firstAttribute="left" secondItem="305" secondAttribute="left"/>
+                            <constraint id="311" firstAttribute="bottom" secondItem="308" secondAttribute="bottom"/>
+                            <constraint id="313" firstAttribute="right" secondItem="308" secondAttribute="right"/>
+                            <constraint id="316" firstItem="308" firstAttribute="top" secondItem="315" secondAttribute="bottom"/>
+                            <constraint id="317" firstItem="315" firstAttribute="left" secondItem="305" secondAttribute="left"/>
+                            <constraint id="318" firstAttribute="right" secondItem="315" secondAttribute="right"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="OperationToolbar" destination="308" id="name-outlet-308"/>
+                        <outlet property="QueryResultView" destination="315" id="name-outlet-315"/>
+                        <outlet property="QueryResultTableView" destination="320" id="name-outlet-320"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="306" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="-399"/>
+        </scene>
+        <scene sceneID="661">
+            <objects>
+                <viewController id="662" sceneMemberID="viewController" customClass="MainOptionsFormViewController" storyboardIdentifier="MainOptionsFormViewController" restorationIdentifier="MainOptionsFormViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="659"/>
+                        <viewControllerLayoutGuide type="bottom" id="660"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="663">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="666" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="696" width="414" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="677" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="212" y="5" width="197" height="30"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
+                                        <state key="normal" title="Close">
+                                            <color key="titleShadowColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="CloseButton_TouchUpInside:" destination="662" id="1067" eventType="touchUpInside"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="682" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="5" y="5" width="197" height="30"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
+                                        <state key="normal" title="Query">
+                                            <color key="titleShadowColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="QueryButton_TouchUpInside:" destination="662" id="1028" eventType="touchUpInside"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="670" firstAttribute="height" constant="40"/>
+                                    <constraint id="678" firstItem="677" firstAttribute="leading" secondItem="666" secondAttribute="centerX" constant="5"/>
+                                    <constraint id="679" firstAttribute="trailing" secondItem="677" secondAttribute="trailing" constant="5"/>
+                                    <constraint id="680" firstItem="677" firstAttribute="top" secondItem="666" secondAttribute="top" constant="5"/>
+                                    <constraint id="681" firstAttribute="bottom" secondItem="677" secondAttribute="bottom" constant="5"/>
+                                    <constraint id="684" firstItem="677" firstAttribute="leading" secondItem="682" secondAttribute="trailing" constant="10"/>
+                                    <constraint id="685" firstItem="682" firstAttribute="leading" secondItem="666" secondAttribute="leading" constant="5"/>
+                                    <constraint id="686" firstItem="682" firstAttribute="top" secondItem="666" secondAttribute="top" constant="5"/>
+                                    <constraint id="687" firstAttribute="bottom" secondItem="682" secondAttribute="bottom" constant="5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" id="688" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="693" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="696" firstAttribute="trailing" secondItem="693" secondAttribute="trailing"/>
+                                    <constraint id="697" firstItem="693" firstAttribute="leading" secondItem="688" secondAttribute="leading"/>
+                                    <constraint id="698" firstItem="693" firstAttribute="top" secondItem="688" secondAttribute="top"/>
+                                    <constraint id="699" firstAttribute="bottom" secondItem="693" secondAttribute="bottom"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint id="667" firstItem="666" firstAttribute="leading" secondItem="663" secondAttribute="leading"/>
+                            <constraint id="668" firstAttribute="trailing" secondItem="666" secondAttribute="trailing"/>
+                            <constraint id="669" firstAttribute="bottom" secondItem="666" secondAttribute="bottom"/>
+                            <constraint id="689" firstItem="688" firstAttribute="leading" secondItem="663" secondAttribute="leading"/>
+                            <constraint id="690" firstAttribute="trailing" secondItem="688" secondAttribute="trailing"/>
+                            <constraint id="691" firstItem="688" firstAttribute="top" secondItem="663" secondAttribute="top"/>
+                            <constraint id="692" firstItem="666" firstAttribute="top" secondItem="688" secondAttribute="bottom"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BaseMapTypeTableView" destination="693" id="name-outlet-693"/>
+                        <outlet property="QueryButton" destination="682" id="name-outlet-682"/>
+                        <outlet property="CloseButton" destination="677" id="name-outlet-677"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="664" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="229" y="-397"/>
+        </scene>
+    </scenes>
+</document>
