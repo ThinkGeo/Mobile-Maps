@@ -15,7 +15,9 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 ## Display a Simple Map ##
 
-This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application.
+This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
+
+![Finished sample](.assets/map_suite_qsg_showheightzoomlevel.png)
 
 > You can get the full example project for this guide [here](samples/android/GettingStartedSample/)
 
@@ -49,7 +51,7 @@ Open the Resources\layout\Main.axml file. Remove the default button node, and in
 Now we have our `ThinkGeo.MapSuite.Android.dll` and `ThinkGeo.MapSuite.dll` referenced and a MapView added.
 
 
-### Display World Map ###
+### Displaying the World Map ###
 
 Now the project is ready, Map Suite Runtime license is required for running and debugging your product. Please open the Product Center, then generate your license. For more details, please refer to (http://wiki.thinkgeo.com/wiki/map_suite_runtime_license_guide_for_mobile).
 
@@ -85,6 +87,9 @@ protected override void OnCreate(Bundle bundle)
     mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
 }
 ```
+
+
+![Result of adding the base map](.assets/map_suite_qsg_showbasemap.png)
 
 
 ### Run the Sample & Register for Your Free Evaluation ###
@@ -182,6 +187,9 @@ protected override void OnCreate(Bundle bundle)
 ```
 
 If we compile and run what we have now, our map should have the countries polygons overlaid on top of our base map.
+
+
+![Our countries shapefile overlaid on top of our base maps](.assets/map_suite_qsg_showshapefile.png)
 
 > So what has occurred here? We have created a layer and added it to the map and the map has rendered according to its default style parameters. Also, we have used ZoomLevel to display the map the way that we want.
 
@@ -283,6 +291,8 @@ protected override void OnCreate(Bundle bundle)
     mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
 }
 ```
+
+![Finished sample](.assets/map_suite_qsg_showheightzoomlevel.png)
 
 ### Summary ###
 
