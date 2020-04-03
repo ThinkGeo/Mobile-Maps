@@ -17,7 +17,7 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![Finished sample](.assets/map_suite_qsg_showheightzoomlevel.png)
+<img src=".assets/map_suite_qsg_showheightzoomlevel.png" width="250"/>
 
 > You can get the full example project for this guide [here](samples/android/GettingStartedSample/)
 
@@ -88,8 +88,7 @@ protected override void OnCreate(Bundle bundle)
 }
 ```
 
-
-![Result of adding the base map](.assets/map_suite_qsg_showbasemap.png)
+<img src=".assets/map_suite_qsg_showbasemap.png" width="250"/>
 
 
 ### Run the Sample & Register for Your Free Evaluation ###
@@ -188,8 +187,7 @@ protected override void OnCreate(Bundle bundle)
 
 If we compile and run what we have now, our map should have the countries polygons overlaid on top of our base map.
 
-
-![Our countries shapefile overlaid on top of our base maps](.assets/map_suite_qsg_showshapefile.png)
+<img src=".assets/map_suite_qsg_showshapefile.png" width="250"/>
 
 > So what has occurred here? We have created a layer and added it to the map and the map has rendered according to its default style parameters. Also, we have used ZoomLevel to display the map the way that we want.
 
@@ -292,7 +290,7 @@ protected override void OnCreate(Bundle bundle)
 }
 ```
 
-![Finished sample](.assets/map_suite_qsg_showheightzoomlevel.png)
+<img src=".assets/map_suite_qsg_showheightzoomlevel.png" width="250"/>
 
 ### Summary ###
 
