@@ -46,7 +46,7 @@ namespace DrawEditFeatures
             androidMap.CurrentExtent = new RectangleShape(-13358339, 11068716, -5565975, -11068716);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay baseOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
+            ThinkGeoCloudRasterMapsOverlay baseOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
             androidMap.Overlays.Add(baseOverlay);
 
             cursorButton = GetButton(Resource.Drawable.Cursor, TrackButtonClick);
