@@ -15,7 +15,7 @@ namespace MapSuiteEarthquakeStatistics
 {
 	
 	
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -64,131 +64,131 @@ namespace MapSuiteEarthquakeStatistics
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int basemap = 2130837504;
+			// aapt resource value: 0x7F010000
+			public const int basemap = 2130771968;
 			
-			// aapt resource value: 0x7f020001
-			public const int capture = 2130837505;
+			// aapt resource value: 0x7F010001
+			public const int capture = 2130771969;
 			
-			// aapt resource value: 0x7f020002
-			public const int clear = 2130837506;
+			// aapt resource value: 0x7F010002
+			public const int clear = 2130771970;
 			
-			// aapt resource value: 0x7f020003
-			public const int Compass = 2130837507;
+			// aapt resource value: 0x7F010003
+			public const int Compass = 2130771971;
 			
-			// aapt resource value: 0x7f020004
-			public const int crossicon = 2130837508;
+			// aapt resource value: 0x7F010004
+			public const int crossicon = 2130771972;
 			
-			// aapt resource value: 0x7f020005
-			public const int displaytype = 2130837509;
+			// aapt resource value: 0x7F010005
+			public const int displaytype = 2130771973;
 			
-			// aapt resource value: 0x7f020006
-			public const int displaytype_bing_aerial = 2130837510;
+			// aapt resource value: 0x7F010006
+			public const int displaytype_bing_aerial = 2130771974;
 			
-			// aapt resource value: 0x7f020007
-			public const int displaytype_bing_road = 2130837511;
+			// aapt resource value: 0x7F010007
+			public const int displaytype_bing_road = 2130771975;
 			
-			// aapt resource value: 0x7f020008
-			public const int displaytype_osm = 2130837512;
+			// aapt resource value: 0x7F010008
+			public const int displaytype_osm = 2130771976;
 			
-			// aapt resource value: 0x7f020009
-			public const int displaytype_wmk = 2130837513;
+			// aapt resource value: 0x7F010009
+			public const int displaytype_wmk = 2130771977;
 			
-			// aapt resource value: 0x7f02000a
-			public const int draw_polygon = 2130837514;
+			// aapt resource value: 0x7F01000A
+			public const int draw_polygon = 2130771978;
 			
-			// aapt resource value: 0x7f02000b
-			public const int draw_polygon_check = 2130837515;
+			// aapt resource value: 0x7F01000B
+			public const int draw_polygon_check = 2130771979;
 			
-			// aapt resource value: 0x7f02000c
-			public const int draw_Rectangle = 2130837516;
+			// aapt resource value: 0x7F01000C
+			public const int draw_Rectangle = 2130771980;
 			
-			// aapt resource value: 0x7f02000d
-			public const int draw_Rectangle_check = 2130837517;
+			// aapt resource value: 0x7F01000D
+			public const int draw_Rectangle_check = 2130771981;
 			
-			// aapt resource value: 0x7f02000e
-			public const int Icon = 2130837518;
+			// aapt resource value: 0x7F01000E
+			public const int Icon = 2130771982;
 			
-			// aapt resource value: 0x7f02000f
-			public const int icon_mapsuite_default256x256 = 2130837519;
+			// aapt resource value: 0x7F01000F
+			public const int icon_mapsuite_default256x256 = 2130771983;
 			
-			// aapt resource value: 0x7f020010
-			public const int icon_mapsuite_default512x512 = 2130837520;
+			// aapt resource value: 0x7F010010
+			public const int icon_mapsuite_default512x512 = 2130771984;
 			
-			// aapt resource value: 0x7f020011
-			public const int icon_mapsuite_globe = 2130837521;
+			// aapt resource value: 0x7F010011
+			public const int icon_mapsuite_globe = 2130771985;
 			
-			// aapt resource value: 0x7f020012
-			public const int icon_mapsuite_globe_Pressed = 2130837522;
+			// aapt resource value: 0x7F010012
+			public const int icon_mapsuite_globe_Pressed = 2130771986;
 			
-			// aapt resource value: 0x7f020013
-			public const int icon_mapsuite_Minus = 2130837523;
+			// aapt resource value: 0x7F010013
+			public const int icon_mapsuite_Minus = 2130771987;
 			
-			// aapt resource value: 0x7f020014
-			public const int icon_mapsuite_Minus_Pressed = 2130837524;
+			// aapt resource value: 0x7F010014
+			public const int icon_mapsuite_Minus_Pressed = 2130771988;
 			
-			// aapt resource value: 0x7f020015
-			public const int icon_mapsuite_noImageTile = 2130837525;
+			// aapt resource value: 0x7F010015
+			public const int icon_mapsuite_noImageTile = 2130771989;
 			
-			// aapt resource value: 0x7f020016
-			public const int icon_mapsuite_Plus = 2130837526;
+			// aapt resource value: 0x7F010016
+			public const int icon_mapsuite_Plus = 2130771990;
 			
-			// aapt resource value: 0x7f020017
-			public const int icon_mapsuite_Plus_Pressed = 2130837527;
+			// aapt resource value: 0x7F010017
+			public const int icon_mapsuite_Plus_Pressed = 2130771991;
 			
-			// aapt resource value: 0x7f020018
-			public const int linearlayoutStyle = 2130837528;
+			// aapt resource value: 0x7F010018
+			public const int linearlayoutStyle = 2130771992;
 			
-			// aapt resource value: 0x7f020019
-			public const int MapSuite = 2130837529;
+			// aapt resource value: 0x7F010019
+			public const int MapSuite = 2130771993;
 			
-			// aapt resource value: 0x7f02001a
-			public const int Pan_check = 2130837530;
+			// aapt resource value: 0x7F01001D
+			public const int panicon1 = 2130771997;
 			
-			// aapt resource value: 0x7f02001b
-			public const int Pan_KeyDown = 2130837531;
+			// aapt resource value: 0x7F01001E
+			public const int panicon1_check = 2130771998;
 			
-			// aapt resource value: 0x7f02001c
-			public const int Pan_Uncheck = 2130837532;
+			// aapt resource value: 0x7F01001F
+			public const int panicon1_on = 2130771999;
 			
-			// aapt resource value: 0x7f02001d
-			public const int panicon1 = 2130837533;
+			// aapt resource value: 0x7F010020
+			public const int panicon2 = 2130772000;
 			
-			// aapt resource value: 0x7f02001e
-			public const int panicon1_check = 2130837534;
+			// aapt resource value: 0x7F010021
+			public const int panicon3 = 2130772001;
 			
-			// aapt resource value: 0x7f02001f
-			public const int panicon1_on = 2130837535;
+			// aapt resource value: 0x7F01001A
+			public const int Pan_check = 2130771994;
 			
-			// aapt resource value: 0x7f020020
-			public const int panicon2 = 2130837536;
+			// aapt resource value: 0x7F01001B
+			public const int Pan_KeyDown = 2130771995;
 			
-			// aapt resource value: 0x7f020021
-			public const int panicon3 = 2130837537;
+			// aapt resource value: 0x7F01001C
+			public const int Pan_Uncheck = 2130771996;
 			
-			// aapt resource value: 0x7f020022
-			public const int polygonicon = 2130837538;
+			// aapt resource value: 0x7F010022
+			public const int polygonicon = 2130772002;
 			
-			// aapt resource value: 0x7f020023
-			public const int rectangleicon = 2130837539;
+			// aapt resource value: 0x7F010023
+			public const int rectangleicon = 2130772003;
 			
-			// aapt resource value: 0x7f020024
-			public const int recycleicon1 = 2130837540;
+			// aapt resource value: 0x7F010024
+			public const int recycleicon1 = 2130772004;
 			
-			// aapt resource value: 0x7f020025
-			public const int recycleicon2 = 2130837541;
+			// aapt resource value: 0x7F010025
+			public const int recycleicon2 = 2130772005;
 			
-			// aapt resource value: 0x7f020026
-			public const int sampleIcon = 2130837542;
+			// aapt resource value: 0x7F010026
+			public const int sampleIcon = 2130772006;
 			
-			// aapt resource value: 0x7f020027
-			public const int save = 2130837543;
+			// aapt resource value: 0x7F010027
+			public const int save = 2130772007;
 			
-			// aapt resource value: 0x7f020028
-			public const int searchicon = 2130837544;
+			// aapt resource value: 0x7F010028
+			public const int searchicon = 2130772008;
 			
-			// aapt resource value: 0x7f020029
-			public const int Slider = 2130837545;
+			// aapt resource value: 0x7F010029
+			public const int Slider = 2130772009;
 			
 			static Drawable()
 			{
@@ -203,119 +203,119 @@ namespace MapSuiteEarthquakeStatistics
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int BingMapsKeyEditText = 2131034113;
+			// aapt resource value: 0x7F02000C
+			public const int androidMap = 2130837516;
 			
-			// aapt resource value: 0x7f050003
-			public const int CancelButton = 2131034115;
+			// aapt resource value: 0x7F02000D
+			public const int bingaRadioButton = 2130837517;
 			
-			// aapt resource value: 0x7f050019
-			public const int ClearButton = 2131034137;
+			// aapt resource value: 0x7F020000
+			public const int BingMapsKeyEditText = 2130837504;
 			
-			// aapt resource value: 0x7f050017
-			public const int DrawPolygonButton = 2131034135;
+			// aapt resource value: 0x7F02000E
+			public const int bingrRadioButton = 2130837518;
 			
-			// aapt resource value: 0x7f050018
-			public const int DrawRectangleButton = 2131034136;
+			// aapt resource value: 0x7F020001
+			public const int CancelButton = 2130837505;
 			
-			// aapt resource value: 0x7f050022
-			public const int HeatStyleRadioButton = 2131034146;
+			// aapt resource value: 0x7F020002
+			public const int ClearButton = 2130837506;
 			
-			// aapt resource value: 0x7f050023
-			public const int IsoLineStyleRadioButton = 2131034147;
+			// aapt resource value: 0x7F02000F
+			public const int dateRange = 2130837519;
 			
-			// aapt resource value: 0x7f05001a
-			public const int MoreOptionsButton = 2131034138;
+			// aapt resource value: 0x7F020010
+			public const int depthRange = 2130837520;
 			
-			// aapt resource value: 0x7f050002
-			public const int OkButton = 2131034114;
+			// aapt resource value: 0x7F020011
+			public const int depthValue = 2130837521;
 			
-			// aapt resource value: 0x7f050016
-			public const int PanButton = 2131034134;
+			// aapt resource value: 0x7F020003
+			public const int DrawPolygonButton = 2130837507;
 			
-			// aapt resource value: 0x7f050021
-			public const int PointStyleRadioButton = 2131034145;
+			// aapt resource value: 0x7F020004
+			public const int DrawRectangleButton = 2130837508;
 			
-			// aapt resource value: 0x7f050014
-			public const int ToolsLinearLayout = 2131034132;
+			// aapt resource value: 0x7F020005
+			public const int HeatStyleRadioButton = 2130837509;
 			
-			// aapt resource value: 0x7f050013
-			public const int androidMap = 2131034131;
+			// aapt resource value: 0x7F020006
+			public const int IsoLineStyleRadioButton = 2130837510;
 			
-			// aapt resource value: 0x7f05001f
-			public const int bingaRadioButton = 2131034143;
+			// aapt resource value: 0x7F020012
+			public const int latitudeValue = 2130837522;
 			
-			// aapt resource value: 0x7f050020
-			public const int bingrRadioButton = 2131034144;
+			// aapt resource value: 0x7F020013
+			public const int linearLayout1 = 2130837523;
 			
-			// aapt resource value: 0x7f050008
-			public const int dateRange = 2131034120;
+			// aapt resource value: 0x7F020014
+			public const int linearLayout3 = 2130837524;
 			
-			// aapt resource value: 0x7f050007
-			public const int depthRange = 2131034119;
+			// aapt resource value: 0x7F020015
+			public const int locationValue = 2130837525;
 			
-			// aapt resource value: 0x7f05000f
-			public const int depthValue = 2131034127;
+			// aapt resource value: 0x7F020016
+			public const int longitudeValue = 2130837526;
 			
-			// aapt resource value: 0x7f05000e
-			public const int latitudeValue = 2131034126;
+			// aapt resource value: 0x7F020017
+			public const int magnitudeRange = 2130837527;
 			
-			// aapt resource value: 0x7f050005
-			public const int linearLayout1 = 2131034117;
+			// aapt resource value: 0x7F020018
+			public const int magnitudeValue = 2130837528;
 			
-			// aapt resource value: 0x7f050009
-			public const int linearLayout3 = 2131034121;
+			// aapt resource value: 0x7F020019
+			public const int mainLayout = 2130837529;
 			
-			// aapt resource value: 0x7f050011
-			public const int locationValue = 2131034129;
+			// aapt resource value: 0x7F020007
+			public const int MoreOptionsButton = 2130837511;
 			
-			// aapt resource value: 0x7f05000d
-			public const int longitudeValue = 2131034125;
+			// aapt resource value: 0x7F020008
+			public const int OkButton = 2130837512;
 			
-			// aapt resource value: 0x7f050006
-			public const int magnitudeRange = 2131034118;
+			// aapt resource value: 0x7F02001A
+			public const int osmRadioButton = 2130837530;
 			
-			// aapt resource value: 0x7f050010
-			public const int magnitudeValue = 2131034128;
+			// aapt resource value: 0x7F020009
+			public const int PanButton = 2130837513;
 			
-			// aapt resource value: 0x7f050004
-			public const int mainLayout = 2131034116;
+			// aapt resource value: 0x7F02000A
+			public const int PointStyleRadioButton = 2130837514;
 			
-			// aapt resource value: 0x7f05001e
-			public const int osmRadioButton = 2131034142;
+			// aapt resource value: 0x7F02001B
+			public const int queryButton = 2130837531;
 			
-			// aapt resource value: 0x7f05000a
-			public const int queryButton = 2131034122;
+			// aapt resource value: 0x7F02001C
+			public const int queryResultTitleTextView = 2130837532;
 			
-			// aapt resource value: 0x7f05000b
-			public const int queryResultTitleTextView = 2131034123;
+			// aapt resource value: 0x7F02001D
+			public const int radioGroup1 = 2130837533;
 			
-			// aapt resource value: 0x7f050015
-			public const int radioGroup1 = 2131034133;
+			// aapt resource value: 0x7F02001E
+			public const int resultListView = 2130837534;
 			
-			// aapt resource value: 0x7f050012
-			public const int resultListView = 2131034130;
+			// aapt resource value: 0x7F02001F
+			public const int textView1 = 2130837535;
 			
-			// aapt resource value: 0x7f050000
-			public const int textView1 = 2131034112;
+			// aapt resource value: 0x7F02000B
+			public const int ToolsLinearLayout = 2130837515;
 			
-			// aapt resource value: 0x7f050025
-			public const int uploadDataTextView = 2131034149;
+			// aapt resource value: 0x7F020020
+			public const int uploadDataTextView = 2130837536;
 			
-			// aapt resource value: 0x7f050024
-			public const int uploadProgressBar = 2131034148;
+			// aapt resource value: 0x7F020021
+			public const int uploadProgressBar = 2130837537;
 			
-			// aapt resource value: 0x7f05001c
-			public const int wmkAerialRadioButton = 2131034140;
+			// aapt resource value: 0x7F020022
+			public const int wmkAerialRadioButton = 2130837538;
 			
-			// aapt resource value: 0x7f05001d
-			public const int wmkAerialWithLabelsRadioButton = 2131034141;
+			// aapt resource value: 0x7F020023
+			public const int wmkAerialWithLabelsRadioButton = 2130837539;
 			
-			// aapt resource value: 0x7f05001b
-			public const int wmkRoadRadioButton = 2131034139;
+			// aapt resource value: 0x7F020024
+			public const int wmkRoadRadioButton = 2130837540;
 			
-			// aapt resource value: 0x7f05000c
-			public const int yearValue = 2131034124;
+			// aapt resource value: 0x7F020025
+			public const int yearValue = 2130837541;
 			
 			static Id()
 			{
@@ -330,37 +330,37 @@ namespace MapSuiteEarthquakeStatistics
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
+			// aapt resource value: 0x7F030000
 			public const int BingMapsKeyLayout = 2130903040;
 			
-			// aapt resource value: 0x7f030001
+			// aapt resource value: 0x7F030001
 			public const int Configuration = 2130903041;
 			
-			// aapt resource value: 0x7f030002
+			// aapt resource value: 0x7F030002
 			public const int listviewLayout = 2130903042;
 			
-			// aapt resource value: 0x7f030003
+			// aapt resource value: 0x7F030003
 			public const int Main = 2130903043;
 			
-			// aapt resource value: 0x7f030004
+			// aapt resource value: 0x7F030004
 			public const int RadioButtonTextColorSelector = 2130903044;
 			
-			// aapt resource value: 0x7f030005
+			// aapt resource value: 0x7F030005
 			public const int SelectBaseMapTypeLayout = 2130903045;
 			
-			// aapt resource value: 0x7f030006
+			// aapt resource value: 0x7F030006
 			public const int SelectDisplayStyleTypeLayout = 2130903046;
 			
-			// aapt resource value: 0x7f030007
+			// aapt resource value: 0x7F030007
 			public const int SelectorDrawPolygon = 2130903047;
 			
-			// aapt resource value: 0x7f030008
+			// aapt resource value: 0x7F030008
 			public const int SelectorDrawRectangle = 2130903048;
 			
-			// aapt resource value: 0x7f030009
+			// aapt resource value: 0x7F030009
 			public const int SelectorPan = 2130903049;
 			
-			// aapt resource value: 0x7f03000a
+			// aapt resource value: 0x7F03000A
 			public const int SplashLayout = 2130903050;
 			
 			static Layout()
@@ -376,11 +376,11 @@ namespace MapSuiteEarthquakeStatistics
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7F040000
+			public const int ApplicationName = 2130968576;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7F040001
+			public const int Hello = 2130968577;
 			
 			static String()
 			{

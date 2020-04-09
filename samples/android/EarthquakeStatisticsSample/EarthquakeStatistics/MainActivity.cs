@@ -4,13 +4,16 @@
     with ThinkGeo, or you can register now at https://cloud.thinkgeo.com.
 ===========================================*/
 
+using Android;
 using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using ThinkGeo.MapSuite;
 using ThinkGeo.MapSuite.Android;
 using ThinkGeo.MapSuite.Drawing;
@@ -38,11 +41,63 @@ namespace MapSuiteEarthquakeStatistics
         private InMemoryFeatureLayer selectedMarkerLayer;
         private InMemoryFeatureLayer highlightMarkerLayer;
 
+        readonly string[] StoragePermissions =
+{
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage
+        };
+        const int RequestStorageId = 0;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            TryShowMapAsync();
+        }
 
+        async Task TryShowMapAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await ShowMapAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(StoragePermissions, RequestStorageId);
+            }
+            else
+            {
+                ShowMapAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestStorageId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await ShowMapAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task ShowMapAsync()
+        {
             InitializeAndroidMap();
             InitializeDialogs();
 
