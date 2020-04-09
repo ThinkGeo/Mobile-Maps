@@ -50,7 +50,7 @@ namespace LabelingStyle
                a Client ID and Secret. These were sent to you via email when you signed up
                with ThinkGeo, or you can register now at https://cloud.thinkgeo.com.
             ===========================================*/
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay();
+            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
             MapView.Overlays.Add("WMK", thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer customLabelingStyleLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs.shp"));
