@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <AndroidAsset Include="Assets\GeometricFunc.GeometricFunc.mapsuitelicense" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidResource Include="Resources\layout\SampleBaseLayout.axml" />
