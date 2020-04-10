@@ -153,6 +153,7 @@
     <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.shp" />
     <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.shx" />
     <None Include="app.config" />
+    <AndroidAsset Include="Assets\SiteSelection.SiteSelection.mapsuitelicense" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
