@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -188,6 +188,7 @@
     <AndroidAsset Include="Assets\AppData\Vehicles.dbf" />
     <AndroidAsset Include="Assets\AppData\Vehicles.ids" />
     <AndroidAsset Include="Assets\AppData\Vehicles.idx" />
+    <AndroidAsset Include="Assets\AnalyzeVisual.AnalyzeVisual.mapsuitelicense" />
     <None Include="Assets\AppData\Vehicles.prj11111" />
     <AndroidAsset Include="Assets\AppData\Vehicles.shp" />
     <AndroidAsset Include="Assets\AppData\Vehicles.shx" />
