@@ -1,5 +1,7 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Locations;
@@ -9,6 +11,7 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using System;
+using System.Threading.Tasks;
 using ThinkGeo.MapSuite;
 using ThinkGeo.MapSuite.Android;
 using ThinkGeo.MapSuite.Layers;
@@ -35,11 +38,64 @@ namespace GettingStartedSample
         private ScaleZoomLevelMapTool scaleZoomLevelMapTool;
         private SelectBaseMapTypeDialog selectBaseMapTypeDialog;
 
+        readonly string[] LocationPermissions =
+{
+            Manifest.Permission.AccessCoarseLocation,
+            Manifest.Permission.AccessFineLocation
+        };
+        const int RequestLocationId = 0;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
+            TryInitializeSampleAsync();
+        }
+
+        async Task TryInitializeSampleAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await InitializeSampleAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(LocationPermissions, RequestLocationId);
+            }
+            else
+            {
+                InitializeSampleAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestLocationId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await InitializeSampleAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task InitializeSampleAsync()
+        {
             //Initialize the Map and relative information.
             InitializeGlobalVariables();
             InitializeAndroidMap();
@@ -67,6 +123,7 @@ namespace GettingStartedSample
             RefreshToolsBarWithConfig(Resources.Configuration);
             CheckGpsServiceAndOpenSettings();
         }
+        
 
         /// <summary>
         /// Called by the system when the device configuration changes while your

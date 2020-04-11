@@ -31,7 +31,7 @@ namespace GettingStartedSample
         private void LoadOverlays()
         {
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
+            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
             Overlays.Add("ThinkGeoCloudMapsOverlay", thinkGeoCloudMapsOverlay);
         }
 
