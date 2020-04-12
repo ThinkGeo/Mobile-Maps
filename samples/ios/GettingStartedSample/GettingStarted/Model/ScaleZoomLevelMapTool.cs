@@ -1,7 +1,7 @@
 using CoreGraphics;
 using System;
 using System.Globalization;
-using ThinkGeo.MapSuite.iOS;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace GettingStartedSample

@@ -9,12 +9,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -29,7 +25,7 @@ namespace AnalyzingVisualization
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             MapView.CurrentExtent = new RectangleShape(-13886070, 6660597, -8906057, 3382985);
 
-            LineStyle lineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
+            LineStyle lineStyle = LineStyle.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
 
             //Cold Front
             CustomGeoImageLineStyle coldFrontLineStyle = GetCustomLineStyle(lineStyle, 19, "offset_circle_red_bl.png", "offset_triangle_blue_revert.png");
@@ -105,9 +101,10 @@ namespace AnalyzingVisualization
                 windFeatureLayer.InternalFeatures.Add(windFeature);
             }
 
-            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             LayerOverlay dynamicOverlay = new LayerOverlay();

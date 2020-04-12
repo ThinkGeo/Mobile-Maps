@@ -4,12 +4,8 @@
     with ThinkGeo, or you can register now at https://cloud.thinkgeo.com.
 ===========================================*/
 
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -25,8 +21,9 @@ namespace AnalyzingVisualization
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer usLayer = new ShapeFileFeatureLayer("AppData/usStatesCensus2010.shp");
@@ -37,7 +34,7 @@ namespace AnalyzingVisualization
             MapView.Overlays.Add(layerOverlay);
 
             usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(20, GeoColor.FromHtml("#00e6fe")), GeoColor.StandardColors.Gray));
+            usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(20, GeoColor.FromHtml("#00e6fe")), GeoColors.Gray));
             usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(GetDotDensityStyle());
             usLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
@@ -47,9 +44,9 @@ namespace AnalyzingVisualization
         private static DotDensityStyle GetDotDensityStyle()
         {
             double pointToValueRatio = 0.0000094778167166538189;
-            PointStyle pointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.StandardColors.Black, 7);
+            PointStyle pointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Black, 7);
             DotDensityStyle dotDensityStyle = new DotDensityStyle("Population", pointToValueRatio, pointStyle);
-            dotDensityStyle.CustomPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.FromHtml("#a57431"), 5);
+            dotDensityStyle.CustomPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColor.FromHtml("#a57431"), 5);
             return dotDensityStyle;
         }
     }

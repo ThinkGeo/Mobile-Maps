@@ -1,17 +1,13 @@
 using System.Globalization;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 
 namespace GeometricFunctions
 {
     public class CenterPointViewController : DetailViewController
     {
-        private Proj4Projection projection;
+        private ProjectionConverter projection;
 
         public CenterPointViewController()
         { }
@@ -19,20 +15,18 @@ namespace GeometricFunctions
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            RectangleShape mapExtent = (RectangleShape)ExtentHelper.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
+            RectangleShape mapExtent = (RectangleShape)MapUtil.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
             mapExtent.ScaleUp(20);
             MapView.CurrentExtent = mapExtent;
 
-            projection = new Proj4Projection();
-            projection.InternalProjectionParametersString = Proj4Projection.GetSphericalMercatorParametersString();
-            projection.ExternalProjectionParametersString = Proj4Projection.GetLatLongParametersString();
+            projection = new ProjectionConverter(Projection.GetSphericalMercatorProjString(), Projection.GetLatLongProjString());
             projection.Open();
 
             InMemoryFeatureLayer sourceLayer = new InMemoryFeatureLayer();
             sourceLayer.InternalFeatures.Add(GeometrySource.FirstOrDefault());
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(new GeoSolidBrush(BrushColor));
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Width = 3;
-            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.Black;
+            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColors.Black;
             sourceLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             InMemoryFeatureLayer pointLayer = new InMemoryFeatureLayer();
@@ -40,16 +34,18 @@ namespace GeometricFunctions
             pointLayer.Columns.Add(new FeatureSourceColumn("Type"));
             pointLayer.Close();
             pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.SymbolSize = 12;
-            pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.SymbolPen = new GeoPen(GeoColor.FromArgb(255, 255, 155, 13), 2);
-            pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.SymbolSolidBrush = new GeoSolidBrush(GeoColor.FromArgb(255, 255, 248, 172));
+            pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.PointType = PointType.Symbol;
+
+            pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.OutlinePen = new GeoPen(GeoColor.FromArgb(255, 255, 155, 13), 2);
+            pointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle.FillBrush = new GeoSolidBrush(GeoColor.FromArgb(255, 255, 248, 172));
             TextStyle textStyle = new TextStyle();
             textStyle.TextColumnName = "Type";
             textStyle.Font = new GeoFont("Arial", 15);
             textStyle.DuplicateRule = LabelDuplicateRule.UnlimitedDuplicateLabels;
             textStyle.OverlappingRule = LabelOverlappingRule.AllowOverlapping;
-            textStyle.TextSolidBrush = new GeoSolidBrush(GeoColor.StandardColors.Black);
-            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColor.StandardColors.White), 1);
-            textStyle.PointPlacement = PointPlacement.LowerCenter;
+            textStyle.TextBrush = new GeoSolidBrush(GeoColors.Black);
+            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColors.White), 1);
+            textStyle.TextPlacement = TextPlacement.Lower;
             textStyle.YOffsetInPixel = -8;
             pointLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;
             pointLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;

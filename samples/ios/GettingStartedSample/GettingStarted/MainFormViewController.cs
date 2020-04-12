@@ -13,10 +13,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace GettingStartedSample
@@ -28,7 +26,7 @@ namespace GettingStartedSample
         private MapView mapView;
         private InstructionView instructionView;
         private CLLocationManager locationManager;
-        private Proj4Projection bingToWgs84Projection;
+        private ProjectionConverter bingToWgs84Projection;
         private long previousLocationUpdatedTicks;
         private TableViewSource zoomScaleSource;
         private TableViewSource mapTypeSource;
@@ -90,11 +88,7 @@ namespace GettingStartedSample
 
         private void InitializeMap()
         {
-            bingToWgs84Projection = new Proj4Projection
-            {
-                InternalProjectionParametersString = Proj4Projection.GetBingMapParametersString(),
-                ExternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString()
-            };
+            bingToWgs84Projection = new ProjectionConverter(Projection.GetBingMapProjString(), Projection.GetWgs84ProjString());
             bingToWgs84Projection.Open();
 
             mapView = new MapView(View.Frame)
@@ -111,10 +105,9 @@ namespace GettingStartedSample
             mapView.MapLongPress += MapView_MapLongPress;
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret")
-            {
-                TileResolution = ThinkGeo.Cloud.TileResolution.High
-            };
+            string clientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string secret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(clientKey, secret);
             mapView.Overlays.Add("ThinkGeoCloudMapsOverlay", thinkGeoCloudMapsOverlay);
 
             // Location marker layer.
@@ -171,8 +164,7 @@ namespace GettingStartedSample
             mapTypeSource = new TableViewSource();
             SectionModel mapTypeSection = new SectionModel();
             mapTypeSection.Rows.Add(new CellModel("Light"));
-            mapTypeSection.Rows.Add(new CellModel("Hybrid"));
-            mapTypeSection.Rows.Add(new CellModel("Aerial"));
+            mapTypeSection.Rows.Add(new CellModel("Dark"));
 
             mapTypeSource.Sections.Add(mapTypeSection);
             mapTypeSource.RowClick += MapTypeSourceRowClick;
@@ -181,8 +173,8 @@ namespace GettingStartedSample
         private void MapTypeSourceRowClick(object sender, TableViewRowClickEventArgs e)
         {
             string baseMapTypeString = ((TableViewSource)e.TableView.Source).Sections[0].Rows[e.IndexPath.Row].Name;
-            ThinkGeoCloudRasterMapsMapType wmkMapType = (ThinkGeoCloudRasterMapsMapType)Enum.Parse(typeof(ThinkGeoCloudRasterMapsMapType), baseMapTypeString);
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = (ThinkGeoCloudRasterMapsOverlay)mapView.Overlays["ThinkGeoCloudMapsOverlay"];
+            ThinkGeoCloudVectorMapsMapType wmkMapType = (ThinkGeoCloudVectorMapsMapType)Enum.Parse(typeof(ThinkGeoCloudVectorMapsMapType), baseMapTypeString);
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = (ThinkGeoCloudVectorMapsOverlay)mapView.Overlays["ThinkGeoCloudMapsOverlay"];
             if (wmkMapType != thinkGeoCloudMapsOverlay.MapType)
             {
                 thinkGeoCloudMapsOverlay.MapType = wmkMapType;
@@ -282,7 +274,7 @@ namespace GettingStartedSample
         private void MapView_MapSingleTap(object sender, UIGestureRecognizer e)
         {
             PointF location = (PointF)e.LocationInView(mapView);
-            PointShape worldPoint = ExtentHelper.ToWorldCoordinate(mapView.CurrentExtent, location.X, location.Y, (float)mapView.Frame.Width, (float)mapView.Frame.Height);
+            PointShape worldPoint = MapUtil.ToWorldCoordinate(mapView.CurrentExtent, location.X, location.Y, (float)mapView.Frame.Width, (float)mapView.Frame.Height);
 
             PointShape wgs84Point = (PointShape)bingToWgs84Projection.ConvertToExternalProjection(worldPoint);
             string displayText = string.Format("Longitude : {0:N4}\r\nLatitude : {1:N4}", wgs84Point.X, wgs84Point.Y);

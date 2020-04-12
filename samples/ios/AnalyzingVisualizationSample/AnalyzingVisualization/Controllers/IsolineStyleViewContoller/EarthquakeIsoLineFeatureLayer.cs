@@ -2,11 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -81,8 +78,8 @@ namespace AnalyzingVisualization
             }
             isoLineLayer.CustomStyles.Add(levelClassBreakStyle);
 
-            TextStyle textStyle = TextStyles.CreateSimpleTextStyle(isoLineLayer.DataValueColumnName, "Arial", 8, DrawingFontStyles.Bold, GeoColor.StandardColors.Black, 0, 0);
-            textStyle.HaloPen = new GeoPen(GeoColor.StandardColors.White, 2);
+            TextStyle textStyle = TextStyle.CreateSimpleTextStyle(isoLineLayer.DataValueColumnName, "Arial", 8, DrawingFontStyles.Bold, GeoColors.Black, 0, 0);
+            textStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             textStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;
             textStyle.SplineType = SplineType.StandardSplining;
             textStyle.DuplicateRule = LabelDuplicateRule.UnlimitedDuplicateLabels;

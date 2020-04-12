@@ -6,12 +6,8 @@
 
 using CoreGraphics;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -26,8 +22,9 @@ namespace AnalyzingVisualization
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ClassBreakStyle classBreakStyle = GetClassBreakStyle();
@@ -60,7 +57,7 @@ namespace AnalyzingVisualization
             for (int i = 0; i < classBreakValues.Length; i++)
             {
                 GeoColor fillColor = new GeoColor(200, familyColors[i]);
-                AreaStyle areaStyle = AreaStyles.CreateSimpleAreaStyle(fillColor, outlineColor, 1);
+                AreaStyle areaStyle = AreaStyle.CreateSimpleAreaStyle(fillColor, outlineColor, 1);
                 classBreakStyle.ClassBreaks.Add(new ClassBreak(classBreakValues[i], areaStyle));
             }
             return classBreakStyle;

@@ -8,10 +8,8 @@ using CoreGraphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace DrawEditFeatures
@@ -43,16 +41,14 @@ namespace DrawEditFeatures
             mapView = new MapView(View.Frame)
             {
                 MapUnit = GeographyUnit.Meter,
-                ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(),
                 BackgroundColor = UIColor.FromRGB(244, 242, 238),
                 CurrentExtent = (new RectangleShape(-13358339, 11068716, -5565975, -11068716))
             };
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret")
-            {
-                TileResolution = ThinkGeo.Cloud.TileResolution.High
-            };
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             mapView.Overlays.Add("WMK", thinkGeoCloudMapsOverlay);
             View.AddSubview(mapView);
             InitializeInstruction();

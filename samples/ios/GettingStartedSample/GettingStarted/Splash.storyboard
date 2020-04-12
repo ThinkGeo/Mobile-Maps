@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="239"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="242">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>S
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
@@ -27,7 +27,7 @@
                                     <constraint id="249" firstAttribute="width" constant="256"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" id="250" translatesAutoresizingMaskIntoConstraints="NO" text="Think Geo Location">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" id="250" translatesAutoresizingMaskIntoConstraints="NO" text="ThinkGeo Location">
                                 <rect key="frame" x="67" y="486" width="280" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>

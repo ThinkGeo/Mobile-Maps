@@ -1,7 +1,7 @@
 using Foundation;
 using System;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace MapSuiteEarthquakeStatistics
@@ -66,15 +66,11 @@ namespace MapSuiteEarthquakeStatistics
             switch (Global.BaseMapType)
             {
                 case BaseMapType.ThinkGeoCloudMapsLight:
-                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Light;
+                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Light;
                     Global.MapView.Refresh();
                     break;
-                case BaseMapType.ThinkGeoCloudMapsAerial:
-                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Aerial;
-                    Global.MapView.Refresh();
-                    break;
-                case BaseMapType.ThinkGeoCloudMapsHybrid:
-                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Hybrid;
+                case BaseMapType.ThinkGeoCloudMapsDark:
+                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Dark;
                     Global.MapView.Refresh();
                     break;
             }

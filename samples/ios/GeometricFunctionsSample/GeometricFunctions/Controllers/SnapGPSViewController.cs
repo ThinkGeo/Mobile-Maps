@@ -1,12 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 
 namespace GeometricFunctions
 {
@@ -106,9 +102,9 @@ namespace GeometricFunctions
             resultLayer.Columns.Add(new FeatureSourceColumn("Name", "character", 100));
 
             GeoColor semiTransparentOrange = GeoColor.FromArgb(140, 255, 155, 13);
-            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.Transparent, GeoColor.StandardColors.Black);
-            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(semiTransparentOrange, 3, false);
-            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("Name", "Arial", 9, DrawingFontStyles.Regular, GeoColor.StandardColors.Black);
+            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Transparent, GeoColors.Black);
+            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(semiTransparentOrange, 3, false);
+            inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyle.CreateSimpleTextStyle("Name", "Arial", 9, DrawingFontStyles.Regular, GeoColors.Black);
             inProcessLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             foreach (var feature in GeometrySource)
             {
@@ -116,7 +112,7 @@ namespace GeometricFunctions
             }
 
             resultLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = inProcessLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle;
-            resultLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(semiTransparentOrange, 4, false);
+            resultLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(semiTransparentOrange, 4, false);
             resultLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             CollectVertices(inProcessLayer.InternalFeatures.Skip(1).ToArray(), resultLayer);

@@ -1,8 +1,7 @@
 using CoreGraphics;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteSiteSelection

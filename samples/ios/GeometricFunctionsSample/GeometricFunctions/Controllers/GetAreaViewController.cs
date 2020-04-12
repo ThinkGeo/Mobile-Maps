@@ -1,11 +1,7 @@
 using System.Globalization;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace GeometricFunctions
@@ -26,16 +22,16 @@ namespace GeometricFunctions
 
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(new GeoSolidBrush(BrushColor));
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Width = 3;
-            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.Black;
+            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColors.Black;
 
             TextStyle textStyle = new TextStyle();
             textStyle.TextColumnName = "Area";
             textStyle.Font = new GeoFont("Arial", 15);
             textStyle.DuplicateRule = LabelDuplicateRule.UnlimitedDuplicateLabels;
             textStyle.OverlappingRule = LabelOverlappingRule.AllowOverlapping;
-            textStyle.TextSolidBrush = new GeoSolidBrush(GeoColor.StandardColors.Black);
-            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColor.StandardColors.White), 1);
-            textStyle.PointPlacement = PointPlacement.LowerCenter;
+            textStyle.TextBrush = new GeoSolidBrush(GeoColors.Black);
+            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColors.White), 1);
+            textStyle.TextPlacement = TextPlacement.Lower;
             textStyle.YOffsetInPixel = -8;
 
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;

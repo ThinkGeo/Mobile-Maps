@@ -31,8 +31,8 @@
                                         </constraints>
                                         <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1520" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0.0" y="50" width="170" height="150"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1520" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="51" width="170" height="150"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1825" translatesAutoresizingMaskIntoConstraints="NO">
@@ -83,6 +83,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close.png" width="40" height="40"/>
+        <image name="close.png" width="32" height="32"/>
     </resources>
 </document>

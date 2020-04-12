@@ -468,7 +468,7 @@ namespace LabelingStyle
                 UIView screenShot = UIScreen.MainScreen.SnapshotView(false);
                 return screenShot;
             }
-            catch (Exception ex)
+            catch 
             {
                 return null;
             }

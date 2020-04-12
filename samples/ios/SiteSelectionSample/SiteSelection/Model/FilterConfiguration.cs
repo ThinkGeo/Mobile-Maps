@@ -1,6 +1,6 @@
-﻿using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-
+﻿
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 namespace MapSuiteSiteSelection
 {
     public class FilterConfiguration

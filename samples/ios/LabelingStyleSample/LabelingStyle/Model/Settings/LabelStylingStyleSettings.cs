@@ -1,5 +1,5 @@
 ﻿using MonoTouch.Dialog;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 
 namespace LabelingStyle
 {

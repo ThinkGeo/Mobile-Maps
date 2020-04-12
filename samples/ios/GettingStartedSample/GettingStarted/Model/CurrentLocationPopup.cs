@@ -1,6 +1,6 @@
 using CoreGraphics;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace GettingStartedSample

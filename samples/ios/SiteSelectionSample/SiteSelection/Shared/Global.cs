@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteSiteSelection
@@ -63,11 +63,9 @@ namespace MapSuiteSiteSelection
             controllers = new Dictionary<string, UIViewController>();
         }
 
-        public static Proj4Projection GetWgs84ToMercatorProjection()
+        public static ProjectionConverter GetWgs84ToMercatorProjection()
         {
-            Proj4Projection wgs84ToMercatorProjection = new Proj4Projection();
-            wgs84ToMercatorProjection.InternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString();
-            wgs84ToMercatorProjection.ExternalProjectionParametersString = Proj4Projection.GetBingMapParametersString();
+            ProjectionConverter wgs84ToMercatorProjection = new ProjectionConverter(Projection.GetWgs84ProjString(), Projection.GetBingMapProjString());
             return wgs84ToMercatorProjection;
         }
 

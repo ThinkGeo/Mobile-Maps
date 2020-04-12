@@ -6,22 +6,18 @@
 	<string>ThinkGeo Sample Labeling</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.thinkgeo.labelingstyle</string>
-	<key>CFBundleShortVersionString</key>
-	<string>10.1</string>
-	<key>CFBundleVersion</key>
-	<string>10.1.0</string>
-	<key>MinimumOSVersion</key>
-	<string>9.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
 		<integer>2</integer>
+		<string></string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -38,5 +34,11 @@
 	<string>Splash</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
+	<key>MinimumOSVersion</key>
+	<string>13.4</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
 </dict>
 </plist>

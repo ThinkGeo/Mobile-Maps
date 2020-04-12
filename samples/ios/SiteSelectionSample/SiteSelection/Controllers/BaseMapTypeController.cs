@@ -1,7 +1,8 @@
 using Foundation;
 using System;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite.iOS;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteSiteSelection
@@ -72,12 +73,7 @@ namespace MapSuiteSiteSelection
                     Global.MapView.Refresh();
                     break;
                 case BaseMapType.ThinkGeoCloudMapsAerial:
-                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Aerial;
-                    Global.ThinkGeoCloudMapsOverlay.IsVisible = true;
-                    Global.MapView.Refresh();
-                    break;
-                case BaseMapType.ThinkGeoCloudMapsHybrid:
-                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Hybrid;
+                    Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Dark;
                     Global.ThinkGeoCloudMapsOverlay.IsVisible = true;
                     Global.MapView.Refresh();
                     break;

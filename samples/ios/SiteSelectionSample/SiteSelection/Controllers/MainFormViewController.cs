@@ -12,12 +12,8 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteSiteSelection
@@ -64,49 +60,48 @@ namespace MapSuiteSiteSelection
 
             //LimitPolygon
             ShapeFileFeatureLayer limitPolygonLayer = new ShapeFileFeatureLayer("AppData/SampleData/CityLimitPolygon.shp");
-            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColor.SimpleColors.White, 5.5f), new GeoSolidBrush(GeoColor.SimpleColors.Transparent)));
-            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColor.SimpleColors.Red, 1.5f) { DashStyle = LineDashStyle.Dash }, new GeoSolidBrush(GeoColor.SimpleColors.Transparent)));
+            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColors.White, 5.5f), new GeoSolidBrush(GeoColors.Transparent)));
+            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColors.Red, 1.5f) { DashStyle = LineDashStyle.Dash }, new GeoSolidBrush(GeoColors.Transparent)));
             limitPolygonLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            limitPolygonLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            limitPolygonLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
             ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
 
             ShapeFileFeatureLayer hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(targetPoisDictionary, "Hotels.shp"));
             hotelsLayer.Name = Global.HotelsLayerKey;
             hotelsLayer.Transparency = 120f;
             hotelsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImage("hotel"));
             hotelsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            hotelsLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            hotelsLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer medicalFacilitesLayer = new ShapeFileFeatureLayer(Path.Combine(targetPoisDictionary, "Medical_Facilities.shp"));
             medicalFacilitesLayer.Name = Global.MedicalFacilitiesLayerKey;
             medicalFacilitesLayer.Transparency = 120f;
             medicalFacilitesLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImage("store"));
             medicalFacilitesLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            medicalFacilitesLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            medicalFacilitesLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer publicFacilitesLayer = new ShapeFileFeatureLayer(Path.Combine(targetPoisDictionary, "Public_Facilities.shp"));
             publicFacilitesLayer.Name = Global.PublicFacilitiesLayerKey;
             publicFacilitesLayer.Transparency = 120f;
             publicFacilitesLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImage("public-facility"));
             publicFacilitesLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            publicFacilitesLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            publicFacilitesLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer restaurantsLayer = new ShapeFileFeatureLayer(Path.Combine(targetPoisDictionary, "Restaurants.shp"));
             restaurantsLayer.Name = Global.RestaurantsLayerKey;
             restaurantsLayer.Transparency = 120f;
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImage("restaurant"));
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            restaurantsLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            restaurantsLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer schoolsLayer = new ShapeFileFeatureLayer(Path.Combine(targetPoisDictionary, "Schools.shp"));
             schoolsLayer.Name = Global.SchoolsLayerKey;
             schoolsLayer.Transparency = 120f;
             schoolsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImage("school"));
             schoolsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            schoolsLayer.FeatureSource.Projection = Global.GetWgs84ToMercatorProjection();
+            schoolsLayer.FeatureSource.ProjectionConverter = Global.GetWgs84ToMercatorProjection();
 
             //Highlight Overlay
             GeoImage pinImage = GetGeoImage("map-pin");
@@ -120,7 +115,7 @@ namespace MapSuiteSiteSelection
             highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             InMemoryFeatureLayer highlightAreaLayer = new InMemoryFeatureLayer();
-            highlightAreaLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(new GeoColor(120, GeoColor.FromHtml("#1749c9")), GeoColor.FromHtml("#fefec1"), 3, LineDashStyle.Solid);
+            highlightAreaLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(120, GeoColor.FromHtml("#1749c9")), GeoColor.FromHtml("#fefec1"), 3, LineDashStyle.Solid);
             highlightAreaLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             LayerOverlay highlightOverlay = new LayerOverlay();

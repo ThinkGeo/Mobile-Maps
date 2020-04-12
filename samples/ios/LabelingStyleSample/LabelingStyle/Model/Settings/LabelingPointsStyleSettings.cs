@@ -1,5 +1,5 @@
 ﻿using MonoTouch.Dialog;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 
 namespace LabelingStyle
 {
@@ -8,13 +8,13 @@ namespace LabelingStyle
         public LabelingPointsStyleSettings()
         {
             Title = "Custom Labeling Edit Settings";
-            Placement = PointPlacement.UpperCenter;
+            Placement = TextPlacement.Upper;
             XOffset = "0";
             YOffset = "8";
         }
 
         [Caption("Placement")]
-        public PointPlacement Placement;
+        public TextPlacement Placement;
 
         [Entry("XOffset")]
         public string XOffset;
@@ -24,7 +24,7 @@ namespace LabelingStyle
 
         public override void Sync()
         {
-            Placement = GetRadioElementValue<PointPlacement>(0);
+            Placement = GetRadioElementValue<TextPlacement>(0);
             XOffset = GetEntryElementValue(1);
             YOffset = GetEntryElementValue(2);
         }

@@ -3,11 +3,8 @@
     a Client ID and Secret. These were sent to you via email when you signed up
     with ThinkGeo, or you can register now at https://cloud.thinkgeo.com.
 ===========================================*/
-
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -22,9 +19,10 @@ namespace AnalyzingVisualization
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             MapView.CurrentExtent = new RectangleShape(-13814438, 6265892, -12272095, 3342085);
 
-            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer usEarthquakeLayer = new ShapeFileFeatureLayer("AppData/usEarthquake_Simplified.shp");

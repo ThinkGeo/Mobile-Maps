@@ -1,12 +1,8 @@
 using CoreGraphics;
 using System.Collections.Generic;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace LabelingStyle
@@ -35,11 +31,11 @@ namespace LabelingStyle
             MapView.MapUnit = GeographyUnit.Meter;
 
             WkbFileFeatureLayer parcelLayer = new WkbFileFeatureLayer("AppData/WkbFiles/Parcels.wkb");
-            parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultAreaStyle = new AreaStyle(new GeoPen(GeoColor.FromHtml("#666666"), 2), new GeoSolidBrush(GeoColor.SimpleColors.White), PenBrushDrawingOrder.PenFirst);
+            parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultAreaStyle = new AreaStyle(new GeoPen(GeoColor.FromHtml("#666666"), 2), new GeoSolidBrush(GeoColors.White), PenBrushDrawingOrder.PenFirst);
             parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new TextStyle("X_REF", new GeoFont("Arail", 6, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColor.FromHtml("#7b7b78")));
             parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.DuplicateRule = LabelDuplicateRule.NoDuplicateLabels;
             parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.GridSize = 1000;
-            parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 1);
+            parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.Mask = new AreaStyle();
             parcelLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;
             parcelLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
@@ -51,9 +47,9 @@ namespace LabelingStyle
             streetLayer.DrawingMarginInPixel = 256;
 
             ShapeFileFeatureLayer restaurantsLayer = new ShapeFileFeatureLayer("AppData/POIs.shp");
-            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1), 7);
-            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new TextStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 1);
+            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle,7, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1));
+            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new TextStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.XOffsetInPixel = 10;
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.Mask = new AreaStyle(new GeoPen(GeoColor.FromHtml("#999999"), 1), new GeoSolidBrush(new GeoColor(100, GeoColor.FromHtml("#cccc99"))), PenBrushDrawingOrder.PenFirst);
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.OverlappingRule = LabelOverlappingRule.AllowOverlapping;
@@ -118,9 +114,9 @@ namespace LabelingStyle
 
                 foreach (var textStyle in textStyles)
                 {
-                    int r = textStyle.HaloPen.Color.RedComponent;
-                    int g = textStyle.HaloPen.Color.GreenComponent;
-                    int b = textStyle.HaloPen.Color.BlueComponent;
+                    byte r = textStyle.HaloPen.Color.RedComponent;
+                    byte g = textStyle.HaloPen.Color.GreenComponent;
+                    byte b = textStyle.HaloPen.Color.BlueComponent;
 
                     if (useHalopen)
                     {
@@ -146,23 +142,23 @@ namespace LabelingStyle
             ClassBreak pwyBreak = new ClassBreak();
             pwyBreak.Value = 1;
             pwyBreak.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#544c63"), 12f), new GeoPen(GeoColor.FromHtml("#9e98b0"), 8f));
-            pwyBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 12, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            pwyBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 2);
+            pwyBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 12, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            pwyBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             pwyBreak.DefaultTextStyle.Mask = new AreaStyle();
             roadStyle.ClassBreaks.Add(pwyBreak);
 
             ClassBreak mainRoad = new ClassBreak();
             mainRoad.Value = 4;
             mainRoad.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#544c63"), 10f), new GeoPen(GeoColor.FromHtml("#e9cab0"), 7f));
-            mainRoad.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 10, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            mainRoad.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 1);
+            mainRoad.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 10, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            mainRoad.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             mainRoad.DefaultTextStyle.Mask = new AreaStyle();
             roadStyle.ClassBreaks.Add(mainRoad);
 
             ClassBreak localRoadBreak = new ClassBreak();
             localRoadBreak.Value = 5;
             localRoadBreak.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#bba7a2"), 8f), new GeoPen(GeoColor.FromHtml("#ffffff"), 6f));
-            localRoadBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 8, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColor.SimpleColors.Black));
+            localRoadBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 8, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColors.Black));
             localRoadBreak.DefaultTextStyle.Mask = new AreaStyle();
             roadStyle.ClassBreaks.Add(localRoadBreak);
             return roadStyle;

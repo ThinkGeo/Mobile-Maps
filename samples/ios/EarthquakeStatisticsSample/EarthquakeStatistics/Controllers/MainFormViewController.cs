@@ -14,12 +14,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteEarthquakeStatistics
@@ -62,36 +58,32 @@ namespace MapSuiteEarthquakeStatistics
         {
             string targetDictionary = @"AppData/SampleData";
 
-            Proj4Projection proj4 = Global.GetWgs84ToMercatorProjection();
+            ProjectionConverter proj4 = Global.GetWgs84ToMercatorProjection();
             string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/CacheImages";
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret")
-            {
-                TileResolution = ThinkGeo.Cloud.TileResolution.High
-            };
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
 
             // Earthquake points
             ShapeFileFeatureLayer earthquakePointLayer = new ShapeFileFeatureLayer(Path.Combine(targetDictionary, "usEarthquake.shp"));
-            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.SimpleColors.Red, 5, GeoColor.SimpleColors.White, 1));
+            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColors.Red, 5, GeoColors.White, 1));
             earthquakePointLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            earthquakePointLayer.FeatureSource.Projection = proj4;
+            earthquakePointLayer.FeatureSource.ProjectionConverter = proj4;
 
-            ShapeFileFeatureSource earthquakeHeatFeatureSource = new ShapeFileFeatureSource(Path.Combine(targetDictionary, "usEarthquake_Simplified.shp"))
+            ShapeFileFeatureLayer earthquakeHeatLayer = new ShapeFileFeatureLayer(Path.Combine(targetDictionary, "usEarthquake_Simplified.shp"));
+            earthquakeHeatLayer.FeatureSource.ProjectionConverter = proj4;
+            HeatStyle heatStyle = new HeatStyle(10, 75, DistanceUnit.Kilometer)
             {
-                Projection = proj4
+                Alpha = 180
             };
+            earthquakeHeatLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(heatStyle);
+            earthquakeHeatLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            earthquakeHeatLayer.IsVisible = false;
+           
 
-            HeatLayer earthquakeHeatLayer = new HeatLayer(earthquakeHeatFeatureSource)
-            {
-                HeatStyle = new HeatStyle(10, 75, DistanceUnit.Kilometer)
-                {
-                    Alpha = 180
-                },
-                IsVisible = false
-            };
-
-            DynamicIsoLineLayer earthquakeIsoLineLayer = CreateDynamicIsoLineLayer(earthquakeHeatFeatureSource);
+            DynamicIsoLineLayer earthquakeIsoLineLayer = CreateDynamicIsoLineLayer(earthquakeHeatLayer.FeatureSource);
             earthquakeIsoLineLayer.IsVisible = false;
 
             LayerOverlay highlightOverlay = new LayerOverlay();
@@ -101,12 +93,12 @@ namespace MapSuiteEarthquakeStatistics
 
             // Highlighted points
             InMemoryFeatureLayer selectedMarkerLayer = new InMemoryFeatureLayer();
-            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.SimpleColors.Orange, 8, GeoColor.SimpleColors.White, 2);
+            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Orange, 8, GeoColors.White, 2);
             selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             PointStyle highLightMarkerStyle = new PointStyle();
-            highLightMarkerStyle.CustomPointStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(50, GeoColor.SimpleColors.Blue), 20, GeoColor.SimpleColors.LightBlue, 1));
-            highLightMarkerStyle.CustomPointStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(255, 0, 122, 255), 10, GeoColor.SimpleColors.White, 2));
+            highLightMarkerStyle.CustomPointStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(50, GeoColors.Blue), 20, GeoColors.LightBlue, 1));
+            highLightMarkerStyle.CustomPointStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(255, 0, 122, 255), 10, GeoColors.White, 2));
 
             InMemoryFeatureLayer highlightMarkerLayer = new InMemoryFeatureLayer();
             highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = highLightMarkerStyle;
@@ -130,9 +122,9 @@ namespace MapSuiteEarthquakeStatistics
             iOSMap.Overlays.Add(Global.HighLightOverlayKey, highlightOverlay);
 
             iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(80, GeoColor.SimpleColors.LightGreen), 8);
-            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.SimpleColors.White, 3, true);
-            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(80, GeoColor.SimpleColors.LightGreen), GeoColor.SimpleColors.White, 2);
+            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(80, GeoColors.LightGreen), 8);
+            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.White, 3, true);
+            iOSMap.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(80, GeoColors.LightGreen), GeoColors.White, 2);
             iOSMap.TrackOverlay.TrackEnded += TrackInteractiveOverlayOnTrackEnded;
             Global.MapView = iOSMap;
 
@@ -423,7 +415,7 @@ namespace MapSuiteEarthquakeStatistics
             }
             earthquakeSource.Sections.Clear();
 
-            Proj4Projection mercatorToWgs84Projection = Global.GetWgs84ToMercatorProjection();
+            ProjectionConverter mercatorToWgs84Projection = Global.GetWgs84ToMercatorProjection();
             mercatorToWgs84Projection.Open();
 
             try
