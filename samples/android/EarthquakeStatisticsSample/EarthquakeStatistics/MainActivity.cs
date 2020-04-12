@@ -42,7 +42,7 @@ namespace MapSuiteEarthquakeStatistics
         private InMemoryFeatureLayer highlightMarkerLayer;
 
         readonly string[] StoragePermissions =
-{
+        {
             Manifest.Permission.ReadExternalStorage,
             Manifest.Permission.WriteExternalStorage
         };
