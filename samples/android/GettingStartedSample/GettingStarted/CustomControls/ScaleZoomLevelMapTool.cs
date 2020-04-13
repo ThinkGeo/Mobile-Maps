@@ -3,7 +3,7 @@ using Android.Util;
 using Android.Widget;
 using System;
 using System.Globalization;
-using ThinkGeo.MapSuite.Android;
+using ThinkGeo.UI.Android;
 
 namespace GettingStartedSample
 {

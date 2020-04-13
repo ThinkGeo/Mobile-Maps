@@ -12,10 +12,8 @@ using Android.Views.Animations;
 using Android.Widget;
 using System;
 using System.Threading.Tasks;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GettingStartedSample
 {
@@ -34,7 +32,7 @@ namespace GettingStartedSample
         private Animation toolsBarOutAnimation;
         private Animation toolsBarInAnimation;
         private LocationManager locationManager;
-        private Proj4Projection wgs84ToMeterProjection;
+        private ProjectionConverter wgs84ToMeterProjection;
         private ScaleZoomLevelMapTool scaleZoomLevelMapTool;
         private SelectBaseMapTypeDialog selectBaseMapTypeDialog;
 
@@ -322,7 +320,7 @@ namespace GettingStartedSample
         {
             Popup popup = new Popup(this);
             PointF location = new PointF(e.ScreenX, e.ScreenY);
-            popup.Position = ExtentHelper.ToWorldCoordinate(CustomMapView.Current.CurrentExtent, location.X, location.Y, (float)CustomMapView.Current.Width, (float)CustomMapView.Current.Height);
+            popup.Position = MapUtil.ToWorldCoordinate(CustomMapView.Current.CurrentExtent, location.X, location.Y, (float)CustomMapView.Current.Width, (float)CustomMapView.Current.Height);
 
             TextView textView = new TextView(this);
             PointShape locationShape = wgs84ToMeterProjection.ConvertToInternalProjection(popup.Position) as PointShape;
@@ -449,9 +447,9 @@ namespace GettingStartedSample
             isTracking = false;
             locationManager = (LocationManager)GetSystemService(Context.LocationService);
             bestGpsProvider = locationManager.GetBestProvider(criteria, true);
-            wgs84ToMeterProjection = new Proj4Projection();
-            wgs84ToMeterProjection.InternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString();
-            wgs84ToMeterProjection.ExternalProjectionParametersString = Proj4Projection.GetGoogleMapParametersString();
+            wgs84ToMeterProjection = new ProjectionConverter();
+            wgs84ToMeterProjection.InternalProjection = new Projection(Projection.GetWgs84ProjString());
+            wgs84ToMeterProjection.ExternalProjection = new Projection(Projection.GetGoogleMapProjString());
             wgs84ToMeterProjection.Open();
         }
 

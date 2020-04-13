@@ -6,7 +6,8 @@
 
 using Android.App;
 using Android.Content;
-using ThinkGeo.MapSuite.Android;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GettingStartedSample
 {
