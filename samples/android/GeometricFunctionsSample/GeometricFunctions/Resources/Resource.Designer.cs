@@ -26,26 +26,18 @@ namespace GeometricFunctions
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::GeometricFunctions.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::GeometricFunctions.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::GeometricFunctions.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GeometricFunctions.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::GeometricFunctions.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::GeometricFunctions.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -253,8 +245,14 @@ namespace GeometricFunctions
 			// aapt resource value: 0x7F040000
 			public const int ApplicationName = 2130968576;
 			
+			// aapt resource value: 0x7F040002
+			public const int app_name = 2130968578;
+			
 			// aapt resource value: 0x7F040001
 			public const int Hello = 2130968577;
+			
+			// aapt resource value: 0x7F040003
+			public const int hello = 2130968579;
 			
 			static String()
 			{

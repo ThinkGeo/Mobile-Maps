@@ -1,11 +1,7 @@
 using Android.Content;
 using System.Globalization;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GeometricFunctions
 {
@@ -36,14 +32,14 @@ namespace GeometricFunctions
         {
             MapView.MapUnit = GeographyUnit.Meter;
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-            RectangleShape mapExtent = (RectangleShape)ExtentHelper.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
+            RectangleShape mapExtent = (RectangleShape)MapUtil.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
             mapExtent.ScaleUp(20);
             MapView.CurrentExtent = mapExtent;
 
             InMemoryFeatureLayer sourceLayer = new InMemoryFeatureLayer();
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(new GeoSolidBrush(BrushColor));
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Width = 3;
-            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.Black;
+            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColors.Black;
             sourceLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             sourceLayer.InternalFeatures.Add("AreaShape1", GeometrySource[0]);
@@ -58,9 +54,9 @@ namespace GeometricFunctions
             textStyle.Font = new GeoFont("Arial", 15);
             textStyle.DuplicateRule = LabelDuplicateRule.UnlimitedDuplicateLabels;
             textStyle.OverlappingRule = LabelOverlappingRule.AllowOverlapping;
-            textStyle.TextSolidBrush = new GeoSolidBrush(GeoColor.StandardColors.Black);
-            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColor.StandardColors.White), 1);
-            textStyle.PointPlacement = PointPlacement.LowerCenter;
+            textStyle.TextBrush = new GeoSolidBrush(GeoColors.Black);
+            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColors.White), 1);
+            textStyle.TextPlacement = TextPlacement.Lower;
             textStyle.YOffsetInPixel = -8;
 
             shortestLineLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;
