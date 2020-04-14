@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using System;
 using UIKit;
 
 namespace GettingStartedSample
@@ -30,12 +29,6 @@ namespace GettingStartedSample
         // This method is called as part of the transiton from background to active state.
         public override void WillEnterForeground(UIApplication application)
         {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-        }
-
-        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Console.WriteLine();
         }
         // This method is called when the application is about to terminate. Save data, if needed.
         public override void WillTerminate(UIApplication application)

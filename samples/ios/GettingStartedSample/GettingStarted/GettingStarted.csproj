@@ -140,17 +140,10 @@
     <Compile Include="MainFormViewController.designer.cs">
       <DependentUpon>MainFormViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\InstructionView.cs" />
-    <Compile Include="Model\TableViewRowClickEventArgs.cs" />
-    <Compile Include="Model\TableView\CellModel.cs" />
-    <Compile Include="Model\TableView\SectionModel.cs" />
-    <Compile Include="Model\TableView\TableViewSource.cs" />
-    <Compile Include="Shared\IOSCapabilityHelper.cs" />
+    <Compile Include="InstructionView.cs" />
     <None Include="app.config" />
     <BundleResource Include="com.thinkgeo.gettingstarted.mapsuitelicense" />
     <None Include="Info.plist" />
-    <Compile Include="Model\CurrentLocationPopup.cs" />
-    <Compile Include="Model\ScaleZoomLevelMapTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <InterfaceDefinition Include="MainForm.storyboard" />
     <InterfaceDefinition Include="Splash.storyboard" />
@@ -195,10 +188,10 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Core" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.4\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.Core.13.0.0-beta070\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.iOS.12.2.2\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.UI.iOS.13.0.0-beta008\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -216,24 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\close%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\close%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\information.png" />
@@ -254,40 +229,13 @@
     <BundleResource Include="Resources\location%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\map-type.png" />
+    <BundleResource Include="Resources\switch-theme.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\map-type%402x.png" />
+    <BundleResource Include="Resources\switch-theme%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\map-type%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous%403x.png" />
+    <BundleResource Include="Resources\switch-theme%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\splash%402x.png" />
@@ -361,5 +309,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets')" />
 </Project>
