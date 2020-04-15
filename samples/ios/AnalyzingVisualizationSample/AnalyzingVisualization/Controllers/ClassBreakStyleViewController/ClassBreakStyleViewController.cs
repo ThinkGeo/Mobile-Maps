@@ -19,7 +19,6 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
             string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
@@ -29,14 +28,12 @@ namespace AnalyzingVisualization
 
             ClassBreakStyle classBreakStyle = GetClassBreakStyle();
             ShapeFileFeatureLayer usLayer = new ShapeFileFeatureLayer("AppData/usStatesCensus2010.shp");
-            usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(classBreakStyle);
             usLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
             layerOverlay.Layers.Add(usLayer);
+            layerOverlay.TileType = TileType.SingleTile;
             MapView.Overlays.Add(layerOverlay);
             MapView.ZoomTo(new PointShape(-10777397, 4821690), MapView.ZoomLevelSet.ZoomLevel05.Scale);
 

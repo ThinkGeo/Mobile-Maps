@@ -148,10 +148,10 @@
     <Compile Include="MainFormViewController.designer.cs">
       <DependentUpon>MainFormViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Shared\ConstForDevice.cs" />
-    <Compile Include="Shared\ConstForIPad.cs" />
-    <Compile Include="Shared\ConstForIPhone.cs" />
-    <Compile Include="Shared\SampleUIHelper.cs" />
+    <Compile Include="Helper\ConstForDevice.cs" />
+    <Compile Include="Helper\ConstForIPad.cs" />
+    <Compile Include="Helper\ConstForIPhone.cs" />
+    <Compile Include="Helper\SampleUIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <InterfaceDefinition Include="MainForm.storyboard" />
     <InterfaceDefinition Include="Splash.storyboard" />

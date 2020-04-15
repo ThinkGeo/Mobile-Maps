@@ -28,9 +28,9 @@ namespace AnalyzingVisualization
             ShapeFileFeatureLayer usEarthquakeLayer = new ShapeFileFeatureLayer("AppData/usEarthquake_Simplified.shp");
             MapView.Overlays.Add(new LayerOverlay(new Layer[] { usEarthquakeLayer })
             {
-                TileWidth = 512,
-                TileHeight = 512
-            });
+                TileType = TileType.SingleTile
+
+        });
 
             usEarthquakeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             usEarthquakeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new HeatStyle(10, 150, "MAGNITUDE", 0, 12, 100, DistanceUnit.Kilometer));

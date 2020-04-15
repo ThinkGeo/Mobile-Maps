@@ -22,7 +22,6 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             MapView.CurrentExtent = new RectangleShape(-13886070, 6660597, -8906057, 3382985);
 
             LineStyle lineStyle = LineStyle.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
@@ -108,8 +107,7 @@ namespace AnalyzingVisualization
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             LayerOverlay dynamicOverlay = new LayerOverlay();
-            dynamicOverlay.TileWidth = 512;
-            dynamicOverlay.TileHeight = 512;
+            dynamicOverlay.TileType = TileType.SingleTile;
             dynamicOverlay.Layers.Add(coldFrontLineLayer);
             dynamicOverlay.Layers.Add(warmFrontLineLayer);
             dynamicOverlay.Layers.Add(occludedFrontLineLayer);

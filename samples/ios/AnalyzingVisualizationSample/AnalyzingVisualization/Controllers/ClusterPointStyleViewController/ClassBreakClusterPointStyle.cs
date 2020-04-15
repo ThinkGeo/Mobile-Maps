@@ -11,40 +11,23 @@ namespace AnalyzingVisualization
     [Serializable]
     public class ClassBreakClusterPointStyle : Style
     {
-        [Obfuscation(Exclude = true)]
-        private Dictionary<int, PointStyle> classBreakPoint;
-        [Obfuscation(Exclude = true)]
-        private int cellSize = 100;
-        [Obfuscation(Exclude = true)]
-        private TextStyle textSytle = new TextStyle();
-
         public ClassBreakClusterPointStyle()
             : base()
         {
-            classBreakPoint = new Dictionary<int, PointStyle>();
+            ClassBreakPoint = new Dictionary<int, PointStyle>();
+            this.CellSize = 100;
         }
 
-        public Dictionary<int, PointStyle> ClassBreakPoint
-        {
-            get { return classBreakPoint; }
-        }
+        public Dictionary<int, PointStyle> ClassBreakPoint { get; private set; }
 
-        public TextStyle TextStyle
-        {
-            get { return textSytle; }
-            set { textSytle = value; }
-        }
+        public TextStyle TextStyle { get; set; }
 
-        public int CellSize
-        {
-            get { return cellSize; }
-            set { cellSize = value; }
-        }
+        public int CellSize { get; set; }
 
         protected override void DrawCore(IEnumerable<Feature> features, GeoCanvas canvas, Collection<SimpleCandidate> labelsInThisLayer, Collection<SimpleCandidate> labelsInAllLayers)
         {
             double scale = MapUtil.GetScale(canvas.CurrentWorldExtent, canvas.Width, canvas.MapUnit);
-            TileMatrix mapSuiteTileMatrix = TileMatrix.GetDefaultMatrix(scale, cellSize, cellSize, canvas.MapUnit);
+            TileMatrix mapSuiteTileMatrix = TileMatrix.GetDefaultMatrix(scale, CellSize, CellSize, canvas.MapUnit);
             IEnumerable<MatrixCell> tileMatricCells = mapSuiteTileMatrix.GetContainedCells(canvas.CurrentWorldExtent);
             Dictionary<string, string> unusedFeatures = new Dictionary<string, string>();
 
@@ -95,10 +78,10 @@ namespace AnalyzingVisualization
 
                     bool isMatch = false;
 
-                    for (int i = 0; i < classBreakPoint.Count - 1; i++)
+                    for (int i = 0; i < ClassBreakPoint.Count - 1; i++)
                     {
-                        var startItem = classBreakPoint.ElementAt(i);
-                        var endItem = classBreakPoint.ElementAt(i + 1);
+                        var startItem = ClassBreakPoint.ElementAt(i);
+                        var endItem = ClassBreakPoint.ElementAt(i + 1);
                         if (featureCount >= startItem.Key && featureCount < endItem.Key)
                         {
                             //Draw the point shape
@@ -107,19 +90,18 @@ namespace AnalyzingVisualization
                             break;
                         }
                     }
-                    if (!isMatch && featureCount >= classBreakPoint.LastOrDefault().Key)
+                    if (!isMatch && featureCount >= ClassBreakPoint.LastOrDefault().Key)
                     {
-                        classBreakPoint.LastOrDefault().Value.Draw(new [] { new Feature(tempMultiPointShape.GetCenterPoint(), featureValues) }, canvas, labelsInThisLayer, labelsInAllLayers);
+                        ClassBreakPoint.LastOrDefault().Value.Draw(new [] { new Feature(tempMultiPointShape.GetCenterPoint(), featureValues) }, canvas, labelsInThisLayer, labelsInAllLayers);
                     }
 
                     if (featureCount != 1)
                     {
                         // Draw the text style to show how many feaures are consolidated in the cluster
-                        textSytle.Draw(new [] { new Feature(tempMultiPointShape.GetCenterPoint(), featureValues) }, canvas, labelsInThisLayer, labelsInAllLayers);
+                        TextStyle.Draw(new [] { new Feature(tempMultiPointShape.GetCenterPoint(), featureValues) }, canvas, labelsInThisLayer, labelsInAllLayers);
                     }
                 }
             }
         }
-
     }
 }

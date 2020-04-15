@@ -145,15 +145,12 @@
     <Compile Include="Controllers\CustomStyleViewContoller\CustomStyleViewContoller.cs" />
     <Compile Include="Controllers\CustomStyleViewContoller\PressureValueStyle.cs" />
     <Compile Include="Controllers\CustomStyleViewContoller\WindPointStyle.cs" />
-    <Compile Include="Controllers\FilterStyleViewController\FilterConditionDefaultValues.cs" />
-    <Compile Include="Controllers\FilterStyleViewController\FilterStyleConditionModel.cs" />
-    <Compile Include="Controllers\FilterStyleViewController\FilterStyleViewController.cs" />
     <Compile Include="Controllers\IconStyleViewController.cs" />
     <Compile Include="Controllers\IsolineStyleViewContoller\EarthquakeIsoLineFeatureLayer.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\IsolineStyleViewContoller\IsolineStyleViewContoller.cs" />
-    <Compile Include="Controllers\DotDenstyStyleViewContoller.cs" />
+    <Compile Include="Controllers\DotDensityStyleViewContoller.cs" />
     <Compile Include="Controllers\HeatStyleViewContoller.cs" />
     <Compile Include="Controllers\Advanced\DetailViewController.cs" />
     <Compile Include="Controllers\Advanced\SliderViewController.cs" />
@@ -189,13 +186,15 @@
     <Content Include="AppData\CustomStyles\WarmFront6.txt" />
     <Content Include="AppData\CustomStyles\WarmFront7.txt" />
     <Content Include="AppData\CustomStyles\WarmFront8.txt" />
-    <BundleResource Include="AppData\Images\vehicle1.png" />
-    <BundleResource Include="AppData\Images\vehicle2.png" />
-    <BundleResource Include="AppData\Images\vehicle3.png" />
-    <BundleResource Include="AppData\Images\vehicle4.png" />
-    <BundleResource Include="AppData\Images\vehicle5.png" />
-    <BundleResource Include="AppData\Images\vehicle6.png" />
-    <BundleResource Include="AppData\Images\vehicle7.png" />
+    <BundleResource Include="AppData\Images\vehicle1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <Content Include="AppData\Images\vehicle2.png" />
+    <Content Include="AppData\Images\vehicle3.png" />
+    <Content Include="AppData\Images\vehicle4.png" />
+    <Content Include="AppData\Images\vehicle5.png" />
+    <Content Include="AppData\Images\vehicle6.png" />
+    <Content Include="AppData\Images\vehicle7.png" />
     <Content Include="AppData\SampleList.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -321,10 +320,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.4\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.Core.13.0.0-beta070\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.iOS.12.2.2\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.UI.iOS.13.0.0-beta008\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -387,13 +386,12 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta070\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
 </Project>

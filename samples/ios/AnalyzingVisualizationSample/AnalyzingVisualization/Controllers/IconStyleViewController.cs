@@ -18,7 +18,6 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             View.AddSubview(MapView);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
@@ -29,16 +28,12 @@ namespace AnalyzingVisualization
 
             ShapeFileFeatureLayer iconStyleFeatureLayer = new ShapeFileFeatureLayer("AppData/Vehicles.shp");
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
             layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(iconStyleFeatureLayer);
             MapView.Overlays.Add(layerOverlay);
 
-            iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(GetIconStyle("AppData/Images/vehicle"));
             iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
             MapView.ZoomTo(new PointShape(-10772265, 3916827), MapView.ZoomLevelSet.ZoomLevel14.Scale);
         }
 
@@ -58,6 +53,7 @@ namespace AnalyzingVisualization
 
                 valueStyle.ValueItems.Add(valueItem);
             }
+
 
             return valueStyle;
         }
