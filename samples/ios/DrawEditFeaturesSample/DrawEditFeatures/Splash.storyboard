@@ -27,7 +27,7 @@
                                     <constraint id="230" firstAttribute="width" constant="256"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="231" translatesAutoresizingMaskIntoConstraints="NO" text="Think Geo">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="231" translatesAutoresizingMaskIntoConstraints="NO" text="ThinkGeo">
                                 <rect key="frame" x="112.5" y="411.5" width="150" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>
@@ -38,7 +38,7 @@
                                     <constraint id="235" firstAttribute="width" constant="150"/>
                                 </constraints>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="263" translatesAutoresizingMaskIntoConstraints="NO" text="Draw Edit Shapes">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="263" translatesAutoresizingMaskIntoConstraints="NO" text="Draw/Edit Shapes">
                                 <rect key="frame" x="57.5" y="451.5" width="260" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>

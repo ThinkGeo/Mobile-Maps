@@ -28,6 +28,9 @@ namespace DrawEditFeatures
         private UIButton rectangleButton;
         private UIButton drawButton;
         private UIView drawButtonsView;
+        private int buttonWidth = 50;
+
+        private List<UIButton> uiButtons;
 
         public MainFormViewController(IntPtr handle)
             : base(handle)
@@ -37,11 +40,11 @@ namespace DrawEditFeatures
         {
             base.ViewDidLoad();
             View.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
+            uiButtons = new List<UIButton>() { lineButton, pointButton, editButton, clearButton, circleButton, cursorButton, polygonButton, ellipseButton, rectangleButton };
 
             mapView = new MapView(View.Frame)
             {
                 MapUnit = GeographyUnit.Meter,
-                BackgroundColor = UIColor.FromRGB(244, 242, 238),
                 CurrentExtent = (new RectangleShape(-13358339, 11068716, -5565975, -11068716))
             };
 
@@ -86,15 +89,15 @@ namespace DrawEditFeatures
             {
                 SampleUIHelper.InitializeInstruction(View, isIphone => 140, contentView =>
                 {
-                    cursorButton = GetUIButton(GetButtonLeft(0), "pan", TrackButtonClick);
-                    pointButton = GetUIButton(GetButtonLeft(1), "point", TrackButtonClick);
-                    lineButton = GetUIButton(GetButtonLeft(2), "polyline", TrackButtonClick);
-                    rectangleButton = GetUIButton(GetButtonLeft(3), "rectangle", TrackButtonClick);
-                    circleButton = GetUIButton(GetButtonLeft(4), "circle", TrackButtonClick);
-                    polygonButton = GetUIButton(GetButtonLeft(5), "polygon", TrackButtonClick);
-                    ellipseButton = GetUIButton(GetButtonLeft(6), "ellipse", TrackButtonClick);
-                    editButton = GetUIButton(GetButtonLeft(7), "edit", TrackButtonClick);
-                    clearButton = GetUIButton(GetButtonLeft(8), "recycle", TrackButtonClick);
+                    cursorButton = GetUIButton(0, 0, "pan", TrackButtonClick);
+                    pointButton = GetUIButton(1 * buttonWidth, 0, "point", TrackButtonClick);
+                    lineButton = GetUIButton(2 * buttonWidth, 0, "polyline", TrackButtonClick);
+                    rectangleButton = GetUIButton(3 * buttonWidth, 0, "rectangle", TrackButtonClick);
+                    circleButton = GetUIButton(4 * buttonWidth, 0, "circle", TrackButtonClick);
+                    polygonButton = GetUIButton(5 * buttonWidth, 0, "polygon", TrackButtonClick);
+                    ellipseButton = GetUIButton(6 * buttonWidth, 0, "ellipse", TrackButtonClick);
+                    editButton = GetUIButton(7 * buttonWidth, 0, "edit", TrackButtonClick);
+                    clearButton = GetUIButton(8 * buttonWidth,  0, "recycle", TrackButtonClick);
 
                     contentView.AddSubviews(new UIView[] { cursorButton, pointButton, lineButton, rectangleButton, circleButton, polygonButton, ellipseButton, editButton, clearButton });
                 });
@@ -103,17 +106,17 @@ namespace DrawEditFeatures
             {
                 SampleUIHelper.InitializeInstruction(View, isIphone => isIphone ? 140 : 120, contentView =>
                 {
-                    cursorButton = GetUIButton(GetButtonLeft(0), "pan", TrackButtonClick);
-                    drawButton = GetUIButton(GetButtonLeft(1), "pen", TrackButtonClick);
-                    editButton = GetUIButton(GetButtonLeft(2), "edit", TrackButtonClick);
-                    clearButton = GetUIButton(GetButtonLeft(3), "recycle", TrackButtonClick);
+                    cursorButton = GetUIButton(0, 0, "pan", TrackButtonClick);
+                    drawButton = GetUIButton(1 * buttonWidth,  0, "pen", TrackButtonClick);
+                    editButton = GetUIButton(2 * buttonWidth, 0, "edit", TrackButtonClick);
+                    clearButton = GetUIButton(3 * buttonWidth, 0, "recycle", TrackButtonClick);
 
                     pointButton = GetUIButton(0, 0, "point", TrackButtonClick);
-                    lineButton = GetUIButton(GetButtonLeft(1), 0, "polyline", TrackButtonClick);
-                    rectangleButton = GetUIButton(GetButtonLeft(2), 0, "rectangle", TrackButtonClick);
-                    circleButton = GetUIButton(GetButtonLeft(3), 0, "circle", TrackButtonClick);
-                    polygonButton = GetUIButton(GetButtonLeft(4), 0, "polygon", TrackButtonClick);
-                    ellipseButton = GetUIButton(GetButtonLeft(5), 0, "ellipse", TrackButtonClick);
+                    lineButton = GetUIButton(1 * buttonWidth, 0, "polyline", TrackButtonClick);
+                    rectangleButton = GetUIButton(2 * buttonWidth,  0, "rectangle", TrackButtonClick);
+                    circleButton = GetUIButton(3 * buttonWidth, 0, "circle", TrackButtonClick);
+                    polygonButton = GetUIButton(4 * buttonWidth, 0, "polygon", TrackButtonClick);
+                    ellipseButton = GetUIButton(5 * buttonWidth, 0, "ellipse", TrackButtonClick);
 
                     drawButtonsView = new UIView(new CGRect(View.Frame.Right, 0, View.Frame.Width, 44));
                     drawButtonsView.Layer.BorderWidth = 0;
@@ -132,13 +135,6 @@ namespace DrawEditFeatures
             }
         }
 
-        private static int GetButtonLeft(int i)
-        {
-            int size = 50;
-            int left = size * i;
-            return left;
-        }
-
         private static RectangleShape GetExtentRetainScale(PointShape currentLocationInMecator, CGRect frame, double resolution)
         {
             double left = currentLocationInMecator.X - resolution * frame.Width * .5;
@@ -146,18 +142,6 @@ namespace DrawEditFeatures
             double top = currentLocationInMecator.Y + resolution * frame.Height * .5;
             double bottom = currentLocationInMecator.Y - resolution * frame.Height * .5;
             return new RectangleShape(left, top, right, bottom);
-        }
-
-        private static UIButton GetUIButton(int leftLocation, string imageName, EventHandler handler)
-        {
-            CGSize buttonSize = new CGSize(44, 44);
-            UIButton button = UIButton.FromType(UIButtonType.System);
-            button.Frame = new CGRect(new Point(leftLocation, 0), buttonSize);
-            button.SetImage(UIImage.FromBundle(imageName), UIControlState.Normal);
-            button.SetTitle(imageName, UIControlState.Application);
-            button.TouchUpInside += handler;
-            button.TintColor = UIColor.White;
-            return button;
         }
 
         private static UIButton GetUIButton(int leftLocation, int topLocation, string imageName, EventHandler handler)
@@ -172,22 +156,10 @@ namespace DrawEditFeatures
             return button;
         }
 
-        private IEnumerable<UIButton> GetButtons()
-        {
-            yield return lineButton;
-            yield return pointButton;
-            yield return editButton;
-            yield return clearButton;
-            yield return circleButton;
-            yield return cursorButton;
-            yield return polygonButton;
-            yield return ellipseButton;
-            yield return rectangleButton;
-        }
 
         private void TrackButtonClick(object sender, EventArgs e)
         {
-            foreach (var tempButton in GetButtons())
+            foreach (var tempButton in uiButtons)
             {
                 tempButton.Layer.BorderWidth = 0;
                 tempButton.Layer.BorderColor = UIColor.Clear.CGColor;
@@ -230,7 +202,6 @@ namespace DrawEditFeatures
                     mapView.EditOverlay.ClearAllControlPoints();
                     mapView.Refresh();
                     break;
-
                 case "recycle":
                     mapView.EditOverlay.ClearAllControlPoints();
                     mapView.EditOverlay.EditShapesLayer.Open();
@@ -239,31 +210,24 @@ namespace DrawEditFeatures
                     mapView.TrackOverlay.TrackShapeLayer.Clear();
                     mapView.Refresh();
                     break;
-
                 case "point":
                     mapView.TrackOverlay.TrackMode = TrackMode.Point;
                     break;
-
                 case "polyline":
                     mapView.TrackOverlay.TrackMode = TrackMode.Line;
                     break;
-
                 case "rectangle":
                     mapView.TrackOverlay.TrackMode = TrackMode.Rectangle;
                     break;
-
                 case "polygon":
                     mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
                     break;
-
                 case "circle":
                     mapView.TrackOverlay.TrackMode = TrackMode.Circle;
                     break;
-
                 case "ellipse":
                     mapView.TrackOverlay.TrackMode = TrackMode.Ellipse;
                     break;
-
                 case "edit":
                     mapView.TrackOverlay.TrackMode = TrackMode.None;
                     foreach (Feature feature in mapView.TrackOverlay.TrackShapeLayer.InternalFeatures)
@@ -274,7 +238,6 @@ namespace DrawEditFeatures
                     mapView.EditOverlay.CalculateAllControlPoints();
                     mapView.Refresh();
                     break;
-
                 case "pen":
                     UIView.Animate(.3, () =>
                     {
@@ -285,7 +248,6 @@ namespace DrawEditFeatures
                     pointButton.Layer.BorderColor = UIColor.White.CGColor;
                     mapView.TrackOverlay.TrackMode = TrackMode.Point;
                     break;
-
                 default:
                     mapView.TrackOverlay.TrackMode = TrackMode.None;
                     break;

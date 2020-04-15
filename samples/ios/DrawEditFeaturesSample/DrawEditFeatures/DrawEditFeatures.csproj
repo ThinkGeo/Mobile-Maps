@@ -197,12 +197,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.4\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.iOS.12.2.2\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
@@ -383,6 +377,18 @@
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\spotlight~ipad.png">
       <Visible>false</Visible>
     </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\ThinkGeoSDKs\ThinkGeo.Core\Core\ThinkGeo.Core.csproj">
+      <Project>{64f3cef4-56bd-46e0-a316-3e83b22bb628}</Project>
+      <Name>ThinkGeo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\ThinkGeoSDKs\ThinkGeo.UI\iOS\iOSSDK\ThinkGeo.UI.iOS.csproj">
+      <Project>{193b58cc-32f2-4023-b3cd-a21de830326c}</Project>
+      <Name>ThinkGeo.UI.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" />
