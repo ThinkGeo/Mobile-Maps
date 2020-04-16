@@ -4,10 +4,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -48,9 +46,10 @@ namespace AnalyzingVisualization
 
         protected override void DrawCore(IEnumerable<Feature> features, GeoCanvas canvas, Collection<SimpleCandidate> labelsInThisLayer, Collection<SimpleCandidate> labelsInAllLayers)
         {
-            double scale = ExtentHelper.GetScale(canvas.CurrentWorldExtent, canvas.Width, canvas.MapUnit);
-            MapSuiteTileMatrix mapSuiteTileMatrix = new MapSuiteTileMatrix(scale, cellSize, cellSize, canvas.MapUnit);
-            IEnumerable<TileMatrixCell> tileMatricCells = mapSuiteTileMatrix.GetContainedCells(canvas.CurrentWorldExtent);
+            double scale = MapUtil.GetScale(canvas.CurrentWorldExtent, canvas.Width, canvas.MapUnit);
+
+            TileMatrix tileMatrix = new TileMatrix(scale, cellSize, cellSize, canvas.CurrentWorldExtent, canvas.MapUnit);
+            IEnumerable<MatrixCell> tileMatrixCells = tileMatrix.GetContainedCells(canvas.CurrentWorldExtent);
             Dictionary<string, string> unusedFeatures = new Dictionary<string, string>();
 
             foreach (Feature feature in features)
@@ -62,7 +61,7 @@ namespace AnalyzingVisualization
                 unusedFeatures.Add(feature.Id, feature.Id);
             }
 
-            foreach (TileMatrixCell cell in tileMatricCells)
+            foreach (MatrixCell cell in tileMatrixCells)
             {
                 int featureCount = 0;
                 MultipointShape tempMultiPointShape = new MultipointShape();

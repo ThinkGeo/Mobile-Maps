@@ -11,9 +11,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {

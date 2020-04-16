@@ -4,12 +4,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -35,7 +31,7 @@ namespace AnalyzingVisualization
             string cachePathFilename = Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
             thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "SphericalMercator");
 
-            LineStyle lineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
+            LineStyle lineStyle = LineStyle.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
 
             //Cold Front
             CustomGeoImageLineStyle coldFrontLineStyle = GetCustomLineStyle(lineStyle, 19, CustomGeoImageLineStyle.SymbolSide.Right,
