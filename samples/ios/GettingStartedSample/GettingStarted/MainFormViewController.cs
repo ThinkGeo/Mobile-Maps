@@ -20,6 +20,7 @@ namespace GettingStartedSample
     {
         private MapView mapView;
         private InstructionView instructionView;
+        CLLocationManager locationManager;
 
         public MainFormViewController(IntPtr handle)
             : base(handle)
@@ -41,6 +42,8 @@ namespace GettingStartedSample
             string clientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
             string secret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(clientKey, secret);
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             mapView.Overlays.Add("ThinkGeoCloudMapsOverlay", thinkGeoCloudMapsOverlay);
 
             // Init Location marker layer.
@@ -98,20 +101,22 @@ namespace GettingStartedSample
             if (thinkGeoCloudMapsOverlay.MapType == ThinkGeoCloudVectorMapsMapType.Light)
             {
                 thinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Dark;
+                thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_dark");
+
             }
             else
             {
                 thinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Light;
+                thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
             }
             thinkGeoCloudMapsOverlay.Refresh();
         }
 
         private void LocateButton_TouchUpInside(object buttonEventSender, EventArgs buttonEventE)
         {
-            CLLocationManager locationManager = new CLLocationManager();
+            locationManager = new CLLocationManager();
             locationManager.RequestWhenInUseAuthorization();
             locationManager.DesiredAccuracy = 1;
-            locationManager.StartUpdatingLocation();
 
             locationManager.LocationsUpdated += delegate (object sender, CLLocationsUpdatedEventArgs e)
             {
@@ -137,9 +142,10 @@ namespace GettingStartedSample
                 {
                     mapView.ZoomTo(locationMarker.Position, 18023);
                 }
+                locationManager.StopUpdatingLocation();
             };
 
-            locationManager.StopUpdatingLocation();
+            locationManager.StartUpdatingLocation();
         }
 
         private void InformationButton_TouchUpInside(object sender, EventArgs e)
