@@ -24,13 +24,16 @@ namespace AnalyzingVisualization
             string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
             string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+            //thinkGeoCloudMapsOverlay.TileHeight = 256;
+            //thinkGeoCloudMapsOverlay.TileWidth = 256;
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer usLayer = new ShapeFileFeatureLayer("AppData/usStatesCensus2010.shp");
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileType = TileType.SingleTile;
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
+           
             layerOverlay.Layers.Add(usLayer);
             MapView.Overlays.Add(layerOverlay);
 

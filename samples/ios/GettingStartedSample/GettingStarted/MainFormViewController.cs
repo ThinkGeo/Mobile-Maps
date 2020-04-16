@@ -42,6 +42,8 @@ namespace GettingStartedSample
             string clientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
             string secret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(clientKey, secret);
+            //thinkGeoCloudMapsOverlay.TileHeight = 256;
+            //thinkGeoCloudMapsOverlay.TileWidth = 256;
             thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
             thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             mapView.Overlays.Add("ThinkGeoCloudMapsOverlay", thinkGeoCloudMapsOverlay);
