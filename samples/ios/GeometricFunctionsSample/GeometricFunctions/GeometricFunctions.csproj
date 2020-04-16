@@ -134,7 +134,6 @@
     <Compile Include="Controllers\CenterPointViewController.cs" />
     <Compile Include="Controllers\SimplifyViewContoller.cs" />
     <Compile Include="Controllers\DifferenceViewController.cs" />
-    <Compile Include="Controllers\SplitViewController.cs" />
     <Compile Include="Controllers\BufferViewController.cs" />
     <Compile Include="Controllers\ScaleViewController.cs" />
     <Compile Include="Controllers\Advanced\DetailViewController.cs" />
@@ -197,10 +196,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.4\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.Core.13.0.0-beta071\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.iOS.12.2.2\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+      <HintPath>..\packages\ThinkGeo.UI.iOS.13.0.0-beta009\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -329,5 +328,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets')" />
 </Project>
