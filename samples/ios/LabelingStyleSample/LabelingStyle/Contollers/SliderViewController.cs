@@ -574,23 +574,6 @@ namespace LabelingStyle
             return NSIndexPath.FromRowSection(row, section);
         }
 
-        //public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
-        //{
-        //    base.DidRotate(fromInterfaceOrientation);
-
-        //    if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
-        //        return;
-        //    switch (InterfaceOrientation)
-        //    {
-        //        case UIInterfaceOrientation.LandscapeLeft:
-        //        case UIInterfaceOrientation.LandscapeRight:
-        //            ShowMenu();
-        //            break;
-        //        default:
-        //            HideMenu();
-        //            break;
-        //    }
-        //}
 
         private void EnsureInvokedOnMainThread(Action action)
         {

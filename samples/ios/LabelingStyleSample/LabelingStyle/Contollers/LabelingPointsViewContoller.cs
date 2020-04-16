@@ -45,8 +45,6 @@ namespace LabelingStyle
             poiLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingPointsOverlay = new LayerOverlay();
-            labelingPointsOverlay.TileHeight = 512;
-            labelingPointsOverlay.TileWidth = 512;
             labelingPointsOverlay.Layers.Add("poi", poiLayer);
             MapView.Overlays.Add("LabelingPoints", labelingPointsOverlay);
 
@@ -63,7 +61,6 @@ namespace LabelingStyle
                 settingsController.ModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
                 settingsController.StyleSettingsChanged += SettingsControllerStyleSettingsChanged;
             }
-
             PresentViewController(settingsController, true, null);
         }
 

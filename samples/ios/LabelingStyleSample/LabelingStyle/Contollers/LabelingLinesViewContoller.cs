@@ -75,7 +75,6 @@ namespace LabelingStyle
             pwyBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 12, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
             pwyBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             pwyBreak.DefaultTextStyle.Mask = new AreaStyle();
-           // pwyBreak.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(pwyBreak);
 
             ClassBreak mainRoad = new ClassBreak();
@@ -84,7 +83,6 @@ namespace LabelingStyle
             mainRoad.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 10, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
             mainRoad.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             mainRoad.DefaultTextStyle.Mask = new AreaStyle();
-          //  mainRoad.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(mainRoad);
 
             ClassBreak localRoadBreak = new ClassBreak();
@@ -93,7 +91,6 @@ namespace LabelingStyle
             localRoadBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 8, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColors.Black));
             localRoadBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             localRoadBreak.DefaultTextStyle.Mask = new AreaStyle();
-         //   localRoadBreak.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(localRoadBreak);
 
             return roadStyle;

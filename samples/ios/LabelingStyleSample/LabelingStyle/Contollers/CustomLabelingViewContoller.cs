@@ -25,7 +25,6 @@ namespace LabelingStyle
             base.InitializeMap();
 
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
             string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
@@ -46,8 +45,6 @@ namespace LabelingStyle
             customLabelingStyleLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay customLabelingOverlay = new LayerOverlay();
-            customLabelingOverlay.TileHeight = 512;
-            customLabelingOverlay.TileWidth = 512;
             customLabelingOverlay.Layers.Add("customLabeling", customLabelingStyleLayer);
             MapView.Overlays.Add("CustomLabeling", customLabelingOverlay);
 
