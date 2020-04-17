@@ -65,6 +65,8 @@ namespace MapSuiteEarthquakeStatistics
             string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
             string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
 
             // Earthquake points
             ShapeFileFeatureLayer earthquakePointLayer = new ShapeFileFeatureLayer(Path.Combine(targetDictionary, "usEarthquake.shp"));
@@ -87,6 +89,7 @@ namespace MapSuiteEarthquakeStatistics
             earthquakeIsoLineLayer.IsVisible = false;
 
             LayerOverlay highlightOverlay = new LayerOverlay();
+            highlightOverlay.TileType = TileType.SingleTile;
             highlightOverlay.Layers.Add("EarthquakePointLayer", earthquakePointLayer);
             highlightOverlay.Layers.Add("EarthquakeHeatLayer", earthquakeHeatLayer);
             highlightOverlay.Layers.Add("EarthquakeIsoLineLayer", earthquakeIsoLineLayer);

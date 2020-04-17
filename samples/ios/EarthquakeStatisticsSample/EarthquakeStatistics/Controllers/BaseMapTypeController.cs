@@ -23,7 +23,7 @@ namespace MapSuiteEarthquakeStatistics
             DataTableSource baseMapTypeSource = new DataTableSource();
             Collection<RowModel> baseMapTypeRows = new Collection<RowModel>();
 
-            string[] baseMapTypeItems = { "ThinkGeo Cloud Maps Light", "ThinkGeo Cloud Maps Aerial", "ThinkGeo Cloud Maps Hybrid" };
+            string[] baseMapTypeItems = { "ThinkGeo Cloud Maps Light", "ThinkGeo Cloud Maps Dark" };
             foreach (var nameItem in baseMapTypeItems)
             {
                 RowModel row = new RowModel(nameItem)
@@ -67,11 +67,13 @@ namespace MapSuiteEarthquakeStatistics
             {
                 case BaseMapType.ThinkGeoCloudMapsLight:
                     Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Light;
-                    Global.MapView.Refresh();
+                    Global.ThinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+                    Global.ThinkGeoCloudMapsOverlay.Refresh();
                     break;
                 case BaseMapType.ThinkGeoCloudMapsDark:
                     Global.ThinkGeoCloudMapsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Dark;
-                    Global.MapView.Refresh();
+                    Global.ThinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_dark");
+                    Global.ThinkGeoCloudMapsOverlay.Refresh();
                     break;
             }
         }
