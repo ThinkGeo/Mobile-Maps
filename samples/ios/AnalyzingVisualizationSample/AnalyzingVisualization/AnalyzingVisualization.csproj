@@ -31,23 +31,20 @@
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
-    <MtouchSdkVersion>13.4</MtouchSdkVersion>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
-    <MtouchUseSGen>False</MtouchUseSGen>
-    <MtouchUseRefCounting>False</MtouchUseRefCounting>
     <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
     <MtouchI18n />
     <OptimizePNGs>false</OptimizePNGs>
     <MtouchFloat32>false</MtouchFloat32>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
+    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -61,8 +58,6 @@
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
     <OptimizePNGs>true</OptimizePNGs>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
@@ -81,8 +76,6 @@
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
@@ -90,8 +83,6 @@
     <MtouchArch>ARM64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
-    <MtouchUseSGen>False</MtouchUseSGen>
-    <MtouchUseRefCounting>False</MtouchUseRefCounting>
     <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
     <MtouchI18n />
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
@@ -112,20 +103,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution</CodesignKey>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaIncludeArtwork>false</IpaIncludeArtwork>
     <IpaMetadata>
     </IpaMetadata>
     <IpaPackageName>ThinkGeoiOSSample_Styling</IpaPackageName>
     <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchFloat32>true</MtouchFloat32>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>AnalyzingVisualization.Application</StartupObject>

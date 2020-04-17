@@ -112,13 +112,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Distribution</CodesignKey>
-    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchFloat32>true</MtouchFloat32>
     <OptimizePNGs>true</OptimizePNGs>
-    <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>ThinkGeo_Location</IpaPackageName>
   </PropertyGroup>

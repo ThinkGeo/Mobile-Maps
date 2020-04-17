@@ -10,7 +10,6 @@
 	<array>
 		<integer>1</integer>
 		<integer>2</integer>
-		<string></string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -35,10 +34,12 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>MinimumOSVersion</key>
-	<string>13.4</string>
+	<string>12.0</string>
+	<key>CFBundleName</key>
+	<string>ThinkGeo Sample Labeling</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>11.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>11.1.0</string>
 </dict>
 </plist>
