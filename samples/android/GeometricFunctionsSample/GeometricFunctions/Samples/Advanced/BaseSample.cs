@@ -114,9 +114,10 @@ namespace GeometricFunctions
                 MapView.SetBackgroundColor(Color.Argb(255, 244, 242, 238));
                 // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
                 ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
-                //string baseFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-                //string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
-                //thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename);
+                string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
+                string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
+                bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
+                if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename);
                 MapView.Overlays.Insert(0, "WMK", thinkGeoCloudMapsOverlay);
             }
         }

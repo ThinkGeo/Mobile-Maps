@@ -1,3 +1,4 @@
+using Android.App;
 using Android.Content;
 using System;
 using System.Collections.ObjectModel;
@@ -27,9 +28,10 @@ namespace AnalyzingVisualization
                with ThinkGeo, or you can register now at https://cloud.thinkgeo.com.
             ===========================================*/
             ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = (ThinkGeoCloudRasterMapsOverlay)MapView.Overlays["WMK"];
-            string baseFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
             string cachePathFilename = Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
-            thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "SphericalMercator");
+            bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
+            if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "SphericalMercator");
 
             LineStyle lineStyle = LineStyle.CreateSimpleLineStyle(GeoColor.FromArgb(255, 50, 0, 249), 4, false);
 
