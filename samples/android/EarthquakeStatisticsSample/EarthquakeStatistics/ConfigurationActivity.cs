@@ -5,9 +5,8 @@ using Android.Widget;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteEarthquakeStatistics
 {
@@ -148,7 +147,7 @@ namespace MapSuiteEarthquakeStatistics
 
             adapter.Data.Clear();
 
-            Proj4Projection mercatorToWgs84Projection = Global.GetWgs84ToMercatorProjection();
+            ProjectionConverter mercatorToWgs84Projection = Global.GetWgs84ToMercatorProjection();
             mercatorToWgs84Projection.Open();
 
             try

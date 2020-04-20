@@ -3,8 +3,8 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using System;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteEarthquakeStatistics
 {
@@ -15,7 +15,7 @@ namespace MapSuiteEarthquakeStatistics
         private View selectDisplayTypeView;
 
         private LayerOverlay earthquakeOverlay;
-        private HeatLayer earthquakeHeatLayer;
+        private ShapeFileFeatureLayer earthquakeHeatLayer;
         private ShapeFileFeatureLayer earthquakePointLayer;
 
         private RadioButton heatRadioButton;
@@ -35,7 +35,7 @@ namespace MapSuiteEarthquakeStatistics
 
             earthquakeOverlay = Global.MapView.Overlays[Global.EarthquakeOverlayKey] as LayerOverlay;
             earthquakePointLayer = earthquakeOverlay.Layers[Global.EarthquakePointLayerKey] as ShapeFileFeatureLayer;
-            earthquakeHeatLayer = earthquakeOverlay.Layers[Global.EarthquakeHeatLayerKey] as HeatLayer;
+            earthquakeHeatLayer = earthquakeOverlay.Layers[Global.EarthquakeHeatLayerKey] as ShapeFileFeatureLayer;
 
             heatRadioButton = selectDisplayTypeView.FindViewById<RadioButton>(Resource.Id.HeatStyleRadioButton);
             isoRadioButton = selectDisplayTypeView.FindViewById<RadioButton>(Resource.Id.IsoLineStyleRadioButton);

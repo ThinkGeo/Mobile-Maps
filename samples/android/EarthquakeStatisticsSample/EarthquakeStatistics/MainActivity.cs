@@ -14,12 +14,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteEarthquakeStatistics
 {
@@ -36,7 +32,7 @@ namespace MapSuiteEarthquakeStatistics
         private LayerOverlay highlightOverlay;
         private LayerOverlay earthquakeOverlay;
 
-        private HeatLayer earthquakeHeatLayer;
+        private ShapeFileFeatureLayer earthquakeHeatLayer;
         private ShapeFileFeatureLayer earthquakePointLayer;
         private InMemoryFeatureLayer selectedMarkerLayer;
         private InMemoryFeatureLayer highlightMarkerLayer;
@@ -98,8 +94,8 @@ namespace MapSuiteEarthquakeStatistics
 
         async Task ShowMapAsync()
         {
-            InitializeAndroidMap();
-            InitializeDialogs();
+            await InitializeAndroidMap();
+            await InitializeDialogs();
 
             panRadioButton = FindViewById<RadioButton>(Resource.Id.PanButton);
             polygonRadioButton = FindViewById<RadioButton>(Resource.Id.DrawPolygonButton);
@@ -181,7 +177,7 @@ namespace MapSuiteEarthquakeStatistics
             Global.FilterSelectedEarthquakeFeatures(Global.GetBackupQueriedFeatures());
         }
 
-        private void InitializeDialogs()
+        async Task InitializeDialogs()
         {
             Global.BaseMapType = BaseMapType.ThinkGeoCloudLightMap;
 
@@ -189,66 +185,12 @@ namespace MapSuiteEarthquakeStatistics
             selectDisplayTypeDialog = new SelectDisplayTypeDialog(this, DisplayType.Point);
         }
 
-        private void InitializeAndroidMap()
+        async Task InitializeAndroidMap()
         {
-            string baseFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
             string cachePathFilename = Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
-            Proj4Projection proj4 = Global.GetWgs84ToMercatorProjection();
-
-            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
-
-            // OSM
-            OpenStreetMapOverlay osmOverlay = new OpenStreetMapOverlay();
-            osmOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "OSMSphericalMercator");
-            osmOverlay.IsVisible = false;
-
-            // Bing - Aerial
-            BingMapsOverlay bingMapsAerialOverlay = new BingMapsOverlay();
-            bingMapsAerialOverlay.IsVisible = false;
-            bingMapsAerialOverlay.MapType = ThinkGeo.MapSuite.Android.BingMapsMapType.AerialWithLabels;
-            bingMapsAerialOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingAerialWithLabels");
-
-            // Bing - Road
-            BingMapsOverlay bingMapsRoadOverlay = new BingMapsOverlay();
-            bingMapsRoadOverlay.IsVisible = false;
-            bingMapsRoadOverlay.MapType = ThinkGeo.MapSuite.Android.BingMapsMapType.Road;
-            bingMapsRoadOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingRoad");
-
-            // Earthquake points
-            earthquakePointLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("usEarthquake.shp"));
-            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.SimpleColors.Red, 5, GeoColor.SimpleColors.White, 1));
-            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            earthquakePointLayer.FeatureSource.Projection = proj4;
-
-            ShapeFileFeatureSource earthquakeHeatFeatureSource = new ShapeFileFeatureSource(SampleHelper.GetDataPath("usEarthquake_Simplify.shp"));
-            earthquakeHeatFeatureSource.Projection = proj4;
-
-            earthquakeHeatLayer = new HeatLayer(earthquakeHeatFeatureSource);
-            earthquakeHeatLayer.HeatStyle = new HeatStyle(10, 75, DistanceUnit.Kilometer);
-            earthquakeHeatLayer.HeatStyle.Alpha = 180;
-            earthquakeHeatLayer.IsVisible = false;
-
-            earthquakeOverlay = new LayerOverlay();
-            earthquakeOverlay.Layers.Add(Global.EarthquakePointLayerKey, earthquakePointLayer);
-            earthquakeOverlay.Layers.Add(Global.EarthquakeHeatLayerKey, earthquakeHeatLayer);
-
-            // Highlighted points
-            selectedMarkerLayer = new InMemoryFeatureLayer();
-            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.SimpleColors.Orange, 8, GeoColor.SimpleColors.White, 2);
-            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            PointStyle highLightMarkerStyle = new PointStyle();
-            highLightMarkerStyle.CustomPointStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(50, GeoColor.SimpleColors.Blue), 20, GeoColor.SimpleColors.LightBlue, 1));
-            highLightMarkerStyle.CustomPointStyles.Add(PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(255, 0, 122, 255), 10, GeoColor.SimpleColors.White, 2));
-
-            highlightMarkerLayer = new InMemoryFeatureLayer();
-            highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = highLightMarkerStyle;
-            highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            highlightOverlay = new LayerOverlay();
-            highlightOverlay.Layers.Add(Global.SelectMarkerLayerKey, selectedMarkerLayer);
-            highlightOverlay.Layers.Add(Global.HighlightMarkerLayerKey, highlightMarkerLayer);
+            bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
+            ProjectionConverter proj4 = Global.GetWgs84ToMercatorProjection();
 
             // Maps
             Global.MapView = FindViewById<MapView>(Resource.Id.androidMap);
@@ -258,17 +200,65 @@ namespace MapSuiteEarthquakeStatistics
             Global.MapView.CurrentExtent = new RectangleShape(-19062735.6816748, 9273256.52450252, -5746827.16371793, 2673516.56066139);
             Global.MapView.SetBackgroundColor(new Android.Graphics.Color(255, 244, 242, 238));
 
+            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
+            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
+
+            // Bing - Aerial
+            BingMapsOverlay bingMapsAerialOverlay = new BingMapsOverlay();
+            bingMapsAerialOverlay.IsVisible = false;
+            bingMapsAerialOverlay.MapType = BingMapsMapType.AerialWithLabels;
+            if (isWriteable) bingMapsAerialOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingAerialWithLabels");
+
+            // Bing - Road
+            BingMapsOverlay bingMapsRoadOverlay = new BingMapsOverlay();
+            bingMapsRoadOverlay.IsVisible = false;
+            bingMapsRoadOverlay.MapType = BingMapsMapType.Road;
+            if (isWriteable) bingMapsRoadOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingRoad");
+
+            // Earthquake points
+            earthquakePointLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("usEarthquake.shp"));
+            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColors.Red, 5, GeoColors.White, 1));
+            earthquakePointLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            earthquakePointLayer.FeatureSource.ProjectionConverter = proj4;
+
+            earthquakeHeatLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("usEarthquake_Simplify.shp"));
+            earthquakeHeatLayer.FeatureSource.ProjectionConverter = proj4;
+            earthquakeHeatLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
+            earthquakeHeatLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new HeatStyle(10, 180, "MAGNITUDE", 0, 12, 100, DistanceUnit.Kilometer));
+            earthquakeHeatLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            earthquakeHeatLayer.IsVisible = false;
+
+            earthquakeOverlay = new LayerOverlay();
+            earthquakeOverlay.Layers.Add(Global.EarthquakePointLayerKey, earthquakePointLayer);
+            earthquakeOverlay.Layers.Add(Global.EarthquakeHeatLayerKey, earthquakeHeatLayer);
+
+            // Highlighted points
+            selectedMarkerLayer = new InMemoryFeatureLayer();
+            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Orange, 8, GeoColors.White, 2);
+            selectedMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            PointStyle highLightMarkerStyle = new PointStyle();
+            highLightMarkerStyle.CustomPointStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(50, GeoColors.Blue), 20, GeoColors.LightBlue, 1));
+            highLightMarkerStyle.CustomPointStyles.Add(PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(255, 0, 122, 255), 10, GeoColors.White, 2));
+
+            highlightMarkerLayer = new InMemoryFeatureLayer();
+            highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = highLightMarkerStyle;
+            highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            highlightOverlay = new LayerOverlay();
+            highlightOverlay.Layers.Add(Global.SelectMarkerLayerKey, selectedMarkerLayer);
+            highlightOverlay.Layers.Add(Global.HighlightMarkerLayerKey, highlightMarkerLayer);
+
             Global.MapView.Overlays.Add(Global.ThinkGeoCloudMapsOverlayKey, thinkGeoCloudMapsOverlay);
-            Global.MapView.Overlays.Add(Global.OpenStreetMapOverlayKey, osmOverlay);
             Global.MapView.Overlays.Add(Global.BingMapsAerialOverlayKey, bingMapsAerialOverlay);
             Global.MapView.Overlays.Add(Global.BingMapsRoadOverlayKey, bingMapsRoadOverlay);
             Global.MapView.Overlays.Add(Global.EarthquakeOverlayKey, earthquakeOverlay);
             Global.MapView.Overlays.Add(Global.HighlightOverlayKey, highlightOverlay);
 
             Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.FromArgb(80, GeoColor.SimpleColors.LightGreen), 8);
-            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.SimpleColors.White, 3, true);
-            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(80, GeoColor.SimpleColors.LightGreen), GeoColor.SimpleColors.White, 2);
+            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColor.FromArgb(80, GeoColors.LightGreen), 8);
+            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.White, 3, true);
+            Global.MapView.TrackOverlay.TrackShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(80, GeoColors.LightGreen), GeoColors.White, 2);
             Global.MapView.TrackOverlay.TrackEnded += TrackOverlay_TrackEnded;
         }
     }

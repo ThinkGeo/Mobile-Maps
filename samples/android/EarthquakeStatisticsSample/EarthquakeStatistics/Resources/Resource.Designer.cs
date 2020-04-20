@@ -26,26 +26,18 @@ namespace MapSuiteEarthquakeStatistics
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::MapSuiteEarthquakeStatistics.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::MapSuiteEarthquakeStatistics.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::MapSuiteEarthquakeStatistics.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteEarthquakeStatistics.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::MapSuiteEarthquakeStatistics.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::MapSuiteEarthquakeStatistics.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -272,50 +264,47 @@ namespace MapSuiteEarthquakeStatistics
 			// aapt resource value: 0x7F020008
 			public const int OkButton = 2130837512;
 			
-			// aapt resource value: 0x7F02001A
-			public const int osmRadioButton = 2130837530;
-			
 			// aapt resource value: 0x7F020009
 			public const int PanButton = 2130837513;
 			
 			// aapt resource value: 0x7F02000A
 			public const int PointStyleRadioButton = 2130837514;
 			
+			// aapt resource value: 0x7F02001A
+			public const int queryButton = 2130837530;
+			
 			// aapt resource value: 0x7F02001B
-			public const int queryButton = 2130837531;
+			public const int queryResultTitleTextView = 2130837531;
 			
 			// aapt resource value: 0x7F02001C
-			public const int queryResultTitleTextView = 2130837532;
+			public const int radioGroup1 = 2130837532;
 			
 			// aapt resource value: 0x7F02001D
-			public const int radioGroup1 = 2130837533;
+			public const int resultListView = 2130837533;
 			
 			// aapt resource value: 0x7F02001E
-			public const int resultListView = 2130837534;
-			
-			// aapt resource value: 0x7F02001F
-			public const int textView1 = 2130837535;
+			public const int textView1 = 2130837534;
 			
 			// aapt resource value: 0x7F02000B
 			public const int ToolsLinearLayout = 2130837515;
 			
+			// aapt resource value: 0x7F02001F
+			public const int uploadDataTextView = 2130837535;
+			
 			// aapt resource value: 0x7F020020
-			public const int uploadDataTextView = 2130837536;
+			public const int uploadProgressBar = 2130837536;
 			
 			// aapt resource value: 0x7F020021
-			public const int uploadProgressBar = 2130837537;
+			public const int wmkAerialRadioButton = 2130837537;
 			
 			// aapt resource value: 0x7F020022
-			public const int wmkAerialRadioButton = 2130837538;
+			public const int wmkAerialWithLabelsRadioButton = 2130837538;
 			
 			// aapt resource value: 0x7F020023
-			public const int wmkAerialWithLabelsRadioButton = 2130837539;
+			public const int wmkRoadRadioButton = 2130837539;
 			
 			// aapt resource value: 0x7F020024
-			public const int wmkRoadRadioButton = 2130837540;
-			
-			// aapt resource value: 0x7F020025
-			public const int yearValue = 2130837541;
+			public const int yearValue = 2130837540;
 			
 			static Id()
 			{
@@ -379,8 +368,14 @@ namespace MapSuiteEarthquakeStatistics
 			// aapt resource value: 0x7F040000
 			public const int ApplicationName = 2130968576;
 			
+			// aapt resource value: 0x7F040002
+			public const int app_name = 2130968578;
+			
 			// aapt resource value: 0x7F040001
 			public const int Hello = 2130968577;
+			
+			// aapt resource value: 0x7F040003
+			public const int hello = 2130968579;
 			
 			static String()
 			{
