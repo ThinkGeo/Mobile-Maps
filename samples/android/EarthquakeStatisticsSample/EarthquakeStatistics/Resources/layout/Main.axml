@@ -86,7 +86,7 @@
                     android:drawableTop="@drawable/searchicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="More Options"
+                    android:text="Query Area"
                     android:textSize="10sp"
                     android:textColor="@android:color/white"
                     android:background="@null"
