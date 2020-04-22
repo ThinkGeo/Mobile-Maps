@@ -220,6 +220,7 @@
     <AndroidAsset Include="Assets\AppData\Images\vehicle5.png" />
     <AndroidAsset Include="Assets\AppData\Images\vehicle6.png" />
     <AndroidAsset Include="Assets\AppData\Images\vehicle7.png" />
+    <AndroidEnvironment Include="environment.txt" />
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\drawable\classbreak.png" />
     <AndroidResource Include="Resources\drawable\clusterstyle.png" />

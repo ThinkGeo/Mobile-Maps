@@ -5,7 +5,7 @@ namespace LabelingStyle
     internal class SampleHelper
     {
         public readonly static string AssetsDataDictionary = @"SampleData";
-        public readonly static string SampleDataDictionary = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData).ToString() + @"MapSuiteSampleData/LabelingStyle";
+        public readonly static string SampleDataDictionary = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData).ToString() + @"/MapSuiteSampleData/LabelingStyle";
 
         public static string GetDataPath(params string[] fileNames)
         {

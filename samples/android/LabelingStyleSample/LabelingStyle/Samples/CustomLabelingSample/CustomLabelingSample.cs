@@ -51,7 +51,7 @@ namespace LabelingStyle
             string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
             string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
             bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
-            if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename);
+            if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "ThinkGeoCloudMaps");
             MapView.Overlays.Add("WMK", thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer customLabelingStyleLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs.shp"));

@@ -465,12 +465,6 @@ namespace GettingStartedSample
             CustomMapView.Current.CurrentExtent = new RectangleShape(-19062735.6816748, 9273256.52450252, -5746827.16371793, 2673516.56066139);
             CustomMapView.Current.SetBackgroundColor(new Color(255, 244, 242, 238));
 
-            //WorldMapKitOverlay worldMapKitOverlay = new WorldMapKitOverlay();
-            //worldMapKitOverlay.Projection = WorldMapKitProjection.SphericalMercator;
-            //worldMapKitOverlay.ClientId = "ThinkGeo";
-            //worldMapKitOverlay.PrivateKey = "MWSN2234230+SDFADS(AADS(A23werq@#$@";
-            //mapView.Overlays.Add("WorldMapKitOverlay", worldMapKitOverlay);
-
             gpsOverlay = new MarkerOverlay();
             CustomMapView.Current.Overlays.Add("GpsOverlay", gpsOverlay);
 
