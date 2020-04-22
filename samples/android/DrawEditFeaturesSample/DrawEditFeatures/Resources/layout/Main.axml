@@ -6,7 +6,7 @@
     android:minHeight="25px"
     android:background="@android:color/background_light"
     android:id="@+id/MainLayout">
-    <ThinkGeo.MapSuite.Android.MapView
+    <ThinkGeo.UI.Android.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/androidmap"
