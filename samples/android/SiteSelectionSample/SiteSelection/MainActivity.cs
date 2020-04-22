@@ -5,7 +5,8 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
-using ThinkGeo.MapSuite.Android;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteSiteSelection
 {

@@ -3,7 +3,8 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using System;
-using ThinkGeo.MapSuite.Android;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteSiteSelection
 {
@@ -33,14 +34,13 @@ namespace MapSuiteSiteSelection
             wmkRoadRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkRoadRadioButton);
             wmkAerialRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkAerialRadioButton);
             wmkAerialWithLabelsRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkAerialWithLabelsRadioButton);
-            osmRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.osmRadioButton);
             bingaRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.bingaRadioButton);
             bingrRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.bingrRadioButton);
 
             wmkRoadRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             wmkAerialRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             wmkAerialWithLabelsRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
-            osmRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
+            //osmRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             bingaRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             bingrRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
 

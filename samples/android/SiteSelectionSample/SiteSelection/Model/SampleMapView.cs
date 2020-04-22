@@ -12,12 +12,8 @@ using Android.Views;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteSiteSelection
 {
@@ -56,13 +52,12 @@ namespace MapSuiteSiteSelection
         public void SwitchBaseMapTo(BaseMapType baseMapType)
         {
             ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = FindOverlay<ThinkGeoCloudRasterMapsOverlay>(OverlayKey.ThinkGeoCloudMapsOverlay);
-            OpenStreetMapOverlay openStreetMapOverlay = FindOverlay<OpenStreetMapOverlay>(OverlayKey.OpenStreetMapOverlay);
+
             BingMapsOverlay bingMapsAerialOverlay = FindOverlay<BingMapsOverlay>(OverlayKey.BingMapsAerialOverlay);
             BingMapsOverlay bingMapsRoadOverlay = FindOverlay<BingMapsOverlay>(OverlayKey.BingMapsRoadOverlay);
 
             thinkGeoCloudMapsOverlay.IsVisible = baseMapType == BaseMapType.ThinkGeoCloudMapAerial ||
                 baseMapType == BaseMapType.ThinkGeoCloudMapLight || baseMapType == BaseMapType.ThinkGeoCloudMapHybrid;
-            openStreetMapOverlay.IsVisible = baseMapType == BaseMapType.OpenStreetMap;
             bingMapsAerialOverlay.IsVisible = baseMapType == BaseMapType.BingMapsAerial;
             bingMapsRoadOverlay.IsVisible = baseMapType == BaseMapType.BingMapsRoad;
 
@@ -207,15 +202,15 @@ namespace MapSuiteSiteSelection
             highlightMarkerLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             InMemoryFeatureLayer highlightAreaLayer = new InMemoryFeatureLayer();
-            highlightAreaLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(new GeoColor(120, GeoColor.FromHtml("#1749c9")), GeoColor.FromHtml("#fefec1"), 3, LineDashStyle.Solid);
+            highlightAreaLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(120, GeoColor.FromHtml("#1749c9")), GeoColor.FromHtml("#fefec1"), 3, LineDashStyle.Solid);
             highlightAreaLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             //LimitPolygon
             ShapeFileFeatureLayer limitPolygonLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("CityLimitPolygon.shp"));
-            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColor.SimpleColors.White, 5.5f), new GeoSolidBrush(GeoColor.SimpleColors.Transparent)));
-            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColor.SimpleColors.Red, 1.5f) { DashStyle = LineDashStyle.Dash }, new GeoSolidBrush(GeoColor.SimpleColors.Transparent)));
+            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColors.White, 5.5f), new GeoSolidBrush(GeoColors.Transparent)));
+            limitPolygonLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new AreaStyle(new GeoPen(GeoColors.Red, 1.5f) { DashStyle = LineDashStyle.Dash }, new GeoSolidBrush(GeoColors.Transparent)));
             limitPolygonLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            limitPolygonLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection();
+            limitPolygonLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection();
 
             // Poi Overlay
             ShapeFileFeatureLayer hotelsLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs", "Hotels.shp"));
@@ -223,38 +218,42 @@ namespace MapSuiteSiteSelection
             hotelsLayer.Transparency = 120f;
             hotelsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImageFromImageId(Resource.Drawable.Hotel));
             hotelsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            hotelsLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection();
+            hotelsLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer medicalFacilitesLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs", "Medical_Facilities.shp"));
             medicalFacilitesLayer.Name = LayerKey.MedicalFacilitiesLayer;
             medicalFacilitesLayer.Transparency = 120f;
             medicalFacilitesLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImageFromImageId(Resource.Drawable.DrugStore));
             medicalFacilitesLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            medicalFacilitesLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection(); ;
+            medicalFacilitesLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection(); ;
 
             ShapeFileFeatureLayer publicFacilitesLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs", "Public_Facilities.shp"));
             publicFacilitesLayer.Name = LayerKey.PublicFacilitiesLayer;
             publicFacilitesLayer.Transparency = 120f;
             publicFacilitesLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImageFromImageId(Resource.Drawable.public_facility));
             publicFacilitesLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            publicFacilitesLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection();
+            publicFacilitesLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer restaurantsLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs", "Restaurants.shp"));
             restaurantsLayer.Name = LayerKey.RestaurantsLayer;
             restaurantsLayer.Transparency = 120f;
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImageFromImageId(Resource.Drawable.restaurant));
             restaurantsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            restaurantsLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection();
+            restaurantsLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection();
 
             ShapeFileFeatureLayer schoolsLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath("POIs", "Schools.shp"));
             schoolsLayer.Name = LayerKey.SchoolsLayer;
             schoolsLayer.Transparency = 120f;
             schoolsLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(GetGeoImageFromImageId(Resource.Drawable.school));
             schoolsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            schoolsLayer.FeatureSource.Projection = GetWgs84ToMercatorProjection();
+            schoolsLayer.FeatureSource.ProjectionConverter = GetWgs84ToMercatorProjection();
+
+            string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
+            string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
+            bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
 
             LayerOverlay highlightOverlay = new LayerOverlay();
-            highlightOverlay.TileType = TileType.SingleTile;
+            highlightOverlay.TileType = TileType.MultiTile;
             highlightOverlay.Layers.Add(limitPolygonLayer);
             highlightOverlay.Layers.Add(LayerKey.HotelsLayer, hotelsLayer);
             highlightOverlay.Layers.Add(LayerKey.MedicalFacilitiesLayer, medicalFacilitesLayer);
@@ -265,27 +264,22 @@ namespace MapSuiteSiteSelection
             highlightOverlay.Layers.Add(LayerKey.HighlightMarkerLayer, highlightMarkerLayer);
             highlightOverlay.Layers.Add(LayerKey.HighlightCenterMarkerLayer, highlightCenterMarkerLayer);
 
-            string baseFolder = Environment.ExternalStorageDirectory.AbsolutePath;
-            string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
-            // OSM
-            OpenStreetMapOverlay osmOverlay = new OpenStreetMapOverlay();
-            osmOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "OSMSphericalMercator");
-            osmOverlay.IsVisible = false;
-            
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
             ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
+            thinkGeoCloudMapsOverlay.TileType = TileType.MultiTile;
+            if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "ThinkGeoCloudMaps");
 
             // Bing - Aerial
             BingMapsOverlay bingMapsAerialOverlay = new BingMapsOverlay();
             bingMapsAerialOverlay.IsVisible = false;
             bingMapsAerialOverlay.MapType = BingMapsMapType.AerialWithLabels;
-            bingMapsAerialOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingAerialWithLabels");
+            if (isWriteable) bingMapsAerialOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingAerialWithLabels");
 
             // Bing - Road
             BingMapsOverlay bingMapsRoadOverlay = new BingMapsOverlay();
             bingMapsRoadOverlay.IsVisible = false;
             bingMapsRoadOverlay.MapType = BingMapsMapType.Road;
-            bingMapsRoadOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingRoad");
+            if (isWriteable) bingMapsRoadOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "BingRoad");
 
             //Maps
             SetBackgroundColor(Color.Argb(255, 244, 242, 238));
@@ -294,7 +288,6 @@ namespace MapSuiteSiteSelection
             MapTools.ZoomMapTool.Visibility = ViewStates.Invisible;
             CurrentExtent = new RectangleShape(-10789390.0630888, 3924457.19413373, -10768237.5787263, 3906066.41190523);
 
-            Overlays.Add(OverlayKey.OpenStreetMapOverlay, osmOverlay);
             Overlays.Add(OverlayKey.ThinkGeoCloudMapsOverlay, thinkGeoCloudMapsOverlay);
             Overlays.Add(OverlayKey.BingMapsAerialOverlay, bingMapsAerialOverlay);
             Overlays.Add(OverlayKey.BingMapsRoadOverlay, bingMapsRoadOverlay);
@@ -304,11 +297,11 @@ namespace MapSuiteSiteSelection
             TrackOverlay.TrackEnded += TrackOverlay_TrackEnded;
         }
 
-        private Proj4Projection GetWgs84ToMercatorProjection()
+        private ProjectionConverter GetWgs84ToMercatorProjection()
         {
-            Proj4Projection wgs84ToMercatorProjection = new Proj4Projection();
-            wgs84ToMercatorProjection.InternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString();
-            wgs84ToMercatorProjection.ExternalProjectionParametersString = Proj4Projection.GetBingMapParametersString();
+            ProjectionConverter wgs84ToMercatorProjection = new ProjectionConverter();
+            wgs84ToMercatorProjection.InternalProjection = new Projection(Projection.GetWgs84ProjString());
+            wgs84ToMercatorProjection.ExternalProjection = new Projection(Projection.GetBingMapProjString());
             wgs84ToMercatorProjection.Open();
             return wgs84ToMercatorProjection;
         }

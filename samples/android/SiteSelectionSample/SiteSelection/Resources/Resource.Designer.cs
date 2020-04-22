@@ -26,26 +26,18 @@ namespace MapSuiteSiteSelection
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::MapSuiteSiteSelection.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::MapSuiteSiteSelection.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::MapSuiteSiteSelection.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::MapSuiteSiteSelection.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::MapSuiteSiteSelection.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::MapSuiteSiteSelection.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -224,41 +216,38 @@ namespace MapSuiteSiteSelection
 			// aapt resource value: 0x7F020007
 			public const int OkButton = 2130837511;
 			
-			// aapt resource value: 0x7F020013
-			public const int osmRadioButton = 2130837523;
-			
 			// aapt resource value: 0x7F020008
 			public const int PanButton = 2130837512;
 			
+			// aapt resource value: 0x7F020013
+			public const int radioGroup1 = 2130837523;
+			
 			// aapt resource value: 0x7F020014
-			public const int radioGroup1 = 2130837524;
+			public const int searchButton = 2130837524;
 			
 			// aapt resource value: 0x7F020015
-			public const int searchButton = 2130837525;
+			public const int similarSiteTitleTextView = 2130837525;
 			
 			// aapt resource value: 0x7F020016
-			public const int similarSiteTitleTextView = 2130837526;
-			
-			// aapt resource value: 0x7F020017
-			public const int textView1 = 2130837527;
+			public const int textView1 = 2130837526;
 			
 			// aapt resource value: 0x7F020009
 			public const int ToolsLinearLayout = 2130837513;
 			
+			// aapt resource value: 0x7F020017
+			public const int uploadDataTextView = 2130837527;
+			
 			// aapt resource value: 0x7F020018
-			public const int uploadDataTextView = 2130837528;
+			public const int uploadProgressBar = 2130837528;
 			
 			// aapt resource value: 0x7F020019
-			public const int uploadProgressBar = 2130837529;
+			public const int wmkAerialRadioButton = 2130837529;
 			
 			// aapt resource value: 0x7F02001A
-			public const int wmkAerialRadioButton = 2130837530;
+			public const int wmkAerialWithLabelsRadioButton = 2130837530;
 			
 			// aapt resource value: 0x7F02001B
-			public const int wmkAerialWithLabelsRadioButton = 2130837531;
-			
-			// aapt resource value: 0x7F02001C
-			public const int wmkRoadRadioButton = 2130837532;
+			public const int wmkRoadRadioButton = 2130837531;
 			
 			static Id()
 			{
@@ -322,6 +311,9 @@ namespace MapSuiteSiteSelection
 			// aapt resource value: 0x7F040000
 			public const int ApplicationName = 2130968576;
 			
+			// aapt resource value: 0x7F04000B
+			public const int app_name = 2130968587;
+			
 			// aapt resource value: 0x7F040001
 			public const int BufferDistance = 2130968577;
 			
@@ -330,6 +322,9 @@ namespace MapSuiteSiteSelection
 			
 			// aapt resource value: 0x7F040003
 			public const int Hello = 2130968579;
+			
+			// aapt resource value: 0x7F04000C
+			public const int hello = 2130968588;
 			
 			// aapt resource value: 0x7F040004
 			public const int MinutesDriving = 2130968580;
