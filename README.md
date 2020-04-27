@@ -39,7 +39,9 @@ In order to develop and debug Xamarin Android applications, you'll need to have 
 Here a few handy links for installation and setup of these prerequisites using Visual Studio:
 
 [Xamarin for Visual Studio](https://docs.microsoft.com/en-us/xamarin/get-started/installation)
+
 [Android SDK](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-sdk)
+
 [Android Emulator](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/device-manager)
 
 
@@ -87,30 +89,30 @@ using ThinkGeo.Android.UI
 Create a new method called `ShowMap` in the MainActivity.cs file, and add the code below:
 
 ```csharp
-    public void ShowMap()
-    {
-        // Set our view from the "main" layout resource
-        SetContentView(Resource.Layout.activity_main);
+public void ShowMap()
+{
+    // Set our view from the "main" layout resource
+    SetContentView(Resource.Layout.activity_main);
 
-        MapView androidMap = FindViewById<MapView>(Resource.Id.androidMap);
+    MapView androidMap = FindViewById<MapView>(Resource.Id.androidMap);
 
-        // Set the Map Configuration.
-        androidMap.MapUnit = GeographyUnit.Meter;
-        androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-        androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
+    // Set the Map Configuration.
+    androidMap.MapUnit = GeographyUnit.Meter;
+    androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+    androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
 
-        // Add the Cloud Maps Overlay
-        ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
+    // Add the Cloud Maps Overlay
+    ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
 
-        androidMap.Overlays.Add("CloudRasterMapsOverlay", thinkGeoCloudMapsOverlay);
+    androidMap.Overlays.Add("CloudRasterMapsOverlay", thinkGeoCloudMapsOverlay);
 
-        ShapeFileFeatureLayer countriesLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData\Countries02.shp"));
-        LayerOverlay overlay = new LayerOverlay();
-        overlay.Opacity = 0.8;
-        overlay.Layers.Add(countriesLayer);
+    ShapeFileFeatureLayer countriesLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData\Countries02.shp"));
+    LayerOverlay overlay = new LayerOverlay();
+    overlay.Opacity = 0.8;
+    overlay.Layers.Add(countriesLayer);
 
-        androidMap.Overlays.Add("Countries02", overlay);
-    }
+    androidMap.Overlays.Add("Countries02", overlay);
+}
 ```
 
 Then, remove the `SetContentView` call and call this method from the `OnCreate` method in the MainActivity.cs file:
@@ -152,12 +154,12 @@ First, we need to add the required permissions to the Android manifest. This can
 Next, we need to set up the method to request permissions. Add the following fields to your MainActivity class:
 
 ```csharp
-    readonly string[] StoragePermissions =
-    {
-        Manifest.Permission.ReadExternalStorage,
-        Manifest.Permission.WriteExternalStorage
-    };
-    const int RequestStorageId = 0;
+readonly string[] StoragePermissions =
+{
+    Manifest.Permission.ReadExternalStorage,
+    Manifest.Permission.WriteExternalStorage
+};
+const int RequestStorageId = 0;
 ```
 
 Add the following usings:
@@ -170,51 +172,51 @@ using Android.Content.PM;
 Then, add the following method to your MainActivity.cs class. This method will handle requesting permissions:
 
 ```csharp
-    public void RequestRequiredPermissions()
-    {
-        const string readPermission = Manifest.Permission.ReadExternalStorage;
-        const string writePermission = Manifest.Permission.WriteExternalStorage;
+public void RequestRequiredPermissions()
+{
+    const string readPermission = Manifest.Permission.ReadExternalStorage;
+    const string writePermission = Manifest.Permission.WriteExternalStorage;
 
-        if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
-        {
-            RequestPermissions(StoragePermissions, RequestStorageId);
-        }
-        else
-        {
-            ShowMap();
-        }
+    if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+    {
+        RequestPermissions(StoragePermissions, RequestStorageId);
     }
+    else
+    {
+        ShowMap();
+    }
+}
 ```
 
 Add the following code to the `OnRequestPermissionsResult` method in the MainActivity.cs:
 
 ```csharp
-    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+{
+    switch (requestCode)
     {
-        switch (requestCode)
-        {
-            case RequestStorageId:
+        case RequestStorageId:
+            {
+                if(grantResults.Length > 0 && grantResults[0] == Permission.Granted)
                 {
-                    if(grantResults.Length > 0 && grantResults[0] == Permission.Granted)
-                    {
-                        ShowMap();
-                    }
-                    else
-                    {
-                        Toast.MakeText(this,
-                            "Storage Permissions Denied", ToastLength.Short).Show();
-                    }
+                    ShowMap();
                 }
-                break;
-        }
+                else
+                {
+                    Toast.MakeText(this,
+                        "Storage Permissions Denied", ToastLength.Short).Show();
+                }
+            }
+            break;
     }
+}
 ```
 
 Finally, replace the `ShowMap` call in the `OnCreate` method with a call to the `RequestRequiredPermissions` method:
 
 ```csharp
-    // Replace 'ShowMap()' in the 'OnCreate' method
-    RequestRequiredPermissions();
+// Replace 'ShowMap()' in the 'OnCreate' method
+RequestRequiredPermissions();
 ```
 
 ### Step 8: Adding an External Data Source - Importing Data
@@ -249,13 +251,13 @@ private void CopySampleData(string targetDirectory)
 Now we can call this method when we initialize our map, in the `ShowMap` method.
 
 ```csharp
-    public void ShowMap()
-    {
-        // Set our view from the "main" layout resource
-        SetContentView(Resource.Layout.activity_main);
-        // Copy the required Shapefiles to Device.
-        string targetDirectory = Path.Combine(Environment.ExternalStorageDirectory.ToString(), "SampleData");
-        CopySampleData(targetDirectory);
+public void ShowMap()
+{
+    // Set our view from the "main" layout resource
+    SetContentView(Resource.Layout.activity_main);
+    // Copy the required Shapefiles to Device.
+    string targetDirectory = Path.Combine(Environment.ExternalStorageDirectory.ToString(), "SampleData");
+    CopySampleData(targetDirectory);
 ```
 
 This method will copy data to the target path, if the folder does not exist.
@@ -265,13 +267,13 @@ This method will copy data to the target path, if the folder does not exist.
 Now we can add the data from the shapefile to the map, in the `ShowMap()` method:
 
 ```csharp
-    // Add a shapefile layer with point style.
-    var capitalLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData/WorldCapitals.shp"));
+// Add a shapefile layer with point style.
+var capitalLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData/WorldCapitals.shp"));
 
-    // Create an overlay to add the layer to and add that overlay to the map.
-    var customDataOverlay = new LayerOverlay();
-    customDataOverlay.Layers.Add(capitalLayer);
-    androidMap.Overlays.Add(customDataOverlay);
+// Create an overlay to add the layer to and add that overlay to the map.
+var customDataOverlay = new LayerOverlay();
+customDataOverlay.Layers.Add(capitalLayer);
+androidMap.Overlays.Add(customDataOverlay);
 ```
 
 ### Step 10: Styling and Labeling the Data
@@ -279,16 +281,16 @@ Now we can add the data from the shapefile to the map, in the `ShowMap()` method
 We won't be able to see the points until a style is defined for it. Adding a style is very straightforward, but extremely extensible and powerful.
 
 ```csharp
-    var capitalStyle = new PointStyle()
-    {
-        SymbolType = PointSymbolType.Circle,
-        SymbolSize = 8,
-        FillBrush = new GeoSolidBrush(GeoColors.White),
-        OutlinePen = new GeoPen(GeoColors.Black, 2)
-    };
+var capitalStyle = new PointStyle()
+{
+    SymbolType = PointSymbolType.Circle,
+    SymbolSize = 8,
+    FillBrush = new GeoSolidBrush(GeoColors.White),
+    OutlinePen = new GeoPen(GeoColors.Black, 2)
+};
 
-    capitalLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = capitalStyle;
-    capitalLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+capitalLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = capitalStyle;
+capitalLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 ```
 
 ### Step 11: Reprojecting the Data
@@ -296,8 +298,8 @@ We won't be able to see the points until a style is defined for it. Adding a sty
 If you run the app now, you'll notice that there is just a single point shape in the center of the map! This is because the data is in a completely different projection from the map. We can easily fix that, though, by adding a `ProjectionConverter` to the layer from Decimal Degrees(4326) to Spherical Mercator(3857).
 
 ```csharp
-    // Set the projection of the capitalLayer to Spherical Mercator
-    capitalLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
+// Set the projection of the capitalLayer to Spherical Mercator
+capitalLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 ```
 
 Now, the data shows up properly on the map!
@@ -307,9 +309,9 @@ Now, the data shows up properly on the map!
 Now, we can make the map zoom into an area based on the extent of the data we added above. In order to do that, we must first open the layer for spatial queries to be made.
 
 ```csharp
-   // Open capitalLayer for it to be ready for spatial queries. Then, set the extent of the map to the full view of the data.
-    capitalLayer.Open();
-    mapView.CurrentExtent = capitalLayer.GetBoundingBox();
+// Open capitalLayer for it to be ready for spatial queries. Then, set the extent of the map to the full view of the data.
+capitalLayer.Open();
+mapView.CurrentExtent = capitalLayer.GetBoundingBox();
 ```
 
 ### Summary
