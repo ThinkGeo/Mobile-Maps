@@ -105,24 +105,17 @@ public void ShowMap()
     ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
 
     androidMap.Overlays.Add("CloudRasterMapsOverlay", thinkGeoCloudMapsOverlay);
-
-    ShapeFileFeatureLayer countriesLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData\Countries02.shp"));
-    LayerOverlay overlay = new LayerOverlay();
-    overlay.Opacity = 0.8;
-    overlay.Layers.Add(countriesLayer);
-
-    androidMap.Overlays.Add("Countries02", overlay);
 }
 ```
 
 Then, remove the `SetContentView` call and call this method from the `OnCreate` method in the MainActivity.cs file:
 
 ```csharp
-    // Remove this call from 'OnCreate'
-    // SetContentView(Resource.Layout.activity_main);
+// Remove this call from 'OnCreate'
+// SetContentView(Resource.Layout.activity_main);
 
-    // Add this call to the 'OnCreate' method
-    ShowMap();
+// Add this call to the 'OnCreate' method
+ShowMap();
 ```
 
 ### Step 6: Run the Sample & Register For Your Free Evaluation
