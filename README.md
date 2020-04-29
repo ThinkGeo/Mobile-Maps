@@ -16,13 +16,13 @@ Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we su
 
 We have a number of samples for both Android and iOS that show off ThinkGeo Mobile Maps' full capabilities. You can use these samples as a starting point for your own application, or simply reference them for how to use our controls using best practices.
 
-* [iOS samples](samples/ios)
-* [Android samples](samples/android)
+- [iOS samples](samples/ios)
+- [Android samples](samples/android)
 
 ## Quickstarts
 
-[Quick Start Guide for Android](#quick-start-display-a-simple-map-on-android)
-[Quick Start Guide for iOS](#quick-start-display-a-simple-map-on-ios)
+- [Quick Start Guide for Android](#quick-start-display-a-simple-map-on-android)
+- [Quick Start Guide for iOS](#quick-start-display-a-simple-map-on-ios)
 
 ## Quick Start: Display a Simple Map on iOS
 
