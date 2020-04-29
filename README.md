@@ -4,13 +4,11 @@ Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we su
 
 ## Repository Layout
 
-`/api-docs`: An offline version the API documentation HTML pages.
-
-`/hero-app`: A real world application that shows off many of this products features along with best practices.
+`/docs`: An offline version the API documentation HTML pages.
 
 `/samples`: A collection of feature by feature samples.
 
-`/.assets`: Any assets needed for the readme.md.
+`/assets`: Any assets needed for the readme.md.
 
 `README.md`: A quick start guide to show you how to quickly get up and running.
 
@@ -26,7 +24,7 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![alt text](.assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
+![alt text](assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
 
 ### Step 1: Set Up Prerequisites
 
@@ -160,7 +158,7 @@ A more in-depth step-by-step walkthrough is also available [on the ThinkGeo Wiki
 
 Now that you have the basic map set up, you can add custom data to the map. Depending on the data, this can be complex or quite simple. We'll be going over the simple basics of adding custom data.
 
-Download the [WorldCapitals.zip](.assets/WorldCapitals.zip) shapefile data and unzip it in your project under a new folder in the `Assets` folder called `AppData`. In order to move this data into storage on the Android device, we'll need to set up our app to request some basic permissions as well.
+Download the [WorldCapitals.zip](assets/WorldCapitals.zip) shapefile data and unzip it in your project under a new folder in the `Assets` folder called `AppData`. In order to move this data into storage on the Android device, we'll need to set up our app to request some basic permissions as well.
 
 First, we need to add the required permissions to the Android manifest. This can be done by right-clicking on the project in the solution explorer and navigating to `Properties -> Android Manifest`, and finding `Required Permissions` near the bottom of the page. We need to ensure that the `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE` options are checked.
 
