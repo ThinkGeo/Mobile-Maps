@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="GettingStarted.GettingStarted" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
-	<uses-sdk android:targetSdkVersion="27" />
+	<uses-sdk android:targetSdkVersion="29" />
 	<application android:label="Getting Started" android:icon="@drawable/MapSuite"></application>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

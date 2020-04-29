@@ -1,4 +1,6 @@
+using Android;
 using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
 using System;
@@ -18,11 +20,64 @@ namespace LabelingStyle
         private TextView uploadTextView;
         private ProgressBar uploadProgressBar;
 
+        readonly string[] StoragePermissions =
+        {
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage
+        };
+        const int RequestStorageId = 0;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashLayout);
 
+            TryCopySampleDataAsync();
+        }
+
+        async Task TryCopySampleDataAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await CopySampleDataAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(StoragePermissions, RequestStorageId);
+            }
+            else
+            {
+                await CopySampleDataAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestStorageId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await CopySampleDataAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task CopySampleDataAsync()
+        {
             uploadTextView = FindViewById<TextView>(Resource.Id.uploadDataTextView);
             uploadProgressBar = FindViewById<ProgressBar>(Resource.Id.uploadProgressBar);
 
@@ -30,15 +85,15 @@ namespace LabelingStyle
             {
                 Collection<string> unLoadDatas = CollectUnloadDatas(SampleHelper.SampleDataDictionary, SampleHelper.AssetsDataDictionary);
                 UploadDataFiles(SampleHelper.SampleDataDictionary, unLoadDatas, OnCopyingSourceFile);
-				
-				uploadTextView.Post(() =>
+
+                uploadTextView.Post(() =>
                 {
                     uploadTextView.Text = "Ready";
                     uploadProgressBar.Progress = 100;
-				});
+                });
             });
 
-            updateSampleDatasTask.ContinueWith(t =>
+            await updateSampleDatasTask.ContinueWith(t =>
             {
                 uploadTextView.PostDelayed(() =>
                 {

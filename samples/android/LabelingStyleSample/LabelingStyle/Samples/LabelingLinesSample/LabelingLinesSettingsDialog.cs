@@ -1,7 +1,8 @@
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace LabelingStyle
 {

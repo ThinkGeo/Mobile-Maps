@@ -15,7 +15,7 @@ namespace GettingStartedSample
 {
 	
 	
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -26,48 +26,40 @@ namespace GettingStartedSample
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::GettingStartedSample.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::GettingStartedSample.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::GettingStartedSample.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::GettingStartedSample.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::GettingStartedSample.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::GettingStartedSample.Resource.String.hello;
 		}
 		
 		public partial class Animation
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int fade_in = 2130968576;
+			// aapt resource value: 0x7F010000
+			public const int fade_in = 2130771968;
 			
-			// aapt resource value: 0x7f040001
-			public const int fade_out = 2130968577;
+			// aapt resource value: 0x7F010001
+			public const int fade_out = 2130771969;
 			
-			// aapt resource value: 0x7f040002
-			public const int location_scale_big = 2130968578;
+			// aapt resource value: 0x7F010002
+			public const int location_scale_big = 2130771970;
 			
-			// aapt resource value: 0x7f040003
-			public const int location_scale_small = 2130968579;
+			// aapt resource value: 0x7F010003
+			public const int location_scale_small = 2130771971;
 			
-			// aapt resource value: 0x7f040004
-			public const int toolsBar_in = 2130968580;
+			// aapt resource value: 0x7F010004
+			public const int toolsBar_in = 2130771972;
 			
-			// aapt resource value: 0x7f040005
-			public const int toolsBar_out = 2130968581;
+			// aapt resource value: 0x7F010005
+			public const int toolsBar_out = 2130771973;
 			
 			static Animation()
 			{
@@ -95,73 +87,73 @@ namespace GettingStartedSample
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
+			// aapt resource value: 0x7F020000
 			public const int close = 2130837504;
 			
-			// aapt resource value: 0x7f020001
+			// aapt resource value: 0x7F020001
 			public const int Compass = 2130837505;
 			
-			// aapt resource value: 0x7f020002
+			// aapt resource value: 0x7F020002
 			public const int displaytype_bing_aerial = 2130837506;
 			
-			// aapt resource value: 0x7f020003
+			// aapt resource value: 0x7F020003
 			public const int displaytype_wmk = 2130837507;
 			
-			// aapt resource value: 0x7f020004
+			// aapt resource value: 0x7F020004
 			public const int fullext40X40 = 2130837508;
 			
-			// aapt resource value: 0x7f020005
+			// aapt resource value: 0x7F020005
 			public const int Icon = 2130837509;
 			
-			// aapt resource value: 0x7f020006
+			// aapt resource value: 0x7F020006
 			public const int icon_mapsuite_default256x256 = 2130837510;
 			
-			// aapt resource value: 0x7f020007
+			// aapt resource value: 0x7F020007
 			public const int icon_mapsuite_default512x512 = 2130837511;
 			
-			// aapt resource value: 0x7f020008
+			// aapt resource value: 0x7F020008
 			public const int icon_mapsuite_globe = 2130837512;
 			
-			// aapt resource value: 0x7f020009
+			// aapt resource value: 0x7F020009
 			public const int icon_mapsuite_globe_Pressed = 2130837513;
 			
-			// aapt resource value: 0x7f02000a
+			// aapt resource value: 0x7F02000A
 			public const int icon_mapsuite_Minus = 2130837514;
 			
-			// aapt resource value: 0x7f02000b
+			// aapt resource value: 0x7F02000B
 			public const int icon_mapsuite_Minus_Pressed = 2130837515;
 			
-			// aapt resource value: 0x7f02000c
+			// aapt resource value: 0x7F02000C
 			public const int icon_mapsuite_noImageTile = 2130837516;
 			
-			// aapt resource value: 0x7f02000d
+			// aapt resource value: 0x7F02000D
 			public const int icon_mapsuite_Plus = 2130837517;
 			
-			// aapt resource value: 0x7f02000e
+			// aapt resource value: 0x7F02000E
 			public const int icon_mapsuite_Plus_Pressed = 2130837518;
 			
-			// aapt resource value: 0x7f02000f
+			// aapt resource value: 0x7F02000F
 			public const int info40X40 = 2130837519;
 			
-			// aapt resource value: 0x7f020010
+			// aapt resource value: 0x7F020010
 			public const int location40X40 = 2130837520;
 			
-			// aapt resource value: 0x7f020011
+			// aapt resource value: 0x7F020011
 			public const int MapSuite = 2130837521;
 			
-			// aapt resource value: 0x7f020012
+			// aapt resource value: 0x7F020012
 			public const int mapType = 2130837522;
 			
-			// aapt resource value: 0x7f020013
+			// aapt resource value: 0x7F020013
 			public const int More = 2130837523;
 			
-			// aapt resource value: 0x7f020014
+			// aapt resource value: 0x7F020014
 			public const int Nxtext40X40 = 2130837524;
 			
-			// aapt resource value: 0x7f020015
+			// aapt resource value: 0x7F020015
 			public const int portrait = 2130837525;
 			
-			// aapt resource value: 0x7f020016
+			// aapt resource value: 0x7F020016
 			public const int Preext40X40 = 2130837526;
 			
 			static Drawable()
@@ -177,80 +169,80 @@ namespace GettingStartedSample
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070010
-			public const int CancelButton = 2131165200;
+			// aapt resource value: 0x7F030008
+			public const int baseMapButton = 2130903048;
 			
-			// aapt resource value: 0x7f070000
-			public const int MapContainer = 2131165184;
+			// aapt resource value: 0x7F030000
+			public const int CancelButton = 2130903040;
 			
-			// aapt resource value: 0x7f07000f
-			public const int OkButton = 2131165199;
+			// aapt resource value: 0x7F030009
+			public const int closeButton = 2130903049;
 			
-			// aapt resource value: 0x7f070008
-			public const int ToolButtonsLayout = 2131165192;
+			// aapt resource value: 0x7F03000A
+			public const int cloudMapAerialRadioButton = 2130903050;
 			
-			// aapt resource value: 0x7f070006
-			public const int ToolsBarBorderFrameLayout = 2131165190;
+			// aapt resource value: 0x7F03000B
+			public const int cloudMapHybridRadioButton = 2130903051;
 			
-			// aapt resource value: 0x7f070002
-			public const int ToolsBarHeaderLayout = 2131165186;
+			// aapt resource value: 0x7F03000C
+			public const int cloudMapLightRadioButton = 2130903052;
 			
-			// aapt resource value: 0x7f070001
-			public const int ToolsBarLinearLayout = 2131165185;
+			// aapt resource value: 0x7F03000D
+			public const int frameLayout1 = 2130903053;
 			
-			// aapt resource value: 0x7f070018
-			public const int ZoomLevelTextView = 2131165208;
+			// aapt resource value: 0x7F03000E
+			public const int fullextImageButton = 2130903054;
 			
-			// aapt resource value: 0x7f07000d
-			public const int baseMapButton = 2131165197;
+			// aapt resource value: 0x7F03000F
+			public const int infoImageButton = 2130903055;
 			
-			// aapt resource value: 0x7f070015
-			public const int closeButton = 2131165205;
+			// aapt resource value: 0x7F030010
+			public const int landscapeTextView = 2130903056;
 			
-			// aapt resource value: 0x7f070013
-			public const int cloudMapAerialRadioButton = 2131165203;
+			// aapt resource value: 0x7F030011
+			public const int localWebView = 2130903057;
 			
-			// aapt resource value: 0x7f070014
-			public const int cloudMapHybridRadioButton = 2131165204;
+			// aapt resource value: 0x7F030012
+			public const int locationImageButton = 2130903058;
 			
-			// aapt resource value: 0x7f070012
-			public const int cloudMapLightRadioButton = 2131165202;
+			// aapt resource value: 0x7F030001
+			public const int MapContainer = 2130903041;
 			
-			// aapt resource value: 0x7f070004
-			public const int frameLayout1 = 2131165188;
+			// aapt resource value: 0x7F030013
+			public const int moreImage = 2130903059;
 			
-			// aapt resource value: 0x7f07000a
-			public const int fullextImageButton = 2131165194;
+			// aapt resource value: 0x7F030014
+			public const int nxtextImageButton = 2130903060;
 			
-			// aapt resource value: 0x7f07000e
-			public const int infoImageButton = 2131165198;
+			// aapt resource value: 0x7F030002
+			public const int OkButton = 2130903042;
 			
-			// aapt resource value: 0x7f070007
-			public const int landscapeTextView = 2131165191;
+			// aapt resource value: 0x7F030015
+			public const int preextImageButton = 2130903061;
 			
-			// aapt resource value: 0x7f070017
-			public const int localWebView = 2131165207;
+			// aapt resource value: 0x7F030016
+			public const int radioGroup1 = 2130903062;
 			
-			// aapt resource value: 0x7f070009
-			public const int locationImageButton = 2131165193;
+			// aapt resource value: 0x7F030017
+			public const int textView1 = 2130903063;
 			
-			// aapt resource value: 0x7f070005
-			public const int moreImage = 2131165189;
+			// aapt resource value: 0x7F030003
+			public const int ToolButtonsLayout = 2130903043;
 			
-			// aapt resource value: 0x7f07000c
-			public const int nxtextImageButton = 2131165196;
+			// aapt resource value: 0x7F030004
+			public const int ToolsBarBorderFrameLayout = 2130903044;
 			
-			// aapt resource value: 0x7f07000b
-			public const int preextImageButton = 2131165195;
+			// aapt resource value: 0x7F030005
+			public const int ToolsBarHeaderLayout = 2130903045;
 			
-			// aapt resource value: 0x7f070011
-			public const int radioGroup1 = 2131165201;
+			// aapt resource value: 0x7F030006
+			public const int ToolsBarLinearLayout = 2130903046;
 			
-			// aapt resource value: 0x7f070003
-			public const int textView1 = 2131165187;
+			// aapt resource value: 0x7F030018
+			public const int zoomLevelListView = 2130903064;
 			
-			// aapt resource value: 0x7f070016
-			public const int zoomLevelListView = 2131165206;
+			// aapt resource value: 0x7F030007
+			public const int ZoomLevelTextView = 2130903047;
 			
 			static Id()
 			{
@@ -265,29 +257,29 @@ namespace GettingStartedSample
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int ButtonBackgroundSelector = 2130903040;
+			// aapt resource value: 0x7F040000
+			public const int ButtonBackgroundSelector = 2130968576;
 			
-			// aapt resource value: 0x7f030001
-			public const int Main = 2130903041;
+			// aapt resource value: 0x7F040001
+			public const int Main = 2130968577;
 			
-			// aapt resource value: 0x7f030002
-			public const int OpenGpsSettingsLayout = 2130903042;
+			// aapt resource value: 0x7F040002
+			public const int OpenGpsSettingsLayout = 2130968578;
 			
-			// aapt resource value: 0x7f030003
-			public const int SelectBaseMapTypeLayout = 2130903043;
+			// aapt resource value: 0x7F040003
+			public const int SelectBaseMapTypeLayout = 2130968579;
 			
-			// aapt resource value: 0x7f030004
-			public const int SelectZoomLevelLayout = 2130903044;
+			// aapt resource value: 0x7F040004
+			public const int SelectZoomLevelLayout = 2130968580;
 			
-			// aapt resource value: 0x7f030005
-			public const int ToolsBarTitleBackground = 2130903045;
+			// aapt resource value: 0x7F040005
+			public const int ToolsBarTitleBackground = 2130968581;
 			
-			// aapt resource value: 0x7f030006
-			public const int WebView = 2130903046;
+			// aapt resource value: 0x7F040006
+			public const int WebView = 2130968582;
 			
-			// aapt resource value: 0x7f030007
-			public const int ZoomLevelListTemplate = 2130903047;
+			// aapt resource value: 0x7F040007
+			public const int ZoomLevelListTemplate = 2130968583;
 			
 			static Layout()
 			{
@@ -302,11 +294,17 @@ namespace GettingStartedSample
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int ApplicationName = 2131034113;
+			// aapt resource value: 0x7F050000
+			public const int ApplicationName = 2131034112;
 			
-			// aapt resource value: 0x7f050000
-			public const int Hello = 2131034112;
+			// aapt resource value: 0x7F050002
+			public const int app_name = 2131034114;
+			
+			// aapt resource value: 0x7F050001
+			public const int Hello = 2131034113;
+			
+			// aapt resource value: 0x7F050003
+			public const int hello = 2131034115;
 			
 			static String()
 			{
@@ -321,7 +319,7 @@ namespace GettingStartedSample
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f060000
+			// aapt resource value: 0x7F060000
 			public const int Theme_Splash = 2131099648;
 			
 			static Style()

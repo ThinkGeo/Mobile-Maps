@@ -1,5 +1,7 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Locations;
@@ -9,10 +11,9 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using System;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using System.Threading.Tasks;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GettingStartedSample
 {
@@ -31,15 +32,68 @@ namespace GettingStartedSample
         private Animation toolsBarOutAnimation;
         private Animation toolsBarInAnimation;
         private LocationManager locationManager;
-        private Proj4Projection wgs84ToMeterProjection;
+        private ProjectionConverter wgs84ToMeterProjection;
         private ScaleZoomLevelMapTool scaleZoomLevelMapTool;
         private SelectBaseMapTypeDialog selectBaseMapTypeDialog;
+
+        readonly string[] LocationPermissions =
+{
+            Manifest.Permission.AccessCoarseLocation,
+            Manifest.Permission.AccessFineLocation
+        };
+        const int RequestLocationId = 0;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
+            TryInitializeSampleAsync();
+        }
+
+        async Task TryInitializeSampleAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await InitializeSampleAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(LocationPermissions, RequestLocationId);
+            }
+            else
+            {
+                InitializeSampleAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestLocationId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await InitializeSampleAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task InitializeSampleAsync()
+        {
             //Initialize the Map and relative information.
             InitializeGlobalVariables();
             InitializeAndroidMap();
@@ -67,6 +121,7 @@ namespace GettingStartedSample
             RefreshToolsBarWithConfig(Resources.Configuration);
             CheckGpsServiceAndOpenSettings();
         }
+        
 
         /// <summary>
         /// Called by the system when the device configuration changes while your
@@ -265,7 +320,7 @@ namespace GettingStartedSample
         {
             Popup popup = new Popup(this);
             PointF location = new PointF(e.ScreenX, e.ScreenY);
-            popup.Position = ExtentHelper.ToWorldCoordinate(CustomMapView.Current.CurrentExtent, location.X, location.Y, (float)CustomMapView.Current.Width, (float)CustomMapView.Current.Height);
+            popup.Position = MapUtil.ToWorldCoordinate(CustomMapView.Current.CurrentExtent, location.X, location.Y, (float)CustomMapView.Current.Width, (float)CustomMapView.Current.Height);
 
             TextView textView = new TextView(this);
             PointShape locationShape = wgs84ToMeterProjection.ConvertToInternalProjection(popup.Position) as PointShape;
@@ -392,9 +447,9 @@ namespace GettingStartedSample
             isTracking = false;
             locationManager = (LocationManager)GetSystemService(Context.LocationService);
             bestGpsProvider = locationManager.GetBestProvider(criteria, true);
-            wgs84ToMeterProjection = new Proj4Projection();
-            wgs84ToMeterProjection.InternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString();
-            wgs84ToMeterProjection.ExternalProjectionParametersString = Proj4Projection.GetGoogleMapParametersString();
+            wgs84ToMeterProjection = new ProjectionConverter();
+            wgs84ToMeterProjection.InternalProjection = new Projection(Projection.GetWgs84ProjString());
+            wgs84ToMeterProjection.ExternalProjection = new Projection(Projection.GetGoogleMapProjString());
             wgs84ToMeterProjection.Open();
         }
 
@@ -409,12 +464,6 @@ namespace GettingStartedSample
             CustomMapView.Current.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
             CustomMapView.Current.CurrentExtent = new RectangleShape(-19062735.6816748, 9273256.52450252, -5746827.16371793, 2673516.56066139);
             CustomMapView.Current.SetBackgroundColor(new Color(255, 244, 242, 238));
-
-            //WorldMapKitOverlay worldMapKitOverlay = new WorldMapKitOverlay();
-            //worldMapKitOverlay.Projection = WorldMapKitProjection.SphericalMercator;
-            //worldMapKitOverlay.ClientId = "ThinkGeo";
-            //worldMapKitOverlay.PrivateKey = "MWSN2234230+SDFADS(AADS(A23werq@#$@";
-            //mapView.Overlays.Add("WorldMapKitOverlay", worldMapKitOverlay);
 
             gpsOverlay = new MarkerOverlay();
             CustomMapView.Current.Overlays.Add("GpsOverlay", gpsOverlay);

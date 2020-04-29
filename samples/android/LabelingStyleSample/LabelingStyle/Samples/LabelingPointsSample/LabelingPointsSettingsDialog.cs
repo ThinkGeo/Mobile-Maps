@@ -2,7 +2,8 @@
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace LabelingStyle
 {
@@ -40,7 +41,7 @@ namespace LabelingStyle
         {
             Settings.XOffset = xOffsetEditText.Text;
             Settings.YOffset = yOffsetEditText.Text;
-            Settings.Placement = (PointPlacement)pointPlacementSpinner.SelectedItemPosition;
+            Settings.Placement = (TextPlacement)pointPlacementSpinner.SelectedItemPosition;
         }
     }
 }

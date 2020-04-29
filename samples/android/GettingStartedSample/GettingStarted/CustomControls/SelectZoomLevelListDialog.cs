@@ -5,8 +5,8 @@ using Android.Widget;
 using System;
 using System.Collections.Generic;
 using Android.Graphics;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GettingStartedSample
 {

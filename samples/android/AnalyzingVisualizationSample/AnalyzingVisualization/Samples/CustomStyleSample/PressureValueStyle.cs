@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -12,11 +10,11 @@ namespace AnalyzingVisualization
         {
             SquareTextPointStyle highPressurePointStyle = new SquareTextPointStyle();
             highPressurePointStyle.Text = "H";
-            highPressurePointStyle.SymbolSolidBrush = new GeoSolidBrush(GeoColor.FromArgb(255, 39, 39, 245));
+            highPressurePointStyle.FillBrush = new GeoSolidBrush(GeoColor.FromArgb(255, 39, 39, 245));
 
             SquareTextPointStyle lowPressurePointStyle = new SquareTextPointStyle();
             lowPressurePointStyle.Text = "L";
-            lowPressurePointStyle.SymbolSolidBrush = new GeoSolidBrush(GeoColor.StandardColors.Red);
+            lowPressurePointStyle.FillBrush = new GeoSolidBrush(GeoColors.Red);
 
             ValueItems.Add(new ValueItem("L", lowPressurePointStyle));
             ValueItems.Add(new ValueItem("H", highPressurePointStyle));
@@ -34,8 +32,8 @@ namespace AnalyzingVisualization
                 SymbolSize = 30;
                 PointType = PointType.Symbol;
                 font = new GeoFont("Verdana", 14);
-                textBrush = new GeoSolidBrush(GeoColor.StandardColors.White);
-                SymbolPen = new GeoPen(GeoColor.StandardColors.White, 1);
+                textBrush = new GeoSolidBrush(GeoColors.White);
+                OutlinePen = new GeoPen(GeoColors.White, 1);
             }
 
             public string Text
