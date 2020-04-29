@@ -1,9 +1,18 @@
 # ThinkGeo Mobile Maps
 
-> Pardon Our Mess: We are currently in a state of transition to moving from our [old wiki](), [discussion forums](), and [GitHub repos]() to GitLab. As a result, certain aspects of our documents may be in disarray. Ultimately, we believe that having a unified location for our customers to discover and explore our products will lead to less confusion and better satisfaction. Until then, if you have any questions or feedback, please reach out to us at [sales@thinkgeo.com](mailto:sales@thinkgeo.com).
-
 Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up and running with some external data and styling.  After reviewing this, we strongly recommend that you check out our samples for both [iOS](samples/ios) and [android](samples/android).  It's packed with examples covering nearly everything you can do with our Mobile Maps control.
 
+## Repository Layout
+
+`/api-docs`: An offline version the API documentation HTML pages.
+
+`/hero-app`: A real world application that shows off many of this products features along with best practices.
+
+`/samples`: A collection of feature by feature samples.
+
+`/.assets`: Any assets needed for the readme.md.
+
+`README.md`: A quick start guide to show you how to quickly get up and running.
 
 ## Samples ##
 
@@ -13,296 +22,302 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 * [Android samples](samples/android)
 
 
-## Display a Simple Map ##
+## Quick Start: Display a Simple Map on Android ##
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-<img src=".assets/map_suite_qsg_showheightzoomlevel.png" width="250"/>
+![alt text](.assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
 
-> You can get the full example project for this guide [here](samples/android/GettingStartedSample/)
+### Step 1: Set Up Prerequisites
+
+In order to develop and debug Xamarin Android applications, you'll need to have a few prerequisites set up. These include:
+
+* Xamarin
+* The Android SDK
+* An Android emulator
+
+Here a few handy links for installation and setup of these prerequisites using Visual Studio:
+
+[Xamarin for Visual Studio](https://docs.microsoft.com/en-us/xamarin/get-started/installation)
+
+[Android SDK](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-sdk)
+
+[Android Emulator](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/device-manager)
 
 
-### Setting up the Environment ###
+### Step 1: Set Up a New Project
 
-Let's start by creating a new Android project in Microsoft Visual Studio (2012 or newer) named QuickstartSample. We can create the project with .NET Framework 4.5.
+Once these prerequisites have been installed, you'll need to create a new **Xamarin Android** project in your editor of choice. Please refer to your editor's instructions on how to create this project. Here is a [guide to creating a sample project](https://docs.microsoft.com/en-us/xamarin/android/get-started/hello-android/hello-android-quickstart) using Visual Studio for reference. 
 
-The project QuickstartSample is created in a new solution called QuickstartSample. The wizard creates a single Android Application. Choose Android version (4.0.3 or higher) for the project.
+### Step 2: Add NuGet Packages
 
-Now we are going to install ThinkGeo Mobile Maps for Android NuGet package. Let's open NuGet Manager dialog and install following NuGet package: `MapSuiteMobileForAndroid-Standard`.
+You'll need to install the **ThinkGeo.UI.Android** NuGet package. We strongly suggest you use your editor's [built in NuGet package manager](https://docs.microsoft.com/en-us/nuget/quickstart/) if possible.  If you're not using an IDE you can [install it via the the dotnet CLI](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-dotnet-cli) from inside the project folder where your project file exists.
 
+```shell
+dotnet add package ThinkGeo.UI.Android
+```
 
-### Add the MapView to our App ###
+### Step 3: Set up the App Template and add the MapView element
 
-Open the Resources\layout\Main.axml file. Remove the default button node, and insert MapView node in the axml.
+Open up the main app layout file. In Visual Studio, this should be under the path `Resources\layout\activity_main.axml`. Change the default `RelativeLayout` to a `FrameLayout` and add the `ThinkGeo.UI.Android.MapView` element
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <ThinkGeo.MapSuite.Android.MapView
-        android:id="@+id/MapView"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ThinkGeo.UI.Android.MapView
+        android:id="@+id/androidMap"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
-</LinearLayout>
+        android:layout_height="fill_parent" />
+</FrameLayout>
 ```
 
-Now we have our `ThinkGeo.MapSuite.Android.dll` and `ThinkGeo.MapSuite.dll` referenced and a MapView added.
+### Step 4: Add Namespaces to MainActivity.cs
 
-
-### Displaying the World Map ###
-
-Now the project is ready, Map Suite Runtime license is required for running and debugging your product. Please open the Product Center, then generate your license. For more details, please refer to (http://wiki.thinkgeo.com/wiki/map_suite_runtime_license_guide_for_mobile).
-
-Let's add references to the `ThinkGeo.MapSuite`, `ThinkGeo.MapSuite.Android` and `ThinkGeo.MapSuite.Shapes` namespaces at the very top of our code, since we'll use many classes within them. 
+Add the required usings to the MainActivity.cs file:
 
 ```csharp
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.Android.UI
 ```
 
-Now, Let's add a base overlay to display the world map witch called "WorldStreetsAndImageryOverlay".
+### Step 5: Add the Map Background Overlay
+
+Create a new method called `ShowMap` in the MainActivity.cs file, and add the code below:
 
 ```csharp
-protected override void OnCreate(Bundle bundle)
+public void ShowMap()
 {
-    base.OnCreate(bundle);
-    SetContentView(Resource.Layout.Main);
+    // Set our view from the "main" layout resource
+    SetContentView(Resource.Layout.activity_main);
 
-    // Get MapView From Activity's View.
-    MapView mapView = FindViewById<MapView>(Resource.Id.MapView);
+    MapView androidMap = FindViewById<MapView>(Resource.Id.androidMap);
 
-    // Set the Map Unit to DecimalDegrees, the Shapefile’s unit of measure. 
-    mapView.MapUnit = GeographyUnit.DecimalDegree;
-            
-    // Create a WorldStreetsAndImageryOverlay.
-    WorldStreetsAndImageryOverlay worldStreetsAndImageryOverlay = new WorldStreetsAndImageryOverlay();
+    // Set the Map Configuration.
+    androidMap.MapUnit = GeographyUnit.Meter;
+    androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+    androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
 
-    // Add a WorldStreetsAndImageryOverlay .
-    mapView.Overlays.Add("WorldStreetsAndImageryOverlay", worldStreetsAndImageryOverlay);
-    
-    // Set a proper extent for the map. The extent is the geographical area you want it to display.
-    mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
+    // Add the Cloud Maps Overlay
+    ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
+
+    androidMap.Overlays.Add("CloudRasterMapsOverlay", thinkGeoCloudMapsOverlay);
 }
 ```
 
-<img src=".assets/map_suite_qsg_showbasemap.png" width="250"/>
-
-
-### Run the Sample & Register for Your Free Evaluation ###
-
-The first time you run your application, you will be presented with ThinkGeo's Product Center which will create and manage your licenses for all of ThinkGeo's products. Create a new account to begin a 60-day free evaluation. 
-
-1. Run the application in Debug mode.
-1. Click the "Create a new Account?" link.
-1. Fill out your name, email address, password and company name and click register.
-1. Check your email and click the "Active Your Account" link.
-1. Return to Product Center and login using the credentials your just created and hit "Continue Debugging" button.
-
-You should now see your map with our Cloud Maps layer!
-
-
-### Adding Your Own Data to the Map ###
-
-Next, we will go over how to add your own external data and add it to the map. We've provided some sample shapefile data for you to use [here](samples/android/GettingStartedSample/GettingStarted/Assets/SampleData).
-
-Create a new folder named AppData under "Assets", then add the map data to it. Make sure the resources’ build action is AndroidAsset.
-
-Now, we can use code to copy the data to a special location for the Android application to use.
+Then, remove the `SetContentView` call and call this method from the `OnCreate` method in the MainActivity.cs file:
 
 ```csharp
-protected override void OnCreate(Bundle bundle)
-{
-    base.OnCreate(bundle);
-    SetContentView(Resource.Layout.Main);
+// Remove this call from 'OnCreate'
+// SetContentView(Resource.Layout.activity_main);
 
-    // Copy the required Shapefiles to Device.
-    string targetDirectory = (@"/mnt/sdcard/Android.Sample/GetStarted/");
-    CopySampleData(targetDirectory);
+// Add this call to the 'OnCreate' method
+ShowMap();
+```
+
+### Step 6: Run the Sample & Register For Your Free Evaluation
+
+The first time you run the application, you will be presented with an error requiring a ThinkGeo license to proceed with running the app. In order to register and generate a license for this project, you'll need to perform the following steps:
+
+1. Run the ThinkGeo.ProductCenter.exe to open the product center. This can be found in the `bin` folder of your project at `path\to\project\bin\Debug\`. 
+2. Click on `Log In` in the upper-right corner and `Create a new account`
+3. Follow the steps on the website to register for your account
+4. Return to Product Center and log in using your new credentials.
+5. Click on the `ThinkGeo UI Mobile for Android` tab and activate an evaluation license.
+6. To generate a runtime license for the sample app, you'll need to find the package name for your sample project. In Visual Studio, this can be found by right-clicking on the project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`
+7. Copy the `Package Name` to the `Runtime License` input box to the right of the Product Center and click `Create`. Save the mewly created license to the `Assets` folder of the solution (`path\to\project\Assets`). 
+8. Add the license to the project in the solution explorer by right-clicking on the `Assets` folder and selecting `Add -> Existing Item`.
+9. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `AndroidAsset` 
+
+You should now be able to see your app with our Cloud Maps layer!
+
+A more in-depth step-by-step walkthrough is also available [on the ThinkGeo Wiki](http://wiki.thinkgeo.com/wiki/map_suite_runtime_license_guide_for_mobile).
+
+### Step 7: Adding an External Data Source - Requesting Permissions
+
+Now that you have the basic map set up, you can add custom data to the map. Depending on the data, this can be complex or quite simple. We'll be going over the simple basics of adding custom data.
+
+Download the [WorldCapitals.zip](.assets/WorldCapitals.zip) shapefile data and unzip it in your project under a new folder in the `Assets` folder called `AppData`. In order to move this data into storage on the Android device, we'll need to set up our app to request some basic permissions as well.
+
+First, we need to add the required permissions to the Android manifest. This can be done by right-clicking on the project in the solution explorer and navigating to `Properties -> Android Manifest`, and finding `Required Permissions` near the bottom of the page. We need to ensure that the `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE` options are checked.
+
+Next, we need to set up the method to request permissions. Add the following fields to your MainActivity class:
+
+```csharp
+readonly string[] StoragePermissions =
+{
+    Manifest.Permission.ReadExternalStorage,
+    Manifest.Permission.WriteExternalStorage
+};
+const int RequestStorageId = 0;
+```
+
+Add the following usings:
+
+```csharp
+using Android;
+using Android.Content.PM;
+```
+
+Then, add the following method to your MainActivity.cs class. This method will handle requesting permissions:
+
+```csharp
+public void RequestRequiredPermissions()
+{
+    const string readPermission = Manifest.Permission.ReadExternalStorage;
+    const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+    if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+    {
+        RequestPermissions(StoragePermissions, RequestStorageId);
+    }
+    else
+    {
+        ShowMap();
+    }
 }
 ```
 
-This method will copy data to the target path, if the folder does not exist. 
+Add the following code to the `OnRequestPermissionsResult` method in the MainActivity.cs:
+
+```csharp
+public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+{
+    switch (requestCode)
+    {
+        case RequestStorageId:
+            {
+                if(grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+                {
+                    ShowMap();
+                }
+                else
+                {
+                    Toast.MakeText(this,
+                        "Storage Permissions Denied", ToastLength.Short).Show();
+                }
+            }
+            break;
+    }
+}
+```
+
+Finally, replace the `ShowMap` call in the `OnCreate` method with a call to the `RequestRequiredPermissions` method:
+
+```csharp
+// Replace 'ShowMap()' in the 'OnCreate' method
+RequestRequiredPermissions();
+```
+
+### Step 8: Adding an External Data Source - Importing Data
+
+Now that we have storage permissions set up, we can store the data locally on the Android device. Create a new folder named `SampleData` under the `Assets` folder in the solution, then add the map data to it. Make sure the resources’ build action is `AndroidAsset`.
+
+Now, we can add a method to copy the data to the external storage for the application to use.
 
 ```csharp
 private void CopySampleData(string targetDirectory)
 {
-	if (!Directory.Exists(targetDirectory))
-	{
-		Directory.CreateDirectory(targetDirectory);
-		foreach (string filename in Assets.List("AppData"))
-		{
-			Stream stream = Assets.Open("AppData/" + filename);
-			FileStream fileStream = File.Create(Path.Combine(targetDirectory, filename));
-			stream.CopyTo(fileStream);
-			fileStream.Close();
-			stream.Close();
-		}
-	}
+    if (!Directory.Exists(targetDirectory)) Directory.CreateDirectory(targetDirectory);
+
+    foreach (string filename in Assets.List("SampleData"))
+    {
+        string sourcePathFilename = Path.Combine("SampleData", filename);
+        string targetPathFilename = Path.Combine(targetDirectory, filename);
+        if (!File.Exists(targetPathFilename))
+        {
+            string targetPath = Path.GetDirectoryName(targetPathFilename);
+            if (!Directory.Exists(targetPath)) Directory.CreateDirectory(targetPath);
+            Stream sourceStream = Assets.Open(sourcePathFilename);
+            FileStream fileStream = File.Create(targetPathFilename);
+            sourceStream.CopyTo(fileStream);
+            fileStream.Close();
+            sourceStream.Close();
+        }
+    }
 }
 ```
 
-Our next step is to define and add our layers. All of the following code can be placed in the "OnCreate" method of the MainActivity.cs so our MapView can load and render the data. We can also add logic to check the data to avoid coping it every time.
+Now we can call this method when we initialize our map, in the `ShowMap` method.
 
 ```csharp
-protected override void OnCreate(Bundle bundle)
+public void ShowMap()
 {
-    base.OnCreate(bundle);
-    SetContentView(Resource.Layout.Main);
-
-    // Copy the required ShapeFiles to Device.
-    string targetDirectory = (@"/mnt/sdcard/Android.Sample/GetStarted/");
+    // Set our view from the "main" layout resource
+    SetContentView(Resource.Layout.activity_main);
+    // Copy the required Shapefiles to Device.
+    string targetDirectory = Path.Combine(Environment.ExternalStorageDirectory.ToString(), "SampleData");
     CopySampleData(targetDirectory);
-
-    MapView mapView = FindViewById<MapView>(Resource.Id.MapView);
-    mapView.MapUnit = GeographyUnit.DecimalDegree;
-
-    // Create a WorldStreetsAndImageryOverlay.
-    WorldStreetsAndImageryOverlay worldStreetsAndImageryOverlay = new WorldStreetsAndImageryOverlay();
-
-    // Add a WorldStreetsAndImageryOverlay .
-    mapView.Overlays.Add("WorldStreetsAndImageryOverlay", worldStreetsAndImageryOverlay);
-    
-    // We create a new Layer and pass the path to a Shapefile into its constructor.
-    ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "Countries02.shp"));
-
-    // Set the worldLayer with a preset Style, as AreaStyles.Country1 has a YellowGreen background and black border, our worldLayer will have the same render style.
-    worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
-
-    // This setting will apply from ZoomLevel01 to ZoomLevel20, which means the map will be rendered with the same style no matter how far we zoom in or out.
-    worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-    // We need to create a LayerOverlayer to add the world layer.
-    LayerOverlay overlay = new LayerOverlay();
-    overlay.Opacity = 0.8;
-    overlay.Layers.Add(worldLayer);
-
-    mapView.Overlays.Add("Countries02", overlay);
-
-    mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
-}
 ```
 
-If we compile and run what we have now, our map should have the countries polygons overlaid on top of our base map.
+This method will copy data to the target path, if the folder does not exist.
 
-<img src=".assets/map_suite_qsg_showshapefile.png" width="250"/>
+### Step 9: Add a Point Data Layer
 
-> So what has occurred here? We have created a layer and added it to the map and the map has rendered according to its default style parameters. Also, we have used ZoomLevel to display the map the way that we want.
-
-> **NOTE:** It is important that the "MapUnit" property of a Map object be set using the "GeographyUnit" enumeration. This is because the coordinates stored in a ShapeFile can be in DecimalDegrees (a format of latitude and longitude), feet, meters, or another unit system. Our map has no way to know what the ShapeFile's unit of measurement is until we set it. This information is normally found somewhere in the ShapeFile's documentation (also referred to as its metadata), or within its supplemental data file, as discussed in the section on ShapeFiles. It may also come as a separate .txt, .xml, or .html file that begins with the same file name as the main ShapeFile.
-
-That was an easy start! Now, let's add second ShapeFile to the sample, so we'll have a total of two layers:
-
-* World country borders (`Countries02.shp`)
-* World capitals (`capital.shp`)
+Now we can add the data from the shapefile to the map, in the `ShowMap()` method:
 
 ```csharp
-protected override void OnCreate(Bundle bundle)
-{
-    base.OnCreate(bundle);
-    SetContentView(Resource.Layout.Main);
+// Add a shapefile layer with point style.
+var capitalLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData/WorldCapitals.shp"));
 
-    string targetDirectory = (@"/mnt/sdcard/Android.Sample/GetStarted/");
-    CopySampleData(targetDirectory);
-
-    MapView mapView = FindViewById<MapView>(Resource.Id.MapView);
-    mapView.MapUnit = GeographyUnit.DecimalDegree;
-
-    // Create a WorldStreetsAndImageryOverlay.
-    WorldStreetsAndImageryOverlay worldStreetsAndImageryOverlay = new WorldStreetsAndImageryOverlay();
-
-    // Add a WorldStreetsAndImageryOverlay .
-    mapView.Overlays.Add("WorldStreetsAndImageryOverlay", worldStreetsAndImageryOverlay);
-
-    ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "Countries02.shp"));
-    worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
-    worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-    // Similarly, we use the presetPointStyle for cities.
-    ShapeFileFeatureLayer capitalLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "capital.shp"));
-
-    // These settings will apply from ZoomLevel01 to ZoomLevel20, which means city symbols will be rendered in the same style, no matter how far we zoom in or out.
-    capitalLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.Capital3;
-
-    // We need to add both of the new layers to the Map's Static Overlay.
-    capitalLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-    // We need to create a LayerOverlay to add the world layer.
-    LayerOverlay overlay = new LayerOverlay();
-    overlay.Opacity = 0.8;
-    overlay.Layers.Add(worldLayer);
-    overlay.Layers.Add(capitalLayer);
-
-    mapView.Overlays.Add("Countries02", overlay);
-
-    mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
-}
+// Create an overlay to add the layer to and add that overlay to the map.
+var customDataOverlay = new LayerOverlay();
+customDataOverlay.Layers.Add(capitalLayer);
+androidMap.Overlays.Add(customDataOverlay);
 ```
 
-Running the application again will show you points on the map indicating the locations of all the capitol cities of the world. But, it's not very useful to just show them as points! Let's show you how to add labels to these cities using a TextStyle.
+### Step 10: Styling and Labeling the Data
 
-A TextStyle ​is used to label items on map. As every ShapeFile ​has a relative .dbf file that includes descriptions for every record, the most common way to use TextStyles is for labeling. For example, Capital ShapeFile'​s corresponding .dbf file contains the field "​CITY_NAME"​. We can use this field to label the cities on our map.
-
-Map Suite includes several built-in TextStyles to help us quickly apply attractive city labels. We can simply pick the TextStyle we like and use it.
-
+We won't be able to see the points until a style is defined for it. Adding a style is very straightforward, but extremely extensible and powerful.
 
 ```csharp
-protected override void OnCreate(Bundle bundle)
+var capitalStyle = new PointStyle()
 {
-    base.OnCreate(bundle);
-    SetContentView(Resource.Layout.Main);
+    SymbolType = PointSymbolType.Circle,
+    SymbolSize = 8,
+    FillBrush = new GeoSolidBrush(GeoColors.White),
+    OutlinePen = new GeoPen(GeoColors.Black, 2)
+};
 
-    string targetDirectory = (@"/mnt/sdcard/Android.Sample/GetStarted/");
-    CopySampleData(targetDirectory);
-
-    MapView mapView = FindViewById<MapView>(Resource.Id.MapView);
-    mapView.MapUnit = GeographyUnit.DecimalDegree;
-
-    WorldStreetsAndImageryOverlay worldStreetsAndImageryOverlay = new WorldStreetsAndImageryOverlay();
-    mapView.Overlays.Add("WorldStreetsAndImageryOverlay", worldStreetsAndImageryOverlay);        
-
-    ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "Countries02.shp"));
-    worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
-    worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-    ShapeFileFeatureLayer capitalLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "capital.shp"));
-    capitalLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.Capital3;
-    capitalLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-    // We create a new Layer for labeling the capitals.
-    ShapeFileFeatureLayer capitalLabelLayer = new ShapeFileFeatureLayer(Path.Combine(targetDirectory, "capital.shp"));
-    // We use the preset TextStyle. Here we pass in the “CITY_NAME”, the name of the field containing the values we want to label the map with.
-    capitalLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Capital3("CITY_NAME");
-    capitalLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-  
-    LayerOverlay overlay = new LayerOverlay();
-    overlay.Opacity = 0.8;
-    overlay.Layers.Add(worldLayer);
-    overlay.Layers.Add(capitalLayer);
-    // Add the label layer to LayerOverlay.
-    overlay.Layers.Add(capitalLabelLayer);
-
-    mapView.Overlays.Add("Countries02", overlay);
-
-    mapView.CurrentExtent = new RectangleShape(-134, 70, -56, 7);
-}
+capitalLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = capitalStyle;
+capitalLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 ```
 
-<img src=".assets/map_suite_qsg_showheightzoomlevel.png" width="250"/>
+### Step 11: Reprojecting the Data
 
-### Summary ###
+If you run the app now, you'll notice that there is just a single point shape in the center of the map! This is because the data is in a completely different projection from the map. We can easily fix that, though, by adding a `ProjectionConverter` to the layer from Decimal Degrees(4326) to Spherical Mercator(3857).
 
-You now know the basics of using the ThinkGeo Mobile Map control and can start adding this functionality to your own applications. Let's recap what we've learned about the object relationships and how the pieces of Map Suite work together:
+```csharp
+// Set the projection of the capitalLayer to Spherical Mercator
+capitalLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
+```
 
-* It is of the utmost importance that the units (feet, meters, decimal degrees, etc.) be set properly for the Map control, based on the requirements of your data.
-* Shapefiles provide the data used by a Map control to render a map.
-* A Map is the basic control that contains all the other objects used to indicate how the map should be rendered.
-* A Map has one-to-many Layers. A Layer correlates one-to-one with a Shapefile (.shp).
-* A Layer can have one-to-many ZoomLevels. ZoomLevels help to define ranges (upper and lower scales) of when a Layer should be shown or hidden.
+Now, the data shows up properly on the map!
 
-For a further in-depth look at other features of Mobile Maps, this repo contains plenty of samples to help you along for both Android and iOS. 
+### Step 12: Zoom Into the Data
+
+Now, we can make the map zoom into an area based on the extent of the data we added above. In order to do that, we must first open the layer for spatial queries to be made.
+
+```csharp
+// Open capitalLayer for it to be ready for spatial queries. Then, set the extent of the map to the full view of the data.
+capitalLayer.Open();
+mapView.CurrentExtent = capitalLayer.GetBoundingBox();
+```
+
+### Summary
+
+You now know the basics of using the ThinkGeo Map controls and are able to get started adding functionality into your own applications. Let's recap what we have learned about the object relationships and how the pieces of ThinkGeo UI work together:
+
+1. It is of the utmost importance that the units (feet, meters, decimal degrees, etc.) be set properly for the Map control based on the data.
+1. FeatureLayers provide the data used by a Map control to render a map.
+1. A Map is the basic control that contains all of the other objects that are used to tell how the map is to be rendered.
+1. A Map has many layers. A Layer correlates one-to-one with a single data source and typically of one type (point, polygon, line etc).
+1. A FeatureLayer can have several ZoomLevels. ZoomLevels help to define ranges (upper and lower) of when a Layer should be shown or hidden.
+
+You are now in a great position to look over the [other samples available](samples/android) and explore our other features.
 
 ## Need Help? ##
 
