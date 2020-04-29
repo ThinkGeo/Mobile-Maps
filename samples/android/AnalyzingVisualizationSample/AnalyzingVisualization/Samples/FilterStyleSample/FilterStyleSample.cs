@@ -5,12 +5,8 @@ using Android.Views.Animations;
 using Android.Widget;
 using System;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -61,7 +57,7 @@ namespace AnalyzingVisualization
 
             GeoColor fillColor = GeoColor.FromArgb(130, GeoColor.FromHtml("#ffb74c"));
             GeoColor outlineColor = GeoColor.FromHtml("#333333");
-            filterStyle.Styles.Add(AreaStyles.CreateSimpleAreaStyle(fillColor, outlineColor));
+            filterStyle.Styles.Add(AreaStyle.CreateSimpleAreaStyle(fillColor, outlineColor));
             statesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(filterStyle);
             statesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         }

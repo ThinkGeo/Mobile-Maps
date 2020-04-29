@@ -2,12 +2,8 @@ using Android.Content;
 using Android.Widget;
 using System.Globalization;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GeometricFunctions
 {
@@ -60,11 +56,11 @@ namespace GeometricFunctions
             textStyle.Font = new GeoFont("Arial", 15);
             textStyle.DuplicateRule = LabelDuplicateRule.UnlimitedDuplicateLabels;
             textStyle.OverlappingRule = LabelOverlappingRule.AllowOverlapping;
-            textStyle.TextSolidBrush = new GeoSolidBrush(GeoColor.StandardColors.Black);
-            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColor.StandardColors.White), 1);
+            textStyle.TextBrush = new GeoSolidBrush(GeoColors.Black);
+            textStyle.HaloPen = new GeoPen(new GeoSolidBrush(GeoColors.White), 1);
 
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;
-            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 9.2F, GeoColor.StandardColors.DarkGray, 12.2F, true);
+            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.White, 9.2F, GeoColors.DarkGray, 12.2F, true);
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle.InnerPen.Brush = new GeoSolidBrush(GeoColor.FromArgb(180, 255, 155, 13));
             sourceLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 

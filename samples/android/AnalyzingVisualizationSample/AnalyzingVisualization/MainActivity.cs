@@ -1,11 +1,14 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace AnalyzingVisualization
@@ -18,12 +21,67 @@ namespace AnalyzingVisualization
         private SliderView sampleListContainer;
         private Collection<BaseSample> samples;
 
+        readonly string[] StoragePermissions =
+        {
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage
+        };
+        const int RequestStorageId = 0;
+
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             ActionBar.Hide();
 
+            TryInitializeSampleAsync();
+        }
+
+
+        async Task TryInitializeSampleAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await InitializeSampleAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(StoragePermissions, RequestStorageId);
+            }
+            else
+            {
+                InitializeSampleAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestStorageId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await InitializeSampleAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task InitializeSampleAsync()
+        {
             sampleListView = FindViewById<ListView>(Resource.Id.listView);
             sampleListContainer = (SliderView)FindViewById(Resource.Id.slider_view);
 

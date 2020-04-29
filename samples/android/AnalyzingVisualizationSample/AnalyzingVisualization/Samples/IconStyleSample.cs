@@ -1,10 +1,6 @@
 using Android.Content;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -34,7 +30,7 @@ namespace AnalyzingVisualization
             valueStyle.ColumnName = "TYPE";
 
             GeoFont font = new GeoFont("Arial", 9);
-            GeoSolidBrush brush = new GeoSolidBrush(GeoColor.StandardColors.Black);
+            GeoSolidBrush brush = new GeoSolidBrush(GeoColors.Black);
 
             valueStyle.ValueItems.Add(new ValueItem("1", new IconStyle(imagePath + "vehicle1.png", "Type", font, brush)));
             valueStyle.ValueItems.Add(new ValueItem("2", new IconStyle(imagePath + "vehicle2.png", "Type", font, brush)));

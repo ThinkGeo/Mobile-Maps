@@ -8,8 +8,8 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteEarthquakeStatistics
 {
@@ -49,7 +49,7 @@ namespace MapSuiteEarthquakeStatistics
 
             Task.Factory.StartNew(() =>
             {
-                bool isValid = Validate(inputKey, ThinkGeo.MapSuite.Android.BingMapsMapType.Aerial);
+                bool isValid = Validate(inputKey, BingMapsMapType.Aerial);
                 Global.MapView.Post(() =>
                 {
                     if (isValid)
@@ -86,7 +86,7 @@ namespace MapSuiteEarthquakeStatistics
             Cancel();
         }
 
-        private bool Validate(string bingMapsKey, ThinkGeo.MapSuite.Android.BingMapsMapType mapType)
+        private bool Validate(string bingMapsKey, BingMapsMapType mapType)
         {
             bool result = false;
 

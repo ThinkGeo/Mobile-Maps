@@ -8,6 +8,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Linq;
+using System.Threading.Tasks;
+using Android;
+using Android.Content.PM;
 
 namespace LabelingStyle
 {
@@ -19,11 +22,65 @@ namespace LabelingStyle
         private SliderView sampleListContainer;
         private Collection<BaseSample> samples;
 
+        readonly string[] StoragePermissions =
+        {
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage
+        };
+        const int RequestStorageId = 0;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.Main);
+
+            TryInitializeSampleAsync();
+        }
+
+        async Task TryInitializeSampleAsync()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                await InitializeSampleAsync();
+                return;
+            }
+
+            await GetStoragePermissionsAsync();
+        }
+
+        async Task GetStoragePermissionsAsync()
+        {
+            const string readPermission = Manifest.Permission.ReadExternalStorage;
+            const string writePermission = Manifest.Permission.WriteExternalStorage;
+
+            if (!(CheckSelfPermission(readPermission) == (int)Permission.Granted) || !(CheckSelfPermission(writePermission) == (int)Permission.Granted))
+            {
+                RequestPermissions(StoragePermissions, RequestStorageId);
+            }
+            else
+            {
+                InitializeSampleAsync();
+            }
+        }
+
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestStorageId:
+                    {
+                        if (grantResults[0] == Permission.Granted)
+                        {
+                            await InitializeSampleAsync();
+                        }
+                    }
+                    break;
+            }
+        }
+
+        async Task InitializeSampleAsync()
+        {
 
             sampleListContainer = FindViewById<SliderView>(Resource.Id.slider_view);
             sampleListView = FindViewById<ListView>(Resource.Id.sampleListView);
