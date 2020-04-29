@@ -105,6 +105,7 @@ public void ShowMap()
     ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
 
     androidMap.Overlays.Add("CloudRasterMapsOverlay", thinkGeoCloudMapsOverlay);
+<<<<<<< HEAD
 
     ShapeFileFeatureLayer countriesLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.ExternalStorageDirectory.ToString(), @"SampleData\Countries02.shp"));
     LayerOverlay overlay = new LayerOverlay();
@@ -112,12 +113,15 @@ public void ShowMap()
     overlay.Layers.Add(countriesLayer);
 
     androidMap.Overlays.Add("Countries02", overlay);
+=======
+>>>>>>> develop
 }
 ```
 
 Then, remove the `SetContentView` call and call this method from the `OnCreate` method in the MainActivity.cs file:
 
 ```csharp
+<<<<<<< HEAD
     // Remove this call from 'OnCreate'
     // SetContentView(Resource.Layout.activity_main);
 
@@ -125,6 +129,15 @@ Then, remove the `SetContentView` call and call this method from the `OnCreate` 
     ShowMap();
 ```
 
+=======
+// Remove this call from 'OnCreate'
+// SetContentView(Resource.Layout.activity_main);
+
+// Add this call to the 'OnCreate' method
+ShowMap();
+```
+
+>>>>>>> develop
 ### Step 6: Run the Sample & Register For Your Free Evaluation
 
 The first time you run the application, you will be presented with an error requiring a ThinkGeo license to proceed with running the app. In order to register and generate a license for this project, you'll need to perform the following steps:

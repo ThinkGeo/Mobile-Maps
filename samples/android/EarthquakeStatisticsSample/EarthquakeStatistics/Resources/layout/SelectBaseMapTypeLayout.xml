@@ -4,16 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-  <!--<GridView
-           android:id="@+id/gridview"
-           android:layout_width="fill_parent"
-           android:layout_height="fill_parent"
-           android:numColumns="4"
-           android:verticalSpacing="10dip"
-           android:horizontalSpacing="10dip"
-           android:stretchMode="columnWidth"
-           android:gravity="center"
-         />-->
   <RadioGroup
         android:minWidth="25px"
         android:minHeight="25px"
@@ -47,14 +37,6 @@
       android:drawableRight="@drawable/displaytype_bing_aerial"
       android:layout_marginRight="5dp"
       android:id="@+id/wmkAerialWithLabelsRadioButton" />
-
-    <RadioButton
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Open Street Map"
-        android:drawableRight="@drawable/displaytype_osm"
-        android:layout_marginRight="5dp"
-        android:id="@+id/osmRadioButton" />
 
     <RadioButton
         android:layout_width="fill_parent"

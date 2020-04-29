@@ -15,7 +15,7 @@ namespace LabelingStyle
 {
 	
 	
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -26,26 +26,18 @@ namespace LabelingStyle
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::LabelingStyle.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::LabelingStyle.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::LabelingStyle.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::LabelingStyle.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::LabelingStyle.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::LabelingStyle.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::LabelingStyle.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::LabelingStyle.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::LabelingStyle.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::LabelingStyle.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -64,8 +56,8 @@ namespace LabelingStyle
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int transparent = 2131034112;
+			// aapt resource value: 0x7F010000
+			public const int transparent = 2130771968;
 			
 			static Color()
 			{
@@ -80,94 +72,94 @@ namespace LabelingStyle
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
+			// aapt resource value: 0x7F020000
 			public const int baseSettingsDialogStyle = 2130837504;
 			
-			// aapt resource value: 0x7f020001
+			// aapt resource value: 0x7F020001
 			public const int @checked = 2130837505;
 			
-			// aapt resource value: 0x7f020002
+			// aapt resource value: 0x7F020002
 			public const int Compass = 2130837506;
 			
-			// aapt resource value: 0x7f020003
+			// aapt resource value: 0x7F020003
 			public const int CustomLabeling = 2130837507;
 			
-			// aapt resource value: 0x7f020004
+			// aapt resource value: 0x7F020004
 			public const int CustomLabelingIcon = 2130837508;
 			
-			// aapt resource value: 0x7f020005
+			// aapt resource value: 0x7F020005
 			public const int detail40 = 2130837509;
 			
-			// aapt resource value: 0x7f020006
+			// aapt resource value: 0x7F020006
 			public const int Icon = 2130837510;
 			
-			// aapt resource value: 0x7f020007
+			// aapt resource value: 0x7F020007
 			public const int icon_mapsuite_default256x256 = 2130837511;
 			
-			// aapt resource value: 0x7f020008
+			// aapt resource value: 0x7F020008
 			public const int icon_mapsuite_default512x512 = 2130837512;
 			
-			// aapt resource value: 0x7f020009
+			// aapt resource value: 0x7F020009
 			public const int icon_mapsuite_globe = 2130837513;
 			
-			// aapt resource value: 0x7f02000a
+			// aapt resource value: 0x7F02000A
 			public const int icon_mapsuite_globe_Pressed = 2130837514;
 			
-			// aapt resource value: 0x7f02000b
+			// aapt resource value: 0x7F02000B
 			public const int icon_mapsuite_Minus = 2130837515;
 			
-			// aapt resource value: 0x7f02000c
+			// aapt resource value: 0x7F02000C
 			public const int icon_mapsuite_Minus_Pressed = 2130837516;
 			
-			// aapt resource value: 0x7f02000d
+			// aapt resource value: 0x7F02000D
 			public const int icon_mapsuite_noImageTile = 2130837517;
 			
-			// aapt resource value: 0x7f02000e
+			// aapt resource value: 0x7F02000E
 			public const int icon_mapsuite_Plus = 2130837518;
 			
-			// aapt resource value: 0x7f02000f
+			// aapt resource value: 0x7F02000F
 			public const int icon_mapsuite_Plus_Pressed = 2130837519;
 			
-			// aapt resource value: 0x7f020010
+			// aapt resource value: 0x7F020010
 			public const int LabelingLinesIcon = 2130837520;
 			
-			// aapt resource value: 0x7f020011
+			// aapt resource value: 0x7F020011
 			public const int LabelingPoints = 2130837521;
 			
-			// aapt resource value: 0x7f020012
+			// aapt resource value: 0x7F020012
 			public const int LabelingPointsIcon = 2130837522;
 			
-			// aapt resource value: 0x7f020013
+			// aapt resource value: 0x7F020013
 			public const int LabelingPolygons = 2130837523;
 			
-			// aapt resource value: 0x7f020014
+			// aapt resource value: 0x7F020014
 			public const int LabelingPolygonsIcon = 2130837524;
 			
-			// aapt resource value: 0x7f020015
+			// aapt resource value: 0x7F020015
 			public const int LabelStyling = 2130837525;
 			
-			// aapt resource value: 0x7f020016
+			// aapt resource value: 0x7F020016
 			public const int LabelStylingIcon = 2130837526;
 			
-			// aapt resource value: 0x7f020017
+			// aapt resource value: 0x7F020017
 			public const int MapSuite = 2130837527;
 			
-			// aapt resource value: 0x7f020018
+			// aapt resource value: 0x7F020018
 			public const int more40 = 2130837528;
 			
-			// aapt resource value: 0x7f020019
+			// aapt resource value: 0x7F020019
 			public const int settings40 = 2130837529;
 			
-			// aapt resource value: 0x7f02001a
+			// aapt resource value: 0x7F02001A
 			public const int SettingsDialogBackground = 2130837530;
 			
-			// aapt resource value: 0x7f02001b
+			// aapt resource value: 0x7F02001B
 			public const int SliderLineBackground = 2130837531;
 			
-			// aapt resource value: 0x7f02001c
+			// aapt resource value: 0x7F02001C
 			public const int @unchecked = 2130837532;
 			
-			// aapt resource value: 0x7f02001d
+			// aapt resource value: 0x7F02001D
 			public const int valuestyle = 2130837533;
 			
 			static Drawable()
@@ -183,101 +175,101 @@ namespace LabelingStyle
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06001d
-			public const int CancelButton = 2131099677;
+			// aapt resource value: 0x7F030000
+			public const int CancelButton = 2130903040;
 			
-			// aapt resource value: 0x7f06000f
-			public const int DuplicateRuleSpinner = 2131099663;
+			// aapt resource value: 0x7F030011
+			public const int drawingMarginsText = 2130903057;
 			
-			// aapt resource value: 0x7f06000e
-			public const int GridSizeSpinner = 2131099662;
+			// aapt resource value: 0x7F030001
+			public const int DuplicateRuleSpinner = 2130903041;
 			
-			// aapt resource value: 0x7f060016
-			public const int LabelStylingLayout = 2131099670;
+			// aapt resource value: 0x7F030002
+			public const int GridSizeSpinner = 2130903042;
 			
-			// aapt resource value: 0x7f06001a
-			public const int MapContainerView = 2131099674;
+			// aapt resource value: 0x7F030003
+			public const int LabelStylingLayout = 2130903043;
 			
-			// aapt resource value: 0x7f06000c
-			public const int MaskCheckBox = 2131099660;
+			// aapt resource value: 0x7F030013
+			public const int linearLayout1 = 2130903059;
 			
-			// aapt resource value: 0x7f060003
-			public const int MaxFontSizeEditText = 2131099651;
+			// aapt resource value: 0x7F030012
+			public const int lineSegmentRatioEditText = 2130903058;
 			
-			// aapt resource value: 0x7f060002
-			public const int MinFontSizeEditText = 2131099650;
+			// aapt resource value: 0x7F030014
+			public const int mainLayout = 2130903060;
 			
-			// aapt resource value: 0x7f06001c
-			public const int OkButton = 2131099676;
+			// aapt resource value: 0x7F030015
+			public const int mainLinearLayout = 2130903061;
 			
-			// aapt resource value: 0x7f060009
-			public const int OnlyWithinCheckBox = 2131099657;
+			// aapt resource value: 0x7F030004
+			public const int MapContainerView = 2130903044;
 			
-			// aapt resource value: 0x7f06000b
-			public const int OutlineColorCheckBox = 2131099659;
+			// aapt resource value: 0x7F030005
+			public const int MaskCheckBox = 2130903045;
 			
-			// aapt resource value: 0x7f06000d
-			public const int OverlappingCheckBox = 2131099661;
+			// aapt resource value: 0x7F030006
+			public const int MaxFontSizeEditText = 2130903046;
 			
-			// aapt resource value: 0x7f060006
-			public const int PointPlacementSpinner = 2131099654;
+			// aapt resource value: 0x7F030007
+			public const int MinFontSizeEditText = 2130903047;
 			
-			// aapt resource value: 0x7f06000a
-			public const int PolygonPartsCheckBox = 2131099658;
+			// aapt resource value: 0x7F030008
+			public const int OkButton = 2130903048;
 			
-			// aapt resource value: 0x7f060017
-			public const int SampleListButton = 2131099671;
+			// aapt resource value: 0x7F030009
+			public const int OnlyWithinCheckBox = 2130903049;
 			
-			// aapt resource value: 0x7f060019
-			public const int SettingsButton = 2131099673;
+			// aapt resource value: 0x7F03000A
+			public const int OutlineColorCheckBox = 2130903050;
 			
-			// aapt resource value: 0x7f060018
-			public const int TitleTextView = 2131099672;
+			// aapt resource value: 0x7F03000B
+			public const int OverlappingCheckBox = 2130903051;
 			
-			// aapt resource value: 0x7f060010
-			public const int drawingMarginsText = 2131099664;
+			// aapt resource value: 0x7F03000C
+			public const int PointPlacementSpinner = 2130903052;
 			
-			// aapt resource value: 0x7f060005
-			public const int lineSegmentRatioEditText = 2131099653;
+			// aapt resource value: 0x7F03000D
+			public const int PolygonPartsCheckBox = 2130903053;
 			
-			// aapt resource value: 0x7f060000
-			public const int linearLayout1 = 2131099648;
+			// aapt resource value: 0x7F03000E
+			public const int SampleListButton = 2130903054;
 			
-			// aapt resource value: 0x7f06001b
-			public const int mainLayout = 2131099675;
+			// aapt resource value: 0x7F030016
+			public const int sampleListMoreButton = 2130903062;
 			
-			// aapt resource value: 0x7f060015
-			public const int mainLinearLayout = 2131099669;
+			// aapt resource value: 0x7F030017
+			public const int sampleListTitle = 2130903063;
 			
-			// aapt resource value: 0x7f060014
-			public const int sampleListMoreButton = 2131099668;
+			// aapt resource value: 0x7F030018
+			public const int sampleListView = 2130903064;
 			
-			// aapt resource value: 0x7f060012
-			public const int sampleListTitle = 2131099666;
+			// aapt resource value: 0x7F03000F
+			public const int SettingsButton = 2130903055;
 			
-			// aapt resource value: 0x7f060013
-			public const int sampleListView = 2131099667;
+			// aapt resource value: 0x7F030019
+			public const int slider_view = 2130903065;
 			
-			// aapt resource value: 0x7f060011
-			public const int slider_view = 2131099665;
+			// aapt resource value: 0x7F03001A
+			public const int splineTypeSpinner = 2130903066;
 			
-			// aapt resource value: 0x7f060004
-			public const int splineTypeSpinner = 2131099652;
+			// aapt resource value: 0x7F03001B
+			public const int textView1 = 2130903067;
 			
-			// aapt resource value: 0x7f060001
-			public const int textView1 = 2131099649;
+			// aapt resource value: 0x7F030010
+			public const int TitleTextView = 2130903056;
 			
-			// aapt resource value: 0x7f06001f
-			public const int uploadDataTextView = 2131099679;
+			// aapt resource value: 0x7F03001C
+			public const int uploadDataTextView = 2130903068;
 			
-			// aapt resource value: 0x7f06001e
-			public const int uploadProgressBar = 2131099678;
+			// aapt resource value: 0x7F03001D
+			public const int uploadProgressBar = 2130903069;
 			
-			// aapt resource value: 0x7f060007
-			public const int xOffsetEditText = 2131099655;
+			// aapt resource value: 0x7F03001E
+			public const int xOffsetEditText = 2130903070;
 			
-			// aapt resource value: 0x7f060008
-			public const int yOffsetEditText = 2131099656;
+			// aapt resource value: 0x7F03001F
+			public const int yOffsetEditText = 2130903071;
 			
 			static Id()
 			{
@@ -292,41 +284,41 @@ namespace LabelingStyle
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int ButtonBackgroundSelector = 2130903040;
+			// aapt resource value: 0x7F040000
+			public const int ButtonBackgroundSelector = 2130968576;
 			
-			// aapt resource value: 0x7f030001
-			public const int CustomLabelingSettingsLayout = 2130903041;
+			// aapt resource value: 0x7F040001
+			public const int CustomLabelingSettingsLayout = 2130968577;
 			
-			// aapt resource value: 0x7f030002
-			public const int LabelingLinesSettingsLayout = 2130903042;
+			// aapt resource value: 0x7F040002
+			public const int LabelingLinesSettingsLayout = 2130968578;
 			
-			// aapt resource value: 0x7f030003
-			public const int LabelingPointsSettingsLayout = 2130903043;
+			// aapt resource value: 0x7F040003
+			public const int LabelingPointsSettingsLayout = 2130968579;
 			
-			// aapt resource value: 0x7f030004
-			public const int LabelingPolygonsSettingsLayout = 2130903044;
+			// aapt resource value: 0x7F040004
+			public const int LabelingPolygonsSettingsLayout = 2130968580;
 			
-			// aapt resource value: 0x7f030005
-			public const int LabelStylingSettingsLayout = 2130903045;
+			// aapt resource value: 0x7F040005
+			public const int LabelStylingSettingsLayout = 2130968581;
 			
-			// aapt resource value: 0x7f030006
-			public const int Main = 2130903046;
+			// aapt resource value: 0x7F040006
+			public const int Main = 2130968582;
 			
-			// aapt resource value: 0x7f030007
-			public const int SampleBaseLayout = 2130903047;
+			// aapt resource value: 0x7F040007
+			public const int SampleBaseLayout = 2130968583;
 			
-			// aapt resource value: 0x7f030008
-			public const int SampleCheckBoxSelector = 2130903048;
+			// aapt resource value: 0x7F040008
+			public const int SampleCheckBoxSelector = 2130968584;
 			
-			// aapt resource value: 0x7f030009
-			public const int SampleSpinnerCheckedText = 2130903049;
+			// aapt resource value: 0x7F040009
+			public const int SampleSpinnerCheckedText = 2130968585;
 			
-			// aapt resource value: 0x7f03000a
-			public const int SettingsDialogBaseLayout = 2130903050;
+			// aapt resource value: 0x7F04000A
+			public const int SettingsDialogBaseLayout = 2130968586;
 			
-			// aapt resource value: 0x7f03000b
-			public const int SplashLayout = 2130903051;
+			// aapt resource value: 0x7F04000B
+			public const int SplashLayout = 2130968587;
 			
 			static Layout()
 			{
@@ -341,11 +333,17 @@ namespace LabelingStyle
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7F050000
+			public const int ApplicationName = 2131034112;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7F050002
+			public const int app_name = 2131034114;
+			
+			// aapt resource value: 0x7F050001
+			public const int Hello = 2131034113;
+			
+			// aapt resource value: 0x7F050003
+			public const int hello = 2131034115;
 			
 			static String()
 			{

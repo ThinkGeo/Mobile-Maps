@@ -4,9 +4,7 @@ using Android.Graphics;
 using Android.Text;
 using Android.Util;
 using Android.Views;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -98,7 +96,8 @@ namespace AnalyzingVisualization
 
         private static Color GetColor(ClassBreak classBreak)
         {
-            GeoColor color = classBreak.DefaultAreaStyle.FillSolidBrush.Color;
+            GeoSolidBrush brush = (GeoSolidBrush)classBreak.DefaultAreaStyle.FillBrush;
+            GeoColor color = brush.Color;
             return new Color(color.RedComponent, color.GreenComponent, color.BlueComponent, color.AlphaComponent);
         }
 
