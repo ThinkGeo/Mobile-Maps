@@ -1,8 +1,6 @@
 using Android.Content;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -18,7 +16,7 @@ namespace AnalyzingVisualization
 
             EarthquakeIsoLineFeatureLayer usEarthquakeIsoLayer = new EarthquakeIsoLineFeatureLayer(new ShapeFileFeatureSource(SampleHelper.GetDataPath("usEarthquake_Simplified.shp")));
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileSizeMode = TileSizeMode.DefaultX2;
+            layerOverlay.TileSizeMode = ThinkGeo.UI.Android.TileSizeMode.DefaultX2;
             layerOverlay.Layers.Add(usEarthquakeIsoLayer);
             MapView.Overlays.Add(layerOverlay);
         }

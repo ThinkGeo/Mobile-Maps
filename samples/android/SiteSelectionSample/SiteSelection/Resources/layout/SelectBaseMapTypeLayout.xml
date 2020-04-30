@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -47,14 +47,6 @@
       android:drawableRight="@drawable/displaytype_bing_aerial"
       android:layout_marginRight="5dp"
       android:id="@+id/wmkAerialWithLabelsRadioButton" />
-
-    <RadioButton
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Open Street Map"
-        android:drawableRight="@drawable/displaytype_osm"
-        android:layout_marginRight="5dp"
-        android:id="@+id/osmRadioButton" />
 
     <RadioButton
         android:layout_width="fill_parent"

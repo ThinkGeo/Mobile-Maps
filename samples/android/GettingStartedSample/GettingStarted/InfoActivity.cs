@@ -16,7 +16,7 @@ namespace GettingStartedSample
             SetContentView(Resource.Layout.WebView);
 
             WebView webView = FindViewById<WebView>(Resource.Id.localWebView);
-            webView.LoadUrl("http://thinkgeo.com/map-suite-developer-gis/android-edition/");
+            webView.LoadUrl("https://wiki.thinkgeo.com/wiki/map_suite_mobile_for_android");
         }
     }
 }

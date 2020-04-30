@@ -8,7 +8,8 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
-using ThinkGeo.MapSuite.Android;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteSiteSelection
 {
@@ -42,7 +43,7 @@ namespace MapSuiteSiteSelection
 
             Task.Factory.StartNew(() =>
             {
-                bool isValid = Validate(bingMapsKeyEditText.Text, ThinkGeo.MapSuite.Android.BingMapsMapType.Aerial);
+                bool isValid = Validate(bingMapsKeyEditText.Text, BingMapsMapType.Aerial);
                 SampleMapView.Current.Post(() =>
                 {
                     if (isValid)
@@ -77,7 +78,7 @@ namespace MapSuiteSiteSelection
             Cancel();
         }
 
-        private bool Validate(string bingMapsKey, ThinkGeo.MapSuite.Android.BingMapsMapType mapType)
+        private bool Validate(string bingMapsKey, BingMapsMapType mapType)
         {
             bool result = false;
 

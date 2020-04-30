@@ -5,7 +5,7 @@ namespace MapSuiteSiteSelection
     internal class SampleHelper
     {
         public readonly static string AssetsDataDictionary = @"SampleData";
-        public readonly static string SampleDataDictionary = @"mnt/sdcard/MapSuiteSampleData/SiteSelection/";
+        public readonly static string SampleDataDictionary = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData).ToString() + @"MapSuiteSampleData/SiteSelection/";
 
         public static string GetDataPath(params string[] fileNames)
         {

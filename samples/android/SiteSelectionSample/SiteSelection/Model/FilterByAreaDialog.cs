@@ -2,7 +2,8 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteSiteSelection
 {

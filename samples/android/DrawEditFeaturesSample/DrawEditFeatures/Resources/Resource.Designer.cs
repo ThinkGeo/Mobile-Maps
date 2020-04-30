@@ -15,7 +15,7 @@ namespace DrawEditFeatures
 {
 	
 	
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -26,26 +26,18 @@ namespace DrawEditFeatures
 		
 		public static void UpdateIdValues()
 		{
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.Compass = global::DrawEditFeatures.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.Compass = global::DrawEditFeatures.Resource.Drawable.Compass;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default256x256 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default256x256;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_default512x512 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default512x512;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_globe_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus_Pressed;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_noImageTile = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_noImageTile;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus;
-			global::ThinkGeo.MapSuite.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.Compass = global::DrawEditFeatures.Resource.Drawable.Compass;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default256x256 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default256x256;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_default512x512 = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_default512x512;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_globe_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_globe_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Minus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Minus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_noImageTile = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_noImageTile;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus;
+			global::ThinkGeo.UI.Android.Resource.Drawable.icon_mapsuite_Plus_Pressed = global::DrawEditFeatures.Resource.Drawable.icon_mapsuite_Plus_Pressed;
+			global::ThinkGeo.UI.Android.Resource.String.app_name = global::DrawEditFeatures.Resource.String.app_name;
+			global::ThinkGeo.UI.Android.Resource.String.hello = global::DrawEditFeatures.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -64,74 +56,74 @@ namespace DrawEditFeatures
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int buttonbackground = 2130837504;
+			// aapt resource value: 0x7F010000
+			public const int buttonbackground = 2130771968;
 			
-			// aapt resource value: 0x7f020001
-			public const int buttonselectedbackground = 2130837505;
+			// aapt resource value: 0x7F010001
+			public const int buttonselectedbackground = 2130771969;
 			
-			// aapt resource value: 0x7f020002
-			public const int Circle = 2130837506;
+			// aapt resource value: 0x7F010002
+			public const int Circle = 2130771970;
 			
-			// aapt resource value: 0x7f020003
-			public const int Clear = 2130837507;
+			// aapt resource value: 0x7F010003
+			public const int Clear = 2130771971;
 			
-			// aapt resource value: 0x7f020004
-			public const int Compass = 2130837508;
+			// aapt resource value: 0x7F010004
+			public const int Compass = 2130771972;
 			
-			// aapt resource value: 0x7f020005
-			public const int Cursor = 2130837509;
+			// aapt resource value: 0x7F010005
+			public const int Cursor = 2130771973;
 			
-			// aapt resource value: 0x7f020006
-			public const int Draw = 2130837510;
+			// aapt resource value: 0x7F010006
+			public const int Draw = 2130771974;
 			
-			// aapt resource value: 0x7f020007
-			public const int Edit = 2130837511;
+			// aapt resource value: 0x7F010007
+			public const int Edit = 2130771975;
 			
-			// aapt resource value: 0x7f020008
-			public const int Ellipse = 2130837512;
+			// aapt resource value: 0x7F010008
+			public const int Ellipse = 2130771976;
 			
-			// aapt resource value: 0x7f020009
-			public const int Icon = 2130837513;
+			// aapt resource value: 0x7F010009
+			public const int Icon = 2130771977;
 			
-			// aapt resource value: 0x7f02000a
-			public const int icon_mapsuite_default256x256 = 2130837514;
+			// aapt resource value: 0x7F01000A
+			public const int icon_mapsuite_default256x256 = 2130771978;
 			
-			// aapt resource value: 0x7f02000b
-			public const int icon_mapsuite_default512x512 = 2130837515;
+			// aapt resource value: 0x7F01000B
+			public const int icon_mapsuite_default512x512 = 2130771979;
 			
-			// aapt resource value: 0x7f02000c
-			public const int icon_mapsuite_globe = 2130837516;
+			// aapt resource value: 0x7F01000C
+			public const int icon_mapsuite_globe = 2130771980;
 			
-			// aapt resource value: 0x7f02000d
-			public const int icon_mapsuite_globe_Pressed = 2130837517;
+			// aapt resource value: 0x7F01000D
+			public const int icon_mapsuite_globe_Pressed = 2130771981;
 			
-			// aapt resource value: 0x7f02000e
-			public const int icon_mapsuite_Minus = 2130837518;
+			// aapt resource value: 0x7F01000E
+			public const int icon_mapsuite_Minus = 2130771982;
 			
-			// aapt resource value: 0x7f02000f
-			public const int icon_mapsuite_Minus_Pressed = 2130837519;
+			// aapt resource value: 0x7F01000F
+			public const int icon_mapsuite_Minus_Pressed = 2130771983;
 			
-			// aapt resource value: 0x7f020010
-			public const int icon_mapsuite_noImageTile = 2130837520;
+			// aapt resource value: 0x7F010010
+			public const int icon_mapsuite_noImageTile = 2130771984;
 			
-			// aapt resource value: 0x7f020011
-			public const int icon_mapsuite_Plus = 2130837521;
+			// aapt resource value: 0x7F010011
+			public const int icon_mapsuite_Plus = 2130771985;
 			
-			// aapt resource value: 0x7f020012
-			public const int icon_mapsuite_Plus_Pressed = 2130837522;
+			// aapt resource value: 0x7F010012
+			public const int icon_mapsuite_Plus_Pressed = 2130771986;
 			
-			// aapt resource value: 0x7f020013
-			public const int Line = 2130837523;
+			// aapt resource value: 0x7F010013
+			public const int Line = 2130771987;
 			
-			// aapt resource value: 0x7f020014
-			public const int Point = 2130837524;
+			// aapt resource value: 0x7F010014
+			public const int Point = 2130771988;
 			
-			// aapt resource value: 0x7f020015
-			public const int Polygon = 2130837525;
+			// aapt resource value: 0x7F010015
+			public const int Polygon = 2130771989;
 			
-			// aapt resource value: 0x7f020016
-			public const int Rectangle = 2130837526;
+			// aapt resource value: 0x7F010016
+			public const int Rectangle = 2130771990;
 			
 			static Drawable()
 			{
@@ -146,29 +138,29 @@ namespace DrawEditFeatures
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050006
-			public const int MainLayout = 2131034118;
+			// aapt resource value: 0x7F020001
+			public const int androidmap = 2130837505;
 			
-			// aapt resource value: 0x7f050007
-			public const int androidmap = 2131034119;
+			// aapt resource value: 0x7F020002
+			public const int contentLinearLayout = 2130837506;
 			
-			// aapt resource value: 0x7f050004
-			public const int contentLinearLayout = 2131034116;
+			// aapt resource value: 0x7F020003
+			public const int contentRelativeLayout = 2130837507;
 			
-			// aapt resource value: 0x7f050003
-			public const int contentRelativeLayout = 2131034115;
+			// aapt resource value: 0x7F020004
+			public const int descriptionTextView = 2130837508;
 			
-			// aapt resource value: 0x7f050005
-			public const int descriptionTextView = 2131034117;
+			// aapt resource value: 0x7F020005
+			public const int headerRelativeLayout = 2130837509;
 			
-			// aapt resource value: 0x7f050001
-			public const int headerRelativeLayout = 2131034113;
+			// aapt resource value: 0x7F020006
+			public const int instructionLinearLayout = 2130837510;
 			
-			// aapt resource value: 0x7f050000
-			public const int instructionLinearLayout = 2131034112;
+			// aapt resource value: 0x7F020007
+			public const int instructionTextView = 2130837511;
 			
-			// aapt resource value: 0x7f050002
-			public const int instructionTextView = 2131034114;
+			// aapt resource value: 0x7F020000
+			public const int MainLayout = 2130837504;
 			
 			static Id()
 			{
@@ -183,10 +175,10 @@ namespace DrawEditFeatures
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
+			// aapt resource value: 0x7F030000
 			public const int Instruction = 2130903040;
 			
-			// aapt resource value: 0x7f030001
+			// aapt resource value: 0x7F030001
 			public const int Main = 2130903041;
 			
 			static Layout()
@@ -202,11 +194,17 @@ namespace DrawEditFeatures
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7F040000
+			public const int ApplicationName = 2130968576;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7F040002
+			public const int app_name = 2130968578;
+			
+			// aapt resource value: 0x7F040001
+			public const int Hello = 2130968577;
+			
+			// aapt resource value: 0x7F040003
+			public const int hello = 2130968579;
 			
 			static String()
 			{
