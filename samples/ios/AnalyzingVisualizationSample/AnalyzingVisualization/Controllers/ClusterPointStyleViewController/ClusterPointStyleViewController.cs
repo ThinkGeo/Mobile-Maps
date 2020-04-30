@@ -32,6 +32,9 @@ namespace AnalyzingVisualization
 
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileType = TileType.SingleTile;
+            layerOverlay.TileSnappingMode = ThinkGeo.UI.iOS.TileSnappingMode.NoSnapping;
+            layerOverlay.TransitionEffect = TransitionEffect.None;
+
 
             layerOverlay.Layers.Add(usEarthquakeLayer);
             MapView.Overlays.Add(layerOverlay);

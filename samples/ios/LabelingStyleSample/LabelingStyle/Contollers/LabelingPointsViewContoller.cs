@@ -47,6 +47,7 @@ namespace LabelingStyle
             poiLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingPointsOverlay = new LayerOverlay();
+            labelingPointsOverlay.TransitionEffect = TransitionEffect.None;
             labelingPointsOverlay.Layers.Add("poi", poiLayer);
             MapView.Overlays.Add("LabelingPoints", labelingPointsOverlay);
 

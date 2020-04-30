@@ -40,7 +40,6 @@ namespace DrawEditFeatures
         {
             base.ViewDidLoad();
             View.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
-            uiButtons = new List<UIButton>() { lineButton, pointButton, editButton, clearButton, circleButton, cursorButton, polygonButton, ellipseButton, rectangleButton };
 
             mapView = new MapView(View.Frame)
             {
@@ -52,9 +51,13 @@ namespace DrawEditFeatures
             string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
             string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             mapView.Overlays.Add("WMK", thinkGeoCloudMapsOverlay);
             View.AddSubview(mapView);
             InitializeInstruction();
+            uiButtons = new List<UIButton>() { lineButton, pointButton, editButton, clearButton, circleButton, cursorButton, polygonButton, ellipseButton, rectangleButton };
 
             mapView.Refresh();
         }
@@ -200,7 +203,8 @@ namespace DrawEditFeatures
                     mapView.TrackOverlay.TrackMode = TrackMode.None;
                     mapView.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
                     mapView.EditOverlay.ClearAllControlPoints();
-                    mapView.Refresh();
+                    mapView.EditOverlay.Refresh();
+                    mapView.TrackOverlay.Refresh();
                     break;
                 case "recycle":
                     mapView.EditOverlay.ClearAllControlPoints();
@@ -208,7 +212,8 @@ namespace DrawEditFeatures
                     mapView.EditOverlay.EditShapesLayer.Clear();
                     mapView.TrackOverlay.TrackShapeLayer.Open();
                     mapView.TrackOverlay.TrackShapeLayer.Clear();
-                    mapView.Refresh();
+                    mapView.EditOverlay.Refresh();
+                    mapView.TrackOverlay.Refresh();
                     break;
                 case "point":
                     mapView.TrackOverlay.TrackMode = TrackMode.Point;
@@ -236,7 +241,8 @@ namespace DrawEditFeatures
                     }
                     mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
                     mapView.EditOverlay.CalculateAllControlPoints();
-                    mapView.Refresh();
+                    mapView.EditOverlay.Refresh();
+                    mapView.TrackOverlay.Refresh();
                     break;
                 case "pen":
                     UIView.Animate(.3, () =>

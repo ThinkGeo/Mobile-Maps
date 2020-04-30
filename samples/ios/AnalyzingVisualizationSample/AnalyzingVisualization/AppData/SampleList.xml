@@ -11,9 +11,6 @@
   <Sample Name="Dot Density Style" Class="DotDensityStyleViewContoller"  Image="dot-densty-style">
     <Description></Description>
   </Sample>
-  <Sample Name="Heat Style" Class="HeatStyleViewContoller"  Image="heat-style">
-    <Description></Description>
-  </Sample>
   <Sample Name="Icon Style" Class="IconStyleViewController"  Image="icon-style">
     <Description></Description>
   </Sample>

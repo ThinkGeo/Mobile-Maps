@@ -57,6 +57,7 @@ namespace LabelingStyle
             restaurantsLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingStyleOverlay = new LayerOverlay();
+            labelingStyleOverlay.TransitionEffect = TransitionEffect.None;
             labelingStyleOverlay.Layers.Add("parcel", parcelLayer);
             labelingStyleOverlay.Layers.Add("street", streetLayer);
             labelingStyleOverlay.Layers.Add("poi", restaurantsLayer);

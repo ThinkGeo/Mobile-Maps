@@ -45,6 +45,7 @@ namespace LabelingStyle
             customLabelingStyleLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay customLabelingOverlay = new LayerOverlay();
+            customLabelingOverlay.TransitionEffect = TransitionEffect.None;
             customLabelingOverlay.Layers.Add("customLabeling", customLabelingStyleLayer);
             MapView.Overlays.Add("CustomLabeling", customLabelingOverlay);
 

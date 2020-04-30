@@ -30,7 +30,7 @@ namespace AnalyzingVisualization
 
             ShapeFileFeatureLayer usLayer = new ShapeFileFeatureLayer("AppData/usStatesCensus2010.shp");
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileType = TileType.SingleTile;
+       //     layerOverlay.TileType = TileType.SingleTile;
            
             layerOverlay.Layers.Add(usLayer);
             MapView.Overlays.Add(layerOverlay);

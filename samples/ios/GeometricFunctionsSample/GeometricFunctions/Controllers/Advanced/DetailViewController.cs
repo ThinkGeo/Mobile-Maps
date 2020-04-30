@@ -68,7 +68,6 @@ namespace GeometricFunctions
             MapView.MapUnit = GeographyUnit.Meter;
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             MapView.BackgroundColor = UIColor.FromRGB(244, 242, 238);
-            MapView.MapTools.ZoomMapTool.Center = new CGPoint(MapView.MapTools.ZoomMapTool.Center.X + 10, MapView.MapTools.ZoomMapTool.Center.Y + 55);
 
             InitializeToolbar();
             LoadBackgroundLayer();

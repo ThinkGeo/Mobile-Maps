@@ -47,7 +47,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
     <MtouchSdkVersion>13.4</MtouchSdkVersion>
-    <MtouchProfiling>False</MtouchProfiling>
+    <MtouchProfiling>true</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
     <MtouchArch>x86_64</MtouchArch>
@@ -197,6 +197,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.Core.13.0.0-beta083\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.UI.iOS.13.0.0-beta022\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
@@ -378,24 +384,12 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\ThinkGeoSDKs\ThinkGeo.Core\Core\ThinkGeo.Core.csproj">
-      <Project>{64f3cef4-56bd-46e0-a316-3e83b22bb628}</Project>
-      <Name>ThinkGeo.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\ThinkGeoSDKs\ThinkGeo.UI\iOS\iOSSDK\ThinkGeo.UI.iOS.csproj">
-      <Project>{193b58cc-32f2-4023-b3cd-a21de830326c}</Project>
-      <Name>ThinkGeo.UI.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
 </Project>

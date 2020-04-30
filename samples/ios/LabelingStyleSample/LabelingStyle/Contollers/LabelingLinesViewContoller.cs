@@ -25,6 +25,7 @@ namespace LabelingStyle
             streetLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingLinesOverlay = new LayerOverlay();
+            labelingLinesOverlay.TransitionEffect = TransitionEffect.None;
             labelingLinesOverlay.Layers.Add("street", streetLayer);
             MapView.Overlays.Add("LabelingLine", labelingLinesOverlay);
 

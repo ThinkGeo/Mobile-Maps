@@ -31,6 +31,7 @@ namespace LabelingStyle
             subdivisionsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             LayerOverlay labelingPolygonsOverlay = new LayerOverlay();
+            labelingPolygonsOverlay.TransitionEffect = TransitionEffect.None;
             labelingPolygonsOverlay.Layers.Add("subdivision", subdivisionsLayer);
             MapView.Overlays.Add("LabelingPolygons", labelingPolygonsOverlay);
 
