@@ -186,11 +186,11 @@ dotnet add package ThinkGeo.UI.Android
 
 ### Step 4: Set up the App Template and add the MapView element
 
-Open up the main app layout file. In Visual Studio, this should be under the path `Resources\layout\activity_main.axml`. Change the default `RelativeLayout` to a `FrameLayout` and add the `ThinkGeo.UI.Android.MapView` element
+Open up the main app layout file. In Visual Studio, this should be under the path `Resources\layout\activity_main.axml`, and add the `ThinkGeo.UI.Android.MapView` element
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -199,7 +199,7 @@ Open up the main app layout file. In Visual Studio, this should be under the pat
         android:id="@+id/androidMap"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
-</FrameLayout>
+</RelativeLayout>
 ```
 
 ### Step 5: Add Namespaces to MainActivity.cs
@@ -208,7 +208,7 @@ Add the required usings to the MainActivity.cs file:
 
 ```csharp
 using ThinkGeo.Core;
-using ThinkGeo.Android.UI
+using ThinkGeo.UI.Android;
 ```
 
 ### Step 6: Add the Map Background Overlay
