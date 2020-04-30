@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <DisableExtraReferences>true</DisableExtraReferences>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -32,6 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,15 +46,13 @@
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <MtouchSdkVersion>13.4</MtouchSdkVersion>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
-    <MtouchUseSGen>False</MtouchUseSGen>
-    <MtouchUseRefCounting>False</MtouchUseRefCounting>
     <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
     <MtouchI18n />
     <OptimizePNGs>false</OptimizePNGs>
@@ -89,16 +89,13 @@
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>False</MtouchEnableGenericValueTypeSharing>
-    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
-    <MtouchUseSGen>False</MtouchUseSGen>
-    <MtouchUseRefCounting>False</MtouchUseRefCounting>
     <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
     <MtouchI18n />
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
@@ -115,18 +112,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Distribution</CodesignKey>
-    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchFloat32>true</MtouchFloat32>
     <OptimizePNGs>true</OptimizePNGs>
-    <CodesignProvision>ThinkGeo App Distribution Profile</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>ThinkGeo_Location</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -135,60 +134,56 @@
     <Compile Include="MainFormViewController.designer.cs">
       <DependentUpon>MainFormViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\InstructionView.cs" />
-    <Compile Include="Model\TableViewRowClickEventArgs.cs" />
-    <Compile Include="Model\TableView\CellModel.cs" />
-    <Compile Include="Model\TableView\SectionModel.cs" />
-    <Compile Include="Model\TableView\TableViewSource.cs" />
-    <Compile Include="Shared\IOSCapabilityHelper.cs" />
     <None Include="app.config" />
+    <BundleResource Include="com.thinkgeo.gettingstarted.mapsuitelicense" />
     <None Include="Info.plist" />
-    <Compile Include="Model\CurrentLocationPopup.cs" />
-    <Compile Include="Model\ScaleZoomLevelMapTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <InterfaceDefinition Include="MainForm.storyboard" />
     <None Include="packages.config" />
-    <InterfaceDefinition Include="Splash.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678">
-      <HintPath>..\packages\MapSuiteDependency-GeoAPI.10.6.0\lib\xamarinios10\GeoAPI.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
     </Reference>
-    <Reference Include="GeoAPI.Bootstrapper.NetTopologySuite, Version=1.14.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1">
-      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\GeoAPI.Bootstrapper.NetTopologySuite.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.Sqlite, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.3.1.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="NetTopologySuite, Version=1.14.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1">
-      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\NetTopologySuite.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\MapSuiteDependency-NewtonsoftJson.10.6.0\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
     </Reference>
-    <Reference Include="PowerCollections, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2573bf8a1bdddcd5">
-      <HintPath>..\packages\MapSuiteDependency-NetTopologySuite.10.6.0\lib\xamarinios10\PowerCollections.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <HintPath>..\packages\MapSuiteDependency-SkiaSharp.10.6.0\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SQLitePCLRaw.core, Version=2.0.2.669, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3.ios, Version=2.0.2.669, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.ios.2.0.2\lib\xamarinios10\SQLitePCLRaw.lib.e_sqlite3.ios.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.internal, Version=2.0.2.669, Culture=neutral, PublicKeyToken=89ae75803b2c608d, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.internal.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.internal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Core" />
-    <Reference Include="ThinkGeo.Cloud.Client, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
-      <HintPath>..\packages\ThinkGeo.Cloud.Client.10.6.0\lib\xamarinios10\ThinkGeo.Cloud.Client.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.Core.13.0.0-beta083\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ThinkGeo.MapSuite, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
-      <HintPath>..\packages\ThinkGeo.MapSuite.10.6.7\lib\xamarinios10\ThinkGeo.MapSuite.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ThinkGeo.MapSuite.iOS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207">
-      <HintPath>..\packages\MapSuiteMobileForiOS-BareBone.10.6.5\lib\xamarinios10\ThinkGeo.MapSuite.iOS.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.UI.iOS.13.0.0-beta022\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -205,85 +200,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\splash.png" />
+    <BundleResource Include="Resources\switch-theme.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\close.png" />
+    <BundleResource Include="Resources\switch-theme%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\close%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\close%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\globe%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\information%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\information%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\location.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\location%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\location%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\map-type.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\map-type%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\map-type%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\next%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\previous%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\splash%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\splash%403x.png" />
+    <BundleResource Include="Resources\switch-theme%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app-pro@2x~ipad.png">
@@ -345,4 +268,19 @@
     </ImageAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.4\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta080\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta080\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta071\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta080\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta080\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta083\build\netstandard2.1\ThinkGeo.Core.targets')" />
 </Project>

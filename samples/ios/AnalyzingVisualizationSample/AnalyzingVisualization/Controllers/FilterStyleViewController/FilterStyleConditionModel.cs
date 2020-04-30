@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace AnalyzingVisualization

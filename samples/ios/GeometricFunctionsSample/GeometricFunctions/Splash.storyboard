@@ -27,7 +27,7 @@
                                     <constraint id="449" firstAttribute="width" constant="256"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="450" translatesAutoresizingMaskIntoConstraints="NO" text="Think Geo">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="450" translatesAutoresizingMaskIntoConstraints="NO" text="ThinkGeo">
                                 <rect key="frame" x="112.5" y="411.5" width="150" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>

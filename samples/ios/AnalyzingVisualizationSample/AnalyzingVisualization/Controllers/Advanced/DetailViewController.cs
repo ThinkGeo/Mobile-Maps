@@ -1,8 +1,8 @@
 using CoreGraphics;
 using Foundation;
 using System;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace AnalyzingVisualization
@@ -40,7 +40,7 @@ namespace AnalyzingVisualization
 
             MapView = new MapView(View.Frame);
             MapView.BackgroundColor = UIColor.FromRGB(244, 242, 238);
-            MapView.MapTools.ZoomMapTool.Center = new CGPoint(MapView.MapTools.ZoomMapTool.Center.X + 10, MapView.MapTools.ZoomMapTool.Center.Y + 55);
+          //  MapView.MapTools.ZoomMapTool.Center = new CGPoint(MapView.MapTools.ZoomMapTool.Center.X + 10, MapView.MapTools.ZoomMapTool.Center.Y + 55);
             View.Add(MapView);
 
             InitializeMap();

@@ -8,11 +8,8 @@ using CoreGraphics;
 using Foundation;
 using System;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace GeometricFunctions
@@ -58,7 +55,7 @@ namespace GeometricFunctions
 
         protected RectangleShape GetBoundingBox()
         {
-            RectangleShape mapExtent = (RectangleShape)ExtentHelper.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
+            RectangleShape mapExtent = (RectangleShape)MapUtil.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
             mapExtent.ScaleUp(140);
             return mapExtent;
         }
@@ -71,7 +68,6 @@ namespace GeometricFunctions
             MapView.MapUnit = GeographyUnit.Meter;
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             MapView.BackgroundColor = UIColor.FromRGB(244, 242, 238);
-            MapView.MapTools.ZoomMapTool.Center = new CGPoint(MapView.MapTools.ZoomMapTool.Center.X + 10, MapView.MapTools.ZoomMapTool.Center.Y + 55);
 
             InitializeToolbar();
             LoadBackgroundLayer();
@@ -97,8 +93,11 @@ namespace GeometricFunctions
         private void LoadBackgroundLayer()
         {
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
         }
 

@@ -6,12 +6,8 @@
 ===========================================*/
 
 using CoreGraphics;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace LabelingStyle
@@ -29,28 +25,27 @@ namespace LabelingStyle
             base.InitializeMap();
 
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer customLabelingStyleLayer = new ShapeFileFeatureLayer("AppData/POIs.shp");
-            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1), 7);
-            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new CustomLabelStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.StandardColors.White, 1);
+            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 7, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1));
+            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new CustomLabelStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.Mask = new AreaStyle();
             customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.XOffsetInPixel = 10;
             customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.YOffsetInPixel = 10;
-            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.PointPlacement = PointPlacement.Center;
+            customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.TextPlacement = TextPlacement.Center;
             customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;
             customLabelingStyleLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             customLabelingStyleLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay customLabelingOverlay = new LayerOverlay();
-            customLabelingOverlay.TileHeight = 512;
-            customLabelingOverlay.TileWidth = 512;
+            customLabelingOverlay.TransitionEffect = TransitionEffect.None;
             customLabelingOverlay.Layers.Add("customLabeling", customLabelingStyleLayer);
             MapView.Overlays.Add("CustomLabeling", customLabelingOverlay);
 

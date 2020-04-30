@@ -1,10 +1,6 @@
 using CoreGraphics;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace LabelingStyle
@@ -29,6 +25,7 @@ namespace LabelingStyle
             streetLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingLinesOverlay = new LayerOverlay();
+            labelingLinesOverlay.TransitionEffect = TransitionEffect.None;
             labelingLinesOverlay.Layers.Add("street", streetLayer);
             MapView.Overlays.Add("LabelingLine", labelingLinesOverlay);
 
@@ -76,28 +73,25 @@ namespace LabelingStyle
             pwyBreak.Value = 1;
             pwyBreak.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#544c63"), 12f), new GeoPen(GeoColor.FromHtml("#9e98b0"), 8f));
 
-            pwyBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 12, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            pwyBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 2);
+            pwyBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 12, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            pwyBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             pwyBreak.DefaultTextStyle.Mask = new AreaStyle();
-            pwyBreak.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(pwyBreak);
 
             ClassBreak mainRoad = new ClassBreak();
             mainRoad.Value = 4;
             mainRoad.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#544c63"), 10f), new GeoPen(GeoColor.FromHtml("#e9cab0"), 7f));
-            mainRoad.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 10, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            mainRoad.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 1);
+            mainRoad.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 10, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            mainRoad.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 1);
             mainRoad.DefaultTextStyle.Mask = new AreaStyle();
-            mainRoad.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(mainRoad);
 
             ClassBreak localRoadBreak = new ClassBreak();
             localRoadBreak.Value = 5;
             localRoadBreak.DefaultLineStyle = new LineStyle(new GeoPen(GeoColor.FromHtml("#bba7a2"), 6f), new GeoPen(GeoColor.FromHtml("#ffffff"), 4f));
-            localRoadBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 8, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            localRoadBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White, 2);
+            localRoadBreak.DefaultTextStyle = new TextStyle("ROAD_NAME", new GeoFont("Arial", 8, DrawingFontStyles.Regular), new GeoSolidBrush(GeoColors.Black));
+            localRoadBreak.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             localRoadBreak.DefaultTextStyle.Mask = new AreaStyle();
-            localRoadBreak.DefaultTextStyle.BestPlacement = true;
             roadStyle.ClassBreaks.Add(localRoadBreak);
 
             return roadStyle;
