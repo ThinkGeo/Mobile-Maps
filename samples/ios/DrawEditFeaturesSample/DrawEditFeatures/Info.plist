@@ -6,10 +6,6 @@
 	<string>ThinkGeo Sample Edit Shapes</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.thinkgeo.draweditfeatures</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
 	<key>UIDeviceFamily</key>
@@ -43,5 +39,11 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>CFBundleName</key>
+	<string>ThinkGeo Sample Edit Shapes</string>
+	<key>CFBundleShortVersionString</key>
+	<string>12.0</string>
+	<key>CFBundleVersion</key>
+	<string>12.0.0</string>
 </dict>
 </plist>
