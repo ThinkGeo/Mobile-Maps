@@ -47,7 +47,6 @@ namespace MapSuiteEarthquakeStatistics
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
             TryShowMapAsync();
         }
 
@@ -94,6 +93,7 @@ namespace MapSuiteEarthquakeStatistics
 
         async Task ShowMapAsync()
         {
+            SetContentView(Resource.Layout.Main);
             await InitializeAndroidMap();
             await InitializeDialogs();
 
