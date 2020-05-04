@@ -2,12 +2,8 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace AnalyzingVisualization
 {
@@ -53,7 +49,7 @@ namespace AnalyzingVisualization
             ClassBreakStyle style = new ClassBreakStyle("Population", BreakValueInclusion.IncludeValue);
             for (int i = 0; i < classBreakValues.Length; i++)
             {
-                style.ClassBreaks.Add(new ClassBreak(classBreakValues[i], AreaStyles.CreateSimpleAreaStyle(new GeoColor(200, familyColors[i]), outlineColor, 1)));
+                style.ClassBreaks.Add(new ClassBreak(classBreakValues[i], AreaStyle.CreateSimpleAreaStyle(new GeoColor(200, familyColors[i]), outlineColor, 1)));
             }
 
             return style;

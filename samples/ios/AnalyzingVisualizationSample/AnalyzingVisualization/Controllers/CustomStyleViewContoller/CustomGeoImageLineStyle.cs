@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -64,7 +62,7 @@ namespace AnalyzingVisualization
                     }
                     //pointStyle.RotationAngle = (float)angle;
                     foreach (var pointStyle in pointStyles) pointStyle.RotationAngle = (float)angle;
-                    float screenDist = ExtentHelper.GetScreenDistanceBetweenTwoWorldPoints(canvas.CurrentWorldExtent, pointShape1,
+                    float screenDist = MapUtil.GetScreenDistanceBetweenTwoWorldPoints(canvas.CurrentWorldExtent, pointShape1,
                                                                                         pointShape2, canvas.Width, canvas.Height);
                     double currentDist = Math.Round(pointShape1.GetDistanceTo(pointShape2, canvas.MapUnit, DistanceUnit.Meter), 2);
                     double worldInterval = (currentDist * spacing) / screenDist;

@@ -5,12 +5,8 @@
 ===========================================*/
 
 using CoreGraphics;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace LabelingStyle
@@ -30,26 +26,28 @@ namespace LabelingStyle
             MapView.MapUnit = GeographyUnit.Meter;
             MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer poiLayer = new ShapeFileFeatureLayer("AppData/POIs.shp");
-            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1), 7);
-            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new TextStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColor.SimpleColors.Black));
-            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.StandardColors.White, 2);
+            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 7, new GeoSolidBrush(GeoColor.FromHtml("#99cc33")), new GeoPen(GeoColor.FromHtml("#666666"), 1));
+            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle = new TextStyle("Name", new GeoFont("Arail", 9, DrawingFontStyles.Bold), new GeoSolidBrush(GeoColors.Black));
+            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.HaloPen = new GeoPen(GeoColors.White, 2);
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.Mask = new AreaStyle();
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.XOffsetInPixel = 0;
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.YOffsetInPixel = 8;
-            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.PointPlacement = PointPlacement.UpperCenter;
+            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.TextPlacement = TextPlacement.Upper;
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;
             poiLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             poiLayer.DrawingMarginInPixel = 256;
 
             LayerOverlay labelingPointsOverlay = new LayerOverlay();
-            labelingPointsOverlay.TileHeight = 512;
-            labelingPointsOverlay.TileWidth = 512;
+            labelingPointsOverlay.TransitionEffect = TransitionEffect.None;
             labelingPointsOverlay.Layers.Add("poi", poiLayer);
             MapView.Overlays.Add("LabelingPoints", labelingPointsOverlay);
 
@@ -66,7 +64,6 @@ namespace LabelingStyle
                 settingsController.ModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
                 settingsController.StyleSettingsChanged += SettingsControllerStyleSettingsChanged;
             }
-
             PresentViewController(settingsController, true, null);
         }
 
@@ -76,7 +73,7 @@ namespace LabelingStyle
             FeatureLayer poiLayer = (FeatureLayer)layerOverlay.Layers["poi"];
 
             LabelingPointsStyleSettings settings = (LabelingPointsStyleSettings)e.StyleSettings;
-            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.PointPlacement = settings.Placement;
+            poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.TextPlacement = settings.Placement;
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.XOffsetInPixel = settings.GetXOffset();
             poiLayer.ZoomLevelSet.ZoomLevel10.DefaultTextStyle.YOffsetInPixel = settings.GetYOffset();
 

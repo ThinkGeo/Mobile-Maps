@@ -1,22 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawEditFeatures", "DrawEditFeatures\DrawEditFeatures.csproj", "{74E81024-F83A-4621-A9A9-613236C0FB4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_License|Any CPU = Debug_License|Any CPU
+		Debug_License|iPhone = Debug_License|iPhone
+		Debug_License|iPhoneSimulator = Debug_License|iPhoneSimulator
+		Debug|Any CPU = Debug|Any CPU
 		Debug|iPhone = Debug|iPhone
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|Any CPU = Release|Any CPU
 		Release|iPhone = Release|iPhone
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug_License|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug_License|iPhone.ActiveCfg = Debug|iPhone
+		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug_License|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug|iPhone.Build.0 = Debug|iPhone
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Release|iPhone.ActiveCfg = Release|iPhone
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Release|iPhone.Build.0 = Release|iPhone
 		{74E81024-F83A-4621-A9A9-613236C0FB4A}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator

@@ -3,8 +3,8 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using System;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace MapSuiteEarthquakeStatistics
 {
@@ -21,7 +21,6 @@ namespace MapSuiteEarthquakeStatistics
         private RadioButton wmkRoadRadioButton;
         private RadioButton wmkAerialRadioButton;
         private RadioButton wmkAerialWithLabelsRadioButton;
-        private RadioButton osmRadioButton;
         private RadioButton bingaRadioButton;
         private RadioButton bingrRadioButton;
 
@@ -37,7 +36,6 @@ namespace MapSuiteEarthquakeStatistics
             wmkRoadRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkRoadRadioButton);
             wmkAerialRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkAerialRadioButton);
             wmkAerialWithLabelsRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.wmkAerialWithLabelsRadioButton);
-            osmRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.osmRadioButton);
             bingaRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.bingaRadioButton);
             bingrRadioButton = selectBaseMapTypeView.FindViewById<RadioButton>(Resource.Id.bingrRadioButton);
 
@@ -45,7 +43,6 @@ namespace MapSuiteEarthquakeStatistics
             wmkAerialRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             wmkAerialWithLabelsRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
 
-            osmRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             bingaRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             bingrRadioButton.CheckedChange += BaseMapRadioButton_CheckedChange;
             baseMapOkButton = selectBaseMapTypeView.FindViewById<Button>(Resource.Id.OkButton);
@@ -154,9 +151,6 @@ namespace MapSuiteEarthquakeStatistics
                     break;
                 case BaseMapType.ThinkGeoCloudHybridMap:
                     wmkAerialWithLabelsRadioButton.Checked = true;
-                    break;
-                case BaseMapType.OpenStreetMap:
-                    osmRadioButton.Checked = true;
                     break;
                 case BaseMapType.BingMapsRoad:
                     bingrRadioButton.Checked = true;

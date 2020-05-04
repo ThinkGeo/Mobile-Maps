@@ -29,7 +29,6 @@ namespace GeometricFunctions
         private nfloat startX;
         private UIView statusImage;
         private UIViewController[] viewControllers;
-        private bool isIos7;
         private bool isOpen;
         public event UITouchEventArgs ShouldReceiveTouch;
         public Action SelectedIndexChanged;
@@ -196,9 +195,6 @@ namespace GeometricFunctions
         {
             base.ViewDidLayoutSubviews();
             CGRect navFrame = View.Bounds;
-            //			navFrame.Y += UIApplication.SharedApplication.StatusBarFrame.Height;
-            //			navFrame.Height -= navFrame.Y;
-            //this.statusbar
             navFrame.Width = menuWidth;
             if (Position == FlyOutPosition.Right)
                 navFrame.X = mainView.Frame.Width - menuWidth;
@@ -235,17 +231,12 @@ namespace GeometricFunctions
             leftNavigation.View.Frame = navFrame;
             View.AddSubview(leftNavigation.View);
 
-            var version = new Version(UIDevice.CurrentDevice.SystemVersion);
-            isIos7 = version.Major >= 7;
-            if (isIos7)
+            leftNavigation.TableView.TableHeaderView = new UIView(new CGRect(0, 0, 320, 22))
             {
-                leftNavigation.TableView.TableHeaderView = new UIView(new CGRect(0, 0, 320, 22))
-                {
-                    BackgroundColor = UIColor.Clear
-                };
+                BackgroundColor = UIColor.Clear
+            };
 
-                leftNavigation.TableView.SectionHeaderHeight = 50;
-            }
+            leftNavigation.TableView.SectionHeaderHeight = 50;
             leftNavigation.TableView.TableFooterView = new UIView(new CGRect(0, 0, 100, 100)) { BackgroundColor = UIColor.Clear };
             leftNavigation.TableView.ScrollsToTop = false;
             shadowView = new UIView();
@@ -262,7 +253,6 @@ namespace GeometricFunctions
 
         private void DragContentView(UIPanGestureRecognizer panGesture)
         {
-            //if (ShouldStayOpen || mainView == null)
             if (mainView == null)
                 return;
             if (!HideShadow)
@@ -349,35 +339,22 @@ namespace GeometricFunctions
                 return;
             }
             if (!DisableStatusBarMoving)
-                //if (!DisableStatusBarMoving && !ShouldStayOpen)
                 UIApplication.SharedApplication.SetStatusBarHidden(false, UIStatusBarAnimation.Fade);
 
-            //bool isOpen = false;
-            //if (mainView != null)
-            //{
-            //    mainView.RemoveFromSuperview();
-            //    isOpen = IsOpen;
-            //}
-            //isOpen = false;
             CurrentViewController = ViewControllers[SelectedIndex];
             CGRect frame = View.Bounds;
-            //if (isOpen || ShouldStayOpen)
             if (isOpen)
             {
                 frame.X = Position == FlyOutPosition.Left ? menuWidth : -menuWidth;
                 frame.Width = frame.Width - frame.X;
             }
-            //setViewSize();
             SetLocation(frame);
             View.AddSubview(mainView);
             AddChildViewController(CurrentViewController);
-            //if (!ShouldStayOpen)
             HideMenu();
             if (SelectedIndexChanged != null)
                 SelectedIndexChanged();
         }
-
-        //bool isOpen {get{ return mainView.Frame.X == menuWidth; }}
 
         private void ShowMenu()
         {
@@ -385,8 +362,6 @@ namespace GeometricFunctions
                 return;
             EnsureInvokedOnMainThread(delegate
                 {
-                    //navigation.ReloadData ();
-                    //isOpen = true;
                     leftNavigation.View.Hidden = false;
                     closeButton.Frame = mainView.Frame;
                     shadowView.Frame = mainView.Frame;
@@ -418,8 +393,6 @@ namespace GeometricFunctions
         private void setViewSize()
         {
             CGRect frame = View.Bounds;
-            //frame.Location = PointF.Empty;
-            //if (ShouldStayOpen)
             if (isOpen)
                 frame.Width -= menuWidth;
             if (mainView.Bounds == frame)
@@ -452,8 +425,7 @@ namespace GeometricFunctions
 
         private void getStatus()
         {
-            //if (DisableStatusBarMoving || !isIos7 || statusImage.Superview != null || ShouldStayOpen)
-            if (DisableStatusBarMoving || !isIos7 || statusImage.Superview != null)
+            if (DisableStatusBarMoving || statusImage.Superview != null)
                 return;
             var image = captureStatusBarImage();
             if (image == null)
@@ -474,7 +446,7 @@ namespace GeometricFunctions
                 UIView screenShot = UIScreen.MainScreen.SnapshotView(false);
                 return screenShot;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -482,15 +454,12 @@ namespace GeometricFunctions
 
         private void hideStatus()
         {
-            if (!isIos7)
-                return;
             statusImage.RemoveFromSuperview();
             UIApplication.SharedApplication.StatusBarHidden = false;
         }
 
         private void HideMenu()
         {
-            //if (mainView == null || mainView.Frame.X == 0)
             if (mainView == null)
                 return;
 
@@ -580,24 +549,7 @@ namespace GeometricFunctions
             return NSIndexPath.FromRowSection(row, section);
         }
 
-        //public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
-        //{
-        //    base.DidRotate(fromInterfaceOrientation);
-
-        //    if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
-        //        return;
-        //    switch (InterfaceOrientation)
-        //    {
-        //        case UIInterfaceOrientation.LandscapeLeft:
-        //        case UIInterfaceOrientation.LandscapeRight:
-        //            ShowMenu();
-        //            break;
-        //        default:
-        //            HideMenu();
-        //            break;
-        //    }
-        //}
-
+     
         private void EnsureInvokedOnMainThread(Action action)
         {
             if (NSThread.Current.IsMainThread)
@@ -617,7 +569,6 @@ namespace GeometricFunctions
         public static UIView SetAccessibilityId(this UIView view, string id)
         {
             var nsId = NSString.CreateNative(id);
-            //Messaging.void_objc_msgSend_IntPtr(view.Handle, selAccessibilityIdentifier_Handle, nsId);
             return view;
         }
     }

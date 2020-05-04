@@ -2,9 +2,8 @@ using CoreGraphics;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteEarthquakeStatistics
@@ -47,9 +46,9 @@ namespace MapSuiteEarthquakeStatistics
             get { return queriedFeatures ?? (queriedFeatures = new Collection<Feature>()); }
         }
 
-        public static ThinkGeoCloudRasterMapsOverlay ThinkGeoCloudMapsOverlay
+        public static ThinkGeoCloudVectorMapsOverlay ThinkGeoCloudMapsOverlay
         {
-            get { return (ThinkGeoCloudRasterMapsOverlay)MapView.Overlays[ThinkGeoCloudMapsOverlayKey]; }
+            get { return (ThinkGeoCloudVectorMapsOverlay)MapView.Overlays[ThinkGeoCloudMapsOverlayKey]; }
         }
 
         public static LayerOverlay HighLightOverlay
@@ -57,13 +56,9 @@ namespace MapSuiteEarthquakeStatistics
             get { return (LayerOverlay)MapView.Overlays[HighLightOverlayKey]; }
         }
 
-        public static Proj4Projection GetWgs84ToMercatorProjection()
+        public static ProjectionConverter GetWgs84ToMercatorProjection()
         {
-            Proj4Projection wgs84ToMercatorProjection = new Proj4Projection
-            {
-                InternalProjectionParametersString = Proj4Projection.GetWgs84ParametersString(),
-                ExternalProjectionParametersString = Proj4Projection.GetBingMapParametersString()
-            };
+            ProjectionConverter wgs84ToMercatorProjection = new ProjectionConverter(Projection.GetWgs84ProjString(), Projection.GetBingMapProjString());
             return wgs84ToMercatorProjection;
         }
 

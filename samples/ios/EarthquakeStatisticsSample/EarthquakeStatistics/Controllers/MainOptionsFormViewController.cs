@@ -2,7 +2,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 using UIKit;
 
 namespace MapSuiteEarthquakeStatistics
@@ -10,7 +11,7 @@ namespace MapSuiteEarthquakeStatistics
     public partial class MainOptionsFormViewController : UIViewController
     {
         private DataTableSource baseMapTypeSource;
-        private HeatLayer earthquakeHeatLayer;
+        private ShapeFileFeatureLayer earthquakeHeatLayer;
         private ShapeFileFeatureLayer earthquakePointLayer;
         private IsoLineLayer earthquakeIsoLineLayer;
         private UILabel baseMapLabel;
@@ -38,7 +39,7 @@ namespace MapSuiteEarthquakeStatistics
         private void InitializeOptionsSource()
         {
             earthquakePointLayer = (ShapeFileFeatureLayer)Global.HighLightOverlay.Layers["EarthquakePointLayer"];
-            earthquakeHeatLayer = (HeatLayer)Global.HighLightOverlay.Layers["EarthquakeHeatLayer"];
+            earthquakeHeatLayer = (ShapeFileFeatureLayer)Global.HighLightOverlay.Layers["EarthquakeHeatLayer"];
             earthquakeIsoLineLayer = (IsoLineLayer)Global.HighLightOverlay.Layers["EarthquakeIsoLineLayer"];
 
             int rowWidth = 400;

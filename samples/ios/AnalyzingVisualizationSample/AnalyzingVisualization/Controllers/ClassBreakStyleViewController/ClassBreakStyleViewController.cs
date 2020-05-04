@@ -6,12 +6,8 @@
 
 using CoreGraphics;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -23,23 +19,21 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ClassBreakStyle classBreakStyle = GetClassBreakStyle();
             ShapeFileFeatureLayer usLayer = new ShapeFileFeatureLayer("AppData/usStatesCensus2010.shp");
-            usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             usLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(classBreakStyle);
             usLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
             layerOverlay.Layers.Add(usLayer);
+            layerOverlay.TileType = TileType.SingleTile;
             MapView.Overlays.Add(layerOverlay);
             MapView.ZoomTo(new PointShape(-10777397, 4821690), MapView.ZoomLevelSet.ZoomLevel05.Scale);
 
@@ -60,7 +54,7 @@ namespace AnalyzingVisualization
             for (int i = 0; i < classBreakValues.Length; i++)
             {
                 GeoColor fillColor = new GeoColor(200, familyColors[i]);
-                AreaStyle areaStyle = AreaStyles.CreateSimpleAreaStyle(fillColor, outlineColor, 1);
+                AreaStyle areaStyle = AreaStyle.CreateSimpleAreaStyle(fillColor, outlineColor, 1);
                 classBreakStyle.ClassBreaks.Add(new ClassBreak(classBreakValues[i], areaStyle));
             }
             return classBreakStyle;

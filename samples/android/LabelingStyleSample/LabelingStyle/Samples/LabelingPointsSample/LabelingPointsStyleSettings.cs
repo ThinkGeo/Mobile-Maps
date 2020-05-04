@@ -1,4 +1,5 @@
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace LabelingStyle
 {
@@ -7,12 +8,12 @@ namespace LabelingStyle
         public LabelingPointsStyleSettings()
         {
             Title = "Labeling Points Edit Settings";
-            Placement = PointPlacement.UpperCenter;
+            Placement = TextPlacement.Upper;
             XOffset = "0";
             YOffset = "8";
         }
 
-        public PointPlacement Placement { get; set; }
+        public TextPlacement Placement { get; set; }
         public string XOffset { get; set; }
         public string YOffset { get; set; }
 

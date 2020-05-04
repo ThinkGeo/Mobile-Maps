@@ -5,12 +5,8 @@
 ===========================================*/
 
 using System.Globalization;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 
 namespace AnalyzingVisualization
 {
@@ -22,26 +18,24 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
             View.AddSubview(MapView);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
+            thinkGeoCloudMapsOverlay.TileCache = new FileRasterTileCache("./cache", "raster_light");
+            thinkGeoCloudMapsOverlay.VectorTileCache = new FileVectorTileCache("./cache", "vector");
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             ShapeFileFeatureLayer iconStyleFeatureLayer = new ShapeFileFeatureLayer("AppData/Vehicles.shp");
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
             layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(iconStyleFeatureLayer);
             MapView.Overlays.Add(layerOverlay);
 
-            iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(GetIconStyle("AppData/Images/vehicle"));
             iconStyleFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
             MapView.ZoomTo(new PointShape(-10772265, 3916827), MapView.ZoomLevelSet.ZoomLevel14.Scale);
         }
 
@@ -51,12 +45,12 @@ namespace AnalyzingVisualization
             valueStyle.ColumnName = "TYPE";
 
             GeoFont font = new GeoFont("Arial", 12, DrawingFontStyles.Bold);
-            GeoSolidBrush brush = new GeoSolidBrush(GeoColor.StandardColors.Black);
+            GeoSolidBrush brush = new GeoSolidBrush(GeoColors.Black);
 
             for (int i = 1; i <= 7; i++)
             {
                 IconStyle iconStyle = new IconStyle(imagePath + i + ".png", "Type", font, brush);
-                iconStyle.HaloPen = new GeoPen(GeoColor.SimpleColors.White);
+                iconStyle.HaloPen = new GeoPen(GeoColors.White);
                 ValueItem valueItem = new ValueItem(i.ToString(CultureInfo.InvariantCulture), iconStyle);
 
                 valueStyle.ValueItems.Add(valueItem);

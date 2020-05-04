@@ -7,12 +7,8 @@
 using CoreAnimation;
 using CoreGraphics;
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.UI.iOS;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace AnalyzingVisualization
@@ -43,17 +39,16 @@ namespace AnalyzingVisualization
         protected override void InitializeMap()
         {
             MapView.MapUnit = GeographyUnit.Meter;
-            MapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet(512);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-            ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-            thinkGeoCloudMapsOverlay.TileResolution = ThinkGeo.Cloud.TileResolution.High;
+            string thinkgeoCloudClientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+            string thinkgeoCloudClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(thinkgeoCloudClientKey, thinkgeoCloudClientSecret);
             MapView.Overlays.Add(thinkGeoCloudMapsOverlay);
 
             statesLayer = new ShapeFileFeatureLayer("AppData/states.shp");
             LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.TileWidth = 512;
-            layerOverlay.TileHeight = 512;
+            layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(statesLayer);
             MapView.Overlays.Add("LayerOverlay", layerOverlay);
 
@@ -62,7 +57,7 @@ namespace AnalyzingVisualization
 
             filterStyle = new FilterStyle();
             filterStyle.Conditions.Add(new FilterCondition("Population", ">2967297"));
-            filterStyle.Styles.Add(AreaStyles.CreateSimpleAreaStyle(fillColor, strokeColor));
+            filterStyle.Styles.Add(AreaStyle.CreateSimpleAreaStyle(fillColor, strokeColor));
             statesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(filterStyle);
             statesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 

@@ -16,73 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="413" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="122" y="268" width="170" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" id="744" translatesAutoresizingMaskIntoConstraints="NO" minimumFontSize="10">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                        <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
-                                        <nil key="highlightedColor"/>
-                                        <constraints>
-                                            <constraint id="828" firstAttribute="height" constant="50"/>
-                                        </constraints>
-                                        <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1520" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0.0" y="50" width="170" height="150"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1825" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="125" y="5" width="40" height="40"/>
-                                        <color key="tintColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                        <state key="normal" image="close.png">
-                                            <color key="titleShadowColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
-                                        </state>
-                                        <constraints>
-                                            <constraint id="2049" firstAttribute="width" constant="40"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="ModalDailogCloseButton_TouchUpInside:" destination="286" id="2679" eventType="touchUpInside"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint id="516" firstAttribute="height" constant="200"/>
-                                    <constraint id="537" firstAttribute="width" constant="170"/>
-                                    <constraint id="765" firstItem="744" firstAttribute="leading" secondItem="413" secondAttribute="leading"/>
-                                    <constraint id="786" firstAttribute="trailing" secondItem="744" secondAttribute="trailing"/>
-                                    <constraint id="807" firstItem="744" firstAttribute="top" secondItem="413" secondAttribute="top"/>
-                                    <constraint id="1603" firstItem="1520" firstAttribute="top" secondItem="744" secondAttribute="bottom"/>
-                                    <constraint id="1624" firstItem="1520" firstAttribute="leading" secondItem="413" secondAttribute="leading"/>
-                                    <constraint id="1645" firstAttribute="trailing" secondItem="1520" secondAttribute="trailing"/>
-                                    <constraint id="1666" firstAttribute="bottom" secondItem="1520" secondAttribute="bottom"/>
-                                    <constraint id="1986" firstItem="744" firstAttribute="trailing" secondItem="1825" secondAttribute="trailing" constant="5"/>
-                                    <constraint id="2007" firstItem="1825" firstAttribute="top" secondItem="744" secondAttribute="top" constant="5"/>
-                                    <constraint id="2028" firstItem="1520" firstAttribute="top" secondItem="1825" secondAttribute="bottom" constant="5"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint id="474" firstItem="413" firstAttribute="centerY" secondItem="287" secondAttribute="centerY"/>
-                            <constraint id="495" firstItem="413" firstAttribute="centerX" secondItem="287" secondAttribute="centerX"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="ModalDailogView" destination="413" id="name-outlet-413"/>
-                        <outlet property="ModalDailogCloseButton" destination="1825" id="name-outlet-1825"/>
-                        <outlet property="ModalOptionsTableView" destination="1520" id="name-outlet-1520"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="288" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-150" y="-414"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="close.png" width="40" height="40"/>
-    </resources>
 </document>

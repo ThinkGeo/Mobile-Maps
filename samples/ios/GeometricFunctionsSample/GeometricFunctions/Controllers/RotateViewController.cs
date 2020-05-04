@@ -1,10 +1,6 @@
 using System.Linq;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.iOS;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
+using ThinkGeo.UI.iOS;
 
 namespace GeometricFunctions
 {
@@ -21,7 +17,7 @@ namespace GeometricFunctions
             InMemoryFeatureLayer sourceLayer = new InMemoryFeatureLayer();
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(new GeoSolidBrush(BrushColor));
             sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Width = 3;
-            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.Black;
+            sourceLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColors.Black;
             sourceLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             sourceLayer.InternalFeatures.Add(GeometrySource.FirstOrDefault());
 
@@ -41,7 +37,7 @@ namespace GeometricFunctions
             InMemoryFeatureLayer sourceLayer = (InMemoryFeatureLayer)layerOverlay.Layers["SourceLayer"];
 
             Feature sourceFeature = sourceLayer.InternalFeatures.FirstOrDefault();
-            if (sourceFeature != null && sourceFeature.GetShape().CanRotate)
+            if (sourceFeature != null)
             {
                 PointShape center = sourceFeature.GetBoundingBox().GetCenterPoint();
                 BaseShape rotatedShape = BaseShape.Rotate(sourceFeature.GetShape(), center, 22.5f);

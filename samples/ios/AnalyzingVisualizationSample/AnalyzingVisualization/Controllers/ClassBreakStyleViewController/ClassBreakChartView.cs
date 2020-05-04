@@ -3,8 +3,7 @@ using CoreGraphics;
 using Foundation;
 using System;
 using System.Linq;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Styles;
+using ThinkGeo.Core;
 using UIKit;
 
 namespace AnalyzingVisualization
@@ -95,7 +94,7 @@ namespace AnalyzingVisualization
 
             private static CGColor GetCGColor(ClassBreak classBreak)
             {
-                GeoColor color = classBreak.DefaultAreaStyle.FillSolidBrush.Color;
+                GeoColor color = ((GeoSolidBrush)classBreak.DefaultAreaStyle.FillBrush).Color;
                 return UIColor.FromRGBA(color.RedComponent, color.GreenComponent, color.BlueComponent, color.AlphaComponent).CGColor;
             }
         }

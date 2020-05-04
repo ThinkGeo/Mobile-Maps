@@ -10,10 +10,8 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using ThinkGeo.MapSuite;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Layers;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace DrawEditFeatures
 {
@@ -46,7 +44,7 @@ namespace DrawEditFeatures
             androidMap.CurrentExtent = new RectangleShape(-13358339, 11068716, -5565975, -11068716);
 
             // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map.
-            ThinkGeoCloudRasterMapsOverlay baseOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
+            ThinkGeoCloudRasterMapsOverlay baseOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
             androidMap.Overlays.Add(baseOverlay);
 
             cursorButton = GetButton(Resource.Drawable.Cursor, TrackButtonClick);
@@ -117,17 +115,8 @@ namespace DrawEditFeatures
             switch (button.Id)
             {
                 case Resource.Drawable.Cursor:
-                    foreach (var item in androidMap.EditOverlay.EditShapesLayer.InternalFeatures)
-                    {
-                        if (!androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures.Contains(item))
-                        {
-                            androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures.Add(item);
-                        }
-                    }
-                   
+                    ClearAndSaveEditMode();
                     androidMap.TrackOverlay.TrackMode = TrackMode.None;
-                    androidMap.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
-                    androidMap.EditOverlay.ClearAllControlPoints();
                     trackLinearLayout.Visibility = ViewStates.Gone;
                     drawButton.Visibility = ViewStates.Visible;
                     editButton.Visibility = ViewStates.Visible;
@@ -136,12 +125,10 @@ namespace DrawEditFeatures
                     break;
 
                 case Resource.Drawable.Clear:
-                    androidMap.EditOverlay.ClearAllControlPoints();
-                    androidMap.EditOverlay.EditShapesLayer.Open();
-                    androidMap.EditOverlay.EditShapesLayer.Clear();
+                    ClearAndSaveEditMode();
                     androidMap.TrackOverlay.TrackShapeLayer.Open();
-                  
                     androidMap.TrackOverlay.TrackShapeLayer.Clear();
+                    androidMap.TrackOverlay.TrackMode = TrackMode.None;
                     androidMap.Refresh();
                     break;
 
@@ -181,18 +168,34 @@ namespace DrawEditFeatures
                     break;
 
                 case Resource.Drawable.Draw:
+                    ClearAndSaveEditMode();
                     androidMap.TrackOverlay.TrackMode = TrackMode.Point;
                     trackLinearLayout.Visibility = ViewStates.Visible;
                     drawButton.Visibility = ViewStates.Gone;
                     editButton.Visibility = ViewStates.Gone;
                     clearButton.Visibility = ViewStates.Gone;
                     pointButton.SetBackgroundResource(Resource.Drawable.buttonselectedbackground);
+                    androidMap.Refresh();
                     break;
 
                 default:
                     androidMap.TrackOverlay.TrackMode = TrackMode.None;
                     break;
             }
+        }
+
+        public void ClearAndSaveEditMode()
+        {
+            foreach (var item in androidMap.EditOverlay.EditShapesLayer.InternalFeatures)
+            {
+                if (!androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures.Contains(item))
+                {
+                    androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures.Add(item);
+                }
+            }
+            androidMap.EditOverlay.ClearAllControlPoints();
+            androidMap.EditOverlay.EditShapesLayer.Open();
+            androidMap.EditOverlay.EditShapesLayer.Clear();
         }
 
         public void InitializeInstruction(params View[] contentViews)

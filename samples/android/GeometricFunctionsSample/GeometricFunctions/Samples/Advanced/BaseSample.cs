@@ -12,9 +12,8 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.ObjectModel;
-using ThinkGeo.MapSuite.Android;
-using ThinkGeo.MapSuite.Drawing;
-using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.Core;
+using ThinkGeo.UI.Android;
 
 namespace GeometricFunctions
 {
@@ -103,7 +102,7 @@ namespace GeometricFunctions
 
         protected virtual RectangleShape GetBoundingBox()
         {
-            RectangleShape mapExtent = (RectangleShape)ExtentHelper.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
+            RectangleShape mapExtent = (RectangleShape)MapUtil.GetBoundingBoxOfItems(GeometrySource).CloneDeep();
             mapExtent.ScaleUp(100);
             return mapExtent;
         }
@@ -114,10 +113,11 @@ namespace GeometricFunctions
             {
                 MapView.SetBackgroundColor(Color.Argb(255, 244, 242, 238));
                 // Please input your ThinkGeo Cloud Client ID / Client Secret to enable the background map. 
-                ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("ThinkGeo Cloud Client ID", "ThinkGeo Cloud Client Secret");
-                //string baseFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-                //string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
-                //thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename);
+                ThinkGeoCloudRasterMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
+                string baseFolder = Application.Context.ExternalCacheDir.AbsolutePath;
+                string cachePathFilename = System.IO.Path.Combine(baseFolder, "MapSuiteTileCaches/SampleCaches.db");
+                bool isWriteable = Android.OS.Environment.MediaMounted.Equals(Android.OS.Environment.ExternalStorageState);
+                if (isWriteable) thinkGeoCloudMapsOverlay.TileCache = new SqliteBitmapTileCache(cachePathFilename, "ThinkGeoCloudRasterMaps");
                 MapView.Overlays.Insert(0, "WMK", thinkGeoCloudMapsOverlay);
             }
         }
