@@ -51,6 +51,12 @@ To develop on Windows, you need:
 
 Even it sounds complicated, Microsoft in fact has made it very straightforward to connect to a MAC and develop Xamarin on Windows. So if you are a .NET developer get used to Visual Studio, feel free to stay on Windows for Xamarin development. This quick start guide is based on Visual Studio on Windows and there's no problem at all to start your application on Mac.
 
+Here a few handy links for installation and setup of these prerequisites using Visual Studio:
+
+[Xamarin for Visual Studio](https://docs.microsoft.com/en-us/xamarin/get-started/installation)
+
+[Xamarin.iOS Installation](https://docs.microsoft.com/en-us/xamarin/ios/get-started/installation/)
+
 ### Step 2: Set Up a New Project
 
 Once these prerequisites have been installed, let's create a new **iOS App (Xamarin)** project in Visual Studio and select **Single View App** template. Here is a [guide to creating a sample project](https://docs.microsoft.com/en-us/xamarin/iOS/get-started/hello-iOS/hello-iOS-quickstart) for reference.
