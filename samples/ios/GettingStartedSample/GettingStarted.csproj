@@ -6,22 +6,38 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{210490A1-19B6-4E6F-9B30-11F66C187D8B}</ProjectGuid>
+    <ProjectGuid>{B48D6DA8-4C97-495C-A6BF-0AA3CD9F3129}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LabelingStyle</RootNamespace>
+    <RootNamespace>GettingStartedSample</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>LabelingStyle</AssemblyName>
+    <AssemblyName>GettingStarted</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
@@ -30,6 +46,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
+    <MtouchSdkVersion>13.4</MtouchSdkVersion>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
@@ -42,8 +59,8 @@
     <MtouchFloat32>true</MtouchFloat32>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
-    <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -53,8 +70,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchFloat32>true</MtouchFloat32>
     <OptimizePNGs>true</OptimizePNGs>
@@ -72,12 +88,11 @@
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>False</MtouchEnableGenericValueTypeSharing>
-    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
     <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
@@ -85,9 +100,9 @@
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchFloat32>true</MtouchFloat32>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
     <BuildIpa>true</BuildIpa>
-    <IpaPackageName>ThinkGeo_Labeling</IpaPackageName>
+    <IpaPackageName>ThinkGeo_Location</IpaPackageName>
+    <CodesignProvision>ThinkGeo App Development Profile</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -103,10 +118,7 @@
     <OptimizePNGs>true</OptimizePNGs>
     <CodesignProvision>iOS Team Provisioning Profile: com.thinkgeo.*</CodesignProvision>
     <BuildIpa>true</BuildIpa>
-    <IpaPackageName>ThinkGeo_Labeling</IpaPackageName>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>LabelingStyle.Application</StartupObject>
+    <IpaPackageName>ThinkGeo_Location</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -115,140 +127,85 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Contollers\LabelStylingViewController.cs" />
-    <Compile Include="Contollers\DetailViewController.cs" />
-    <Compile Include="Contollers\CustomLabelingViewContoller.cs" />
-    <Compile Include="Contollers\LabelingPolygonsViewContoller.cs" />
-    <Compile Include="Contollers\LabelingLinesViewContoller.cs" />
-    <Compile Include="Contollers\SliderViewController.cs" />
-    <Compile Include="Contollers\LabelingPointsViewContoller.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Model\CustomLabelingStyleSettings.cs" />
-    <Compile Include="Model\LabelingLinesStyleSettings.cs" />
-    <Compile Include="Model\LabelingPointsStyleSettings.cs" />
-    <Compile Include="Model\LabelingPolygonsStyleSettings.cs" />
-    <Compile Include="Model\LabelStylingStyleSettings.cs" />
-    <Compile Include="Model\StyleSettings.cs" />
-    <Compile Include="Model\StyleSettingsChangedStyleSettingsControllerEventArgs.cs" />
-    <Compile Include="Model\StyleSettingsController.cs" />
-    <Compile Include="Model\CustomLabelStyle.cs" />
-    <Content Include="AppData\StyleList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="AppData\POIs.dbf" />
-    <Content Include="AppData\POIs.ids" />
-    <Content Include="AppData\POIs.idx" />
-    <Content Include="AppData\POIs.prj" />
-    <Content Include="AppData\POIs.shp" />
-    <Content Include="AppData\POIs.shx" />
-    <Content Include="AppData\Restaurants.dbf" />
-    <Content Include="AppData\Restaurants.shp" />
-    <Content Include="AppData\Restaurants.shx" />
-    <Content Include="AppData\Street.dbf" />
-    <Content Include="AppData\Street.ids" />
-    <Content Include="AppData\Street.idx" />
-    <Content Include="AppData\street.prj" />
-    <Content Include="AppData\Street.shp" />
-    <Content Include="AppData\Street.shx" />
-    <Content Include="AppData\WkbFiles\Parcels.ids" />
-    <Content Include="AppData\WkbFiles\Parcels.idx" />
-    <Content Include="AppData\WkbFiles\Parcels.wkb" />
-    <Content Include="AppData\WkbFiles\Parcels.wkx" />
-    <Content Include="AppData\WkbFiles\Subdivisions.ids" />
-    <Content Include="AppData\WkbFiles\Subdivisions.idx" />
-    <Content Include="AppData\WkbFiles\Subdivisions.wkb" />
-    <Content Include="AppData\WkbFiles\Subdivisions.wkx" />
-    <BundleResource Include="Resources\detail.png" />
-    <BundleResource Include="Resources\detail%402x.png" />
-    <BundleResource Include="Resources\detail%403x.png" />
-    <BundleResource Include="Resources\settings.png" />
-    <BundleResource Include="Resources\settings%402x.png" />
-    <BundleResource Include="Resources\settings%403x.png" />
-    <BundleResource Include="Resources\splash.png" />
-    <BundleResource Include="Resources\splash%402x.png" />
-    <BundleResource Include="Resources\splash%403x.png" />
-    <BundleResource Include="Resources\custom.png" />
-    <BundleResource Include="Resources\custom%402x.png" />
-    <BundleResource Include="Resources\custom%403x.png" />
-    <BundleResource Include="Resources\lines.png" />
-    <BundleResource Include="Resources\lines%402x.png" />
-    <BundleResource Include="Resources\lines%403x.png" />
-    <BundleResource Include="Resources\points.png" />
-    <BundleResource Include="Resources\points%402x.png" />
-    <BundleResource Include="Resources\points%403x.png" />
-    <BundleResource Include="Resources\polygons.png" />
-    <BundleResource Include="Resources\polygons%402x.png" />
-    <BundleResource Include="Resources\polygons%403x.png" />
-    <BundleResource Include="Resources\styling.png" />
-    <BundleResource Include="Resources\styling%402x.png" />
-    <BundleResource Include="Resources\styling%403x.png" />
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <BundleResource Include="com.thinkgeo.labelingstyle.mapsuitelicense" />
-    <None Include="Info.plist">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="MainFormViewController.cs" />
+    <Compile Include="MainFormViewController.designer.cs">
+      <DependentUpon>MainFormViewController.cs</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <BundleResource Include="com.thinkgeo.gettingstarted.mapsuitelicense" />
+    <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="Splash.storyboard" />
+    <InterfaceDefinition Include="MainForm.storyboard" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainViewController.designer.cs">
-      <DependentUpon>MainViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainViewController.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Sqlite, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.3.1.3\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    <Reference Include="Microsoft.Data.Sqlite, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>.\packages\Microsoft.Data.Sqlite.Core.3.1.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="MonoTouch.Dialog-1" />
     <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=2.0.2.669, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.lib.e_sqlite3.ios, Version=2.0.2.669, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.ios.2.0.2\lib\xamarinios10\SQLitePCLRaw.lib.e_sqlite3.ios.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.lib.e_sqlite3.ios.2.0.2\lib\xamarinios10\SQLitePCLRaw.lib.e_sqlite3.ios.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.internal, Version=2.0.2.669, Culture=neutral, PublicKeyToken=89ae75803b2c608d, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.provider.internal.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.internal.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.provider.internal.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.internal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>.\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing.Common" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>.\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>.\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.iOS.12.2.6\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.UI.iOS.12.2.6\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\switch-theme.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\switch-theme%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\switch-theme%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app-pro@2x~ipad.png">
@@ -310,13 +267,11 @@
     </ImageAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project=".\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets'))" />
-    <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
-  <Import Project="..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
 </Project>

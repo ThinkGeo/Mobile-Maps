@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometricFunctions", "GeometricFunctions\GeometricFunctions.csproj", "{8B6B093B-D833-4DD4-87E4-91B4E6046FA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometricFunctions", "GeometricFunctions.csproj", "{8B6B093B-D833-4DD4-87E4-91B4E6046FA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,5 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C74E82FA-4DFC-4FBA-8B93-13A55676A1F7}
 	EndGlobalSection
 EndGlobal

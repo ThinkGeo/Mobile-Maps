@@ -61,52 +61,52 @@
   <ItemGroup>
     <Reference Include="Java.Interop" />
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.3.1.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+      <HintPath>.\packages\Microsoft.Data.Sqlite.Core.3.1.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=2.0.2.669, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.lib.e_sqlite3.android, Version=2.0.2.669, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.2.0.2\lib\monoandroid80\SQLitePCLRaw.lib.e_sqlite3.android.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.lib.e_sqlite3.android.2.0.2\lib\monoandroid80\SQLitePCLRaw.lib.e_sqlite3.android.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=2.0.2.669, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+      <HintPath>.\packages\SQLitePCLRaw.provider.e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>.\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>.\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>.\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>..\packages\ThinkGeo.UI.Android.12.2.6\lib\MonoAndroid\ThinkGeo.UI.Android.dll</HintPath>
+      <HintPath>.\packages\ThinkGeo.UI.Android.12.2.6\lib\MonoAndroid\ThinkGeo.UI.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -182,17 +182,17 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
-  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />
-  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets')" />
-  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets')" />
-  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets')" />
-  <Import Project="..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets')" />
+  <Import Project=".\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
