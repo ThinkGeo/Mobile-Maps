@@ -243,10 +243,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>.\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ThinkGeo.UI.iOS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>.\packages\ThinkGeo.UI.iOS.12.2.6\lib\xamarinios\ThinkGeo.UI.iOS.dll</HintPath>
+      <HintPath>packages\ThinkGeo.Core.12.2.7\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -317,6 +315,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('.\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets'))" />
     <Error Condition="!Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
   <Import Project=".\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Import Project="packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" />
 </Project>

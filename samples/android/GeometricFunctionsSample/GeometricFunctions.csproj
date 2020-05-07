@@ -103,10 +103,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>.\packages\ThinkGeo.Core.12.2.6\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+      <HintPath>packages\ThinkGeo.Core.12.2.7\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
     </Reference>
     <Reference Include="ThinkGeo.UI.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
-      <HintPath>.\packages\ThinkGeo.UI.Android.12.2.6\lib\MonoAndroid\ThinkGeo.UI.Android.dll</HintPath>
+      <HintPath>packages\ThinkGeo.UI.Android.12.2.7\lib\MonoAndroid\ThinkGeo.UI.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +193,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets'))" />
   </Target>
+  <Import Project="packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
