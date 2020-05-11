@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9EFE5CF4-3E1B-450E-B375-B444F4DAD82E}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MapSuiteSiteSelection</RootNamespace>
+    <AssemblyName>SiteSelection</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Java.Interop" />
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>.\packages\ThinkGeo.Dependency.Jint.12.2.1\lib\netstandard2.0\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Sqlite, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>.\packages\Microsoft.Data.Sqlite.Core.3.1.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
+      <HintPath>.\packages\ThinkGeo.Dependency.NetTopologySuite.12.2.1\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>.\packages\ThinkGeo.Dependency.SkiaSharp.12.2.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>.\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=2.0.2.669, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>.\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3.android, Version=2.0.2.669, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
+      <HintPath>.\packages\SQLitePCLRaw.lib.e_sqlite3.android.2.0.2\lib\monoandroid80\SQLitePCLRaw.lib.e_sqlite3.android.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=2.0.2.669, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>.\packages\SQLitePCLRaw.provider.e_sqlite3.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>.\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>.\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>.\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThinkGeo.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>packages\ThinkGeo.Core.12.2.7\lib\netstandard2.1\ThinkGeo.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ThinkGeo.UI.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>packages\ThinkGeo.UI.Android.12.2.7\lib\MonoAndroid\ThinkGeo.UI.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\BaseMapType.cs" />
+    <Compile Include="Model\FilterConfiguration.cs" />
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Model\FilterByAreaDialog.cs" />
+    <Compile Include="Model\FilterByTypeDialog.cs" />
+    <Compile Include="Model\InputBingMapKeyDialog.cs" />
+    <Compile Include="Model\PotentialSimilarSiteResultHolder.cs" />
+    <Compile Include="Model\PotentialSimilarSitesAdapter.cs" />
+    <Compile Include="Model\PredicateLayout.cs" />
+    <Compile Include="Model\SampleMapView.cs" />
+    <Compile Include="Model\SelectBaseMapTypeDialog.cs" />
+    <Compile Include="Model\ZoomToFeatureEventArgs.cs" />
+    <Compile Include="PotentialSimilarSitesActivity.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleHelper.cs" />
+    <Compile Include="SplashActivity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.dbf" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.ids" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.idx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.prj" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.shp" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Hotels.shx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.dbf" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.ids" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.idx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.prj" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.shp" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Medical_Facilities.shx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.dbf" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.ids" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.idx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.prj" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.shp" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Public_Facilities.shx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.dbf" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.ids" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.idx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.prj" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.shp" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Restaurants.shx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.dbf" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.ids" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.idx" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.prj" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.shp" />
+    <AndroidAsset Include="Assets\SampleData\POIs\Schools.shx" />
+    <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.dbf" />
+    <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.ids" />
+    <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.idx" />
+    <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.shp" />
+    <AndroidAsset Include="Assets\SampleData\CityLimitPolygon.shx" />
+    <None Include="app.config" />
+    <AndroidAsset Include="Assets\SiteSelection.SiteSelection.mapsuitelicense" />
+    <None Include="packages.config" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\PotentialSimilarSitesLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SplashLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable\clear.png" />
+    <AndroidResource Include="Resources\drawable\drawPoint.png" />
+    <AndroidResource Include="Resources\drawable\pan.png" />
+    <AndroidResource Include="Resources\drawable\linearlayoutStyle.xml" />
+    <AndroidResource Include="Resources\drawable\searchicon.png" />
+    <AndroidResource Include="Resources\layout\FilterByAreaDialogLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FilterByTypeDialogLayout.xml" />
+    <AndroidResource Include="Resources\layout\ListItemTemplate.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SpinnerTextViewLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BingMapsKeyLayout.xml" />
+    <AndroidResource Include="Resources\layout\SelectBaseMapTypeLayout.xml" />
+    <AndroidResource Include="Resources\drawable\basemap.png" />
+    <AndroidResource Include="Resources\drawable\displaytype_bing_aerial.png" />
+    <AndroidResource Include="Resources\drawable\displaytype_bing_road.png" />
+    <AndroidResource Include="Resources\drawable\displaytype_osm.png" />
+    <AndroidResource Include="Resources\drawable\DrugStore.png" />
+    <AndroidResource Include="Resources\drawable\Hotel.png" />
+    <AndroidResource Include="Resources\drawable\public_facility.png" />
+    <AndroidResource Include="Resources\drawable\restaurant.png" />
+    <AndroidResource Include="Resources\drawable\school.png" />
+    <AndroidResource Include="Resources\drawable\selectedHalo.png" />
+    <AndroidResource Include="Resources\layout\RadioButtonTextColorSelector.xml" />
+    <AndroidResource Include="Resources\layout\RadioButtonTextSizeSelector.xml" />
+    <AndroidResource Include="Resources\drawable\find.png" />
+    <AndroidResource Include="Resources\drawable\FilterByArea.png" />
+    <AndroidResource Include="Resources\drawable\FilterByType.png" />
+    <AndroidResource Include="Resources\drawable\displaytype_wmk.png" />
+    <AndroidResource Include="Resources\drawable\sampleIcon.png" />
+    <AndroidResource Include="Resources\drawable\MapSuite.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.IsoLine.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.IsoLine.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Tab.targets')" />
+  <Import Project=".\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.Noaa.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.Noaa.targets')" />
+  <Import Project=".\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+    <Error Condition="!Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets'))" />
+  </Target>
+  <Import Project="packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('packages\ThinkGeo.Core.12.2.7\build\netstandard2.1\ThinkGeo.Core.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

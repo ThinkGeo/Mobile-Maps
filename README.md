@@ -1,7 +1,7 @@
 # ThinkGeo Mobile Maps 
 
 
-Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up and running with some external data and styling.  After reviewing this, we strongly recommend that you check out our samples for both [iOS](samples/ios) and [android](samples/android).  It's packed with examples covering nearly everything you can do with our Mobile Maps control.
+Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up and running with some external data and styling.  After reviewing this, we strongly recommend that you check out our samples for both [iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios) and [android](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android).  It's packed with examples covering nearly everything you can do with our Mobile Maps control.
 
 ## Repository Layout
 
@@ -17,8 +17,8 @@ Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we su
 
 We have a number of samples for both Android and iOS that show off ThinkGeo Mobile Maps' full capabilities. You can use these samples as a starting point for your own application, or simply reference them for how to use our controls using best practices.
 
-- [iOS samples](samples/ios)
-- [Android samples](samples/android)
+- [iOS samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios)
+- [Android samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android)
 
 ## Quickstarts
 
@@ -29,7 +29,7 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with ThinkGeo background map along with some external data on a Xamarin iOS application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![Simple Map](assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
+![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
 
 ### Step 1: Install Prerequisites
 
@@ -123,7 +123,7 @@ Now go ahead and run the application and the map will be displayed properly.
 
 Now let's add an external data source (Shape File) to the map.
 
-1. Download [WorldCapitals.zip](assets/WorldCapitals.zip) shapefile and unzip it in your project under a new folder called `SampleData`.
+1. Download [WorldCapitals.zip](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/WorldCapitals.zip) shapefile and unzip it in your project under a new folder called `SampleData`.
 1. Include those files to the project. Multi-select them and change the Build Action to "Content".
 1. Now add the following code to `ViewDidLoad()` method.
 
@@ -154,13 +154,13 @@ You now know the basics of using the ThinkGeo Map controls and are able to get s
 1. A Map has many layers. A Layer correlates one-to-one with a single data source and typically of one type (point, polygon, line etc).
 1. A FeatureLayer can have several ZoomLevels. ZoomLevels help to define ranges (upper and lower) of when a Layer should be shown or hidden.
 
-You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/develop/samples/ios) and explore our other features.
+You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios) and explore our other features.
 
 ## Quick Start: Display a Simple Map on Android
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![alt text](assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
+![alt text](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
 
 ### Step 1: Set Up Prerequisites
 
@@ -184,7 +184,7 @@ Once these prerequisites have been installed, you'll need to create a new **Xama
 
 ### Step 3: Add NuGet Packages
 
-You'll need to install the **ThinkGeo.UI.Android** NuGet package. We strongly suggest you use your editor's [built in NuGet package manager](https://docs.microsoft.com/en-us/nuget/quickstart/) if possible.  If you're not using an IDE you can [install it via the the dotnet CLI](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-dotnet-cli) from inside the project folder where your project file exists.
+You'll need to install the **ThinkGeo.UI.Android** NuGet package. We strongly suggest you use your editor's [built in NuGet package manager](https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio) if possible.  If you're not using an IDE you can [install it via the the dotnet CLI](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-dotnet-cli) from inside the project folder where your project file exists.
 
 ```shell
 dotnet add package ThinkGeo.UI.Android
@@ -271,7 +271,7 @@ You should now be able to see your app with our Cloud Maps layer!
 
 Now that you have the basic map set up, you can add custom data to the map. Depending on the data, this can be complex or quite simple. We'll be going over the simple basics of adding custom data.
 
-Download the [WorldCapitals.zip](assets/WorldCapitals.zip) shapefile data and unzip it in your project under a new folder in the `Assets` folder called `AppData`. In order to move this data into storage on the Android device, we'll need to set up our app to request some basic permissions as well.
+Download the [WorldCapitals.zip](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/WorldCapitals.zip) shapefile data and unzip it in your project under a new folder in the `Assets` folder called `AppData`. In order to move this data into storage on the Android device, we'll need to set up our app to request some basic permissions as well.
 
 First, we need to add the required permissions to the Android manifest. This can be done by right-clicking on the project in the solution explorer and navigating to `Properties -> Android Manifest`, and finding `Required Permissions` near the bottom of the page. We need to ensure that the `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE` options are checked.
 
@@ -448,11 +448,10 @@ You now know the basics of using the ThinkGeo Map controls and are able to get s
 1. A Map has many layers. A Layer correlates one-to-one with a single data source and typically of one type (point, polygon, line etc).
 1. A FeatureLayer can have several ZoomLevels. ZoomLevels help to define ranges (upper and lower) of when a Layer should be shown or hidden.
 
-You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/samples/android) and explore our other features.
+You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android) and explore our other features.
 
 ## Need Help?
 
 If you run into any issues with running the samples, please let us know in the [Community Forums](https://community.thinkgeo.com).
 
 If you have any questions about the product or sales, please contact us at [sales@thinkgeo.com](mailto:sales@thinkgeo.com).
-
