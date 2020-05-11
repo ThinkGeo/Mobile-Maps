@@ -1,10 +1,10 @@
-# Earthquake Statistics Sample Template for Android
+# Earthquake Statistics Sample Template for iOS
 
 ### Description
 
 The Earthquake Statistics sample template is a statistical report system for earthquakes that have occurred in the past few years across the United States. It can help you generate infographics and analyze the severely afflicted areas, or used as supporting evidence when recommending measures to minimize the damage in future quakes.
 
-![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/samples/android/EarthquakeStatisticsSample/ScreenShot.png)
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/samples/ios/EarthquakeStatisticsSample/ScreenShot.gif)
 
 ### Requirements
 
@@ -12,13 +12,13 @@ This sample makes use of the following NuGet packages:
 
 [ThinkGeo Core](https://www.nuget.org/packages/ThinkGeo.Core)
 
-[ThinkGeo UI for Android](https://www.nuget.org/packages/ThinkGeo.UI.Android)
+[ThinkGeo UI for iOS](https://www.nuget.org/packages/ThinkGeo.UI.iOS)
 
-### ThinkGeo UI for Android Resources
+### ThinkGeo UI for iOS Resources
 
-[ThinkGeo UI for Android - Quickstart and API Docs](https://docs.thinkgeo.com/products/mobile-maps/v12.0/quickstart/#quick-start-display-a-simple-map-on-android)
+[ThinkGeo UI for iOS - Quickstart and API Docs](https://docs.thinkgeo.com/products/mobile-maps/v12.0/quickstart/#quick-start-display-a-simple-map-on-ios)
 
-[ThinkGeo UI for Android - Product Page](https://www.thinkgeo.com/mobile-maps)
+[ThinkGeo UI for iOS - Product Page](https://www.thinkgeo.com/mobile-maps)
 
 ### Additional Resources
 

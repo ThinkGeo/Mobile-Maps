@@ -1,10 +1,10 @@
-# Draw Edit Features Sample for Android
+# Draw Edit Features Sample for iOS
 
 ### Description
 
 This samples shows you how to implement drawing and editing shapes into your mobile application.
 
-![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/samples/android/DrawEditFeaturesSample/ScreenShot.png)
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/samples/ios/DrawEditFeaturesSample/ScreenShot.gif)
 
 ### Requirements
 
@@ -12,13 +12,13 @@ This sample makes use of the following NuGet packages:
 
 [ThinkGeo Core](https://www.nuget.org/packages/ThinkGeo.Core)
 
-[ThinkGeo UI for Android](https://www.nuget.org/packages/ThinkGeo.UI.Android)
+[ThinkGeo UI for iOS](https://www.nuget.org/packages/ThinkGeo.UI.iOS)
 
-### ThinkGeo UI for Android Resources
+### ThinkGeo UI for iOS Resources
 
-[ThinkGeo UI for Android - Quickstart and API Docs](https://docs.thinkgeo.com/products/mobile-maps/v12.0/quickstart/#quick-start-display-a-simple-map-on-android)
+[ThinkGeo UI for iOS - Quickstart and API Docs](https://docs.thinkgeo.com/products/mobile-maps/v12.0/quickstart/#quick-start-display-a-simple-map-on-ios)
 
-[ThinkGeo UI for Android - Product Page](https://www.thinkgeo.com/mobile-maps)
+[ThinkGeo UI for iOS - Product Page](https://www.thinkgeo.com/mobile-maps)
 
 ### Additional Resources
 
