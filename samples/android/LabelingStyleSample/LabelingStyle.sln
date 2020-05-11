@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelingStyle", "LabelingStyle\LabelingStyle.csproj", "{AF60DE1D-CD21-4C65-8D6C-8C86EB9797DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelingStyle", "LabelingStyle.csproj", "{AF60DE1D-CD21-4C65-8D6C-8C86EB9797DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
