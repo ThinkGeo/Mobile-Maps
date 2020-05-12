@@ -307,6 +307,12 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="LabelingStyle\**" />
+    <Content Remove="LabelingStyle\**" />
+    <EmbeddedResource Remove="LabelingStyle\**" />
+    <None Remove="LabelingStyle\**" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project=".\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.13.0.0-beta072\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

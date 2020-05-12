@@ -200,6 +200,12 @@
     <AndroidResource Include="Resources\layout\SelectorPan.xml" />
     <AndroidResource Include="Resources\drawable\sampleIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="EarthquakeStatistics\**" />
+    <Content Remove="EarthquakeStatistics\**" />
+    <EmbeddedResource Remove="EarthquakeStatistics\**" />
+    <None Remove="EarthquakeStatistics\**" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project=".\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
   <Import Project=".\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />
