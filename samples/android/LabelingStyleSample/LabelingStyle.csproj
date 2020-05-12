@@ -213,6 +213,12 @@
     <AndroidResource Include="Resources\drawable\LabelStylingIcon.png" />
     <AndroidResource Include="Resources\layout\ButtonBackgroundSelector.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="LabelingStyle\**" />
+    <Content Remove="LabelingStyle\**" />
+    <EmbeddedResource Remove="LabelingStyle\**" />
+    <None Remove="LabelingStyle\**" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project=".\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
   <Import Project=".\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />

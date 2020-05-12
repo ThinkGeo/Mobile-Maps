@@ -243,6 +243,14 @@
     <AndroidResource Include="Resources\layout\FilterStyleSettings.xml" />
     <AndroidResource Include="Resources\drawable\MapSuite.png" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="AnalyzingVisualization\**" />
+    <Content Remove="AnalyzingVisualization\**" />
+    <EmbeddedResource Remove="AnalyzingVisualization\**" />
+    <None Remove="AnalyzingVisualization\**" />
+  </ItemGroup>
+
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project=".\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets" Condition="Exists('.\packages\ThinkGeo.Core.12.2.6\build\netstandard2.1\ThinkGeo.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -180,7 +180,12 @@
     <AndroidResource Include="Resources\drawable\simplify.png" />
     <AndroidResource Include="Resources\drawable\MapSuite.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Remove="GeometricFunctions\**" />
+    <Content Remove="GeometricFunctions\**" />
+    <EmbeddedResource Remove="GeometricFunctions\**" />
+    <None Remove="GeometricFunctions\**" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project=".\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.10.0.0\build\Mono\ThinkGeo.MapSuite.targets')" />
   <Import Project=".\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets" Condition="Exists('.\packages\ThinkGeo.MapSuite.Layers.InMemory.10.0.0\build\Mono\ThinkGeo.MapSuite.Layers.InMemory.targets')" />
