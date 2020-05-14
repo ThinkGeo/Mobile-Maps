@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{129CB9A1-7B30-49E9-9E61-273ABDFFA483}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ThinkGeo.UI.iOS.HowDoI</RootNamespace>
+    <AssemblyName>ThinkGeo.UI.iOS.HowDoI</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_License|iPhoneSimulator'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\iPhoneSimulator\Debug_License\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_License|iPhone'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\iPhone\Debug_License\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ThinkGeo.UI.iOS">
+      <Version>13.0.0-beta002</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon72.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon72@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="AppData\Frisco\Frisco.tgeo" />
+    <BundleResource Include="AppData\Frisco\TXlkaA20.dbf" />
+    <BundleResource Include="AppData\Frisco\TXlkaA20.ids" />
+    <BundleResource Include="AppData\Frisco\TXlkaA20.idx" />
+    <BundleResource Include="AppData\Frisco\TXlkaA20.shp" />
+    <BundleResource Include="AppData\Frisco\TXlkaA20.shx" />
+    <BundleResource Include="AppData\Frisco\TXlkaA40.dbf" />
+    <BundleResource Include="AppData\Frisco\TXlkaA40.ids" />
+    <BundleResource Include="AppData\Frisco\TXlkaA40.idx" />
+    <BundleResource Include="AppData\Frisco\TXlkaA40.shp" />
+    <BundleResource Include="AppData\Frisco\TXlkaA40.shx" />
+    <BundleResource Include="AppData\Frisco\TXwat.dbf" />
+    <BundleResource Include="AppData\Frisco\TXwat.ids" />
+    <BundleResource Include="AppData\Frisco\TXwat.idx" />
+    <BundleResource Include="AppData\Frisco\TXwat.prj" />
+    <BundleResource Include="AppData\Frisco\TXwat.shp" />
+    <BundleResource Include="AppData\Frisco\TXwat.shx" />
+    <BundleResource Include="AppData\Gif\EWX_N0R_0.gfw" />
+    <BundleResource Include="AppData\Gpx\afoxboro.gpx" />
+    <BundleResource Include="AppData\Gpx\ashland.gpx" />
+    <BundleResource Include="AppData\Gpx\blue_hills.gpx" />
+    <BundleResource Include="AppData\Gpx\fells_loop.gpx" />
+    <None Include="AppData\Gpx\mystic_basin_trail.gpx" />
+    <BundleResource Include="AppData\SampleData\cities_e.dbf" />
+    <BundleResource Include="AppData\SampleData\cities_e.ids" />
+    <BundleResource Include="AppData\SampleData\cities_e.idx" />
+    <BundleResource Include="AppData\SampleData\cities_e.shp" />
+    <BundleResource Include="AppData\SampleData\cities_e.shx" />
+    <BundleResource Include="AppData\SampleData\Countries02.dbf" />
+    <BundleResource Include="AppData\SampleData\Countries02.ids" />
+    <BundleResource Include="AppData\SampleData\Countries02.idx" />
+    <BundleResource Include="AppData\SampleData\Countries02.shp" />
+    <BundleResource Include="AppData\SampleData\Countries02.shx" />
+    <BundleResource Include="AppData\SampleData\states.dbf" />
+    <BundleResource Include="AppData\SampleData\states.ids" />
+    <BundleResource Include="AppData\SampleData\states.idx" />
+    <BundleResource Include="AppData\SampleData\states.shp" />
+    <BundleResource Include="AppData\SampleData\states.shx" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.DAT" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.ID" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.ids" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.idx" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.IND" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.MAP" />
+    <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.TAB" />
+    <BundleResource Include="AppData\Tiff\World.tfw" />
+    <None Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advance\BaseViewController.cs" />
+    <Compile Include="Database Layers\LoadSqliteFeatureLayer.cs" />
+    <Compile Include="Web Based Layers\LoadBingMapsLayer.cs" />
+    <Compile Include="Web Based Layers\LoadOpenStreetMapLayer.cs" />
+    <Compile Include="Web Based Layers\LoadThinkGeoCloudRasterMapsLayer.cs" />
+    <Compile Include="Web Based Layers\LoadThinkGeoCloudVectorMapsLayer.cs" />
+    <Content Include="AppData\Source\AddAMarker.cs" />
+    <Content Include="AppData\Source\AddAPopup.cs" />
+    <Content Include="AppData\Source\AddATouchEventOnMap.cs" />
+    <Content Include="AppData\Source\AddATouchEventOnMarker.cs" />
+    <Content Include="AppData\Source\AddLabelOnMarkers.cs" />
+    <Content Include="AppData\Source\AddVariousMapTools.cs" />
+    <Content Include="AppData\Source\AreaOfAFeature.cs" />
+    <Content Include="AppData\Source\BufferAFeature.cs" />
+    <Content Include="AppData\Source\ChangeEditSettings.cs" />
+    <Content Include="AppData\Source\ConvertToFromWellKnownBinary.cs" />
+    <Content Include="AppData\Source\CreateAGraticuleAdornmentLayer.cs" />
+    <Content Include="AppData\Source\CreateAnInMemoryFeatureLayer.cs" />
+    <Content Include="AppData\Source\DisplayASimpleMap.cs" />
+    <Content Include="AppData\Source\DrawAFeatureBasedOnAValue.cs" />
+    <Content Include="AppData\Source\DrawAndEditShapes.cs" />
+    <Content Include="AppData\Source\DrawFeaturesBasedOnRegularExpression.cs" />
+    <Content Include="AppData\Source\DrawThematicFeatures.cs" />
+    <Content Include="AppData\Source\EditFeaturesFromAFeatureLayer.cs" />
+    <Content Include="AppData\Source\EnvelopeOfAFeature.cs" />
+    <Content Include="AppData\Source\ExtentAndScaleChangeEvents.cs" />
+    <Content Include="AppData\Source\FindById.cs" />
+    <Content Include="AppData\Source\FindFeatureTouched.cs" />
+    <Content Include="AppData\Source\FindTheDifferenceOfTwoFeatures.cs" />
+    <Content Include="AppData\Source\FindWorldCoordinatesWhereTouched.cs" />
+    <Content Include="AppData\Source\GetDistanceBetweenTwoFeatures.cs" />
+    <Content Include="AppData\Source\LengthOfAFeature.cs" />
+    <Content Include="AppData\Source\LoadAGdiPlusRasterLayer.cs" />
+    <Content Include="AppData\Source\LoadAGeoTiffRasterLayer.cs" />
+    <Content Include="AppData\Source\LoadAGpxFeatureLayer.cs" />
+    <Content Include="AppData\Source\LoadAHeatMapLayer.cs" />
+    <Content Include="AppData\Source\LoadAMapFromStreams.cs" />
+    <Content Include="AppData\Source\LoadAShapeFileFeatureLayer.cs" />
+    <Content Include="AppData\Source\LoadATabFeatureLayer.cs" />
+    <Content Include="AppData\Source\LoadATinyGeoFeatureLayer.cs" />
+    <Content Include="AppData\Source\ScaleFeatureUpAndDown.cs" />
+    <Content Include="AppData\Source\ScreenCoordinatesToWorldCoordinates.cs" />
+    <Content Include="AppData\Source\ShortestLineBetweenFeatures.cs" />
+    <Content Include="AppData\Source\SpatialQueryAFeatureLayer.cs" />
+    <Content Include="AppData\Source\UseBingMapsOverlay.cs" />
+    <Content Include="AppData\Source\UseGoogleMapsOverlay.cs" />
+    <Content Include="AppData\Source\UseRotationProjectionForAFeatureLayer.cs" />
+    <Content Include="AppData\Source\UseWMSOverlay.cs" />
+    <Content Include="AppData\Source\UsingGoogle900913projection.cs" />
+    <Content Include="AppData\Source\WorldCoordinatesToScreenCoordinates.cs" />
+    <Content Include="AppData\Source\ZoomInToAFeatureTouched.cs" />
+    <Content Include="AppData\Source\ZoomIntoFeatures.cs" />
+    <Content Include="AppData\Source\ZoomToAScale.cs" />
+    <Compile Include="Geometry Functions\FindWorldCoordinatesWhereTouched.cs" />
+    <Compile Include="Geometry Functions\GetDistanceBetweenTwoFeatures.cs" />
+    <Compile Include="Geometry Functions\ScreenCoordinatesToWorldCoordinates.cs" />
+    <Compile Include="Geometry Functions\WorldCoordinatesToScreenCoordinates.cs" />
+    <Compile Include="Vector Layers\CreateAnInMemoryFeatureLayer.cs" />
+    <Compile Include="Vector Layers\LoadAMapFromStreams.cs" />
+    <Compile Include="DetailViewController.cs" />
+    <Compile Include="Markers And Popups\AddLabelOnMarkers.cs" />
+    <Compile Include="Geometry Functions\EditFeaturesFromAFeatureLayer.cs" />
+    <Compile Include="Geometry Functions\AreaOfAFeature.cs" />
+    <Compile Include="Geometry Functions\BufferAFeature.cs" />
+    <Compile Include="Geometry Functions\ConvertToFromWellKnownBinary.cs" />
+    <Compile Include="Geometry Functions\EnvelopeOfAFeature.cs" />
+    <Compile Include="Geometry Functions\FindById.cs" />
+    <Compile Include="Geometry Functions\FindTheDifferenceOfTwoFeatures.cs" />
+    <Compile Include="Geometry Functions\LengthOfAFeature.cs" />
+    <Compile Include="Geometry Functions\ScaleFeatureUpAndDown.cs" />
+    <Compile Include="Geometry Functions\ShortestLineBetweenFeatures.cs" />
+    <Compile Include="Geometry Functions\SpatialQueryAFeatureLayer.cs" />
+    <Compile Include="Map Functions\ZoomIntoFeatures.cs" />
+    <Compile Include="Markers And Popups\AddAMarker.cs" />
+    <Compile Include="Markers And Popups\AddAPopup.cs" />
+    <Compile Include="Map Functions\AddATouchEventOnMap.cs" />
+    <Compile Include="Markers And Popups\AddATouchEventOnMarker.cs" />
+    <Compile Include="MapTools\AddVariousMapTools.cs" />
+    <Compile Include="Map Functions\DisplayASimpleMap.cs" />
+    <Compile Include="Geometry Functions\FindFeatureTouched.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="MainView\CategoryNode.cs" />
+    <Compile Include="MainView\SampleNode.cs" />
+    <Compile Include="MainView\TableSource.cs" />
+    <Compile Include="MainView\TableViewContoller.cs" />
+    <Compile Include="MainView\WebViewController.cs" />
+    <Compile Include="Other Layers\CreateAGraticuleAdornmentLayer.cs" />
+    <Compile Include="Map Functions\ExtentAndScaleChangeEvents.cs" />
+    <Compile Include="Projection\UseRotationProjectionForAFeatureLayer.cs" />
+    <Compile Include="Map Functions\ZoomInToAFeatureTouched.cs" />
+    <Compile Include="Map Functions\ZoomToAScale.cs" />
+    <Compile Include="Raster Layers\LoadAGdiPlusRasterLayer.cs" />
+    <Compile Include="Raster Layers\LoadAGeoTiffRasterLayer.cs" />
+    <Compile Include="Vector Layers\LoadAGpxFeatureLayer.cs" />
+    <Compile Include="Other Layers\LoadAHeatMapLayer.cs" />
+    <Compile Include="Vector Layers\LoadAShapeFileFeatureLayer.cs" />
+    <Compile Include="Vector Layers\LoadATabFeatureLayer.cs" />
+    <Compile Include="Vector Layers\LoadATinyGeoFeatureLayer.cs" />
+    <Compile Include="Overlay\UseBingMapsOverlay.cs" />
+    <Compile Include="Overlay\UseGoogleMapsOverlay.cs" />
+    <Compile Include="Overlay\UseWMSOverlay.cs" />
+    <Compile Include="Projection\UsingGoogle900913projection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleHelper.cs" />
+    <Compile Include="Geometry Functions\ChangeEditSettings.cs" />
+    <Compile Include="Geometry Functions\DrawAndEditShapes.cs" />
+    <Compile Include="Share\SampleUIHelper.cs" />
+    <Compile Include="Styles\DrawAFeatureBasedOnAValue.cs" />
+    <Compile Include="Styles\DrawFeaturesBasedOnRegularExpression.cs" />
+    <Compile Include="Styles\DrawThematicFeatures.cs" />
+    <BundleResource Include="Resources\AQUABLANK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="AppData\Gif\EWX_N0R_0.gif" />
+    <Content Include="AppData\SampleList-iOS.xml" />
+    <Content Include="AppData\SyntaxHighlighter\shBrushCSharp.js" />
+    <Content Include="AppData\SyntaxHighlighter\shBrushXml.js" />
+    <Content Include="AppData\SyntaxHighlighter\shCore.js" />
+    <Content Include="AppData\SyntaxHighlighter\SourceCode\DisplayASimpleMap.html" />
+    <Content Include="AppData\SyntaxHighlighter\SyntaxHighlighter.css" />
+    <BundleResource Include="AppData\Tiff\World.tif" />
+    <BundleResource Include="Resources\ArrowDown.png" />
+    <BundleResource Include="Resources\ArrowUp.png" />
+    <BundleResource Include="Resources\Circle.png" />
+    <BundleResource Include="Resources\Clear.png" />
+    <BundleResource Include="Resources\Cursor.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Landscape.png" />
+    <BundleResource Include="Resources\Default-Landscape%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Draw.png" />
+    <BundleResource Include="Resources\Edit.png" />
+    <BundleResource Include="Resources\Ellipse.png" />
+    <BundleResource Include="Resources\GoogleMap.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-72.png" />
+    <BundleResource Include="Resources\Icon-72%402x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
+    <BundleResource Include="Resources\Icon.png" />
+    <BundleResource Include="Resources\Icon%402x.png" />
+    <BundleResource Include="Resources\item.png" />
+    <BundleResource Include="Resources\Line.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\Minus.png" />
+    <BundleResource Include="Resources\More.png" />
+    <BundleResource Include="Resources\Pin.png" />
+    <BundleResource Include="Resources\Plus.png" />
+    <BundleResource Include="Resources\Point.png" />
+    <BundleResource Include="Resources\Polygon.png" />
+    <BundleResource Include="Resources\Rectangle.png" />
+    <BundleResource Include="Resources\Search.png" />
+    <BundleResource Include="Resources\Square.png" />
+    <BundleResource Include="Resources\ThinkGeoLogo.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="5dp"
+    android:background="#FFF">
+    <CheckBox
+        android:text="Apply Outline Color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/OutlineColorCheckBox"
+        android:background="@null"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:button="@null"
+        android:layout_marginTop="8dp"
+        android:drawableRight="@layout/SampleCheckBoxSelector" />
+    <View
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <CheckBox
+        android:text="Apply Background Mask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/MaskCheckBox"
+        android:background="@null"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:button="@null"
+        android:layout_marginTop="8dp"
+        android:drawableRight="@layout/SampleCheckBoxSelector" />
+    <View
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <CheckBox
+        android:text="Labels Overlapping Each Other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/OverlappingCheckBox"
+        android:background="@null"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:button="@null"
+        android:layout_marginTop="8dp"
+        android:drawableRight="@layout/SampleCheckBoxSelector" />
+    <View
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Grid Size : "
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/textView1"
+            android:textColor="#000"
+            android:textSize="18sp" />
+        <Spinner
+            android:id="@+id/GridSizeSpinner"
+            android:maxHeight="25dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null" />
+    </LinearLayout>
+    <View
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Duplicate Rule : "
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/textView1"
+            android:textColor="#000"
+            android:textSize="18sp" />
+        <Spinner
+            android:id="@+id/DuplicateRuleSpinner"
+            android:maxHeight="25dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null" />
+    </LinearLayout>
+    <View
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Drawing Margins : "
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/textView1"
+            android:textColor="#000"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/drawingMarginsText"
+            android:inputType="number"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:text="50"
+            android:gravity="right"
+            android:background="@null" />
+    </LinearLayout>
+</LinearLayout>

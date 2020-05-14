@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <FrameLayout
+      android:id="@+id/MapContainerView"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:layout_weight="18"
+      android:minWidth="25px"
+      android:minHeight="25px" />
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_weight="4">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/ListViewHeader">
+      <TextView
+          android:text="RoadName"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/RoadNameView"
+          android:gravity="center_vertical"
+          android:layout_weight="1" />
+      <TextView
+          android:text="Direction"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/DirectionView"
+          android:gravity="center_vertical"
+          android:layout_weight="1" />
+      <TextView
+          android:text="Length(Meter)"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/LengthView"
+          android:gravity="center_vertical"
+          android:layout_weight="1" />
+    </LinearLayout>
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="#666"
+        android:textAlignment="gravity"
+        android:id="@+id/DirectionListView"/>
+  </LinearLayout>
+</LinearLayout>

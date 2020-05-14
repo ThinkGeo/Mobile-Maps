@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThinkGeoMBTilesMapsSample-ForiOS", "ThinkGeoMBTilesMapsSample-ForiOS\ThinkGeoMBTilesMapsSample-ForiOS.csproj", "{862D404B-FC88-4B70-8719-26F0AFF60555}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Debug|iPhone.Build.0 = Debug|iPhone
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Release|iPhone.ActiveCfg = Release|iPhone
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Release|iPhone.Build.0 = Release|iPhone
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{862D404B-FC88-4B70-8719-26F0AFF60555}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D9E4152-F957-42CB-A062-454F8D19D85F}
+	EndGlobalSection
+EndGlobal

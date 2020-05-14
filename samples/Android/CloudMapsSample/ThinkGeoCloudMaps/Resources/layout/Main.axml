@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<LinearLayout 
+		 android:layout_width="match_parent"
+         android:layout_height="60dp"
+         android:background="#f7f7f7"
+         android:orientation="horizontal">
+		 <TextView
+			android:text="ThinkGeo Cloud Maps"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/TitleTextView"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+		<ImageButton
+			android:gravity="right"
+			android:src="@drawable/detail40"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/SettingsButton"
+            android:background="@layout/ButtonBackgroundSelector" />
+		</LinearLayout>
+    <thinkgeo.mapsuite.android.MapView
+        android:id="@+id/map1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </thinkgeo.mapsuite.android.MapView>
+</LinearLayout>

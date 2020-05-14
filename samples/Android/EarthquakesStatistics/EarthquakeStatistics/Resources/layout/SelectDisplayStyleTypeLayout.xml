@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+  <!--<GridView
+           android:id="@+id/gridview"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:numColumns="4"
+           android:verticalSpacing="10dip"
+           android:horizontalSpacing="10dip"
+           android:stretchMode="columnWidth"
+           android:gravity="center"
+         />-->
+  <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup1">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Point Style"
+        android:id="@+id/PointStyleRadioButton" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heat Style"
+        android:id="@+id/HeatStyleRadioButton" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IsoLine Style"
+        android:enabled="false"
+        android:id="@+id/IsoLineStyleRadioButton" />
+  </RadioGroup>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:text="Ok"
+      android:id="@+id/OkButton"/>
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:text="Cancel"
+      android:id="@+id/CancelButton"/>
+  </LinearLayout>
+</LinearLayout>

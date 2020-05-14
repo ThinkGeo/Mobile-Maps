@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <analyzingvisualization.SliderView
+        android:id="@+id/slider_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="#FFF"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/sampleListTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#f7f7f7"
+                    android:text="  Style List"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:gravity="left|center_vertical" />
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1" />
+                <ImageButton
+                    android:src="@drawable/more40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sampleListMoreButton"
+                    android:layout_margin="5dp"
+                    android:background="@layout/ButtonBackgroundSelector" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="192dp"
+                android:background="@drawable/SliderLineBackground" />
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/mainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFF"
+            android:orientation="vertical" />
+    </analyzingvisualization.SliderView>
+</LinearLayout>

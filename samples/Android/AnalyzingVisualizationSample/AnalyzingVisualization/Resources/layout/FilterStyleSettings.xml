@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingsLinearLayout"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#82838A"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/headerLinearLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Setting"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingTextView"
+            android:layout_marginLeft="4dp" />
+        <View
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:layout_weight="1" />
+        <ImageButton
+            android:src="@drawable/More"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:id="@+id/moreImageButton"
+            android:background="@null"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/columnLinearLayour"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp">
+        <TextView
+            android:text="Column    :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/columnTextView" />
+        <TextView
+            android:text="STATE_NAME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameTextView"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/conditionLinearLayour"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:text="Condition :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/conditionextView" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/conditionSpinner"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/valueLinearLayour"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:text="Value        :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valueTextView" />
+        <EditText
+            android:text="1100000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valueEditText"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:text="Apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/applyButton" />
+</LinearLayout>

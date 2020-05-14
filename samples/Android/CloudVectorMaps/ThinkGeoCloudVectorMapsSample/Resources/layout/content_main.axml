@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:showIn="@layout/activity_main">
+	<ThinkGeo.MapSuite.Android.MapView
+		android:id="@+id/MapView"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:minWidth="25px"
+		android:minHeight="25px">
+	</ThinkGeo.MapSuite.Android.MapView>
+	<android.support.design.widget.TabLayout
+		android:background="#fff"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerInParent="true"
+		android:orientation="vertical"
+		app:tabBackground="@drawable/tablayoutstyle"
+		android:id="@+id/tabLayout1">
+		<android.support.design.widget.TabItem
+			android:id="@+id/lightTab"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Light" />
+		<android.support.design.widget.TabItem
+			android:id="@+id/darkTab"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Dark" />
+		<android.support.design.widget.TabItem
+			android:id="@+id/hybridTab"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hybrid" />
+		<android.support.design.widget.TabItem
+			android:id="@+id/customTab"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Sea Blue (Custom)" />
+	</android.support.design.widget.TabLayout>
+</RelativeLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <thinkgeo.mapsuite.android.MapView
+        android:id="@+id/androidMap"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minHeight="25px"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ToolsLinearLayout"
+        android:background="@drawable/linearlayoutStyle">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/radioGroup1">
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:layout_marginRight="15dp"
+                    android:text="Pan"
+                    android:textSize="10sp"
+                    android:textColor="@layout/RadioButtonTextColorSelector"
+                    android:drawableTop="@layout/SelectorPan"
+                    android:id="@+id/PanButton" />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:layout_marginRight="15dp"
+                    android:text="Draw Polygon"
+                    android:textSize="10sp"
+                    android:textColor="@layout/RadioButtonTextColorSelector"
+                    android:drawableTop="@layout/SelectorDrawPolygon"
+                    android:id="@+id/DrawPolygonButton" />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:layout_marginRight="15dp"
+                    android:text="Draw Rectangle"
+                    android:textSize="10sp"
+                    android:textColor="@layout/RadioButtonTextColorSelector"
+                    android:drawableTop="@layout/SelectorDrawRectangle"
+                    android:id="@+id/DrawRectangleButton" />
+            </RadioGroup>
+            <Button
+                android:drawableTop="@drawable/recycleicon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear"
+                android:textSize="10sp"
+                android:textColor="@android:color/white"
+                android:background="@null"
+                android:id="@+id/ClearButton" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:drawableTop="@drawable/searchicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="More Options"
+                    android:textSize="10sp"
+                    android:textColor="@android:color/white"
+                    android:background="@null"
+                    android:id="@+id/MoreOptionsButton"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
