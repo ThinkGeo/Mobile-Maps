@@ -29,7 +29,7 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with ThinkGeo background map along with some external data on a Xamarin iOS application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
+![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
 
 ### Step 1: Install Prerequisites
 
@@ -160,7 +160,7 @@ You are now in a great position to look over the [other samples available](https
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with some external data and styling on a Xamarin Android application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-![alt text](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
+![alt text](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/assets/quickstart_shapefile_pointstyle_screenshot.PNG "Simple Map")
 
 ### Step 1: Set Up Prerequisites
 
