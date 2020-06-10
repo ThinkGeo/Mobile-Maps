@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,8 @@ namespace ThinkGeo.UI.Android.HowDoI
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize)]
     public class MainActivity : Activity
     {
-        //readonly string[] StoragePermissions = new string[] {Manifest.Permission.ReadExternalStorage,
-        //                                                    Manifest.Permission.WriteExternalStorage};
-        //const int RequestStorageId = 0;
+        private const int RequestStorageId = 0;
+        private readonly string[] StoragePermissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
 
         private TextView uploadTextView;
         private ProgressBar uploadProgressBar;
@@ -33,13 +33,16 @@ namespace ThinkGeo.UI.Android.HowDoI
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashLayout);
 
+            // Request read & write permission to storage.
+            RequestRequiredPermissions();
+
             uploadTextView = FindViewById<TextView>(Resource.Id.uploadDataTextView);
             uploadProgressBar = FindViewById<ProgressBar>(Resource.Id.uploadProgressBar);
 
             Task updateSampleDatasTask = Task.Factory.StartNew(() =>
             {
-                Collection<string> unLoadDatas = CollectUnloadDatas(SampleHelper.SampleDataDictionary, SampleHelper.AssetsDataDictionary);
-                UploadDataFiles(SampleHelper.SampleDataDictionary, unLoadDatas, OnCopyingSourceFile);
+                Collection<string> unLoadDatas = SampleHelper.CollectUnloadDatas(this.Assets, SampleHelper.SampleDataDictionary, SampleHelper.AssetsDataDictionary);
+                SampleHelper.UploadDataFiles(this.Assets, SampleHelper.SampleDataDictionary, unLoadDatas, OnCopyingFiles);
 
                 uploadTextView.Post(() =>
                 {
@@ -58,7 +61,30 @@ namespace ThinkGeo.UI.Android.HowDoI
             });
         }
 
-        private void OnCopyingSourceFile(string targetPathFilename, int completeCount, int totalCount)
+        private void RequestRequiredPermissions()
+        {
+            foreach (var permission in StoragePermissions)
+            {
+                if (CheckSelfPermission(permission) != Permission.Granted)
+                {
+                    RequestPermissions(StoragePermissions, RequestStorageId);
+                    break;
+                }
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            if (requestCode == RequestStorageId)
+            {
+                if (grantResults.Any(x => x == Permission.Denied))
+                {
+                    Toast.MakeText(this, "Storage Permissions Denied", ToastLength.Short).Show();
+                }
+            }
+        }
+
+        private void OnCopyingFiles(string targetPathFilename, int completeCount, int totalCount)
         {
             uploadTextView.Post(() =>
             {
@@ -67,57 +93,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             });
         }
 
-        private Collection<string> CollectUnloadDatas(string targetDirectory, string sourceDirectory)
-        {
-            Collection<string> result = new Collection<string>();
-
-            foreach (string filename in Assets.List(sourceDirectory))
-            {
-                string sourcePath = System.IO.Path.Combine(sourceDirectory, filename);
-                string targetPath = System.IO.Path.Combine(targetDirectory, sourcePath);
-
-                bool isSourcePathAFile = !string.IsNullOrEmpty(Path.GetExtension(sourcePath));
-                if (isSourcePathAFile && !File.Exists(targetPath))
-                {
-                    result.Add(sourcePath);
-                }
-                else if (!isSourcePathAFile)
-                {
-                    foreach (string item in CollectUnloadDatas(targetDirectory, sourcePath))
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            return result;
-        }
-
-        private void UploadDataFiles(string targetDirectory, IEnumerable<string> sourcePathFilenames, Action<string, int, int> onCopyingSourceFile = null)
-        {
-            int completeCount = 0;
-            if (!Directory.Exists(targetDirectory)) Directory.CreateDirectory(targetDirectory);
-
-            foreach (string sourcePathFilename in sourcePathFilenames)
-            {
-                string targetPathFilename = Path.Combine(targetDirectory, sourcePathFilename);
-                if (!File.Exists(targetPathFilename))
-                {
-                    if (onCopyingSourceFile != null) onCopyingSourceFile(targetPathFilename, completeCount, sourcePathFilenames.Count());
-
-                    string targetPath = Path.GetDirectoryName(targetPathFilename);
-                    if (!Directory.Exists(targetPath)) Directory.CreateDirectory(targetPath);
-                    Stream sourceStream = Assets.Open(sourcePathFilename);
-                    FileStream fileStream = File.Create(targetPathFilename);
-                    sourceStream.CopyTo(fileStream);
-                    fileStream.Close();
-                    sourceStream.Close();
-
-                    completeCount++;
-                }
-            }
-        }
 
     }
-
 }
 
