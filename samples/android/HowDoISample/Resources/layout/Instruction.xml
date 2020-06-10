@@ -1,0 +1,67 @@
+﻿<LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       android:orientation="vertical"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/instructionLinearLayout"
+       android:layout_alignParentRight="true"
+       android:layout_centerHorizontal="true"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentBottom="true"
+       android:background="#7E7E7E">
+  <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/headerRelativeLayout">
+    <TextView
+        android:text=" Instruction "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instructionTextView"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true" />
+    <View
+        android:layout_height="1dp"
+        android:layout_width="100dp"
+        android:background="@android:color/background_light"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/instructionTextView" />
+    <View
+        android:layout_height="1dp"
+        android:layout_width="100dp"
+        android:background="@android:color/background_light"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/instructionTextView" />
+  </RelativeLayout>
+  <RelativeLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:id="@+id/contentRelativeLayout">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentLinearLayout"
+        android:layout_marginLeft="12.0dp">
+      <TextView
+        android:text="This sample shows how to show a simple map"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionTextView"/>
+    </LinearLayout>
+  </RelativeLayout>
+  <View
+      android:layout_width="wrap_content"
+      android:layout_height="10.0dp" />
+</LinearLayout>
