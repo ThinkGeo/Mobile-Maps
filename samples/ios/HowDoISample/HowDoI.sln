@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HowDoI", "HowDoI\HowDoI.csproj", "{FC4EDE18-5261-4D41-B6D1-21955F15C194}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Debug|iPhone.Build.0 = Debug|iPhone
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Release|iPhone.ActiveCfg = Release|iPhone
+		{FC4EDE18-5261-4D41-B6D1-21955F15C194}.Release|iPhone.Build.0 = Release|iPhone
+	EndGlobalSection
+EndGlobal
