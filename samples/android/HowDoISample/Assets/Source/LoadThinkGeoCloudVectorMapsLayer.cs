@@ -19,11 +19,11 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
             layerOverlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
              
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
-            androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-            androidMap.Refresh();
+            mapView.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.Refresh();
         }
     }
 }

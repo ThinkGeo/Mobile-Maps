@@ -23,9 +23,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(worldLayer);
 
             //
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add(layerOverlay);
 
             LinearLayout linearLayout = new LinearLayout(this.Context);
             linearLayout.Orientation = Orientation.Horizontal;
@@ -49,7 +49,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             var button = sender as Button;
             string zoomLevelScale = button.Text;
             double scale = Convert.ToDouble(zoomLevelScale.Split(':')[1], CultureInfo.InvariantCulture);
-            androidMap.ZoomToScale(scale);
+            mapView.ZoomToScale(scale);
         }
     }
 }

@@ -13,15 +13,15 @@ namespace ThinkGeo.UI.Android.HowDoI
             base.OnStart();
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-143.4, 109.3, 116.7, -76.3);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-143.4, 109.3, 116.7, -76.3);
 
             WmsOverlay wmsOverlay = new WmsOverlay();
             wmsOverlay.ServerUris.Add(new Uri("http://ows.mundialis.de/services/service"));
             wmsOverlay.Parameters.Add("layers", "OSM-WMS");
             wmsOverlay.Parameters.Add("STYLES", "default");
             wmsOverlay.Parameters.Add("CRS", "3857");
-            androidMap.Overlays.Add(wmsOverlay);
+            mapView.Overlays.Add(wmsOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

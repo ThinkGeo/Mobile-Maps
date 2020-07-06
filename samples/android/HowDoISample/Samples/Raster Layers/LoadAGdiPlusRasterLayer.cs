@@ -20,10 +20,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(radarImageLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
             radarImageLayer.Open();
-            androidMap.CurrentExtent = radarImageLayer.GetBoundingBox();
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.CurrentExtent = radarImageLayer.GetBoundingBox();
+            mapView.Overlays.Add(layerOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

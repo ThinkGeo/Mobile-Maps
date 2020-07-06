@@ -27,10 +27,10 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             Feature feature = new Feature(new RectangleShape(-55.5723249724898, 15.7443857300058, -10.5026750275102, -7.6443857300058));
 
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-79.303125, 76.471875, 0.853125000000006, -38.840625);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-79.303125, 76.471875, 0.853125000000006, -38.840625);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
 
             canReShape = new CheckBox(this.Context);
             canReShape.Text = "ReShape";
@@ -60,13 +60,13 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void Setting_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
-            androidMap.EditOverlay.CanReshape = canReShape.Checked;
-            androidMap.EditOverlay.CanResize = canResize.Checked;
-            androidMap.EditOverlay.CanRotate = canRotate.Checked;
-            androidMap.EditOverlay.CanDrag = canDrag.Checked;
+            mapView.EditOverlay.CanReshape = canReShape.Checked;
+            mapView.EditOverlay.CanResize = canResize.Checked;
+            mapView.EditOverlay.CanRotate = canRotate.Checked;
+            mapView.EditOverlay.CanDrag = canDrag.Checked;
 
-            androidMap.EditOverlay.CalculateAllControlPoints();
-            androidMap.Refresh();
+            mapView.EditOverlay.CalculateAllControlPoints();
+            mapView.Refresh();
         }
     }
 }

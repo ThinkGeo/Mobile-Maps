@@ -10,7 +10,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class FindTheDifferenceOfTwoFeatures : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -35,10 +35,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add("WorldLayer", worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("InMemoryOverlay", inmemoryOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("InMemoryOverlay", inmemoryOverlay);
 
             Button differenceButton = new Button(this.Context);
             differenceButton.Text = "Difference";
@@ -50,7 +50,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void DifferenceButtonClick(object sender, EventArgs e)
         {
-            LayerOverlay inMemoryOverlay = (LayerOverlay)androidMap.Overlays["InMemoryOverlay"];
+            LayerOverlay inMemoryOverlay = (LayerOverlay)mapView.Overlays["InMemoryOverlay"];
             InMemoryFeatureLayer inMemoryLayer = (InMemoryFeatureLayer)inMemoryOverlay.Layers["InMemoryFeatureLayer"];
 
             if (inMemoryLayer.InternalFeatures.Count > 1)
@@ -63,7 +63,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                 inMemoryLayer.InternalFeatures.Add("ResultFeature", new Feature(resultShape.GetWellKnownBinary(), "ResultFeature"));
                 inMemoryLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillBrush = new GeoSolidBrush(GeoColor.FromArgb(100, GeoColors.Blue));
 
-                androidMap.Overlays["InMemoryOverlay"].Refresh();
+                mapView.Overlays["InMemoryOverlay"].Refresh();
             }
         }
     }

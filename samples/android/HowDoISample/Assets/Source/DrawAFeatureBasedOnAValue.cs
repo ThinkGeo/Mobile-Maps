@@ -24,9 +24,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add("TXlkaA20", worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-135.7, 83.6, 113.5, -53);
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-135.7, 83.6, 113.5, -53);
+            mapView.Overlays.Add(layerOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

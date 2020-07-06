@@ -21,11 +21,11 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add("BingMapsLayer", bingMapsLayer);
             layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
 
-           androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
-            androidMap.ZoomLevelSet = new BingMapsZoomLevelSet();
-            androidMap.Overlays.Add("LayerOverlay", layerOverlay);
-            androidMap.Refresh();
+           mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
+            mapView.ZoomLevelSet = new BingMapsZoomLevelSet();
+            mapView.Overlays.Add("LayerOverlay", layerOverlay);
+            mapView.Refresh();
         }
     }
 }

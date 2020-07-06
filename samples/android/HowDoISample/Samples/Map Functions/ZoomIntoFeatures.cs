@@ -29,10 +29,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
             //
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("HighlightOverlay", highlightOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
 
             Button oneFeatureButton = new Button(this.Context);
             oneFeatureButton.Text = "OneFeature";
@@ -53,16 +53,16 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void OneFeatureButtonClick(object sender, EventArgs e)
         {
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
 
-            LayerOverlay highlightOverlay = (LayerOverlay)androidMap.Overlays["HighlightOverlay"];
+            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
             InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
             lock (worldLayer)
             {
                 if (!worldLayer.IsOpen) worldLayer.Open();
-                androidMap.CurrentExtent = worldLayer.FeatureSource.GetBoundingBoxById("137");
+                mapView.CurrentExtent = worldLayer.FeatureSource.GetBoundingBoxById("137");
 
                 highlightLayer.Open();
                 highlightLayer.InternalFeatures.Clear();
@@ -74,7 +74,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                 highlightLayer.Close();
             }
 
-            androidMap.Refresh();
+            mapView.Refresh();
         }
 
         private void MulitFeaturesButtonClick(object sender, EventArgs e)
@@ -84,17 +84,17 @@ namespace ThinkGeo.UI.Android.HowDoI
             featureIDs.Add("6");   // For Canada
             featureIDs.Add("137"); // For Mexico
 
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
 
-            LayerOverlay highlightOverlay = (LayerOverlay)androidMap.Overlays["HighlightOverlay"];
+            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
             InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
             lock (worldLayer)
             {
                 if (!worldLayer.IsOpen) worldLayer.Open();
                 Collection<Feature> features = worldLayer.FeatureSource.GetFeaturesByIds(featureIDs, new string[0]);
-                androidMap.CurrentExtent = MapUtil.GetBoundingBoxOfItems(features);
+                mapView.CurrentExtent = MapUtil.GetBoundingBoxOfItems(features);
 
                 highlightLayer.Open();
                 highlightLayer.InternalFeatures.Clear();
@@ -108,7 +108,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                 highlightLayer.Close();
             }
 
-            androidMap.Refresh();
+            mapView.Refresh();
         }
     }
 }

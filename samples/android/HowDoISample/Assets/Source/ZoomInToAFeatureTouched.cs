@@ -27,20 +27,20 @@ namespace ThinkGeo.UI.Android.HowDoI
             LayerOverlay highlightOverlay = new LayerOverlay();
             highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("HighlightOverlay", highlightOverlay);
-            androidMap.SingleTap += AndroidMap_SingleTap;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+            mapView.SingleTap += mapView_SingleTap;
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo);
         }
 
-        private void AndroidMap_SingleTap(object sender, SingleTapMapViewEventArgs e)
+        private void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
         {
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
-            LayerOverlay highlightOverlay = (LayerOverlay)androidMap.Overlays["HighlightOverlay"];
+            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
             InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
             worldLayer.Open();
@@ -51,7 +51,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             highlightLayer.InternalFeatures.Clear();
             if (selectedFeatures.Count > 0)
             {
-                androidMap.ZoomTo(selectedFeatures[0].GetBoundingBox());
+                mapView.ZoomTo(selectedFeatures[0].GetBoundingBox());
                 highlightLayer.InternalFeatures.Add(selectedFeatures[0]);
             }
             highlightLayer.Close();

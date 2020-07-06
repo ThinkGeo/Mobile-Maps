@@ -9,15 +9,15 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class EditFeaturesFromAFeatureLayer : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnStart();
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(0, 100, 100, 0);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(0, 100, 100, 0);
 
             InMemoryFeatureLayer inMemoryLayer = new InMemoryFeatureLayer();
             inMemoryLayer.InternalFeatures.Add("Polygon", new Feature("POLYGON((10 60,40 70,30 85, 10 60))", "Polygon"));
@@ -35,7 +35,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             inmemoryOverlay.TileType = TileType.SingleTile;
             inmemoryOverlay.Layers.Add(new BackgroundLayer(new GeoSolidBrush(GeoColors.White)));
             inmemoryOverlay.Layers.Add("InMemoryFeatureLayer", inMemoryLayer);
-            androidMap.Overlays.Add("InMemoryOverlay", inmemoryOverlay);
+            mapView.Overlays.Add("InMemoryOverlay", inmemoryOverlay);
 
             Button editFeatureButton = new Button(this.Context);
             editFeatureButton.Text = "Edit a feature";
@@ -47,7 +47,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void EditFeatureButtonClick(object sender, System.EventArgs e)
         {
-            LayerOverlay inMemoryOverlay = (LayerOverlay)androidMap.Overlays["InMemoryOverlay"];
+            LayerOverlay inMemoryOverlay = (LayerOverlay)mapView.Overlays["InMemoryOverlay"];
             InMemoryFeatureLayer inMemoryLayer = (InMemoryFeatureLayer)inMemoryOverlay.Layers["InMemoryFeatureLayer"];
 
             inMemoryLayer.Open();
@@ -56,7 +56,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             inMemoryLayer.EditTools.CommitTransaction();
             inMemoryLayer.Close();
 
-            androidMap.Overlays["InMemoryOverlay"].Refresh();
+            mapView.Overlays["InMemoryOverlay"].Refresh();
         }
     }
 }

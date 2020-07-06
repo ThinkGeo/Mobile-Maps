@@ -29,9 +29,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             inmemoryOverlay.Layers.Add(inMemoryLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(0, 100, 100, 0);
-            androidMap.Overlays.Add(inmemoryOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(0, 100, 100, 0);
+            mapView.Overlays.Add(inmemoryOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

@@ -43,11 +43,11 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             ThinkGeoCloudRasterMapsOverlay ThinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret);
 
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = currentExtent;
-            androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-            androidMap.Overlays.Add("ThinkGeoCloudRasterMapsOverlay", ThinkGeoCloudRasterMapsOverlay);
-            androidMap.Overlays.Add("BufferOverlay", bufferOverlay);
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = currentExtent;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.Overlays.Add("ThinkGeoCloudRasterMapsOverlay", ThinkGeoCloudRasterMapsOverlay);
+            mapView.Overlays.Add("BufferOverlay", bufferOverlay);
 
             Button bufferButton = new Button(this.Context);
             bufferButton.Text = "Buffer";
@@ -59,7 +59,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void BufferButtonClick(object sender, System.EventArgs e)
         {
-            LayerOverlay bufferOverLay = (LayerOverlay)androidMap.Overlays["BufferOverlay"];
+            LayerOverlay bufferOverLay = (LayerOverlay)mapView.Overlays["BufferOverlay"];
 
             InMemoryFeatureLayer inMemoryLayer = (InMemoryFeatureLayer)bufferOverLay.Layers["InMemoryFeatureLayer"];
             InMemoryFeatureLayer bufferLayer = (InMemoryFeatureLayer)bufferOverLay.Layers["BufferLayer"];
@@ -71,7 +71,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             bufferLayer.InternalFeatures.Clear();
             bufferLayer.InternalFeatures.Add("BufferFeature", bufferFeature);
 
-            androidMap.Overlays["BufferOverlay"].Refresh();
+            mapView.Overlays["BufferOverlay"].Refresh();
         }
     }
 }

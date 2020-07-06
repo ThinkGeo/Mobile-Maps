@@ -24,9 +24,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             staticOverlay.Layers.Add(worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = new RectangleShape(-13939426.6371, 6701997.4056, -7812401.86, 2626987.386962);
-            androidMap.Overlays.Add(staticOverlay);
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = new RectangleShape(-13939426.6371, 6701997.4056, -7812401.86, 2626987.386962);
+            mapView.Overlays.Add(staticOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

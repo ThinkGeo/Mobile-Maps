@@ -20,10 +20,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add(sqliteFeatureLayer);
 
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = new RectangleShape(-8336043.617221244, 5212990.090742311, -8328829.872716907, 5207266.868281254);
-            androidMap.Refresh();
+            mapView.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = new RectangleShape(-8336043.617221244, 5212990.090742311, -8328829.872716907, 5207266.868281254);
+            mapView.Refresh();
         }
     }
 }

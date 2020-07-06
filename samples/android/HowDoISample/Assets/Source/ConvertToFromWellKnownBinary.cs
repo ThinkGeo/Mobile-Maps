@@ -24,9 +24,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add(worldLayer);
 
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add(layerOverlay);
 
             Button convertButton = new Button(this.Context);
             convertButton.Text = "Convert";

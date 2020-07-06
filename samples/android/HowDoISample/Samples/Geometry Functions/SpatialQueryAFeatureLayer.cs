@@ -10,7 +10,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class SpatialQueryAFeatureLayer : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -40,10 +40,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             spatialQueryResultOverlay.Layers.Add("SpatialQueryResultLayer", spatialQueryResultLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("SpatialQueryResultOverlay", spatialQueryResultOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("SpatialQueryResultOverlay", spatialQueryResultOverlay);
 
             Button withinButton = new Button(this.Context);
             withinButton.Text = "Within";
@@ -63,10 +63,10 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void button_TouchDown(object sender, EventArgs e)
         {
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
 
-            LayerOverlay spatialQueryResultOverlay = (LayerOverlay)androidMap.Overlays["SpatialQueryResultOverlay"];
+            LayerOverlay spatialQueryResultOverlay = (LayerOverlay)mapView.Overlays["SpatialQueryResultOverlay"];
             InMemoryFeatureLayer rectangleLayer = (InMemoryFeatureLayer)spatialQueryResultOverlay.Layers["RectangleLayer"];
             InMemoryFeatureLayer spatialQueryResultLayer = (InMemoryFeatureLayer)spatialQueryResultOverlay.Layers["SpatialQueryResultLayer"];
 
@@ -97,7 +97,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                 spatialQueryResultLayer.InternalFeatures.Add(feature.Id, feature);
             }
 
-            androidMap.Overlays["SpatialQueryResultOverlay"].Refresh();
+            mapView.Overlays["SpatialQueryResultOverlay"].Refresh();
         }
     }
 }

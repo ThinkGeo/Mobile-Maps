@@ -9,7 +9,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class ScreenCoordinatesToWorldCoordinates : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private TextView screenPositionLable;
         private TextView worldPositionLable;
 
@@ -25,17 +25,17 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.SingleTap += AndroidMap_SingleTap; ;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.SingleTap += mapView_SingleTap; ;
 
             screenPositionLable = new TextView(this.Context);
             worldPositionLable = new TextView(this.Context);
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo, new Collection<View>() { screenPositionLable, worldPositionLable });
         }
 
-        private void AndroidMap_SingleTap(object sender, SingleTapMapViewEventArgs e)
+        private void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
         {
             screenPositionLable.Text = string.Format("Screen Position:({0:N4},{1:N4})", e.ScreenX, e.ScreenY);
             worldPositionLable.Text = string.Format("World Position: ({0:N4},{1:N4})", e.WorldX, e.WorldY);

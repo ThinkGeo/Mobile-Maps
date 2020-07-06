@@ -33,11 +33,11 @@ namespace ThinkGeo.UI.Android.HowDoI
             ThinkGeoCloudRasterMapsOverlay ThinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret);
 
             
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.CurrentExtent = currentExtent;
-            androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.CurrentExtent = currentExtent;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

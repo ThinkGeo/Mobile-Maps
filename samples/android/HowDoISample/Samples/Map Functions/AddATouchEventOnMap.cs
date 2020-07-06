@@ -43,16 +43,16 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(txlkaA20FeatureLayer);
             layerOverlay.Layers.Add(txlkaA40FeatureLayer);
 
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
-            androidMap.Overlays.Add(markerOverlay);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.SingleTap += AndroidMap_SingleTap;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
+            mapView.Overlays.Add(markerOverlay);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.SingleTap += mapView_SingleTap;
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo);
         }
 
-        private void AndroidMap_SingleTap(object sender, SingleTapMapViewEventArgs e)
+        private void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
         {
             Marker marker = new Marker(this.Context);
             marker.Position = e.WorldPoint;

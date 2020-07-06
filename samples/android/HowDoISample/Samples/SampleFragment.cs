@@ -14,7 +14,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 {
     public abstract class SampleFragment : Fragment
     {
-        protected MapView androidMap;
+        protected MapView mapView;
         protected View currentView;
         private bool isDisposed;
 
@@ -26,17 +26,17 @@ namespace ThinkGeo.UI.Android.HowDoI
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             currentView = inflater.Inflate(Resource.Layout.DisplayMapView, container, false);
-            androidMap = currentView.FindViewById<MapView>(Resource.Id.androidmap);
+            mapView = currentView.FindViewById<MapView>(Resource.Id.mapView);
 
             return currentView;
         }
 
         public override void OnDestroy()
         {
-            if (androidMap != null && !isDisposed)
+            if (mapView != null && !isDisposed)
             {
                 isDisposed = true;
-                androidMap.Dispose();
+                mapView.Dispose();
             }
 
             base.OnDestroy();

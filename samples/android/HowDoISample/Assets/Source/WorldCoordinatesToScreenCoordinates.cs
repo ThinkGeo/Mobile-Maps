@@ -12,7 +12,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 {
     public class WorldCoordinatesToScreenCoordinates : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private TextView resultView;
         private EditText longitudeTextView;
         private EditText latitudeTextView;
@@ -37,10 +37,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.Overlays.Add(markerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.Overlays.Add(markerOverlay);
 
             Button convertButton = new Button(this.Context);
             convertButton.Click += ConvertButtonClick;
@@ -71,7 +71,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void ConvertButtonClick(object sender, EventArgs e)
         {
-            ScreenPointF screenPoint = MapUtil.ToScreenCoordinate(androidMap.CurrentExtent, new PointShape(Double.Parse(longitudeTextView.Text, CultureInfo.InvariantCulture), Double.Parse(latitudeTextView.Text, CultureInfo.InvariantCulture)), androidMap.Width, androidMap.Height);
+            ScreenPointF screenPoint = MapUtil.ToScreenCoordinate(mapView.CurrentExtent, new PointShape(Double.Parse(longitudeTextView.Text, CultureInfo.InvariantCulture), Double.Parse(latitudeTextView.Text, CultureInfo.InvariantCulture)), mapView.Width, mapView.Height);
             resultView.Text = string.Format("Screen Position:({0:N4},{1:N4})", screenPoint.X, screenPoint.Y);
         }
     }

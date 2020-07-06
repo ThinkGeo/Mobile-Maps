@@ -40,10 +40,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             ThinkGeoCloudRasterMapsOverlay ThinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret);
 
             
-            androidMap.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.CurrentExtent = gpxFeatureLayer.GetBoundingBox();
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.CurrentExtent = gpxFeatureLayer.GetBoundingBox();
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

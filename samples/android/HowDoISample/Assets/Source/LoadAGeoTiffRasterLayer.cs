@@ -21,9 +21,9 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(geoTiffRasterLayer);
 
             
-            androidMap.CurrentExtent = geoTiffRasterLayer.GetBoundingBox();
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.CurrentExtent = geoTiffRasterLayer.GetBoundingBox();
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.Overlays.Add(layerOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

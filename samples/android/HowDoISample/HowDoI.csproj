@@ -117,6 +117,7 @@
     <AndroidAsset Include="Assets\Source\ZoomToAScale.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NavigationDrawerActivity.cs" />
+    <Compile Include="Samples\Creating Styles\CreateAreaStyleSample.cs" />
     <Compile Include="Samples\Database Layers\LoadSqliteFeatureLayer.cs" />
     <Compile Include="Samples\Geometry Functions\FindWorldCoordinatesWhereTouched.cs" />
     <Compile Include="Samples\Geometry Functions\GetDistanceBetweenTwoFeatures.cs" />

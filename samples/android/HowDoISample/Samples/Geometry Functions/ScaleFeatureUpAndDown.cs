@@ -9,7 +9,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class ScaleFeatureUpAndDown : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -37,10 +37,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add("WorldLayer", worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("InMemoryOverlay", inMemoryOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("InMemoryOverlay", inMemoryOverlay);
 
             Button scaleUpButton = new Button(this.Context);
             scaleUpButton.Text = "ScaleUp";
@@ -71,7 +71,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void UpdateFeatureByScale(double percentage, bool isScaleUp)
         {
-            LayerOverlay inMemoryOverlay = (LayerOverlay)androidMap.Overlays["InMemoryOverlay"];
+            LayerOverlay inMemoryOverlay = (LayerOverlay)mapView.Overlays["InMemoryOverlay"];
             InMemoryFeatureLayer inMemoryLayer = (InMemoryFeatureLayer)inMemoryOverlay.Layers["InMemoryFeatureLayer"];
 
             inMemoryLayer.Open();
@@ -87,7 +87,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             inMemoryLayer.EditTools.CommitTransaction();
             inMemoryLayer.Close();
 
-            androidMap.Overlays["InMemoryOverlay"].Refresh();
+            mapView.Overlays["InMemoryOverlay"].Refresh();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class FindWorldCoordinatesWhereTouched : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private TextView longitudeLabelView;
         private TextView latitudeLabelView;
 
@@ -32,25 +32,25 @@ namespace ThinkGeo.UI.Android.HowDoI
             highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("HighlightOverlay", highlightOverlay);
-            androidMap.SingleTap += AndroidMap_SingleTap;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+            mapView.SingleTap += mapView_SingleTap;
 
             longitudeLabelView = new TextView(this.Context);
             latitudeLabelView = new TextView(this.Context);
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo, new Collection<View>() { longitudeLabelView, latitudeLabelView });
         }
 
-        private void AndroidMap_SingleTap(object sender, SingleTapMapViewEventArgs e)
+        private void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
         {
             longitudeLabelView.Text = string.Format("Longitude : {0:N4}", e.WorldX);
             latitudeLabelView.Text = string.Format("Latitude : {0:N4}", e.WorldY);
 
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
-            LayerOverlay highlightOverlay = (LayerOverlay)androidMap.Overlays["HighlightOverlay"];
+            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
             InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
             worldLayer.Open();

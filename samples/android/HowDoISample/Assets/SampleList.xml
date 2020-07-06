@@ -1,7 +1,7 @@
 <SampleList>
   <Category Name="Map Functions">
     <Sample Name="Add A Touch Event On Map" Class="AddATouchEventOnMap" >
-      <Description>This sample shows how to add touch event on AndroidMap.</Description>
+      <Description>This sample shows how to add touch event on mapView.</Description>
     </Sample>
     <Sample Name="Display a simple map" Class="DisplayASimpleMap" >
       <Description>This sample shows how to display a simple map.</Description>

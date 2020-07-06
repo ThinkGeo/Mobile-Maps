@@ -11,7 +11,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class DrawAndEditShapes : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private ImageButton editButton;
         private ImageButton lineButton;
         private ImageButton pointButton;
@@ -31,10 +31,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             ThinkGeoCloudRasterMapsOverlay layerOverlay = new ThinkGeoCloudRasterMapsOverlay(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret);
 
             
-            androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.CurrentExtent = new RectangleShape(-20000000, 20000000, 20000000, -20000000);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
 
             cursorButton = GetButton(Resource.Drawable.Cursor, TrackButtonClick);
             drawButton = GetButton(Resource.Drawable.Draw, TrackButtonClick);
@@ -103,61 +103,61 @@ namespace ThinkGeo.UI.Android.HowDoI
             switch (button.Id)
             {
                 case Resource.Drawable.Cursor:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.None;
-                    androidMap.EditOverlay.ClearAllControlPoints();
+                    mapView.TrackOverlay.TrackMode = TrackMode.None;
+                    mapView.EditOverlay.ClearAllControlPoints();
                     drawLinearLayout.Visibility = ViewStates.Gone;
                     drawButton.Visibility = ViewStates.Visible;
                     editButton.Visibility = ViewStates.Visible;
                     clearButton.Visibility = ViewStates.Visible;
-                    androidMap.Refresh();
+                    mapView.Refresh();
                     break;
 
                 case Resource.Drawable.Clear:
-                    androidMap.EditOverlay.ClearAllControlPoints();
-                    androidMap.EditOverlay.EditShapesLayer.Open();
-                    androidMap.EditOverlay.EditShapesLayer.Clear();
-                    androidMap.TrackOverlay.TrackShapeLayer.Open();
-                    androidMap.TrackOverlay.TrackShapeLayer.Clear();
-                    androidMap.Refresh();
+                    mapView.EditOverlay.ClearAllControlPoints();
+                    mapView.EditOverlay.EditShapesLayer.Open();
+                    mapView.EditOverlay.EditShapesLayer.Clear();
+                    mapView.TrackOverlay.TrackShapeLayer.Open();
+                    mapView.TrackOverlay.TrackShapeLayer.Clear();
+                    mapView.Refresh();
                     break;
 
                 case Resource.Drawable.Point:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Point;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Point;
                     break;
 
                 case Resource.Drawable.Line:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Line;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Line;
                     break;
 
                 case Resource.Drawable.Rectangle:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Rectangle;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Rectangle;
                     break;
 
                 case Resource.Drawable.Polygon:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Polygon;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
                     break;
 
                 case Resource.Drawable.Circle:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Circle;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Circle;
                     break;
 
                 case Resource.Drawable.Ellipse:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Ellipse;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Ellipse;
                     break;
 
                 case Resource.Drawable.Edit:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.None;
-                    foreach (Feature feature in androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures)
+                    mapView.TrackOverlay.TrackMode = TrackMode.None;
+                    foreach (Feature feature in mapView.TrackOverlay.TrackShapeLayer.InternalFeatures)
                     {
-                        androidMap.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature);
+                        mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature);
                     }
-                    androidMap.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
-                    androidMap.EditOverlay.CalculateAllControlPoints();
-                    androidMap.Refresh();
+                    mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+                    mapView.EditOverlay.CalculateAllControlPoints();
+                    mapView.Refresh();
                     break;
 
                 case Resource.Drawable.Draw:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.Point;
+                    mapView.TrackOverlay.TrackMode = TrackMode.Point;
                     drawLinearLayout.Visibility = ViewStates.Visible;
                     drawButton.Visibility = ViewStates.Gone;
                     editButton.Visibility = ViewStates.Gone;
@@ -166,7 +166,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                     break;
 
                 default:
-                    androidMap.TrackOverlay.TrackMode = TrackMode.None;
+                    mapView.TrackOverlay.TrackMode = TrackMode.None;
                     break;
             }
         }

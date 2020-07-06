@@ -48,10 +48,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(txlkaA40FeatureLayer);
             layerOverlay.Layers.Add(txlkaA20FeatureLayer);
              
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.Overlays.Add(markerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.Overlays.Add(markerOverlay);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

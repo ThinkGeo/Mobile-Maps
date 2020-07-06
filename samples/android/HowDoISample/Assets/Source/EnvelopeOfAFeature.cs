@@ -10,7 +10,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class EnvelopeOfAFeature : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -33,10 +33,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add("WorldLayer", worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add("WorldOverlay", layerOverlay);
-            androidMap.Overlays.Add("BoundingBoxOverlay", boundingboxOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add("WorldOverlay", layerOverlay);
+            mapView.Overlays.Add("BoundingBoxOverlay", boundingboxOverlay);
 
             Button envelopeButton = new Button(this.Context);
             envelopeButton.Text = "Envelope";
@@ -48,19 +48,19 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void EnvelopeButtonClick(object sender, EventArgs e)
         {
-            LayerOverlay worldOverlay = (LayerOverlay)androidMap.Overlays["WorldOverlay"];
+            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
             FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
             worldLayer.Open();
             RectangleShape usBoundingBox = worldLayer.QueryTools.GetFeatureById("137", new string[0]).GetBoundingBox();
             worldLayer.Close();
 
-            InMemoryFeatureLayer boundingBoxLayer = ((LayerOverlay)androidMap.Overlays["BoundingBoxOverlay"]).Layers["BoundingBoxLayer"] as InMemoryFeatureLayer;
+            InMemoryFeatureLayer boundingBoxLayer = ((LayerOverlay)mapView.Overlays["BoundingBoxOverlay"]).Layers["BoundingBoxLayer"] as InMemoryFeatureLayer;
             if (!boundingBoxLayer.InternalFeatures.Contains("BoundingBox"))
             {
                 boundingBoxLayer.InternalFeatures.Add("BoundingBox", new Feature(usBoundingBox.GetWellKnownBinary(), "BoundingBox"));
             }
 
-            androidMap.Overlays["BoundingBoxOverlay"].Refresh();
+            mapView.Overlays["BoundingBoxOverlay"].Refresh();
         }
     }
 }

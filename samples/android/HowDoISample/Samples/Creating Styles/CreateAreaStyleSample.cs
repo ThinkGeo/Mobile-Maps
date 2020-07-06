@@ -1,19 +1,44 @@
-using Android.App;
+﻿using System;
+using System.Collections.ObjectModel;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
-    public class ZoomIntoFeatures : SampleFragment
+    public class CreateAreaStyleSample : SampleFragment
     {
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            SetupSample();
+
+            SetupMap();
+        }
+
+        private void SetupSample()
+        {
             base.OnStart();
 
+            Button oneFeatureButton = new Button(this.Context);
+            oneFeatureButton.Text = "OneFeature";
+            oneFeatureButton.Click += OneFeatureButtonClick;
+
+            Button mulitFeaturesButton = new Button(this.Context);
+            mulitFeaturesButton.Text = "MultiFeatures";
+            mulitFeaturesButton.Click += MulitFeaturesButtonClick;
+
+            LinearLayout linearLayout = new LinearLayout(this.Context);
+            linearLayout.Orientation = Orientation.Horizontal;
+
+            linearLayout.AddView(oneFeatureButton);
+            linearLayout.AddView(mulitFeaturesButton);
+
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+        }
+
+        private void SetupMap()
+        {
             ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath(@"SampleData/Countries02.shp"));
             worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));
             worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
@@ -33,22 +58,6 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
             mapView.Overlays.Add("WorldOverlay", layerOverlay);
             mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
-
-            Button oneFeatureButton = new Button(this.Context);
-            oneFeatureButton.Text = "OneFeature";
-            oneFeatureButton.Click += OneFeatureButtonClick;
-
-            Button mulitFeaturesButton = new Button(this.Context);
-            mulitFeaturesButton.Text = "MultiFeatures";
-            mulitFeaturesButton.Click += MulitFeaturesButtonClick;
-
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
-
-            linearLayout.AddView(oneFeatureButton);
-            linearLayout.AddView(mulitFeaturesButton);
-
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
         }
 
         private void OneFeatureButtonClick(object sender, EventArgs e)

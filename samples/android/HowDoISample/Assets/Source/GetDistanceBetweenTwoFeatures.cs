@@ -11,7 +11,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class GetDistanceBetweenTwoFeatures : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private TextView distanceTextView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -40,10 +40,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.Layers.Add(worldLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.Overlays.Add("Marker", markerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.Overlays.Add("Marker", markerOverlay);
 
             Button getDistanceButton = new Button(this.Context);
             getDistanceButton.Click += GetDistanceButtonClick;
@@ -62,7 +62,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void GetDistanceButtonClick(object sender, EventArgs e)
         {
-            MarkerOverlay markerOverlayr = androidMap.Overlays["Marker"] as MarkerOverlay;
+            MarkerOverlay markerOverlayr = mapView.Overlays["Marker"] as MarkerOverlay;
             Marker usMarker = markerOverlayr.Markers[0];
             Marker chinaMarker = markerOverlayr.Markers[1];
             double distance = usMarker.Position.GetDistanceTo(chinaMarker.Position, GeographyUnit.DecimalDegree, DistanceUnit.Kilometer);

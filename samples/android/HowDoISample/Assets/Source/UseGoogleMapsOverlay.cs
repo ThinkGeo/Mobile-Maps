@@ -12,8 +12,8 @@ namespace ThinkGeo.UI.Android.HowDoI
             base.OnStart();
 
             
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.ZoomLevelSet = new GoogleMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new GoogleMapsZoomLevelSet();
 
             GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay();
             googleMapsOverlay.ClientId = "Your Client Id";
@@ -21,14 +21,14 @@ namespace ThinkGeo.UI.Android.HowDoI
             googleMapsOverlay.ClientId = "gme-valmontindustries";
             googleMapsOverlay.PrivateKey = "-J7YzyRJpepGq9HwRM3LGXyDM04=";
             googleMapsOverlay.TileType = TileType.MultiTile;
-            androidMap.Overlays.Add(googleMapsOverlay);
+            mapView.Overlays.Add(googleMapsOverlay);
 
             ProjectionConverter proj4 = new ProjectionConverter();
             proj4.InternalProjection = new Projection(Projection.GetDecimalDegreesProjString());
             proj4.ExternalProjection = new Projection(Projection.GetGoogleMapProjString());
             proj4.Open();
 
-            androidMap.CurrentExtent = proj4.ConvertToExternalProjection(new RectangleShape(-139.2, 92.4, 120.9, -93.2)) as RectangleShape;
+            mapView.CurrentExtent = proj4.ConvertToExternalProjection(new RectangleShape(-139.2, 92.4, 120.9, -93.2)) as RectangleShape;
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }

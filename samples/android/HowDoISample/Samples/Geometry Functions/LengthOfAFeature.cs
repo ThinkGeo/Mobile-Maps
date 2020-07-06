@@ -10,7 +10,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class LengthOfAFeature : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
         private TextView messageLabel;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -38,22 +38,22 @@ namespace ThinkGeo.UI.Android.HowDoI
             highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
-            androidMap.Overlays.Add("RoadOverlay", layerOverlay);
-            androidMap.Overlays.Add("HighlightOverlay", highlightOverlay);
-            androidMap.SingleTap += AndroidMap_SingleTap;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
+            mapView.Overlays.Add("RoadOverlay", layerOverlay);
+            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+            mapView.SingleTap += mapView_SingleTap;
 
             messageLabel = new TextView(this.Context);
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo, new Collection<View>() { messageLabel });
         }
 
-        private void AndroidMap_SingleTap(object sender, SingleTapMapViewEventArgs e)
+        private void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
         {
-            LayerOverlay overlay = androidMap.Overlays["RoadOverlay"] as LayerOverlay;
+            LayerOverlay overlay = mapView.Overlays["RoadOverlay"] as LayerOverlay;
             FeatureLayer roadLayer = overlay.Layers["TXlkaA40"] as FeatureLayer;
 
-            LayerOverlay highlightOverlay = androidMap.Overlays["HighlightOverlay"] as LayerOverlay;
+            LayerOverlay highlightOverlay = mapView.Overlays["HighlightOverlay"] as LayerOverlay;
             InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
             roadLayer.Open();

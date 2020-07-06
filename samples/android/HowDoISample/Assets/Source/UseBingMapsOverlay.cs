@@ -19,10 +19,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             bingMapOverlay.MapType = BingMapsMapType.AerialWithLabels;
 
 
-            androidMap.MapUnit = GeographyUnit.Meter;
-            androidMap.ZoomLevelSet = new BingMapsZoomLevelSet();
-            androidMap.Overlays.Add("BingMapOverlay", bingMapOverlay);
-            androidMap.CurrentExtent = bingMapOverlay.GetBoundingBox();
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new BingMapsZoomLevelSet();
+            mapView.Overlays.Add("BingMapOverlay", bingMapOverlay);
+            mapView.CurrentExtent = bingMapOverlay.GetBoundingBox();
 
             CheckBingMapApplicationId();
 
@@ -31,17 +31,17 @@ namespace ThinkGeo.UI.Android.HowDoI
 
         private void CheckBingMapApplicationId()
         {
-            BingMapsOverlay bingMapOverlay = (BingMapsOverlay)androidMap.Overlays["BingMapOverlay"];
+            BingMapsOverlay bingMapOverlay = (BingMapsOverlay)mapView.Overlays["BingMapOverlay"];
             if (bingMapOverlay.ApplicationId.Equals("Your Application Id"))
             {
-                androidMap.Overlays.Clear();
+                mapView.Overlays.Clear();
 
                 ImageView imageView = new ImageView(this.Context);
                 imageView.SetImageResource(Resource.Drawable.Notice);
                 imageView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
 
                 RelativeLayout mainLayout = currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout);
-                mainLayout.RemoveView(androidMap);
+                mainLayout.RemoveView(mapView);
                 mainLayout.AddView(imageView);
             }
         }

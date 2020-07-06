@@ -24,10 +24,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(worldLayer);
 
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            androidMap.CurrentExtentChanged += AndroidMap_CurrentExtentChanged;
-            androidMap.Overlays.Add(layerOverlay);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
+            mapView.CurrentExtentChanged += mapView_CurrentExtentChanged;
+            mapView.Overlays.Add(layerOverlay);
 
             labelExtent = new TextView(this.Context);
             labelScale = new TextView(this.Context );
@@ -35,13 +35,13 @@ namespace ThinkGeo.UI.Android.HowDoI
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { labelExtent, labelScale });
         }
 
-        private void AndroidMap_CurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
+        private void mapView_CurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
         {
             PointShape upperLeftPoint = e.NewExtent.UpperLeftPoint;
             PointShape lowerRightPoint = e.NewExtent.LowerRightPoint;
 
             labelExtent.Text = string.Format("Map cureent extent: {0}, {1}, {2}, {3}", upperLeftPoint.X.ToString("n2"), upperLeftPoint.Y.ToString("n2"), lowerRightPoint.X.ToString("n2"), lowerRightPoint.Y.ToString("n2"));
-            labelScale.Text = string.Format("Map cureent scale: {0}", MapUtil.GetScale(e.NewExtent, (float)androidMap.Width, androidMap.MapUnit).ToString("n4"));
+            labelScale.Text = string.Format("Map cureent scale: {0}", MapUtil.GetScale(e.NewExtent, (float)mapView.Width, mapView.MapUnit).ToString("n4"));
         }
     }
 }

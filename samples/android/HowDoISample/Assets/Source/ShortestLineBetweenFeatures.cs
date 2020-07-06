@@ -7,22 +7,22 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class ShortestLineBetweenFeatures : SampleFragment
     {
-        private MapView androidMap;
+        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnStart();
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(0, 100, 100, 0);
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(0, 100, 100, 0);
 
             LayerOverlay inMemoryOverlay = new LayerOverlay();
-            androidMap.Overlays.Add(inMemoryOverlay);
+            mapView.Overlays.Add(inMemoryOverlay);
 
             LayerOverlay shortestLineOverlay = new LayerOverlay();
             shortestLineOverlay.TileType = TileType.SingleTile;
-            androidMap.Overlays.Add(shortestLineOverlay);
+            mapView.Overlays.Add(shortestLineOverlay);
 
             BaseShape areaShape1 = BaseShape.CreateShapeFromWellKnownData("POLYGON((10 20,30 60,40 10,10 20))");
             BaseShape areaShape2 = new EllipseShape(new PointShape(70, 70), 10, 20);

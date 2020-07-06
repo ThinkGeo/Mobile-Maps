@@ -52,12 +52,12 @@ namespace ThinkGeo.UI.Android.HowDoI
             markerOverlay.Markers.Add(thinkGeoMarker);
 
             
-            androidMap.MapUnit = GeographyUnit.DecimalDegree;
-            androidMap.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
-            androidMap.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
-            androidMap.Overlays.Add(layerOverlay);
-            androidMap.Overlays.Add(markerOverlay);
-            androidMap.Overlays.Add("PopupOverlay", new PopupOverlay());
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.CurrentExtent = new RectangleShape(-96.8172, 33.1299, -96.8050, 33.1226);
+            mapView.Overlays.Add(ThinkGeoCloudRasterMapsOverlay);
+            mapView.Overlays.Add(layerOverlay);
+            mapView.Overlays.Add(markerOverlay);
+            mapView.Overlays.Add("PopupOverlay", new PopupOverlay());
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }
@@ -65,7 +65,7 @@ namespace ThinkGeo.UI.Android.HowDoI
         void ThinkGeoMarkerClick(object sender, System.EventArgs e)
         {
             Marker thinkGeoMarker = (Marker)sender;
-            PopupOverlay popupOverlay = androidMap.Overlays["PopupOverlay"] as PopupOverlay;
+            PopupOverlay popupOverlay = mapView.Overlays["PopupOverlay"] as PopupOverlay;
 
             if (popupOverlay.Popups.Count > 0)
             {
