@@ -81,7 +81,7 @@ namespace ThinkGeo.UI.iOS.HowDoI
 			}
 			catch (Exception ex)
 			{
-				ShowAlert("Not Implement.", "Infromation");
+				ShowAlert("This sample has not been implemented yet.", "Error");
 				//ShowToast("Not Implement.");
 			}
 		}

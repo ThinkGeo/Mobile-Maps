@@ -1,285 +1,670 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-        <ProjectGuid>{FC4EDE18-5261-4D41-B6D1-21955F15C194}</ProjectGuid>
-        <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-        <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
-        <OutputType>Exe</OutputType>
-        <RootNamespace>ThinkGeo.UI.iOS.HowDoI</RootNamespace>
-        <AssemblyName>HowDoI</AssemblyName>
-        <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-        <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-        <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-        <ProvisioningType>automatic</ProvisioningType>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-        <DefineConstants>DEBUG</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <MtouchArch>x86_64</MtouchArch>
-        <MtouchLink>None</MtouchLink>
-        <MtouchDebug>true</MtouchDebug>
-        <CodesignProvision>VS: WildCard Development</CodesignProvision>
-        <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-        <DebugType>none</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <MtouchLink>None</MtouchLink>
-        <MtouchArch>x86_64</MtouchArch>
-        <CodesignProvision>VS: WildCard Development</CodesignProvision>
-        <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\iPhone\Debug</OutputPath>
-        <DefineConstants>DEBUG</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <MtouchArch>ARM64</MtouchArch>
-        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-        <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
-        <MtouchDebug>true</MtouchDebug>
-        <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-        <DebugType>none</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\iPhone\Release</OutputPath>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-        <MtouchArch>ARM64</MtouchArch>
-        <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
-        <SignAssembly>true</SignAssembly>
-        <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Core" />
-        <Reference Include="Xamarin.iOS" />
-        <Reference Include="System.Xml.Linq" />
-    </ItemGroup>
-    <ItemGroup>
-      <PackageReference Include="SidebarNavigation">
-        <Version>2.1.0</Version>
-      </PackageReference>
-      <PackageReference Include="ThinkGeo.UI.iOS">
-        <Version>12.2.13</Version>
-      </PackageReference>
-    </ItemGroup>
-    <ItemGroup>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-            <Visible>false</Visible>
-        </ImageAsset>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Resources\" />
-        <Folder Include="Samples\" />
-        <Folder Include="Samples\Map Functions\" />
-        <Folder Include="Samples\Styles\" />
-        <Folder Include="Assets.xcassets\threelines.imageset\" />
-        <Folder Include="Samples\Overlay\" />
-    </ItemGroup>
-    <ItemGroup>
-        <InterfaceDefinition Include="LaunchScreen.storyboard" />
-        <InterfaceDefinition Include="Samples\Map Functions\DisplayASimpleMapViewController.xib" />
-        <InterfaceDefinition Include="Samples\Overlay\UseBingMapsOverlayViewController.xib" />
-        <InterfaceDefinition Include="Samples\Overlay\UseGoogleMapsOverlayViewController.xib" />
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="Info.plist" />
-        <None Include="Entitlements.plist" />
-        <None Include="AppData\capital.ids" />
-        <None Include="AppData\cntry02.idx" />
-        <None Include="AppData\cntry02.shx" />
-        <None Include="AppData\cntry02.shp" />
-        <None Include="AppData\cntry02.dbf" />
-        <None Include="AppData\cntry02.ids" />
-        <None Include="AppData\capital.idx" />
-        <None Include="AppData\capital.shx" />
-        <None Include="AppData\capital.shp" />
-        <None Include="AppData\capital.dbf" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Main.cs" />
-        <Compile Include="AppDelegate.cs" />
-        <Compile Include="RootViewController.cs" />
-        <Compile Include="RootViewController.designer.cs">
-          <DependentUpon>RootViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="NavController.cs" />
-        <Compile Include="NavController.designer.cs">
-          <DependentUpon>NavController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="BaseController.cs" />
-        <Compile Include="BaseController.designer.cs">
-          <DependentUpon>BaseController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="SideMenuController.cs" />
-        <Compile Include="SideMenuController.designer.cs">
-          <DependentUpon>SideMenuController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="MenuTableSource.cs" />
-        <Compile Include="SampleInfo.cs" />
-        <Compile Include="Samples\Map Functions\DisplayASimpleMapViewController.cs" />
-        <Compile Include="Samples\Map Functions\DisplayASimpleMapViewController.designer.cs">
-          <DependentUpon>DisplayASimpleMapViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Samples\Overlay\UseBingMapsOverlayViewController.cs" />
-        <Compile Include="Samples\Overlay\UseBingMapsOverlayViewController.designer.cs">
-          <DependentUpon>UseBingMapsOverlayViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Samples\Overlay\UseGoogleMapsOverlayViewController.cs" />
-        <Compile Include="Samples\Overlay\UseGoogleMapsOverlayViewController.designer.cs">
-          <DependentUpon>UseGoogleMapsOverlayViewController.cs</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
-      <BundleResource Include="howdoi.ios.com.thinkgeo.mapsuitelicense" />
-      <BundleResource Include="Resources\union%403x.png" />
-      <BundleResource Include="Resources\union%402x.png" />
-      <BundleResource Include="Resources\union.png" />
-      <BundleResource Include="Resources\splash%403x.png" />
-      <BundleResource Include="Resources\splash%402x.png" />
-      <BundleResource Include="Resources\splash.png" />
-      <BundleResource Include="Resources\snapping%403x.png" />
-      <BundleResource Include="Resources\snapping%402x.png" />
-      <BundleResource Include="Resources\snapping.png" />
-      <BundleResource Include="Resources\simplify%403x.png" />
-      <BundleResource Include="Resources\simplify%402x.png" />
-      <BundleResource Include="Resources\simplify.png" />
-      <BundleResource Include="Resources\scale%403x.png" />
-      <BundleResource Include="Resources\scale%402x.png" />
-      <BundleResource Include="Resources\scale.png" />
-      <BundleResource Include="Resources\rotate%403x.png" />
-      <BundleResource Include="Resources\rotate%402x.png" />
-      <BundleResource Include="Resources\rotate.png" />
-      <BundleResource Include="Resources\line-to-line%403x.png" />
-      <BundleResource Include="Resources\line-to-line%402x.png" />
-      <BundleResource Include="Resources\line-to-line.png" />
-      <BundleResource Include="Resources\get-shortest-line%403x.png" />
-      <BundleResource Include="Resources\get-shortest-line%402x.png" />
-      <BundleResource Include="Resources\get-shortest-line.png" />
-      <BundleResource Include="Resources\get-length%403x.png" />
-      <BundleResource Include="Resources\get-length%402x.png" />
-      <BundleResource Include="Resources\get-length.png" />
-      <BundleResource Include="Resources\get-area%403x.png" />
-      <BundleResource Include="Resources\get-area%402x.png" />
-      <BundleResource Include="Resources\get-area.png" />
-      <BundleResource Include="Resources\fire%403x.png" />
-      <BundleResource Include="Resources\fire%402x.png" />
-      <BundleResource Include="Resources\fire.png" />
-      <BundleResource Include="Resources\envelop-bounding-box%403x.png" />
-      <BundleResource Include="Resources\envelop-bounding-box%402x.png" />
-      <BundleResource Include="Resources\envelop-bounding-box.png" />
-      <BundleResource Include="Resources\difference%403x.png" />
-      <BundleResource Include="Resources\difference%402x.png" />
-      <BundleResource Include="Resources\difference.png" />
-      <BundleResource Include="Resources\detail%403x.png" />
-      <BundleResource Include="Resources\detail%402x.png" />
-      <BundleResource Include="Resources\detail.png" />
-      <BundleResource Include="Resources\convex-hull%403x.png" />
-      <BundleResource Include="Resources\convex-hull%402x.png" />
-      <BundleResource Include="Resources\convex-hull.png" />
-      <BundleResource Include="Resources\clip%403x.png" />
-      <BundleResource Include="Resources\clip%402x.png" />
-      <BundleResource Include="Resources\clip.png" />
-      <BundleResource Include="Resources\center-point%403x.png" />
-      <BundleResource Include="Resources\center-point%402x.png" />
-      <BundleResource Include="Resources\center-point.png" />
-      <BundleResource Include="Resources\buffer%403x.png" />
-      <BundleResource Include="Resources\buffer%402x.png" />
-      <BundleResource Include="Resources\buffer.png" />
-      <BundleResource Include="Resources\Circle.png" />
-      <BundleResource Include="Resources\circle%402x.png" />
-      <BundleResource Include="Resources\circle%403x.png" />
-      <BundleResource Include="Resources\Edit.png" />
-      <BundleResource Include="Resources\edit%402x.png" />
-      <BundleResource Include="Resources\edit%403x.png" />
-      <BundleResource Include="Resources\Ellipse.png" />
-      <BundleResource Include="Resources\ellipse%402x.png" />
-      <BundleResource Include="Resources\ellipse%403x.png" />
-      <BundleResource Include="Resources\More.png" />
-      <BundleResource Include="Resources\more%402x.png" />
-      <BundleResource Include="Resources\more%403x.png" />
-      <BundleResource Include="Resources\pan.png" />
-      <BundleResource Include="Resources\pan%402x.png" />
-      <BundleResource Include="Resources\pan%403x.png" />
-      <BundleResource Include="Resources\pen.png" />
-      <BundleResource Include="Resources\pen%402x.png" />
-      <BundleResource Include="Resources\pen%403x.png" />
-      <BundleResource Include="Resources\Point.png" />
-      <BundleResource Include="Resources\point%402x.png" />
-      <BundleResource Include="Resources\point%403x.png" />
-      <BundleResource Include="Resources\Polygon.png" />
-      <BundleResource Include="Resources\polygon%402x.png" />
-      <BundleResource Include="Resources\polygon%403.png" />
-      <BundleResource Include="Resources\polyline.png" />
-      <BundleResource Include="Resources\polyline%402x.png" />
-      <BundleResource Include="Resources\polyline%403x.png" />
-      <BundleResource Include="Resources\Rectangle.png" />
-      <BundleResource Include="Resources\rectangle%402x.png" />
-      <BundleResource Include="Resources\rectangle%403x.png" />
-      <BundleResource Include="Resources\recycle.png" />
-      <BundleResource Include="Resources\recycle%402x.png" />
-      <BundleResource Include="Resources\recycle%403x.png" />
-      <BundleResource Include="Resources\SampleList.xml" />
-      <BundleResource Include="Resources\threelines%402x.png" />
-      <BundleResource Include="Resources\threelines%403x.png" />
-      <BundleResource Include="Resources\Icon.png" />
-    </ItemGroup>
-    <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{FC4EDE18-5261-4D41-B6D1-21955F15C194}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ThinkGeo.UI.iOS.HowDoI</RootNamespace>
+    <AssemblyName>HowDoI</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <ProvisioningType>automatic</ProvisioningType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>Apple Development: Frank Fu (UUHYF7GLHP)</CodesignKey>
+    <SignAssembly>true</SignAssembly>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SidebarNavigation">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.UI.iOS">
+      <Version>12.2.13</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\threelines.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Samples\Map Functions\DisplayASimpleMapViewController.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="AppData\capital.ids" />
+    <None Include="AppData\cntry02.idx" />
+    <None Include="AppData\cntry02.shx" />
+    <None Include="AppData\cntry02.shp" />
+    <None Include="AppData\cntry02.dbf" />
+    <None Include="AppData\cntry02.ids" />
+    <None Include="AppData\capital.idx" />
+    <None Include="AppData\capital.shx" />
+    <None Include="AppData\capital.shp" />
+    <None Include="AppData\capital.dbf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="RootViewController.cs" />
+    <Compile Include="RootViewController.designer.cs">
+      <DependentUpon>RootViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavController.cs" />
+    <Compile Include="NavController.designer.cs">
+      <DependentUpon>NavController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseController.cs" />
+    <Compile Include="BaseController.designer.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\StylingAcrossMultipleScalesSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\StylingAcrossMultipleScalesSampleViewController.designer.cs">
+      <DependentUpon>StylingAcrossMultipleScalesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateClusterPointStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateClusterPointStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateClusterPointStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateFilterStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateFilterStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateFilterStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateHeatStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateHeatStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateHeatStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateLineStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateLineStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateLineStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreatePointStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreatePointStyleSampleViewController.designer.cs">
+      <DependentUpon>CreatePointStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateTextStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateTextStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateTextStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateValueStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateValueStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateValueStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateClassBreakStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateClassBreakStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateClassBreakStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CreatingStyles\CreateAreaStyleSampleViewController.cs" />
+    <Compile Include="Samples\CreatingStyles\CreateAreaStyleSampleViewController.designer.cs">
+      <DependentUpon>CreateAreaStyleSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Database\OracleLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\OracleLayerSampleViewController.designer.cs">
+      <DependentUpon>OracleLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Database\PostgresLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\PostgresLayerSampleViewController.designer.cs">
+      <DependentUpon>PostgresLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Database\SQLiteLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\SQLiteLayerSampleViewController.designer.cs">
+      <DependentUpon>SQLiteLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Database\SQLServerLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\SQLServerLayerSampleViewController.designer.cs">
+      <DependentUpon>SQLServerLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\CommonRasterLayersSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\CommonRasterLayersSampleViewController.designer.cs">
+      <DependentUpon>CommonRasterLayersSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\ECWLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\ECWLayerSampleViewController.designer.cs">
+      <DependentUpon>ECWLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\ESRIGridLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\ESRIGridLayerSampleViewController.designer.cs">
+      <DependentUpon>ESRIGridLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\GeoTiffLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\GeoTiffLayerSampleViewController.designer.cs">
+      <DependentUpon>GeoTiffLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\JPEG2000LayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\JPEG2000LayerSampleViewController.designer.cs">
+      <DependentUpon>JPEG2000LayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Raster\MrSidLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\MrSidLayerSampleViewController.designer.cs">
+      <DependentUpon>MrSidLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\ShapefileLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\ShapefileLayerSampleViewController.designer.cs">
+      <DependentUpon>ShapefileLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\ISOLineLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\ISOLineLayerSampleViewController.designer.cs">
+      <DependentUpon>ISOLineLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\S57LayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\S57LayerSampleViewController.designer.cs">
+      <DependentUpon>S57LayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\TABLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\TABLayerSampleViewController.designer.cs">
+      <DependentUpon>TABLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\FileGeoDatabaseLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\FileGeoDatabaseLayerSampleViewController.designer.cs">
+      <DependentUpon>FileGeoDatabaseLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\GPXLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\GPXLayerSampleViewController.designer.cs">
+      <DependentUpon>GPXLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\GraticuleLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\GraticuleLayerSampleViewController.designer.cs">
+      <DependentUpon>GraticuleLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\InMemoryLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\InMemoryLayerSampleViewController.designer.cs">
+      <DependentUpon>InMemoryLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\Vector\TinyGeoLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\TinyGeoLayerSampleViewController.designer.cs">
+      <DependentUpon>TinyGeoLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAAWeatherStationLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAAWeatherStationLayerSampleViewController.designer.cs">
+      <DependentUpon>NOAAWeatherStationLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAAWeatherWarningLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAAWeatherWarningLayerSampleViewController.designer.cs">
+      <DependentUpon>NOAAWeatherWarningLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\OpenStreetMapLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\OpenStreetMapLayerSampleViewController.designer.cs">
+      <DependentUpon>OpenStreetMapLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\BingMapLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\BingMapLayerSampleViewController.designer.cs">
+      <DependentUpon>BingMapLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\CloudMapsRasterLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\CloudMapsRasterLayerSampleViewController.designer.cs">
+      <DependentUpon>CloudMapsRasterLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\CloudMapsVectorLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\CloudMapsVectorLayerSampleViewController.designer.cs">
+      <DependentUpon>CloudMapsVectorLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\GoogleMapLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\GoogleMapLayerSampleViewController.designer.cs">
+      <DependentUpon>GoogleMapLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAARadarLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\NOAARadarLayerSampleViewController.designer.cs">
+      <DependentUpon>NOAARadarLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\DisplayingLayers\WebServices\WMSLayerSampleViewController.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\WMSLayerSampleViewController.designer.cs">
+      <DependentUpon>WMSLayerSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Interpolation\InterpolationPlaceholderSampleViewController.cs" />
+    <Compile Include="Samples\Interpolation\InterpolationPlaceholderSampleViewController.designer.cs">
+      <DependentUpon>InterpolationPlaceholderSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\ScaleShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\ScaleShapeSampleViewController.designer.cs">
+      <DependentUpon>ScaleShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\SimplifyShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SimplifyShapeSampleViewController.designer.cs">
+      <DependentUpon>SimplifyShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\SnapToShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SnapToShapeSampleViewController.designer.cs">
+      <DependentUpon>SnapToShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\SplitShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SplitShapeSampleViewController.designer.cs">
+      <DependentUpon>SplitShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\TranslateShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\TranslateShapeSampleViewController.designer.cs">
+      <DependentUpon>TranslateShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\UnionShapesSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\UnionShapesSampleViewController.designer.cs">
+      <DependentUpon>UnionShapesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateCenterPointSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateCenterPointSampleViewController.designer.cs">
+      <DependentUpon>CalculateCenterPointSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateAreaSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateAreaSampleViewController.designer.cs">
+      <DependentUpon>CalculateAreaSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateLengthSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateLengthSampleViewController.designer.cs">
+      <DependentUpon>CalculateLengthSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateShortestLineBetweenShapesSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateShortestLineBetweenShapesSampleViewController.designer.cs">
+      <DependentUpon>CalculateShortestLineBetweenShapesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\ClipShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\ClipShapeSampleViewController.designer.cs">
+      <DependentUpon>ClipShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\DifferenceShapesSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\DifferenceShapesSampleViewController.designer.cs">
+      <DependentUpon>DifferenceShapesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\GetEnvelopeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetEnvelopeSampleViewController.designer.cs">
+      <DependentUpon>GetEnvelopeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\GetLineOnALineSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetLineOnALineSampleViewController.designer.cs">
+      <DependentUpon>GetLineOnALineSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\BufferShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\BufferShapeSampleViewController.designer.cs">
+      <DependentUpon>BufferShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\RotateShapeSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\RotateShapeSampleViewController.designer.cs">
+      <DependentUpon>RotateShapeSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformingGeometricOperations\GetConvexHullSampleViewController.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetConvexHullSampleViewController.designer.cs">
+      <DependentUpon>GetConvexHullSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ProjectingData\ProjectLatLonCoordinatesSampleViewController.cs" />
+    <Compile Include="Samples\ProjectingData\ProjectLatLonCoordinatesSampleViewController.designer.cs">
+      <DependentUpon>ProjectLatLonCoordinatesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ProjectingData\SetLayerProjectionSampleViewController.cs" />
+    <Compile Include="Samples\ProjectingData\SetLayerProjectionSampleViewController.designer.cs">
+      <DependentUpon>SetLayerProjectionSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SettingMapExtent\BasicNavigationSampleViewController.cs" />
+    <Compile Include="Samples\SettingMapExtent\BasicNavigationSampleViewController.designer.cs">
+      <DependentUpon>BasicNavigationSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SettingMapExtent\SetMapExtentSampleViewController.cs" />
+    <Compile Include="Samples\SettingMapExtent\SetMapExtentSampleViewController.designer.cs">
+      <DependentUpon>SetMapExtentSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\TopologicalValidation\LineValidationSampleViewController.cs" />
+    <Compile Include="Samples\TopologicalValidation\LineValidationSampleViewController.designer.cs">
+      <DependentUpon>LineValidationSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\TopologicalValidation\PointValidationSampleViewController.cs" />
+    <Compile Include="Samples\TopologicalValidation\PointValidationSampleViewController.designer.cs">
+      <DependentUpon>PointValidationSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\TopologicalValidation\PolygonValidationSampleViewController.cs" />
+    <Compile Include="Samples\TopologicalValidation\PolygonValidationSampleViewController.designer.cs">
+      <DependentUpon>PolygonValidationSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\ProjectionCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\ProjectionCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>ProjectionCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\ReverseGeocodingCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\ReverseGeocodingCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>ReverseGeocodingCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>RoutingCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingServiceAreaCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingServiceAreaCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>RoutingServiceAreaCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingTSPCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\RoutingTSPCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>RoutingTSPCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\TimezoneCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\TimezoneCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>TimezoneCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\ColorUtilitiesCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\ColorUtilitiesCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>ColorUtilitiesCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\ElevationCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\ElevationCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>ElevationCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\GeocodingCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\GeocodingCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>GeocodingCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingCloudMapsServices\WorldMapsQueryCloudServicesSampleViewController.cs" />
+    <Compile Include="Samples\UsingCloudMapsServices\WorldMapsQueryCloudServicesSampleViewController.designer.cs">
+      <DependentUpon>WorldMapsQueryCloudServicesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingMapTools\DisplayMapLogoSampleViewController.cs" />
+    <Compile Include="Samples\UsingMapTools\DisplayMapLogoSampleViewController.designer.cs">
+      <DependentUpon>DisplayMapLogoSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingMapTools\DisplayMapMouseCoordinatesSampleViewController.cs" />
+    <Compile Include="Samples\UsingMapTools\DisplayMapMouseCoordinatesSampleViewController.designer.cs">
+      <DependentUpon>DisplayMapMouseCoordinatesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingMapTools\DisplayMapPanZoomBarSampleViewController.cs" />
+    <Compile Include="Samples\UsingMapTools\DisplayMapPanZoomBarSampleViewController.designer.cs">
+      <DependentUpon>DisplayMapPanZoomBarSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingMapTools\DisplayMapScaleLineSampleViewController.cs" />
+    <Compile Include="Samples\UsingMapTools\DisplayMapScaleLineSampleViewController.designer.cs">
+      <DependentUpon>DisplayMapScaleLineSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayOpenStreetMapOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayOpenStreetMapOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayOpenStreetMapOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayWMSOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayWMSOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayWMSOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DrawEditDeleteShapesUsingInteractiveOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DrawEditDeleteShapesUsingInteractiveOverlaySampleViewController.designer.cs">
+      <DependentUpon>DrawEditDeleteShapesUsingInteractiveOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySampleViewController.designer.cs">
+      <DependentUpon>GroupingLayersUsingLayerOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\PrintMapsUsingPrintOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\PrintMapsUsingPrintOverlaySampleViewController.designer.cs">
+      <DependentUpon>PrintMapsUsingPrintOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\UsingMarkersSampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\UsingMarkersSampleViewController.designer.cs">
+      <DependentUpon>UsingMarkersSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\CachingMapTilesSampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\CachingMapTilesSampleViewController.designer.cs">
+      <DependentUpon>CachingMapTilesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayBingMapsOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayBingMapsOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayBingMapsOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayCloudMapsRasterOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayCloudMapsRasterOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayCloudMapsRasterOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayCloudMapsVectorOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayCloudMapsVectorOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayCloudMapsVectorOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\DisplayGoogleMapsOverlaySampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\DisplayGoogleMapsOverlaySampleViewController.designer.cs">
+      <DependentUpon>DisplayGoogleMapsOverlaySampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingOverlays\UsingPopupsSampleViewController.cs" />
+    <Compile Include="Samples\UsingOverlays\UsingPopupsSampleViewController.designer.cs">
+      <DependentUpon>UsingPopupsSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\GetAllFeatureDataSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\GetAllFeatureDataSampleViewController.designer.cs">
+      <DependentUpon>GetAllFeatureDataSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\GetDataFromFeatureSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\GetDataFromFeatureSampleViewController.designer.cs">
+      <DependentUpon>GetDataFromFeatureSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\GetFeaturesWithinDistanceSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\GetFeaturesWithinDistanceSampleViewController.designer.cs">
+      <DependentUpon>GetFeaturesWithinDistanceSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\IntersectsSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\IntersectsSampleViewController.designer.cs">
+      <DependentUpon>IntersectsSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\OverlapsSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\OverlapsSampleViewController.designer.cs">
+      <DependentUpon>OverlapsSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\TouchesSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\TouchesSampleViewController.designer.cs">
+      <DependentUpon>TouchesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\ContainsSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\ContainsSampleViewController.designer.cs">
+      <DependentUpon>ContainsSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\CrossesSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\CrossesSampleViewController.designer.cs">
+      <DependentUpon>CrossesSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\DisjointSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\DisjointSampleViewController.designer.cs">
+      <DependentUpon>DisjointSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\EqualsSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\EqualsSampleViewController.designer.cs">
+      <DependentUpon>EqualsSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\UsingQueryTools\WithinSampleViewController.cs" />
+    <Compile Include="Samples\UsingQueryTools\WithinSampleViewController.designer.cs">
+      <DependentUpon>WithinSampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SideMenuController.cs" />
+    <Compile Include="SideMenuController.designer.cs">
+      <DependentUpon>SideMenuController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTableSource.cs" />
+    <Compile Include="SampleInfo.cs" />
+    <Compile Include="Samples\Map Functions\DisplayASimpleMapViewController.cs" />
+    <Compile Include="Samples\Map Functions\DisplayASimpleMapViewController.designer.cs">
+      <DependentUpon>DisplayASimpleMapViewController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="howdoi.ios.com.thinkgeo.mapsuitelicense" />
+    <BundleResource Include="Resources\union%403x.png" />
+    <BundleResource Include="Resources\union%402x.png" />
+    <BundleResource Include="Resources\union.png" />
+    <BundleResource Include="Resources\splash%403x.png" />
+    <BundleResource Include="Resources\splash%402x.png" />
+    <BundleResource Include="Resources\splash.png" />
+    <BundleResource Include="Resources\snapping%403x.png" />
+    <BundleResource Include="Resources\snapping%402x.png" />
+    <BundleResource Include="Resources\snapping.png" />
+    <BundleResource Include="Resources\simplify%403x.png" />
+    <BundleResource Include="Resources\simplify%402x.png" />
+    <BundleResource Include="Resources\simplify.png" />
+    <BundleResource Include="Resources\scale%403x.png" />
+    <BundleResource Include="Resources\scale%402x.png" />
+    <BundleResource Include="Resources\scale.png" />
+    <BundleResource Include="Resources\rotate%403x.png" />
+    <BundleResource Include="Resources\rotate%402x.png" />
+    <BundleResource Include="Resources\rotate.png" />
+    <BundleResource Include="Resources\line-to-line%403x.png" />
+    <BundleResource Include="Resources\line-to-line%402x.png" />
+    <BundleResource Include="Resources\line-to-line.png" />
+    <BundleResource Include="Resources\get-shortest-line%403x.png" />
+    <BundleResource Include="Resources\get-shortest-line%402x.png" />
+    <BundleResource Include="Resources\get-shortest-line.png" />
+    <BundleResource Include="Resources\get-length%403x.png" />
+    <BundleResource Include="Resources\get-length%402x.png" />
+    <BundleResource Include="Resources\get-length.png" />
+    <BundleResource Include="Resources\get-area%403x.png" />
+    <BundleResource Include="Resources\get-area%402x.png" />
+    <BundleResource Include="Resources\get-area.png" />
+    <BundleResource Include="Resources\fire%403x.png" />
+    <BundleResource Include="Resources\fire%402x.png" />
+    <BundleResource Include="Resources\fire.png" />
+    <BundleResource Include="Resources\envelop-bounding-box%403x.png" />
+    <BundleResource Include="Resources\envelop-bounding-box%402x.png" />
+    <BundleResource Include="Resources\envelop-bounding-box.png" />
+    <BundleResource Include="Resources\difference%403x.png" />
+    <BundleResource Include="Resources\difference%402x.png" />
+    <BundleResource Include="Resources\difference.png" />
+    <BundleResource Include="Resources\detail%403x.png" />
+    <BundleResource Include="Resources\detail%402x.png" />
+    <BundleResource Include="Resources\detail.png" />
+    <BundleResource Include="Resources\convex-hull%403x.png" />
+    <BundleResource Include="Resources\convex-hull%402x.png" />
+    <BundleResource Include="Resources\convex-hull.png" />
+    <BundleResource Include="Resources\clip%403x.png" />
+    <BundleResource Include="Resources\clip%402x.png" />
+    <BundleResource Include="Resources\clip.png" />
+    <BundleResource Include="Resources\center-point%403x.png" />
+    <BundleResource Include="Resources\center-point%402x.png" />
+    <BundleResource Include="Resources\center-point.png" />
+    <BundleResource Include="Resources\buffer%403x.png" />
+    <BundleResource Include="Resources\buffer%402x.png" />
+    <BundleResource Include="Resources\buffer.png" />
+    <BundleResource Include="Resources\Circle.png" />
+    <BundleResource Include="Resources\circle%402x.png" />
+    <BundleResource Include="Resources\circle%403x.png" />
+    <BundleResource Include="Resources\Edit.png" />
+    <BundleResource Include="Resources\edit%402x.png" />
+    <BundleResource Include="Resources\edit%403x.png" />
+    <BundleResource Include="Resources\Ellipse.png" />
+    <BundleResource Include="Resources\ellipse%402x.png" />
+    <BundleResource Include="Resources\ellipse%403x.png" />
+    <BundleResource Include="Resources\More.png" />
+    <BundleResource Include="Resources\more%402x.png" />
+    <BundleResource Include="Resources\more%403x.png" />
+    <BundleResource Include="Resources\pan.png" />
+    <BundleResource Include="Resources\pan%402x.png" />
+    <BundleResource Include="Resources\pan%403x.png" />
+    <BundleResource Include="Resources\pen.png" />
+    <BundleResource Include="Resources\pen%402x.png" />
+    <BundleResource Include="Resources\pen%403x.png" />
+    <BundleResource Include="Resources\Point.png" />
+    <BundleResource Include="Resources\point%402x.png" />
+    <BundleResource Include="Resources\point%403x.png" />
+    <BundleResource Include="Resources\Polygon.png" />
+    <BundleResource Include="Resources\polygon%402x.png" />
+    <BundleResource Include="Resources\polygon%403.png" />
+    <BundleResource Include="Resources\polyline.png" />
+    <BundleResource Include="Resources\polyline%402x.png" />
+    <BundleResource Include="Resources\polyline%403x.png" />
+    <BundleResource Include="Resources\Rectangle.png" />
+    <BundleResource Include="Resources\rectangle%402x.png" />
+    <BundleResource Include="Resources\rectangle%403x.png" />
+    <BundleResource Include="Resources\recycle.png" />
+    <BundleResource Include="Resources\recycle%402x.png" />
+    <BundleResource Include="Resources\recycle%403x.png" />
+    <BundleResource Include="Resources\SampleList.xml" />
+    <BundleResource Include="Resources\threelines%402x.png" />
+    <BundleResource Include="Resources\threelines%403x.png" />
+    <BundleResource Include="Resources\Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

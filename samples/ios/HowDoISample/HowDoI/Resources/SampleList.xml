@@ -1,171 +1,315 @@
 <SampleList>
-  <Category Name="Map Functions">
-    <Sample Name="Display a simple map" Class="DisplayASimpleMap" >
-      <Description>This sample shows how to display a simple map.</Description>
+  <Category Name="Setting the Map Extent">
+    <Sample Name="Basic Navigation" Class="BasicNavigationSample" >
+      <Description>Learn how to use code to zoom, pan, and rotate the map control.</Description>
     </Sample>
-    <Sample Name="Add A Touch Event On Map" Class="AddATouchEventOnMap" >
-      <Description>This sample shows how to add touch event on AndroidMap.</Description>
-    </Sample>
-    
-    <Sample Name="Extent and scale change events" Class="ExtentAndScaleChangeEvents" >
-      <Description>Extent and scale change events.</Description>
-    </Sample>
-    <Sample Name="Zoom in to a feature user touched" Class="ZoomInToAFeatureTouched" >
-      <Description>This sample shows how to zoom in to a feature user touched.</Description>
-    </Sample>
-    <Sample Name="Zoom Into Features" Class="ZoomIntoFeatures">
-      <Description>Zoom Into Features.</Description>
-    </Sample>
-    <Sample Name="Zoom to a scale" Class="ZoomToAScale" >
-      <Description>This sample shows how to zoom to a scale.</Description>
+    <Sample Name="Set the Map Extent" Class="SetMapExtentSample" >
+      <Description>Learn how to set the map extent in a variety of different ways.</Description>
     </Sample>
   </Category>
-  <Category Name="Overlay">
-    <Sample Name="Use BingMaps Overlay" Class="UseBingMapsOverlay" >
-      <Description>This sample shows how use bing map overlay.</Description>
+  <Category Name="Displaying Layers">
+    <Sample Name="Display a Shapefile Layer" Class="ShapefileLayerSample" >
+      <Description>This sample shows how to display a shapefile layer.</Description>
     </Sample>
-    <Sample Name="Use GoogleMaps Overlay" Class="UseGoogleMapsOverlay"  DisplayPicture="true" >
-      <Description>This sample shows how use google map overlay.</Description>
+    <Sample Name="Display a FileGeoDatabase Layer" Class="FileGeoDatabaseLayerSample" >
+      <Description>This sample shows how to display a file geodatabase layer.</Description>
     </Sample>
-    <Sample Name="Use WMS overlay" Class="UseWMSOverlay" >
-      <Description>This sample shows how to use wms overlay.</Description>
+    <Sample Name="Display a TinyGeo Layer" Class="TinyGeoLayerSample" >
+      <Description>This sample shows how to display a TinyGeo layer.</Description>
     </Sample>
-  </Category>
-  <Category Name="Raster Layers">
-    <Sample Name="Load A GeoTiffRasterLayer" Class="LoadAGeoTiffRasterLayer" >
-      <Description>This sample shows how to load tiff raster layer.</Description>
+    <Sample Name="Display a S57 (Nautical Charts) Layer" Class="S57LayerSample" >
+      <Description>This sample shows how to display S57 nautical charts.</Description>
     </Sample>
-    <Sample Name="Load A GdiPlusRasterLayer" Class="LoadAGdiPlusRasterLayer" >
-      <Description>This sample shows how to load gdi plus raster layer.</Description>
+    <Sample Name="Display a GPX Layer" Class="GPXLayerSample" >
+      <Description>This sample shows how to display a GPX layer.</Description>
     </Sample>
-  </Category>
-  <Category Name="Vector Layers">
-    <Sample Name="Create an InMemoryFeatureLayer" Class="CreateAnInMemoryFeatureLayer">
-      <Description>Create an InMemoryFeatureLayer.</Description>
+    <Sample Name="Display a TAB Layer" Class="TABLayerSample" >
+      <Description>This sample shows how to display a TAB layer.</Description>
     </Sample>
-    <Sample Name="Load A GpxFeatureLayer" Class="LoadAGpxFeatureLayer" >
-      <Description>This sample shows how to load gpx data.</Description>
+    <Sample Name="Display an ISOLine Layer" Class="ISOLineLayerSample" >
+      <Description>This sample shows how to display an ISOLine layer.</Description>
     </Sample>
-    <Sample Name="Load A TabFeatureLayer" Class="LoadATabFeatureLayer" >
-      <Description>This sample shows how to load tab file.</Description>
+    <Sample Name="Display an InMemory Layer" Class="InMemoryLayerSample" >
+      <Description>This sample shows how to display an in memory layer.</Description>
     </Sample>
-    <Sample Name="Load A TinyGeoFeatureLayer" Class="LoadATinyGeoFeatureLayer" >
-      <Description>This sample shows how to load a tinygeo layer.</Description>
+    <Sample Name="Display a Graticule Layer" Class="GraticuleLayerSample" >
+      <Description>This sample shows how to display a graticule line layer.</Description>
     </Sample>
-    <Sample Name="Load A ShapeFileFeatureLayer" Class="LoadAShapeFileFeatureLayer" >
-      <Description>This sample shows how to load a shapefile layer.</Description>
+    <Sample Name="Display a SQLite Layer" Class="SQLiteLayerSample" >
+      <Description>This sample shows how to display a SQLite layer.</Description>
     </Sample>
-  </Category>
-  <Category Name="Web Based Layers">
-    <Sample Name="Load ThinkGeoCloudVectorMapsLayer" Class="LoadThinkGeoCloudVectorMapsLayer">
-      <Description>This sample shows how to load ThinkGeoCloudVectorMapsLayer.</Description>
+    <Sample Name="Display a Postgres Layer" Class="PostgresLayerSample" >
+      <Description>This sample shows how to display a Postgres layer.</Description>
     </Sample>
-    <Sample Name="Load ThinkGeoCloudRasterMapsLayer" Class="LoadThinkGeoCloudRasterMapsLayer">
-      <Description>This sample shows how to load ThinkGeoCloudRasterMapsLayer.</Description>
+    <Sample Name="Display an Oracle Layer" Class="OracleLayerSample" >
+      <Description>This sample shows how to display a Oracle layer.</Description>
     </Sample>
-    <Sample Name="Load OpenStreetMapLayer" Class="LoadOpenStreetMapLayer">
-      <Description>This sample shows how to load OpenStreetMapLayer.</Description>
+    <Sample Name="Display a SQL Server Layer" Class="SQLServerLayerSample" >
+      <Description>This sample shows how to display a SQL Server layer.</Description>
     </Sample>
-    <Sample Name="Load BingMapsLayer" Class="LoadBingMapsLayer">
-      <Description>This sample shows how to load BingMapsLayer.</Description>
+    <Sample Name="Display a NOAA Radar Layer (TODO)" Class="NOAARadarLayerSample" >
+      <Description>This sample shows how to add NOAA Radar weather to your map.</Description>
     </Sample>
-  </Category>
-  <Category Name="Database Layers">
-    <Sample Name="Load SqliteFeatureLayer" Class="LoadSqliteFeatureLayer">
-      <Description>This sample shows how to load SqliteFeatureLayer.</Description>
+    <Sample Name="Display a NOAA Weather Station Layer" Class="NOAAWeatherStationLayerSample" >
+      <Description>This sample shows how to display NOAA weather stations current readings to your map.</Description>
     </Sample>
-  </Category>
-  <Category Name="Other Layers">
-    <Sample Name="Load A HeatMapLayer" Class="LoadAHeatMapLayer" >
-      <Description>This sample shows how to load a heat map layer.</Description>
+    <Sample Name="Display a NOAA Weather Warning Layer" Class="NOAAWeatherWarningLayerSample" >
+      <Description>This sample shows how to display NOAA weather warnings to your map</Description>
     </Sample>
-  </Category>
-  <Category Name="Styles">
-    <Sample Name="Draw A Feature Based on A Value" Class="DrawAFeatureBasedOnAValue">
-      <Description>Draw a feature based on a value.</Description>
+    <Sample Name="Display a Cloud Maps Raster Layer" Class="CloudMapsRasterLayerSample" >
+      <Description>This sample shows how to display ThinkGeo cloud raster background images.</Description>
     </Sample>
-    <Sample Name="Draw Features Based on Regular Expression" Class="DrawFeaturesBasedOnRegularExpression">
-      <Description>Draw features based on regular expression.</Description>
+    <Sample Name="Display a Cloud Maps Vector Layer" Class="CloudMapsVectorLayerSample" >
+      <Description>This sample shows how to display ThinkGeo cloud vector background maps.</Description>
     </Sample>
-    <Sample Name="Draw Thematic Features" Class="DrawThematicFeatures">
-      <Description>Draw thematic features.</Description>
+    <Sample Name="Display a Bing Map Layer" Class="BingMapLayerSample" >
+      <Description>This sample shows how to display a Bing Maps layer.</Description>
     </Sample>
-  </Category>
-  <Category Name="Projection">
-    <Sample Name="Using Google's 900913 projection" Class="UsingGoogle900913projection" >
-      <Description>Using Google's 900913 projection.</Description>
+    <Sample Name="Display a Google Map Layer" Class="GoogleMapLayerSample" >
+      <Description>This sample shows how to display a Google Maps layer.</Description>
     </Sample>
-  </Category>
-  <Category Name="Geometry Functions">
-    <Sample Name="Area of a Feature" Class="AreaOfAFeature">
-      <Description>This sample shows how to get the area of a feature where user tapped.</Description>
+    <Sample Name="Display an OpenStreetMap Layer" Class="OpenStreetMapLayerSample" >
+      <Description>This sample shows how to display a Open Street Maps layer.</Description>
     </Sample>
-    <Sample Name="Buffer a Feature" Class="BufferAFeature">
-      <Description>Buffer a Feature.</Description>
+    <Sample Name="Display a WMS Layer" Class="WMSLayerSample" >
+      <Description>This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)</Description>
     </Sample>
-    <Sample Name="Change Edit Settings" Class="ChangeEditSettings" >
-      <Description>Change Edit Settings.</Description>
+    <Sample Name="Display an ECW Layer" Class="ECWLayerSample" >
+      <Description>This sample shows how to display a ECW image.</Description>
     </Sample>
-    <Sample Name="Convert To/From Well Known Binary" Class="ConvertToFromWellKnownBinary">
-      <Description>Convert To/From Well Known Binary.</Description>
+    <Sample Name="Display a GeoTiff Layer" Class="GeoTiffLayerSample" >
+      <Description>This sample shows how to display a GeoTiff image.</Description>
     </Sample>
-    <Sample Name="Draw and Edit Shapes" Class="DrawAndEditShapes" >
-      <Description>Draw and Edit Shapes.</Description>
+    <Sample Name="Display a MrSid Layer" Class="MrSidLayerSample" >
+      <Description>This sample shows how to display a MrSids layer.</Description>
     </Sample>
-    <Sample Name="Edit feature from a feature layer" Class="EditFeaturesFromAFeatureLayer">
-      <Description>Edit feature from a feature layer.</Description>
+    <Sample Name="Display a ESRI Grid Layer" Class="ESRIGridLayerSample" >
+      <Description>This sample shows how to display a ESRI grid layer.</Description>
     </Sample>
-    <Sample Name="Envelope of a Feature" Class="EnvelopeOfAFeature">
-      <Description>Envelope of a Feature.</Description>
+    <Sample Name="Display Common Raster Layers" Class="CommonRasterLayersSample" >
+      <Description>This sample shows how to display common images types such as PNG, JPEG, Bitmap etc.</Description>
     </Sample>
-    <Sample Name="Find By Id" Class="FindById">
-      <Description>Find By Id.</Description>
-    </Sample>
-    <Sample Name="Find the Feature the User Touched" Class="FindFeatureTouched" >
-      <Description>This sample shows how to find the feature when user touched.</Description>
-    </Sample>
-    <Sample Name="Find the difference of two features" Class="FindTheDifferenceOfTwoFeatures">
-      <Description>Find the difference of two features.</Description>
-    </Sample>
-    <Sample Name="Find World Coordinates Where a User Tapped" Class="FindWorldCoordinatesWhereTouched">
-      <Description>Find world coordinates where user tapped.</Description>
-    </Sample>
-    <Sample Name="Get Distance Between Two Features" Class="GetDistanceBetweenTwoFeatures">
-      <Description>Get distance between two points.</Description>
-    </Sample>
-    <Sample Name="Length of a Feature" Class="LengthOfAFeature">
-      <Description>This sample shows how to get the length of a feature where user tapped.</Description>
-    </Sample>
-    <Sample Name="Scale Feature Up and Down" Class="ScaleFeatureUpAndDown">
-      <Description>Scale Feature Up and Down.</Description>
-    </Sample>
-    <Sample Name="Convert Screen Coordinates to World" Class="ScreenCoordinatesToWorldCoordinates">
-      <Description>Convert screen coordinates to world where a user tapped.</Description>
-    </Sample>
-    <Sample Name="Shortest Line Between Features" Class="ShortestLineBetweenFeatures">
-      <Description>Shortest Line Between Features.</Description>
-    </Sample>
-    <Sample Name="Spatial Query a Feature Layer" Class="SpatialQueryAFeatureLayer">
-      <Description>Spatial Query a Feature Layer.</Description>
-    </Sample>
-    <Sample Name="Convert World Coordinates to Screen" Class="WorldCoordinatesToScreenCoordinates">
-      <Description>Convert world coordinates to screen.</Description>
+    <Sample Name="Display a JPEG2000 Layer" Class="JPEG2000LayerSample" >
+      <Description>This sample shows how to display a JPEG2000 image.</Description>
     </Sample>
   </Category>
-  <Category Name="Markers And Popups">
-    <Sample Name="Add A Marker" Class="AddAMarker" >
-      <Description>This sample shows how to add a marker.</Description>
+  <Category Name="Using Overlays">
+    <Sample Name="Caching Map Tiles" Class="CachingMapTilesSample" >
+      <Description>Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times. Saved tile images can be found in the cache folder within this project's debug folder.</Description>
     </Sample>
-    <Sample Name="Add A Popup" Class="AddAPopup" >
-      <Description>This sample shows how to add a popup.</Description>
+    <Sample Name="Display Bing Maps Overlay" Class="DisplayBingMapsOverlaySample" >
+      <Description>Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required. Visit the Bing Maps Dev Portal to sign up for a key (https://www.bingmapsportal.com/).</Description>
     </Sample>
-    <Sample Name="Add A Touch Event On Marker" Class="AddATouchEventOnMarker" >
-      <Description>This sample shows how to add touch event on marker.</Description>
+    <Sample Name="Display Cloud Maps Raster Overlay" Class="DisplayCloudMapsRasterOverlaySample" >
+      <Description>Learn to render ThinkGeo Cloud Maps in raster format. Sign up for your own ThinkGeo Cloud API key at https://cloud.thinkgeo.com!</Description>
+    </Sample>
+    <Sample Name="Display Cloud Maps Vector Overlay" Class="DisplayCloudMapsVectorOverlaySample" >
+      <Description>Learn to render ThinkGeo Cloud Maps in vector format. Sign up for your own ThinkGeo Cloud API key at https://cloud.thinkgeo.com!</Description>
+    </Sample>
+    <Sample Name="Display Google Maps Overlay" Class="DisplayGoogleMapsOverlaySample" >
+      <Description>Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required. Visit the Google Maps Platform page to sign up for a key (https://cloud.google.com/maps-platform/).</Description>
+    </Sample>
+    <Sample Name="Display OpenStreetMap Overlay" Class="DisplayOpenStreetMapOverlaySample" >
+      <Description>Learn to render OpenStreetMap using the OpenStreetMapOverlay. OpenStreetMap Tiles are not meant for heavy production use without express permission from the OpenStreetMap Foundation. See https://operations.osmfoundation.org/ for details about their usage policies.</Description>
+    </Sample>
+    <Sample Name="Display a WMS Overlay" Class="DisplayWMSOverlaySample" >
+      <Description>Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.</Description>
+    </Sample>
+    <Sample Name="Draw, Edit, or Delete Shapes using the InteractiveOverlay" Class="DrawEditDeleteShapesUsingInteractiveOverlaySample" >
+      <Description>Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.</Description>
+    </Sample>
+    <Sample Name="Grouping Layers Using LayerOverlay" Class="GroupingLayersUsingLayerOverlaySample" >
+      <Description>Learn to group layers into logical groups using LayerOverlays.</Description>
+    </Sample>
+    <Sample Name="Print Maps Using PrintOverlay" Class="PrintMapsUsingPrintOverlaySample" >
+      <Description>Learn to print maps using the PrintOverlay.</Description>
+    </Sample>
+    <Sample Name="Using Markers" Class="UsingMarkersSample" >
+      <Description>Learn to add, edit, or remove markers on the map using the MarkerOverlay.</Description>
+    </Sample>
+    <Sample Name="Using Popups" Class="UsingPopupsSample" >
+      <Description>Learn to add, edit, or remove popups on the map using the PopupOverlay.</Description>
     </Sample>
   </Category>
-  <Category Name="Map Tools">
-    <Sample Name="Add Various Map Tools" Class="AddVariousMapTools" >
-      <Description>This sample shows how to add various map tools.</Description>
+  <Category Name="Using Map Tools">
+    <Sample Name="Display a Logo Adornment" Class="DisplayMapLogoSample" >
+      <Description>Learn to render a custom logo on the map.</Description>
+    </Sample>
+    <Sample Name="Display Map Mouse Coordinates" Class="DisplayMapMouseCoordinatesSample" >
+      <Description>Learn to render coordinate info based on the mouse cursor position on the map.</Description>
+    </Sample>
+    <Sample Name="Display a Map ScaleLine" Class="DisplayMapScaleLineSample" >
+      <Description>Learn to render a ScaleLine on the map in a variety of different of styles.</Description>
+    </Sample>
+    <Sample Name="Display a Map PanZoomBar" Class="DisplayMapPanZoomBarSample" >
+      <Description>Learn to render a PanZoomBar on the map.</Description>
+    </Sample>
+  </Category>
+  <Category Name="Creating Styles">
+    <Sample Name="Create a Point Style" Class="CreatePointStyleSample" >
+      <Description>Learn how to style point data using a PointStyle</Description>
+    </Sample>
+    <Sample Name="Create a Line Style" Class="CreateLineStyleSample" >
+      <Description>Learn how to style line data using a LineStyle</Description>
+    </Sample>
+    <Sample Name="Create an Area Style" Class="CreateAreaStyleSample" >
+      <Description>Learn how to style polygon data using an AreaStyle</Description>
+    </Sample>
+    <Sample Name="Create a Text Style" Class="CreateTextStyleSample" >
+      <Description>Learn how to label data using a TextStyle</Description>
+    </Sample>
+    <Sample Name="Create a Filter Style" Class="CreateFilterStyleSample" >
+      <Description>Learn how to selectively style features using a FilterStyle</Description>
+    </Sample>
+    <Sample Name="Create a Heat Style" Class="CreateHeatStyleSample" >
+      <Description>Learn how to create a heat map from data using a HeatStyle</Description>
+    </Sample>
+    <Sample Name="Create a Cluster Style" Class="CreateClusterPointStyleSample" >
+      <Description>Learn how to cluster point data dynamically using a ClusterPointStyle</Description>
+    </Sample>
+    <Sample Name="Create a ClassBreak Style" Class="CreateClassBreakStyleSample" >
+      <Description>Learn how to style data based on numeric values using a ClassBreakStyle</Description>
+    </Sample>
+    <Sample Name="Create a Value Style" Class="CreateValueStyleSample" >
+      <Description>Learn how to style data based on data values using a ValueStyle</Description>
+    </Sample>
+  </Category>
+  <Category Name="Projecting Data">
+    <Sample Name="Setting the Projection of a Layer" Class="SetLayerProjectionSample" >
+      <Description>Learn how to automatically reproject a layer using the ProjectionConverter class</Description>
+    </Sample>
+    <Sample Name="Projecting Features" Class="ProjectLatLonCoordinatesSample" >
+      <Description>Learn how to reproject features using the ProjectionConverter class</Description>
+    </Sample>
+  </Category>
+  <Category Name="Performing Geometric Operations">
+    <Sample Name="Union Shapes" Class="UnionShapesSample" >
+      <Description>Learn how to union shapes into a single shape</Description>
+    </Sample>
+    <Sample Name="Buffer Shape" Class="BufferShapeSample" >
+      <Description>Learn how to buffer a shape</Description>
+    </Sample>
+    <Sample Name="Simplify Shape" Class="SimplifyShapeSample" >
+      <Description>Learn how to simplify a shape's geometry</Description>
+    </Sample>
+    <Sample Name="Rotate Shape" Class="RotateShapeSample" >
+      <Description>Learn how to rotate a shape</Description>
+    </Sample>
+    <Sample Name="Scale Shape" Class="ScaleShapeSample" >
+      <Description>Learn how to scale a shape</Description>
+    </Sample>
+    <Sample Name="Translate Shape" Class="TranslateShapeSample" >
+      <Description>Learn how to translate a shape</Description>
+    </Sample>
+    <Sample Name="Calculate Center Point" Class="CalculateCenterPointSample" >
+      <Description>Learn how to calculate the center point of a feature</Description>
+    </Sample>
+    <Sample Name="Calculate Area" Class="CalculateAreaSample" >
+      <Description>Learn how to calculate the area of a feature</Description>
+    </Sample>
+    <Sample Name="Calculate Length" Class="CalculateLengthSample" >
+      <Description>Learn how to calculate the length of a line</Description>
+    </Sample>
+    <Sample Name="Calculate Shortest Line Between Shapes" Class="CalculateShortestLineBetweenShapesSample" >
+      <Description>Learn how to calculate the shortest line between two shapes</Description>
+    </Sample>
+    <Sample Name="Get Line on a Line" Class="GetLineOnALineSample" >
+      <Description>Learn how to get part of a line from an existing line</Description>
+    </Sample>
+    <Sample Name="Clip Shape" Class="ClipShapeSample" >
+      <Description>Learn how to clip a shape from another shape</Description>
+    </Sample>
+    <Sample Name="Difference Shapes" Class="DifferenceShapesSample" >
+      <Description>Learn how to find the difference of shapes</Description>
+    </Sample>
+    <Sample Name="Get Convex Hull" Class="GetConvexHullSample" >
+      <Description>Learn how to get the convex hull of a shape</Description>
+    </Sample>
+    <Sample Name="Get Envelope" Class="GetEnvelopeSample" >
+      <Description>Learn how to get the envelope of a shape</Description>
+    </Sample>
+  </Category>
+  <Category Name="Using Query Tools">
+    <Sample Name="Check if Feature Contains" Class="ContainsSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer contain a shape</Description>
+    </Sample>
+    <Sample Name="Check if Feature Crosses" Class="CrossesSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer a shape crosses</Description>
+    </Sample>
+    <Sample Name="Check if Features are Disjoint" Class="DisjointSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer are disjoint from a shape</Description>
+    </Sample>
+    <Sample Name="Check if Features are Equal" Class="EqualsSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer are topologically equal to a shape</Description>
+    </Sample>
+    <Sample Name="Check if Feature Intersects" Class="IntersectsSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer intersect a shape</Description>
+    </Sample>
+    <Sample Name="Check if Feature Overlaps" Class="OverlapsSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer overlap a shape</Description>
+    </Sample>
+    <Sample Name="Check if Feature Touches" Class="TouchesSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer are touching a shape</Description>
+    </Sample>
+    <Sample Name="Check if Feature is Within Another Feature" Class="WithinSample" >
+      <Description>Learn how to use layer query tools to find which features in a layer are within a shape</Description>
+    </Sample>
+    <Sample Name="Get Features Within a Distance" Class="GetFeaturesWithinDistanceSample" >
+      <Description>Learn how to use layer query tools to find features in a layer within a given distance of a point</Description>
+    </Sample>
+    <Sample Name="Get Data from All Features" Class="GetAllFeatureDataSample" >
+      <Description>Learn how to get data from all features in a ShapeFile</Description>
+    </Sample>
+    <Sample Name="Get Data from One Feature" Class="GetDataFromFeatureSample" >
+      <Description>Learn how to get data from a feature in a ShapeFile</Description>
+    </Sample>
+  </Category>
+  <Category Name="Topological Validation">
+    <Sample Name="Validate Point Topology" Class="PointValidationSample" >
+      <Description>Learn how to use the TopologyValidator APIs to perform validation on points</Description>
+    </Sample>
+    <Sample Name="Validate Line Topology" Class="LineValidationSample" >
+      <Description>Learn how to use the TopologyValidator APIs to perform validation on lines</Description>
+    </Sample>
+    <Sample Name="Validate Polygon Topology" Class="PolygonValidationSample" >
+      <Description>Learn how to use the TopologyValidator APIs to perform validation on polygons</Description>
+    </Sample>
+  </Category>
+  <Category Name="Using Cloud Maps Services">
+    <Sample Name="Routing" Class="RoutingCloudServicesSample" >
+      <Description>Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Routing - Service Area" Class="RoutingServiceAreaCloudServicesSample" >
+      <Description>Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Routing - Traveling Sales Person" Class="RoutingTSPCloudServicesSample" >
+      <Description>Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Elevation" Class="ElevationCloudServicesSample" >
+      <Description>Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Geocoding" Class="GeocodingCloudServicesSample" >
+      <Description>Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Reverse Geocoding" Class="ReverseGeocodingCloudServicesSample" >
+      <Description>Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Color Utilities" Class="ColorUtilitiesCloudServicesSample" >
+      <Description>Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Timezone" Class="TimezoneCloudServicesSample" >
+      <Description>Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="Projection" Class="ProjectionCloudServicesSample" >
+      <Description>Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud</Description>
+    </Sample>
+    <Sample Name="World Maps Query" Class="WorldMapsQueryCloudServicesSample" >
+      <Description>Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud</Description>
+    </Sample>
+  </Category>
+  <Category Name="Interpolation">
+    <Sample Name="Interpolation Methods" Class="InterpolationPlaceholderSample" >
+      <Description>Learn how to do grid based interpolation using various methods</Description>
     </Sample>
   </Category>
 </SampleList>
