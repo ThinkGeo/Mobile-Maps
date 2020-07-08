@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using ThinkGeo.Core;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
     /// <summary>
-    /// Learn how to ...
+    /// Learn how to style point data using a PointStyle
     /// </summary>
     public class CreatePointStyleSample : SampleFragment
     {
@@ -25,18 +26,24 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            //Button button = new Button(this.Context);
-            //button.Text = "OneFeature";
-            //button.Click += Button_Click;
+            Button SymbolButton = new Button(this.Context);
+            SymbolButton.Text = "Symbols";
+            SymbolButton.Click += SymbolButton_Click;
 
-            //LinearLayout linearLayout = new LinearLayout(this.Context);
-            //linearLayout.Orientation = Orientation.Horizontal;
+            Button IconButton = new Button(this.Context);
+            IconButton.Text = "Icons";
+            IconButton.Click += IconButton_Click;
 
-            //linearLayout.AddView(button);
+            Button TextButton = new Button(this.Context);
+            TextButton.Text = "Text";
+            TextButton.Click += TextButton_Click;
 
-            //SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            LinearLayout linearLayout = new LinearLayout(this.Context);
+            linearLayout.Orientation = Orientation.Horizontal;
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
+            linearLayout.AddView(IconButton);
+
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
         }
 
         /// <summary>
@@ -55,12 +62,96 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            mapView.CurrentExtent = new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
+
+            ShapeFileFeatureLayer hotelsLayer = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Hotels.shp");
+            LayerOverlay layerOverlay = new LayerOverlay();
+
+            // Project the layer's data to match the projection of the map
+            hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+
+            // Add the layer to a layer overlay
+            layerOverlay.Layers.Add("hotels", hotelsLayer);
+
+            // Add the overlay to the map
+            mapView.Overlays.Add("layerOverlay", layerOverlay);
         }
 
-        //private void Button_Click(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Create a pointStyle using a PointSymbol and add it to the Hotels layer
+        /// </summary>
+        private void SymbolButton_Click(object sender, EventArgs e)
+        {
+            if (mapView.Overlays.Count > 0)
+            {
+                LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+                ShapeFileFeatureLayer hotelsLayer = (ShapeFileFeatureLayer)layerOverlay.Layers["hotels"];
+
+                // Create a point style
+                var pointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue, new GeoPen(GeoBrushes.White, 2));
+
+                // Add the point style to the collection of custom styles for ZoomLevel 1.
+                hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
+                hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
+
+                // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+                hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                // Refresh the layerOverlay to show the new style
+                layerOverlay.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Create a pointStyle using an icon image and add it to the Hotels layer
+        /// </summary>
+        private void IconButton_Click(object sender, EventArgs e)
+        {
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            ShapeFileFeatureLayer hotelsLayer = (ShapeFileFeatureLayer)layerOverlay.Layers["hotels"];
+
+            // Create a point style
+            var pointStyle = new PointStyle(new GeoImage(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/Resources/hotel_icon.png"))
+            {
+                ImageScale = .25
+            };
+
+            // Add the point style to the collection of custom styles for ZoomLevel 1.
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
+
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            // Refresh the layerOverlay to show the new style
+            layerOverlay.Refresh();
+        }
+
+
+        /// <summary>
+        /// Create a pointStyle using a font symbol and add it to the Hotels layer
+        /// </summary>
+        private void TextButton_Click(object sender, EventArgs e)
+        {
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            ShapeFileFeatureLayer hotelsLayer = (ShapeFileFeatureLayer)layerOverlay.Layers["hotels"];
+
+            // Create a point style
+            var symbolPointStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
+            {
+                Mask = new AreaStyle(GeoBrushes.White),
+                MaskType = MaskType.Circle
+            };
+
+            // Add the point style to the collection of custom styles for ZoomLevel 1.
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(symbolPointStyle);
+
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            // Refresh the layerOverlay to show the new style
+            layerOverlay.Refresh();
+        }
     }
 }

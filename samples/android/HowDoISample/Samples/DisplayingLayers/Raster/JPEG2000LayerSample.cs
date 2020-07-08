@@ -7,9 +7,9 @@ using ThinkGeo.Core;
 namespace ThinkGeo.UI.Android.HowDoI
 {
     /// <summary>
-    /// This sample shows how to display a Oracle layer.
+    /// This sample shows how to display a JPEG2000 image.
     /// </summary>
-    public class OracleLayerSample : SampleFragment
+    public class JPEG2000LayerSample : SampleFragment
     {
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -44,22 +44,15 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Create a new overlay that will hold our new layer and add it to the map.
-            LayerOverlay schoolOverlay = new LayerOverlay();
-            mapView.Overlays.Add(schoolOverlay);
+            LayerOverlay layerOverlay = new LayerOverlay();
+            mapView.Overlays.Add(layerOverlay);
 
-            // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
-            OracleFeatureLayer schoolLayer = new OracleFeatureLayer(@"OCI:ThinkGeoSampleUser/ThinkGeoSamplePassword@sampledatabases.thinkgeo.com/xe", "SYSTEM.SCHOOLS", "OGR_FID");
-            schoolLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Create the new layer and dd the layer to the overlay we created earlier.
+            Jpeg2000RasterLayer jp2000RasterLayer = new Jpeg2000RasterLayer("mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Jp2/m_3309650_sw_14_1_20160911_20161121.jp2");
+            layerOverlay.Layers.Add(jp2000RasterLayer);
 
-            // Add the layer to the overlay we created earlier.
-            schoolOverlay.Layers.Add("Coyote Sightings", schoolLayer);
-
-            // Set a point style to zoom level 1 and then apply it to all zoom levels up to 20.
-            schoolLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue, new GeoPen(GeoColors.White, 2));
-            schoolLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            // Set the map view current extent to a bounding box that shows just a few sightings.  
-            mapView.CurrentExtent = new RectangleShape(-10789388.4602951, 3923878.18083465, -10768258.7082788, 3906668.46719412);
+            // Set the map view current extent to a slightly zoomed in area of the image.
+            mapView.CurrentExtent = new RectangleShape(-10783910.2966461, 3917274.29233111, -10777309.4670677, 3912119.9131963);
 
             // Refresh the map.
             mapView.Refresh();

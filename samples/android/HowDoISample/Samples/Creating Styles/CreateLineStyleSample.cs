@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 namespace ThinkGeo.UI.Android.HowDoI
 {
     /// <summary>
-    /// Learn how to ...
+    /// Learn how to style line data using a LineStyle
     /// </summary>
     public class CreateLineStyleSample : SampleFragment
     {
@@ -24,17 +24,6 @@ namespace ThinkGeo.UI.Android.HowDoI
         private void SetupSample()
         {
             base.OnStart();
-
-            //Button button = new Button(this.Context);
-            //button.Text = "OneFeature";
-            //button.Click += Button_Click;
-
-            //LinearLayout linearLayout = new LinearLayout(this.Context);
-            //linearLayout.Orientation = Orientation.Horizontal;
-
-            //linearLayout.AddView(button);
-
-            //SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }
@@ -56,11 +45,37 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+            // Create a layer with line data
+            ShapeFileFeatureLayer friscoStreets = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Data/Shapefile/Streets.shp");
+
+            // Project the layer's data to match the projection of the map
+            friscoStreets.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+
+            // Add the layer to a layer overlay
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add(friscoStreets);
+
+            // Add the overlay to the map
+            mapView.Overlays.Add(layerOverlay);
+
+            // Add the line style to the historicSites layer
+            AddLineStyle(friscoStreets);
         }
 
-        //private void Button_Click(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Create a lineStyle and add it to the Frisco Streets layer
+        /// </summary>
+        private void AddLineStyle(ShapeFileFeatureLayer layer)
+        {
+            // Create a line style
+            var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 4), new GeoPen(GeoBrushes.WhiteSmoke, 2));
+
+            // Add the line style to the collection of custom styles for ZoomLevel 1. 
+            layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(lineStyle);
+
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
+            layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+        }
     }
 }

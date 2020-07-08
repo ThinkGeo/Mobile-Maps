@@ -129,7 +129,16 @@
     <Compile Include="Samples\Creating Styles\StylingAcrossMultipleScalesSample.cs" />
     <Compile Include="Samples\Creating Styles\CreateAreaStyleSample.cs" />
     <Compile Include="Samples\Database Layers\LoadSqliteFeatureLayer.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\PostgresLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\SQLiteLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\SQLServerLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\Database\OracleLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\CommonRasterLayersSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\ECWLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\ESRIGridLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\JPEG2000LayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Raster\MrSidLayerSample.cs" />
     <Compile Include="Samples\Geometry Functions\FindWorldCoordinatesWhereTouched.cs" />
     <Compile Include="Samples\Geometry Functions\GetDistanceBetweenTwoFeatures.cs" />
     <Compile Include="Samples\Geometry Functions\ScreenCoordinatesToWorldCoordinates.cs" />
@@ -420,8 +429,26 @@
     <AndroidAsset Include="Assets\SyntaxHighlighter\SourceCode\DisplayASimpleMap.html" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ThinkGeo.Ecw">
+      <Version>12.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.Jpeg2000">
+      <Version>12.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.MrSid">
+      <Version>12.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.Oracle">
+      <Version>12.2.15</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.PostgreSql">
+      <Version>12.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.SqlServer">
+      <Version>12.2.14</Version>
+    </PackageReference>
     <PackageReference Include="ThinkGeo.UI.Android">
-      <Version>12.2.11</Version>
+      <Version>12.2.14</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>28.0.0.3</Version>
@@ -472,7 +499,52 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09G.TXT" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\AQUA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\AQUABLANK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\coyote_paw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\drugs_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\East.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\hotel_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\North.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\South.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\vandalism_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\weapon_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\West.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\ZoomIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\Resources\ZoomOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Samples\DisplayingLayers\Vector\" />
+    <Folder Include="Samples\DisplayingLayers\WebServices\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

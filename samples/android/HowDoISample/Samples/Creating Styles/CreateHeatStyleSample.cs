@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 namespace ThinkGeo.UI.Android.HowDoI
 {
     /// <summary>
-    /// Learn how to ...
+    /// Learn how to create a heat map from data using a HeatStyle
     /// </summary>
     public class CreateHeatStyleSample : SampleFragment
     {
@@ -24,17 +24,6 @@ namespace ThinkGeo.UI.Android.HowDoI
         private void SetupSample()
         {
             base.OnStart();
-
-            //Button button = new Button(this.Context);
-            //button.Text = "OneFeature";
-            //button.Click += Button_Click;
-
-            //LinearLayout linearLayout = new LinearLayout(this.Context);
-            //linearLayout.Orientation = Orientation.Horizontal;
-
-            //linearLayout.AddView(button);
-
-            //SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }
@@ -56,11 +45,36 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+            ShapeFileFeatureLayer coyoteSightings = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Frisco_Coyote_Sightings.shp");
+
+            // Project the layer's data to match the projection of the map
+            coyoteSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+
+            // Add the layer to a layer overlay
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add(coyoteSightings);
+
+            // Add the overlay to the map
+            mapView.Overlays.Add(layerOverlay);
+
+            // Apply HeatStyle
+            AddHeatStyle(coyoteSightings);
         }
 
-        //private void Button_Click(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Create a heat style that bases the color intensity on the proximity of surrounding points
+        /// </summary>
+        private void AddHeatStyle(ShapeFileFeatureLayer layer)
+        {
+            // Create the heat style
+            var heatStyle = new HeatStyle(20, 1, DistanceUnit.Kilometer);
+
+            // Add the point style to the collection of custom styles for ZoomLevel 1.
+            layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(heatStyle);
+
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+        }
     }
 }
