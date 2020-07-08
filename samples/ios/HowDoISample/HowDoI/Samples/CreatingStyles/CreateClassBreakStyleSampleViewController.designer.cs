@@ -11,7 +11,7 @@ using UIKit;
 
 namespace ThinkGeo.UI.iOS.HowDoI
 {
-    [Register(" CreateClassBreakStyleSampleViewController")]
+    [Register("CreateClassBreakStyleSampleViewController")]
     partial class CreateClassBreakStyleSampleViewController
     {
         void ReleaseDesignerOutlets()

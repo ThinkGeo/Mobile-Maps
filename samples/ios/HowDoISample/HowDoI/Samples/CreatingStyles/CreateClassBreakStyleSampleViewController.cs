@@ -6,7 +6,7 @@ namespace ThinkGeo.UI.iOS.HowDoI
 {
     public partial class CreateClassBreakStyleSampleViewController : BaseController
     {
-        public CreateClassBreakStyleSampleViewController() : base(" CreateClassBreakStyleSampleViewController", null)
+        public CreateClassBreakStyleSampleViewController() : base("CreateClassBreakStyleSampleViewController", null)
         {
             Title = "";
         }
