@@ -139,6 +139,16 @@
     <Compile Include="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\Raster\JPEG2000LayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\Raster\MrSidLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\FileGeoDatabaseLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\GPXLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\GraticuleLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\InMemoryLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\ISOLineLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\S57LayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\ShapefileLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\TABLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.cs" />
+    <Compile Include="Samples\DisplayingLayers\WebServices\BingMapLayerSample.cs" />
     <Compile Include="Samples\Geometry Functions\FindWorldCoordinatesWhereTouched.cs" />
     <Compile Include="Samples\Geometry Functions\GetDistanceBetweenTwoFeatures.cs" />
     <Compile Include="Samples\Geometry Functions\ScreenCoordinatesToWorldCoordinates.cs" />
@@ -432,10 +442,16 @@
     <PackageReference Include="ThinkGeo.Ecw">
       <Version>12.2.14</Version>
     </PackageReference>
+    <PackageReference Include="ThinkGeo.FileGeoDatabase">
+      <Version>12.2.14</Version>
+    </PackageReference>
     <PackageReference Include="ThinkGeo.Jpeg2000">
       <Version>12.2.14</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.MrSid">
+      <Version>12.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.NauticalCharts">
       <Version>12.2.14</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.Oracle">
@@ -541,10 +557,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\AppData\Resources\ZoomOut.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Samples\DisplayingLayers\Vector\" />
-    <Folder Include="Samples\DisplayingLayers\WebServices\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
