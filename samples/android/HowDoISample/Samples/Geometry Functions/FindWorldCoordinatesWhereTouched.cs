@@ -9,7 +9,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class FindWorldCoordinatesWhereTouched : SampleFragment
     {
-        private MapView mapView;
         private TextView longitudeLabelView;
         private TextView latitudeLabelView;
 

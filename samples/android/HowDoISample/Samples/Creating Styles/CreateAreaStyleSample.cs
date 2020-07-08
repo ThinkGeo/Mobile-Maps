@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Android.OS;
-using Android.Views;
+﻿using Android.OS;
 using Android.Widget;
 using ThinkGeo.Core;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
+    /// <summary>
+    /// Learn how to style polygon data using an AreaStyle
+    /// </summary>
     public class CreateAreaStyleSample : SampleFragment
     {
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -16,108 +16,66 @@ namespace ThinkGeo.UI.Android.HowDoI
             SetupMap();
         }
 
+        /// <summary>
+        /// Sets up the sample's layout and controls
+        /// </summary>
         private void SetupSample()
         {
             base.OnStart();
 
-            Button oneFeatureButton = new Button(this.Context);
-            oneFeatureButton.Text = "OneFeature";
-            oneFeatureButton.Click += OneFeatureButtonClick;
-
-            Button mulitFeaturesButton = new Button(this.Context);
-            mulitFeaturesButton.Text = "MultiFeatures";
-            mulitFeaturesButton.Click += MulitFeaturesButtonClick;
-
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
-
-            linearLayout.AddView(oneFeatureButton);
-            linearLayout.AddView(mulitFeaturesButton);
-
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }
 
+        /// <summary>
+        /// Sets up the map layers and styles
+        /// </summary>
         private void SetupMap()
         {
-            ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(SampleHelper.GetDataPath(@"SampleData/Countries02.shp"));
-            worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));
-            worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            InMemoryFeatureLayer highlightLayer = new InMemoryFeatureLayer();
-            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(150, 154, 205, 50));
-            highlightLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Add Cloud Maps as a background overlay
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("USlbIyO5uIMja2y0qoM21RRM6NBXUad4hjK3NBD6pD0~", "f6OJsvCDDzmccnevX55nL7nXpPDXXKANe5cN6czVjCH0s8jhpCH-2A~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.Layers.Add("WorldLayer", worldLayer);
+            // Set the zoom levels to match cloud maps
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            LayerOverlay highlightOverlay = new LayerOverlay();
-            highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            //
-            mapView.MapUnit = GeographyUnit.DecimalDegree;
-            mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
-            mapView.Overlays.Add("WorldOverlay", layerOverlay);
-            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+            ShapeFileFeatureLayer parks;
+
+            // Create a layer with polygon data
+            parks = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Parks.shp");
+
+            // Project the layer's data to match the projection of the map
+            parks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+
+            // Add the layer to a layer overlay
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add(parks);
+
+            // Add the overlay to the map
+            mapView.Overlays.Add(layerOverlay);
+
+            // Add the area style to the parks layer
+            AddAreaStyle(parks);
         }
 
-        private void OneFeatureButtonClick(object sender, EventArgs e)
+        /// <summary>
+        /// Create an areaStyle and add it to the parks layer
+        /// </summary>
+        private void AddAreaStyle(ShapeFileFeatureLayer layer)
         {
-            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
-            FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
+            // Create an area style
+            var areaStyle = new AreaStyle(GeoPens.DimGray, new GeoSolidBrush(new GeoColor(128, GeoColors.ForestGreen)));
 
-            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
-            InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
+            // Add the area style to the collection of custom styles for ZoomLevel 1.
+            layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(areaStyle);
 
-            lock (worldLayer)
-            {
-                if (!worldLayer.IsOpen) worldLayer.Open();
-                mapView.CurrentExtent = worldLayer.FeatureSource.GetBoundingBoxById("137");
-
-                highlightLayer.Open();
-                highlightLayer.InternalFeatures.Clear();
-                Feature feature = worldLayer.FeatureSource.GetFeatureById("137", ReturningColumnsType.NoColumns);
-                if (feature != null)
-                {
-                    highlightLayer.InternalFeatures.Add(feature);
-                }
-                highlightLayer.Close();
-            }
-
-            mapView.Refresh();
-        }
-
-        private void MulitFeaturesButtonClick(object sender, EventArgs e)
-        {
-            Collection<string> featureIDs = new Collection<string>();
-            featureIDs.Add("63");  // For US
-            featureIDs.Add("6");   // For Canada
-            featureIDs.Add("137"); // For Mexico
-
-            LayerOverlay worldOverlay = (LayerOverlay)mapView.Overlays["WorldOverlay"];
-            FeatureLayer worldLayer = (FeatureLayer)worldOverlay.Layers["WorldLayer"];
-
-            LayerOverlay highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
-            InMemoryFeatureLayer highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
-
-            lock (worldLayer)
-            {
-                if (!worldLayer.IsOpen) worldLayer.Open();
-                Collection<Feature> features = worldLayer.FeatureSource.GetFeaturesByIds(featureIDs, new string[0]);
-                mapView.CurrentExtent = MapUtil.GetBoundingBoxOfItems(features);
-
-                highlightLayer.Open();
-                highlightLayer.InternalFeatures.Clear();
-                if (features.Count > 0)
-                {
-                    foreach (var feature in features)
-                    {
-                        highlightLayer.InternalFeatures.Add(feature);
-                    }
-                }
-                highlightLayer.Close();
-            }
-
-            mapView.Refresh();
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the area style on every zoom level on the map.
+            layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         }
     }
 }

@@ -9,7 +9,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class ScreenCoordinatesToWorldCoordinates : SampleFragment
     {
-        private MapView mapView;
         private TextView screenPositionLable;
         private TextView worldPositionLable;
 

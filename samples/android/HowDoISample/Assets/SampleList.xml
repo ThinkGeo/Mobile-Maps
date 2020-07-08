@@ -1,4 +1,12 @@
 <SampleList>
+  <Category Name="Creating Styles">
+    <Sample Name="Create an AreaStyle" Class="CreateAreaStyleSample" >
+      <Description>Learn how to style polygon data using an AreaStyle</Description>
+    </Sample>
+    <Sample Name="Create a ClassBreakStyle" Class="CreateClassBreakStyleSample" >
+      <Description>Learn how to selectively style features based on numerical data using a ClassBreakStyle</Description>
+    </Sample>
+  </Category>
   <Category Name="Map Functions">
     <Sample Name="Add A Touch Event On Map" Class="AddATouchEventOnMap" >
       <Description>This sample shows how to add touch event on mapView.</Description>

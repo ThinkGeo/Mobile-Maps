@@ -78,7 +78,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             //first launch, show Display a simple map sample
             if (savedInstanceState == null)
             {
-                SampleInfo sample = new SampleInfo("Display a simple map", "DisplayASimpleMap", "This sample shows how to display a simple map.", null);
+                var sample = sampleListAdapter.Samples[0].Children[0];
                 LoadSample(sample);
             }
         }

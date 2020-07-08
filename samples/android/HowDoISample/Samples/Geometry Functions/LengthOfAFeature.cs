@@ -10,7 +10,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class LengthOfAFeature : SampleFragment
     {
-        private MapView mapView;
         private TextView messageLabel;
 
         public override void OnActivityCreated(Bundle savedInstanceState)

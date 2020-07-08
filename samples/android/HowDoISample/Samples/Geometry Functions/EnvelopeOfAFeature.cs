@@ -10,8 +10,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class EnvelopeOfAFeature : SampleFragment
     {
-        private MapView mapView;
-
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnStart();

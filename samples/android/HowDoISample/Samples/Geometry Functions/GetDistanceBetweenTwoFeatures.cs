@@ -11,7 +11,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class GetDistanceBetweenTwoFeatures : SampleFragment
     {
-        private MapView mapView;
         private TextView distanceTextView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)

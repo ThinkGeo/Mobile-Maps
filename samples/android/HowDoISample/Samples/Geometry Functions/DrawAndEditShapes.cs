@@ -11,7 +11,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 { 
     public class DrawAndEditShapes : SampleFragment
     {
-        private MapView mapView;
         private ImageButton editButton;
         private ImageButton lineButton;
         private ImageButton pointButton;

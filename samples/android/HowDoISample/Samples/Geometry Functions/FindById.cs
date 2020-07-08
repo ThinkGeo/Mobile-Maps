@@ -7,10 +7,9 @@ using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 
 namespace ThinkGeo.UI.Android.HowDoI
-{ 
+{
     public class FindById : SampleFragment
     {
-        private MapView mapView;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -30,7 +29,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             LayerOverlay highlightOverlay = new LayerOverlay();
             highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
-            
+
             mapView.MapUnit = GeographyUnit.DecimalDegree;
             mapView.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);
             mapView.Overlays.Add("WorldOverlay", layerOverlay);

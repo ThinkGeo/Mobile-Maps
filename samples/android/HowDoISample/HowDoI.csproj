@@ -40,6 +40,7 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -117,8 +118,18 @@
     <AndroidAsset Include="Assets\Source\ZoomToAScale.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NavigationDrawerActivity.cs" />
+    <Compile Include="Samples\Creating Styles\CreateClassBreakStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateClusterPointStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateFilterStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateHeatStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateLineStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreatePointStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateTextStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\CreateValueStyleSample.cs" />
+    <Compile Include="Samples\Creating Styles\StylingAcrossMultipleScalesSample.cs" />
     <Compile Include="Samples\Creating Styles\CreateAreaStyleSample.cs" />
     <Compile Include="Samples\Database Layers\LoadSqliteFeatureLayer.cs" />
+    <Compile Include="Samples\DisplayingLayers\Database\OracleLayerSample.cs" />
     <Compile Include="Samples\Geometry Functions\FindWorldCoordinatesWhereTouched.cs" />
     <Compile Include="Samples\Geometry Functions\GetDistanceBetweenTwoFeatures.cs" />
     <Compile Include="Samples\Geometry Functions\ScreenCoordinatesToWorldCoordinates.cs" />
@@ -176,53 +187,139 @@
     <Compile Include="WebViewActivity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\AppData\Frisco\Frisco.tgeo" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA20.dbf" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA20.ids" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA20.idx" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA20.shp" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA20.shx" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA40.dbf" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA40.ids" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA40.idx" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA40.shp" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXlkaA40.shx" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.dbf" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.ids" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.idx" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.prj" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.shp" />
-    <AndroidAsset Include="Assets\AppData\Frisco\TXwat.shx" />
-    <AndroidAsset Include="Assets\AppData\Gif\EWX_N0R_0.gfw" />
-    <AndroidAsset Include="Assets\AppData\Gpx\afoxboro.gpx" />
-    <AndroidAsset Include="Assets\AppData\Gpx\ashland.gpx" />
-    <AndroidAsset Include="Assets\AppData\Gpx\blue_hills.gpx" />
-    <AndroidAsset Include="Assets\AppData\Gpx\fells_loop.gpx" />
-    <AndroidAsset Include="Assets\AppData\Gpx\mystic_basin_trail.gpx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\cities_e.dbf" />
-    <AndroidAsset Include="Assets\AppData\SampleData\cities_e.ids" />
-    <AndroidAsset Include="Assets\AppData\SampleData\cities_e.idx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\cities_e.shp" />
-    <AndroidAsset Include="Assets\AppData\SampleData\cities_e.shx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\Countries02.dbf" />
-    <AndroidAsset Include="Assets\AppData\SampleData\Countries02.ids" />
-    <AndroidAsset Include="Assets\AppData\SampleData\Countries02.idx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\Countries02.shp" />
-    <AndroidAsset Include="Assets\AppData\SampleData\Countries02.shx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\states.dbf" />
-    <AndroidAsset Include="Assets\AppData\SampleData\states.ids" />
-    <AndroidAsset Include="Assets\AppData\SampleData\states.idx" />
-    <AndroidAsset Include="Assets\AppData\SampleData\states.shp" />
-    <AndroidAsset Include="Assets\AppData\SampleData\states.shx" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.dat" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.id" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.ids" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.idx" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.ind" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.map" />
-    <AndroidAsset Include="Assets\AppData\Tab\HoustonMuniBdySamp_Boundary.tab" />
-    <AndroidAsset Include="Assets\AppData\Tiff\World.tfw" />
     <AndroidAsset Include="Assets\ThinkGeo.UI.Android.HowDoI.mapsuitelicense" />
+    <AndroidAsset Include="Assets\samples.json" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Bmp\m_3309650_sw_14_1_20160911_20161121.bpw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Csv\Frisco_Mosquitos.csv" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Ecw\World.ecw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Ecw\World.eww" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Font\vectormap-icons.ttf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\GeoTiff\World.tfw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Gif\m_3309650_sw_14_1_20160911_20161121.gfw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Gpx\Hike_Bike.gpx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\GridFile\Mosquitos.grd" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Jp2\m_3309650_sw_14_1_20160911_20161121.jp2" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\MrSid\World.sdw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\MrSid\World.sid" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.000" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.001" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.002" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.003" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.004" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.005" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.006" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.007" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.008" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.009" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.hyr" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09M.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\City_ETJ.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Countries02.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Countries02.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Countries02.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Countries02.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Countries02.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco 2010 Census Housing Units.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.cpg" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Coyote_Sightings.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.cpg" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Crime.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.cpg" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.csv" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Frisco_Mosquitos.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.cpg" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimits.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.cpg" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\FriscoCityLimitsDivided.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.gpx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hike_Bike.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Hotels.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Parks.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Schools.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Streets.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Subdivisions.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.dbf" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.prj" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.shp" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Shapefile\Zoning.shx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\SQLite\frisco-restaurants.sqlite" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.dat" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.id" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.ids" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.idx" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.map" />
+    <AndroidAsset Include="Assets\AppData\SampleData\Tab\City_ETJ.tab" />
+    <AndroidAsset Include="Assets\AppData\SampleData\TinyGeo\Zoning.tgeo" />
+    <AndroidAsset Include="Assets\AppData\SampleData\UsgsDem\mobile-e.dem" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -308,12 +405,6 @@
     <AndroidAsset Include="Assets\SampleList.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\AppData\Gif\EWX_N0R_0.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\AppData\Tiff\World.tif" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\SyntaxHighlighter\shBrushCSharp.js" />
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +436,43 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\SplashLayout.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\Bmp\m_3309650_sw_14_1_20160911_20161121.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\GeoTiff\World.tif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\Gif\m_3309650_sw_14_1_20160911_20161121.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\Png\m_3309650_sw_14_1_20160911_20161121.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09A.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09B.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09C.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09D.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09E.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09F.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\AppData\SampleData\S57\US1GC09M\US1GC09G.TXT" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

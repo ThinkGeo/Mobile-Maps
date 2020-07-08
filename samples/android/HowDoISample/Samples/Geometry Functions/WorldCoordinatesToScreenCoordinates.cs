@@ -12,7 +12,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 {
     public class WorldCoordinatesToScreenCoordinates : SampleFragment
     {
-        private MapView mapView;
         private TextView resultView;
         private EditText longitudeTextView;
         private EditText latitudeTextView;
