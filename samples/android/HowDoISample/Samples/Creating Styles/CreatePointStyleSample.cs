@@ -26,22 +26,27 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            Button SymbolButton = new Button(this.Context);
-            SymbolButton.Text = "Symbols";
-            SymbolButton.Click += SymbolButton_Click;
+            RadioButton symbolButton = new RadioButton(this.Context);
+            symbolButton.Text = "Symbols";
+            symbolButton.Click += SymbolButton_Click;
 
-            Button IconButton = new Button(this.Context);
-            IconButton.Text = "Icons";
-            IconButton.Click += IconButton_Click;
+            RadioButton iconButton = new RadioButton(this.Context);
+            iconButton.Text = "Icons";
+            iconButton.Click += IconButton_Click;
 
-            Button TextButton = new Button(this.Context);
-            TextButton.Text = "Text";
-            TextButton.Click += TextButton_Click;
+            RadioButton textButton = new RadioButton(this.Context);
+            textButton.Text = "Text";
+            textButton.Click += TextButton_Click;
+
+            RadioGroup radioGroup = new RadioGroup(this.Context);
+            radioGroup.AddView(symbolButton);
+            radioGroup.AddView(iconButton);
+            radioGroup.AddView(textButton);
 
             LinearLayout linearLayout = new LinearLayout(this.Context);
             linearLayout.Orientation = Orientation.Horizontal;
 
-            linearLayout.AddView(IconButton);
+            linearLayout.AddView(radioGroup);
 
             SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
         }

@@ -7,9 +7,9 @@ using ThinkGeo.Core;
 namespace ThinkGeo.UI.Android.HowDoI
 {
     /// <summary>
-    /// This sample shows how to display a Bing Maps layer.
+    /// This sample shows how to display a Google Maps layer.
     /// </summary>
-    public class BingMapLayerSample : SampleFragment
+    public class GoogleMapLayerSample : SampleFragment
     {
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -36,18 +36,25 @@ namespace ThinkGeo.UI.Android.HowDoI
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
-            // Set the map zoom level set to the bing map zoom level set so all the zoom levels line up.
-            mapView.ZoomLevelSet = new BingMapsZoomLevelSet(256);
+            // Sets the map zoom level set to the Google maps zoom level set.
+            mapView.ZoomLevelSet = new GoogleMapsZoomLevelSet();
 
-            // Create the layer overlay with some additional settings and add to the map.
-            LayerOverlay layerOverlay = new LayerOverlay() { TileSizeMode = TileSizeMode.Default };
-            layerOverlay.TileSizeMode = TileSizeMode.Default;
-            layerOverlay.MaxExtent = MaxExtents.BingMaps;
-            mapView.Overlays.Add("Bing Map", layerOverlay);
+            // Clear the current overlay
+            mapView.Overlays.Clear();
 
-            // Create the bing map layer and add it to the map.
-            BingMapsLayer bingMapsLayer = new BingMapsLayer("YOUR_BING_MAPS_KEY", BingMapsMapType.Road);
-            layerOverlay.Layers.Add(bingMapsLayer);
+            // Create a new overlay that will hold our new layer and add it to the map.
+            LayerOverlay worldOverlay = new LayerOverlay();
+            mapView.Overlays.Add("WorldOverlay", worldOverlay);
+
+            // Create the new layer.
+            GoogleMapsLayer worldLayer = new GoogleMapsLayer();
+
+            // Add the layer to the overlay we created earlier.
+            worldOverlay.Layers.Add("WorldLayer", worldLayer);
+
+            // Set the client ID and Private key from the text box on the sample.  
+            worldLayer.ClientId = "YOUR_GOOGLE_MAPS_CLIENT_ID";
+            worldLayer.PrivateKey = "YOUR_GOOGLE_MAPS_PRIVATE_KEY";
 
             // Set the current extent to the whole world.
             mapView.CurrentExtent = new RectangleShape(-10000000, 10000000, 10000000, -10000000);
