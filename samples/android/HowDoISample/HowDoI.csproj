@@ -136,6 +136,24 @@
     <Compile Include="Samples\DisplayingLayers\WebServices\NOAAWeatherWarningLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\WebServices\OpenStreetMapLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\WebServices\WMSLayerSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\BufferShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateAreaSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateCenterPointSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateLengthSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\CalculateShortestLineBetweenShapesSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\ClipShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\DifferenceShapesSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetConvexHullSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetEnvelopeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\GetLineOnALineSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\RotateShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\ScaleShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SimplifyShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SnapToShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\SplitShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\TranslateShapeSample.cs" />
+    <Compile Include="Samples\PerformingGeometricOperations\UnionShapesSample.cs" />
+    <Compile Include="Samples\ProjectingData\Sample.cs" />
     <Compile Include="Samples\_deprecated\Database Layers\LoadSqliteFeatureLayer.cs" />
     <Compile Include="Samples\DisplayingLayers\Database\PostgresLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\Database\SQLiteLayerSample.cs" />
@@ -565,7 +583,20 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\AppData\Resources\ZoomOut.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Samples\Interpolation\" />
+    <Folder Include="Samples\SettingMapExtent\" />
+    <Folder Include="Samples\TopologicalValidation\" />
+    <Folder Include="Samples\UsingCloudMapsServices\" />
+    <Folder Include="Samples\UsingMapTools\" />
+    <Folder Include="Samples\UsingOverlays\" />
+    <Folder Include="Samples\UsingQueryTools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout1.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
