@@ -13,6 +13,10 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class CalculateLengthSample : SampleFragment
     {
+        private TextView instructions;
+        private TextView lengthLabel;
+        private EditText lengthResult;
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             SetupSample();
@@ -27,17 +31,28 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            RadioButton button = new RadioButton(this.Context);
-            button.Text = "Button";
-            button.Click += Button_Click;
-            button.Selected = true;
+            instructions = new TextView(this.Context)
+            {
+                Text = "Tap a feature on the map to display it's length below."
+            };
 
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
+            lengthLabel = new TextView(this.Context)
+            {
+                Text = "Length (km):"
+            };
 
-            linearLayout.AddView(button);
+            lengthResult = new EditText(this.Context);
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            var gridLayout = new GridLayout(this.Context)
+            {
+                RowCount = 2,
+                ColumnCount = 2
+            };
+            gridLayout.AddView(instructions, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(0, 2, 1f)));
+            gridLayout.AddView(lengthLabel, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 1f)));
+            gridLayout.AddView(lengthResult, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(1, 1f)));
+
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { gridLayout });
         }
 
         /// <summary>

@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:rowCount="6"
+    android:columnCount="2"
+    android:padding="10">
     <TextView
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap a feature to get it's area displayed in the TextBox below."
+        />
+    <TextView
+        android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buffer Amount(m)"
         />
     <EditText
+        android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:text="1000"/>
+        android:text="1000"
+        android:gravity="right"/>
+    <RadioGroup
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Show Centroid Center"
+            android:checked="true"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Show Bounding Box Center"/>
+    </RadioGroup>
     <Button
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buffer"
         android:id="@+id/button1" />
-</LinearLayout>
+</GridLayout>

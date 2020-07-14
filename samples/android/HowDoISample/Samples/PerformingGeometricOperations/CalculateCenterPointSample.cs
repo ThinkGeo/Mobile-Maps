@@ -13,6 +13,10 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class CalculateCenterPointSample : SampleFragment
     {
+        private TextView instructions;
+        private RadioButton centroidCenter;
+        private RadioButton bboxCenter;
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             SetupSample();
@@ -27,17 +31,36 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            RadioButton button = new RadioButton(this.Context);
-            button.Text = "Button";
-            button.Click += Button_Click;
-            button.Selected = true;
+            instructions = new TextView(this.Context)
+            {
+                Text = "Tap a feature on the map to display it's center point."
+            };
 
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
+            centroidCenter = new RadioButton(this.Context)
+            {
+                Text = "Show Centroid Center"
+            };
+            centroidCenter.Click += RadioButton_Checked;
 
-            linearLayout.AddView(button);
+            bboxCenter = new RadioButton(this.Context)
+            {
+                Text = "Show Bounding Box Center"
+            };
+            bboxCenter.Click += RadioButton_Checked;
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            var radioGroup = new RadioGroup(this.Context);
+            radioGroup.AddView(centroidCenter);
+            radioGroup.AddView(bboxCenter);
+
+            var gridLayout = new GridLayout(this.Context)
+            {
+                RowCount = 2,
+                ColumnCount = 1
+            };
+            gridLayout.AddView(instructions, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(0, 1f)));
+            gridLayout.AddView(radioGroup, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 1f)));
+
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { gridLayout });
         }
 
         /// <summary>
@@ -85,7 +108,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            centroidCenter.IsChecked = true;
+            centroidCenter.Checked = true;
         }
 
         /// <summary>
@@ -100,7 +123,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             PointShape centerPoint;
 
             // Get the CenterPoint of the selected feature
-            if ((bool)centroidCenter.IsChecked)
+            if (centroidCenter.Checked)
             {
                 // Centroid, or geometric center, method. Accurate, but can be relatively slower on extremely complex shapes
                 centerPoint = feature.GetShape().GetCenterPoint();

@@ -13,6 +13,10 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class BufferShapeSample : SampleFragment
     {
+        private TextView bufferLabel;
+        private EditText bufferDistance;
+        private Button bufferButton;
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             SetupSample();
@@ -27,24 +31,33 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            var bufferDistance = new EditText(this.Context)
+            bufferLabel = new TextView(this.Context)
+            {
+                Text = "Buffer Distance (m):"
+            };
+
+            bufferDistance = new EditText(this.Context)
             {
                 Text = "1000",
                 InputType = InputTypes.ClassNumber
             };
 
-            var bufferButton = new Button(this.Context);
-            bufferButton.Text = "Buffer";
+            bufferButton = new Button(this.Context)
+            {
+                Text = "Buffer"
+            };
             bufferButton.Click += BufferButton_Click;
-            bufferButton.Selected = true;
 
-            var linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
+            var gridLayout = new GridLayout(this.Context)
+            {
+                RowCount = 2,
+                ColumnCount = 2
+            };
+            gridLayout.AddView(bufferLabel, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(0, 1f)));
+            gridLayout.AddView(bufferDistance, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(1, 1f)));
+            gridLayout.AddView(bufferButton, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 2, 1f)));
 
-            linearLayout.AddView(bufferDistance);
-            linearLayout.AddView(bufferButton);
-
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { gridLayout });
         }
 
         /// <summary>
