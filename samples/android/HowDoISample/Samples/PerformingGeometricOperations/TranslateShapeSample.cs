@@ -28,7 +28,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             RadioButton button = new RadioButton(this.Context);
             button.Text = "Button";
-            button.Click += Button_Click;
+            //button.Click += Button_Click;
             button.Selected = true;
 
             LinearLayout linearLayout = new LinearLayout(this.Context);
@@ -100,13 +100,13 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.Close();
 
             // Translate the first feature's shape by the X and Y values on the UI in meters
-            var translate = AreaBaseShape.TranslateByOffset(features[0].GetShape(), Convert.ToDouble(translateX.Text), Convert.ToDouble(translateY.Text), GeographyUnit.Meter, DistanceUnit.Meter);
+            //var translate = AreaBaseShape.TranslateByOffset(features[0].GetShape(), Convert.ToDouble(translateX.Text), Convert.ToDouble(translateY.Text), GeographyUnit.Meter, DistanceUnit.Meter);
 
             // Add the translated shape into translatedLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the
             // underlying data using BeginTransaction and CommitTransaction instead.
             translatedLayer.InternalFeatures.Clear();
-            translatedLayer.InternalFeatures.Add(new Feature(translate));
+            //translatedLayer.InternalFeatures.Add(new Feature(translate));
 
             // Redraw the layerOverlay to see the translated feature on the map
             layerOverlay.Refresh();
@@ -128,13 +128,13 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.Close();
 
             // Translate the first feature's shape by the X and Y values on the UI in meters
-            var translate = AreaBaseShape.TranslateByDegree(features[0].GetShape(), Convert.ToDouble(translateDistance.Text), Convert.ToDouble(translateAngle.Text), GeographyUnit.Meter, DistanceUnit.Meter);
+            //var translate = AreaBaseShape.TranslateByDegree(features[0].GetShape(), Convert.ToDouble(translateDistance.Text), Convert.ToDouble(translateAngle.Text), GeographyUnit.Meter, DistanceUnit.Meter);
 
             // Add the translated shape into translatedLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the
             // underlying data using BeginTransaction and CommitTransaction instead.
             translatedLayer.InternalFeatures.Clear();
-            translatedLayer.InternalFeatures.Add(new Feature(translate));
+            //translatedLayer.InternalFeatures.Add(new Feature(translate));
 
             // Redraw the layerOverlay to see the translated feature on the map
             layerOverlay.Refresh();

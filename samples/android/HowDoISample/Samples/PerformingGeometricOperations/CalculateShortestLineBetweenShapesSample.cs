@@ -29,7 +29,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             RadioButton button = new RadioButton(this.Context);
             button.Text = "Button";
-            button.Click += Button_Click;
             button.Selected = true;
 
             LinearLayout linearLayout = new LinearLayout(this.Context);
@@ -125,7 +124,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
 
             // Display the shortestLine's length in the distanceResult TextBox
-            distanceResult.Text = $"{length:f3} km";
+            //distanceResult.Text = $"{length:f3} km";
         }
     }
 }

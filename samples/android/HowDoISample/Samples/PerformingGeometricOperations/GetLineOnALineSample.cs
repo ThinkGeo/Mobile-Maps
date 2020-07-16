@@ -101,12 +101,12 @@ namespace ThinkGeo.UI.Android.HowDoI
             railway.Close();
 
             // Get the subLine from the railway line shape
-            var subLine = ((LineShape)feature.GetShape()).GetLineOnALine(StartingPoint.FirstPoint, Convert.ToDouble(startingOffset.Text), Convert.ToDouble(distance.Text), GeographyUnit.Meter,
-                DistanceUnit.Meter);
+            //var subLine = ((LineShape)feature.GetShape()).GetLineOnALine(StartingPoint.FirstPoint, Convert.ToDouble(startingOffset.Text), Convert.ToDouble(distance.Text), GeographyUnit.Meter,
+            //    DistanceUnit.Meter);
 
             // Add the subLine into an InMemoryFeatureLayer to display the result.
             subLineLayer.InternalFeatures.Clear();
-            subLineLayer.InternalFeatures.Add(new Feature(subLine));
+            //subLineLayer.InternalFeatures.Add(new Feature(subLine));
 
             // Redraw the layerOverlay to see the subLine on the map
             layerOverlay.Refresh();

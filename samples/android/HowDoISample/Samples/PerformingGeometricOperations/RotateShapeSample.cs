@@ -100,12 +100,12 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.Close();
 
             // Rotate the first feature using it's center point as the anchor
-            var rotate = AreaBaseShape.Rotate(features[0], features[0].GetShape().GetCenterPoint(), Convert.ToSingle(rotateDegree.Text));
+            //var rotate = AreaBaseShape.Rotate(features[0], features[0].GetShape().GetCenterPoint(), Convert.ToSingle(rotateDegree.Text));
 
             // Add the rotated shape into rotatedLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.
             rotatedLayer.InternalFeatures.Clear();
-            rotatedLayer.InternalFeatures.Add(new Feature(rotate));
+            //rotatedLayer.InternalFeatures.Add(new Feature(rotate));
 
             // Redraw the layerOverlay to see the rotated feature on the map
             layerOverlay.Refresh();

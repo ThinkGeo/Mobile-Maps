@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:rowCount="6"
-    android:columnCount="2"
-    android:padding="10">
+    android:columnCount="2">
     <TextView
         android:layout_columnWeight="1"
         android:layout_columnSpan="2"

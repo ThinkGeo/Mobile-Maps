@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Android.OS;
 using Android.Widget;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -43,7 +45,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             // Set the zoom levels to match cloud maps
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            ShapeFileFeatureLayer housingUnitsLayer = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Frisco 2010 Census Housing Units.shp");
+            ShapeFileFeatureLayer housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Shapefile/Frisco 2010 Census Housing Units.shp"));
             LegendAdornmentLayer legend = new LegendAdornmentLayer();
 
             // Setup the legend adornment

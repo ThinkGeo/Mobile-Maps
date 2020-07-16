@@ -74,7 +74,7 @@ namespace ThinkGeo.UI.Android.HowDoI
                                                        Resource.Drawable.ic_drawer,
                                                        Resource.String.drawer_open,
                                                        Resource.String.drawer_close);
-            drawerLayout.SetDrawerListener(drawerToggle);
+            drawerLayout.AddDrawerListener(drawerToggle);
             //first launch, show Display a simple map sample
             if (savedInstanceState == null)
             {

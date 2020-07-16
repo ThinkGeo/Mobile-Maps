@@ -100,13 +100,13 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.Close();
 
             // Scale the first feature by the scaleFactor TextBox on the UI
-            var scale = AreaBaseShape.ScaleTo(features[0].GetShape(), Convert.ToSingle(scaleFactor.Text));
+            //var scale = AreaBaseShape.ScaleTo(features[0].GetShape(), Convert.ToSingle(scaleFactor.Text));
 
             // Add the scaled shape into scaledLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the
             // underlying data using BeginTransaction and CommitTransaction instead.
             scaledLayer.InternalFeatures.Clear();
-            scaledLayer.InternalFeatures.Add(new Feature(scale));
+            //scaledLayer.InternalFeatures.Add(new Feature(scale));
 
             // Redraw the layerOverlay to see the scaled feature on the map
             layerOverlay.Refresh();

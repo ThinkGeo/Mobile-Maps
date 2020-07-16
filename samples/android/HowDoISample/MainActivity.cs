@@ -1,6 +1,7 @@
 ﻿using Android;
 using Android.App;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -22,9 +24,6 @@ namespace ThinkGeo.UI.Android.HowDoI
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize)]
     public class MainActivity : Activity
     {
-        private const int RequestStorageId = 0;
-        private readonly string[] StoragePermissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
-
         private TextView uploadTextView;
         private ProgressBar uploadProgressBar;
 
@@ -33,26 +32,17 @@ namespace ThinkGeo.UI.Android.HowDoI
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashLayout);
 
-            // Request read & write permission to storage.
-            RequestRequiredPermissions();
-
             uploadTextView = FindViewById<TextView>(Resource.Id.uploadDataTextView);
             uploadProgressBar = FindViewById<ProgressBar>(Resource.Id.uploadProgressBar);
 
-            Task updateSampleDatasTask = Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() => CopyAssets(this.Assets, "AppData")).ContinueWith(t =>
             {
-                Collection<string> unLoadDatas = SampleHelper.CollectUnloadDatas(this.Assets, SampleHelper.SampleDataDictionary, SampleHelper.AssetsDataDictionary);
-                SampleHelper.UploadDataFiles(this.Assets, SampleHelper.SampleDataDictionary, unLoadDatas, OnCopyingFiles);
-
                 uploadTextView.Post(() =>
                 {
                     uploadTextView.Text = "Ready";
                     uploadProgressBar.Progress = 100;
                 });
-            });
 
-            updateSampleDatasTask.ContinueWith(t =>
-            {
                 uploadTextView.PostDelayed(() =>
                 {
                     StartActivity(typeof(NavigationDrawerActivity));
@@ -61,39 +51,58 @@ namespace ThinkGeo.UI.Android.HowDoI
             });
         }
 
-        private void RequestRequiredPermissions()
+        private void CopyAssets(AssetManager assetManager, string sourceDir)
         {
-            foreach (var permission in StoragePermissions)
+            var pendingAssets = GatherMissingData(assetManager, sourceDir);
+            for (int i = 0; i < pendingAssets.Count; i++)
             {
-                if (CheckSelfPermission(permission) != Permission.Granted)
+                var asset = pendingAssets[i];
+                var targetFilePath = Path.Combine(FileSystem.AppDataDirectory, asset);
+                var targetDir = Path.GetDirectoryName(targetFilePath);
+
+                OnCopyingFiles(Path.GetFileName(asset), i, pendingAssets.Count);
+
+                if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
+
+                using (var targetStream = File.Create(targetFilePath))
                 {
-                    RequestPermissions(StoragePermissions, RequestStorageId);
-                    break;
+                    var sourceStream = assetManager.Open(asset);
+                    sourceStream.CopyTo(targetStream);
+                    sourceStream.Close();
                 }
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        private Collection<string> GatherMissingData(AssetManager assetManager, string sourceDir)
         {
-            if (requestCode == RequestStorageId)
+            var paths = new Collection<string>();
+            foreach (var asset in assetManager.List(sourceDir))
             {
-                if (grantResults.Any(x => x == Permission.Denied))
+                var path = Path.Combine(sourceDir, asset);
+                if (assetManager.List(path).Length > 0)
                 {
-                    Toast.MakeText(this, "Storage Permissions Denied", ToastLength.Short).Show();
+                    foreach (var subPath in GatherMissingData(assetManager, path))
+                    {
+                        paths.Add(subPath);
+                    }
+                }
+                else if (!File.Exists(Path.Combine(FileSystem.AppDataDirectory, path)))
+                {
+                    paths.Add(path);
                 }
             }
+
+            return paths;
         }
 
-        private void OnCopyingFiles(string targetPathFilename, int completeCount, int totalCount)
+        private void OnCopyingFiles(string fileName, int completeCount, int totalCount)
         {
             uploadTextView.Post(() =>
             {
-                uploadTextView.Text = string.Format("Copying {0} ({1}/{2})", Path.GetFileName(targetPathFilename), completeCount, totalCount);
+                uploadTextView.Text = $"Copying {fileName} ({completeCount}/{totalCount})";
                 uploadProgressBar.Progress = (int)(completeCount * 100f / totalCount);
             });
         }
-
-
     }
 }
 

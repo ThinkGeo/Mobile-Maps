@@ -100,12 +100,12 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.Close();
 
             // Simplify the first feature using the Douglas Peucker method
-            var simplify = AreaBaseShape.Simplify(features[0].GetShape() as AreaBaseShape, Convert.ToInt32(tolerance.Text), SimplificationType.DouglasPeucker);
+            //var simplify = AreaBaseShape.Simplify(features[0].GetShape() as AreaBaseShape, Convert.ToInt32(tolerance.Text), SimplificationType.DouglasPeucker);
 
             // Add the simplified shape into simplifyLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.
             simplifyLayer.InternalFeatures.Clear();
-            simplifyLayer.InternalFeatures.Add(new Feature(simplify));
+            //simplifyLayer.InternalFeatures.Add(new Feature(simplify));
 
             // Redraw the layerOverlay to see the simplified feature on the map
             layerOverlay.Refresh();

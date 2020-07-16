@@ -1,6 +1,8 @@
 ﻿using Android.OS;
 using Android.Widget;
+using System.IO;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -47,7 +49,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             ShapeFileFeatureLayer parks;
 
             // Create a layer with polygon data
-            parks = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Parks.shp");
+            parks = new ShapeFileFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Shapefile/Parks.shp"));
 
             // Project the layer's data to match the projection of the map
             parks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
