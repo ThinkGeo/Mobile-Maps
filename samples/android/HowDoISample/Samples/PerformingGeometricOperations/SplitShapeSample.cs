@@ -38,7 +38,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             linearLayout.AddView(button);
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
         }
 
         /// <summary>

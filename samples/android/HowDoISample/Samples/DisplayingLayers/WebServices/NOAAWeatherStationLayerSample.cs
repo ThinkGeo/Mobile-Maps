@@ -31,7 +31,6 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             base.OnStart();
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), base.SampleInfo);
         }
 
         /// <summary>

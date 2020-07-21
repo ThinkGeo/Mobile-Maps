@@ -17,7 +17,7 @@ namespace ThinkGeo.UI.Android.HowDoI
 {
     [Activity(
         Label = "@string/app_name",
-        Theme = "@android:style/Theme.Light.NoTitleBar",
+        Theme = "@style/Theme.AppCompat.Light",
         MainLauncher = true,
         NoHistory = true,
         ScreenOrientation = ScreenOrientation.Portrait,

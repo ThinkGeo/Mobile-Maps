@@ -52,7 +52,6 @@ namespace ThinkGeo.UI.Android.HowDoI
             gridLayout.AddView(lengthLabel, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 1f)));
             gridLayout.AddView(lengthResult, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(1, 1f)));
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { gridLayout });
         }
 
         /// <summary>

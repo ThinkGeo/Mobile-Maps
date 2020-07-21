@@ -1,31 +1,42 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Android.OS;
 using Android.Views;
-using Android.Widget;
 using ThinkGeo.Core;
 using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
-    public class BufferShapeSample : SampleFragment
+    /// <summary>
+    /// The SampleTemplate class is used to create new samples for the ThinkGeo HowDoI Android sample project.
+    /// This class provides all of the basic ingredients to creating new samples including how to define the 
+    /// layout, binding the controls to the class, and using the appropriate override methods for building up
+    /// the sample. Included is also style conventions for using the mapView and commenting the class to help
+    /// educate our users to better understand how they can use ThinkGeo software.
+    /// 
+    /// Please replace this docstring with an appropriate description of a sample when duplicating this
+    /// template when creating a new sample.
+    /// </summary>
+    public class SampleTemplate : SampleFragment
     {
+        // Controls
         private MapView mapView;
-        private EditText bufferAmount;
 
-        public override int Layout => Resource.Layout.PerformingGeometricOperations_BufferShapeSample;
+        /// <summary>
+        /// Defines the Layout to use from the `Resources/layout` directory
+        /// </summary>
+        public override int Layout => Resource.Layout._SampleTemplate;
 
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
+            // Bind the controls needed from the Layout to the class
             mapView = view.FindViewById<MapView>(Resource.Id.mapView);
-            bufferAmount = view.FindViewById<EditText>(Resource.Id.bufferAmount);
-
-            var bufferButton = view.FindViewById<Button>(Resource.Id.bufferButton);
-            bufferButton.Click += BufferButton_Click;
-
-            SetupMap();
 
             return view;
         }
@@ -33,8 +44,10 @@ namespace ThinkGeo.UI.Android.HowDoI
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -46,7 +59,6 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             ShapeFileFeatureLayer cityLimits = new ShapeFileFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Shapefile/FriscoCityLimits.shp"));
-            InMemoryFeatureLayer bufferLayer = new InMemoryFeatureLayer();
             LayerOverlay layerOverlay = new LayerOverlay();
 
             // Project cityLimits layer to Spherical Mercator to match the map projection
@@ -56,15 +68,8 @@ namespace ThinkGeo.UI.Android.HowDoI
             cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Orange), GeoColors.DimGray);
             cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Style the bufferLayer
-            bufferLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Green), GeoColors.DimGray);
-            bufferLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
             // Add cityLimits to a LayerOverlay
             layerOverlay.Layers.Add("cityLimits", cityLimits);
-
-            // Add bufferLayer to the layerOverlay
-            layerOverlay.Layers.Add("bufferLayer", bufferLayer);
 
             // Set the map extent to the cityLimits layer bounding box
             cityLimits.Open();
@@ -76,32 +81,8 @@ namespace ThinkGeo.UI.Android.HowDoI
         }
 
         /// <summary>
-        /// Buffers the first feature in the cityLimits layer and adds them to the bufferLayer to display on the map
+        /// Dispose of the mapView once the view is destroyed.
         /// </summary>
-        private void BufferButton_Click(object sender, EventArgs e)
-        {
-            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
-
-            ShapeFileFeatureLayer cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
-            InMemoryFeatureLayer bufferLayer = (InMemoryFeatureLayer)layerOverlay.Layers["bufferLayer"];
-
-            // Query the cityLimits layer to get all the features
-            cityLimits.Open();
-            var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
-            cityLimits.Close();
-
-            // Buffer the first feature by the amount of the bufferAmount TextBox
-            var buffer = features[0].Buffer(Convert.ToInt32(bufferAmount.Text), GeographyUnit.Meter, DistanceUnit.Meter);
-
-            // Add the buffer shape into an InMemoryFeatureLayer to display the result.
-            // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.
-            bufferLayer.InternalFeatures.Clear();
-            bufferLayer.InternalFeatures.Add(buffer);
-
-            // Redraw the layerOverlay to see the buffered features on the map
-            layerOverlay.Refresh();
-        }
-
         public override void OnDestroy()
         {
             if (mapView != null)

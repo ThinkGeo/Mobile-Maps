@@ -56,7 +56,6 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             linearLayout.AddView(radioGroup);
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
         }
 
         /// <summary>

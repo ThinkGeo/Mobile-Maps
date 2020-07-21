@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 
@@ -14,33 +9,39 @@ namespace ThinkGeo.UI.Android.HowDoI
 {
     public abstract class SampleFragment : Fragment
     {
-        protected MapView mapView;
-        protected View currentView;
-        private bool isDisposed;
+        private BottomSheetBehavior bottomSheetBehavior;
 
-        public SampleFragment()
-        { }
-
-        public SampleInfo SampleInfo { get; set; }
+        public abstract int Layout { get; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            currentView = inflater.Inflate(Resource.Layout.DisplayMapView, container, false);
-            mapView = currentView.FindViewById<MapView>(Resource.Id.mapView);
+            View view = inflater.Inflate(Layout, container, false);
 
-            return currentView;
+            var bottomSheet = view.FindViewById<LinearLayout>(Resource.Id.bottom_sheet);
+            bottomSheetBehavior = BottomSheetBehavior.From(bottomSheet);
+            bottomSheetBehavior.PeekHeight = bottomSheet.Height;
+            bottomSheetBehavior.Hideable = true;
+
+            var fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab);
+            fab.Click += Fab_Click;
+
+            return view;
         }
 
-        public override void OnDestroy()
+        private void Fab_Click(object sender, EventArgs e)
         {
-            if (mapView != null && !isDisposed)
+            switch (bottomSheetBehavior.State)
             {
-                isDisposed = true;
-                mapView.Dispose();
+                case BottomSheetBehavior.StateHalfExpanded:
+                case BottomSheetBehavior.StateCollapsed:
+                    bottomSheetBehavior.State = BottomSheetBehavior.StateExpanded;
+                    break;
+                case BottomSheetBehavior.StateExpanded:
+                    bottomSheetBehavior.State = BottomSheetBehavior.StateCollapsed;
+                    break;
+                default:
+                    break;
             }
-
-            base.OnDestroy();
-
         }
     }
 }

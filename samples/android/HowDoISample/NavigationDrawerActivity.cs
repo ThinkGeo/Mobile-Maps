@@ -3,9 +3,9 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using System;
@@ -13,8 +13,8 @@ using System.Linq;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
-    [Activity(Label = "@string/app_name")]
-    public class NavigationDrawerActivity : Activity
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light")]
+    public class NavigationDrawerActivity : AppCompatActivity
     {
         private SampleListAdapter sampleListAdapter;
         private ExpandableListView drawerSampleList;
@@ -32,8 +32,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             else if (item.ItemId == Resource.Id.viewSource)
             {
                 Intent intent = new Intent(this, typeof(WebViewActivity));
-                SampleFragment currentSample = this.FragmentManager.FindFragmentByTag("CurrentFragmentSample") as SampleFragment;
-                intent.PutExtra("SampleName", currentSample.SampleInfo.ClassType.Name);
+
                 StartActivity(intent);
             }
 
@@ -70,15 +69,11 @@ namespace ThinkGeo.UI.Android.HowDoI
             // ActionBarDrawerToggle ties together the the proper interactions
             // between the sliding drawer and the action bar app icon
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            drawerToggle = new MyActionBarDrawerToggle(this, drawerLayout,
-                                                       Resource.Drawable.ic_drawer,
-                                                       Resource.String.drawer_open,
-                                                       Resource.String.drawer_close);
             drawerLayout.AddDrawerListener(drawerToggle);
             //first launch, show Display a simple map sample
             if (savedInstanceState == null)
             {
-                var FragmentTransaction = this.FragmentManager.BeginTransaction();
+                var FragmentTransaction = SupportFragmentManager.BeginTransaction();
                 FragmentTransaction.Replace(Resource.Id.content_frame, new BufferShapeSample(), "CurrentFragmentSample");
                 FragmentTransaction.Commit();
 
@@ -98,9 +93,8 @@ namespace ThinkGeo.UI.Android.HowDoI
         {
             // update the main content by replacing fragments
             var fragment = Activator.CreateInstance(Type.GetType(sampleNode.ClassType.FullName)) as SampleFragment;
-            fragment.SampleInfo = sampleNode;
 
-            var FragmentTransaction = this.FragmentManager.BeginTransaction();
+            var FragmentTransaction = SupportFragmentManager.BeginTransaction();
             FragmentTransaction.Replace(Resource.Id.content_frame, fragment, "CurrentFragmentSample");
             FragmentTransaction.Commit();
 
@@ -125,29 +119,6 @@ namespace ThinkGeo.UI.Android.HowDoI
             base.OnConfigurationChanged(newConfig);
             // Pass any configuration change to the drawer toggls
             drawerToggle.OnConfigurationChanged(newConfig);
-        }
-
-        internal class MyActionBarDrawerToggle : ActionBarDrawerToggle
-        {
-            NavigationDrawerActivity owner;
-
-            public MyActionBarDrawerToggle(NavigationDrawerActivity activity, DrawerLayout layout, int imgRes, int openRes, int closeRes)
-                : base(activity, layout, imgRes, openRes, closeRes)
-            {
-                owner = activity;
-            }
-
-            public override void OnDrawerClosed(View drawerView)
-            {
-                owner.ActionBar.Title = owner.Title;
-                owner.InvalidateOptionsMenu();
-            }
-
-            public override void OnDrawerOpened(View drawerView)
-            {
-                owner.ActionBar.Title = owner.Resources.GetString(Resource.String.app_name);
-                owner.InvalidateOptionsMenu();
-            }
         }
     }
 }
