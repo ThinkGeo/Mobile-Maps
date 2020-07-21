@@ -78,8 +78,10 @@ namespace ThinkGeo.UI.Android.HowDoI
             //first launch, show Display a simple map sample
             if (savedInstanceState == null)
             {
-                var sample = sampleListAdapter.Samples[0].Children[0];
-                LoadSample(sample);
+                var FragmentTransaction = this.FragmentManager.BeginTransaction();
+                FragmentTransaction.Replace(Resource.Id.content_frame, new BufferShapeSample(), "CurrentFragmentSample");
+                FragmentTransaction.Commit();
+
             }
         }
 

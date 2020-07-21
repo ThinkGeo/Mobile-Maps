@@ -7,6 +7,11 @@
       <Description>Learn how to selectively style features based on numerical data using a ClassBreakStyle</Description>
     </Sample>
   </Category>
+  <Category Name="PerformingGeometricOperations">
+    <Sample Name="Buffer a Shape" Class="BufferShapeSample">
+      <Description>test</Description>
+    </Sample>
+  </Category>
   <Category Name="Map Functions">
     <Sample Name="Add A Touch Event On Map" Class="AddATouchEventOnMap" >
       <Description>This sample shows how to add touch event on mapView.</Description>

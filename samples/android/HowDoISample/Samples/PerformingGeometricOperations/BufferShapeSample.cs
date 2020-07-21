@@ -1,63 +1,55 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.IO;
+using Android.App;
 using Android.OS;
-using Android.Text;
+using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
-    /// <summary>
-    /// Learn how to buffer a shape
-    /// </summary>
-    public class BufferShapeSample : SampleFragment
+    public class BufferShapeSample : Fragment
     {
-        private TextView bufferLabel;
-        private EditText bufferDistance;
-        private Button bufferButton;
+        MapView mapView;
+        EditText bufferAmount;
 
-        public override void OnActivityCreated(Bundle savedInstanceState)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            SetupSample();
+            // Use this to return your custom view for this Fragment
+            var view = inflater.Inflate(Resource.Layout.PerformingGeometricOperations_BufferShapeSample, container, false);
 
-            SetupMap();
-        }
+            var bottomSheet = view.FindViewById<LinearLayout>(Resource.Id.bottom_sheet);
+            var behavior = BottomSheetBehavior.From(bottomSheet);
+            behavior.PeekHeight = bottomSheet.Height;
+            behavior.Hideable = true;
 
-        /// <summary>
-        /// Sets up the sample's layout and controls
-        /// </summary>
-        private void SetupSample()
-        {
-            base.OnStart();
-
-            bufferLabel = new TextView(this.Context)
+            var fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab);
+            fab.Click += (sender, e) =>
             {
-                Text = "Buffer Distance (m):"
+                switch (behavior.State)
+                {
+                    case BottomSheetBehavior.StateCollapsed:
+                        behavior.State = BottomSheetBehavior.StateExpanded;
+                        break;
+                    case BottomSheetBehavior.StateExpanded:
+                        behavior.State = BottomSheetBehavior.StateCollapsed;
+                        break;
+                    default:
+                        break;
+                }
             };
 
-            bufferDistance = new EditText(this.Context)
-            {
-                Text = "1000",
-                InputType = InputTypes.ClassNumber
-            };
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
+            bufferAmount = view.FindViewById<EditText>(Resource.Id.bufferAmount);
 
-            bufferButton = new Button(this.Context)
-            {
-                Text = "Buffer"
-            };
+            var bufferButton = view.FindViewById<Button>(Resource.Id.bufferButton);
             bufferButton.Click += BufferButton_Click;
 
-            var gridLayout = new GridLayout(this.Context)
-            {
-                RowCount = 2,
-                ColumnCount = 2
-            };
-            gridLayout.AddView(bufferLabel, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(0, 1f)));
-            gridLayout.AddView(bufferDistance, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(1, 1f)));
-            gridLayout.AddView(bufferButton, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 2, 1f)));
+            SetupMap();
 
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { gridLayout });
+            return view;
         }
 
         /// <summary>
@@ -75,7 +67,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("USlbIyO5uIMja2y0qoM21RRM6NBXUad4hjK3NBD6pD0~", "f6OJsvCDDzmccnevX55nL7nXpPDXXKANe5cN6czVjCH0s8jhpCH-2A~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer cityLimits = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/FriscoCityLimits.shp");
+            ShapeFileFeatureLayer cityLimits = new ShapeFileFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Shapefile/FriscoCityLimits.shp"));
             InMemoryFeatureLayer bufferLayer = new InMemoryFeatureLayer();
             LayerOverlay layerOverlay = new LayerOverlay();
 
@@ -120,8 +112,8 @@ namespace ThinkGeo.UI.Android.HowDoI
             var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
             cityLimits.Close();
 
-            // Buffer the first feature by the amount of the bufferDistance TextBox
-            var buffer = features[0].Buffer(Convert.ToInt32(bufferDistance.Text), GeographyUnit.Meter, DistanceUnit.Meter);
+            // Buffer the first feature by the amount of the bufferAmount TextBox
+            var buffer = features[0].Buffer(Convert.ToInt32(bufferAmount.Text), GeographyUnit.Meter, DistanceUnit.Meter);
 
             // Add the buffer shape into an InMemoryFeatureLayer to display the result.
             // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.
@@ -130,6 +122,16 @@ namespace ThinkGeo.UI.Android.HowDoI
 
             // Redraw the layerOverlay to see the buffered features on the map
             layerOverlay.Refresh();
+        }
+
+        public override void OnDestroy()
+        {
+            if (mapView != null)
+            {
+                mapView.Dispose();
+            }
+
+            base.OnDestroy();
         }
     }
 }
