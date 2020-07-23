@@ -12,50 +12,36 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class CreatePointStyleSample : SampleFragment
     {
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        // Controls
+        private MapView mapView;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Defines the Layout to use from the `Resources/layout` directory
         /// </summary>
-        private void SetupSample()
+        public override int Layout => Resource.Layout.__SampleTemplate;
+
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnStart();
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            RadioButton symbolButton = new RadioButton(this.Context);
-            symbolButton.Text = "Symbols";
-            symbolButton.Click += SymbolButton_Click;
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
 
-            RadioButton iconButton = new RadioButton(this.Context);
-            iconButton.Text = "Icons";
-            iconButton.Click += IconButton_Click;
-
-            RadioButton textButton = new RadioButton(this.Context);
-            textButton.Text = "Text";
-            textButton.Click += TextButton_Click;
-
-            RadioGroup radioGroup = new RadioGroup(this.Context);
-            radioGroup.AddView(symbolButton);
-            radioGroup.AddView(iconButton);
-            radioGroup.AddView(textButton);
-
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
-
-            linearLayout.AddView(radioGroup);
-
-            SampleViewHelper.InitializeInstruction(this.Context, currentView.FindViewById<RelativeLayout>(Resource.Id.MainLayout), this.SampleInfo, new Collection<View>() { linearLayout });
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 

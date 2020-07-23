@@ -16,7 +16,7 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// Please replace this docstring with an appropriate description of a sample when duplicating this
     /// template when creating a new sample.
     /// </summary>
-    public class SampleTemplate : SampleFragment
+    public class SetMapExtentSample : SampleFragment
     {
         // Controls
         private MapView mapView;

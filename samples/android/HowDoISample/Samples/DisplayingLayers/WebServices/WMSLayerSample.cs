@@ -12,45 +12,36 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class WMSLayerSample : SampleFragment
     {
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        // Controls
+        private MapView mapView;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Defines the Layout to use from the `Resources/layout` directory
         /// </summary>
-        private void SetupSample()
+        public override int Layout => Resource.Layout.__SampleTemplate;
+
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnStart();
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            RadioButton overlayButton = new RadioButton(this.Context);
-            overlayButton.Text = "Use WmsOverlay";
-            overlayButton.Click += rbLayerOverlay_Checked;
-            overlayButton.Checked = true;
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
 
-            RadioButton rasterLayerButton = new RadioButton(this.Context);
-            rasterLayerButton.Text = "Use WmsRasterLayer";
-            rasterLayerButton.Click += rbLayerOverlay_Checked;
-
-            RadioGroup radioGroup = new RadioGroup(this.Context);
-            radioGroup.AddView(overlayButton);
-            radioGroup.AddView(rasterLayerButton);
-
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
-
-            linearLayout.AddView(radioGroup);
-
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.DecimalDegree;
 

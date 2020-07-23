@@ -12,29 +12,37 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class NOAAWeatherWarningLayerSample : SampleFragment
     {
+        // Controls
+        private MapView mapView;
         private ImageView loadingImage;
 
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        /// <summary>
+        /// Defines the Layout to use from the `Resources/layout` directory
+        /// </summary>
+        public override int Layout => Resource.Layout.__SampleTemplate;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
         /// </summary>
-        private void SetupSample()
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnStart();
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
+
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 

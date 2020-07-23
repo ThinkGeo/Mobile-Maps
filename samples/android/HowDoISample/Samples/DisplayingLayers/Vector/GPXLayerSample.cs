@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -11,27 +14,36 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class GPXLayerSample : SampleFragment
     {
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        // Controls
+        private MapView mapView;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Defines the Layout to use from the `Resources/layout` directory
         /// </summary>
-        private void SetupSample()
-        {
-            base.OnStart();
+        public override int Layout => Resource.Layout.__SampleTemplate;
 
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
+
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
+
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -47,7 +59,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.Overlays.Add(gpxOverlay);
 
             // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
-            GpxFeatureLayer gpxLayer = new GpxFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Gpx/Hike_Bike.gpx");
+            GpxFeatureLayer gpxLayer = new GpxFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Gpx/Hike_Bike.gpx"));
             gpxLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             // Add the layer to the overlay we created earlier.

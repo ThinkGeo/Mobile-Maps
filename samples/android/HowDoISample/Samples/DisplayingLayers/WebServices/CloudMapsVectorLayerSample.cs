@@ -12,55 +12,36 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class CloudMapsVectorLayerSample : SampleFragment
     {
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        // Controls
+        private MapView mapView;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Defines the Layout to use from the `Resources/layout` directory
         /// </summary>
-        private void SetupSample()
+        public override int Layout => Resource.Layout.__SampleTemplate;
+
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnStart();
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            RadioButton lightButton = new RadioButton(this.Context);
-            lightButton.Text = "Light";
-            lightButton.Click += rbMapType_Checked;
-            lightButton.Selected = true;
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
 
-            RadioButton darkButton = new RadioButton(this.Context);
-            darkButton.Text = "Dark";
-            darkButton.Click += rbMapType_Checked;
-
-            RadioButton aerialButton = new RadioButton(this.Context);
-            aerialButton.Text = "Aerial";
-            aerialButton.Click += rbMapType_Checked;
-
-            RadioButton hybridButton = new RadioButton(this.Context);
-            hybridButton.Text = "Hybrid";
-            hybridButton.Click += rbMapType_Checked;
-
-            RadioGroup radioGroup = new RadioGroup(this.Context);
-            radioGroup.AddView(lightButton);
-            radioGroup.AddView(darkButton);
-            radioGroup.AddView(aerialButton);
-            radioGroup.AddView(hybridButton);
-
-            LinearLayout linearLayout = new LinearLayout(this.Context);
-            linearLayout.Orientation = Orientation.Horizontal;
-
-            linearLayout.AddView(radioGroup);
-
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 

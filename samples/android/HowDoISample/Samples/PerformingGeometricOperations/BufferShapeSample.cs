@@ -13,7 +13,7 @@ namespace ThinkGeo.UI.Android.HowDoI
         private MapView mapView;
         private EditText bufferAmount;
 
-        public override int Layout => Resource.Layout.PerformingGeometricOperations_BufferShapeSample;
+        public override int Layout => Resource.Layout._PerformingGeometricOperations_BufferShapeSample;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

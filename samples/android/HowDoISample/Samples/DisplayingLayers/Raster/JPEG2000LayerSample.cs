@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -11,27 +14,36 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class JPEG2000LayerSample : SampleFragment
     {
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        // Controls
+        private MapView mapView;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Defines the Layout to use from the `Resources/layout` directory
         /// </summary>
-        private void SetupSample()
-        {
-            base.OnStart();
+        public override int Layout => Resource.Layout.__SampleTemplate;
 
+        /// <summary>
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
+        /// </summary>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
+
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
+
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -47,7 +59,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             mapView.Overlays.Add(layerOverlay);
 
             // Create the new layer and dd the layer to the overlay we created earlier.
-            Jpeg2000RasterLayer jp2000RasterLayer = new Jpeg2000RasterLayer("mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Jp2/m_3309650_sw_14_1_20160911_20161121.jp2");
+            Jpeg2000RasterLayer jp2000RasterLayer = new Jpeg2000RasterLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Jp2/m_3309650_sw_14_1_20160911_20161121.jp2"));
             layerOverlay.Layers.Add(jp2000RasterLayer);
 
             // Set the map view current extent to a slightly zoomed in area of the image.

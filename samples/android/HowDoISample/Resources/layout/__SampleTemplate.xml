@@ -9,16 +9,16 @@
     tools:context="com.support.android.designlibdemo.BottomSheetActivity">
 
     <!-- MapView Control -->
-    <!--<ThinkGeo.UI.Android.MapView
+    <ThinkGeo.UI.Android.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF4F2EE" />-->
+        android:background="#FFF4F2EE" />
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#333" />
+        android:background="#333" />-->
 
     <!-- BottomSheet that holds the sample description and controls -->
     <LinearLayout

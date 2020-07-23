@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 
 namespace ThinkGeo.UI.Android.HowDoI
 {
@@ -13,60 +15,39 @@ namespace ThinkGeo.UI.Android.HowDoI
     /// </summary>
     public class CalculateCenterPointSample : SampleFragment
     {
+        // Controls
+        private MapView mapView;
         private TextView instructions;
         private RadioButton centroidCenter;
         private RadioButton bboxCenter;
 
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            SetupSample();
-
-            SetupMap();
-        }
+        /// <summary>
+        /// Defines the Layout to use from the `Resources/layout` directory
+        /// </summary>
+        public override int Layout => Resource.Layout.__SampleTemplate;
 
         /// <summary>
-        /// Sets up the sample's layout and controls
+        /// Creates the sample view from the Layout resource and exposes controls from the view that needs to be 
+        /// referenced for the sample to run (mapView, buttons, etc.)
         /// </summary>
-        private void SetupSample()
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnStart();
+            // Call the base OnCreateView method to inflate the Layout with basic functionality
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            instructions = new TextView(this.Context)
-            {
-                Text = "Tap a feature on the map to display it's center point."
-            };
+            // Bind the controls needed from the Layout to the class
+            mapView = view.FindViewById<MapView>(Resource.Id.mapView);
 
-            centroidCenter = new RadioButton(this.Context)
-            {
-                Text = "Show Centroid Center"
-            };
-            centroidCenter.Click += RadioButton_Checked;
-
-            bboxCenter = new RadioButton(this.Context)
-            {
-                Text = "Show Bounding Box Center"
-            };
-            bboxCenter.Click += RadioButton_Checked;
-
-            var radioGroup = new RadioGroup(this.Context);
-            radioGroup.AddView(centroidCenter);
-            radioGroup.AddView(bboxCenter);
-
-            var gridLayout = new GridLayout(this.Context)
-            {
-                RowCount = 2,
-                ColumnCount = 1
-            };
-            gridLayout.AddView(instructions, new GridLayout.LayoutParams(GridLayout.InvokeSpec(0), GridLayout.InvokeSpec(0, 1f)));
-            gridLayout.AddView(radioGroup, new GridLayout.LayoutParams(GridLayout.InvokeSpec(1), GridLayout.InvokeSpec(0, 1f)));
-
+            return view;
         }
 
         /// <summary>
         /// Sets up the map layers and styles
         /// </summary>
-        private void SetupMap()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
+            base.OnActivityCreated(savedInstanceState);
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -77,7 +58,7 @@ namespace ThinkGeo.UI.Android.HowDoI
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("USlbIyO5uIMja2y0qoM21RRM6NBXUad4hjK3NBD6pD0~", "f6OJsvCDDzmccnevX55nL7nXpPDXXKANe5cN6czVjCH0s8jhpCH-2A~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer censusHousing = new ShapeFileFeatureLayer(@"mnt/sdcard/MapSuiteSampleData/HowDoISamples/AppData/SampleData/Shapefile/Frisco 2010 Census Housing Units.shp");
+            ShapeFileFeatureLayer censusHousing = new ShapeFileFeatureLayer(Path.Combine(FileSystem.AppDataDirectory, "AppData/SampleData/Shapefile/Frisco 2010 Census Housing Units.shp"));
             InMemoryFeatureLayer centerPointLayer = new InMemoryFeatureLayer();
             LayerOverlay layerOverlay = new LayerOverlay();
 

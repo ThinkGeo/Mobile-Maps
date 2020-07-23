@@ -125,12 +125,13 @@
     <Compile Include="Samples\DisplayingLayers\Vector\TABLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.cs" />
     <Compile Include="Samples\DisplayingLayers\WebServices\BingMapLayerSample.cs" />
-    <Compile Include="Samples\SampleFragment.cs" />
+    <Compile Include="Samples\SettingMapExtent\BasicNavigationSample.cs" />
+    <Compile Include="Samples\SettingMapExtent\SetMapExtentSample.cs" />
+    <Compile Include="Shared\SampleFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleListAdapter.cs" />
-    <Compile Include="SampleInfo.cs" />
     <Compile Include="Samples\SampleTemplate.cs" />
+    <Compile Include="Shared\SampleExpandableListAdapter.cs" />
     <Compile Include="WebViewActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -358,32 +359,35 @@
     <AndroidAsset Include="Assets\SyntaxHighlighter\SourceCode\DisplayASimpleMap.html" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
     <PackageReference Include="ThinkGeo.Ecw">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.FileGeoDatabase">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.Jpeg2000">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.MrSid">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.NauticalCharts">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.Oracle">
-      <Version>12.2.15</Version>
+      <Version>12.2.18</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.PostgreSql">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.SqlServer">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.UI.Android">
-      <Version>12.2.14</Version>
+      <Version>12.2.17</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
       <Version>28.0.0.3</Version>
@@ -485,7 +489,6 @@
   <ItemGroup>
     <Folder Include="Samples\Interpolation\" />
     <Folder Include="Samples\ProjectingData\" />
-    <Folder Include="Samples\SettingMapExtent\" />
     <Folder Include="Samples\TopologicalValidation\" />
     <Folder Include="Samples\UsingCloudMapsServices\" />
     <Folder Include="Samples\UsingMapTools\" />
@@ -493,12 +496,12 @@
     <Folder Include="Samples\UsingQueryTools\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\PerformingGeometricOperations_BufferShapeSample.xml">
+    <AndroidResource Include="Resources\layout\_PerformingGeometricOperations_BufferShapeSample.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\_SampleTemplate.xml">
+    <AndroidResource Include="Resources\layout\__SampleTemplate.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
