@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using HowDoISample.Services;
 using HowDoISample.Views;
 
 namespace HowDoISample
@@ -13,7 +12,6 @@ namespace HowDoISample
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
         }
 

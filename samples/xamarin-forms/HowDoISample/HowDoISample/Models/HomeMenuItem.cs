@@ -6,7 +6,6 @@ namespace HowDoISample.Models
 {
     public enum MenuItemType
     {
-        Browse,
         About
     }
     public class HomeMenuItem
