@@ -11,7 +11,7 @@ namespace HowDoISample
         public App()
         {
             InitializeComponent();
-
+            Device.SetFlags(new string[] { "Expander_Experimental" });
             MainPage = new MainPage();
         }
 

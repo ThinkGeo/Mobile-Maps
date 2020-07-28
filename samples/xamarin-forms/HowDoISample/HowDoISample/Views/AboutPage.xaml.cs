@@ -10,8 +10,11 @@ namespace HowDoISample.Views
     [DesignTimeVisible(false)]
     public partial class AboutPage : ContentPage
     {
+        string Test { get; }
+
         public AboutPage()
         {
+            Test = "test";
             InitializeComponent();
         }
     }
