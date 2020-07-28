@@ -21,4 +21,37 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Samples\CreatingStyles\CreatingAreaStyleSample.xaml.cs">
+      <DependentUpon>CreatingAreaStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateClassBreakStyleSample.xaml.cs">
+      <DependentUpon>CreateClassBreakStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateClusterPointStyleSample.xaml.cs">
+      <DependentUpon>CreateClusterPointStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateFilterStyleSample.xaml.cs">
+      <DependentUpon>CreateFilterStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateHeatStyleSample.xaml.cs">
+      <DependentUpon>CreateHeatStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateLineStyleSample.xaml.cs">
+      <DependentUpon>CreateLineStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreatePointStyleSample.xaml.cs">
+      <DependentUpon>CreatePointStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateTextStyleSample.xaml.cs">
+      <DependentUpon>CreateTextStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateValueStyleSample.xaml.cs">
+      <DependentUpon>CreateValueStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\StylingAcrossMultipleScales.xaml.cs">
+      <DependentUpon>StylingAcrossMultipleScales.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
