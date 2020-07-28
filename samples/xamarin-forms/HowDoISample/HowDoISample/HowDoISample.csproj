@@ -65,8 +65,23 @@
     <Compile Update="Samples\DisplayingLayers\Database\SQLiteLayerSample.xaml.cs">
       <DependentUpon>SQLiteLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\SampleTemplate.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Samples\DisplayingLayers\Raster\CommonRasterLayersSample.xaml.cs">
+      <DependentUpon>CommonRasterLayersSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\ECWLayerSample.xaml.cs">
+      <DependentUpon>ECWLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\ESRIGridLayerSample.xaml.cs">
+      <DependentUpon>ESRIGridLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.xaml.cs">
+      <DependentUpon>GeoTiffLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\JPEG2000LayerSample.xaml.cs">
+      <DependentUpon>JPEG2000LayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\MrSidLayerSample.xaml.cs">
+      <DependentUpon>MrSidLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\SampleTemplate.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
