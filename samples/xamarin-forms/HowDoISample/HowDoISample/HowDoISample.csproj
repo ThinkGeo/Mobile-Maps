@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Samples\CreatingStyles\CreatingAreaStyleSample.xaml.cs">
-      <DependentUpon>CreatingAreaStyleSample.xaml</DependentUpon>
+    <Compile Update="Samples\CreatingStyles\CreateAreaStyleSample.xaml.cs">
+      <DependentUpon>CreateAreaStyleSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\CreatingStyles\CreateClassBreakStyleSample.xaml.cs">
       <DependentUpon>CreateClassBreakStyleSample.xaml</DependentUpon>
@@ -52,6 +52,27 @@
     </Compile>
     <Compile Update="Samples\CreatingStyles\StylingAcrossMultipleScales.xaml.cs">
       <DependentUpon>StylingAcrossMultipleScales.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Database\OracleLayerSample.xaml.cs">
+      <DependentUpon>OracleLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Database\PostgresLayerSample.xaml.cs">
+      <DependentUpon>PostgresLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Database\SQLServerLayerSample.xaml.cs">
+      <DependentUpon>SQLServerLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Database\SQLiteLayerSample.xaml.cs">
+      <DependentUpon>SQLiteLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Raster\SampleTemplate.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\SampleTemplate.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\WebServices\SampleTemplate.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

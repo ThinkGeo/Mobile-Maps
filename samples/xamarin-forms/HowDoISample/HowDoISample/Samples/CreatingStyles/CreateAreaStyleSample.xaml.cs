@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreatingAreaStyleSample : ContentPage
+    public partial class CreateAreaStyleSample : ContentPage
     {
-        public CreatingAreaStyleSample()
+        public CreateAreaStyleSample()
         {
             InitializeComponent();
         }
