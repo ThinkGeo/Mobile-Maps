@@ -188,6 +188,12 @@
     <Compile Update="Samples\PerformingGeometricOperations\ScaleShapeSample.xaml.cs">
       <DependentUpon>ScaleShapeSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\ProjectingData\ProjectLatLonCoordinatesSample.xaml.cs">
+      <DependentUpon>ProjectLatLonCoordinatesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\ProjectingData\SetLayerProjectionSample.xaml.cs">
+      <DependentUpon>SetLayerProjectionSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
