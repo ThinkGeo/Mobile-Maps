@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CloudMapsRasterLayerSample"
+             x:Class="HowDoISample.Views.SnapToShapeSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,19 +36,17 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <RadioButton Grid.Column="1" Grid.Row="1" CheckedChanged="rbMapType_Checked" Text="Light"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" CheckedChanged="rbMapType_Checked" Text="Dark"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" CheckedChanged="rbMapType_Checked" Text="Aerial"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="4" CheckedChanged="rbMapType_Checked" IsChecked="True" Text="Hybrid"></RadioButton>
+                        <Label Grid.Column="1" Grid.Row="0" Text="(WIP) Snap To Shape Controls:" FontSize="16"/>
+
+                        <Button Grid.Column="1" Grid.Row="1" x:Name="snapToShape" Text="Snap To Shape" Clicked="SnapToShape_Click"></Button>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>

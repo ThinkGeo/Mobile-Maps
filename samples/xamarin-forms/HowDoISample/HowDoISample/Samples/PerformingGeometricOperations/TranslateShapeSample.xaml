@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CloudMapsRasterLayerSample"
+             x:Class="HowDoISample.Views.TranslateShapeSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,16 +36,40 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <RadioButton Grid.Column="1" Grid.Row="1" CheckedChanged="rbMapType_Checked" Text="Light"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" CheckedChanged="rbMapType_Checked" Text="Dark"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" CheckedChanged="rbMapType_Checked" Text="Aerial"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="4" CheckedChanged="rbMapType_Checked" IsChecked="True" Text="Hybrid"></RadioButton>
+                        <!-- Translate By Offset -->
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="Translate By Offset:" FontSize="16"></Label>
+
+                        <Label Grid.Column="1" Grid.Row="2" Text="Translate X (m): "></Label>
+                        <Entry  Grid.Column="2" Grid.Row="2"  x:Name="translateX" Text="1000"></Entry>
+
+                        <Label  Grid.Column="1" Grid.Row="3" Text="Translate Y (m): "></Label>
+                        <Entry  Grid.Column="2" Grid.Row="3" x:Name="translateY" Text="1000"></Entry>
+
+                        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="offsetTranslateShape" Text="Translate" Clicked="OffsetTranslateShape_OnClick"></Button>
+
+                        <!-- Translate By Degree Angle -->
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Text="Translate By Degree Angle:" FontSize="16"></Label>
+
+                        <Label Grid.Column="1" Grid.Row="6" Text="Angle: "></Label>
+                        <Entry Grid.Column="2" Grid.Row="6" x:Name="translateAngle" Text="120"></Entry>
+
+                        <Label Grid.Column="1" Grid.Row="7" Text="Distance (m): "></Label>
+                        <Entry  Grid.Column="2" Grid.Row="7" x:Name="translateDistance" Text="1000"></Entry>
+
+                        <Button Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="degreeTranslateShape" Text="Translate" Clicked="DegreeTranslateShape_OnClick"></Button>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="90" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

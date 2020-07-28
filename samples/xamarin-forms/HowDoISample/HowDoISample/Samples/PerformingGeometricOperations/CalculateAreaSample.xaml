@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CloudMapsRasterLayerSample"
+             x:Class="HowDoISample.Views.CalculateAreaSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,18 +36,17 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <RadioButton Grid.Column="1" Grid.Row="1" CheckedChanged="rbMapType_Checked" Text="Light"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" CheckedChanged="rbMapType_Checked" Text="Dark"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" CheckedChanged="rbMapType_Checked" Text="Aerial"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="4" CheckedChanged="rbMapType_Checked" IsChecked="True" Text="Hybrid"></RadioButton>
+                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
+                        
+                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="Button_Clicked"></Button>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

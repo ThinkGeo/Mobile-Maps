@@ -137,5 +137,60 @@
     <Compile Update="Samples\DisplayingLayers\WebServices\WMSLayerSample.xaml.cs">
       <DependentUpon>WMSLayerSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\BufferShapeSample.xaml.cs">
+      <DependentUpon>BufferShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\CalculateAreaSample.xaml.cs">
+      <DependentUpon>CalculateAreaSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\CalculateCenterPointSample.xaml.cs">
+      <DependentUpon>CalculateCenterPointSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\CalculateLengthSample.xaml.cs">
+      <DependentUpon>CalculateLengthSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\CalculateShortestLineBetweenShapesSample.xaml.cs">
+      <DependentUpon>CalculateShortestLineBetweenShapesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\ClipShapeSample.xaml.cs">
+      <DependentUpon>ClipShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\DifferenceShapesSample.xaml.cs">
+      <DependentUpon>DifferenceShapesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\GetConvexHullSample.xaml.cs">
+      <DependentUpon>GetConvexHullSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\GetEnvelopeSample.xaml.cs">
+      <DependentUpon>GetEnvelopeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\GetLineOnALineSample.xaml.cs">
+      <DependentUpon>GetLineOnALineSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\RotateShapeSample.xaml.cs">
+      <DependentUpon>RotateShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\UnionShapesSample.xaml.cs">
+      <DependentUpon>UnionShapesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\TranslateShapeSample.xaml.cs">
+      <DependentUpon>TranslateShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\SplitShapeSample.xaml.cs">
+      <DependentUpon>SplitShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\SnapToShapeSample.xaml.cs">
+      <DependentUpon>SnapToShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\SimplifyShapeSample.xaml.cs">
+      <DependentUpon>SimplifyShapeSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\PerformingGeometricOperations\ScaleShapeSample.xaml.cs">
+      <DependentUpon>ScaleShapeSample.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Samples\Interpolation\" />
   </ItemGroup>
 </Project>
