@@ -83,8 +83,32 @@
     <Compile Update="Samples\DisplayingLayers\Raster\MrSidLayerSample.xaml.cs">
       <DependentUpon>MrSidLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\SampleTemplate.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Samples\DisplayingLayers\Vector\FileGeoDatabaseLayerSample.xaml.cs">
+      <DependentUpon>FileGeoDatabaseLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\GPXLayerSample.xaml.cs">
+      <DependentUpon>GPXLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\GraticuleLayerSample.xaml.cs">
+      <DependentUpon>GraticuleLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\InMemoryLayerSample.xaml.cs">
+      <DependentUpon>InMemoryLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\ISOLineLayerSample.xaml.cs">
+      <DependentUpon>ISOLineLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\S57LayerSample.xaml.cs">
+      <DependentUpon>S57LayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.xaml.cs">
+      <DependentUpon>TinyGeoLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\TABLayerSample.xaml.cs">
+      <DependentUpon>TABLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\ShapefileLayerSample.xaml.cs">
+      <DependentUpon>ShapefileLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\WebServices\SampleTemplate.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
