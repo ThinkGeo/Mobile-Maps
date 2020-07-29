@@ -14,26 +14,22 @@ namespace HowDoISample.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        Dictionary<string, NavigationPage> MenuPages = new Dictionary<string, NavigationPage>();
+
         public MainPage()
         {
             InitializeComponent();
 
             MasterBehavior = MasterBehavior.Popover;
-
-            MenuPages.Add((int)MenuItemType.About, (NavigationPage)Detail);
         }
 
-        public async Task NavigateFromMenu(int id)
+        public async Task NavigateFromMenu(string id)
         {
             if (!MenuPages.ContainsKey(id))
             {
-                switch (id)
-                {
-                    case (int)MenuItemType.About:
-                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
-                        break;
-                }
+                var type = Type.GetType(id);
+                var samplePage = (ContentPage)Activator.CreateInstance(type);
+                MenuPages.Add(id, new NavigationPage(samplePage));
             }
 
             var newPage = MenuPages[id];

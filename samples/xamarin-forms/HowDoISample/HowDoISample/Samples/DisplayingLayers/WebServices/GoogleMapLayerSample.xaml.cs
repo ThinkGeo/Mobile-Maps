@@ -55,5 +55,10 @@ namespace HowDoISample.Views
             //// Refresh the map.
             //mapView.Refresh();
         }
+
+        private void BtnActivate_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

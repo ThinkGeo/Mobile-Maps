@@ -1,6 +1,7 @@
 ﻿using HowDoISample.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,25 +14,28 @@ namespace HowDoISample.Views
     public partial class MenuPage : ContentPage
     {
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        List<HomeMenuItem> menuItems;
+        ObservableCollection<CategoryMenuItem> categoryMenuItems;
+
         public MenuPage()
         {
             InitializeComponent();
 
-            menuItems = new List<HomeMenuItem>
+            var category = new CategoryMenuItem() { Title = "Category" };
+            category.Add(new SampleMenuItem() { Title = "Sample", Id = "SampleTemplate" });
+
+            categoryMenuItems = new ObservableCollection<CategoryMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                category
             };
 
-            ListViewMenu.ItemsSource = menuItems;
+            ListViewMenu.ItemsSource = categoryMenuItems;
 
-            ListViewMenu.SelectedItem = menuItems[0];
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)
                     return;
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                var id = ((SampleMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }
