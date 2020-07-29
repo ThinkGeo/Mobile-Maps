@@ -24,7 +24,7 @@ namespace HowDoISample.Views
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        private void btnActivate_Click(object sender, EventArgs e)
         {
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
