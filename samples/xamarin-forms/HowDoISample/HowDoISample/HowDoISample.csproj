@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -197,6 +197,9 @@
     <Compile Update="Samples\SettingMapExtent\BasicNavigationSample.xaml.cs">
       <DependentUpon>BasicNavigationSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\SettingMapExtent\SetMapExtentSample.xaml.cs">
+      <DependentUpon>SetMapExtentSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\TopologicalValidation\LineValidationSample.xaml.cs">
       <DependentUpon>LineValidationSample.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,24 @@
     </Compile>
     <Compile Update="Samples\TopologicalValidation\PolygonValidationSample.xaml.cs">
       <DependentUpon>PolygonValidationSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\ColorUtilitiesCloudServicesSample.xaml.cs">
+      <DependentUpon>ColorUtilitiesCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\ElevationCloudServicesSample.xaml.cs">
+      <DependentUpon>ElevationCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\GeocodingCloudServicesSample.xaml.cs">
+      <DependentUpon>GeocodingCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\ProjectionCloudServicesSample.xaml.cs">
+      <DependentUpon>ProjectionCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\ReverseGeocodingCloudServicesSample.xaml.cs">
+      <DependentUpon>ReverseGeocodingCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\RoutingCloudServicesSample.xaml.cs">
+      <DependentUpon>RoutingCloudServicesSample.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

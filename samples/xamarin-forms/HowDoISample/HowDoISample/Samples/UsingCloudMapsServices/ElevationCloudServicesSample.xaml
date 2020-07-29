@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.BingMapLayerSample"
+             x:Class="HowDoISample.Views.ElevationCloudServicesSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,19 +36,32 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Bing API Key:" FontSize="16"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" Text="Sign up for a Bing Maps Api Key">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding TapCommand}"
-                                          CommandParameter="https://www.bingmapsportal.com/" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <Label Grid.Column="1" Grid.Row="2" Text="Application ID" FontSize="12"></Label>
-                        <Entry Grid.Column="1" Grid.Row="3" x:Name ="txtApplicationID"></Entry>
-                        <Button Grid.Column="1" Grid.Row="4" x:Name="btnActivate" Clicked="btnActivate_Click" Text="Activate"></Button>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Elevation for a Shape"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="14">Interval Distance (m):</Label>
+                        <Grid Grid.Column="1" Grid.Row="2">
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Slider Grid.Column="0" Grid.Row="0" x:Name="intervalDistance" Maximum="1000" Minimum="50" Value="100"></Slider>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Clicked="DrawPoint_Click" Text="Draw a New Point"></Button>
+                        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Clicked="DrawLine_Click" Text="Draw a New Line"></Button>
+                        <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click" Text="Draw a New Polygon"></Button>
+                        <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" x:Name="txtAverageElevation"></Label>
+                        <Label Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" x:Name="txtHighestElevation"></Label>
+                        <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="txtLowestElevation"></Label>
+
+                       
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
@@ -59,7 +72,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>

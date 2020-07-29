@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HowDoISample.Views.GeocodingCloudServicesSample"
+             Title="Sample Template">
+    <ContentPage.Content>
+        <StackLayout>
+            <Expander>
+                <!-- Sample Description -->
+                <Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="8">
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                               FontSize="Subtitle" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand"/>
+                        <BoxView Color="LightGray" 
+                                 WidthRequest="1" 
+                                 VerticalOptions="Center" 
+                                 HorizontalOptions="Center"/>
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Value="True">
+                                    <Setter Property="Rotation"
+                                            Value="180"/>
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+                </Expander.Header>
+
+                <!-- Sample Controls -->
+                <Expander.Content>
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Geocode"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontSize="14">Search Text:</Label>
+                        <Entry Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" x:Name="txtSearchString" Text="6101 Frisco Square Blvd, Frisco, TX 75034"></Entry>
+                        <Label Grid.Column="1" Grid.Row="3" FontSize="14" Text="Maximum Results:"></Label>
+                        <Entry  Grid.Column="2" Grid.Row="3" x:Name="txtMaxResults" Text="10"></Entry>
+
+                        <Label Grid.Column="1" Grid.Row="4" FontSize="14" Text="SearchType:"></Label>
+                        <Picker Grid.Column="2" Grid.Row="4" x:Name="cboSearchType" SelectedIndexChanged="cboSearchType_SelectionChanged">
+                            <Picker.ItemsSource>
+                                <x:String>Fuzzy</x:String>
+                                <x:String>Exact</x:String>
+                            </Picker.ItemsSource>
+
+                        </Picker>
+                        <Label Grid.Column="1"  Grid.Row="5" Grid.ColumnSpan="2" x:Name="txtSearchTypeDescription"></Label>
+
+                        <Label Grid.Column="1" Grid.Row="6" FontSize="14">LocationType:</Label>
+                        <Picker Grid.Column="2" Grid.Row="6" x:Name="cboLocationType" SelectedIndexChanged="cboLocationType_SelectionChanged">
+                            <Picker.ItemsSource>
+                                <x:String>Default</x:String>
+                                <x:String>Address</x:String>
+                                <x:String>Street</x:String>
+                                <x:String>City</x:String>
+                                <x:String>County</x:String>
+                                <x:String>Zipcode</x:String>
+                                <x:String>State</x:String>
+                            </Picker.ItemsSource>
+                        </Picker>
+                        <Label Grid.Column="1"  Grid.Row="7" Grid.ColumnSpan="2" x:Name="txtLocationTypeDescription"></Label>
+
+                        <Button Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Clicked="Search_Click" Text="Search"></Button>
+
+                        <Label Grid.Column="1"  Grid.Row="10" Grid.ColumnSpan="2" x:Name="txtSearchResultsDescription"></Label>
+<!--
+                        <ListBox Grid.Column="1"  Grid.Row="11" Grid.ColumnSpan="2" Name="lsbLocations" SelectionChanged="lsbLocations_SelectionChanged" Visibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" Height="Auto">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding Path=LocationName}" TextWrapping="Wrap"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontWeight="Bold"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Map Control -->
+            <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

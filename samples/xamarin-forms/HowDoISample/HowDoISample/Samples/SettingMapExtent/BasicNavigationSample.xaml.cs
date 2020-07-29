@@ -40,6 +40,15 @@ namespace HowDoISample.Views
         }
 
         /// <summary>
+        /// Zoom out on the map
+        /// The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double right clicking on the map, or by using the the scroll wheel.
+        /// </summary>
+        private void ZoomOut_Click(object sender, EventArgs e)
+        {
+            //mapView.ZoomOut();
+        }
+
+        /// <summary>
         /// Pan the map in a direction using the PanDirection enum and set how far to pan based on percentage.
         /// The same effect can be achieved by using the ZoomPanBar arrows on the upper left of the map or by left click dragging anywhere on the map.
         /// </summary>
