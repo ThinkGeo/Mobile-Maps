@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HowDoISample.Views.LineValidationSample"
+             Title="Sample Template">
+    <ContentPage.Content>
+        <StackLayout>
+            <Expander>
+                <!-- Sample Description -->
+                <Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="8">
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                               FontSize="Subtitle" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand"/>
+                        <BoxView Color="LightGray" 
+                                 WidthRequest="1" 
+                                 VerticalOptions="Center" 
+                                 HorizontalOptions="Center"/>
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Value="True">
+                                    <Setter Property="Rotation"
+                                            Value="180"/>
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+                </Expander.Header>
+
+                <!-- Sample Controls -->
+                <Expander.Content>
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <Label Grid.Column="1" Grid.Row="0" Text="Line Validation Tests">
+                        </Label>
+                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="rdoCheckLineEndpointsMustTouchPoints" CheckedChanged="CheckLineEndpointsMustTouchPoints" Text="Line Endpoints Must Touch Points"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="rdoCheckLinesMustOverlapPolygonBoundaries" CheckedChanged="CheckLinesMustOverlapPolygonBoundaries" Text="Lines Must Overlap Polygon Boundaries"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckLinesMustOverlapLines" CheckedChanged="CheckLinesMustOverlapLines" Text="Lines Must Overlap Lines"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckLinesMustBeSinglePart" CheckedChanged="CheckLinesMustBeSinglePart" Text="Lines Must Be Single Part"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="5" x:Name="rdoCheckLinesMustFormClosedPolygon" CheckedChanged="CheckLinesMustFormClosedPolygon" Text="Lines Must Form Closed Polygons"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="6" x:Name="rdoCheckLinesMustNotHavePseudonodes" CheckedChanged="CheckLinesMustNotHavePseudonodes" Text="Lines Must Not Have Pseudonodes"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckLinesMustNotIntersect" CheckedChanged="CheckLinesMustNotIntersect" Text="Lines Must Not Intersect"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckLinesMustNotSelfIntersectOrTouch" CheckedChanged="CheckLinesMustNotSelfIntersectOrTouch" Text="Lines Must Not Self-Intersect Or Touch"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckLinesMustNotOverlap" CheckedChanged="CheckLinesMustNotOverlap" Text="Lines Must Not Overlap"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="10" x:Name="rdoCheckLinesMustNotOverlapLines" CheckedChanged="CheckLinesMustNotOverlapLines" Text="Lines Must Not Overlap With Lines"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="11" x:Name="rdoCheckLinesMustNotSelfIntersect" CheckedChanged="CheckLinesMustNotSelfIntersect" Text="Lines Must Not Self-Intersect"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="12" x:Name="rdoCheckLinesMustNotSelfOverlap" CheckedChanged="CheckLinesMustNotSelfOverlap" Text="Lines Must Not Self-Overlap"></RadioButton>
+                        <Entry Grid.Column="1" Grid.Row="13" x:Name="txtValidationInfo"></Entry>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Map Control -->
+            <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ThinkGeo.Core;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace HowDoISample.Views
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class BasicNavigationSample : ContentPage
+    {
+        public BasicNavigationSample()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// ...
+        /// </summary>
+        private void MapView_Loaded(object sender, EventArgs e)
+        {
+            //// Set the map's unit of measurement to meters(Spherical Mercator)
+            //mapView.MapUnit = GeographyUnit.Meter;
+
+            //// Add Cloud Maps as a background overlay
+            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+
+            //// Set the map extent
+            //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+        }
+
+        private void ZoomIn_Click(object sender, EventArgs e)
+        {
+            //mapView.ZoomIn();
+        }
+
+        /// <summary>
+        /// Pan the map in a direction using the PanDirection enum and set how far to pan based on percentage.
+        /// The same effect can be achieved by using the ZoomPanBar arrows on the upper left of the map or by left click dragging anywhere on the map.
+        /// </summary>
+        private void PanArrow_Click(object sender, EventArgs e)
+        {
+            //var percentage = (int)panPercentage.Value;
+            //switch (((Button)sender).Name)
+            //{
+            //    case "panNorth":
+            //        mapView.Pan(PanDirection.Up, percentage);
+            //        break;
+            //    case "panEast":
+            //        mapView.Pan(PanDirection.Right, percentage);
+            //        break;
+            //    case "panWest":
+            //        mapView.Pan(PanDirection.Left, percentage);
+            //        break;
+            //    case "panSouth":
+            //        mapView.Pan(PanDirection.Down, percentage);
+            //        break;
+            //}
+        }
+
+        /// <summary>
+        /// Rotate the map at an angle using the value of the rotateAngle Slider. Since this is just setting a property, you must refresh the map in order for the rotation to show.
+        /// The same effect can be achieved by holding down the ALT key and left click dragging anywhere on the map.
+        /// </summary>
+        private void Rotate_Click(object sender, EventArgs e)
+        {
+            //mapView.RotatedAngle = (float)rotateAngle.Value;
+            //mapView.Refresh();
+        }
+
+    }
+}

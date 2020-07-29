@@ -194,6 +194,18 @@
     <Compile Update="Samples\ProjectingData\SetLayerProjectionSample.xaml.cs">
       <DependentUpon>SetLayerProjectionSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\SettingMapExtent\BasicNavigationSample.xaml.cs">
+      <DependentUpon>BasicNavigationSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\TopologicalValidation\LineValidationSample.xaml.cs">
+      <DependentUpon>LineValidationSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\TopologicalValidation\PointValidationSample.xaml.cs">
+      <DependentUpon>PointValidationSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\TopologicalValidation\PolygonValidationSample.xaml.cs">
+      <DependentUpon>PolygonValidationSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
