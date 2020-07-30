@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HowDoISample.Views.WorldMapsQueryCloudServicesSample"
+             Title="Sample Template">
+    <ContentPage.Content>
+        <StackLayout>
+            <Expander>
+                <!-- Sample Description -->
+                <Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="8">
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                               FontSize="Subtitle" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand"/>
+                        <BoxView Color="LightGray" 
+                                 WidthRequest="1" 
+                                 VerticalOptions="Center" 
+                                 HorizontalOptions="Center"/>
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Value="True">
+                                    <Setter Property="Rotation"
+                                            Value="180"/>
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+                </Expander.Header>
+
+                <!-- Sample Controls -->
+                <Expander.Content>
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Query World Maps Features"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontSize="14">Query Layer:</Label>
+                        <Picker Grid.Column="2" Grid.Row="1" x:Name="cboQueryLayer">
+                            <Picker.ItemsSource>
+                                <x:String>Buildings</x:String>
+                                <x:String>Countries</x:String>
+                                <x:String>States</x:String>
+                                <x:String>Roads</x:String>
+                                <x:String>Rail</x:String>
+                                <x:String>Addresses</x:String>
+                                <x:String>Cities</x:String>
+                                <x:String>Land-Use</x:String>
+                                <x:String>Places</x:String>
+                                <x:String>POIs</x:String>
+                                <x:String>Transport</x:String>
+                                <x:String>Water</x:String>
+                                <x:String>Waterways</x:String>
+                            </Picker.ItemsSource>
+                        </Picker>
+                        <Label Grid.Column="1" Grid.Row="2" FontSize="14">Query Type:</Label>
+                        <Picker Grid.Column="2" Grid.Row="2" x:Name="cboQueryType">
+                            <Picker.ItemsSource>
+                                <x:String>Containing</x:String>
+                                <x:String>Nearest</x:String>
+                                <x:String >Intersecting</x:String>
+                                <x:String>Overlapping</x:String>
+                                <x:String>Within</x:String>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <Label Grid.Column="1" Grid.Row="3" Text="Maximum Results:"/>
+                        <Grid Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2">
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=maxResults}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Slider Grid.Column="0" Grid.Row="0" x:Name="maxResults" Maximum="1000" Minimum="10" Value="100"></Slider>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+
+                        <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPoint_Click" Text="Draw New Point And Query"></Button>
+                        <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Clicked="DrawLine_Click" Text="Draw New Line And Query"></Button>
+                        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click" Text="Draw New Polygon And Query"></Button>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Map Control -->
+            <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

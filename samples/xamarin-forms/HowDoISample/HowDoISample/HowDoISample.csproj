@@ -230,6 +230,15 @@
     <Compile Update="Samples\UsingCloudMapsServices\RoutingServiceAreaCloudServicesSample.xaml.cs">
       <DependentUpon>RoutingServiceAreaCloudServicesSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\RoutingTSPCloudServicesSample.xaml.cs">
+      <DependentUpon>RoutingTSPCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\WorldMapsQueryCloudServicesSample.xaml.cs">
+      <DependentUpon>WorldMapsQueryCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\TimezoneCloudServicesSample.xaml.cs">
+      <DependentUpon>TimezoneCloudServicesSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
