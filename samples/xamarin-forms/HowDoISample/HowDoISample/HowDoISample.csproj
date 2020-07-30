@@ -227,6 +227,9 @@
     <Compile Update="Samples\UsingCloudMapsServices\RoutingCloudServicesSample.xaml.cs">
       <DependentUpon>RoutingCloudServicesSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingCloudMapsServices\RoutingServiceAreaCloudServicesSample.xaml.cs">
+      <DependentUpon>RoutingServiceAreaCloudServicesSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

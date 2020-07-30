@@ -122,8 +122,8 @@ namespace HowDoISample.Views
         //    // Create a feature with coordinates in Decimal Degrees (4326)
         //    Feature decimalDegreeFeature = new Feature(-96.834516, 33.150083);
 
-        //    // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
-        //    Feature sphericalMercatorFeature = await ReprojectAFeature(decimalDegreeFeature);
+            //    // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
+            //    Feature sphericalMercatorFeature = await ReprojectAFeature(decimalDegreeFeature);
 
         //    // Add the reprojected features to the map
         //    ClearMapAndAddFeatures(new Collection<Feature>() { sphericalMercatorFeature });
