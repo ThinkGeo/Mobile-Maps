@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SampleTemplate : ContentPage
+    public partial class DisplayMapLogoSample : ContentPage
     {
-        public SampleTemplate()
+        public DisplayMapLogoSample()
         {
             InitializeComponent();
         }
@@ -35,19 +35,19 @@ namespace HowDoISample.Views
 
 
         /// <summary>
-        /// Enable the PanZoomBar and remove it from the MapView
+        /// Replaces the map logo with the ThinkGeo logo
         /// </summary>
-        private void DisplayPanZoomBar_Checked(object sender, EventArgs e)
+        private void ThinkGeoLogo_Checked(object sender, EventArgs e)
         {
-            //mapView.MapTools.PanZoomBar.IsEnabled = true;
+            //mapView.MapTools.Logo.Source = new BitmapImage(new Uri(@"..\..\..\Resources\ThinkGeoLogo.png", UriKind.RelativeOrAbsolute));
         }
 
         /// <summary>
-        /// Disable the PanZoomBar and remove it from the MapView
+        /// Replaces the map logo with a generic logo
         /// </summary>
-        private void DisplayPanZoomBar_Unchecked(object sender, EventArgs e)
+        private void GenericLogo_Checked(object sender, EventArgs e)
         {
-            //mapView.MapTools.PanZoomBar.IsEnabled = false;
+            //mapView.MapTools.Logo.Source = new BitmapImage(new Uri(@"..\..\..\Resources\generic-logo.png", UriKind.RelativeOrAbsolute));
         }
     }
 }

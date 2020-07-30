@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SampleTemplate : ContentPage
+    public partial class DisplayMapScaleLineSample : ContentPage
     {
-        public SampleTemplate()
+        public DisplayMapScaleLineSample()
         {
             InitializeComponent();
         }

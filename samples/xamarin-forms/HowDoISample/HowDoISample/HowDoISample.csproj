@@ -239,6 +239,18 @@
     <Compile Update="Samples\UsingCloudMapsServices\TimezoneCloudServicesSample.xaml.cs">
       <DependentUpon>TimezoneCloudServicesSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayMapLogoSample.xaml.cs">
+      <DependentUpon>DisplayMapLogoSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayMapMouseCoordinatesSample.xaml.cs">
+      <DependentUpon>DisplayMapMouseCoordinatesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayMapPanZoomBarSample.xaml.cs">
+      <DependentUpon>DisplayMapPanZoomBarSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayMapScaleLineSample.xaml.cs">
+      <DependentUpon>DisplayMapScaleLineSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
