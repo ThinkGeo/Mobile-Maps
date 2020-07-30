@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NOAAWeatherStationLayerSample : ContentPage
@@ -26,7 +26,7 @@ namespace HowDoISample.Views
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Create background world map with vector tile requested from ThinkGeo Cloud Service. 
+            //// Create background world map with vector tile requested from ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
@@ -66,11 +66,11 @@ namespace HowDoISample.Views
 
         private void UpdateWeatherStations()
         {
-            //// Here we fresh the map based on the delegate that fires when the feature source has new data.            
+            //// Here we fresh the map based on the delegate that fires when the feature source has new data.
             ////mapView.Refresh(mapView.Overlays["Weather"]);
             //loadingImage.Visibility = Visibility.Hidden;
         }
 
- 
+
     }
 }

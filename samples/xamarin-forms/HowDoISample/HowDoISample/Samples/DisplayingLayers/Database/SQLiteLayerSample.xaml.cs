@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SQLiteLayerSample : ContentPage
@@ -53,7 +53,7 @@ namespace HowDoISample.Views
             //restaurantsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;
             //restaurantsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Set the map view current extent to a bounding box that shows just a few restaurants.  
+            //// Set the map view current extent to a bounding box that shows just a few restaurants.
             //mapView.CurrentExtent = new RectangleShape(-10776971.1234695, 3915454.06613793, -10775965.157585, 3914668.53918197);
 
             //// Refresh the map.

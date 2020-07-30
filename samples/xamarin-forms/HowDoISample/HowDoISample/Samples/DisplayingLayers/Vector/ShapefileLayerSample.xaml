@@ -4,21 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.ShapefileLayerSample"
-             Title="Sample Template">
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.ShapefileLayerSample"
+             Title="Create ShapeFile Layer Sample">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>
@@ -38,7 +38,7 @@
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
                         <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
+
                         <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="Button_Clicked"></Button>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />

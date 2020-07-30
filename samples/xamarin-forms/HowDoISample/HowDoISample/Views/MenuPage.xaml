@@ -4,13 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.MenuPage"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.MenuPage"
              Title="Menu">
 
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView x:Name="ListViewMenu"
                   IsGroupingEnabled="True"
-                  GroupDisplayBinding="{Binding Title}">
+                  GroupDisplayBinding="{Binding Title}"
+                  ItemSelected="ListViewMenu_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Title}"/>

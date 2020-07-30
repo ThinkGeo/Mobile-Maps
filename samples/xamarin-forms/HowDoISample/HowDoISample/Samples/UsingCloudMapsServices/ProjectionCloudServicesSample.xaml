@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.ProjectionCloudServicesSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.ProjectionCloudServicesSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -12,13 +12,13 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>

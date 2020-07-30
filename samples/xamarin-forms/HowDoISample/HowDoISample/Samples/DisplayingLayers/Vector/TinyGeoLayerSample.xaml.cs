@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TinyGeoLayerSample : ContentPage
@@ -44,7 +44,7 @@ namespace HowDoISample.Views
             //tinyGeoLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(GeoPens.Black, new GeoSolidBrush(new GeoColor(50, GeoColors.Blue)));
             //tinyGeoLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Open the layer and set the map view current extent to the bounding box of the layer.  
+            //// Open the layer and set the map view current extent to the bounding box of the layer.
             //tinyGeoLayer.Open();
             //mapView.CurrentExtent = tinyGeoLayer.GetBoundingBox();
 

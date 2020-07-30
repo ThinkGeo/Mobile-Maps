@@ -9,7 +9,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GoogleMapLayerSample : ContentPage
@@ -45,7 +45,7 @@ namespace HowDoISample.Views
             //// Add the layer to the overlay we created earlier.
             //worldOverlay.Layers.Add("WorldLayer", worldLayer);
 
-            //// Set the client ID and Private key from the text box on the sample.  
+            //// Set the client ID and Private key from the text box on the sample.
             //worldLayer.ClientId = txtClientId.Text;
             //worldLayer.PrivateKey = txtPrivateKey.Text;
 

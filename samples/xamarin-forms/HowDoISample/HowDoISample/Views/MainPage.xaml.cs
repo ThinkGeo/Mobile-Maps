@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 
 using HowDoISample.Models;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
@@ -28,7 +28,7 @@ namespace HowDoISample.Views
             if (!MenuPages.ContainsKey(id))
             {
                 var type = Type.GetType(id);
-                var samplePage = (ContentPage)Activator.CreateInstance(type);
+                var samplePage = (Page)Activator.CreateInstance(type);
                 MenuPages.Add(id, new NavigationPage(samplePage));
             }
 

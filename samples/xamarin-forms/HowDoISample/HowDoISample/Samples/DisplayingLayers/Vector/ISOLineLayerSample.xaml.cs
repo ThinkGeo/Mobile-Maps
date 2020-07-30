@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ISOLineLayerSample : ContentPage
@@ -25,7 +25,7 @@ namespace HowDoISample.Views
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Create background world map with vector tile requested from ThinkGeo Cloud Service. 
+            //// Create background world map with vector tile requested from ThinkGeo Cloud Service.
             //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
@@ -42,7 +42,7 @@ namespace HowDoISample.Views
             //isoLineOverlay.Layers.Add("IsoLineLayer", isoLineLayer);
             //isoLineOverlay.DrawingQuality = DrawingQuality.HighQuality;
 
-            //// Create a layer that so we can get the current extent below to set the maps extend 
+            //// Create a layer that so we can get the current extent below to set the maps extend
             //// We wont use it after so later in the code we will just close it.
             //var mosquitosLayer = new ShapeFileFeatureSource(@"../../../data/Shapefile/Frisco_Mosquitos.shp");
             //mosquitosLayer.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -86,7 +86,7 @@ namespace HowDoISample.Views
         //// We use this method to generate the values for the lines based on the data values and how many breaks we want.
         //Collection<double> isoLineLevels = GridIsoLineLayer.GetIsoLineLevels(csvPointData, 25);
 
-        ////Create the new dynamicIsoLineLayer           
+        ////Create the new dynamicIsoLineLayer
         //DynamicIsoLineLayer dynamicIsoLineLayer = new DynamicIsoLineLayer(csvPointData, isoLineLevels, new InverseDistanceWeightedGridInterpolationModel(), IsoLineType.LinesOnly);
 
         //// Set the cell height and width dynamically based on the map view size

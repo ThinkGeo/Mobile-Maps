@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreatePointStyleSample : ContentPage
@@ -64,7 +64,7 @@ namespace HowDoISample.Views
             //    hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             //    hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
 
-            //    // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            //    // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
             //    hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             //    // Refresh the layerOverlay to show the new style
@@ -90,7 +90,7 @@ namespace HowDoISample.Views
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
 
-            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             //// Refresh the layerOverlay to show the new style
@@ -117,7 +117,7 @@ namespace HowDoISample.Views
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(symbolPointStyle);
 
-            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map. 
+            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
             //hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             //// Refresh the layerOverlay to show the new style

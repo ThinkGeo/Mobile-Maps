@@ -4,21 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.SetMapExtentSample"
-             Title="Sample Template">
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.SetMapExtentSample"
+             Title="Set Map Extent">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                        <Label Text="Learn how to set the map's extent in a variety of different methods."
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>
@@ -35,6 +35,7 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
+                    <ScrollView MinimumHeightRequest="400">
                     <Grid Grid.Column="1" Grid.Row="0">
                         <!-- Zoom To Scale Controls -->
                         <Label Text="Zoom To Scale:" Grid.Row="0" Grid.ColumnSpan="2"/>
@@ -95,6 +96,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                     </Grid>
+                    </ScrollView>
                 </Expander.Content>
             </Expander>
 

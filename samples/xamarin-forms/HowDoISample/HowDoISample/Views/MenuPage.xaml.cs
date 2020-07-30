@@ -1,12 +1,16 @@
-﻿using HowDoISample.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
+using HowDoISample.Models;
+using HowDoISample.Services;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
@@ -14,30 +18,55 @@ namespace HowDoISample.Views
     public partial class MenuPage : ContentPage
     {
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        ObservableCollection<CategoryMenuItem> categoryMenuItems;
+        List<MenuGroup> CategoryMenuItems { get; }
 
         public MenuPage()
         {
             InitializeComponent();
 
-            var category = new CategoryMenuItem() { Title = "Category" };
-            category.Add(new SampleMenuItem() { Title = "Sample", Id = "SampleTemplate" });
+            CategoryMenuItems = GetMenuItems();
 
-            categoryMenuItems = new ObservableCollection<CategoryMenuItem>
+            ListViewMenu.ItemsSource = CategoryMenuItems;
+        }
+
+        private async void ListViewMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;
+
+            var id = ((SampleMenuItem)e.SelectedItem).Id;
+            await RootPage.NavigateFromMenu(id);
+        }
+
+        /// <summary>
+        /// Reads samples.json to build the menu items
+        /// NOTE: This method slows down the application due to running on the main thread. A workaround will be implemented in the future.
+        /// </summary>
+        /// <returns></returns>
+        private List<MenuGroup> GetMenuItems()
+        {
+            List<MenuGroup> menuItems = new List<MenuGroup>();
+            List<Category> categories;
+
+            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(SampleDataStore)).Assembly;
+            Stream stream = assembly.GetManifestResourceStream("HowDoISample.samples.json");
+            using (var reader = new StreamReader(stream))
             {
-                category
-            };
+                var text = reader.ReadToEnd();
+                categories = JsonConvert.DeserializeObject<List<Category>>(text);
+            }
 
-            ListViewMenu.ItemsSource = categoryMenuItems;
-
-            ListViewMenu.ItemSelected += async (sender, e) =>
+            foreach (var category in categories)
             {
-                if (e.SelectedItem == null)
-                    return;
+                var sampleGroup = new MenuGroup() { Title = category.Title };
+                foreach (var sample in category.Children)
+                {
+                    sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title });
+                }
+                menuItems.Add(sampleGroup);
+            }
 
-                var id = ((SampleMenuItem)e.SelectedItem).Id;
-                await RootPage.NavigateFromMenu(id);
-            };
+            return menuItems;
         }
     }
 }

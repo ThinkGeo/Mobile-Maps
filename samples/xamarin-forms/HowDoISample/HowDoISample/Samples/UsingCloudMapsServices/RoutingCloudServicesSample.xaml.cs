@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RoutingCloudServicesSample : ContentPage
@@ -22,7 +22,7 @@ namespace HowDoISample.Views
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
-            //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
+            //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 

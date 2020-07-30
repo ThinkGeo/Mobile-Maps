@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NOAAWeatherWarningLayerSample : ContentPage
@@ -25,7 +25,7 @@ namespace HowDoISample.Views
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Create background world map with vector tile requested from ThinkGeo Cloud Service. 
+            //// Create background world map with vector tile requested from ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
@@ -70,7 +70,7 @@ namespace HowDoISample.Views
         //private void FeatureSource_WarningsUpdated(object sender, WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
         //{
         //    // This event fires when the the feature source has new data.  We need to make sure we refresh the map
-        //    // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.                        
+        //    // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
         //    loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Hidden);
         //    mapView.Dispatcher.Invoke(() => mapView.Refresh(mapView.Overlays["Noaa Weather Warning"]));
 
@@ -97,7 +97,7 @@ namespace HowDoISample.Views
         //    // Get the parks layer from the MapView
         //    FeatureLayer weatherWarnings = mapView.FindFeatureLayer("Noaa Weather Warning");
 
-        //    // Find the feature that was clicked on by querying the layer for features containing the clicked coordinates            
+        //    // Find the feature that was clicked on by querying the layer for features containing the clicked coordinates
         //    Collection<Feature> selectedFeatures = weatherWarnings.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns);
 
         //    return selectedFeatures;

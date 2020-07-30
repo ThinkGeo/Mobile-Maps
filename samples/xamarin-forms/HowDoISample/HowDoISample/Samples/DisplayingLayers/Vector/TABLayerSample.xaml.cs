@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TABLayerSample : ContentPage
@@ -47,7 +47,7 @@ namespace HowDoISample.Views
             //cityBoundaryLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(100, GeoColors.Green), GeoColors.Green);
             //cityBoundaryLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Open the layer and set the map view current extent to the bounding box of the layer.  
+            //// Open the layer and set the map view current extent to the bounding box of the layer.
             //cityBoundaryLayer.Open();
             //mapView.CurrentExtent = cityBoundaryLayer.GetBoundingBox();
 

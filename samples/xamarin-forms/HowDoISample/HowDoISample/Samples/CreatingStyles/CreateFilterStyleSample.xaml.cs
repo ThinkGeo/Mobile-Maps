@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateFilterStyleSample : ContentPage
@@ -51,7 +51,7 @@ namespace HowDoISample.Views
         /// </summary>
         private void AddFilterStyle(ShapeFileFeatureLayer layer)
         {
-            //    // Create a filter style based on the "Drugs" Offense Group 
+            //    // Create a filter style based on the "Drugs" Offense Group
             //    var drugFilterStyle = new FilterStyle()
             //    {
             //        Conditions = { new FilterCondition("OffenseGro", "Drugs") },
@@ -61,7 +61,7 @@ namespace HowDoISample.Views
             //        }
             //    };
 
-            //    // Create a filter style based on the "Weapons" Offense Group 
+            //    // Create a filter style based on the "Weapons" Offense Group
             //    var weaponFilterStyle = new FilterStyle()
             //    {
             //        Conditions = { new FilterCondition("OffenseGro", "Weapons") },
@@ -71,7 +71,7 @@ namespace HowDoISample.Views
             //        }
             //    };
 
-            //    // Create a filter style based on the "Vandalism" Offense Group 
+            //    // Create a filter style based on the "Vandalism" Offense Group
             //    var vandalismFilterStyle = new FilterStyle()
             //    {
             //        Conditions = { new FilterCondition("OffenseGro", "Vandalism") },

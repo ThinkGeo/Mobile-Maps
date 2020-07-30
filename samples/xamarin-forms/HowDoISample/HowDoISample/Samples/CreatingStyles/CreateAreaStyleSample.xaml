@@ -4,13 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CreateAreaStyleSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.CreateAreaStyleSample"
              Title="Create an Area Style">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Learn how to style polygon data using an AreaStyle" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+            <Label Text="Learn how to style polygon data using an AreaStyle"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
 
             <!-- Map Control -->

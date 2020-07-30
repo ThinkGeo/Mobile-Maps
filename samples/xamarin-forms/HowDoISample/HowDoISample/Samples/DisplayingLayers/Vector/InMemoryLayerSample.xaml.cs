@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InMemoryLayerSample : ContentPage
@@ -25,7 +25,7 @@ namespace HowDoISample.Views
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
+            //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
@@ -46,7 +46,7 @@ namespace HowDoISample.Views
             //InMemoryFeatureLayer inMemoryFeatureLayer = new InMemoryFeatureLayer();
             //inMemoryOverlay.Layers.Add("Frisco Mosquitos", inMemoryFeatureLayer);
 
-            //// Loop through all the features in the first layer and add them to the in memeory layer.  We use a shortcut called internal 
+            //// Loop through all the features in the first layer and add them to the in memeory layer.  We use a shortcut called internal
             //// features that is supported in the in memory layer instead of going through the edit tools
             //foreach (Feature feature in features)
             //{
@@ -59,12 +59,12 @@ namespace HowDoISample.Views
             //textStyle.MaskMargin = new DrawingMargin(2, 2, 2, 2);
             //textStyle.YOffsetInPixel = -10;
 
-            //// Create an point style and add the text style from above on zoom level 1 and then apply it to all zoom levels up to 20.            
+            //// Create an point style and add the text style from above on zoom level 1 and then apply it to all zoom levels up to 20.
             //inMemoryFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red, GeoPens.White);
             //inMemoryFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = textStyle;
             //inMemoryFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Open the layer and set the map view current extent to the bounding box of the layer.  
+            //// Open the layer and set the map view current extent to the bounding box of the layer.
             //inMemoryFeatureLayer.Open();
             //mapView.CurrentExtent = inMemoryFeatureLayer.GetBoundingBox();
 

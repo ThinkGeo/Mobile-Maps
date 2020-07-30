@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateLineStyleSample : ContentPage
@@ -56,10 +56,10 @@ namespace HowDoISample.Views
             //// Create a line style
             //var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 4), new GeoPen(GeoBrushes.WhiteSmoke, 2));
 
-            //// Add the line style to the collection of custom styles for ZoomLevel 1. 
+            //// Add the line style to the collection of custom styles for ZoomLevel 1.
             //layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(lineStyle);
 
-            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
+            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map.
             //layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         }
     }

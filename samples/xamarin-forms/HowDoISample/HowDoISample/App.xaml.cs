@@ -1,7 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using HowDoISample.Views;
+using ThinkGeo.UI.Xamarin.HowDoI;
+using HowDoISample.Services;
 
 namespace HowDoISample
 {
@@ -12,6 +13,7 @@ namespace HowDoISample
         {
             InitializeComponent();
             Device.SetFlags(new string[] { "Expander_Experimental" });
+            DependencyService.Register<SampleDataStore>();
             MainPage = new MainPage();
         }
 

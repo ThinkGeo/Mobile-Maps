@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HowDoISample.Views
+namespace ThinkGeo.UI.Xamarin.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateAreaStyleSample : ContentPage
@@ -60,10 +60,10 @@ namespace HowDoISample.Views
             //// Create a area style
             //var areaStyle = new AreaStyle(GeoPens.DimGray, new GeoSolidBrush(new GeoColor(128, GeoColors.ForestGreen)));
 
-            //// Add the area style to the collection of custom styles for ZoomLevel 1. 
+            //// Add the area style to the collection of custom styles for ZoomLevel 1.
             //layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(areaStyle);
 
-            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the area style on every zoom level on the map. 
+            //// Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the area style on every zoom level on the map.
             //layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         }
     }
