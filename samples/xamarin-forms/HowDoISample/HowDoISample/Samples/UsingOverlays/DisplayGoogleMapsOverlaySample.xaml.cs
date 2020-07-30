@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SampleTemplate : ContentPage
+    public partial class DisplayGoogleMapsOverlaySample : ContentPage
     {
-        public SampleTemplate()
+        public DisplayGoogleMapsOverlaySample()
         {
             InitializeComponent();
         }
@@ -25,17 +25,21 @@ namespace HowDoISample.Views
             //// Set the map's unit of measurement to meters(Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add Cloud Maps as a background overlay
-            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
-            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            //// Add a simple background overlay
+            //mapView.BackgroundOverlay.BackgroundBrush = GeoBrushes.AliceBlue;
 
             //// Set the map extent
             //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
-        private void button_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Create a Google Maps overlay and add it to the map view.
+        /// </summary>
+        private void DisplayGoogleMaps_Click(object sender, EventArgs e)
         {
-
+            //GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
+            //mapView.Overlays.Add(googleMapsOverlay);
+            //mapView.Refresh();
         }
     }
 }

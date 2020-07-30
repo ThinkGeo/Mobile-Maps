@@ -32,12 +32,21 @@ namespace HowDoISample.Views
             // ...
         }
 
+
         /// <summary>
-        /// ...
+        /// Enable the PanZoomBar and remove it from the MapView
         /// </summary>
-        private void Button_Clicked(object sender, EventArgs e)
+        private void DisplayPanZoomBar_Checked(object sender, EventArgs e)
         {
-            // ...
+            //mapView.MapTools.PanZoomBar.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Disable the PanZoomBar and remove it from the MapView
+        /// </summary>
+        private void DisplayPanZoomBar_Unchecked(object sender, EventArgs e)
+        {
+          // mapView.MapTools.PanZoomBar.IsEnabled = false;
         }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.SampleTemplate"
+             x:Class="HowDoISample.Views.DisplayOpenStreetMapOverlaySample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,14 +36,17 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="button_Clicked"></Button>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="OpentStreetMaps:" FontAttributes="Bold" FontSize="16"/>
+
+                        <Label Grid.Column="1" Grid.Row="1" Text="User Agent:"></Label>
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name="osmUserAgent"></Entry>
+
+                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="displayOsmMaps" Text="Update" Clicked="DisplayOsmMaps_Click"></Button>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

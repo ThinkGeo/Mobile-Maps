@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DisplayMapScaleLineSample : ContentPage
+    public partial class CachingMapTilesSample : ContentPage
     {
-        public DisplayMapScaleLineSample()
+        public CachingMapTilesSample()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace HowDoISample.Views
             //mapView.MapUnit = GeographyUnit.Meter;
 
             //// Add Cloud Maps as a background overlay
-            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             //// Set the map extent
@@ -35,19 +35,19 @@ namespace HowDoISample.Views
 
 
         /// <summary>
-        /// Enable the ScaleLine and add it to the MapView (default: bottom left)
+        /// Create a new tile cache on the Cloud Maps overlay. Cached images will be saved on the file system in the bin folder.
         /// </summary>
-        private void DisplayScaleLine_Checked(object sender, EventArgs e)
+        private void UseCache_Checked(object sender, EventArgs e)
         {
-           // mapView.MapTools.ScaleLine.IsEnabled = true;
+            //thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache("cache", "CloudMapsImages", RasterTileFormat.Png);
         }
 
         /// <summary>
-        /// Disable the ScaleLine and remove it from the MapView
+        /// Remove the tile cache by setting it to null. Note that this does not remove the cached images on the file system.
         /// </summary>
-        private void DisplayScaleLine_Unchecked(object sender, EventArgs e)
+        private void UseCache_Unchecked(object sender, EventArgs e)
         {
-            //mapView.MapTools.ScaleLine.IsEnabled = false;
+           // thinkGeoCloudVectorMapsOverlay.TileCache = null;
         }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.SampleTemplate"
+             x:Class="HowDoISample.Views.DrawEditDeleteShapesUsingInteractiveOverlaySample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,17 +36,29 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="button_Clicked"></Button>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Interactive Controls:" FontAttributes="Bold" FontSize="16"/>
+                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="navMode" Text="Navigation Mode" IsChecked="True" Clicked="NavMode_Click"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="drawPoint" Text="Draw Point" Clicked="DrawPoint_Click"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="drawLine" Text="Draw Line" Clicked="DrawLine_Click"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="4" x:Name="drawPolygon" Text="Draw Polygon" Clicked="DrawPolygon_Click"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="5" x:Name="editShape" Text="Edit Shape" Clicked="EditShape_Click"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="6" x:Name="deleteShape" Text="Delete Shape" Clicked="DeleteShape_Click"></RadioButton>
+
+                        <Label Grid.Column="1" Grid.Row="7" Text="Instructions:" FontAttributes="Bold" FontSize="16"/>
+                        <Label x:Name="instructions" Grid.Column="1" Grid.Row="8"></Label>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

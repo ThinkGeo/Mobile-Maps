@@ -54,7 +54,7 @@ namespace HowDoISample.Views
         /// <summary>
         /// Changes the display format of the MouseCoordinates based on ComboBox selection
         /// </summary>
-        private void CoordinateType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CoordinateType_SelectionChanged(object sender, EventArgs e)
         {
             //switch (((ComboBoxItem)coordinateType.SelectedItem).Content)
             //{

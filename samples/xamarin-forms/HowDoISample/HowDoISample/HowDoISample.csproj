@@ -251,6 +251,42 @@
     <Compile Update="Samples\UsingMapTools\DisplayMapScaleLineSample.xaml.cs">
       <DependentUpon>DisplayMapScaleLineSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingOverlays\CachingMapTilesSample.xaml.cs">
+      <DependentUpon>CachingMapTilesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayBingMapsOverlaySample.xaml.cs">
+      <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayCloudMapsRasterOverlaySample.xaml.cs">
+      <DependentUpon>DisplayCloudMapsRasterOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayCloudMapsVectorOverlaySample.xaml.cs">
+      <DependentUpon>DisplayCloudMapsVectorOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
+      <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayOpenStreetMapOverlaySample.xaml.cs">
+      <DependentUpon>DisplayOpenStreetMapOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DisplayWMSOverlaySample.xaml.cs">
+      <DependentUpon>DisplayWMSOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml.cs">
+      <DependentUpon>DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
+      <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\PrintMapsUsingPrintOverlaySample.xaml.cs">
+      <DependentUpon>PrintMapsUsingPrintOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\UsingPopupsSample.xaml.cs">
+      <DependentUpon>UsingPopupsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\UsingMarkersSample.xaml.cs">
+      <DependentUpon>UsingMarkersSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

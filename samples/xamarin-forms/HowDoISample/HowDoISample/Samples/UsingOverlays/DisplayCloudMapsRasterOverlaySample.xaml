@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.SampleTemplate"
+             x:Class="HowDoISample.Views.DisplayCloudMapsRasterOverlaySample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,17 +36,31 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="button_Clicked"></Button>
+                        <Label Grid.Column="1" Grid.Row="0"  Grid.ColumnSpan="3" Text="ThinkGeo Raster Cloud Maps:" FontAttributes="Bold" FontSize="16"/>
+                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Sign up for a Cloud Maps account">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}"
+                                          CommandParameter="https://cloud.thinkgeo.com/"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label Grid.Column="1" Grid.Row="2" Text="API Key:"></Label>
+                        <Entry Grid.Column="2" Grid.Row="2" x:Name="cloudMapsApiKey" Text="itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~"></Entry>
+
+                        <Label Grid.Column="1" Grid.Row="3" Text="Secret Key:"></Label>
+                        <Entry Grid.Column="2" Grid.Row="3" x:Name="cloudMapsSecretKey" Text="bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~"></Entry>
+
+                        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="displayRasterCloudMaps" Text="Update" Clicked="DisplayRasterCloudMaps_Click"></Button>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="160" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

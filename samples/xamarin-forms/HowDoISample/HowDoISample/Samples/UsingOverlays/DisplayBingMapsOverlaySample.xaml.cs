@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HowDoISample.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SampleTemplate : ContentPage
+    public partial class DisplayBingMapsOverlaySample : ContentPage
     {
-        public SampleTemplate()
+        public DisplayBingMapsOverlaySample()
         {
             InitializeComponent();
         }
+        // Launcher.OpenAsync is provided by Xamarin.Essentials.
+        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
         /// <summary>
         /// ...
@@ -33,9 +37,15 @@ namespace HowDoISample.Views
             //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
-        private void button_Clicked(object sender, EventArgs e)
-        {
 
+        /// <summary>
+        /// Create a Bing Maps overlay and add it to the map view.
+        /// </summary>
+        private void DisplayBingMaps_Click(object sender, EventArgs e)
+        {
+            //BingMapsOverlay bingMapsOverlay = new BingMapsOverlay(bingApplicationId.Text, BingMapsMapType.Road);
+            //mapView.Overlays.Add(bingMapsOverlay);
+            //mapView.Refresh();
         }
     }
 }

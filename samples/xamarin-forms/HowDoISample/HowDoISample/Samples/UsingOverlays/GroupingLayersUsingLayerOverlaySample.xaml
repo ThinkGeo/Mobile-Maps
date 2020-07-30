@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.SampleTemplate"
+             x:Class="HowDoISample.Views.GroupingLayersUsingLayerOverlaySample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -36,14 +36,15 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="button_Clicked"></Button>
+                        <Label Grid.Column="1" Grid.Row="0" Text="LayerOverlay Controls:" FontAttributes="Bold" FontSize="16"/>
+                        <Label Text="Show POI Group"></Label>
+                        <Label Text="Show Landuse Group"></Label>
+                        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="ShowPoi" CheckedChanged="ShowPoiGroup_Checked"></CheckBox>
+                        <CheckBox Grid.Column="1" Grid.Row="2" x:Name="ShowLandUse"  CheckedChanged="ShowLanduseGroup_Checked"></CheckBox>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
