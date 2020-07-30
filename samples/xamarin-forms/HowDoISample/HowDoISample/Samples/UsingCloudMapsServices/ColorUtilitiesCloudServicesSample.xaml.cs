@@ -557,10 +557,7 @@ namespace HowDoISample.Views
             return color;
         }
 
-        /// <summary>
-        /// Helper function to change the tip shown for different Color Types
-        /// </summary>
-        private void cboColorType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboColorType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //var comboBoxContent = (cboColorType.SelectedItem as ComboBoxItem).Content;
 

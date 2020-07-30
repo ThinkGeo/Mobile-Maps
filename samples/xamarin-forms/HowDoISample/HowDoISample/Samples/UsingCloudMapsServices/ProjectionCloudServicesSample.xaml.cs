@@ -117,8 +117,8 @@ namespace HowDoISample.Views
         /// <summary>
         /// Use the ProjectionCloudClient to reproject a single feature
         /// </summary>
-        //private async void ReprojectFeature_Click(object sender, EventArgs e)
-        //{
+        private async void ReprojectFeature_Click(object sender, EventArgs e)
+        {
         //    // Create a feature with coordinates in Decimal Degrees (4326)
         //    Feature decimalDegreeFeature = new Feature(-96.834516, 33.150083);
 
@@ -127,7 +127,7 @@ namespace HowDoISample.Views
 
         //    // Add the reprojected features to the map
         //    ClearMapAndAddFeatures(new Collection<Feature>() { sphericalMercatorFeature });
-        //}
+        }
 
         /// <summary>
         /// Use the ProjectionCloudClient to reproject multiple different features
