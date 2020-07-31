@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="HowDoISample.Views.DisplayCloudMapsRasterOverlaySample"
-             Title="Sample Template">
+             Title="Display Cloud Maps Raster Overlay">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                        <Label Text="Learn to render ThinkGeo Cloud Maps in raster format. Sign up for your own ThinkGeo Cloud API key at https://cloud.thinkgeo.com!" 
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>

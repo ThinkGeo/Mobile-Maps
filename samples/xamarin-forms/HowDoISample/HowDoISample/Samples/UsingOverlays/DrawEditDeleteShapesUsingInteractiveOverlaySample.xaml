@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="HowDoISample.Views.DrawEditDeleteShapesUsingInteractiveOverlaySample"
-             Title="Sample Template">
+             Title="Draw, Edit, or Delete Shapes using the InteractiveOverlay">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                        <Label Text="Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay." 
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>

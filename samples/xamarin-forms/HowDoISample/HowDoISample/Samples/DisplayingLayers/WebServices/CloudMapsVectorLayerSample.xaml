@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.Xamarin.HowDoI.CloudMapsVectorLayerSample"
-             Title="Sample Template">
+             Title="Display a Cloud Maps Vector Layer">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied"
+                        <Label Text="This sample shows how to display ThinkGeo cloud vector background maps."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>

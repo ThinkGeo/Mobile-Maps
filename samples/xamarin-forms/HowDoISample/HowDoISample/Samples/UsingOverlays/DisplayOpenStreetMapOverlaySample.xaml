@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="HowDoISample.Views.DisplayOpenStreetMapOverlaySample"
-             Title="Sample Template">
+             Title="Display OpenStreetMap Overlay">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
+                        <Label Text="Learn to render OpenStreetMap using the OpenStreetMapOverlay. OpenStreetMap Tiles are not meant for heavy production use without express permission from the OpenStreetMap Foundation. See https://operations.osmfoundation.org/ for details about their usage policies." 
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>
