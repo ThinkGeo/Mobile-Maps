@@ -308,6 +308,24 @@
     <Compile Update="Samples\UsingQueryTools\EqualsSample.xaml.cs">
       <DependentUpon>EqualsSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingQueryTools\GetDataFromFeatureSample.xaml.cs">
+      <DependentUpon>GetDataFromFeatureSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\GetFeaturesWithinDistanceSample.xaml.cs">
+      <DependentUpon>GetFeaturesWithinDistanceSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\IntersectsSample.xaml.cs">
+      <DependentUpon>IntersectsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\OverlapsSample.xaml.cs">
+      <DependentUpon>OverlapsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\WithinSample.xaml.cs">
+      <DependentUpon>WithinSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\TouchesSample.xaml.cs">
+      <DependentUpon>TouchesSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

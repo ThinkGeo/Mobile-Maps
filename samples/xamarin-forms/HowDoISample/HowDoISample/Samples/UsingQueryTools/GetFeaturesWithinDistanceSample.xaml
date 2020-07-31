@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.GetAllFeatureDataSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.GetFeaturesWithinDistanceSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -12,13 +12,13 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>
@@ -36,36 +36,35 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Frisco Hotels Feature Data"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Features Within a Set Distance"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Draw A New Point"></Label>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Search Radius: (m)"/>
+                        <Grid Grid.Column="1" Grid.Row="3">
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=searchRadius}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Slider Grid.Column="0" Grid.Row="0" x:Name="searchRadius" Maximum="1600" Minimum="100" Value="400"></Slider>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Label Grid.Column="1" Grid.Row="5" x:Name="txtNumberOfFeaturesFound"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Select a hotel from the list to zoom to that location"></Label>
-                        <!--
-                        <ListBox Grid.Column="1" Grid.Row="2" Name="lsbHotels" SelectionChanged="lsbHotels_SelectionChanged">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Width="180">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
-                                        <TextBlock Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.GetAllFeatureDataSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.GetDataFromFeatureSample"
              Title="Sample Template">
     <ContentPage.Content>
         <StackLayout>
@@ -12,13 +12,13 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This is a sample description that needs to be replaced once the template is copied" 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                        <Label Text="This is a sample description that needs to be replaced once the template is copied"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>
@@ -36,35 +36,14 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Frisco Hotels Feature Data"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Click on a Park to View More Information"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Select a hotel from the list to zoom to that location"></Label>
-                        <!--
-                        <ListBox Grid.Column="1" Grid.Row="2" Name="lsbHotels" SelectionChanged="lsbHotels_SelectionChanged">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Width="180">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
-                                        <TextBlock Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        -->
+                        <!-- Grid Layout -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                     </Grid>
