@@ -296,6 +296,18 @@
     <Compile Update="Samples\UsingOverlays\UsingMarkersSample.xaml.cs">
       <DependentUpon>UsingMarkersSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\UsingQueryTools\ContainsSample.xaml.cs">
+      <DependentUpon>ContainsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\CrossesSample.xaml.cs">
+      <DependentUpon>CrossesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\DisjointSample.xaml.cs">
+      <DependentUpon>DisjointSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingQueryTools\EqualsSample.xaml.cs">
+      <DependentUpon>EqualsSample.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
