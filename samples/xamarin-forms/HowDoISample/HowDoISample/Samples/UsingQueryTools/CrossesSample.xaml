@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CrossesSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.CrossesSample"
              Title="Check if Feature Crosses">
     <ContentPage.Content>
         <StackLayout>

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.CachingMapTilesSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.CachingMapTilesSample"
              Title="Caching Map Tiles">
     <ContentPage.Content>
         <StackLayout>
@@ -30,6 +30,7 @@
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
+                        
                     </StackLayout>
                 </Expander.Header>
 
@@ -39,7 +40,7 @@
                         <Label Text="Tile Cache Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
                         <Label Text="Use Tile Cache"></Label>
                         <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked" Grid.Column="1" Grid.Row="1"></CheckBox>
-
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="240" />

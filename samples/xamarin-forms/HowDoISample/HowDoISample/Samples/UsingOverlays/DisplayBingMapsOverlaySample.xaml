@@ -4,21 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.DisplayBingMapsOverlaySample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.DisplayBingMapsOverlaySample"
              Title="Display Bing Maps Overlay">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
+                    <StackLayout Orientation="Horizontal" Margin="4">
                         <Label Text="Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required. Visit the Bing Maps Dev Portal to sign up for a key (https://www.bingmapsportal.com/)." 
                                FontSize="Subtitle" 
-                               VerticalOptions="Center" 
+                               VerticalOptions="CenterAndExpand" 
                                HorizontalOptions="StartAndExpand"/>
                         <BoxView Color="LightGray" 
                                  WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                                 VerticalOptions="Start" 
                                  HorizontalOptions="Center"/>
                         <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
                             <Image.Triggers>
@@ -37,7 +37,7 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Bing Maps Controls:" FontAttributes="Bold" FontSize="16"/>
-                        <Label  Text="Sign up for a Bing Maps Api Key">
+                        <Label  Grid.Column="1" Grid.Row="1" Text="Sign up for a Bing Maps Api Key">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding TapCommand}"
                                           CommandParameter="https://www.bingmapsportal.com/" />
@@ -50,10 +50,8 @@
                         <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayBingMaps" Text="Update" Clicked="DisplayBingMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="170" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

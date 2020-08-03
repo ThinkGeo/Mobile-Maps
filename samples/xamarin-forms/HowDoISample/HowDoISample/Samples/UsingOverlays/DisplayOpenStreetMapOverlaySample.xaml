@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.DisplayOpenStreetMapOverlaySample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.DisplayOpenStreetMapOverlaySample"
              Title="Display OpenStreetMap Overlay">
     <ContentPage.Content>
         <StackLayout>
