@@ -114,8 +114,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         ///// <summary>
         ///// RadioButton checked event that will recalculate the center point so long as a feature was already selected
         ///// </summary>
-        //private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        //{
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
         //    LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
         //    InMemoryFeatureLayer centerPointLayer = (InMemoryFeatureLayer)layerOverlay.Layers["centerPointLayer"];
 
@@ -124,6 +124,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         //    {
         //        CalculateCenterPoint(centerPointLayer.InternalFeatures["selectedFeature"]);
         //    }
-        //}
+        }
     }
 }

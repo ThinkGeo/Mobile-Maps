@@ -8,7 +8,7 @@
              Title="Create a Filter Style">
     <ContentPage.Content>
         <StackLayout>
-           
+            <!-- Sample Description -->
             <Frame HasShadow="False">
                 <Label Text="Learn how to selectively style features using a FilterStyle"
                        FontSize="Subtitle"

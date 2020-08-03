@@ -35,96 +35,105 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Zooming:" FontSize="16" FontAttributes="Bold"></Label>
-                        <Grid Grid.Column="1" Grid.Row="1" x:Name="zoomButtonGrid">
-                            <ImageButton x:Name="zoomIn" Source="/Resources/ZoomIn.png" Clicked="ZoomIn_Click" Grid.Column="0" Padding="4">
-                            </ImageButton>
-                            <ImageButton x:Name="zoomOut" Source="/Resources/ZoomOut.png" Clicked="ZoomOut_Click" Grid.Column="1" Padding="4">
-                            </ImageButton>
+                    <ScrollView MinimumHeightRequest="400">
+                        <Grid Grid.Column="1" Grid.Row="0">
 
-                            <!-- Zoom Button Grid Layout-->
+                            <Label Grid.Column="1" Grid.Row="0" Text="Zooming:" FontSize="16" FontAttributes="Bold"></Label>
+                            <Grid Grid.Column="1" Grid.Row="1" x:Name="zoomButtonGrid">
+                                <ImageButton x:Name="zoomIn" Source="/Resources/ZoomIn.png" Clicked="ZoomIn_Click" Grid.Column="0" Padding="4">
+                                </ImageButton>
+                                <ImageButton x:Name="zoomOut" Source="/Resources/ZoomOut.png" Clicked="ZoomOut_Click" Grid.Column="1" Padding="4">
+                                </ImageButton>
+
+                                <!-- Zoom Button Grid Layout-->
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+
+                            <Label Grid.Column="1" Grid.Row="2" Text="Panning:" FontSize="16" FontAttributes="Bold"></Label>
+                            <Grid Grid.Column="1" Grid.Row="3" x:Name="panButtonGrid">
+
+                                <ImageButton x:Name="panNorth" Source="/Resources/North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                </ImageButton>
+                                <ImageButton x:Name="panWest" Source="/Resources/West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                </ImageButton>
+                                <ImageButton x:Name="panEast" Source="/Resources/East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                </ImageButton>
+                                <ImageButton x:Name="panSouth" Source="/Resources/South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                </ImageButton>
+
+                                <!-- Pan Button Grid Layout -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                            </Grid>
+
+                            <Label Grid.Column="1" Grid.Row="4" Text="Panning Percentage:"/>
+                            <Grid Grid.Column="1" Grid.Row="5">
+
+                                <Slider Grid.Column="0" Grid.Row="0" x:Name="panPercentage" Maximum="100" Value="50"></Slider>
+                                <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=panPercentage}" Text="{Binding Path=Value}"></Label>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <Label Grid.Column="1" Grid.Row="6" Text="Rotating:" FontSize="16" FontAttributes="Bold"></Label>
+                            <Label Grid.Column="1" Grid.Row="7" Text="Current Angle:"/>
+                            <Grid Grid.Column="1" Grid.Row="8">
+
+                                <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=rotateAngle}"  Text="{Binding Path=Value}"></Label>
+                                <Slider Grid.Column="0" Grid.Row="0" x:Name="rotateAngle" Maximum="360" Value="0"></Slider>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <Button Grid.Column="1" Text="  Update" Grid.Row="9" x:Name="rotate" Clicked="Rotate_Click"></Button>
+
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-
-                        <Label Grid.Column="1" Grid.Row="2" Text="Panning:" FontSize="16" FontAttributes="Bold"></Label>
-                        <Grid Grid.Column="1" Grid.Row="3" x:Name="panButtonGrid">
-                            <ImageButton x:Name="panNorth" Source="/Resources/North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" Height="24" Width="24">
-                            </ImageButton>
-                            <ImageButton x:Name="panWest" Source="/Resources/West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" Height="24" Width="24">
-                            </ImageButton>
-                            <ImageButton x:Name="panEast" Source="/Resources/East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" Height="24" Width="24">
-                            </ImageButton>
-                            <ImageButton x:Name="panSouth" Source="/Resources/South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" Height="24" Width="24">
-                            </ImageButton>
-
-                            <!-- Pan Button Grid Layout -->
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                        </Grid>
-
-                        <Label Grid.Column="1" Grid.Row="4" Text="Panning Percentage:"/>
-                        <Grid Grid.Column="1" Grid.Row="5">
-                            <Slider Grid.Column="0" Grid.Row="0" x:Name="panPercentage" Maximum="100" Value="50"></Slider>
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=panPercentage}" Text="{Binding Path=Value}" Width="28"></Label>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
+
+
                             </Grid.ColumnDefinitions>
-                        </Grid>
-                        <Label Grid.Column="1" Grid.Row="6" Text="Rotating:" FontSize="16" FontAttributes="Bold"></Label>
-                        <Label Grid.Column="1" Grid.Row="7" Text="Current Angle:"/>
-                        <Grid Grid.Column="1" Grid.Row="8">
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=rotateAngle}"  Text="{Binding Path=Value}" Width="28"></Label>
-                            <Slider Grid.Column="0" Grid.Row="0" x:Name="rotateAngle" Maximum="360" Value="0"></Slider>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+
                         </Grid>
-                        <Button Grid.Column="1" Text="  Update" Grid.Row="9" x:Name="rotate" Clicked="Rotate_Click"></Button>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                    </Grid>
+                    </ScrollView>
                 </Expander.Content>
             </Expander>
 

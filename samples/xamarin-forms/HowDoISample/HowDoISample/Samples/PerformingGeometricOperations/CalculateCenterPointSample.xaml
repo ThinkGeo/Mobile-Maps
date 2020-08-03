@@ -36,16 +36,21 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
+                        <Label Grid.Column="1" Grid.Row="0"  Text="Center Point Controls:" FontSize="16" FontAttributes="Bold"/>
 
+                        <Label Grid.Column="1" Grid.Row="1" Text="Click on a feature to display it's center point."></Label>
+
+                        <RadioButton x:Name="centroidCenter" Text="Show Centroid Center" CheckedChanged="RadioButton_Checked" Grid.Column="1" Grid.Row="2"></RadioButton>
+                        <RadioButton x:Name="bboxCenter" Text="Show Bounding Box Center" CheckedChanged="RadioButton_Checked" Grid.Column="1" Grid.Row="3"></RadioButton>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
