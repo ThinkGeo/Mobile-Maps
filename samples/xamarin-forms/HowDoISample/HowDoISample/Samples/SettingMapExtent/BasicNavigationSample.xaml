@@ -40,9 +40,9 @@
 
                             <Label Grid.Column="1" Grid.Row="0" Text="Zooming:" FontSize="16" FontAttributes="Bold"></Label>
                             <Grid Grid.Column="1" Grid.Row="1" x:Name="zoomButtonGrid">
-                                <ImageButton x:Name="zoomIn" Source="/Resources/ZoomIn.png" Clicked="ZoomIn_Click" Grid.Column="0" Padding="4">
+                                <ImageButton x:Name="zoomIn" Source="ZoomIn.png" Clicked="ZoomIn_Click" Grid.Column="0" Padding="4">
                                 </ImageButton>
-                                <ImageButton x:Name="zoomOut" Source="/Resources/ZoomOut.png" Clicked="ZoomOut_Click" Grid.Column="1" Padding="4">
+                                <ImageButton x:Name="zoomOut" Source="ZoomOut.png" Clicked="ZoomOut_Click" Grid.Column="1" Padding="4">
                                 </ImageButton>
 
                                 <!-- Zoom Button Grid Layout-->
@@ -56,13 +56,13 @@
                             <Label Grid.Column="1" Grid.Row="2" Text="Panning:" FontSize="16" FontAttributes="Bold"></Label>
                             <Grid Grid.Column="1" Grid.Row="3" x:Name="panButtonGrid">
 
-                                <ImageButton x:Name="panNorth" Source="/Resources/North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton x:Name="panNorth" Source="North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panWest" Source="/Resources/West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton x:Name="panWest" Source="West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panEast" Source="/Resources/East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton x:Name="panEast" Source="East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panSouth" Source="/Resources/South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton x:Name="panSouth" Source="South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
 
                                 <!-- Pan Button Grid Layout -->
