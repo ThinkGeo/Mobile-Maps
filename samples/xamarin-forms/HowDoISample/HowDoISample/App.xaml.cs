@@ -2,7 +2,6 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ThinkGeo.UI.Xamarin.HowDoI;
-using HowDoISample.Services;
 
 namespace HowDoISample
 {
@@ -12,8 +11,7 @@ namespace HowDoISample
         public App()
         {
             InitializeComponent();
-            Device.SetFlags(new string[] { "Expander_Experimental" , "RadioButton_Experimental" });
-            DependencyService.Register<SampleDataStore>();
+            Device.SetFlags(new string[] { "Expander_Experimental", "RadioButton_Experimental" });
             MainPage = new MainPage();
         }
 

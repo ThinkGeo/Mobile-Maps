@@ -14,5 +14,7 @@ namespace HowDoISample.Models
     class MenuGroup : List<SampleMenuItem>
     {
         public string Title { get; set; }
+
+        public bool IsExpanded { get; set; }
     }
 }

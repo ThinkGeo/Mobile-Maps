@@ -15,7 +15,7 @@ namespace HowDoISample.Models
         public string Source { get; set; }
     }
 
-    class Category
+    class SampleCategory
     {
         public string Title { get; set; }
 
