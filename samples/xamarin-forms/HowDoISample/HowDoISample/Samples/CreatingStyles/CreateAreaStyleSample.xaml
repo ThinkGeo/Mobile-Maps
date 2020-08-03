@@ -8,10 +8,14 @@
              Title="Create an Area Style">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Learn how to style polygon data using an AreaStyle"
-                               FontSize="Subtitle"
-                               VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
+            <!-- Sample Description -->
+            <Frame>
+                <Label Text="Learn how to style polygon data using an AreaStyle"
+                       FontSize="Subtitle"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+            </Frame>
+           
 
             <!-- Map Control -->
             <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
