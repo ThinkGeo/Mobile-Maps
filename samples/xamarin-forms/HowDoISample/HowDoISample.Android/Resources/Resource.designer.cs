@@ -8405,7 +8405,7 @@ namespace HowDoISample.Droid
 			public const int South = 2131165312;
 			
 			// aapt resource value: 0x7F070081
-			public const int ThinkGeoLogo = 2131165313;
+			public const int thinkgeo_logo = 2131165313;
 			
 			// aapt resource value: 0x7F070082
 			public const int tooltip_frame_dark = 2131165314;
@@ -8423,13 +8423,10 @@ namespace HowDoISample.Droid
 			public const int West = 2131165318;
 			
 			// aapt resource value: 0x7F070087
-			public const int xamarin_logo = 2131165319;
+			public const int ZoomIn = 2131165319;
 			
 			// aapt resource value: 0x7F070088
-			public const int ZoomIn = 2131165320;
-			
-			// aapt resource value: 0x7F070089
-			public const int ZoomOut = 2131165321;
+			public const int ZoomOut = 2131165320;
 			
 			static Drawable()
 			{

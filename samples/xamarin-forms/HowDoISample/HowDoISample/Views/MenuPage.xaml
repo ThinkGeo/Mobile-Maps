@@ -7,6 +7,15 @@
              x:Class="ThinkGeo.UI.Xamarin.HowDoI.MenuPage"
              Title="Menu">
     <StackLayout VerticalOptions="FillAndExpand">
+        <!-- Logo -->
+        <Frame BackgroundColor="Black">
+            <Image Source="thinkgeo_logo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
+        </Frame>
+        
+        <!-- Sample Search Bar -->
+        <SearchBar  HorizontalOptions="StartAndExpand" Placeholder="Find Samples (WIP)" />
+        
+        <!-- Sample Menu -->
         <ListView x:Name="ListViewMenu"
                   IsGroupingEnabled="True"
                   GroupDisplayBinding="{Binding Title}"
