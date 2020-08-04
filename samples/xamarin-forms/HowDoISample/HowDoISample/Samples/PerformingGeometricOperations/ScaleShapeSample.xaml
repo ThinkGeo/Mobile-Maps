@@ -38,15 +38,15 @@
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Scale Shape Controls:" FontSize="16"/>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="Scale Factor: "></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="scaleFactor" Text=".5"></Entry>
+                        <Label Grid.Column="1" Grid.Row="1" Text="Scale Factor: " VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name="scaleFactor" Text=".5" VerticalOptions="Center"></Entry>
 
                         <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="scaleShape" Text="Scale" Clicked="ScaleShape_OnClick"></Button>
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

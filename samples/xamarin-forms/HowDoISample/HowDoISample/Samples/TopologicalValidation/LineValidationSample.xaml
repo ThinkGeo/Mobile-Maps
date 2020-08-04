@@ -50,11 +50,10 @@
                         <RadioButton Grid.Column="1" Grid.Row="10" x:Name="rdoCheckLinesMustNotOverlapLines" CheckedChanged="CheckLinesMustNotOverlapLines" Text="Lines Must Not Overlap With Lines"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="11" x:Name="rdoCheckLinesMustNotSelfIntersect" CheckedChanged="CheckLinesMustNotSelfIntersect" Text="Lines Must Not Self-Intersect"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="12" x:Name="rdoCheckLinesMustNotSelfOverlap" CheckedChanged="CheckLinesMustNotSelfOverlap" Text="Lines Must Not Self-Overlap"></RadioButton>
-                        <Entry Grid.Column="1" Grid.Row="13" x:Name="txtValidationInfo"></Entry>
+                        <Label Grid.Column="1" Grid.Row="13" x:Name="txtValidationInfo"></Label>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>

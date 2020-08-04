@@ -18,9 +18,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             InitializeComponent();
         }
 
-        /// <summary>
-        /// ...
-        /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service
@@ -51,55 +48,55 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //// Set the map extent
             //mapView.CurrentExtent = new RectangleShape(-10779751.80, 3915369.33, -10779407.60, 3915141.57);
         }
-        private Feature ReprojectFeature(Feature decimalDegreeFeature)
-        {
-            // Create a new ProjectionConverter to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
-            ProjectionConverter projectionConverter = new ProjectionConverter(4326, 3857);
+        //    private Feature ReprojectFeature(Feature decimalDegreeFeature)
+        //      {
+        // Create a new ProjectionConverter to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
+        //            ProjectionConverter projectionConverter = new ProjectionConverter(4326, 3857);
 
-            // Convert the feature to Spherical Mercator
-            projectionConverter.Open();
-            Feature sphericalMercatorFeature = projectionConverter.ConvertToExternalProjection(decimalDegreeFeature);
-            projectionConverter.Close();
+        // Convert the feature to Spherical Mercator
+        //projectionConverter.Open();
+        // Feature sphericalMercatorFeature = projectionConverter.ConvertToExternalProjection(decimalDegreeFeature);
+        //   projectionConverter.Close();
 
-            // Return the reprojected feature
-            return sphericalMercatorFeature;
-        }
-        private Collection<Feature> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
-        {
-            // Create a new ProjectionConverter to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
-            ProjectionConverter projectionConverter = new ProjectionConverter(4326, 3857);
+        // Return the reprojected feature
+        // return sphericalMercatorFeature;
+        //}
+        // private Collection<Feature> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
+        //{
+        // Create a new ProjectionConverter to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
+        //ProjectionConverter projectionConverter = new ProjectionConverter(4326, 3857);
 
-            // Convert the feature to Spherical Mercator
-            projectionConverter.Open();
-            Collection<Feature> sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
-            projectionConverter.Close();
+        // Convert the feature to Spherical Mercator
+        //projectionConverter.Open();
+        //Collection<Feature> sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
+        //projectionConverter.Close();
 
-            // Return the reprojected features
-            return sphericalMercatorFeatures;
-        }
+        // Return the reprojected features
+        //return sphericalMercatorFeatures;
+        //}
 
-        private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
-        {
-        //    // Get the layer we prepared from the MapView
-        //    InMemoryFeatureLayer reprojectedFeatureLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Reprojected Features Layer");
+       // private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
+        //{
+            //    // Get the layer we prepared from the MapView
+            //    InMemoryFeatureLayer reprojectedFeatureLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Reprojected Features Layer");
 
-        //    // Clear old features from the feature layer and add the newly reprojected features
-        //    reprojectedFeatureLayer.InternalFeatures.Clear();
-        //    foreach (Feature sphericalMercatorFeature in reprojectedFeatures)
-        //    {
-        //        reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
-        //    }
+            //    // Clear old features from the feature layer and add the newly reprojected features
+            //    reprojectedFeatureLayer.InternalFeatures.Clear();
+            //    foreach (Feature sphericalMercatorFeature in reprojectedFeatures)
+            //    {
+            //        reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
+            //    }
 
-        //    // Set the map extent to zoom into the feature and refresh the map
-        //    reprojectedFeatureLayer.Open();
-        //    mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
+            //    // Set the map extent to zoom into the feature and refresh the map
+            //    reprojectedFeatureLayer.Open();
+            //    mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
 
-        //    ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-        //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
+            //    ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
+            //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
 
-        //    reprojectedFeatureLayer.Close();
-        //    mapView.Refresh();
-        }
+            //    reprojectedFeatureLayer.Close();
+            //    mapView.Refresh();
+       // }
 
         private void ReprojectFeature_Click(object sender, EventArgs e)
         {

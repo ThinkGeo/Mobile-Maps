@@ -39,7 +39,7 @@
                         <Button Grid.Column="1" Grid.Row="1" x:Name="clipShape" Text="Clip" Clicked="ClipShape_OnClick"></Button>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

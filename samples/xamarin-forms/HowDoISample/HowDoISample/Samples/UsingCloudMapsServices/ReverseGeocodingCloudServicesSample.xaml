@@ -46,9 +46,11 @@
                         <Label Grid.Column="1" Grid.Row="5" FontSize="14">Categories:</Label>
                         <Picker Grid.Column="2" Grid.Row="5" x:Name="cboLocationCategories" SelectedIndexChanged="cboLocationType_SelectionChanged">
                             <Picker.ItemsSource>
-                                <x:String>All</x:String>
-                                <x:String>Common</x:String>
-                                <x:String>None</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>All</x:String>
+                                    <x:String>Common</x:String>
+                                    <x:String>None</x:String>
+                                </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
                         <Label Grid.Column="1"  Grid.Row="6" Grid.ColumnSpan="2" x:Name="txtLocationCategoriesDescription"></Label>
@@ -108,8 +110,8 @@
 -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

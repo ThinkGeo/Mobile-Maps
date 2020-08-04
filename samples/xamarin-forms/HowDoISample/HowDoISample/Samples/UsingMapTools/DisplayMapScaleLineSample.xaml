@@ -36,17 +36,21 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="ScaleBar Controls:" FontSize="16" FontAttributes="Bold"/>
-                        <Label Text="Display ScaleBar"></Label>
-                        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="displayScaleLine" IsChecked="True" CheckedChanged="DisplayScaleLine_Checked"></CheckBox>
+                        <Label Grid.Column="0" Grid.Row="0" Text="ScaleBar Controls:" FontAttributes="Bold"/>
+
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <CheckBox x:Name="displayScaleLine" IsChecked="True" CheckedChanged="DisplayScaleLine_Checked" VerticalOptions="Center"></CheckBox>
+                            <Label Text="Display ScaleBar" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
+                        </StackLayout>
+                           
+                        
 
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>

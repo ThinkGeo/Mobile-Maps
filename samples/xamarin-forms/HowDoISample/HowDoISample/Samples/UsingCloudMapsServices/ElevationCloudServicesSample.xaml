@@ -39,7 +39,7 @@
                         <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Elevation for a Shape"></Label>
                         <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="14">Interval Distance (m):</Label>
                         <Grid Grid.Column="1" Grid.Row="2">
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}"></Label>
                             <Slider Grid.Column="0" Grid.Row="0" x:Name="intervalDistance" Maximum="1000" Minimum="50" Value="100"></Slider>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>

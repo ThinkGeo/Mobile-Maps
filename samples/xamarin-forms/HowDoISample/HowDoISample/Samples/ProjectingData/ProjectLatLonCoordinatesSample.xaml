@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.Xamarin.HowDoI.ProjectLatLonCoordinatesSample"
-             Title="Setting the Projection of a Layer">
+             Title="Projecting Features">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
@@ -37,15 +37,13 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
 
-                        <Button Grid.Column="1" Grid.Row="1" Clicked="ReprojectFeature_Click" Text="Reproject and Display a Feature"></Button>
-                        <Editor Grid.Column="1" Grid.Row="2" x:Name="txtWKT" Text="POINT(-96.834516 33.150083)&#x0a;LINESTRING(-96.83559 33.149,-96.835866046134 33.1508413556856,-96.835793626491 33.1508974965687,-96.8336008970734 33.1511063402186,-96.83356 33.15109,-96.83328 33.14922)&#x0a;POLYGON((-96.83582 33.1508,-96.83578 33.15046,-96.83353 33.15068,-96.83358 33.15102,-96.83582 33.1508))"/>
-                        <Button  Grid.Column="1" Grid.Row="3" Clicked="ReprojectMultipleFeatures_Click" Text="Reproject and Display Multiple Features"></Button>
+                        <Button Grid.Column="0" Grid.Row="1" Clicked="ReprojectFeature_Click" Text="Reproject and Display a Feature"></Button>
+                        <Editor Grid.Column="0" Grid.Row="2" x:Name="txtWKT" Text="POINT(-96.834516 33.150083)&#x0a;LINESTRING(-96.83559 33.149,-96.835866046134 33.1508413556856,-96.835793626491 33.1508974965687,-96.8336008970734 33.1511063402186,-96.83356 33.15109,-96.83328 33.14922)&#x0a;POLYGON((-96.83582 33.1508,-96.83578 33.15046,-96.83353 33.15068,-96.83358 33.15102,-96.83582 33.1508))"/>
+                        <Button  Grid.Column="0" Grid.Row="3" Clicked="ReprojectMultipleFeatures_Click" Text="Reproject and Display Multiple Features"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

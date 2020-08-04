@@ -36,17 +36,19 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Geocode"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" FontSize="14">Search Text:</Label>
-                        <Entry Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" x:Name="txtSearchString" Text="6101 Frisco Square Blvd, Frisco, TX 75034"></Entry>
-                        <Label Grid.Column="1" Grid.Row="3" FontSize="14" Text="Maximum Results:"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="3" x:Name="txtMaxResults" Text="10"></Entry>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Geocode" VerticalOptions="Center"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontSize="14" VerticalOptions="Center">Search Text:</Label>
+                        <Entry Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" x:Name="txtSearchString" Text="6101 Frisco Square Blvd, Frisco, TX 75034" VerticalOptions="Center"></Entry>
+                        <Label Grid.Column="1" Grid.Row="3" FontSize="14" Text="Maximum Results:" VerticalOptions="Center"></Label>
+                        <Entry  Grid.Column="2" Grid.Row="3" x:Name="txtMaxResults" Text="10" VerticalOptions="Center"></Entry>
 
-                        <Label Grid.Column="1" Grid.Row="4" FontSize="14" Text="SearchType:"></Label>
-                        <Picker Grid.Column="2" Grid.Row="4" x:Name="cboSearchType" SelectedIndexChanged="cboSearchType_SelectionChanged">
+                        <Label Grid.Column="1" Grid.Row="4" FontSize="14" Text="SearchType:" VerticalOptions="Center"></Label>
+                        <Picker Grid.Column="2" Grid.Row="4" x:Name="cboSearchType" SelectedIndexChanged="cboSearchType_SelectionChanged" VerticalOptions="Center">
                             <Picker.ItemsSource>
-                                <x:String>Fuzzy</x:String>
-                                <x:String>Exact</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Fuzzy</x:String>
+                                    <x:String>Exact</x:String>
+                                </x:Array>
                             </Picker.ItemsSource>
 
                         </Picker>
@@ -55,13 +57,15 @@
                         <Label Grid.Column="1" Grid.Row="6" FontSize="14">LocationType:</Label>
                         <Picker Grid.Column="2" Grid.Row="6" x:Name="cboLocationType" SelectedIndexChanged="cboLocationType_SelectionChanged">
                             <Picker.ItemsSource>
-                                <x:String>Default</x:String>
-                                <x:String>Address</x:String>
-                                <x:String>Street</x:String>
-                                <x:String>City</x:String>
-                                <x:String>County</x:String>
-                                <x:String>Zipcode</x:String>
-                                <x:String>State</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Default</x:String>
+                                    <x:String>Address</x:String>
+                                    <x:String>Street</x:String>
+                                    <x:String>City</x:String>
+                                    <x:String>County</x:String>
+                                    <x:String>Zipcode</x:String>
+                                    <x:String>State</x:String>
+                                </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
                         <Label Grid.Column="1"  Grid.Row="7" Grid.ColumnSpan="2" x:Name="txtLocationTypeDescription"></Label>
@@ -87,8 +91,8 @@
 -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="5"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

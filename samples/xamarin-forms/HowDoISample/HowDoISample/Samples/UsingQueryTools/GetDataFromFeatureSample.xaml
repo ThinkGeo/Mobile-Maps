@@ -36,12 +36,11 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Click on a Park to View More Information"></Label>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Click on a Park to View More Information"></Label>
 
                         <!-- Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="240" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

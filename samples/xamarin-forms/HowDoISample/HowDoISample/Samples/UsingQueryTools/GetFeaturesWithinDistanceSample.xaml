@@ -36,11 +36,13 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
+                        
                         <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Features Within a Set Distance"></Label>
                         <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Draw A New Point"></Label>
                         <Label Grid.Column="1" Grid.Row="2" Text="Search Radius: (m)"/>
+                       
                         <Grid Grid.Column="1" Grid.Row="3">
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=searchRadius}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=searchRadius}" Text="{Binding Path=Value}"></Label>
                             <Slider Grid.Column="0" Grid.Row="0" x:Name="searchRadius" Maximum="1600" Minimum="100" Value="400"></Slider>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -55,7 +57,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>

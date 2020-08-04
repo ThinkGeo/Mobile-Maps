@@ -38,15 +38,18 @@
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="0" Text="Generate and Apply a New Color Group"></Label>
                         <Label FontSize="14">Category:</Label>
-                        <Picker Grid.Column="1" Grid.Row="1" x:Name="cboColorType" Width="150" SelectedIndexChanged="cboColorType_SelectedIndexChanged">
+                        <Picker Grid.Column="1" Grid.Row="1" x:Name="cboColorType" SelectedIndexChanged="cboColorType_SelectedIndexChanged">
                             <Picker.ItemsSource>
-                                <x:String>Hue</x:String>
-                                <x:String>Triad</x:String>
-                                <x:String>Tetrad</x:String>
-                                <x:String>Quality</x:String>
-                                <x:String>Analogous</x:String>
-                                <x:String>Contrasting</x:String>
-                                <x:String>Complementary</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Hue</x:String>
+                                    <x:String>Triad</x:String>
+                                    <x:String>Tetrad</x:String>
+                                    <x:String>Quality</x:String>
+                                    <x:String>Analogous</x:String>
+                                    <x:String>Contrasting</x:String>
+                                    <x:String>Complementary</x:String>
+                                </x:Array>
+
                             </Picker.ItemsSource>
                         </Picker>
                         <Label Grid.Column="1" Grid.Row="2" x:Name="txtColorCategoryDescription" Text="Get a family of colors with the same hue and sequential variances in lightness and saturation"></Label>
@@ -58,19 +61,22 @@
                         <RadioButton x:Name="rdoDefaultColor" Text="Default Color:" IsChecked="True" GroupName="SelectedColor"></RadioButton>
                         <Picker x:Name="cboDefaultColor">
                             <Picker.ItemsSource>
-                            <x:String>Red</x:String>
-                            <x:String>Orange</x:String>
-                            <x:String>Yellow</x:String>
-                            <x:String>Green</x:String>
-                            <x:String>Blue</x:String>
-                            <x:String>Purple</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Red</x:String>
+                                    <x:String>Orange</x:String>
+                                    <x:String>Yellow</x:String>
+                                    <x:String>Green</x:String>
+                                    <x:String>Blue</x:String>
+                                    <x:String>Purple</x:String>
+                                </x:Array>
+ 
                             </Picker.ItemsSource>
                         </Picker>
                         <Button Grid.Column="1" Grid.Row="6" Text="Generate" VerticalOptions="Start"  Clicked="GenerateColors_Click"></Button>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>

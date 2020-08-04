@@ -40,8 +40,8 @@
 
                         <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="Click on a feature to get it's length displayed in the TextBox below."></Label>
 
-                        <Label Grid.Column="1" Grid.Row="2" Text="Length: "></Label>
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="lengthResult" IsReadOnly="True"></Entry>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Length: "  VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="2" x:Name="lengthResult" IsReadOnly="True"  VerticalOptions="Center"></Entry>
 
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>

@@ -40,8 +40,8 @@
 
                         <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Click on a Park (green) on the map to get the shortest line to the Frisco Stadium (blue)."></Label>
 
-                        <Label Grid.Column="1" Grid.Row="2" Text="Distance: "></Label>
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="distanceResult" IsReadOnly="True"></Entry>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Distance: "  VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="2" x:Name="distanceResult" IsReadOnly="True"  VerticalOptions="Center"></Entry>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="90" />

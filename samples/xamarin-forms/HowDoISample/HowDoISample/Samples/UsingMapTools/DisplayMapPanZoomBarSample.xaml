@@ -36,15 +36,16 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="PanZoomBar Controls" FontSize="16" FontAttributes="Bold"/>
-                        <Label Text="Display PanZoomBar"></Label>
-                        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="DisplayPanZoomBar" IsChecked="True" CheckedChanged="DisplayPanZoomBar_Checked"></CheckBox>
+                        <Label Grid.Column="0" Grid.Row="0" Text="PanZoomBar Controls" FontSize="16" FontAttributes="Bold"/>
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <CheckBox x:Name="DisplayPanZoomBar" IsChecked="True" CheckedChanged="DisplayPanZoomBar_Checked" VerticalOptions="Center"></CheckBox>
+                            <Label Text="Display PanZoomBar" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
+                        </StackLayout>
 
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

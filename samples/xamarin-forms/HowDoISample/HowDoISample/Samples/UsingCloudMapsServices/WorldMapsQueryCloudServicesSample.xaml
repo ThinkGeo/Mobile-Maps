@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.WorldMapsQueryCloudServicesSample"
+             x:Class="ThinkGeo.UI.Xamarin.HowDoI.WorldMapsQueryCloudServicesSample"
              Title="World Maps Query">
     <ContentPage.Content>
         <StackLayout>
@@ -40,35 +40,40 @@
                         <Label Grid.Column="1" Grid.Row="1" FontSize="14">Query Layer:</Label>
                         <Picker Grid.Column="2" Grid.Row="1" x:Name="cboQueryLayer">
                             <Picker.ItemsSource>
-                                <x:String>Buildings</x:String>
-                                <x:String>Countries</x:String>
-                                <x:String>States</x:String>
-                                <x:String>Roads</x:String>
-                                <x:String>Rail</x:String>
-                                <x:String>Addresses</x:String>
-                                <x:String>Cities</x:String>
-                                <x:String>Land-Use</x:String>
-                                <x:String>Places</x:String>
-                                <x:String>POIs</x:String>
-                                <x:String>Transport</x:String>
-                                <x:String>Water</x:String>
-                                <x:String>Waterways</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Buildings</x:String>
+                                    <x:String>Countries</x:String>
+                                    <x:String>States</x:String>
+                                    <x:String>Roads</x:String>
+                                    <x:String>Rail</x:String>
+                                    <x:String>Addresses</x:String>
+                                    <x:String>Cities</x:String>
+                                    <x:String>Land-Use</x:String>
+                                    <x:String>Places</x:String>
+                                    <x:String>POIs</x:String>
+                                    <x:String>Transport</x:String>
+                                    <x:String>Water</x:String>
+                                    <x:String>Waterways</x:String>
+                                </x:Array>
+                           
                             </Picker.ItemsSource>
                         </Picker>
                         <Label Grid.Column="1" Grid.Row="2" FontSize="14">Query Type:</Label>
                         <Picker Grid.Column="2" Grid.Row="2" x:Name="cboQueryType">
                             <Picker.ItemsSource>
-                                <x:String>Containing</x:String>
-                                <x:String>Nearest</x:String>
-                                <x:String >Intersecting</x:String>
-                                <x:String>Overlapping</x:String>
-                                <x:String>Within</x:String>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Containing</x:String>
+                                    <x:String>Nearest</x:String>
+                                    <x:String >Intersecting</x:String>
+                                    <x:String>Overlapping</x:String>
+                                    <x:String>Within</x:String>
+                                </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
 
                         <Label Grid.Column="1" Grid.Row="3" Text="Maximum Results:"/>
                         <Grid Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2">
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=maxResults}" Text="{Binding Path=Value}" Width="40"></Label>
+                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=maxResults}" Text="{Binding Path=Value}"></Label>
                             <Slider Grid.Column="0" Grid.Row="0" x:Name="maxResults" Maximum="1000" Minimum="10" Value="100"></Slider>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -86,8 +91,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

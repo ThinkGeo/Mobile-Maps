@@ -42,7 +42,7 @@
                         <RadioButton Grid.Column="1" Grid.Row="2" x:Name="rdoCheckIfPointsAreTouchingLineEndpoints" CheckedChanged="CheckIfPointsAreTouchingLineEndpoints" Text="Points Must Be Touching Line Endpoints"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckIfPointsAreTouchingPolygonBoundaries" CheckedChanged="CheckIfPointsAreTouchingPolygonBoundaries" Text="Points Must Be Touching Polygon Boundaries"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckIfPointsAreWithinPolygons" CheckedChanged="CheckIfPointsAreWithinPolygons" Text="Points Must Be Within Polygons"></RadioButton>
-                        <Entry Grid.Column="1" Grid.Row="5" x:Name="txtValidationInfo"></Entry>
+                        <Label Grid.Column="1" Grid.Row="5" x:Name="txtValidationInfo"></Label>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />

@@ -350,8 +350,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Clear the previously displayed features from the map, and add new features
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures, Collection<Feature> filterFeatures = null)
-        {
+        //private void ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures, Collection<Feature> filterFeatures = null)
+        //{
             //// Get the InMemoryFeatureLayers from the MapView
             //InMemoryFeatureLayer validatedFeaturesLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Validated Features");
             //InMemoryFeatureLayer filterFeaturesLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Filter Features");
@@ -396,6 +396,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //validatedFeaturesLayer.Close();
             //filterFeaturesLayer.Close();
             //resultFeaturesLayer.Close();
-        }
+        //}
     }
 }

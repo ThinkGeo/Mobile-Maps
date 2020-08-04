@@ -364,13 +364,13 @@
     "title": "Projecting Data",
     "children": [
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.ProjectingData.SetLayerProjectionSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.SetLayerProjectionSample",
         "title": "Setting the Projection of a Layer",
         "description": "Learn how to automatically reproject a layer using the ProjectionConverter class",
         "source": "Samples/ProjectingData/SetLayerProjectionSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.ProjectingData.ProjectLatLonCoordinatesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ProjectLatLonCoordinatesSample",
         "title": "Projecting Features",
         "description": "Learn how to reproject features using the ProjectionConverter class",
         "source": "Samples/ProjectingData/ProjectLatLonCoordinatesSample"
@@ -476,67 +476,67 @@
     "title": "Using Query Tools",
     "children": [
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.ContainsSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ContainsSample",
         "title": "Check if Feature Contains",
         "description": "Learn how to use layer query tools to find which features in a layer contain a shape",
         "source": "Samples/UsingQueryTools/ContainsSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.CrossesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.CrossesSample",
         "title": "Check if Feature Crosses",
         "description": "Learn how to use layer query tools to find which features in a layer a shape crosses",
         "source": "Samples/UsingQueryTools/CrossesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.DisjointSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.DisjointSample",
         "title": "Check if Features are Disjoint",
         "description": "Learn how to use layer query tools to find which features in a layer are disjoint from a shape",
         "source": "Samples/UsingQueryTools/DisjointSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.EqualsSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.EqualsSample",
         "title": "Check if Features are Equal",
         "description": "Learn how to use layer query tools to find which features in a layer are topologically equal to a shape",
         "source": "Samples/UsingQueryTools/EqualsSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.IntersectsSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.IntersectsSample",
         "title": "Check if Feature Intersects",
         "description": "Learn how to use layer query tools to find which features in a layer intersect a shape",
         "source": "Samples/UsingQueryTools/IntersectsSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.OverlapsSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.OverlapsSample",
         "title": "Check if Feature Overlaps",
         "description": "Learn how to use layer query tools to find which features in a layer overlap a shape",
         "source": "Samples/UsingQueryTools/OverlapsSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.TouchesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.TouchesSample",
         "title": "Check if Feature Touches",
         "description": "Learn how to use layer query tools to find which features in a layer are touching a shape",
         "source": "Samples/UsingQueryTools/TouchesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.WithinSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.WithinSample",
         "title": "Check if Feature is Within Another Feature",
         "description": "Learn how to use layer query tools to find which features in a layer are within a shape",
         "source": "Samples/UsingQueryTools/WithinSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.GetFeaturesWithinDistanceSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.GetFeaturesWithinDistanceSample",
         "title": "Get Features Within a Distance",
         "description": "Learn how to use layer query tools to find features in a layer within a given distance of a point",
         "source": "Samples/UsingQueryTools/GetFeaturesWithinDistanceSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.GetAllFeatureDataSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.GetAllFeatureDataSample",
         "title": "Get Data from All Features",
         "description": "Learn how to get data from all features in a ShapeFile",
         "source": "Samples/UsingQueryTools/GetAllFeatureDataSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingQueryTools.GetDataFromFeatureSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.GetDataFromFeatureSample",
         "title": "Get Data from One Feature",
         "description": "Learn how to get data from a feature in a ShapeFile",
         "source": "Samples/UsingQueryTools/GetDataFromFeatureSample"
@@ -547,19 +547,19 @@
     "title": "Topological Validation",
     "children": [
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.TopologicalValidation.PointValidationSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.PointValidationSample",
         "title": "Validate Point Topology",
         "description": "Learn how to use the TopologyValidator APIs to perform validation on points",
         "source": "Samples/TopologicalValidation/PointValidationSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.TopologicalValidation.LineValidationSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.LineValidationSample",
         "title": "Validate Line Topology",
         "description": "Learn how to use the TopologyValidator APIs to perform validation on lines",
         "source": "Samples/TopologicalValidation/LineValidationSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.TopologicalValidation.PolygonValidationSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.PolygonValidationSample",
         "title": "Validate Polygon Topology",
         "description": "Learn how to use the TopologyValidator APIs to perform validation on polygons",
         "source": "Samples/TopologicalValidation/PolygonValidationSample"
@@ -570,61 +570,61 @@
     "title": "Using Cloud Maps Services",
     "children": [
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.RoutingCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.RoutingCloudServicesSample",
         "title": "Routing",
         "description": "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.RoutingServiceAreaCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.RoutingServiceAreaCloudServicesSample",
         "title": "Routing - Service Area",
         "description": "Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.RoutingTSPCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.RoutingTSPCloudServicesSample",
         "title": "Routing - Traveling Sales Person",
         "description": "Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.ElevationCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ElevationCloudServicesSample",
         "title": "Elevation",
         "description": "Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ElevationCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.GeocodingCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.GeocodingCloudServicesSample",
         "title": "Geocoding",
         "description": "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/GeocodingCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.ReverseGeocodingCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ReverseGeocodingCloudServicesSample",
         "title": "Reverse Geocoding",
         "description": "Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ReverseGeocodingCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.ColorUtilitiesCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ColorUtilitiesCloudServicesSample",
         "title": "Color Utilities",
         "description": "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ColorUtilitiesCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.TimezoneCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.TimezoneCloudServicesSample",
         "title": "Timezone",
         "description": "Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/TimezoneCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.ProjectionCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.ProjectionCloudServicesSample",
         "title": "Projection",
         "description": "Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ProjectionCloudServicesSample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingCloudMapsServices.WorldMapsQueryCloudServicesSample",
+        "id": "ThinkGeo.UI.Xamarin.HowDoI.WorldMapsQueryCloudServicesSample",
         "title": "World Maps Query",
         "description": "Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/WorldMapsQueryCloudServicesSample"

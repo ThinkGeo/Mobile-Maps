@@ -47,11 +47,10 @@
                         <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckIfPolygonsHaveGaps" CheckedChanged="CheckIfPolygonsHaveGaps" Text="Union of Polygons Must Not Have Gaps"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckPolygonsMustNotOverlap" CheckedChanged="CheckPolygonsMustNotOverlap" Text="Polygons Must Not Overlap"></RadioButton>
                         <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckPolygonsMustNotOverlapPolygons" CheckedChanged="CheckPolygonsMustNotOverlapPolygons" Text="Polygons Must Not Overlap Other Polygons"></RadioButton>
-                        <Entry Grid.Column="1" Grid.Row="10" x:Name="txtValidationInfo"></Entry>
+                        <Label Grid.Column="1" Grid.Row="10" x:Name="txtValidationInfo"></Label>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>

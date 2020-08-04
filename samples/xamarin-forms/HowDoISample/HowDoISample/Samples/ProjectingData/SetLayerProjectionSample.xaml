@@ -5,55 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.Xamarin.HowDoI.SetLayerProjectionSample"
-             Title="Projecting Features">
+             Title="Setting the Projection of a Layer">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
-                <!-- Sample Description -->
-                <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn how to reproject features using the ProjectionConverter class"
-                               FontSize="Subtitle"
-                               VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180"/>
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </Expander.Header>
 
-                <!-- Sample Controls -->
-                <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </Expander.Content>
-            </Expander>
+            <Frame HasShadow="False">
+                <Label Text="Learn how to reproject features using the ProjectionConverter class"
+                       FontSize="Subtitle"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+            </Frame>
 
             <!-- Map Control -->
             <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
