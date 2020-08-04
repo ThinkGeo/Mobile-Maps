@@ -43,9 +43,7 @@
                         <RadioButton Grid.Column="1" Grid.Row="3" x:Name="copyMode" Text="Copy Mode (with Shift key)" Clicked="CopyMode_OnClick"></RadioButton>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

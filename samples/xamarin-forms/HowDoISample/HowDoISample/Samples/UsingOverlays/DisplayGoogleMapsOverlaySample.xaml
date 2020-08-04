@@ -54,10 +54,7 @@
                         <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="displayGoogleMaps" Text="Update" Clicked="DisplayGoogleMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="90" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

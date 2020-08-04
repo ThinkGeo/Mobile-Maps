@@ -40,9 +40,8 @@
                         <Button Grid.Column="1" Grid.Row="1" x:Name="printMap" Text="Print Map" Clicked="PrintMap_OnClick"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

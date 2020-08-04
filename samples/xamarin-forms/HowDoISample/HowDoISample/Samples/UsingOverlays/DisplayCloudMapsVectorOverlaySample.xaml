@@ -52,10 +52,10 @@
                         <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="displayVectorCloudMaps" Text="Update" Clicked="DisplayVectorCloudMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="90" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

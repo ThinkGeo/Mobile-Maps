@@ -8,44 +8,14 @@
              Title="Display a WMS Overlay">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
-                <!-- Sample Description -->
-                <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load." 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180"/>
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </Expander.Header>
+          
+            <Frame HasShadow="False">
+                <Label Text="Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load." 
+                       FontSize="Subtitle" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="StartAndExpand"/>
 
-                <!-- Sample Controls -->
-                <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <!-- Grid Layout -->
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </Expander.Content>
-            </Expander>
+            </Frame>
 
             <!-- Map Control -->
             <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>

@@ -11,7 +11,7 @@
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
+                    <StackLayout Orientation="Horizontal" Padding="4">
                         <Label Text="Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times. Saved tile images can be found in the cache folder within this project's debug folder." 
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
@@ -37,16 +37,16 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Text="Tile Cache Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
-                        <Label Text="Use Tile Cache"></Label>
-                        <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked" Grid.Column="1" Grid.Row="1"></CheckBox>
+                        <Label Text="Tile Cache Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="Use Tile Cache"  Grid.Column="0" Grid.Row="1"></Label>
+                        <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked" Grid.Column="0" Grid.Row="2"></CheckBox>
                         
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>

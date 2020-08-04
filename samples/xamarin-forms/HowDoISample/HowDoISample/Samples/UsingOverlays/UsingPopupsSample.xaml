@@ -8,37 +8,15 @@
              Title="Using Popups">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
-                <!-- Sample Description -->
-                <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn to add, edit, or remove popups on the map using the PopupOverlay." 
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180"/>
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </Expander.Header>
+            <!-- Sample Controls -->
 
-                <!-- Sample Controls -->
-                <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                    </Grid>
-                </Expander.Content>
-            </Expander>
+            <Frame>
+                <Label Text="Learn to add, edit, or remove popups on the map using the PopupOverlay." 
+                       FontSize="Subtitle" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="StartAndExpand"/>
+
+            </Frame>
 
             <!-- Map Control -->
             <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>

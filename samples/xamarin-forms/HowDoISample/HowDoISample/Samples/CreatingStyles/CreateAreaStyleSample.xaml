@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
-            <Frame>
+            <Frame HasShadow="False">
                 <Label Text="Learn how to style polygon data using an AreaStyle"
                        FontSize="Subtitle"
                        VerticalOptions="Center"

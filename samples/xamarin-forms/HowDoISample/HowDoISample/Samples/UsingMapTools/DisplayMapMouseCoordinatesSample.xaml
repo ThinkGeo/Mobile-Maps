@@ -36,24 +36,31 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Mouse Coordinates Controls:" FontSize="16" FontAttributes="Bold"/>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Mouse Coordinates Controls:" FontSize="16" FontAttributes="Bold"/>
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <CheckBox x:Name="displayMouseCoordinates" BindingContext="Display Mouse Coordinates" IsChecked="True" CheckedChanged="DisplayMouseCoordinates_Checked" VerticalOptions="Center"></CheckBox>
+                            <Label Text="Display Mouse Coordinates" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        </StackLayout>
 
-                        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="displayMouseCoordinates" BindingContext="Display Mouse Coordinates" IsChecked="True" CheckedChanged="DisplayMouseCoordinates_Checked"></CheckBox>
-
-                        <Picker Grid.Column="1" Grid.Row="2" x:Name="coordinateType" SelectedIndexChanged="CoordinateType_SelectionChanged">
-                            <Picker.ItemsSource>
-                                <x:String>(lat), (lon)</x:String>
-                                <x:String>(lon), (lat)</x:String>
-                                <x:String>(degrees), (minutes), (seconds)</x:String>
-                                <x:String>(custom)</x:String>
-                            </Picker.ItemsSource>
-                        </Picker>
+                        <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                            <Label Text="Select Coordinate Type:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            <Picker x:Name="coordinateType" SelectedIndexChanged="CoordinateType_SelectionChanged" HorizontalOptions="FillAndExpand"  VerticalOptions="Center">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>(lat), (lon)</x:String>
+                                        <x:String>(lon), (lat)</x:String>
+                                        <x:String>(degrees), (minutes), (seconds)</x:String>
+                                        <x:String>(custom)</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                       
+                        </StackLayout>
+ 
 
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
