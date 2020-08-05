@@ -37,10 +37,14 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="0" Grid.Row="0" Text="LayerOverlay Controls:" FontAttributes="Bold" FontSize="16"/>
-                        <Label Text="Show POI Group" Grid.Column="1" Grid.Row="1"></Label>
-                        <Label Text="Show Landuse Group" Grid.Column="1" Grid.Row="2"></Label>
-                        <CheckBox Grid.Column="0" Grid.Row="1" x:Name="ShowPoi" CheckedChanged="ShowPoiGroup_Checked"></CheckBox>
-                        <CheckBox Grid.Column="0" Grid.Row="2" x:Name="ShowLandUse"  CheckedChanged="ShowLanduseGroup_Checked"></CheckBox>
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <CheckBox x:Name="ShowPoi" CheckedChanged="ShowPoiGroup_Checked" VerticalOptions="Center"></CheckBox>
+                            <Label Text="Show POI Group" VerticalOptions="Center"></Label>
+                        </StackLayout>
+                        <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                            <CheckBox x:Name="ShowLandUse"  CheckedChanged="ShowLanduseGroup_Checked" VerticalOptions="Center"></CheckBox>
+                            <Label Text="Show Landuse Group" VerticalOptions="Center"></Label>
+                        </StackLayout>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

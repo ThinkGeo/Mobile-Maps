@@ -54,12 +54,12 @@
                         </Picker>
                         <Label Grid.Column="1" Grid.Row="2" x:Name="txtColorCategoryDescription" Text="Get a family of colors with the same hue and sequential variances in lightness and saturation"></Label>
                         <Label Grid.Column="1" Grid.Row="4">Base Color:</Label>
-                        <RadioButton x:Name="rdoRandomColor" GroupName="SelectedColor" Text="Random Color"></RadioButton>
-                        <RadioButton x:Name="rdoSpecificColor"  Text="Specific Color:" GroupName="SelectedColor"></RadioButton>
-                        <Entry x:Name="txtSpecificColor" Text="#AB2567"></Entry>
+                        <RadioButton x:Name="rdoRandomColor" Grid.Column="1" Grid.Row="5" GroupName="SelectedColor" Text="Random Color"></RadioButton>
+                        <RadioButton x:Name="rdoSpecificColor"  Text="Specific Color:" Grid.Column="1" Grid.Row="6"  GroupName="SelectedColor"></RadioButton>
+                        <Entry x:Name="txtSpecificColor" Text="#AB2567" Grid.Column="1" Grid.Row="7" ></Entry>
 
-                        <RadioButton x:Name="rdoDefaultColor" Text="Default Color:" IsChecked="True" GroupName="SelectedColor"></RadioButton>
-                        <Picker x:Name="cboDefaultColor">
+                        <RadioButton x:Name="rdoDefaultColor" Grid.Column="1" Grid.Row="8"  Text="Default Color:" IsChecked="True" GroupName="SelectedColor"></RadioButton>
+                        <Picker x:Name="cboDefaultColor" Grid.Column="1" Grid.Row="9" >
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Red</x:String>
@@ -72,7 +72,7 @@
  
                             </Picker.ItemsSource>
                         </Picker>
-                        <Button Grid.Column="1" Grid.Row="6" Text="Generate" VerticalOptions="Start"  Clicked="GenerateColors_Click"></Button>
+                        <Button Grid.Column="1" Grid.Row="10" Text="Generate" VerticalOptions="Start"  Clicked="GenerateColors_Click"></Button>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -85,6 +85,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="15"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

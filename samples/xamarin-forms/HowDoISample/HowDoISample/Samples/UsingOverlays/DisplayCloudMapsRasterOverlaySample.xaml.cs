@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ThinkGeo.Core;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,6 +43,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //mapView.Overlays.Add(thinkGeoCloudRasterMapsOverlay);
             //mapView.Refresh();
         }
-
+        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
     }
 }

@@ -38,9 +38,10 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Text="Tile Cache Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
-                        <Label Text="Use Tile Cache"  Grid.Column="0" Grid.Row="1"></Label>
-                        <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked" Grid.Column="0" Grid.Row="2"></CheckBox>
-                        
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                            <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked"></CheckBox>
+                            <Label Text="Use Tile Cache" VerticalOptions="Center" ></Label>
+                        </StackLayout>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />

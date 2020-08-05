@@ -48,8 +48,8 @@
                         <Label Grid.Column="1" Grid.Row="2" Text="API Key:"></Label>
                         <Entry Grid.Column="2" Grid.Row="2" x:Name="googleApiKey"></Entry>
 
-                        <Label Grid.Column="1" Grid.Row="3" Text="Secret:"></Label>
-                        <Entry Grid.Column="2" Grid.Row="3" x:Name="googleSigningSecret"></Entry>
+                        <Label Grid.Column="1" Grid.Row="3" Text="Secret:" VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="3" x:Name="googleSigningSecret" VerticalOptions="Center"></Entry>
 
                         <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="displayGoogleMaps" Text="Update" Clicked="DisplayGoogleMaps_Click"></Button>
 

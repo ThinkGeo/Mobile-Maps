@@ -37,10 +37,11 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Rotate Shape Controls:" FontSize="16"/>
+                        <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                            <Label  Text="Rotation Degree: " VerticalOptions="Center"></Label>
+                            <Entry x:Name="rotateDegree" Text="90"></Entry>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="Rotation Degree: "></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="rotateDegree" Text="90"></Entry>
-
+                        </StackLayout>
                         <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="rotateShape" Text="Rotate" Clicked="RotateShape_OnClick"></Button>
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>

@@ -10,7 +10,7 @@
         <StackLayout>
             <!-- Sample Controls -->
 
-            <Frame>
+            <Frame HasShadow="False">
                 <Label Text="Learn to add, edit, or remove popups on the map using the PopupOverlay." 
                        FontSize="Subtitle" 
                        VerticalOptions="Center" 
