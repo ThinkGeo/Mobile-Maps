@@ -17,9 +17,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             InitializeComponent();
         }
 
-        /// <summary>
-        /// ...
-        /// </summary>
+        ///// <summary>
+        ///// Learn how to set the map extent using a variety of different methods.
+        ///// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Set the map's unit of measurement to meters(Spherical Mercator)
@@ -54,25 +54,25 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //featureIds.SelectedIndex = 0;
         }
 
-        /// <summary>
-        /// Zoom to a scale programmatically. Note that the scales are bound by a ZoomLevelSet.
-        /// </summary>
+        ///// <summary>
+        ///// Zoom to a scale programmatically. Note that the scales are bound by a ZoomLevelSet.
+        ///// </summary>
         private void ZoomToScale_Click(object sender, EventArgs e)
         {
             //mapView.ZoomToScale(Convert.ToDouble(zoomScale.Text));
         }
-        /// <summary>
-        /// Set the map extent to fix a layer's bounding box
-        /// </summary>
+        ///// <summary>
+        ///// Set the map extent to fix a layer's bounding box
+        ///// </summary>
         private void LayerBoundingBox_Click(object sender, EventArgs e)
         {
             //mapView.CurrentExtent = friscoCityBoundary.GetBoundingBox();
             //mapView.Refresh();
         }
 
-        /// <summary>
-        /// Set the map extent to fix a feature's bounding box
-        /// </summary>
+        ///// <summary>
+        ///// Set the map extent to fix a feature's bounding box
+        ///// </summary>
         private void FeatureBoundingBox_Click(object sender, EventArgs e)
         {
             //var feature = friscoCityBoundary.FeatureSource.GetFeatureById(featureIds.SelectedItem.ToString(), ReturningColumnsType.NoColumns);
@@ -80,9 +80,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //mapView.Refresh();
         }
 
-        /// <summary>
-        /// Zoom to a lat/lon at a desired scale by converting the lat/lon to match the map's projection
-        /// </summary>
+        ///// <summary>
+        ///// Zoom to a lat/lon at a desired scale by converting the lat/lon to match the map's projection
+        ///// </summary>
         private void ZoomToLatLon_Click(object sender, EventArgs e)
         {
             //// Create a PointShape from the lat-lon
