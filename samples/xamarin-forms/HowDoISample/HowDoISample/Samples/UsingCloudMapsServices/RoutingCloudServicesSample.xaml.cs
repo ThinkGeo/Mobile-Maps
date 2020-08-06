@@ -23,7 +23,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
@@ -69,14 +69,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Set options and perform routing using the RoutingCloudClient through a preset set of waypoints
         /// </summary>
-       // private async Task<CloudRoutingGetRouteResult> GetRoute(Collection<PointShape> waypoints)
+        // private async Task<CloudRoutingGetRouteResult> GetRoute(Collection<PointShape> waypoints)
         //{
-            //// Set up options for the routing request
-            //// Enable turn-by-turn so we get turn by turn instructions
-            //CloudRoutingGetRouteOptions options = new CloudRoutingGetRouteOptions();
-            //options.TurnByTurn = true;
+        //// Set up options for the routing request
+        //// Enable turn-by-turn so we get turn by turn instructions
+        //CloudRoutingGetRouteOptions options = new CloudRoutingGetRouteOptions();
+        //options.TurnByTurn = true;
 
-            //return await routingCloudClient.GetRouteAsync(waypoints, 3857, options);
+        //return await routingCloudClient.GetRouteAsync(waypoints, 3857, options);
         //}
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
-            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
@@ -86,24 +86,24 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         //private async Task<CloudRoutingOptimizationResult> GetOptimizedRoute()
         //{
-            //// Set up options for the TSP routing request
-            //CloudRoutingOptimizationOptions options = new CloudRoutingOptimizationOptions();
+        //// Set up options for the TSP routing request
+        //CloudRoutingOptimizationOptions options = new CloudRoutingOptimizationOptions();
 
-            //// Enable turn-by-turn so we get turn by turn instructions
-            //options.TurnByTurn = true;
+        //// Enable turn-by-turn so we get turn by turn instructions
+        //options.TurnByTurn = true;
 
-            //// A specific starting and ending location can be specified, if desired. 
-            //// For this example, any point can be used as the start and end
-            //options.Destination = CloudRoutingTspFixDestinationCoordinate.Any;
-            //options.Source = CloudRoutingTspFixSourceCoordinate.Any;
+        //// A specific starting and ending location can be specified, if desired. 
+        //// For this example, any point can be used as the start and end
+        //options.Destination = CloudRoutingTspFixDestinationCoordinate.Any;
+        //options.Source = CloudRoutingTspFixSourceCoordinate.Any;
 
-            //// The 'roundtrip' option specifies whether the route returns to the starting point or not
-            //options.Roundtrip = true;
+        //// The 'roundtrip' option specifies whether the route returns to the starting point or not
+        //options.Roundtrip = true;
 
-            //// Send the TSP routing request
-            //CloudRoutingOptimizationResult optimizedRoutingResult = await routingCloudClient.GetOptimizedRouteAsync(routingWaypoints, 3857, options);
+        //// Send the TSP routing request
+        //CloudRoutingOptimizationResult optimizedRoutingResult = await routingCloudClient.GetOptimizedRouteAsync(routingWaypoints, 3857, options);
 
-            //return optimizedRoutingResult;
+        //return optimizedRoutingResult;
         //}
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Interaction logic for ShapefileLayer.xaml
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {

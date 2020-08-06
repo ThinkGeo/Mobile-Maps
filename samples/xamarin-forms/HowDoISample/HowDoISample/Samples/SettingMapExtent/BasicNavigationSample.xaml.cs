@@ -28,16 +28,16 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
-
+            
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
         private void ZoomIn_Click(object sender, EventArgs e)
         {
-            //mapView.ZoomIn();
+            //mapView.ZoomToNextExtent();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void PanArrow_Click(object sender, EventArgs e)
         {
             //var percentage = (int)panPercentage.Value;
-            //switch (((Button)sender).Name)
+            //switch (((ImageButton)sender).AutomationId)
             //{
             //    case "panNorth":
             //        mapView.Pan(PanDirection.Up, percentage);
@@ -80,7 +80,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void Rotate_Click(object sender, EventArgs e)
         {
             //mapView.RotatedAngle = (float)rotateAngle.Value;
-            //mapView.Refresh();
+           // mapView.Refresh();
         }
 
     }

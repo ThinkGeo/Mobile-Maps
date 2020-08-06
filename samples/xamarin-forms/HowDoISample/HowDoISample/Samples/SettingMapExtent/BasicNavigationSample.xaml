@@ -57,13 +57,13 @@
                             <Label Grid.Column="1" Grid.Row="2" Text="Panning:" FontSize="16" FontAttributes="Bold"></Label>
                             <Grid Grid.Column="1" Grid.Row="3" x:Name="panButtonGrid">
 
-                                <ImageButton x:Name="panNorth" Source="North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton AutomationId="panNorth" Source="North.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="0" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panWest" Source="West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton AutomationId="panWest" Source="West.gif" Clicked="PanArrow_Click" Grid.Column="1" Grid.Row="1" Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panEast" Source="East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton AutomationId="panEast" Source="East.gif" Clicked="PanArrow_Click" Grid.Column="3" Grid.Row="1"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
-                                <ImageButton x:Name="panSouth" Source="South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
+                                <ImageButton AutomationId="panSouth" Source="South.gif" Clicked="PanArrow_Click" Grid.Column="2" Grid.Row="2"  Padding="2" Margin="0" HeightRequest="24" WidthRequest="24">
                                 </ImageButton>
 
                                 <!-- Pan Button Grid Layout -->

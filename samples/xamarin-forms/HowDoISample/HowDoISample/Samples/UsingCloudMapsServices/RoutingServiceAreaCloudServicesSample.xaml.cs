@@ -24,7 +24,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
@@ -78,20 +78,20 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Get the service area from a given point on the map
         /// </summary>
-       // private async Task<CloudRoutingGetServiceAreaResult> GetServiceArea(PointShape centerpoint)
+        // private async Task<CloudRoutingGetServiceAreaResult> GetServiceArea(PointShape centerpoint)
         //{
-            //// Set options for the service area request
-            //// We can control options like Travel Direction and Contour Granularity
-            //CloudRoutingGetServiceAreaOptions options = new CloudRoutingGetServiceAreaOptions();
-            //options.DistanceUnit = DistanceUnit.Meter;
+        //// Set options for the service area request
+        //// We can control options like Travel Direction and Contour Granularity
+        //CloudRoutingGetServiceAreaOptions options = new CloudRoutingGetServiceAreaOptions();
+        //options.DistanceUnit = DistanceUnit.Meter;
 
-            //// Set the srid for the query to 3857 (Spherical Mercator)
-            //int srid = 3857;
+        //// Set the srid for the query to 3857 (Spherical Mercator)
+        //int srid = 3857;
 
-            //// Run the service area query
-            //// Pass in the service area intervals. These will be used as the service areas for the query (15, 30, 45 60 minutes)
-            //CloudRoutingGetServiceAreaResult getServiceAreaResult = await routingCloudClient.GetServiceAreaAsync(centerpoint, srid, serviceAreaIntervals, options);
-            //return getServiceAreaResult;
+        //// Run the service area query
+        //// Pass in the service area intervals. These will be used as the service areas for the query (15, 30, 45 60 minutes)
+        //CloudRoutingGetServiceAreaResult getServiceAreaResult = await routingCloudClient.GetServiceAreaAsync(centerpoint, srid, serviceAreaIntervals, options);
+        //return getServiceAreaResult;
         //}
 
         /// <summary>

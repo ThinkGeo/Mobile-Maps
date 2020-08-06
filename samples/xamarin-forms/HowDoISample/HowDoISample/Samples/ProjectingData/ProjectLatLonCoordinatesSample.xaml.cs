@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void MapView_Loaded(object sender, EventArgs e)
         {
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service
-            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
@@ -75,28 +75,28 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         //return sphericalMercatorFeatures;
         //}
 
-       // private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
+        // private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
         //{
-            //    // Get the layer we prepared from the MapView
-            //    InMemoryFeatureLayer reprojectedFeatureLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Reprojected Features Layer");
+        //    // Get the layer we prepared from the MapView
+        //    InMemoryFeatureLayer reprojectedFeatureLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Reprojected Features Layer");
 
-            //    // Clear old features from the feature layer and add the newly reprojected features
-            //    reprojectedFeatureLayer.InternalFeatures.Clear();
-            //    foreach (Feature sphericalMercatorFeature in reprojectedFeatures)
-            //    {
-            //        reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
-            //    }
+        //    // Clear old features from the feature layer and add the newly reprojected features
+        //    reprojectedFeatureLayer.InternalFeatures.Clear();
+        //    foreach (Feature sphericalMercatorFeature in reprojectedFeatures)
+        //    {
+        //        reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
+        //    }
 
-            //    // Set the map extent to zoom into the feature and refresh the map
-            //    reprojectedFeatureLayer.Open();
-            //    mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
+        //    // Set the map extent to zoom into the feature and refresh the map
+        //    reprojectedFeatureLayer.Open();
+        //    mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
 
-            //    ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-            //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
+        //    ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
+        //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
 
-            //    reprojectedFeatureLayer.Close();
-            //    mapView.Refresh();
-       // }
+        //    reprojectedFeatureLayer.Close();
+        //    mapView.Refresh();
+        // }
 
         private void ReprojectFeature_Click(object sender, EventArgs e)
         {
