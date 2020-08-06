@@ -11,16 +11,16 @@
         <Frame BackgroundColor="Black">
             <Image Source="thinkgeo_logo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
         </Frame>
-        
+
         <!-- Sample Search Bar -->
         <SearchBar  HorizontalOptions="StartAndExpand" Placeholder="Find Samples (WIP)" />
-        
+
         <!-- Sample Menu -->
         <ListView x:Name="ListViewMenu"
                   IsGroupingEnabled="True"
                   GroupDisplayBinding="{Binding Title}"
                   ItemSelected="ListViewMenu_ItemSelected">
-            
+
             <!-- Sample Category -->
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>

@@ -5,6 +5,7 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:ThinkGeo.UI.Xamarin.HowDoI"
+            xmlns:samples="clr-namespace:ThinkGeo.UI.Xamarin.HowDoI"
             x:Class="ThinkGeo.UI.Xamarin.HowDoI.MainPage">
 
     <MasterDetailPage.Master>
@@ -14,7 +15,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <views:SampleTemplate />
+                <samples:BasicNavigationSample />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
