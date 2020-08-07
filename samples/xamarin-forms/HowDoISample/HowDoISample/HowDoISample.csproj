@@ -21,7 +21,16 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta151" />
+    <PackageReference Include="ThinkGeo.FileGeoDatabase" Version="13.0.0-beta144" />
+    <PackageReference Include="ThinkGeo.MrSid" Version="13.0.0-beta142" />
+    <PackageReference Include="ThinkGeo.NauticalCharts" Version="13.0.0-beta145" />
+    <PackageReference Include="ThinkGeo.Oracle" Version="13.0.0-beta146" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.0.0-beta140" />
+    <PackageReference Include="ThinkGeo.Printers" Version="13.0.0-beta140" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="13.0.0-beta139" />
     <PackageReference Include="ThinkGeo.UI.Forms" Version="13.0.0-beta002" />
+    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="13.0.0-beta143" />
+    <PackageReference Include="ThinkGeo.UnmanagedProj" Version="13.0.0-beta141" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>

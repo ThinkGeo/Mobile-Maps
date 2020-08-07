@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,39 +23,39 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add Cloud Maps as a background overlay
-            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            // Add Cloud Maps as a background overlay
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            //ShapeFileFeatureLayer friscoTrails = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Hike_Bike.shp");
-            //InMemoryFeatureLayer selectedLineLayer = new InMemoryFeatureLayer();
-            //LayerOverlay layerOverlay = new LayerOverlay();
+            ShapeFileFeatureLayer friscoTrails = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Hike_Bike.shp");
+            InMemoryFeatureLayer selectedLineLayer = new InMemoryFeatureLayer();
+            LayerOverlay layerOverlay = new LayerOverlay();
 
-            //// Project friscoTrails layer to Spherical Mercator to match the map projection
-            //friscoTrails.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project friscoTrails layer to Spherical Mercator to match the map projection
+            friscoTrails.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Style friscoTrails layer
-            //friscoTrails.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Orange, 2, false);
-            //friscoTrails.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style friscoTrails layer
+            friscoTrails.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Orange, 2, false);
+            friscoTrails.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Style selectedLineLayer
-            //selectedLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 2, false);
-            //selectedLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style selectedLineLayer
+            selectedLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 2, false);
+            selectedLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Add friscoTrails layer to a LayerOverlay
-            //layerOverlay.Layers.Add("friscoTrails", friscoTrails);
+            // Add friscoTrails layer to a LayerOverlay
+            layerOverlay.Layers.Add("friscoTrails", friscoTrails);
 
-            //// Add selectedLineLayer to the layerOverlay
-            //layerOverlay.Layers.Add("selectedLineLayer", selectedLineLayer);
+            // Add selectedLineLayer to the layerOverlay
+            layerOverlay.Layers.Add("selectedLineLayer", selectedLineLayer);
 
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10782307.6877106, 3918904.87378907, -10774377.3460701, 3912073.31442403);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10782307.6877106, 3918904.87378907, -10774377.3460701, 3912073.31442403);
 
-            //// Add LayerOverlay to Map
-            //mapView.Overlays.Add("layerOverlay", layerOverlay);
+            // Add LayerOverlay to Map
+            mapView.Overlays.Add("layerOverlay", layerOverlay);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,51 +23,51 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add Cloud Maps as a background overlay
-            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            // Add Cloud Maps as a background overlay
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            //ShapeFileFeatureLayer friscoParks = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Parks.shp");
-            //InMemoryFeatureLayer stadiumLayer = new InMemoryFeatureLayer();
-            //InMemoryFeatureLayer shortestLineLayer = new InMemoryFeatureLayer();
-            //LayerOverlay layerOverlay = new LayerOverlay();
+            ShapeFileFeatureLayer friscoParks = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Parks.shp");
+            InMemoryFeatureLayer stadiumLayer = new InMemoryFeatureLayer();
+            InMemoryFeatureLayer shortestLineLayer = new InMemoryFeatureLayer();
+            LayerOverlay layerOverlay = new LayerOverlay();
 
-            //// Project friscoParks layer to Spherical Mercator to match the map projection
-            //friscoParks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project friscoParks layer to Spherical Mercator to match the map projection
+            friscoParks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Style friscoParks layer
-            //friscoParks.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(64, GeoColors.Green), GeoColors.DimGray);
-            //friscoParks.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style friscoParks layer
+            friscoParks.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(64, GeoColors.Green), GeoColors.DimGray);
+            friscoParks.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Style stadiumLayer
-            //stadiumLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 16, GeoColors.White, 4);
-            //stadiumLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style stadiumLayer
+            stadiumLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 16, GeoColors.White, 4);
+            stadiumLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Style shortestLineLayer
-            //shortestLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Red, 2, false);
-            //shortestLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style shortestLineLayer
+            shortestLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Red, 2, false);
+            shortestLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Add friscoParks layer to a LayerOverlay
-            //layerOverlay.Layers.Add("friscoParks", friscoParks);
+            // Add friscoParks layer to a LayerOverlay
+            layerOverlay.Layers.Add("friscoParks", friscoParks);
 
-            //// Add stadiumLayer layer to a LayerOverlay
-            //layerOverlay.Layers.Add("stadiumLayer", stadiumLayer);
+            // Add stadiumLayer layer to a LayerOverlay
+            layerOverlay.Layers.Add("stadiumLayer", stadiumLayer);
 
-            //// Add shortestLineLayer to the layerOverlay
-            //layerOverlay.Layers.Add("shortestLineLayer", shortestLineLayer);
+            // Add shortestLineLayer to the layerOverlay
+            layerOverlay.Layers.Add("shortestLineLayer", shortestLineLayer);
 
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10782307.6877106, 3918904.87378907, -10774377.3460701, 3912073.31442403);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10782307.6877106, 3918904.87378907, -10774377.3460701, 3912073.31442403);
 
-            //// Add LayerOverlay to Map
-            //mapView.Overlays.Add("layerOverlay", layerOverlay);
+            // Add LayerOverlay to Map
+            mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            //// Add Toyota Stadium feature to stadiumLayer
-            //var stadium = new Feature(new PointShape(-10779651.500992451, 3915933.0023557912));
-            //stadiumLayer.InternalFeatures.Add(stadium);
+            // Add Toyota Stadium feature to stadiumLayer
+            var stadium = new Feature(new PointShape(-10779651.500992451, 3915933.0023557912));
+            stadiumLayer.InternalFeatures.Add(stadium);
         }
 
         //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
