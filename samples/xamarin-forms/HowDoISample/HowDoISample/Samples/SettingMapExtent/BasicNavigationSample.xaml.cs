@@ -55,22 +55,22 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void PanArrow_Click(object sender, EventArgs e)
         {
-            //var percentage = (int)panPercentage.Value;
-            //switch (((ImageButton)sender).AutomationId)
-            //{
-            //    case "panNorth":
-            //        mapView.Pan(PanDirection.Up, percentage);
-            //        break;
-            //    case "panEast":
-            //        mapView.Pan(PanDirection.Right, percentage);
-            //        break;
-            //    case "panWest":
-            //        mapView.Pan(PanDirection.Left, percentage);
-            //        break;
-            //    case "panSouth":
-            //        mapView.Pan(PanDirection.Down, percentage);
-            //        break;
-            //}
+            var percentage = (int)panPercentage.Value;
+            switch (((ImageButton)sender).AutomationId)
+            {
+                //case "panNorth":
+                //    mapView.Pan(PanDirection.Up, percentage);
+                //    break;
+                //case "panEast":
+                //    mapView.Pan(PanDirection.Right, percentage);
+                //    break;
+                //case "panWest":
+                //    mapView.Pan(PanDirection.Left, percentage);
+                //    break;
+                //case "panSouth":
+                //    mapView.Pan(PanDirection.Down, percentage);
+                //    break;
+            }
         }
 
         /// <summary>
