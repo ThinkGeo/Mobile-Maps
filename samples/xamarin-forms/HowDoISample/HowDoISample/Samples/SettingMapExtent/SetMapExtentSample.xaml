@@ -9,7 +9,7 @@
              Title="Set Map Extent">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander x:Name="controlsExpander">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">

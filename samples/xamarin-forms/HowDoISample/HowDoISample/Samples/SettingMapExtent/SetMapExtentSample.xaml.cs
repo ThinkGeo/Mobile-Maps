@@ -7,7 +7,7 @@ using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ThinkGeo.UI.Forms;
-
+using System.IO;
 
 namespace ThinkGeo.UI.Xamarin.HowDoI
 {
@@ -24,8 +24,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Learn how to set the map extent using a variety of different methods.
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -34,7 +35,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Load the Frisco data to a layer
-            friscoCityBoundary = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/City_ETJ.shp");
+            friscoCityBoundary = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/City_ETJ.shp"));
 
             // Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
             friscoCityBoundary.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -61,15 +62,21 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Zoom to a scale programmatically. Note that the scales are bound by a ZoomLevelSet.
         /// </summary>
-        private void ZoomToScale_Click(object sender, EventArgs e)
+        private async void ZoomToScale_Click(object sender, EventArgs e)
         {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay(500);
+
             mapView.ZoomToScale(Convert.ToDouble(zoomScale.Text));
         }
         /// <summary>
         /// Set the map extent to fix a layer's bounding box
         /// </summary>
-        private void LayerBoundingBox_Click(object sender, EventArgs e)
+        private async void LayerBoundingBox_Click(object sender, EventArgs e)
         {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay(500);
+
             mapView.CurrentExtent = friscoCityBoundary.GetBoundingBox();
             mapView.Refresh();
         }
@@ -77,8 +84,11 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Set the map extent to fix a feature's bounding box
         /// </summary>
-        private void FeatureBoundingBox_Click(object sender, EventArgs e)
+        private async void FeatureBoundingBox_Click(object sender, EventArgs e)
         {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay(500);
+
             var feature = friscoCityBoundary.FeatureSource.GetFeatureById(featureIds.SelectedItem.ToString(), ReturningColumnsType.NoColumns);
             mapView.CurrentExtent = feature.GetBoundingBox();
             mapView.Refresh();
@@ -87,8 +97,11 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Zoom to a lat/lon at a desired scale by converting the lat/lon to match the map's projection
         /// </summary>
-        private void ZoomToLatLon_Click(object sender, EventArgs e)
+        private async void ZoomToLatLon_Click(object sender, EventArgs e)
         {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay(500);
+
             // Create a PointShape from the lat-lon
             var latlonPoint = new PointShape(Convert.ToDouble(latitude.Text), Convert.ToDouble(longitude.Text));
 
