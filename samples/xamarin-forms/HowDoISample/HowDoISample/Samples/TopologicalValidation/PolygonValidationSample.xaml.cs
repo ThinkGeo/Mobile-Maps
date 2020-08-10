@@ -20,8 +20,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         }
 
 
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Create an InMemoryFeatureLayer to hold the shapes to be validated
             // Add styles to display points, lines, and polygons on this layer in green
             InMemoryFeatureLayer validatedFeaturesLayer = new InMemoryFeatureLayer();
