@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.Forms;assembly=ThinkGeo.UI.Forms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.Xamarin.HowDoI.ElevationCloudServicesSample"
@@ -56,9 +57,35 @@
                         <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" x:Name="txtAverageElevation"></Label>
                         <Label Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" x:Name="txtHighestElevation"></Label>
                         <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="txtLowestElevation"></Label>
-
-
-
+                        <ListView Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" x:Name="lsbElevations" SelectedItem="lsbElevations_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="180">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat=Elevation: {0:0.00} feet}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                       <!-- <ListBox Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Name="lsbElevations" SelectionChanged="lsbElevations_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="180">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding Path=Point}" FontWeight="Bold" TextWrapping="Wrap"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding Path=Elevation, StringFormat=Elevation: {0:0.00} feet}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="240" />
@@ -82,8 +109,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <Image x:Name="mapView" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
-
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
