@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Create background world map with vector tile requested from ThinkGeo Cloud Service. 
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Create a new overlay that will hold our new layer and add it to the map.
@@ -35,7 +37,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(staticOverlay);
 
             // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
-            GridFeatureLayer gridFeatureLayer = new GridFeatureLayer(@"..\..\..\data\GridFile\Mosquitos.grd");
+            GridFeatureLayer gridFeatureLayer = new GridFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/GridFile/Mosquitos.grd"));
             gridFeatureLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
             // Add the layer to the overlay we created earlier.

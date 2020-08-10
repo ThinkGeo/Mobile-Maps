@@ -57,8 +57,14 @@
     <PackageReference Include="ThinkGeo.Core">
       <Version>13.0.0-beta152</Version>
     </PackageReference>
+    <PackageReference Include="ThinkGeo.Ecw">
+      <Version>13.0.0-beta144</Version>
+    </PackageReference>
     <PackageReference Include="ThinkGeo.FileGeoDatabase">
       <Version>13.0.0-beta145</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.Gdal">
+      <Version>13.0.0-beta146</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.MrSid">
       <Version>13.0.0-beta143</Version>
@@ -201,7 +207,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

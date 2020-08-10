@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Interaction logic for ShapefileLayer.xaml
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -35,7 +37,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(parksOverlay);
 
             // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
-            ShapeFileFeatureLayer parksLayer = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Parks.shp");
+            ShapeFileFeatureLayer parksLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
             parksLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
             // Add the layer to the overlay we created earlier.

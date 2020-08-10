@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -35,7 +37,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(cityboundaryOverlay);
 
             // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
-            TabFeatureLayer cityBoundaryLayer = new TabFeatureLayer(@"../../../Data/Tab/City_ETJ.tab");
+            TabFeatureLayer cityBoundaryLayer = new TabFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Tab/City_ETJ.tab"));
             cityBoundaryLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
             // Add the layer to the overlay we created earlier.

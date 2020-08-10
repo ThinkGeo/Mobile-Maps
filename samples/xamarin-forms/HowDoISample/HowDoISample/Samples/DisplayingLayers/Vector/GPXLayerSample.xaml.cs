@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -35,7 +37,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(gpxOverlay);
 
             // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
-            GpxFeatureLayer gpxLayer = new GpxFeatureLayer(@"../../../Data/Gpx/Hike_Bike.gpx");
+            GpxFeatureLayer gpxLayer = new GpxFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Gpx/Hike_Bike.gpx"));
             gpxLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             // Add the layer to the overlay we created earlier.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -35,7 +37,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(layerOverlay);
 
             // Create the new layer and dd the layer to the overlay we created earlier.
-            NativeImageRasterLayer commonRasterLayer = new NativeImageRasterLayer("../../../Data/Jpg/m_3309650_sw_14_1_20160911_20161121.jpg");
+            NativeImageRasterLayer commonRasterLayer = new NativeImageRasterLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Data/Jpg/m_3309650_sw_14_1_20160911_20161121.jpg"));
             layerOverlay.Layers.Add(commonRasterLayer);
 
             // Set the map view current extent to a slightly zoomed in area of the image.
