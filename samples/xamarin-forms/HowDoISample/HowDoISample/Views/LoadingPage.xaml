@@ -4,13 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HowDoISample.Views.LoadingPage">
+             x:Class="HowDoISample.Views.LoadingPage" BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Copying sample data assets to local file storage. This might take awhile..."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <ActivityIndicator Color="Orange" IsRunning="True" />
+        <StackLayout Padding="40">
+            <Image Source="thinkgeo_logo" VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+            <Label Text="Copying sample data assets to local file storage." TextColor="LightGray"
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="This may take a few minutes..." TextColor="LightGray"
+                   HorizontalTextAlignment="Center"/>
+            <ActivityIndicator Color="SteelBlue" IsRunning="True" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
