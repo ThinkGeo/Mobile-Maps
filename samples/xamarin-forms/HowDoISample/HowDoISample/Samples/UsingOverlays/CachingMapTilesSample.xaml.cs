@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CachingMapTilesSample : ContentPage
     {
+        ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay;
+
         public CachingMapTilesSample()
         {
             InitializeComponent();
@@ -22,15 +25,15 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add Cloud Maps as a background overlay
-            //thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            // Add Cloud Maps as a background overlay
+           var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
 
@@ -39,7 +42,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void UseCache_Checked(object sender, EventArgs e)
         {
-            //thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache("cache", "CloudMapsImages", RasterTileFormat.Png);
+            thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache("cache", "CloudMapsImages", RasterTileFormat.Png);
         }
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void UseCache_Unchecked(object sender, EventArgs e)
         {
-           // thinkGeoCloudVectorMapsOverlay.TileCache = null;
+            thinkGeoCloudVectorMapsOverlay.TileCache = null;
         }
     }
 }

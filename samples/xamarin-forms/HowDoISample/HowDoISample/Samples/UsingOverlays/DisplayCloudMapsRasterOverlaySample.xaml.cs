@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,14 +25,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void MapView_Loaded(object sender, EventArgs e)
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add a simple background overlay
+            // Add a simple background overlay
             //mapView.BackgroundOverlay.BackgroundBrush = GeoBrushes.AliceBlue;
 
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10782598.9806675, 3915669.09132595, -10772234.1196896, 3906343.77392696);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10782598.9806675, 3915669.09132595, -10772234.1196896, 3906343.77392696);
         }
 
         /// <summary>
@@ -39,9 +40,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayRasterCloudMaps_Click(object sender, EventArgs e)
         {
-            //var thinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudRasterMapsMapType.Hybrid);
-            //mapView.Overlays.Add(thinkGeoCloudRasterMapsOverlay);
-            //mapView.Refresh();
+            var thinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudRasterMapsMapType.Hybrid);
+            mapView.Overlays.Add(thinkGeoCloudRasterMapsOverlay);
+            mapView.Refresh();
         }
         public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
     }
