@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,9 +36,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Create a new overlay that will hold our new layer and add it to the map.
             LayerOverlay restuarantsOverlay = new LayerOverlay();
             mapView.Overlays.Add(restuarantsOverlay);
-
+            string resturantPath = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/SQLite/frisco-restaurants.sqlite"));
             // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
-            SqliteFeatureLayer restaurantsLayer = new SqliteFeatureLayer(@"Data Source=../../../Data/SQLite/frisco-restaurants.sqlite;", "restaurants", "id", "geometry");
+            SqliteFeatureLayer restaurantsLayer = new SqliteFeatureLayer($"Data Source={resturantPath};", "restaurants", "id", "geometry");
             restaurantsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
             // Add the layer to the overlay we created earlier.

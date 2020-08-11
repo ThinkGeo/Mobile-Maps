@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void ReprojectFeaturesFromShapefile()
         {
             // Create a feature layer to hold the Frisco subdivisions data
-            ShapeFileFeatureLayer subdivisionsLayer = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Subdivisions.shp");
+            ShapeFileFeatureLayer subdivisionsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Subdivisions.shp"));
 
             // Create a new ProjectionConverter to convert between Texas North Central (2276) and Spherical Mercator (3857)
             ProjectionConverter projectionConverter = new ProjectionConverter(2276, 3857);

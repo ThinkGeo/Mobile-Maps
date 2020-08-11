@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Create a new overlay that will hold our new layer and add it to the map.
             LayerOverlay coyoteSightingsOverlay = new LayerOverlay();
             mapView.Overlays.Add(coyoteSightingsOverlay);
-
             // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
             SqlServerFeatureLayer coyoteSightingsLayer = new SqlServerFeatureLayer("Server=sampledatabases.thinkgeo.com;Database=ThinkGeoSamples;User Id=thinkgeouser;Password=dkjGk$%*7kS82hks;", "frisco_coyote_sightings", "id");
             coyoteSightingsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
