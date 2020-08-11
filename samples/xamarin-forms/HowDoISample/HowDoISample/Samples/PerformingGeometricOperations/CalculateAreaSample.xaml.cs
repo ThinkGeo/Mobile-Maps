@@ -60,27 +60,27 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add("layerOverlay", layerOverlay);
         }
 
-        //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        {
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
-        //    ShapeFileFeatureLayer friscoParks = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoParks"];
-        //    InMemoryFeatureLayer selectedAreaLayer = (InMemoryFeatureLayer)layerOverlay.Layers["selectedAreaLayer"];
+            ShapeFileFeatureLayer friscoParks = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoParks"];
+            InMemoryFeatureLayer selectedAreaLayer = (InMemoryFeatureLayer)layerOverlay.Layers["selectedAreaLayer"];
 
-        //    // Query the friscoParks layer to get the first feature closest to the map click event
-        //    var feature = friscoParks.QueryTools.GetFeaturesNearestTo(e.WorldLocation, GeographyUnit.Meter, 1,
-        //        ReturningColumnsType.NoColumns).First();
+            // Query the friscoParks layer to get the first feature closest to the map click event
+            var feature = friscoParks.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
+                ReturningColumnsType.NoColumns).First();
 
-        //    // Show the selected feature on the map
-        //    selectedAreaLayer.InternalFeatures.Clear();
-        //    selectedAreaLayer.InternalFeatures.Add(feature);
-        //    layerOverlay.Refresh();
+            // Show the selected feature on the map
+            selectedAreaLayer.InternalFeatures.Clear();
+            selectedAreaLayer.InternalFeatures.Add(feature);
+            layerOverlay.Refresh();
 
-        //    // Get the area of the first feature
-        //    var area = ((AreaBaseShape)feature.GetShape()).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers);
+            // Get the area of the first feature
+            var area = ((AreaBaseShape)feature.GetShape()).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers);
 
-        //    // Display the selectedArea's area in the areaResult TextBox
-        //    areaResult.Text = $"{area:f3} sq km";
-        //}
+            // Display the selectedArea's area in the areaResult TextBox
+            areaResult.Text = $"{area:f3} sq km";
+        }
     }
 }

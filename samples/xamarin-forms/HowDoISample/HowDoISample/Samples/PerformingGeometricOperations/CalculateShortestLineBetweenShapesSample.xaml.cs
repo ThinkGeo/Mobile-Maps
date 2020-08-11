@@ -72,34 +72,34 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             stadiumLayer.InternalFeatures.Add(stadium);
         }
 
-        //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        {
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
-        //    ShapeFileFeatureLayer friscoParks = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoParks"];
-        //    InMemoryFeatureLayer stadiumLayer = (InMemoryFeatureLayer)layerOverlay.Layers["stadiumLayer"];
-        //    InMemoryFeatureLayer shortestLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["shortestLineLayer"];
+            ShapeFileFeatureLayer friscoParks = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoParks"];
+            InMemoryFeatureLayer stadiumLayer = (InMemoryFeatureLayer)layerOverlay.Layers["stadiumLayer"];
+            InMemoryFeatureLayer shortestLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["shortestLineLayer"];
 
-        //    // Query the friscoParks layer to get the first feature closest to the map click event
-        //    var park = friscoParks.QueryTools.GetFeaturesNearestTo(e.WorldLocation, GeographyUnit.Meter, 1,
-        //        ReturningColumnsType.NoColumns).First();
+            // Query the friscoParks layer to get the first feature closest to the map click event
+            var park = friscoParks.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
+                ReturningColumnsType.NoColumns).First();
 
-        //    // Get the stadium feature from the stadiumLayer
-        //    var stadium = stadiumLayer.InternalFeatures[0];
+            // Get the stadium feature from the stadiumLayer
+            var stadium = stadiumLayer.InternalFeatures[0];
 
-        //    // Get the shortest line from the selected park to the stadium
-        //    var shortestLine = park.GetShape().GetShortestLineTo(stadium, GeographyUnit.Meter);
+            // Get the shortest line from the selected park to the stadium
+            var shortestLine = park.GetShape().GetShortestLineTo(stadium, GeographyUnit.Meter);
 
-        //    // Show the shortestLine on the map
-        //    shortestLineLayer.InternalFeatures.Clear();
-        //    shortestLineLayer.InternalFeatures.Add(new Feature(shortestLine));
-        //    layerOverlay.Refresh();
+            // Show the shortestLine on the map
+            shortestLineLayer.InternalFeatures.Clear();
+            shortestLineLayer.InternalFeatures.Add(new Feature(shortestLine));
+            layerOverlay.Refresh();
 
-        //    // Get the area of the first feature
-        //    var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
+            // Get the area of the first feature
+            var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
 
-        //    // Display the shortestLine's length in the distanceResult TextBox
-        //    distanceResult.Text = $"{length:f3} km";
-        //}
+            // Display the shortestLine's length in the distanceResult TextBox
+            distanceResult.Text = $"{length:f3} km";
+        }
     }
 }

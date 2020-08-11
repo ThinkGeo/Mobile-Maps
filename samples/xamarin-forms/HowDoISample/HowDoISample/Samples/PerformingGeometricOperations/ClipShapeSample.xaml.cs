@@ -78,29 +78,29 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void ClipShape_OnClick(object sender, EventArgs e)
         {
-            //LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
-            //ShapeFileFeatureLayer cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
-            //InMemoryFeatureLayer westRegionLayer = (InMemoryFeatureLayer)layerOverlay.Layers["westRegionLayer"];
-            //InMemoryFeatureLayer clipLayer = (InMemoryFeatureLayer)layerOverlay.Layers["clipLayer"];
+            ShapeFileFeatureLayer cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
+            InMemoryFeatureLayer westRegionLayer = (InMemoryFeatureLayer)layerOverlay.Layers["westRegionLayer"];
+            InMemoryFeatureLayer clipLayer = (InMemoryFeatureLayer)layerOverlay.Layers["clipLayer"];
 
-            //// Query the cityLimits layer to get the first feature
-            //cityLimits.Open();
-            //var feature = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns).First();
-            //cityLimits.Close();
+            // Query the cityLimits layer to get the first feature
+            cityLimits.Open();
+            var feature = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns).First();
+            cityLimits.Close();
 
-            //// Get the westRegion area
-            //var westRegion = westRegionLayer.InternalFeatures[0];
+            // Get the westRegion area
+            var westRegion = westRegionLayer.InternalFeatures[0];
 
-            //// Clips the cityLimits feature down to the common area of the westRegion
-            //var clip = feature.GetIntersection(westRegion);
+            // Clips the cityLimits feature down to the common area of the westRegion
+            var clip = feature.GetIntersection(westRegion);
 
-            //// Add the clip into an InMemoryFeatureLayer to display the result.
-            //clipLayer.InternalFeatures.Clear();
-            //clipLayer.InternalFeatures.Add(clip);
+            // Add the clip into an InMemoryFeatureLayer to display the result.
+            clipLayer.InternalFeatures.Clear();
+            clipLayer.InternalFeatures.Add(clip);
 
-            //// Redraw the layerOverlay to see the clip feature on the map
-            //layerOverlay.Refresh();
+            // Redraw the layerOverlay to see the clip feature on the map
+            layerOverlay.Refresh();
         }
     }
 }

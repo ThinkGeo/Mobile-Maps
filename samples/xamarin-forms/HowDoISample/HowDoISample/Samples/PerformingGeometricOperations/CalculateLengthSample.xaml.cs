@@ -63,27 +63,27 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Calculates the length of a line selected on the map and displays it in the lengthResult TextBox
         /// </summary>
-        //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        {
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
-        //    ShapeFileFeatureLayer friscoTrails = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoTrails"];
-        //    InMemoryFeatureLayer selectedLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["selectedLineLayer"];
+            ShapeFileFeatureLayer friscoTrails = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoTrails"];
+            InMemoryFeatureLayer selectedLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["selectedLineLayer"];
 
-        //    // Query the friscoTrails layer to get the first feature closest to the map click event
-        //    var feature = friscoTrails.QueryTools.GetFeaturesNearestTo(e.WorldLocation, GeographyUnit.Meter, 1,
-        //        ReturningColumnsType.NoColumns).First();
+            // Query the friscoTrails layer to get the first feature closest to the map click event
+            var feature = friscoTrails.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
+                ReturningColumnsType.NoColumns).First();
 
-        //    // Show the selected feature on the map
-        //    selectedLineLayer.InternalFeatures.Clear();
-        //    selectedLineLayer.InternalFeatures.Add(feature);
-        //    layerOverlay.Refresh();
+            // Show the selected feature on the map
+            selectedLineLayer.InternalFeatures.Clear();
+            selectedLineLayer.InternalFeatures.Add(feature);
+            layerOverlay.Refresh();
 
-        //    // Get the length of the first feature
-        //    var length = ((LineBaseShape)feature.GetShape()).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
+            // Get the length of the first feature
+            var length = ((LineBaseShape)feature.GetShape()).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
 
-        //    // Display the selectedLine's length in the lengthResult TextBox
-        //    lengthResult.Text = $"{length:f3} km";
-        //}
+            // Display the selectedLine's length in the lengthResult TextBox
+            lengthResult.Text = $"{length:f3} km";
+        }
     }
 }
