@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,17 +23,20 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+
 
             // Create a feature layer to hold the Frisco zoning data
-            ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Zoning.shp");
+            ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
             // Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
             ProjectionConverter projectionConverter = new ProjectionConverter(2276, 3857);
@@ -90,26 +94,26 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
-            //// Find the layers we will be modifying in the MapView dictionary
-            //LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Highlighted Features Overlay"];
-            //InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)highlightedFeaturesOverlay.Layers["Highlighted Features"];
+            // Find the layers we will be modifying in the MapView dictionary
+            LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Highlighted Features Overlay"];
+            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)highlightedFeaturesOverlay.Layers["Highlighted Features"];
 
-            //// Clear the currently highlighted features
-            //highlightedFeaturesLayer.Open();
-            //highlightedFeaturesLayer.InternalFeatures.Clear();
+            // Clear the currently highlighted features
+            highlightedFeaturesLayer.Open();
+            highlightedFeaturesLayer.InternalFeatures.Clear();
 
-            //// Add new features to the layer
-            //foreach (var feature in features)
-            //{
-            //    highlightedFeaturesLayer.InternalFeatures.Add(feature);
-            //}
-            //highlightedFeaturesLayer.Close();
+            // Add new features to the layer
+            foreach (var feature in features)
+            {
+                highlightedFeaturesLayer.InternalFeatures.Add(feature);
+            }
+            highlightedFeaturesLayer.Close();
 
-            //// Refresh the overlay so the layer is redrawn
-            //highlightedFeaturesOverlay.Refresh();
+            // Refresh the overlay so the layer is redrawn
+            highlightedFeaturesOverlay.Refresh();
 
-            //// Update the number of matching features found in the UI
-            //txtNumberOfFeaturesFound.Text = string.Format("Number of features containing the drawn shape: {0}", features.Count());
+            // Update the number of matching features found in the UI
+            txtNumberOfFeaturesFound.Text = string.Format("Number of features containing the drawn shape: {0}", features.Count());
         }
 
         /// <summary>

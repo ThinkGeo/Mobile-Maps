@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             //    // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             //    ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //    mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
@@ -38,7 +40,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //    zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
 
             //    // Import the features from the Frisco zoning data shapefile
-            //    ShapeFileFeatureSource zoningDataFeatureSource = new ShapeFileFeatureSource(@"../../../Data/Shapefile/Zoning.shp");
+                ShapeFileFeatureSource zoningDataFeatureSource = new ShapeFileFeatureSource(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
             //    // Create a ProjectionConverter to convert the shapefile data from North Central Texas (2276) to Spherical Mercator (3857)
             //    ProjectionConverter projectionConverter = new ProjectionConverter(3857, 2276);

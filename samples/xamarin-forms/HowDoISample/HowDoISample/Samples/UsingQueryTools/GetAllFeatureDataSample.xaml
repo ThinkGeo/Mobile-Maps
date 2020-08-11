@@ -40,9 +40,9 @@
                         <Label Grid.Column="1" Grid.Row="0" Text="Frisco Hotels Feature Data"></Label>
 
                         <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Select a hotel from the list to zoom to that location"></Label>
-                        <!--
-                        <ListBox Grid.Column="1" Grid.Row="2" Name="lsbHotels" SelectionChanged="lsbHotels_SelectionChanged">
-                            <ListBox.ItemTemplate>
+                        
+                        <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" SelectedItem="lsbHotels_SelectionChanged">
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="180">
                                         <Grid.RowDefinitions>
@@ -50,14 +50,14 @@
                                             <RowDefinition Height="Auto" ></RowDefinition>
                                             <RowDefinition Height="Auto" ></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
-                                        <TextBlock Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
+                                        <Label Grid.Row="0" Text="{Binding Path=Name}" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
+                                        <Label Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
                                     </Grid>
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        -->
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="240" />
