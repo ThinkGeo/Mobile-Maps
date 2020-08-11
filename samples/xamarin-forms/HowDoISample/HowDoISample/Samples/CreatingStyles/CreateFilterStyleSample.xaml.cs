@@ -27,9 +27,11 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);        //    mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);        
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10780196.9469504, 3916119.49665258, -10776231.7761301, 3912703.71697007);
@@ -60,7 +62,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 Conditions = { new FilterCondition("OffenseGro", "Drugs") },
                 Styles = {
                         new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(@"../../../Resources/drugs_icon.png")) { ImageScale = .60 }
+                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/drugs_icon.png"))) { ImageScale = .60 }
                     }
             };
 
@@ -70,7 +72,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 Conditions = { new FilterCondition("OffenseGro", "Weapons") },
                 Styles = {
                         new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(@"../../../Resources/weapon_icon.png")) { ImageScale = .25 }
+                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/weapon_icon.png"))) { ImageScale = .25 }
                     }
             };
 
@@ -80,7 +82,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 Conditions = { new FilterCondition("OffenseGro", "Vandalism") },
                 Styles = {
                         new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(@"../../../Resources/vandalism_icon.png")) { ImageScale = .25 }
+                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/vandalism_icon.png"))) { ImageScale = .25 }
                     }
             };
 
