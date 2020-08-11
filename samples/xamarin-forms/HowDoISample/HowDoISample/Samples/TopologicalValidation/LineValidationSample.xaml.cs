@@ -25,6 +25,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
             // Create an InMemoryFeatureLayer to hold the shapes to be validated
             // Add styles to display points, lines, and polygons on this layer in green
             InMemoryFeatureLayer validatedFeaturesLayer = new InMemoryFeatureLayer();
