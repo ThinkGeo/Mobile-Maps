@@ -199,6 +199,14 @@
     <None Remove="Data\Tab\City_ETJ.tab" />
     <None Remove="Data\TinyGeo\Zoning.tgeo" />
     <None Remove="Data\UsgsDem\mobile-e.dem" />
+    <None Remove="Resources\AQUA.png" />
+    <None Remove="Resources\AQUABLANK.png" />
+    <None Remove="Resources\coyote_paw.png" />
+    <None Remove="Resources\drugs_icon.png" />
+    <None Remove="Resources\generic_logo.png" />
+    <None Remove="Resources\hotel_icon.png" />
+    <None Remove="Resources\vandalism_icon.png" />
+    <None Remove="Resources\weapon_icon.png" />
     <None Remove="samples.json" />
   </ItemGroup>
 
@@ -391,6 +399,14 @@
     <EmbeddedResource Include="Data\Tab\City_ETJ.tab" />
     <EmbeddedResource Include="Data\TinyGeo\Zoning.tgeo" />
     <EmbeddedResource Include="Data\UsgsDem\mobile-e.dem" />
+    <EmbeddedResource Include="Resources\AQUA.png" />
+    <EmbeddedResource Include="Resources\AQUABLANK.png" />
+    <EmbeddedResource Include="Resources\coyote_paw.png" />
+    <EmbeddedResource Include="Resources\drugs_icon.png" />
+    <EmbeddedResource Include="Resources\generic_logo.png" />
+    <EmbeddedResource Include="Resources\hotel_icon.png" />
+    <EmbeddedResource Include="Resources\vandalism_icon.png" />
+    <EmbeddedResource Include="Resources\weapon_icon.png" />
     <EmbeddedResource Include="samples.json" />
   </ItemGroup>
 
