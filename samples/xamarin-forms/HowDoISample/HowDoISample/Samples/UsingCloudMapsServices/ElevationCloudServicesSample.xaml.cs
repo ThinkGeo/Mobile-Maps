@@ -24,7 +24,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
@@ -68,13 +68,13 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             // Create a sample line and get elevation along that line
             LineShape sampleShape = new LineShape("LINESTRING(-10776298.0601626 3912306.29684573,-10776496.3187036 3912399.45447343,-10776675.4679876 3912478.28015841,-10776890.4471285 3912516.49867234,-10777189.0292686 3912509.33270098,-10777329.9600387 3912442.4503016,-10777664.3720356 3912174.92070409)");
-            PerformElevationQuery(sampleShape);
+            await PerformElevationQuery(sampleShape);
         }
 
         /// <summary>
         /// Get elevation data using the ElevationCloudClient and update the UI
         /// </summary>
-        private async void PerformElevationQuery(BaseShape queryShape)
+        private async Task PerformElevationQuery(BaseShape queryShape)
         {
             // Get feature layers from the MapView
             LayerOverlay elevationPointsOverlay = (LayerOverlay)mapView.Overlays["Elevation Features Overlay"];
@@ -173,7 +173,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             {
                 if (((PolygonShape)e.TrackShape).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers) > 5)
                 {
-                    
+
                     await DisplayAlert("Error", "Please draw a smaller polygon (limit: 5km^2)", "OK");
                     return;
                 }
@@ -188,7 +188,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             }
 
             // Get elevation data for the drawn shape and update the UI
-            PerformElevationQuery(e.TrackShape);
+            await PerformElevationQuery(e.TrackShape);
         }
 
         // <summary>

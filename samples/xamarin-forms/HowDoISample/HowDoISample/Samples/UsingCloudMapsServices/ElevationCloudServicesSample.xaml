@@ -36,61 +36,41 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Elevation for a Shape"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="14">Interval Distance (m):</Label>
-                        <Grid Grid.Column="1" Grid.Row="2">
-                            <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}"></Label>
-                            <Slider Grid.Column="0" Grid.Row="0" x:Name="intervalDistance" Maximum="1000" Minimum="50" Value="100"></Slider>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Clicked="DrawPoint_Click" Text="Draw a New Point"></Button>
-                        <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Clicked="DrawLine_Click" Text="Draw a New Line"></Button>
-                        <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click" Text="Draw a New Polygon"></Button>
-                        <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" x:Name="txtAverageElevation"></Label>
-                        <Label Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" x:Name="txtHighestElevation"></Label>
-                        <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="txtLowestElevation"></Label>
-                        <ListView Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" x:Name="lsbElevations" SelectedItem="lsbElevations_SelectionChanged">
+                    <StackLayout Padding="5">
+                        <Label Text="Interval Distance (m):" FontAttributes="Bold"/>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Slider x:Name="intervalDistance" Maximum="1000" Minimum="50" Value="100" HorizontalOptions="FillAndExpand"></Slider>
+                            <Label BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}" HorizontalOptions="End"></Label>
+
+                        </StackLayout>
+
+                        <Button Clicked="DrawPoint_Click" Text="Draw a New Point"></Button>
+                        <Button Clicked="DrawLine_Click" Text="Draw a New Line"></Button>
+                        <Button Clicked="DrawPolygon_Click" Text="Draw a New Polygon"></Button>
+
+                        <Label x:Name="txtAverageElevation"></Label>
+                        <Label x:Name="txtHighestElevation"></Label>
+                        <Label x:Name="txtLowestElevation"></Label>
+
+                        <ListView x:Name="lsbElevations" SelectedItem="lsbElevations_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="180">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat=Elevation: {0:0.00} feet}"/>
-                                    </Grid>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat=Elevation: {0:0.00} feet}"/>
+                                        </Grid>
+                                    </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                    </StackLayout>
                 </Expander.Content>
             </Expander>
 
