@@ -41,6 +41,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
+            //mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Create a new ShapeFileFeatureLayer using a shapefile containing Frisco Census data
             //ShapeFileFeatureLayer housingUnitsLayer = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Frisco 2010 Census Housing Units.shp");

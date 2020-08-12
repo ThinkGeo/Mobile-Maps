@@ -29,7 +29,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
-
+            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
             //// Create a new feature layer to display the route
             //InMemoryFeatureLayer routingLayer = new InMemoryFeatureLayer();
 

@@ -31,6 +31,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             // Set the Map Unit to meters (used in Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Create a feature layer to hold the Frisco parks data
             ShapeFileFeatureLayer parksLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));

@@ -25,6 +25,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         {
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Set the zoom level set on the map to make sure its compatable with the OSM zoom levels.
             mapView.ZoomLevelSet = new OpenStreetMapsZoomLevelSet();

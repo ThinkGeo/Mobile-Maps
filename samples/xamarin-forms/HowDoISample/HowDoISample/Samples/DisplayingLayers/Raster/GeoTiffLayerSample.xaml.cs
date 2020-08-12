@@ -27,6 +27,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Create a new overlay that will hold our new layer and add it to the map.
             LayerOverlay layerOverlay = new LayerOverlay();

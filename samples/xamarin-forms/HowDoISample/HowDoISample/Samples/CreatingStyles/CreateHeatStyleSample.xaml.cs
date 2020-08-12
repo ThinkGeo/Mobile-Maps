@@ -27,8 +27,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         protected override void OnAppearing()
         {
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
             base.OnAppearing();
+            mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Add Cloud Maps as a background overlay

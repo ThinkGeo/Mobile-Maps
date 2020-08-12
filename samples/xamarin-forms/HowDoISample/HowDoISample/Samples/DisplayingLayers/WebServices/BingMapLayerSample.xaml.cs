@@ -28,6 +28,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         {
             //// It is important to set the map unit first to either feet, meters or decimal degrees.
             //mapView.MapUnit = GeographyUnit.Meter;
+            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Set the map zoom level set to the bing map zoom level set so all the zoom levels line up.
             //mapView.ZoomLevelSet = new BingMapsZoomLevelSet(256);

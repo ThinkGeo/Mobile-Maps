@@ -29,6 +29,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
+            //mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
             //MarkerOverlay geocodedLocationsOverlay = new SimpleMarkerOverlay();

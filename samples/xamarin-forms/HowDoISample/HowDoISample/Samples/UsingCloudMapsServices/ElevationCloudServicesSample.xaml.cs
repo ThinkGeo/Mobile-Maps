@@ -33,6 +33,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Create a new InMemoryFeatureLayer to hold the shape drawn for the elevation query
             InMemoryFeatureLayer drawnShapeLayer = new InMemoryFeatureLayer();

@@ -31,9 +31,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //// Set the Map Unit to meters (used in Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
+            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Create a feature layer to hold the Frisco zoning data
-            ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
+            // ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
             //// Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
             //ProjectionConverter projectionConverter = new ProjectionConverter(2276, 3857);

@@ -31,6 +31,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //// Set the map's unit of measurement to meters (Spherical Mercator)
             //mapView.MapUnit = GeographyUnit.Meter;
+            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Create a PopupOverlay to display time zone information based on locations input by the user
             //PopupOverlay timezoneInfoPopupOverlay = new PopupOverlay();

@@ -31,6 +31,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             //    // Set the Map Unit to meters (used in Spherical Mercator)
             //    mapView.MapUnit = GeographyUnit.Meter;
+            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //    // Create a feature layer to hold and display the zoning data
             //    InMemoryFeatureLayer zoningLayer = new InMemoryFeatureLayer();
@@ -40,7 +41,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //    zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
 
             //    // Import the features from the Frisco zoning data shapefile
-                ShapeFileFeatureSource zoningDataFeatureSource = new ShapeFileFeatureSource(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
+            ShapeFileFeatureSource zoningDataFeatureSource = new ShapeFileFeatureSource(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
             //    // Create a ProjectionConverter to convert the shapefile data from North Central Texas (2276) to Spherical Mercator (3857)
             //    ProjectionConverter projectionConverter = new ProjectionConverter(3857, 2276);
