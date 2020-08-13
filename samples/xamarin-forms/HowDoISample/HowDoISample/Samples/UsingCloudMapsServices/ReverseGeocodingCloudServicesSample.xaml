@@ -37,9 +37,9 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Click on the Map or Enter a Location to Reverse Geocode"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="Click on the Map or Enter a Location to Reverse Geocode"></Label>
                         <Label Grid.Column="1" Grid.Row="1" FontSize="14">Location:</Label>
-                        <Entry Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="txtCoordinates" Text="3915241.03,-10779570.57"></Entry>
+                        <Entry Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="txtCoordinates" Text="3915241.03,-10779570.57"></Entry>
                         <Label Grid.Column="1" Grid.Row="3" FontSize="14">Search Radius:</Label>
                         <Entry Grid.Column="2" Grid.Row="3" x:Name="txtSearchRadius" Text="400"></Entry>
                         <Label Grid.Column="1" Grid.Row="4" FontSize="14">Maximum Results:</Label>
@@ -54,68 +54,80 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <Label Grid.Column="1"  Grid.Row="6" Grid.ColumnSpan="2" x:Name="txtLocationCategoriesDescription"></Label>
-                        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Clicked="Search_Click" Text="Search"></Button>
-                        <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="txtSearchResultsBestMatch"></Label>
-<!--
-                        <TabControl Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" x:Name="tabSearchResults">
-                            <TabItem x:Name="nearbyAddressesTabItem" Header="Address">
-                                <ListBox x:Name="lsbAddresses" SelectionChanged="lsbSearchResults_SelectionChanged">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="280">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Grid.Row="0" Text="{Binding Path=Address}" TextWrapping="Wrap"/>
-                                                <TextBlock Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontWeight="Bold"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </TabItem>
-                            <TabItem x:Name="nearbyRoadsTabItem" Header="Road">
-                                <ListBox x:Name="lsbRoads" SelectionChanged="lsbSearchResults_SelectionChanged">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="280">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Grid.Row="0" Text="{Binding Path=Address}" TextWrapping="Wrap"/>
-                                                <TextBlock Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontWeight="Bold"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </TabItem>
-                            <TabItem x:Name="nearbyPlacesTabItem" Header="Place">
-                                <ListBox x:Name="lsbPlaces" SelectionChanged="lsbSearchResults_SelectionChanged">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="280">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Grid.Row="0" Text="{Binding Path=Address}" TextWrapping="Wrap"/>
-                                                <TextBlock Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontWeight="Bold"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </TabItem>
-                        </TabControl>
--->
+                        <Label Grid.Column="1"  Grid.Row="6" Grid.ColumnSpan="3" x:Name="txtLocationCategoriesDescription"></Label>
+                        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Clicked="Search_Click" Text="Search"></Button>
+                        <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" x:Name="txtSearchResultsBestMatch"></Label>
+                        <!--
+                        < Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" x:Name="tabSearchResults">
+                        -->
+                        <Button Grid.Column="1" Grid.Row="9" x:Name="btnNearbyAddresses" Text="Address" Clicked="btnNearbyAddresses_Clicked"></Button>
+                        <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbAddresses" ItemSelected="lsbSearchResults_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=Address}"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontAttributes="Bold"/>
+                                        </Grid>
+                                    </ViewCell>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--
+                        <TabItem x:Name="nearbyRoadsTabItem" Header="Road">
+                        -->
+                        <Button Grid.Column="2" Grid.Row="9" Text="Roads" x:Name="btnNearbyRoads" Clicked="btnNearbyRoads_Clicked"></Button>
+
+                        <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbRoads" ItemSelected="lsbSearchResults_SelectionChanged" IsVisible="false">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=Address}"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontAttributes="Bold"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--
+                         <TabItem x:Name="nearbyPlacesTabItem" Header="Place">
+                        -->
+                        <Button Grid.Column="3" Grid.Row="9" Text="Places" x:Name="btnNearbyPlaces" Clicked="btnNearbyPlaces_Clicked"></Button>
+                        <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbPlaces" ItemSelected="lsbSearchResults_SelectionChanged" IsVisible="false">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=Address}"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontAttributes="Bold"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -132,7 +144,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="mapView_MapSingleTap"></ThinkGeoUI:MapView>
 
 
         </StackLayout>
