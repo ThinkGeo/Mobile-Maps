@@ -74,22 +74,25 @@
                         <Button Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Clicked="Search_Click" Text="Search"></Button>
 
                         <Label Grid.Column="1"  Grid.Row="10" Grid.ColumnSpan="2" x:Name="txtSearchResultsDescription"></Label>
-<!--
-                        <ListBox Grid.Column="1"  Grid.Row="11" Grid.ColumnSpan="2" Name="lsbLocations" SelectionChanged="lsbLocations_SelectionChanged" Visibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <ListBox.ItemTemplate>
+
+                        <ListView Grid.Column="1"  Grid.Row="11" Grid.ColumnSpan="2" x:Name="lsbLocations" ItemSelected="lsbLocations_SelectionChanged" IsVisible="False">
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="Auto" Height="Auto">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding Path=LocationName}" TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontWeight="Bold"/>
-                                    </Grid>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=LocationName}"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat=Type: {0}}" FontAttributes="Bold"/>
+                                        </Grid>
+                                    </ViewCell>
+
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
--->
+                            </ListView.ItemTemplate>
+                        </ListView>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="*"/>
