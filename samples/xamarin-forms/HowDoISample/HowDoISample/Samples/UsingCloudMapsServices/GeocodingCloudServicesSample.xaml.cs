@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
             //// Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
@@ -50,25 +51,25 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         //private async Task<CloudGeocodingResult> PerformGeocodingQuery()
         //{
-        //// Show a loading graphic to let users know the request is running
-        //loadingImage.Visibility = Visibility.Visible;
+        //    // Show a loading graphic to let users know the request is running
+        //    //loadingImage.Visibility = Visibility.Visible;
 
-        //CloudGeocodingOptions options = new CloudGeocodingOptions();
+        //    CloudGeocodingOptions options = new CloudGeocodingOptions();
 
-        //// Set up the CloudGeocodingOptions object based on the parameters set in the UI
-        //options.MaxResults = int.Parse(txtMaxResults.Text);
-        //options.SearchMode = ((ComboBoxItem)cboSearchType.SelectedItem).Content.ToString() == "Fuzzy" ? CloudGeocodingSearchMode.FuzzyMatch : CloudGeocodingSearchMode.ExactMatch;
-        //options.LocationType = (CloudGeocodingLocationType)Enum.Parse(typeof(CloudGeocodingLocationType), ((ComboBoxItem)cboLocationType.SelectedItem).Content.ToString());
-        //options.ResultProjectionInSrid = 3857;
+        //    // Set up the CloudGeocodingOptions object based on the parameters set in the UI
+        //    options.MaxResults = int.Parse(txtMaxResults.Text);
+        //    options.SearchMode = ((ComboBoxItem)cboSearchType.SelectedItem).Content.ToString() == "Fuzzy" ? CloudGeocodingSearchMode.FuzzyMatch : CloudGeocodingSearchMode.ExactMatch;
+        //    options.LocationType = (CloudGeocodingLocationType)Enum.Parse(typeof(CloudGeocodingLocationType), ((ComboBoxItem)cboLocationType.SelectedItem).Content.ToString());
+        //    options.ResultProjectionInSrid = 3857;
 
-        //// Run the geocode
-        //string searchString = txtSearchString.Text.Trim();
-        //CloudGeocodingResult searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
+        //    // Run the geocode
+        //    string searchString = txtSearchString.Text.Trim();
+        //    CloudGeocodingResult searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
 
-        //// Hide the loading graphic
-        //loadingImage.Visibility = Visibility.Hidden;
+        //    // Hide the loading graphic
+        //    loadingImage.Visibility = Visibility.Hidden;
 
-        //return searchResult;
+        //    return searchResult;
         //}
 
         /// <summary>
