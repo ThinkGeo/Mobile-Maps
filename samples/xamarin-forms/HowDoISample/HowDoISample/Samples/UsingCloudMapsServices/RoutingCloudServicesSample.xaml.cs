@@ -81,7 +81,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             CloudRoutingGetRouteOptions options = new CloudRoutingGetRouteOptions();
             options.TurnByTurn = true;
 
-            return await routingCloudClient.GetRouteAsync(waypoints, 3857, options);
+            CloudRoutingGetRouteResult testRoute = routingCloudClient.GetRoute(waypoints, 3857, options);
+
+            return routingCloudClient.GetRoute(waypoints, 3857, options);
+
         }
 
         /// <summary>
