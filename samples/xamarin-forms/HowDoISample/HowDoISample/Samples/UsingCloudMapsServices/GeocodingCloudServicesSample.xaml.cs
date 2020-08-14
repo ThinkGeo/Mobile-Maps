@@ -15,6 +15,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
     public partial class GeocodingCloudServicesSample : ContentPage
     {
         private GeocodingCloudClient geocodingCloudClient;
+
         public GeocodingCloudServicesSample()
         {
             InitializeComponent();
@@ -61,15 +62,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             options.MaxResults = int.Parse(txtMaxResults.Text);
             options.SearchMode = ((string)cboSearchType.SelectedItem) == "Fuzzy" ? CloudGeocodingSearchMode.FuzzyMatch : CloudGeocodingSearchMode.ExactMatch;
             options.LocationType = (CloudGeocodingLocationType)Enum.Parse(typeof(CloudGeocodingLocationType), (string)cboLocationType.SelectedItem);
-           // options.ResultProjectionInSrid = 3857;
-            options.ResultProjectionInProj4String = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
+            options.ResultProjectionInSrid = 3857;
+
             // Run the geocode
             string searchString = txtSearchString.Text.Trim();
             CloudGeocodingResult searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
-            
+
             // Hide the loading graphic
             //loadingImage.Visibility = Visibility.Hidden;
-
 
             return searchResult;
         }
@@ -85,7 +85,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             lsbLocations.ItemsSource = null;
             geocodedLocationOverlay.Refresh();
 
-            
             // Update the UI with the number of results found and the list of locations found
             txtSearchResultsDescription.Text = $"Found {searchResult.Locations.Count} matching locations.";
             lsbLocations.ItemsSource = searchResult.Locations;
@@ -110,7 +109,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 // Handle an error returned from the geocoding service
                 if (searchResult.Exception != null)
                 {
-                    await DisplayAlert("Alert",searchResult.Exception.Message, "Error");
+                    await DisplayAlert("Alert", searchResult.Exception.Message, "Error");
                     return;
                 }
 
@@ -133,7 +132,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
                 // Clear the existing markers and add a new marker at the chosen location
                 geocodedLocationOverlay.Markers.Clear();
-                geocodedLocationOverlay.Markers.Add(CreateNewMarker(chosenLocation.LocationPoint));
+                //geocodedLocationOverlay.Markers.Add(CreateNewMarker(chosenLocation.LocationPoint));
 
                 // Center the map on the chosen location
                 mapView.CurrentExtent = chosenLocation.BoundingBox;
@@ -236,12 +235,12 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         {
             return new Marker()
             {
-                Position = point,  
+                Position = point,
                 ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
                 YOffset = -17
             };
         }
-        
+
 
     }
 }
