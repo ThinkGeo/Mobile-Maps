@@ -54,6 +54,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
+            
+
             // Add each feature layer to it's own overlay
             // We do this so we can control and refresh/redraw each layer individually
             LayerOverlay zoningOverlay = new LayerOverlay();
@@ -65,15 +67,16 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add("Highlighted Features Overlay", highlightedFeaturesOverlay);
 
             // Add a MarkerOverlay to the map to display the selected point for the query
-            //SimpleMarkerOverlay queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
-           // mapView.Overlays.Add("Query Feature Marker Overlay", queryFeatureMarkerOverlay);
+            MarkerOverlay queryFeatureMarkerOverlay = new MarkerOverlay();
+            mapView.Overlays.Add("Query Feature Marker Overlay", queryFeatureMarkerOverlay);
 
             // Add a sample point to the map for the initial query
             PointShape sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
             GetFeaturesContaining(sampleShape);
 
             // Set the map extent to the sample shape
-            mapView.CurrentExtent = new RectangleShape(-10781407.8544813, 3916678.62545891, -10777442.6836611, 3913262.84577639);
+            //mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
+
         }
 
         /// <summary>
@@ -121,46 +124,45 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void GetFeaturesContaining(PointShape point)
         {
-            //// Find the layers we will be modifying in the MapView
-            //SimpleMarkerOverlay queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
-            //ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
+            // Find the layers we will be modifying in the MapView
+            MarkerOverlay queryFeatureMarkerOverlay = (MarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
+            ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
 
-            //// Clear the query point marker overlaylayer and add a marker on the newly drawn point
-            //queryFeatureMarkerOverlay.Markers.Clear();
+            // Clear the query point marker overlaylayer and add a marker on the newly drawn point
+            queryFeatureMarkerOverlay.Markers.Clear();
 
-            //// Create a marker with a static marker image and add it to the map
-            //var marker = CreateNewMarker(point);
-            //queryFeatureMarkerOverlay.Markers.Add(marker);
-            //queryFeatureMarkerOverlay.Refresh();
+            // Create a marker with a static marker image and add it to the map
+            var marker = CreateNewMarker(point);
+            queryFeatureMarkerOverlay.Markers.Add(marker);
+            queryFeatureMarkerOverlay.Refresh();
 
-            //// Perform the spatial query using the drawn point and highlight features that were found
-            //var queriedFeatures = PerformSpatialQuery(point, zoningLayer);
-            //HighlightQueriedFeatures(queriedFeatures);
+            // Perform the spatial query using the drawn point and highlight features that were found
+            var queriedFeatures = PerformSpatialQuery(point, zoningLayer);
+            HighlightQueriedFeatures(queriedFeatures);
 
-            //// Clear the drawn point
-            //mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+            // Clear the drawn point
+            mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
         }
 
         /// <summary>
         /// Perform the spatial query when a new point is drawn
         /// </summary>
-        //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    GetFeaturesContaining(e.WorldLocation);
-        //}
+        private void MapView_OnMapTap(object sender, TouchMapViewEventArgs e)
+        {
+            GetFeaturesContaining(e.PointInWorldCoordinate);
+        }
 
         ///// <summary>
         ///// Create a new map marker using preloaded image assets
         ///// </summary>
-        //private Marker CreateNewMarker(PointShape point)
-        //{
-        //    return new Marker(point)
-        //    {
-        //        ImageSource = new BitmapImage(new Uri("/Resources/AQUA.png", UriKind.RelativeOrAbsolute)),
-        //        Width = 20,
-        //        Height = 34,
-        //        YOffset = -17
-        //    };
-        //}
+        private Marker CreateNewMarker(PointShape point)
+        {
+            return new Marker
+            {
+                Position = point,
+                ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
+                YOffset = -17
+            };
+        }
     }
 }

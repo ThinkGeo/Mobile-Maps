@@ -28,9 +28,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             AddMapLayers();
             AddMosquitoDataGrid();
         }
-        /// <summary>
-        /// Creates a PrintDocument and draws all of the layers for it to print onto.
-        /// </summary>
+        ///// <summary>
+        ///// Creates a PrintDocument and draws all of the layers for it to print onto.
+        ///// </summary>
         private void PrintMap_OnClick(object sender, EventArgs e)
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
@@ -72,9 +72,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //printerGeoCanvas.EndDrawing();
         }
 
-        /// <summary>
-        /// Setup the mapView for a print preview and add a printerOverlay to hold various print layers
-        /// </summary>
+        ///// <summary>
+        ///// Setup the mapView for a print preview and add a printerOverlay to hold various print layers
+        ///// </summary>
         private void SetupMapForPrinting()
         {
             //// Set the map's unit of measurement to meters(Spherical Mercator)
@@ -118,9 +118,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //printerOverlay.PrinterLayers.Add(titleLabel);
         }
 
-        /// <summary>
-        /// Creates various layers from shapefile data and adds them to a mapPrinterLayer that will be able to translate the layers into print commands
-        /// </summary>
+        ///// <summary>
+        ///// Creates various layers from shapefile data and adds them to a mapPrinterLayer that will be able to translate the layers into print commands
+        ///// </summary>
         private void AddMapLayers()
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
@@ -201,9 +201,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //printerOverlay.PrinterLayers.Add(mapPrinterLayer);
         }
 
-        /// <summary>
-        /// Creates a DataGridLayer containing mosquito trap data collected on 5/5/2020
-        /// </summary>
+        ///// <summary>
+        ///// Creates a DataGridLayer containing mosquito trap data collected on 5/5/2020
+        ///// </summary>
         private void AddMosquitoDataGrid()
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];

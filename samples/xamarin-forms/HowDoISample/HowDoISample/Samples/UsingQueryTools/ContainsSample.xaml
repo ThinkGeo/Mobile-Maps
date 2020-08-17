@@ -39,12 +39,12 @@
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Grid.Column="1" Grid.Row="0" Text="Perform a 'Contains' Query">
                         </Label>
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold">Click On The Map To Draw A New Point</Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Draw A New Point"></Label>
                         <Label Grid.Column="1" Grid.Row="2" x:Name="txtNumberOfFeaturesFound"></Label>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

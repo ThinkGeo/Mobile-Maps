@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,89 +25,91 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            //// Add Cloud Maps as a background overlay
-            //var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            //mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+
+            // Add Cloud Maps as a background overlay
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             ///**********************
             // * Landuse LayerOverlay
             // **********************/
 
-            //// Create cityLimits layer
-            //var cityLimits = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/FriscoCityLimits.shp");
+            // Create cityLimits layer
+            var cityLimits = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/FriscoCityLimits.shp"));
 
-            //// Style cityLimits layer
-            //cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Transparent, GeoColors.DimGray, 2);
-            //cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style cityLimits layer
+            cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Transparent, GeoColors.DimGray, 2);
+            cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Project cityLimits layer to Spherical Mercator to match the map projection
-            //cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project cityLimits layer to Spherical Mercator to match the map projection
+            cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //LayerOverlay poiOverlay = new LayerOverlay();
-            //LayerOverlay landuseOverlay = new LayerOverlay();
+            LayerOverlay poiOverlay = new LayerOverlay();
+            LayerOverlay landuseOverlay = new LayerOverlay();
 
-            //// Add cityLimits layer to the landuseGroup overlay
-            //landuseOverlay.Layers.Add(cityLimits);
+            // Add cityLimits layer to the landuseGroup overlay
+            landuseOverlay.Layers.Add(cityLimits);
 
-            //// Create Parks landuse layer
-            //var parks = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Parks.shp");
+            // Create Parks landuse layer
+            var parks = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
 
-            //// Style Parks landuse layer
-            //parks.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(128, GeoColors.Green), GeoColors.Transparent);
-            //parks.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style Parks landuse layer
+            parks.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(new GeoColor(128, GeoColors.Green), GeoColors.Transparent);
+            parks.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Project Parks landuse layer to Spherical Mercator to match the map projection
-            //parks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project Parks landuse layer to Spherical Mercator to match the map projection
+            parks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Add Parks landuse layer to the landuseGroup overlay
-            //landuseOverlay.Layers.Add(parks);
+            // Add Parks landuse layer to the landuseGroup overlay
+            landuseOverlay.Layers.Add(parks);
 
-            //// Add Landuse overlay to the map
-            //mapView.Overlays.Add("landuseOverlay", landuseOverlay);
+            // Add Landuse overlay to the map
+            mapView.Overlays.Add("landuseOverlay", landuseOverlay);
 
             ///******************
             // * POI LayerOverlay
             // ******************/
 
-            //// Create Hotel POI layer
-            //var hotels = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Hotels.shp");
+            // Create Hotel POI layer
+            var hotels = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Hotels.shp"));
 
-            //// Style Hotel POI layer
-            //hotels.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 8, GeoColors.White, 2);
-            //hotels.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style Hotel POI layer
+            hotels.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 8, GeoColors.White, 2);
+            hotels.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Project Hotels POI layer to Spherical Mercator to match the map projection
-            //hotels.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project Hotels POI layer to Spherical Mercator to match the map projection
+            hotels.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Add Hotel POI layer to the poiGroup overlay
-            //poiOverlay.Layers.Add(hotels);
+            // Add Hotel POI layer to the poiGroup overlay
+            poiOverlay.Layers.Add(hotels);
 
-            //// Create School POI layer
-            //var schools = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Schools.shp");
+            // Create School POI layer
+            var schools = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Schools.shp"));
 
-            //// Style School POI layer
-            //schools.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleSquareStyle(GeoColors.Red, 8, GeoColors.White, 2);
-            //schools.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Style School POI layer
+            schools.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleSquareStyle(GeoColors.Red, 8, GeoColors.White, 2);
+            schools.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            //// Project Schools POI layer to Spherical Mercator to match the map projection
-            //schools.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project Schools POI layer to Spherical Mercator to match the map projection
+            schools.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Add School POI layer to the poiGroup overlay
-            //poiOverlay.Layers.Add(schools);
+            // Add School POI layer to the poiGroup overlay
+            poiOverlay.Layers.Add(schools);
 
-            //// Add POI overlay to the map
-            //mapView.Overlays.Add("poiOverlay", poiOverlay);
+            // Add POI overlay to the map
+            mapView.Overlays.Add("poiOverlay", poiOverlay);
 
-            //// Set the map extent
-            //cityLimits.Open();
-            //mapView.CurrentExtent = cityLimits.GetBoundingBox();
-            //cityLimits.Close();
+            // Set the map extent
+            cityLimits.Open();
+            mapView.CurrentExtent = cityLimits.GetBoundingBox();
+            cityLimits.Close();
 
-            //ShowPoi.IsChecked = true;
-            //ShowLandUse.IsChecked = true;
+            ShowPoi.IsChecked = true;
+            ShowLandUse.IsChecked = true;
         }
 
         /// <summary>
@@ -113,17 +117,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void ShowLanduseGroup_Checked(object sender, EventArgs e)
         {
-            //LayerOverlay landuseOverlay = (LayerOverlay)mapView.Overlays["landuseOverlay"];
-            //landuseOverlay.IsVisible = true;
-        }
-
-        /// <summary>
-        /// Show the Landuse overlay
-        /// </summary>
-        private void ShowLanduseGroup_Unchecked(object sender, EventArgs e)
-        {
-            //LayerOverlay landuseOverlay = (LayerOverlay)mapView.Overlays["landuseOverlay"];
-            //landuseOverlay.IsVisible = false;
+           LayerOverlay landuseOverlay = (LayerOverlay)mapView.Overlays["landuseOverlay"];
+           landuseOverlay.IsVisible = ShowLandUse.IsChecked;
         }
 
         /// <summary>
@@ -131,17 +126,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void ShowPoiGroup_Checked(object sender, EventArgs e)
         {
-            //LayerOverlay poiOverlay = (LayerOverlay)mapView.Overlays["poiOverlay"];
-            //poiOverlay.IsVisible = true;
+            LayerOverlay poiOverlay = (LayerOverlay)mapView.Overlays["poiOverlay"];
+            poiOverlay.IsVisible = ShowPoi.IsChecked;
         }
 
-        /// <summary>
-        /// Show the POI overlay
-        /// </summary>
-        private void ShowPoiGroup_Unchecked(object sender, EventArgs e)
-        {
-            //LayerOverlay poiOverlay = (LayerOverlay)mapView.Overlays["poiOverlay"];
-            //poiOverlay.IsVisible = false;
-        }
+
     }
 }
