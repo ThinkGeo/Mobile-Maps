@@ -20,8 +20,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             SetupMapForPrinting();
             AddPageTitleLabel();
             AddMapLayers();

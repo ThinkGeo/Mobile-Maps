@@ -21,17 +21,18 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
-            //mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            base.OnAppearing();
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            //// Add a simple background overlay
-            //mapView.BackgroundColor = new Color(234, 232, 226);
+            // Add a simple background overlay
+            mapView.BackgroundColor = new Color(234, 232, 226);
 
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
         /// <summary>
@@ -39,9 +40,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayGoogleMaps_Click(object sender, EventArgs e)
         {
-            //GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
-            //mapView.Overlays.Add(googleMapsOverlay);
-            //mapView.Refresh();
+           // GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
+           // mapView.Overlays.Add(googleMapsOverlay);
+           // mapView.Refresh();
         }
     }
 }

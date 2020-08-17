@@ -22,8 +22,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         // Launcher.OpenAsync is provided by Xamarin.Essentials.
         public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();

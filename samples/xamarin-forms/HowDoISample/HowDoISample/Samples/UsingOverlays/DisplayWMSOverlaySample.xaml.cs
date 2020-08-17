@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
+using ThinkGeo.UI.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,17 +21,18 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            base.OnAppearing();
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Add a simple background overlay
-            //mapView.BackgroundColor = new Color(234, 232, 226);
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            // Add a simple background overlay
+            mapView.BackgroundColor = new Color(234, 232, 226);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            //// Create a WmsOverlay and add it to the map.
+            // Create a WmsOverlay and add it to the map.
             //WmsOverlay wmsOverlay = new WmsOverlay();
             //wmsOverlay.ServerUri = new Uri("http://ows.mundialis.de/services/service");
             //wmsOverlay.Parameters.Add("VERSION", "1.3.0");

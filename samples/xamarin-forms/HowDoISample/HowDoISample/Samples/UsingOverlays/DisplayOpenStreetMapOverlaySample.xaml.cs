@@ -20,16 +20,17 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
-            //mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            base.OnAppearing();
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            //// Add a simple background overlay
-            //mapView.BackgroundColor = new Color(234, 232, 226);
-            //// Set the map extent
-            //mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            // Add a simple background overlay
+            mapView.BackgroundColor = new Color(234, 232, 226);
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
         /// <summary>
         /// Create an OpenStretMaps overlay and add it to the map view.

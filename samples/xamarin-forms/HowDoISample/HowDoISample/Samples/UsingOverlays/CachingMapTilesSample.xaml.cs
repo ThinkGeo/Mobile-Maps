@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,15 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map extent
@@ -44,7 +45,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void UseCache_Checked(object sender, EventArgs e)
         {
-            thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache("cache", "CloudMapsImages", RasterTileFormat.Png);
+            thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsImages", RasterTileFormat.Png);
         }
 
         /// <summary>

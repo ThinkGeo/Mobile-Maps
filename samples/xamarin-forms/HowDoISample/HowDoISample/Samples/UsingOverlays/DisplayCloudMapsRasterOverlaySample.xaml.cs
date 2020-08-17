@@ -23,8 +23,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
