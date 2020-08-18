@@ -33,8 +33,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco 2010 Census Housing Units.shp"));
-            LegendAdornmentLayer legend = new LegendAdornmentLayer();
+            var housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco 2010 Census Housing Units.shp"));
+            var legend = new LegendAdornmentLayer();
 
             // Setup the legend adornment
             legend.Title = new LegendItem()
@@ -65,7 +65,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Adds a ClassBreakStyle to the housingUnitsLayer that changes colors based on the numerical value of the H_UNITS column as they fall within the range of a ClassBreak
         /// </summary>
-        private void AddClassBreakStyle(ShapeFileFeatureLayer layer, LegendAdornmentLayer legend)
+        private static void AddClassBreakStyle(ShapeFileFeatureLayer layer, LegendAdornmentLayer legend)
         {
             // Create the ClassBreakStyle based on the H_UNITS numerical column
             var housingUnitsStyle = new ClassBreakStyle("H_UNITS");
@@ -74,7 +74,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             var colors = GeoColor.GetColorsInHueFamily(GeoColors.Red, classBreakIntervals.Count()).Reverse().ToList();
 
             // Create ClassBreaks for each of the classBreakIntervals
-            for (int i = 0; i < classBreakIntervals.Count(); i++)
+            for (var i = 0; i < classBreakIntervals.Count(); i++)
             {
                 // Create the classBreak using one of the intervals and colors defined above
                 var classBreak = new ClassBreak(classBreakIntervals[i], AreaStyle.CreateSimpleAreaStyle(new GeoColor(192, colors[i]), GeoColors.White));

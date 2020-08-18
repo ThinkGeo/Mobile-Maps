@@ -66,8 +66,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private async void ZoomToScale_Click(object sender, EventArgs e)
         {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay(500);
+            await CollapseExpander();
 
             mapView.ZoomToScale(Convert.ToDouble(zoomScale.Text));
         }
@@ -76,8 +75,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private async void LayerBoundingBox_Click(object sender, EventArgs e)
         {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay(500);
+            await CollapseExpander();
 
             mapView.CurrentExtent = friscoCityBoundary.GetBoundingBox();
             mapView.Refresh();
@@ -88,8 +86,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private async void FeatureBoundingBox_Click(object sender, EventArgs e)
         {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay(500);
+            await CollapseExpander();
 
             var feature = friscoCityBoundary.FeatureSource.GetFeatureById(featureIds.SelectedItem.ToString(), ReturningColumnsType.NoColumns);
             mapView.CurrentExtent = feature.GetBoundingBox();
@@ -101,8 +98,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private async void ZoomToLatLon_Click(object sender, EventArgs e)
         {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay(500);
+            await CollapseExpander();
 
             // Create a PointShape from the lat-lon
             var latlonPoint = new PointShape(Convert.ToDouble(latitude.Text), Convert.ToDouble(longitude.Text));
@@ -117,5 +113,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.ZoomTo(convertedPoint, Convert.ToDouble(latlonScale.Text));
         }
 
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
+        }
     }
 }

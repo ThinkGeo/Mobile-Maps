@@ -170,7 +170,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// When a route segment is selected in the UI, highlight it
         /// </summary>
-        private void lsbRouteSegments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lsbRouteSegments_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
             ListView routeSegments = (ListView)sender;
             if (routeSegments.SelectedItem != null)

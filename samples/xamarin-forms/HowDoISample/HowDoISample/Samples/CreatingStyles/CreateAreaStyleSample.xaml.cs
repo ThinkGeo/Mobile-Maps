@@ -36,10 +36,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            ShapeFileFeatureLayer friscoSubdivisions;
-
             // Create a layer with polygon data
-            friscoSubdivisions = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
+            var friscoSubdivisions = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
 
             // Project the layer's data to match the projection of the map
             friscoSubdivisions.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -59,7 +57,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Create a areaStyle and add it to the Historic Sites layer
         /// </summary>
-        private void AddAreaStyle(ShapeFileFeatureLayer layer)
+        private static void AddAreaStyle(ShapeFileFeatureLayer layer)
         {
             // Create a area style
             var areaStyle = new AreaStyle(GeoPens.DimGray, new GeoSolidBrush(new GeoColor(128, GeoColors.ForestGreen)));

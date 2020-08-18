@@ -17,9 +17,8 @@
                        HorizontalOptions="StartAndExpand"/>
             </Frame>
 
-
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView  x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
 
         </StackLayout>
     </ContentPage.Content>

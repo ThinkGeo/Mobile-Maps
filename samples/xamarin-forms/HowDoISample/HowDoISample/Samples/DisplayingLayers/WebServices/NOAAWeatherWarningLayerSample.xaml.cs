@@ -21,11 +21,13 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //// It is important to set the map unit first to either feet, meters or decimal degrees.
-            //mapView.MapUnit = GeographyUnit.Meter;
-            //  mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            base.OnAppearing();
+
+            // It is important to set the map unit first to either feet, meters or decimal degrees.
+            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             //// Create background world map with vector tile requested from ThinkGeo Cloud Service.
             //ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);

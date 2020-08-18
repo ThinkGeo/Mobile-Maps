@@ -21,13 +21,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        private void MapView_Loaded(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
+
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            // Set the zoom level set on the map to make sure its compatable with the OSM zoom levels.
+            // Set the zoom level set on the map to make sure its compatible with the OSM zoom levels.
             mapView.ZoomLevelSet = new OpenStreetMapsZoomLevelSet();
 
             // Create a new overlay that will hold our new layer and add it to the map and set the tile size to match up with the OSM til size.
