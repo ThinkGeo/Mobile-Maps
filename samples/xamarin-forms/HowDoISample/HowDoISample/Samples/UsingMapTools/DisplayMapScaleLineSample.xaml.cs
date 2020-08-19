@@ -42,7 +42,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayScaleLine_Checked(object sender, EventArgs e)
         {
-           // mapView.MapTools.ScaleLine.IsEnabled = true;
+            //mapView.MapTools.ScaleLine.IsEnabled = true;
         }
 
         /// <summary>

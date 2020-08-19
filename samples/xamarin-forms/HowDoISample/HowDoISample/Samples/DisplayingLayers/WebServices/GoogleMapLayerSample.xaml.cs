@@ -15,25 +15,29 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GoogleMapLayerSample : ContentPage
     {
-        // Launcher.OpenAsync is provided by Xamarin.Essentials.
-        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
         public GoogleMapLayerSample()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// ...
-        /// </summary>
-        private void btnActivate_Click(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
             // Sets the map zoom level set to the Google maps zoom level set.
             mapView.ZoomLevelSet = new GoogleMapsZoomLevelSet();
 
+            // Set the current extent to the whole world.
+            mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015, 3910065.3144544438);
+        }
+
+        /// <summary>
+        /// ...
+        /// </summary>
+        private void btnActivate_OnClicked(object sender, EventArgs e)
+        {
             // Clear the current overlay
             mapView.Overlays.Clear();
 
@@ -42,25 +46,22 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add("WorldOverlay", worldOverlay);
 
             // Create the new layer.
-            GoogleMapsLayer worldLayer = new GoogleMapsLayer();
+            GoogleMapsLayer googleMapsLayer = new GoogleMapsLayer();
 
             // Add the layer to the overlay we created earlier.
-            worldOverlay.Layers.Add("WorldLayer", worldLayer);
+            worldOverlay.Layers.Add("GoogleLayer", googleMapsLayer);
 
             // Set the client ID and Private key from the text box on the sample.
-            worldLayer.ClientId = txtClientId.Text;
-            worldLayer.PrivateKey = txtPrivateKey.Text;
-
-            // Set the current extent to the whole world.
-            mapView.CurrentExtent = new RectangleShape(-10000000, 10000000, 10000000, -10000000);
+            googleMapsLayer.ApiKey = txtClientId.Text;
+            googleMapsLayer.UriSigningSecret = txtUriSigningSecret.Text;
 
             // Refresh the map.
             mapView.Refresh();
         }
 
-        private void BtnActivate_Clicked(object sender, EventArgs e)
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs eventArgs)
         {
-
+            await Launcher.OpenAsync("https://developers.google.com/maps/documentation/maps-static/get-api-key");
         }
     }
 }

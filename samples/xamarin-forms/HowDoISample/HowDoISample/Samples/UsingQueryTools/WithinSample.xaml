@@ -36,19 +36,20 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Perform a 'Within' Query"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Start Drawing a New Polygon"></Label>
-                        <Label Grid.Column="1" Grid.Row="2" FontAttributes="Bold" Text="Double-Click On The Map To Finish Drawing"></Label>
-                        <Label Grid.Column="1" Grid.Row="3" x:Name="txtNumberOfFeaturesFound"></Label>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Tap On The Map To Start Drawing a New Polygon"></Label>
 
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Italic" Text="Long Press On The Map To Finish Drawing"></Label>
+
+                        <Label Grid.Column="1" Grid.Row="2" FontAttributes="Bold" x:Name="txtNumberOfFeaturesFound"></Label>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

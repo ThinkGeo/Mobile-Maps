@@ -36,10 +36,9 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0"  Text="Union Controls:" FontSize="16"/>
+                    <Grid>
+                        <Button Grid.Column="1" Grid.Row="0" x:Name="unionShapes" Text="Union" Clicked="UnionShapes_OnClick"></Button>
 
-                        <Button Grid.Column="1" Grid.Row="1" x:Name="unionShapes" Text="Union" Clicked="UnionShapes_OnClick"></Button>
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -47,7 +46,6 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>

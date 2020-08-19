@@ -36,19 +36,15 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Perform a 'Touches' Query"></Label>
-                        <Label Grid.Column="1" Grid.Row="3" x:Name="txtNumberOfFeaturesFound"></Label>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Bold" x:Name="txtNumberOfFeaturesFound"></Label>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>

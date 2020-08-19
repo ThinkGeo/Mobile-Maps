@@ -40,7 +40,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayPanZoomBar_Checked(object sender, EventArgs e)
         {
-            //mapView.MapTools.PanZoomBar.IsEnabled = true;
+            mapView.MapTools.ZoomMapTool.IsEnabled = true;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayPanZoomBar_Unchecked(object sender, EventArgs e)
         {
-          // mapView.MapTools.PanZoomBar.IsEnabled = false;
+            mapView.MapTools.ZoomMapTool.IsEnabled = false;
         }
     }
 }

@@ -54,8 +54,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            
-
             // Add each feature layer to it's own overlay
             // We do this so we can control and refresh/redraw each layer individually
             LayerOverlay zoningOverlay = new LayerOverlay();
@@ -116,7 +114,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             highlightedFeaturesOverlay.Refresh();
 
             // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = string.Format("Number of features containing the drawn shape: {0}", features.Count());
+            txtNumberOfFeaturesFound.Text = $"Number of features containing the drawn shape: {features.Count()}";
         }
 
         /// <summary>
@@ -152,9 +150,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             GetFeaturesContaining(e.PointInWorldCoordinate);
         }
 
-        ///// <summary>
-        ///// Create a new map marker using preloaded image assets
-        ///// </summary>
+        /// <summary>
+        /// Create a new map marker using preloaded image assets
+        /// </summary>
         private Marker CreateNewMarker(PointShape point)
         {
             return new Marker

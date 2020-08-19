@@ -28,9 +28,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             AddMapLayers();
             AddMosquitoDataGrid();
         }
-        ///// <summary>
-        ///// Creates a PrintDocument and draws all of the layers for it to print onto.
-        ///// </summary>
+
+        /// <summary>
+        /// Creates a PrintDocument and draws all of the layers for it to print onto.
+        /// </summary>
         private void PrintMap_OnClick(object sender, EventArgs e)
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
@@ -72,33 +73,32 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //printerGeoCanvas.EndDrawing();
         }
 
-        ///// <summary>
-        ///// Setup the mapView for a print preview and add a printerOverlay to hold various print layers
-        ///// </summary>
+        /// <summary>
+        /// Setup the mapView for a print preview and add a printerOverlay to hold various print layers
+        /// </summary>
         private void SetupMapForPrinting()
         {
-            //// Set the map's unit of measurement to meters(Spherical Mercator)
-            //mapView.MapUnit = GeographyUnit.Meter;
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            //// Set the map's ZoomLevelSet to a set of common printer zoom settings
-            //mapView.ZoomLevelSet =
-            //    new PrinterZoomLevelSet(GeographyUnit.Meter, PrinterHelper.GetPointsPerGeographyUnit(GeographyUnit.Meter));
-            //mapView.MinimumScale = mapView.ZoomLevelSet.ZoomLevel20.Scale;
+            // Set the map's ZoomLevelSet to a set of common printer zoom settings
+            mapView.ZoomLevelSet = new PrinterZoomLevelSet(GeographyUnit.Meter, PrinterHelper.GetPointsPerGeographyUnit(GeographyUnit.Meter));
+            mapView.MinimumScale = mapView.ZoomLevelSet.ZoomLevel20.Scale;
 
             //PrinterInteractiveOverlay printerOverlay = new PrinterInteractiveOverlay();
-            //PagePrinterLayer pageLayer = new PagePrinterLayer(PrinterPageSize.AnsiA, PrinterOrientation.Portrait);
+            PagePrinterLayer pageLayer = new PagePrinterLayer(PrinterPageSize.AnsiA, PrinterOrientation.Portrait);
 
-            //// Style the pageLayer to appear to look like a piece of paper
-            //pageLayer.BackgroundMask = AreaStyle.CreateSimpleAreaStyle(GeoColors.White, GeoColors.Black);
+            // Style the pageLayer to appear to look like a piece of paper
+            pageLayer.BackgroundMask = AreaStyle.CreateSimpleAreaStyle(GeoColors.White, GeoColors.Black);
 
-            //// Add the pageLayer to the printerOverlay
+            // Add the pageLayer to the printerOverlay
             //printerOverlay.PrinterLayers.Add("pageLayer", pageLayer);
 
-            //// Add the printerOverlay to the map
+            // Add the printerOverlay to the map
             //mapView.InteractiveOverlays.Add("printerOverlay", printerOverlay);
 
-            //// Set the map extent
-            //mapView.CurrentExtent = pageLayer.GetPosition().GetBoundingBox();
+            // Set the map extent
+            mapView.CurrentExtent = pageLayer.GetPosition().GetBoundingBox();
         }
 
         /// <summary>
@@ -106,27 +106,27 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void AddPageTitleLabel()
         {
-            //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
-            //PagePrinterLayer pageLayer = (PagePrinterLayer)printerOverlay.PrinterLayers["pageLayer"];
-
-            //var titleLabel = new LabelPrinterLayer("Frisco Mosquito Report - 5/5/2020", new GeoFont("Verdana", 8), GeoBrushes.Black)
-            //{
-            //    PrinterWrapMode = PrinterWrapMode.AutoSizeText
-            //};
-            //titleLabel.SetPosition(7.5, .5, 0, 4.75, PrintingUnit.Inch);
-
-            //printerOverlay.PrinterLayers.Add(titleLabel);
+            // PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
+            // PagePrinterLayer pageLayer = (PagePrinterLayer)printerOverlay.PrinterLayers["pageLayer"];
+            //
+            // var titleLabel = new LabelPrinterLayer("Frisco Mosquito Report - 5/5/2020", new GeoFont("Verdana", 8), GeoBrushes.Black)
+            // {
+            //     PrinterWrapMode = PrinterWrapMode.AutoSizeText
+            // };
+            // titleLabel.SetPosition(7.5, .5, 0, 4.75, PrintingUnit.Inch);
+            //
+            // printerOverlay.PrinterLayers.Add(titleLabel);
         }
 
-        ///// <summary>
-        ///// Creates various layers from shapefile data and adds them to a mapPrinterLayer that will be able to translate the layers into print commands
-        ///// </summary>
+        /// <summary>
+        /// Creates various layers from shapefile data and adds them to a mapPrinterLayer that will be able to translate the layers into print commands
+        /// </summary>
         private void AddMapLayers()
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];
             //PagePrinterLayer pageLayer = (PagePrinterLayer)printerOverlay.PrinterLayers["pageLayer"];
 
-            ///***************************
+            //***************************
             // * Create cityLimits layer *
             // ***************************/
             //var cityLimits = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/FriscoCityLimits.shp");
@@ -139,7 +139,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //// Project cityLimits layer to Spherical Mercator to match the mapLayer projection
             //cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            ///************************
+            //************************
             // * Create streets layer *
             // ************************/
             //var streets = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Streets.shp");
@@ -154,7 +154,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //// Project streets layer to Spherical Mercator to match the mapLayer projection
             //streets.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            ///**********************
+            //**********************
             // * Create parks layer *
             // **********************/
             //var parks = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Parks.shp");
@@ -166,7 +166,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //// Project parks layer to Spherical Mercator to match the mapLayer projection
             //parks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            ///*************************
+            //*************************
             // * Create mosquitoSightings layer *
             // *************************/
             //var mosquitoSightings = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Frisco_Mosquitos.shp");
@@ -183,7 +183,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //// Project parks layer to Spherical Mercator to match the mapLayer projection
             //mosquitoSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            ///********************************
+            //********************************
             // * Create mapPrinterLayer layer *
             // *******************************/
             //// Open cityLimits layer to get the bounding box for the mapLayer
@@ -201,9 +201,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             //printerOverlay.PrinterLayers.Add(mapPrinterLayer);
         }
 
-        ///// <summary>
-        ///// Creates a DataGridLayer containing mosquito trap data collected on 5/5/2020
-        ///// </summary>
+        /// <summary>
+        /// Creates a DataGridLayer containing mosquito trap data collected on 5/5/2020
+        /// </summary>
         private void AddMosquitoDataGrid()
         {
             //PrinterInteractiveOverlay printerOverlay = (PrinterInteractiveOverlay)mapView.InteractiveOverlays["printerOverlay"];

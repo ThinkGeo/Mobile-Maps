@@ -43,7 +43,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayMouseCoordinates_Checked(object sender, EventArgs e)
         {
-           // mapView.MapTools.MouseCoordinate.IsEnabled = true;
+            mapView.MapTools.CenterCoordinate.IsEnabled = true;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DisplayMouseCoordinates_Unchecked(object sender, EventArgs e)
         {
-            //mapView.MapTools.MouseCoordinate.IsEnabled = false;
+            mapView.MapTools.CenterCoordinate.IsEnabled = false;
         }
 
         /// <summary>
@@ -59,37 +59,37 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void CoordinateType_SelectionChanged(object sender, EventArgs e)
         {
-            //switch (((ComboBoxItem)coordinateType.SelectedItem).Content)
-            //{
-            //    case "(lat), (lon)":
-            //        // Set to Lat, Lon format
-            //        mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.LatitudeLongitude;
-            //        break;
-            //    case "(lon), (lat)":
-            //        // Set to Lon, Lat format
-            //        mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.LongitudeLatitude;
-            //        break;
-            //    case "(degrees), (minutes), (seconds)":
-            //        // Set to Degrees, Minutes, Seconds format
-            //        mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.DegreesMinutesSeconds;
-            //        break;
-            //    case "(custom)":
-            //        // Set to a custom format
-            //        mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.Custom;
-            //        // Add an EventHandler to handle what the formatted output should look like
-            //        mapView.MapTools.MouseCoordinate.CustomFormatted += new System.EventHandler<CustomFormattedMouseCoordinateMapToolEventArgs>(MouseCoordinate_CustomMouseCoordinateFormat);
-            //        break;
-            //}
+            // switch (((ComboBoxItem)coordinateType.SelectedItem).Content)
+            // {
+            //     case "(lat), (lon)":
+            //         // Set to Lat, Lon format
+            //         mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.LatitudeLongitude;
+            //         break;
+            //     case "(lon), (lat)":
+            //         // Set to Lon, Lat format
+            //         mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.LongitudeLatitude;
+            //         break;
+            //     case "(degrees), (minutes), (seconds)":
+            //         // Set to Degrees, Minutes, Seconds format
+            //         mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.DegreesMinutesSeconds;
+            //         break;
+            //     case "(custom)":
+            //         // Set to a custom format
+            //         mapView.MapTools.MouseCoordinate.MouseCoordinateType = MouseCoordinateType.Custom;
+            //         // Add an EventHandler to handle what the formatted output should look like
+            //         mapView.MapTools.MouseCoordinate.CustomFormatted += new System.EventHandler<CustomFormattedMouseCoordinateMapToolEventArgs>(MouseCoordinate_CustomMouseCoordinateFormat);
+            //         break;
+            // }
         }
 
-        /// <summary>
-        /// Event handler that formats the MouseCoordinates to use WorldCoordinates and changes the Foreground color to red.
-        /// Other modifications to the display of the MouseCoordinates can be safely done here.
-        /// </summary>
-        //private void MouseCoordinate_CustomMouseCoordinateFormat(object sender, CustomFormattedMouseCoordinateMapToolEventArgs e)
-        //{
-        //    ((MouseCoordinateMapTool)sender).Foreground = new SolidColorBrush(Colors.Red);
-        //    e.Result = $"X: {e.WorldCoordinate.X.ToString("N0")}, Y: {e.WorldCoordinate.Y.ToString("N0")}";
-        //}
+        // /// <summary>
+        // /// Event handler that formats the MouseCoordinates to use WorldCoordinates and changes the Foreground color to red.
+        // /// Other modifications to the display of the MouseCoordinates can be safely done here.
+        // /// </summary>
+        // private void MouseCoordinate_CustomMouseCoordinateFormat(object sender, CustomFormattedMouseCoordinateMapToolEventArgs e)
+        // {
+        //     ((MouseCoordinateMapTool)sender).Foreground = new SolidColorBrush(Colors.Red);
+        //     e.Result = $"X: {e.WorldCoordinate.X.ToString("N0")}, Y: {e.WorldCoordinate.Y.ToString("N0")}";
+        // }
     }
 }

@@ -36,26 +36,22 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Calculate Length Controls:" FontSize="16" FontAttributes="Bold"/>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Text="Tap on a feature to get it's length displayed in the TextBox below." FontAttributes="Italic"></Label>
 
-                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="Click on a feature to get it's length displayed in the TextBox below."></Label>
-
-                        <Label Grid.Column="1" Grid.Row="2" Text="Length: "  VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="lengthResult" IsReadOnly="True"  VerticalOptions="Center"></Entry>
+                        <Label Grid.Column="1" Grid.Row="1" Text="Length: " FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name="lengthResult" IsReadOnly="True"  VerticalOptions="Center"></Entry>
 
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="90" />
-                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>

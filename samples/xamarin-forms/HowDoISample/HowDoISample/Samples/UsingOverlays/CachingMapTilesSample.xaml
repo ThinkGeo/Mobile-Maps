@@ -13,15 +13,15 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="4">
-                        <Label Text="Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times. Saved tile images can be found in the cache folder within this project's debug folder." 
+                        <Label Text="Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the device and reuse them for faster rendering times."
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>
                         <BoxView Color="LightGray" 
                                  WidthRequest="1" 
-                                 VerticalOptions="Center" 
+                                 VerticalOptions="Center"
                                  HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Center" HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
                                              Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
@@ -37,22 +37,11 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Text="Tile Cache Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
-                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                    <Grid>
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
                             <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_Checked"></CheckBox>
                             <Label Text="Use Tile Cache" VerticalOptions="Center" ></Label>
                         </StackLayout>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>
             </Expander>

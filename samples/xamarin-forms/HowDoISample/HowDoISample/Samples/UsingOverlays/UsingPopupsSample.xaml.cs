@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,37 +43,38 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void AddHotelPopups()
         {
-            //// Create a PopupOverlay
-            //var popupOverlay = new PopupOverlay();
+            // Create a PopupOverlay
+            var popupOverlay = new PopupOverlay();
 
-            //// Create a layer in order to query the data
-            //var hotelsLayer = new ShapeFileFeatureLayer(@"../../../Data/Shapefile/Hotels.shp");
+            // Create a layer in order to query the data
+            var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Hotels.shp"));
 
-            //// Project the data to match the map's projection
-            //hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            // Project the data to match the map's projection
+            hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-            //// Open the layer so that we can begin querying
-            //hotelsLayer.Open();
+            // Open the layer so that we can begin querying
+            hotelsLayer.Open();
 
-            //// Query all the hotel features
-            //var hotelFeatures = hotelsLayer.QueryTools.GetAllFeatures(ReturningColumnsType.AllColumns);
+            // Query all the hotel features
+            var hotelFeatures = hotelsLayer.QueryTools.GetAllFeatures(ReturningColumnsType.AllColumns);
 
-            //// Add each hotel feature to the popupOverlay
-            //foreach (var feature in hotelFeatures)
-            //{
-            //    var popup = new Popup(feature.GetShape().GetCenterPoint())
-            //    {
-            //        Content = feature.ColumnValues["NAME"]
-            //    };
-            //    popupOverlay.Popups.Add(popup);
-            //}
+            // Add each hotel feature to the popupOverlay
+            foreach (var feature in hotelFeatures)
+            {
+                var popup = new Popup()
+                {
+                    Position = feature.GetShape().GetCenterPoint(),
+                    Content = feature.ColumnValues["NAME"]
+                };
+                popupOverlay.Popups.Add(popup);
+            }
 
-            //// Close the hotel layer
-            //hotelsLayer.Close();
+            // Close the hotel layer
+            hotelsLayer.Close();
 
-            //// Add the popupOverlay to the map and refresh
-            //mapView.Overlays.Add(popupOverlay);
-            //mapView.Refresh();
+            // Add the popupOverlay to the map and refresh
+            mapView.Overlays.Add(popupOverlay);
+            mapView.Refresh();
         }
     }
 }

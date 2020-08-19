@@ -36,10 +36,13 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Buffer Distance (m):" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="bufferDistance" Text="1000"></Entry>
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="bufferShape" Text="Buffer" Clicked="BufferShape_OnClick"></Button>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Buffer Distance (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="0" x:Name="bufferDistance" Text="1000"></Entry>
+
+                        <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="bufferShape" Text="Buffer" Clicked="BufferShape_OnClick"></Button>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="*" />
@@ -47,7 +50,6 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>

@@ -36,12 +36,12 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Perform a 'Contains' Query">
-                        </Label>
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Draw A New Point"></Label>
-                        <Label Grid.Column="1" Grid.Row="2" x:Name="txtNumberOfFeaturesFound"></Label>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Italic" Text="Click On The Map To Draw A New Point"></Label>
 
+                        <Label Grid.Column="1" Grid.Row="2" x:Name="txtNumberOfFeaturesFound" FontAttributes="Bold"></Label>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="*" />

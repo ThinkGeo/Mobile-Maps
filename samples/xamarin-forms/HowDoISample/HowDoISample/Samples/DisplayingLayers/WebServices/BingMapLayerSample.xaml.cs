@@ -16,8 +16,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BingMapLayerSample : ContentPage
     {
-        // Launcher.OpenAsync is provided by Xamarin.Essentials.
-        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
         public BingMapLayerSample()
         {
             InitializeComponent();
@@ -51,6 +49,11 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
             // Refresh the map.
             mapView.Refresh();
+        }
+
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await Launcher.OpenAsync("https://www.bingmapsportal.com/");
         }
     }
 }

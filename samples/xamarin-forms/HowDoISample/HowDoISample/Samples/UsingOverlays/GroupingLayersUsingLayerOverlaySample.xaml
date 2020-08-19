@@ -36,23 +36,21 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="0" Grid.Row="0" Text="LayerOverlay Controls:" FontAttributes="Bold" FontSize="16"/>
-                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <Grid>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                             <CheckBox x:Name="ShowPoi" CheckedChanged="ShowPoiGroup_Checked" VerticalOptions="Center"></CheckBox>
                             <Label Text="Show POI Group" VerticalOptions="Center"></Label>
                         </StackLayout>
-                        <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                             <CheckBox x:Name="ShowLandUse"  CheckedChanged="ShowLanduseGroup_Checked" VerticalOptions="Center"></CheckBox>
                             <Label Text="Show Landuse Group" VerticalOptions="Center"></Label>
                         </StackLayout>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>

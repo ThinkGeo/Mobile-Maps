@@ -36,15 +36,15 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Get Features Within a Set Distance"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Click On The Map To Draw A New Point"></Label>
-                        <Label Grid.Column="1" Grid.Row="2" Text="Search Radius: (m)"/>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Tap On The Map To Draw A New Point"></Label>
+
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Search Radius: (m)"/>
                        
-                        <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid Grid.Column="1" Grid.Row="2">
                             <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=searchRadius}" Text="{Binding Path=Value}"></Label>
                             <Slider Grid.Column="0" Grid.Row="0" x:Name="searchRadius" Maximum="1600" Minimum="100" Value="400"></Slider>
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -54,16 +54,16 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                         </Grid>
-                        <Label Grid.Column="1" Grid.Row="5" x:Name="txtNumberOfFeaturesFound"></Label>
 
+                        <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" x:Name="txtNumberOfFeaturesFound"></Label>
+
+                        <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
