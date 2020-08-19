@@ -44,7 +44,7 @@
                         <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" SelectedItem="lsbHotels_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="180">
+                                    <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" ></RowDefinition>
                                             <RowDefinition Height="Auto" ></RowDefinition>

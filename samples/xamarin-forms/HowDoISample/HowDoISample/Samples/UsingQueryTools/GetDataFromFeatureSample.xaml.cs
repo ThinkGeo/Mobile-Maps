@@ -93,19 +93,20 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 parkInfoString.AppendLine(String.Format("{0}: {1}", column.Key, column.Value));
             }
 
-            // Create a new popup with the park info string
-            //PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
+            //Create a new popup with the park info string
+           //PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
             //Popup popup = new Popup(feature.GetShape().GetCenterPoint());
             //popup.Content = parkInfoString.ToString();
             //popup.FontSize = 10d;
             //popup.FontFamily = new System.Windows.Media.FontFamily("Verdana");
 
-            // Clear the popup overlay and add the new popup to it
+            ////Clear the popup overlay and add the new popup to it
             //popupOverlay.Popups.Clear();
-           // popupOverlay.Popups.Add(popup);
+            //popupOverlay.Popups.Add(popup);
 
-            // Refresh the overlay to redraw the popups
+            //Refresh the overlay to redraw the popups
             //popupOverlay.Refresh();
+
         }
 
         /// <summary>

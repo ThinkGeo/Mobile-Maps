@@ -62,7 +62,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             projectionConverter.Close();
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10779646.71, 3920258.95, -10774442.97, 3915699.48);
+           // mapView.CurrentExtent = new RectangleShape(-10779646.71, 3920258.95, -10774442.97, 3915699.48);
 
             // Create a layer to hold the feature we will perform the spatial query against
             InMemoryFeatureLayer queryFeatureLayer = new InMemoryFeatureLayer();

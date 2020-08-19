@@ -47,7 +47,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
+            //mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
 
             // Create a layer to hold the feature we will perform the spatial query against
             InMemoryFeatureLayer queryFeatureLayer = new InMemoryFeatureLayer();
@@ -161,13 +161,13 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Set the map to 'Polygon Drawing Mode' when the user clicks on the map without panning
         /// </summary>
-        //private void MapView_OnMapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    if (!(mapView.TrackOverlay.TrackMode == TrackMode.Polygon))
-        //    {
-        //        // Set the drawing mode to 'Polygon'
-        //        mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
-        //    }
-        //}
+        private void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
+        {
+            if (!(mapView.TrackOverlay.TrackMode == TrackMode.Polygon))
+            {
+                // Set the drawing mode to 'Polygon'
+                mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
+            }
+        }
     }
 }
