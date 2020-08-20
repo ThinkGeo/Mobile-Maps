@@ -87,6 +87,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Refresh and redraw the map
             mapView.Refresh();
         }
+
         /// <summary>
         /// When a hotel is selected in the UI, center the map on it
         /// </summary>

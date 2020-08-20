@@ -36,8 +36,8 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="0" Grid.Row="0" Text="Click on a Park to View More Information"></Label>
+                    <Grid>
+                        <Label Grid.Column="0" Grid.Row="0" FontAttributes="Italic" Text="Tap on a Park to View More Information"></Label>
 
                         <!-- Grid Layout -->
                         <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_OnMapSingleTap"></ThinkGeoUI:MapView>
 
         </StackLayout>
     </ContentPage.Content>

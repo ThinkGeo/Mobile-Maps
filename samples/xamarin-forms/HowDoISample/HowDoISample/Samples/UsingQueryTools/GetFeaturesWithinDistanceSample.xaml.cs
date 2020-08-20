@@ -112,7 +112,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             highlightedFeaturesOverlay.Refresh();
 
             // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = string.Format("Number of features within distance of the drawn shape: {0}", features.Count());
+            txtNumberOfFeaturesFound.Text = $"Number of features within distance of the drawn shape: {features.Count()}";
         }
 
         private void GetFeaturesWithinDistance(PointShape point)
@@ -151,7 +151,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             return new Marker()
             {
                 Position = point,
-                ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png"),
                 YOffset = -17
             };
         }

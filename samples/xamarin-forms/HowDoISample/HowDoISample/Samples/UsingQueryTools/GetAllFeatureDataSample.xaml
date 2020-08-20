@@ -36,31 +36,33 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid>
                         <Label Grid.Column="1" Grid.Row="0" Text="Frisco Hotels Feature Data"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Text="Select a hotel from the list to zoom to that location"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Italic" Text="Select a hotel from the list to zoom to that location"></Label>
                         
                         <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" SelectedItem="lsbHotels_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="{Binding Path=Name}" FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
-                                        <Label Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
-                                    </Grid>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Path=Name}" FontAttributes="Bold"/>
+                                            <Label Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
+                                            <Label Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
+                                        </Grid>
+                                    </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

@@ -119,7 +119,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             highlightedFeaturesOverlay.Refresh();
 
             // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = string.Format("Number of features within the drawn shape: {0}", features.Count());
+            txtNumberOfFeaturesFound.Text = $"Number of features within the drawn shape: {features.Count()}";
         }
 
         /// <summary>
@@ -157,10 +157,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// Set the map to 'Polygon Drawing Mode' when the user clicks on the map without panning
         /// </summary>
-
         private void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
         {
-            if (!(mapView.TrackOverlay.TrackMode == TrackMode.Polygon))
+            if (mapView.TrackOverlay.TrackMode != TrackMode.Polygon)
             {
                 // Set the drawing mode to 'Polygon'
                 mapView.TrackOverlay.TrackMode = TrackMode.Polygon;

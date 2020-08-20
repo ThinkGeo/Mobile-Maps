@@ -56,7 +56,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Set the map extent to the bounding box of the parks
             parksLayer.Open();
             mapView.CurrentExtent = parksLayer.GetBoundingBox();
-            //mapView.ZoomIn();
+            // mapView.ZoomIn();
             parksLayer.Close();
 
             // Refresh and redraw the map
@@ -90,38 +90,36 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             // Add all attribute pairs to the info string
             foreach (var column in feature.ColumnValues)
             {
-                parkInfoString.AppendLine(String.Format("{0}: {1}", column.Key, column.Value));
+                parkInfoString.AppendLine($"{column.Key}: {column.Value}");
             }
 
             //Create a new popup with the park info string
-           //PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
-            //Popup popup = new Popup(feature.GetShape().GetCenterPoint());
-            //popup.Content = parkInfoString.ToString();
-            //popup.FontSize = 10d;
-            //popup.FontFamily = new System.Windows.Media.FontFamily("Verdana");
+            PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
+            Popup popup = new Popup() { Position = feature.GetShape().GetCenterPoint()};
+            popup.Content = parkInfoString.ToString();
 
-            ////Clear the popup overlay and add the new popup to it
-            //popupOverlay.Popups.Clear();
-            //popupOverlay.Popups.Add(popup);
+            //Clear the popup overlay and add the new popup to it
+            popupOverlay.Popups.Clear();
+            popupOverlay.Popups.Add(popup);
 
             //Refresh the overlay to redraw the popups
-            //popupOverlay.Refresh();
+            popupOverlay.Refresh();
 
         }
 
         /// <summary>
         /// Pull data from the selected feature and display it when clicked
         /// </summary>
-        //private void MapView_MapClick(object sender, MapClickMapViewEventArgs e)
-        //{
-        //    // Get the selected feature based on the map click location
-        //    Feature selectedFeature = GetFeatureFromLocation(e.WorldLocation);
+        private void MapView_OnMapSingleTap(object sender, TouchMapViewEventArgs e)
+        {
+            // Get the selected feature based on the map click location
+            Feature selectedFeature = GetFeatureFromLocation(e.PointInWorldCoordinate);
 
-        //    // If a feature was selected, get the data from it and display it
-        //    if (selectedFeature != null)
-        //    {
-        //        DisplayFeatureInfo(selectedFeature);
-        //    }
-        //}
+            // If a feature was selected, get the data from it and display it
+            if (selectedFeature != null)
+            {
+                DisplayFeatureInfo(selectedFeature);
+            }
+        }
     }
 }
