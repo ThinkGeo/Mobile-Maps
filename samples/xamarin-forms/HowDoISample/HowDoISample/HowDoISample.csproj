@@ -469,9 +469,6 @@
     <Compile Update="Samples\CreatingStyles\StylingAcrossMultipleScales.xaml.cs">
       <DependentUpon>StylingAcrossMultipleScales.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Database\OracleLayerSample.xaml.cs">
-      <DependentUpon>OracleLayerSample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\DisplayingLayers\Database\PostgresLayerSample.xaml.cs">
       <DependentUpon>PostgresLayerSample.xaml</DependentUpon>
     </Compile>
@@ -484,23 +481,11 @@
     <Compile Update="Samples\DisplayingLayers\Raster\CommonRasterLayersSample.xaml.cs">
       <DependentUpon>CommonRasterLayersSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\ECWLayerSample.xaml.cs">
-      <DependentUpon>ECWLayerSample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\DisplayingLayers\Raster\ESRIGridLayerSample.xaml.cs">
       <DependentUpon>ESRIGridLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.xaml.cs">
       <DependentUpon>GeoTiffLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\JPEG2000LayerSample.xaml.cs">
-      <DependentUpon>JPEG2000LayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\MrSidLayerSample.xaml.cs">
-      <DependentUpon>MrSidLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\FileGeoDatabaseLayerSample.xaml.cs">
-      <DependentUpon>FileGeoDatabaseLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\GPXLayerSample.xaml.cs">
       <DependentUpon>GPXLayerSample.xaml</DependentUpon>
@@ -513,9 +498,6 @@
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\ISOLineLayerSample.xaml.cs">
       <DependentUpon>ISOLineLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\S57LayerSample.xaml.cs">
-      <DependentUpon>S57LayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.xaml.cs">
       <DependentUpon>TinyGeoLayerSample.xaml</DependentUpon>
