@@ -37,11 +37,13 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid>
-                        <Label Grid.Column="0" Grid.Row="0" FontAttributes="Italic" Text="Tap on a Park to View More Information"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Tap on a Park to View More Information"></Label>
 
                         <!-- Grid Layout -->
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

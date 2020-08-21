@@ -36,39 +36,39 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Polygon Validation Tests">
-                        </Label>
-                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries" CheckedChanged="CheckIfPolygonBoundariesOverlapPolygonBoundaries" Text="Polygon Boundaries Must Overlap Polygon Boundaries"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="rdoCheckIfPolygonBoundariesOverlapLines" CheckedChanged="CheckIfPolygonBoundariesOverlapLines" Text="Polygon Boundaries Must Overlap Lines"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckIfPolygonsOverlapPolygons" CheckedChanged="CheckIfPolygonsOverlapPolygons" Text="Polygons Must Overlap Polygons"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckIfPolygonsAreWithinPolygons" CheckedChanged="CheckIfPolygonsAreWithinPolygons" Text="Polygons Must Be Within Polygons"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="5" x:Name="rdoCheckIfPolygonsContainPoints" CheckedChanged="CheckIfPolygonsContainPoints" Text="Polygons Must Contain Points"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="6" x:Name="rdoCheckIfPolygonsCoverEachOther" CheckedChanged="CheckIfPolygonsCoverEachOther" Text="Polygons Must Overlap Each Other"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckIfPolygonsHaveGaps" CheckedChanged="CheckIfPolygonsHaveGaps" Text="Union of Polygons Must Not Have Gaps"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckPolygonsMustNotOverlap" CheckedChanged="CheckPolygonsMustNotOverlap" Text="Polygons Must Not Overlap"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckPolygonsMustNotOverlapPolygons" CheckedChanged="CheckPolygonsMustNotOverlapPolygons" Text="Polygons Must Not Overlap Other Polygons"></RadioButton>
-                        <Label Grid.Column="1" Grid.Row="10" x:Name="txtValidationInfo"></Label>
+                    <ScrollView HeightRequest="300">
+                        <Grid>
+                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" x:Name="txtValidationInfo"></Label>
+                            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries" CheckedChanged="CheckIfPolygonBoundariesOverlapPolygonBoundaries" Text="Polygon Boundaries Must Overlap Polygon Boundaries"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="2" x:Name="rdoCheckIfPolygonBoundariesOverlapLines" CheckedChanged="CheckIfPolygonBoundariesOverlapLines" Text="Polygon Boundaries Must Overlap Lines"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckIfPolygonsOverlapPolygons" CheckedChanged="CheckIfPolygonsOverlapPolygons" Text="Polygons Must Overlap Polygons"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckIfPolygonsAreWithinPolygons" CheckedChanged="CheckIfPolygonsAreWithinPolygons" Text="Polygons Must Be Within Polygons"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="rdoCheckIfPolygonsContainPoints" CheckedChanged="CheckIfPolygonsContainPoints" Text="Polygons Must Contain Points"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="6" x:Name="rdoCheckIfPolygonsCoverEachOther" CheckedChanged="CheckIfPolygonsCoverEachOther" Text="Polygons Must Overlap Each Other"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckIfPolygonsHaveGaps" CheckedChanged="CheckIfPolygonsHaveGaps" Text="Union of Polygons Must Not Have Gaps"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckPolygonsMustNotOverlap" CheckedChanged="CheckPolygonsMustNotOverlap" Text="Polygons Must Not Overlap"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckPolygonsMustNotOverlapPolygons" CheckedChanged="CheckPolygonsMustNotOverlapPolygons" Text="Polygons Must Not Overlap Other Polygons"></RadioButton>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </ScrollView>
                 </Expander.Content>
             </Expander>
 

@@ -23,6 +23,9 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            // Set the map's unit of measurement to Decimal Degree
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
+
             // Create an InMemoryFeatureLayer to hold the shapes to be validated
             // Add styles to display points, lines, and polygons on this layer in green
             InMemoryFeatureLayer validatedFeaturesLayer = new InMemoryFeatureLayer();
@@ -53,9 +56,6 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
             featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
             mapView.Overlays.Add("Features Overlay", featuresOverlay);
-
-            // Set a default extent for the map
-            mapView.CurrentExtent = new RectangleShape(0, 200, 200, 0);
 
             rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries.IsChecked = true;
 

@@ -9,7 +9,7 @@
              Title="Get Data from All Features">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander x:Name="controlsExpander">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
@@ -36,30 +36,25 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" Text="Frisco Hotels Feature Data"></Label>
+                    <Grid HeightRequest="300">
+                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Select a hotel from the list to zoom to that location"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Italic" Text="Select a hotel from the list to zoom to that location"></Label>
-                        
-                        <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" SelectedItem="lsbHotels_SelectionChanged">
+                        <Label Grid.Column="1" Grid.Row="1" FontSize="Subtitle" Text="Frisco Hotels Feature Data"></Label>
+
+                        <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" ItemSelected="lsbHotels_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" ></RowDefinition>
-                                                <RowDefinition Height="Auto" ></RowDefinition>
-                                                <RowDefinition Height="Auto" ></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="{Binding Path=Name}" FontAttributes="Bold"/>
-                                            <Label Grid.Row="1" Text="{Binding Path=Address, StringFormat=Address: {0}}"/>
-                                            <Label Grid.Row="2" Text="{Binding Path=Rooms, StringFormat=Rooms: {0}}"/>
-                                        </Grid>
+                                        <StackLayout>
+                                            <Label Text="{Binding Path=Name}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Path=Address, StringFormat='Address: {0}'}"/>
+                                            <Label Text="{Binding Path=Rooms, StringFormat='Rooms: {0}'}"/>
+                                        </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="*" />

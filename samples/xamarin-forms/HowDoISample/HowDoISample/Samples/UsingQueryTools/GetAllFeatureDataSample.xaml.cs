@@ -91,8 +91,10 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// <summary>
         /// When a hotel is selected in the UI, center the map on it
         /// </summary>
-        private void lsbHotels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void lsbHotels_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
+            await CollapseExpander();
+
             InMemoryFeatureLayer highlightedHotelLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Highlighted Hotel");
             highlightedHotelLayer.Open();
             highlightedHotelLayer.InternalFeatures.Clear();
@@ -111,6 +113,12 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             }
 
             highlightedHotelLayer.Close();
+        }
+
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
 
         /// <summary>
