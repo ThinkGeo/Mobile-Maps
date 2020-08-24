@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ThinkGeo.Core;
-using ThinkGeo.UI.Forms;
+using ThinkGeo.UI.XamarinForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

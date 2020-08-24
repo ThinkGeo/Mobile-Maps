@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ThinkGeo.Core;
-using ThinkGeo.UI.Forms;
+using ThinkGeo.UI.XamarinForms;
 
 namespace ThinkGeo.UI.Xamarin.HowDoI
 {

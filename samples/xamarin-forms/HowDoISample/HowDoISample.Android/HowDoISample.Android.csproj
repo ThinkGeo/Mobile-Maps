@@ -54,52 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ThinkGeo.Core">
-      <Version>13.0.0-beta154</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.Ecw">
-      <Version>13.0.0-beta146</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.FileGeoDatabase">
-      <Version>13.0.0-beta147</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.Gdal">
-      <Version>13.0.0-beta148</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.MrSid">
-      <Version>13.0.0-beta145</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.NauticalCharts">
-      <Version>13.0.0-beta148</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.Oracle">
-      <Version>13.0.0-beta149</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.PostgreSql">
-      <Version>13.0.0-beta143</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.Printers">
-      <Version>13.0.0-beta143</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.SqlServer">
-      <Version>13.0.0-beta142</Version>
-    </PackageReference>
     <PackageReference Include="ThinkGeo.UI.Android">
-      <Version>13.0.0-beta093</Version>
+      <Version>13.0.0-beta095</Version>
     </PackageReference>
-    <PackageReference Include="ThinkGeo.UI.Forms">
+    <PackageReference Include="ThinkGeo.UI.XamarinForms.Android">
       <Version>13.0.0-beta003</Version>
     </PackageReference>
-    <PackageReference Include="ThinkGeo.UI.Forms.Android">
-      <Version>13.0.0-beta003</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff">
-      <Version>13.0.0-beta146</Version>
-    </PackageReference>
-    <PackageReference Include="ThinkGeo.UnmanagedProj">
-      <Version>13.0.0-beta144</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
