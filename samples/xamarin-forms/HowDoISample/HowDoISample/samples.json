@@ -588,16 +588,5 @@
         "source": "Samples/UsingCloudMapsServices/WorldMapsQueryCloudServicesSample"
       }
     ]
-  },
-  {
-    "title": "Interpolation",
-    "children": [
-      {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.Interpolation.Placeholder",
-        "title": "Interpolation Methods",
-        "description": "Learn how to do grid based interpolation using various methods",
-        "source": "Samples/Interpolation/Placeholder"
-      }
-    ]
   }
 ]

@@ -54,14 +54,15 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         {
             MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
 
-            // Create a marker at the position the mouse was clicked
-            //var marker = new Marker(e.PointInWorldCoordinate)
-            //{
-            //    ImageSource = new BitmapImage(new Uri("/Resources/AQUA.png", UriKind.RelativeOrAbsolute)),
-            //    Width = 20,
-            //    Height = 34,
-            //    YOffset = -17
-            //};
+            // // Create a marker at the position the mouse was clicked
+            // var marker = new Marker()
+            // {
+            //     Position = e.PointInWorldCoordinate,
+            //     ImageSource = new BitmapImage(new Uri("/Resources/AQUA.png", UriKind.RelativeOrAbsolute)),
+            //     Width = 20,
+            //     Height = 34,
+            //     YOffset = -17
+            // };
 
             // Add the marker to the simpleMarkerOverlay and refresh the map
             //simpleMarkerOverlay.Markers.Add(marker);
@@ -82,8 +83,8 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void DragMode_OnClick(object sender, EventArgs e)
         {
-            //MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
-            //simpleMarkerOverlay.DragMode = MarkerDragMode.Drag;
+            // MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
+            // simpleMarkerOverlay.DragMode = MarkerDragMode.Drag;
         }
 
         /// <summary>

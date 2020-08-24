@@ -42,7 +42,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         /// </summary>
         private void ThinkGeoLogo_Checked(object sender, EventArgs e)
         {
-            //mapView.MapTools.Logo.Source = new BitmapImage(new Uri(@"..\..\..\Resources\ThinkGeoLogo.png", UriKind.RelativeOrAbsolute));
+            // mapView.MapTools.Logo.Source = new BitmapImage(new Uri(@"..\..\..\Resources\ThinkGeoLogo.png", UriKind.RelativeOrAbsolute));
         }
 
         /// <summary>

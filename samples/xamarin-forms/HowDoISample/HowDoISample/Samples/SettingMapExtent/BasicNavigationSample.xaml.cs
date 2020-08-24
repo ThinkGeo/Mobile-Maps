@@ -39,7 +39,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
 
         private void ZoomIn_Click(object sender, EventArgs e)
         {
-            //mapView.ZoomToNextExtent();
+            //mapView.ZoomIn();
         }
 
         /// <summary>
@@ -60,18 +60,18 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             var percentage = (int)panPercentage.Value;
             switch (((ImageButton)sender).AutomationId)
             {
-                //case "panNorth":
-                //    mapView.Pan(PanDirection.Up, percentage);
-                //    break;
-                //case "panEast":
-                //    mapView.Pan(PanDirection.Right, percentage);
-                //    break;
-                //case "panWest":
-                //    mapView.Pan(PanDirection.Left, percentage);
-                //    break;
-                //case "panSouth":
-                //    mapView.Pan(PanDirection.Down, percentage);
-                //    break;
+                case "panNorth":
+                    mapView.Pan(PanDirection.Up, percentage);
+                    break;
+                case "panEast":
+                    mapView.Pan(PanDirection.Right, percentage);
+                    break;
+                case "panWest":
+                    mapView.Pan(PanDirection.Left, percentage);
+                    break;
+                case "panSouth":
+                    mapView.Pan(PanDirection.Down, percentage);
+                    break;
             }
         }
 
@@ -82,8 +82,14 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         private void Rotate_Click(object sender, EventArgs e)
         {
             //mapView.RotatedAngle = (float)rotateAngle.Value;
-           // mapView.Refresh();
+            mapView.Refresh();
         }
 
+        private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            var newStep = Math.Round(e.NewValue / 1.0);
+
+            ((Slider)sender).Value = newStep * 1.0;
+        }
     }
 }

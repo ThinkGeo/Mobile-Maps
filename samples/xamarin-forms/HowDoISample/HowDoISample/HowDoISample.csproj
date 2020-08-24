@@ -713,8 +713,4 @@
       <DependentUpon>TouchesSample.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Samples\Interpolation\" />
-  </ItemGroup>
 </Project>
