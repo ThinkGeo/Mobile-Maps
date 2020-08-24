@@ -676,9 +676,6 @@
     <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\PrintMapsUsingPrintOverlaySample.xaml.cs">
-      <DependentUpon>PrintMapsUsingPrintOverlaySample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\UsingOverlays\UsingPopupsSample.xaml.cs">
       <DependentUpon>UsingPopupsSample.xaml</DependentUpon>
     </Compile>

@@ -302,7 +302,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                 if (coordinates.Count() != 2)
                 {
                     txtCoordinates.Focus();
-                    await DisplayAlert("Alert", "Please enter a valid set of coordinates to search", "Error");
+                    await DisplayAlert("Alert", "Please enter a valid set of coordinates to search", "OK");
 
                     return false;
                 }

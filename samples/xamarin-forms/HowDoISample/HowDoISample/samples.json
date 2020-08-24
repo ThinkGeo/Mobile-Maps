@@ -211,12 +211,6 @@
         "source": "Samples/UsingOverlays/GroupingLayersUsingLayerOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.Xamarin.HowDoI.PrintMapsUsingPrintOverlaySample",
-        "title": "Print Maps Using PrintOverlay",
-        "description": "Learn to print maps using the PrintOverlay.",
-        "source": "Samples/UsingOverlays/PrintMapsUsingPrintOverlaySample"
-      },
-      {
         "id": "ThinkGeo.UI.Xamarin.HowDoI.UsingMarkersSample",
         "title": "Using Markers",
         "description": "Learn to add, edit, or remove markers on the map using the MarkerOverlay.",
