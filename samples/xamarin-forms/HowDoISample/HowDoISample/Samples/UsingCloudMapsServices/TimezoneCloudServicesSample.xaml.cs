@@ -8,7 +8,7 @@ using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimezoneCloudServicesSample : ContentPage
@@ -64,7 +64,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
         }
 
         private async void mapView_MapTap(object sender, TouchMapViewEventArgs e)
-        {
+        {  
             // if (e.MouseButton == MapMouseButton.Left)
             {
                 //Run the timezone info query

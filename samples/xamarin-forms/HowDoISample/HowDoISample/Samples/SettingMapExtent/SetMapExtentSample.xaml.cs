@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 using ThinkGeo.UI.XamarinForms;
 using System.IO;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetMapExtentSample : ContentPage

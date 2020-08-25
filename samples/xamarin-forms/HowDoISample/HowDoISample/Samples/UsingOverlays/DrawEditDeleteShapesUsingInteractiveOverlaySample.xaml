@@ -5,7 +5,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.DrawEditDeleteShapesUsingInteractiveOverlaySample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DrawEditDeleteShapesUsingInteractiveOverlaySample"
              Title="Draw, Edit, or Delete Shapes using the InteractiveOverlay">
     <ContentPage.Content>
         <StackLayout>

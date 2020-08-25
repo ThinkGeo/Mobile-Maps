@@ -9,7 +9,7 @@ using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CachingMapTilesSample : ContentPage
@@ -39,21 +39,21 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
-
         /// <summary>
-        /// Create a new tile cache on the Cloud Maps overlay. Cached images will be saved on the file system in the bin folder.
+        /// Toggles the use of a local tile cache
         /// </summary>
-        private void UseCache_Checked(object sender, EventArgs e)
+        private void UseCache_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsImages", RasterTileFormat.Png);
-        }
-
-        /// <summary>
-        /// Remove the tile cache by setting it to null. Note that this does not remove the cached images on the file system.
-        /// </summary>
-        private void UseCache_Unchecked(object sender, EventArgs e)
-        {
-            thinkGeoCloudVectorMapsOverlay.TileCache = null;
+            if (useCache.IsChecked)
+            {
+                // Create a new tile cache on the Cloud Maps overlay. Cached images will be saved on the file system in the local application data directory.
+                thinkGeoCloudVectorMapsOverlay.TileCache = new FileRasterTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsImages", RasterTileFormat.Png);
+            }
+            else
+            {
+                // Remove the tile cache by setting it to null. Note that this does not remove the cached images on the file system.
+                thinkGeoCloudVectorMapsOverlay.TileCache = null;
+            }
         }
     }
 }

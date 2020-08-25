@@ -4,7 +4,7 @@ using HowDoISample.Models;
 using HowDoISample.ViewModels;
 using Xamarin.Forms;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.SetMapExtentSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample"
              Title="Set Map Extent">
     <ContentPage.Content>
         <StackLayout>

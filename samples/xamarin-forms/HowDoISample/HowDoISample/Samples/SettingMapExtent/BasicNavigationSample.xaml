@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.BasicNavigationSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.BasicNavigationSample"
              Title="Basic Navigation">
     <ContentPage.Content>
         <StackLayout>
@@ -37,8 +37,7 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <ScrollView HeightRequest="300">
-                        <Grid Grid.Column="1" Grid.Row="0">
-
+                        <Grid>
                             <Label Grid.Column="1" Grid.Row="0" Text="Zooming:" FontSize="Subtitle" FontAttributes="Bold"></Label>
                             <Grid Grid.Column="1" Grid.Row="1" x:Name="zoomButtonGrid">
                                 <ImageButton x:Name="zoomIn" HeightRequest="44" Source="ZoomIn.png" Clicked="ZoomIn_Click" Grid.Column="0" Padding="4">

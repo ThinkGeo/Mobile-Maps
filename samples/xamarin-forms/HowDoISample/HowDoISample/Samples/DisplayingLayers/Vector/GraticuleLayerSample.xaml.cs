@@ -8,7 +8,7 @@ using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraticuleLayerSample : ContentPage

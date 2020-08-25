@@ -5,7 +5,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.GoogleMapLayerSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GoogleMapLayerSample"
              Title="Display a Google Map Layer">
     <ContentPage.Content>
         <StackLayout>

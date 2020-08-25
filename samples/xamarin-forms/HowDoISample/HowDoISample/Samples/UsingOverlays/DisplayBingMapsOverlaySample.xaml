@@ -5,7 +5,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.DisplayBingMapsOverlaySample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample"
              Title="Display Bing Maps Overlay">
     <ContentPage.Content>
         <StackLayout>

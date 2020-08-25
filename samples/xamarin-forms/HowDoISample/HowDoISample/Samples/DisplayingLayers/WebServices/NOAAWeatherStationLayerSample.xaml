@@ -5,7 +5,7 @@
               xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.NOAAWeatherStationLayerSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherStationLayerSample"
              Title="Display a NOAA Weather Station Layer">
     <ContentPage.Content>
         <StackLayout>

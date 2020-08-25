@@ -5,7 +5,7 @@
               xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.GetFeaturesWithinDistanceSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GetFeaturesWithinDistanceSample"
              Title="Get Features Within a Distance">
     <ContentPage.Content>
         <StackLayout>

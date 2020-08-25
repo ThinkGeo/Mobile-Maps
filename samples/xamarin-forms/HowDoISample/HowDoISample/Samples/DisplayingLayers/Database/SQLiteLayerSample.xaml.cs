@@ -10,7 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SQLiteLayerSample : ContentPage
@@ -35,23 +35,24 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Create a new overlay that will hold our new layer and add it to the map.
-            LayerOverlay restuarantsOverlay = new LayerOverlay();
-            mapView.Overlays.Add(restuarantsOverlay);
-            string resturantPath = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/SQLite/frisco-restaurants.sqlite"));
+            LayerOverlay restaurantsOverlay = new LayerOverlay();
+            mapView.Overlays.Add(restaurantsOverlay);
+
             // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
-            SqliteFeatureLayer restaurantsLayer = new SqliteFeatureLayer($"Data Source={resturantPath};", "restaurants", "id", "geometry");
+            string restaurantPath = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/SQLite/frisco-restaurants.sqlite"));
+            SqliteFeatureLayer restaurantsLayer = new SqliteFeatureLayer($"Data Source={restaurantPath};", "restaurants", "id", "geometry");
             restaurantsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
             // Add the layer to the overlay we created earlier.
-            restuarantsOverlay.Layers.Add("Frisco Restaurants", restaurantsLayer);
+            restaurantsOverlay.Layers.Add("Frisco Restaurants", restaurantsLayer);
 
             // Create a new text style and set various settings to make it look good.
-            var textStyle = new TextStyle("Name", new GeoFont("Arial", 12), GeoBrushes.Black);
+            var textStyle = new TextStyle("Name", new GeoFont("Arial", 10), GeoBrushes.Black);
             textStyle.MaskType = MaskType.RoundedCorners;
             textStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;
             textStyle.Mask = new AreaStyle(GeoBrushes.WhiteSmoke);
             textStyle.SuppressPartialLabels = true;
-            textStyle.YOffsetInPixel = -5;
+            textStyle.YOffsetInPixel = 1;
 
             // Set a point style and the above text style to zoom level 1 and then apply it to all zoom levels up to 20.
             restaurantsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Green, new GeoPen(GeoColors.White, 2));

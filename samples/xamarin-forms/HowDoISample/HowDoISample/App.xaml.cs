@@ -1,13 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ThinkGeo.UI.Xamarin.HowDoI;
 using System.Diagnostics;
 using HowDoISample.Views;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
 using System.Collections.Generic;
+using ThinkGeo.UI.XamarinForms.HowDoI;
 
 namespace HowDoISample
 {

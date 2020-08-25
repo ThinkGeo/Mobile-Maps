@@ -5,7 +5,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.Xamarin.HowDoI.SQLiteLayerSample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SQLiteLayerSample"
              Title="Display a SQLite Layer">
     <ContentPage.Content>
         <StackLayout>

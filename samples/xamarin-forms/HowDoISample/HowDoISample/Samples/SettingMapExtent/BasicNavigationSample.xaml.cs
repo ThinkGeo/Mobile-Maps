@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 using ThinkGeo.Core;
 using ThinkGeo.UI.XamarinForms;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasicNavigationSample : ContentPage
@@ -73,6 +73,7 @@ namespace ThinkGeo.UI.Xamarin.HowDoI
                     mapView.Pan(PanDirection.Down, percentage);
                     break;
             }
+            mapView.Refresh();
         }
 
         /// <summary>

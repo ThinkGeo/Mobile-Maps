@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 using ThinkGeo.UI.XamarinForms;
 using System.Collections.ObjectModel;
 
-namespace ThinkGeo.UI.Xamarin.HowDoI
+namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PostgresLayerSample : ContentPage
