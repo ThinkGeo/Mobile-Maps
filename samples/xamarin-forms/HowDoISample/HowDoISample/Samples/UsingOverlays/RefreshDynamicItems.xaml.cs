@@ -67,7 +67,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnDisappearing();
             cancelFeed = true;
-            mapView.Dispose();
+
 
         }
 
