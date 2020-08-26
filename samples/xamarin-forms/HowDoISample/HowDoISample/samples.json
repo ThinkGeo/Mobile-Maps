@@ -217,6 +217,12 @@
         "source": "Samples/UsingOverlays/UsingMarkersSample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.RefreshDynamicItems",
+        "title": "Refreshing Dynamic Items",
+        "description": "Learn how to use overlays to display dynamically refreshing data. This sample will shows how to refresh an overlay to display a vehicle that gets updates every few seconds.",
+        "source": "Samples/UsingOverlays/RefreshDynamicItems"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample",
         "title": "Using Popups",
         "description": "Learn to add, edit, or remove popups on the map using the PopupOverlay.",

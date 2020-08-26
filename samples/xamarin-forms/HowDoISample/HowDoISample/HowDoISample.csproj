@@ -14,6 +14,7 @@
     <None Remove="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bmp" />
     <None Remove="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bpw" />
     <None Remove="Data\Csv\Frisco_Mosquitos.csv" />
+    <None Remove="Data\Csv\vehicle-route.csv" />
     <None Remove="Data\Ecw\World.ecw" />
     <None Remove="Data\Ecw\World.eww" />
     <None Remove="Data\FileGeoDatabase\zoning.gdb\a00000001.gdbindexes" />
@@ -206,6 +207,7 @@
     <None Remove="Resources\generic_logo.png" />
     <None Remove="Resources\hotel_icon.png" />
     <None Remove="Resources\vandalism_icon.png" />
+    <None Remove="Resources\vehicle.png" />
     <None Remove="Resources\weapon_icon.png" />
     <None Remove="samples.json" />
   </ItemGroup>
@@ -214,6 +216,7 @@
     <EmbeddedResource Include="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bmp" />
     <EmbeddedResource Include="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bpw" />
     <EmbeddedResource Include="Data\Csv\Frisco_Mosquitos.csv" />
+    <EmbeddedResource Include="Data\Csv\vehicle-route.csv" />
     <EmbeddedResource Include="Data\Ecw\World.ecw" />
     <EmbeddedResource Include="Data\Ecw\World.eww" />
     <EmbeddedResource Include="Data\FileGeoDatabase\zoning.gdb\a00000001.gdbindexes" />
@@ -406,6 +409,7 @@
     <EmbeddedResource Include="Resources\generic_logo.png" />
     <EmbeddedResource Include="Resources\hotel_icon.png" />
     <EmbeddedResource Include="Resources\vandalism_icon.png" />
+    <EmbeddedResource Include="Resources\vehicle.png" />
     <EmbeddedResource Include="Resources\weapon_icon.png" />
     <EmbeddedResource Include="samples.json" />
   </ItemGroup>
@@ -675,6 +679,9 @@
     </Compile>
     <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\RefreshDynamicItems.xaml.cs">
+      <DependentUpon>RefreshDynamicItems.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingOverlays\UsingPopupsSample.xaml.cs">
       <DependentUpon>UsingPopupsSample.xaml</DependentUpon>
