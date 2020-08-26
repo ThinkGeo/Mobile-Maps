@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -35,8 +35,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+            await Task.Delay(5000);
+            controlsExpander.IsExpanded = true;
         }
 
+        protected override void on
+
+        /// <summary>
+        /// Zoom in on the map
+        /// The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double tapping on the map, or pinching the map.
+        /// </summary>
         private void ZoomIn_Click(object sender, EventArgs e)
         {
             //mapView.ZoomIn();
@@ -44,7 +53,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         /// <summary>
         /// Zoom out on the map
-        /// The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double right clicking on the map, or by using the the scroll wheel.
+        /// The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double tapping on the map, or pinching the map.
         /// </summary>
         private void ZoomOut_Click(object sender, EventArgs e)
         {
@@ -53,7 +62,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         /// <summary>
         /// Pan the map in a direction using the PanDirection enum and set how far to pan based on percentage.
-        /// The same effect can be achieved by using the ZoomPanBar arrows on the upper left of the map or by left click dragging anywhere on the map.
+        /// The same effect can be achieved by tap dragging anywhere on the map.
         /// </summary>
         private void PanArrow_Click(object sender, EventArgs e)
         {
@@ -86,6 +95,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Locks slider values to whole numbers
+        /// </summary>
         private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
         {
             var newStep = Math.Round(e.NewValue / 1.0);
