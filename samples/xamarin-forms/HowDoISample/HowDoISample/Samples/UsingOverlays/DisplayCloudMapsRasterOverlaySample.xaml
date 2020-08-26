@@ -13,7 +13,7 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn to render ThinkGeo Cloud Maps in raster format. Sign up for your own ThinkGeo Cloud API key at https://cloud.thinkgeo.com!" 
+                        <Label Text="Learn to render ThinkGeo Cloud Maps in raster format."
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>
@@ -37,28 +37,27 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid>
-                        <Label Grid.Column="1" Grid.Row="0"  Grid.ColumnSpan="2" Text="ThinkGeo Raster Cloud Maps:" FontAttributes="Bold" FontSize="16"/>
-                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Sign up for a Cloud Maps account">
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontAttributes="Italic" TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding TapCommand}"
-                                          CommandParameter="https://cloud.thinkgeo.com/"/>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
                             </Label.GestureRecognizers>
-                        
                         </Label>
-                        <Label Grid.Column="1" Grid.Row="3" Text="API Key:" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                        <Editor Grid.Column="2" Grid.Row="3" x:Name="cloudMapsApiKey" Text="itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~" ></Editor>
-                        <Label Grid.Column="1" Grid.Row="4"  Text="Secret Key:" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                        <Editor Grid.Column="2" Grid.Row="4"  x:Name="cloudMapsSecretKey" Text="bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~"></Editor>
+
+                        <Label Grid.Column="1" Grid.Row="1" Text="API Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Editor Grid.Column="2" Grid.Row="1" x:Name="cloudMapsApiKey" Text="9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~" ></Editor>
+
+                        <Label Grid.Column="1" Grid.Row="2"  Text="Secret Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Editor Grid.Column="2" Grid.Row="2"  x:Name="cloudMapsSecretKey" Text="vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~"></Editor>
  
-                        <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" x:Name="displayRasterCloudMaps" Text="Update" Clicked="DisplayRasterCloudMaps_Click"></Button>
+                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayRasterCloudMaps" Text="Update" Clicked="DisplayRasterCloudMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

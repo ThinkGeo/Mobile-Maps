@@ -13,7 +13,7 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn to render OpenStreetMap using the OpenStreetMapOverlay. OpenStreetMap Tiles are not meant for heavy production use without express permission from the OpenStreetMap Foundation. See https://operations.osmfoundation.org/ for details about their usage policies." 
+                        <Label Text="Learn to render OpenStreetMap using the OpenStreetMapOverlay."
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>
@@ -36,17 +36,19 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="OpentStreetMaps:" FontAttributes="Bold" FontSize="16"/>
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontAttributes="Italic" Text="OpenStreetMap Tiles are not meant for heavy production use without express permission from the OpenStreetMap Foundation. See https://operations.osmfoundation.org/ for details about their usage policies."></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="User Agent:"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text="User Agent:" FontAttributes="Bold" VerticalOptions="Center"></Label>
                         <Editor Grid.Column="2" Grid.Row="1" x:Name="osmUserAgent"></Editor>
 
                         <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="displayOsmMaps" Text="Update" Clicked="DisplayOsmMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="Auto" />
-
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

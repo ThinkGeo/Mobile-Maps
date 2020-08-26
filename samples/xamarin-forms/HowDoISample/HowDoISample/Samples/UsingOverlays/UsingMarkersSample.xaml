@@ -36,22 +36,20 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="MarkerOverlay Controls" FontSize="16"/>
-
-                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="staticMode" Text="Static Mode" IsChecked="True" Clicked="StaticMode_OnClick"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="dragMode" Text="Drag Mode" Clicked="DragMode_OnClick"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="copyMode" Text="Copy Mode (with Shift key)" Clicked="CopyMode_OnClick"></RadioButton>
+                    <Grid>
+                        <RadioButton Grid.Column="1" Grid.Row="0" x:Name="staticMode" Text="Static Mode" IsChecked="True" Clicked="StaticMode_OnClick"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="dragMode" Text="Drag Mode" Clicked="DragMode_OnClick"></RadioButton>
+                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="copyMode" Text="Copy Mode (with Shift key)" Clicked="CopyMode_OnClick"></RadioButton>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>

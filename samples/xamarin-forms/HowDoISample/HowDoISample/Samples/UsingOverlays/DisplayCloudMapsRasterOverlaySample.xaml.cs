@@ -30,10 +30,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-
-            // Add a simple background overlay
-            //mapView.BackgroundOverlay.BackgroundBrush = GeoBrushes.AliceBlue;
-
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10782598.9806675, 3915669.09132595, -10772234.1196896, 3906343.77392696);
         }
@@ -43,10 +39,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void DisplayRasterCloudMaps_Click(object sender, EventArgs e)
         {
-            var thinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudRasterMapsMapType.Hybrid);
+            var thinkGeoCloudRasterMapsOverlay = new ThinkGeoCloudRasterMapsOverlay(cloudMapsApiKey.Text, cloudMapsSecretKey.Text, ThinkGeoCloudRasterMapsMapType.Hybrid);
             mapView.Overlays.Add(thinkGeoCloudRasterMapsOverlay);
             mapView.Refresh();
         }
-        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
+
+        /// <summary>
+        /// Opens a link when the element is tapped on
+        /// </summary>
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await Launcher.OpenAsync("https://cloud.thinkgeo.com/");
+        }
     }
 }

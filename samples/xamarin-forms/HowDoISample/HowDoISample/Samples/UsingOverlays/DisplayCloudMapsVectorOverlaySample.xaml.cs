@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using ThinkGeo.UI.XamarinForms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,25 +29,26 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
             mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-            // Add a simple background overlay
-            mapView.BackgroundColor = new Color(234, 232, 226);
-
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
 
-
-        /// <summary>
-        /// Enable the PanZoomBar and remove it from the MapView
-        /// </summary>
         /// <summary>
         /// Create a ThinkGeo Cloud Maps vector overlay and add it to the map view.
         /// </summary>
         private void DisplayVectorCloudMaps_Click(object sender, EventArgs e)
         {
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(cloudMapsApiKey.Text, cloudMapsSecretKey.Text, ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
             mapView.Refresh();
+        }
+
+        /// <summary>
+        /// Opens a link when the element is tapped on
+        /// </summary>
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await Launcher.OpenAsync("https://cloud.thinkgeo.com/");
         }
     }
 }

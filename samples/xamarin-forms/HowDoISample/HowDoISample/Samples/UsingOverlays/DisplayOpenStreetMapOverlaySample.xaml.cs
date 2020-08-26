@@ -33,13 +33,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
         }
         /// <summary>
-        /// Create an OpenStretMaps overlay and add it to the map view.
+        /// Create an OpenStreetMaps overlay and add it to the map view.
         /// </summary>
         private void DisplayOsmMaps_Click(object sender, EventArgs e)
         {
-            //OpenStreetMapOverlay osmMapsOverlay = new OpenStreetMapOverlay(osmUserAgent.Text);
-            //mapView.Overlays.Add(osmMapsOverlay);
-            //mapView.Refresh();
+            // OpenStreetMapOverlay osmMapsOverlay = new OpenStreetMapOverlay(osmUserAgent.Text);
+            // mapView.Overlays.Add(osmMapsOverlay);
+            // mapView.Refresh();
         }
     }
 }

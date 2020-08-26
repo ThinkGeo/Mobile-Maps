@@ -13,7 +13,7 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Margin="4">
-                        <Label Text="Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required. Visit the Bing Maps Dev Portal to sign up for a key (https://www.bingmapsportal.com/)." 
+                        <Label Text="Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required."
                                FontSize="Subtitle" 
                                VerticalOptions="CenterAndExpand" 
                                HorizontalOptions="StartAndExpand"/>
@@ -36,23 +36,23 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Bing Maps Controls:" FontAttributes="Bold" FontSize="16"/>
-                        <Label  Grid.Column="1" Grid.Row="1" Text="Sign up for a Bing Maps Api Key">
+                    <Grid>
+                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontAttributes="Italic" TextColor="Blue" Text="Sign up for a Bing Maps Api Key">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding TapCommand}"
-                                          CommandParameter="https://www.bingmapsportal.com/" />
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
                             </Label.GestureRecognizers>
                         </Label>
                        
-                        <Label Grid.Column="1" Grid.Row="2" Text="API Key:"></Label>
+                        <Label Grid.Column="1" Grid.Row="2" Text="API Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
                         <Entry Grid.Column="2" Grid.Row="2" x:Name="bingApplicationId"></Entry>
 
                         <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayBingMaps" Text="Update" Clicked="DisplayBingMaps_Click"></Button>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

@@ -15,7 +15,6 @@
                        FontSize="Subtitle" 
                        VerticalOptions="Center" 
                        HorizontalOptions="StartAndExpand"/>
-
             </Frame>
 
             <!-- Map Control -->

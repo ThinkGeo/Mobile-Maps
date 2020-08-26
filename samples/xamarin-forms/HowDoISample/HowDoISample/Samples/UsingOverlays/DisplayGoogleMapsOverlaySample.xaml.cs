@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using ThinkGeo.UI.XamarinForms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -40,9 +41,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void DisplayGoogleMaps_Click(object sender, EventArgs e)
         {
-           // GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
-           // mapView.Overlays.Add(googleMapsOverlay);
-           // mapView.Refresh();
+           GoogleMapsOverlay googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
+           mapView.Overlays.Add(googleMapsOverlay);
+           mapView.Refresh();
+        }
+
+        /// <summary>
+        /// Opens a link when the element is tapped on
+        /// </summary>
+        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            await Launcher.OpenAsync("https://developers.google.com/maps/documentation/maps-static/get-api-key");
         }
     }
 }

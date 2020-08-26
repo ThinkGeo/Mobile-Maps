@@ -70,7 +70,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add Landuse overlay to the map
             mapView.Overlays.Add("landuseOverlay", landuseOverlay);
 
-            ///******************
+            //******************
             // * POI LayerOverlay
             // ******************/
 
@@ -91,7 +91,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var schools = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Schools.shp"));
 
             // Style School POI layer
-            schools.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleSquareStyle(GeoColors.Red, 8, GeoColors.White, 2);
+            schools.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Red, 8, GeoColors.White, 2);
             schools.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Project Schools POI layer to Spherical Mercator to match the map projection
