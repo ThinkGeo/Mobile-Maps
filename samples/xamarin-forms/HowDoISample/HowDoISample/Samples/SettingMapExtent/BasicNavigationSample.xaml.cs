@@ -40,8 +40,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             controlsExpander.IsExpanded = true;
         }
 
-        protected override void on
-
         /// <summary>
         /// Zoom in on the map
         /// The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double tapping on the map, or pinching the map.
