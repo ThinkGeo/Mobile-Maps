@@ -146,24 +146,6 @@
     <ImageAsset Include="Assets.xcassets\chevron_down.imageset\chevron_down2.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\chevron_up.imageset\chevron_up.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\chevron_up.imageset\chevron_up1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\chevron_up.imageset\chevron_up2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\East.imageset\East.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\East.imageset\East1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\East.imageset\East2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\frisco_sat_map.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -179,25 +161,16 @@
     <ImageAsset Include="Assets.xcassets\chevron_down.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\chevron_up.imageset\Contents.json">
+    <ImageAsset Include="Assets.xcassets\PanArrow.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\North.imageset\North.png">
+    <ImageAsset Include="Assets.xcassets\PanArrow.imageset\PanArrow.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\North.imageset\North1.png">
+    <ImageAsset Include="Assets.xcassets\PanArrow.imageset\PanArrow1.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\North.imageset\North2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\South.imageset\South.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\South.imageset\South1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\South.imageset\South2.png">
+    <ImageAsset Include="Assets.xcassets\PanArrow.imageset\PanArrow2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\thinkgeo_icon.imageset\thinkgeo_icon.png">
@@ -218,37 +191,16 @@
     <ImageAsset Include="Assets.xcassets\thinkgeo_logo.imageset\thinkgeo_logo2.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\West.imageset\West.png">
+    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn3.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\West.imageset\West1.png">
+    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn4.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\West.imageset\West2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn2.png">
+    <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\ZoomIn5.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\East.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\North.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\South.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\West.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\thinkgeo_icon.imageset\Contents.json">
@@ -260,13 +212,13 @@
     <ImageAsset Include="Assets.xcassets\ZoomIn.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut.png">
+    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut3.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut1.png">
+    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut4.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut2.png">
+    <ImageAsset Include="Assets.xcassets\ZoomOut.imageset\ZoomOut5.png">
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
