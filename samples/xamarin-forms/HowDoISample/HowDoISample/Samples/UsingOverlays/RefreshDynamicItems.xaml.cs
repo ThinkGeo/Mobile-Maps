@@ -70,8 +70,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnDisappearing();
             cancelFeed = true;
-
-
         }
 
         private async void StartDataFeed()
@@ -134,8 +132,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Refresh the vehicle overlay
-            //mapView.Refresh(mapView.Overlays["Vehicle Overlay"]);
-            mapView.Refresh();
+            mapView.Refresh(new [] {mapView.Overlays["Vehicle Overlay"]});
         }
 
 

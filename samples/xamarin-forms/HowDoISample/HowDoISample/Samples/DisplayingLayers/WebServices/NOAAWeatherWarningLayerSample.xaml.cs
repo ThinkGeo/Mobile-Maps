@@ -68,7 +68,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
         private void FeatureSource_WarningsUpdating(object sender, WarningsUpdatingNoaaWeatherWarningsFeatureSourceEventArgs e)
         {
-        //    loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Visible);
+            // loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Visible);
         }
 
         private void FeatureSource_WarningsUpdated(object sender, WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
@@ -76,26 +76,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // This event fires when the the feature source has new data.  We need to make sure we refresh the map
             // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
             // loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Hidden);
-            // mapView.Dispatcher.Invoke(() => mapView.Refresh(mapView.Overlays["Noaa Weather Warning"]));
-
+            mapView.Dispatcher.BeginInvokeOnMainThread(() => mapView.Refresh(new[] {mapView.Overlays["Noaa Weather Warning"]}));
         }
 
-        public void InvokeMethod()
+        private void mapView_MapClick(object sender, TouchMapViewEventArgs e)
         {
-            //mapView.Refresh(mapView.Overlays["Noaa Weather Warning"]);
-        }
+            // Get the selected feature based on the map click location
+            Collection<Feature> selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
 
-        // private void mapView_MapClick(object sender, MapClickMapViewEventArgs e)
-        // {
-        //     // Get the selected feature based on the map click location
-        //     Collection<Feature> selectedFeatures = GetFeaturesFromLocation(e.WorldLocation);
-        //
-        //     // If a feature was selected, get the data from it and display it
-        //     if (selectedFeatures != null)
-        //     {
-        //        DisplayFeatureInfo(selectedFeatures);
-        //     }
-        // }
+            // If a feature was selected, get the data from it and display it
+            if (selectedFeatures != null)
+            {
+               DisplayFeatureInfo(selectedFeatures);
+            }
+        }
 
         private Collection<Feature> GetFeaturesFromLocation(PointShape location)
         {
@@ -107,6 +101,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             return selectedFeatures;
         }
+
         private void DisplayFeatureInfo(Collection<Feature> features)
         {
             if (features.Count > 0)
@@ -115,26 +110,23 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Each column in a feature is a data attribute
                 // Add all attribute pairs to the info string
-
-
                 foreach (Feature feature in features)
                 {
                     weatherWarningString.AppendLine($"{feature.ColumnValues["TITLE"]}");
                 }
 
-                // // Create a new popup with the park info string
-                // PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
-                // Popup popup = new Popup(features[0].GetShape().GetCenterPoint());
-                // popup.Content = weatherWarningString.ToString();
-                // popup.FontSize = 10d;
-                // popup.FontFamily = new System.Windows.Media.FontFamily("Verdana");
-                //
-                // // Clear the popup overlay and add the new popup to it
-                // popupOverlay.Popups.Clear();
-                // popupOverlay.Popups.Add(popup);
-                //
-                // // Refresh the overlay to redraw the popups
-                // popupOverlay.Refresh();
+                // Create a new popup with the park info string
+                PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
+                Popup popup = new Popup();
+                popup.Position = features[0].GetShape().GetCenterPoint();
+                popup.Content = weatherWarningString.ToString();
+
+                // Clear the popup overlay and add the new popup to it
+                popupOverlay.Popups.Clear();
+                popupOverlay.Popups.Add(popup);
+
+                // Refresh the overlay to redraw the popups
+                popupOverlay.Refresh();
             }
         }
     }

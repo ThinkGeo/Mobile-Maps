@@ -25,57 +25,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.DecimalDegree;            
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
 
             // This code sets up the sample to use the overlay versus the layer.
-            UseOverlay();
+            AddWmsLayer();
 
             // Set the current extent to a local area.
             mapView.CurrentExtent = new RectangleShape(-96.8538765269409, 33.1618647290098, -96.7987487018851, 33.1054126590461);
-
-            // Refresh the map.
-            mapView.Refresh();
         }
-        private void rbLayerOrOverlay_Checked(object sender, EventArgs e)
-        {
-            // Based on the radio buttons we switch between using the overlay and layer.
-            RadioButton button = (RadioButton)sender;
-            if (button.Text != null)
-            {
-                switch (button.Text.ToString())
-                {
-                    case "Use WmsOverlay":
-                        UseOverlay();
-                        break;
-                    case "Use WmsRasterLayer":
-                        UseLayer();
-                        break;
-                    default:
-                        break;
-                }
-                mapView.Refresh();
-            }
-        }
-        private void UseOverlay()
-        {
-            // Clear out the overlays so we start fresh
-            mapView.Overlays.Clear();
 
-            // Create a WMS overlay using the WMS parameters below.
-            // This is a public service and is very slow most of the time.
-            WmsOverlay wmsOverlay = new WmsOverlay();
-            //wmsOverlay.ServerUri = new Uri("http://ows.mundialis.de/services/service");
-            wmsOverlay.Parameters.Add("layers", "OSM-WMS");
-            wmsOverlay.Parameters.Add("STYLES", "default");
-
-            // Add the overlay to the map.
-            mapView.Overlays.Add(wmsOverlay);
-        }
-        private void UseLayer()
+        private void AddWmsLayer()
         {
-            // Clear out the overlays so we start fresh
-            mapView.Overlays.Clear();
-
             // Create an overlay that we will add the layer to.
             LayerOverlay staticOverlay = new LayerOverlay();
             mapView.Overlays.Add(staticOverlay);

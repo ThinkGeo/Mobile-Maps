@@ -9,7 +9,7 @@
              Title="Display Bing Maps Overlay">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Margin="4">

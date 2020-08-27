@@ -9,51 +9,13 @@
              Title="Display a WMS Layer">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
-                <!-- Sample Description -->
-                <Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)"
-                               FontSize="Subtitle"
-                               VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180"/>
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </Expander.Header>
 
-                <!-- Sample Controls -->
-                <Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Layer or Overlay:" FontSize="16"></Label>
-                        <RadioButton Grid.Column="1" Grid.Row="1" CheckedChanged="rbLayerOrOverlay_Checked" IsChecked="True" Text="Use WmsOverlay"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" CheckedChanged="rbLayerOrOverlay_Checked" Text="Use WmsRasterLayer"></RadioButton>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </Expander.Content>
-            </Expander>
+            <Frame HasShadow="False">
+                <Label Text="This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)"
+                       FontSize="Subtitle"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+            </Frame>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>

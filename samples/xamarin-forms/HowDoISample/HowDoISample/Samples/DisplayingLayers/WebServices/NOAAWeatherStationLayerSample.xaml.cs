@@ -66,7 +66,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             //// This event fires when the the feature source has new data.  We need to make sure we refresh the map
             //// on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
-            //mapView.Dispatcher.Invoke(new RefreshWeatherStations(this.UpdateWeatherStations), new object[] { });
+            mapView.Dispatcher.BeginInvokeOnMainThread(UpdateWeatherStations);
         }
 
         private void UpdateWeatherStations()

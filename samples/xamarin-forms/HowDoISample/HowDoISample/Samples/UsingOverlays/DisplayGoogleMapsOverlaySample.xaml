@@ -9,7 +9,7 @@
              Title="Display Google Maps Overlay">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
