@@ -32,6 +32,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the current extent to the whole world.
             mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015, 3910065.3144544438);
+
+            mapView.Refresh();
         }
 
         /// <summary>

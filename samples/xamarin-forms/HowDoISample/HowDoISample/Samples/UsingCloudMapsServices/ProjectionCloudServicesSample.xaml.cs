@@ -32,8 +32,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new feature layer to display the shapes we will be reprojecting
             InMemoryFeatureLayer reprojectedFeaturesLayer = new InMemoryFeatureLayer();
@@ -58,6 +57,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Initialize the ProjectionCloudClient with our ThinkGeo Cloud credentials
             projectionCloudClient = new ProjectionCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
+
+            mapView.Refresh();
         }
 
         /// <summary>

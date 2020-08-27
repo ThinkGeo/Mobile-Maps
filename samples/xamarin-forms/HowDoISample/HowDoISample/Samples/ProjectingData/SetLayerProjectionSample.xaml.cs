@@ -31,7 +31,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the Map Unit to meters (Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            
 
             // Create an overlay that we can add feature layers to, and add it to the MapView
             LayerOverlay subdivisionsOverlay = new LayerOverlay();
@@ -39,6 +39,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Reproject a shapefile and set the extent
             ReprojectFeaturesFromShapefile();
+
+            mapView.Refresh();
         }
 
         private void ReprojectFeaturesFromShapefile()

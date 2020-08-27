@@ -61,6 +61,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckIfPointsAreTouchingLines.IsChecked = true;
 
+            mapView.Refresh();
         }
 
         private void CheckIfPointsAreTouchingLines(object sender, EventArgs e)

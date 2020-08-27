@@ -27,7 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            
             ShapeFileFeatureLayer.BuildIndexFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/FriscoCityLimits.shp"));
 
             // Add Cloud Maps as a background overlay
@@ -62,6 +62,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+
+            mapView.Refresh();
         }
 
         private void OffsetTranslateShape_OnClick(object sender, EventArgs e)

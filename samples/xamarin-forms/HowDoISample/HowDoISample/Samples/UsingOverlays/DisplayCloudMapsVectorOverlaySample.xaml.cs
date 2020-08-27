@@ -26,11 +26,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+            mapView.Refresh();
         }
 
         /// <summary>

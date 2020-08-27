@@ -26,8 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Set the map background color
             mapView.BackgroundColor = new Color(234, 232, 226);

@@ -40,6 +40,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             wmsOverlay.Parameters.Add("STYLES", "default");
             wmsOverlay.Parameters.Add("CRS", "EPSG:3857");  // Make sure to match the WMS CRS to the Map's projection
             mapView.Overlays.Add(wmsOverlay);
+
+            mapView.Refresh();
         }
     }
 }

@@ -30,12 +30,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-
             // Set the Map Unit to meters (used in Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-
-
+            
             // Create a feature layer to hold and display the zoning data
             InMemoryFeatureLayer zoningLayer = new InMemoryFeatureLayer();
 
@@ -137,6 +134,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text = string.Format("Number of features topologically equal to the drawn shape: {0}", features.Count());
+
+            mapView.Refresh();
         }
 
         /// <summary>

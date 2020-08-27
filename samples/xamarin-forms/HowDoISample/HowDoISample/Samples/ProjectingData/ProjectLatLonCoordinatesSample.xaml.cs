@@ -27,8 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new feature layer to display the shapes we will be reprojecting
             InMemoryFeatureLayer reprojectedFeaturesLayer = new InMemoryFeatureLayer();
@@ -50,6 +49,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10779751.80, 3915369.33, -10779407.60, 3915141.57);
+
+            mapView.Refresh();
         }
         private Feature ReprojectFeature(Feature decimalDegreeFeature)
         {

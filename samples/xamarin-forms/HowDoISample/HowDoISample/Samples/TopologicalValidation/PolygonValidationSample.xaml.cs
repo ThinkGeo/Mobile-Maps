@@ -59,6 +59,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries.IsChecked = true;
 
+            mapView.Refresh();
         }
 
         private void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, EventArgs e)

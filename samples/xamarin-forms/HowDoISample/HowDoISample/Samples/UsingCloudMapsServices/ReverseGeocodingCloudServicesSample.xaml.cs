@@ -33,8 +33,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new feature layer to display the search radius of the reverse geocode and create a style for it
             InMemoryFeatureLayer searchRadiusFeatureLayer = new InMemoryFeatureLayer();
@@ -69,6 +68,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             reverseGeocodingCloudClient = new ReverseGeocodingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
 
             cboLocationCategories.SelectedIndex = 0;
+
+            mapView.Refresh();
         }
 
         /// <summary>

@@ -61,6 +61,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckLineEndpointsMustTouchPoints.IsChecked = true;
 
+            mapView.Refresh();
         }
 
         /// <summary>

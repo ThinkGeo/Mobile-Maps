@@ -32,8 +32,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new InMemoryFeatureLayer to hold the shape drawn for the elevation query
             InMemoryFeatureLayer drawnShapeLayer = new InMemoryFeatureLayer();
@@ -69,6 +68,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create a sample line and get elevation along that line
             LineShape sampleShape = new LineShape("LINESTRING(-10776298.0601626 3912306.29684573,-10776496.3187036 3912399.45447343,-10776675.4679876 3912478.28015841,-10776890.4471285 3912516.49867234,-10777189.0292686 3912509.33270098,-10777329.9600387 3912442.4503016,-10777664.3720356 3912174.92070409)");
             await PerformElevationQuery(sampleShape);
+
+            mapView.Refresh();
         }
 
         /// <summary>

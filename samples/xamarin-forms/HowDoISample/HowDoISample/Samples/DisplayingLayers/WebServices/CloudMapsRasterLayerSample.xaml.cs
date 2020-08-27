@@ -25,11 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-
-            // Set the map zoom level set to the Cloud Maps zoom level set.
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;                        
 
             // Create the layer overlay with some additional settings and add to the map.
             ThinkGeoCloudRasterMapsOverlay cloudOverlay = new ThinkGeoCloudRasterMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");

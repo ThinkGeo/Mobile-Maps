@@ -31,9 +31,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
-
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a feature layer to hold the Frisco zoning data
             ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
@@ -81,8 +79,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             GetFeaturesCrossing(sampleShape);
 
             // Set the map extent to the sample shapes
-            mapView.CurrentExtent = sampleShape.GetBoundingBox();
-            //mapView.ZoomOut();
+            mapView.CurrentExtent = sampleShape.GetBoundingBox();            
+            
             mapView.Refresh();
         }
 

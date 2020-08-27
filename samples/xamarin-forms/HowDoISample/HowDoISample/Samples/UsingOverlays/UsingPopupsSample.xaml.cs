@@ -26,8 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Add Cloud Maps as a background overlay
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
@@ -37,6 +36,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
 
             AddHotelPopups();
+
+            mapView.Refresh();
         }
         /// <summary>
         /// Adds hotel popups to the map

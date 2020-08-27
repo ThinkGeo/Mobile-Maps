@@ -24,13 +24,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Add a simple background overlay
             mapView.BackgroundColor = new Color(234, 232, 226);
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+
+            mapView.Refresh();
         }
         /// <summary>
         /// Create an OpenStreetMaps overlay and add it to the map view.

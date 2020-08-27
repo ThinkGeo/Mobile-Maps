@@ -34,8 +34,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new feature layer to display the service areas
             InMemoryFeatureLayer serviceAreasLayer = new InMemoryFeatureLayer();
@@ -80,6 +79,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Run a sample query
             PointShape samplePoint = new PointShape(-10776836.140633, 3912350.714164);
             GetAndDrawServiceArea(samplePoint);
+
+            mapView.Refresh();
         }
 
         /// <summary>

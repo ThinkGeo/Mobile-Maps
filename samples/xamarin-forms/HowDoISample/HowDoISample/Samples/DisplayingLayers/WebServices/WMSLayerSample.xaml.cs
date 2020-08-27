@@ -25,8 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.DecimalDegree;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.DecimalDegree;            
 
             // This code sets up the sample to use the overlay versus the layer.
             UseOverlay();

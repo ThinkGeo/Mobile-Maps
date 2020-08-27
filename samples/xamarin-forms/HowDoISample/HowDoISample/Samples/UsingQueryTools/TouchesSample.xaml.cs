@@ -31,8 +31,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a feature layer to hold and display the zoning data
             InMemoryFeatureLayer zoningLayer = new InMemoryFeatureLayer();
@@ -101,6 +100,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent to the sample shape
             mapView.CurrentExtent = new RectangleShape(-10778499.3056056, 3920951.91647677, -10774534.1347853, 3917536.13679426);
+
+            mapView.Refresh();
         }
 
         /// <summary>

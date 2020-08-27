@@ -31,8 +31,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a PopupOverlay to display time zone information based on locations input by the user
             PopupOverlay timezoneInfoPopupOverlay = new PopupOverlay();
@@ -61,6 +60,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Get Timezone info for Frisco, TX
             //GetTimeZoneInfo(-10779572.80, 3915268.68);
 
+            mapView.Refresh();
         }
 
         private async void mapView_MapTap(object sender, TouchMapViewEventArgs e)

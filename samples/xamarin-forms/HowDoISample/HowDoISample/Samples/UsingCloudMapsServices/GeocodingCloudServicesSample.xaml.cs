@@ -32,8 +32,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
             MarkerOverlay geocodedLocationsOverlay = new MarkerOverlay();
@@ -47,6 +46,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             cboSearchType.SelectedIndex = 0;
             cboLocationType.SelectedIndex = 0;
+
+            mapView.Refresh();
         }
 
         /// <summary>

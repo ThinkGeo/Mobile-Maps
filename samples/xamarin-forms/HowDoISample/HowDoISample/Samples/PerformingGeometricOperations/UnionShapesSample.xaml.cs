@@ -27,7 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            
             // Add Cloud Maps as a background overlay
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
@@ -61,6 +61,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+
+            mapView.Refresh();
         }
 
         private void UnionShapes_OnClick(object sender, EventArgs e)

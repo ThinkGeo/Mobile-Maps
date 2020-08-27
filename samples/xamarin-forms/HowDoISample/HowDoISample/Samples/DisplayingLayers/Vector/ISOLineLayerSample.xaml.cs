@@ -27,8 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create background world map with vector tile requested from ThinkGeo Cloud Service.
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
@@ -137,6 +136,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return dynamicIsoLineLayer;
         }
 
+        #region Create Sample Data Code
         // ========================================================
         // Code for creating the grid file from a point shapefile
         // ========================================================
@@ -166,5 +166,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         //    }
         //}
         //File.WriteAllText(@"../../../data/Frisco_Mosquitos.csv", builder.ToString());
+        #endregion
     }
 }

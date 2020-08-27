@@ -33,8 +33,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-            mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
+            mapView.MapUnit = GeographyUnit.Meter;            
 
             // Create a new feature layer to display the route
             InMemoryFeatureLayer routingLayer = new InMemoryFeatureLayer();
@@ -85,6 +84,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Run the routing request
             RouteWaypoints();
+
+            mapView.Refresh();
         }
 
 
