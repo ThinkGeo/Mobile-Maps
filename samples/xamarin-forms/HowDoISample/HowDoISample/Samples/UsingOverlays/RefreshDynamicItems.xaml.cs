@@ -42,8 +42,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // This in memory layer will hold the active point, we will be adding and removing from it frequently
             InMemoryFeatureLayer vehicleLayer = new InMemoryFeatureLayer();
 
-            // Set the points image to an car icon and then apply it to all zoomlevels
-            vehicleLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle.png")));
+            // Set the points image to an car icon and then apply it to all zoomlevels            
+            PointStyle vehiclePointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle-location.png")));
+            vehiclePointStyle.YOffsetInPixel = -24;
+
+            vehicleLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = vehiclePointStyle;
             vehicleLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Add the in memory layer to the overlay

@@ -207,6 +207,7 @@
     <None Remove="Resources\generic_logo.png" />
     <None Remove="Resources\hotel_icon.png" />
     <None Remove="Resources\vandalism_icon.png" />
+    <None Remove="Resources\vehicle-location.png" />
     <None Remove="Resources\vehicle.png" />
     <None Remove="Resources\weapon_icon.png" />
     <None Remove="samples.json" />
@@ -409,7 +410,7 @@
     <EmbeddedResource Include="Resources\generic_logo.png" />
     <EmbeddedResource Include="Resources\hotel_icon.png" />
     <EmbeddedResource Include="Resources\vandalism_icon.png" />
-    <EmbeddedResource Include="Resources\vehicle.png" />
+    <EmbeddedResource Include="Resources\vehicle-location.png" />
     <EmbeddedResource Include="Resources\weapon_icon.png" />
     <EmbeddedResource Include="samples.json" />
   </ItemGroup>
