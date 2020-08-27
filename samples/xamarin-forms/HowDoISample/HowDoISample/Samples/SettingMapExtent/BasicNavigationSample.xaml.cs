@@ -38,6 +38,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await Task.Delay(5000);
             controlsExpander.IsExpanded = true;
+
+            mapView.Refresh();
         }
 
         /// <summary>
