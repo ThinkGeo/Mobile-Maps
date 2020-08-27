@@ -46,7 +46,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void ZoomIn_Click(object sender, EventArgs e)
         {
-            //mapView.ZoomIn();
+            mapView.ZoomIn();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void ZoomOut_Click(object sender, EventArgs e)
         {
-            //mapView.ZoomOut();
+            mapView.ZoomOut();
         }
 
         /// <summary>
