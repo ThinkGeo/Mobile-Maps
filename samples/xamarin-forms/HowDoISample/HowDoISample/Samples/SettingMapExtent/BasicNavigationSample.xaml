@@ -137,7 +137,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MinimumHeightRequest="10" MinimumWidthRequest="10" WidthRequest="20" HeightRequest="20"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MinimumHeightRequest="1" MinimumWidthRequest="1" WidthRequest="1" HeightRequest="1"></ThinkGeoUI:MapView>
 
         </StackLayout>
     </ContentPage.Content>
