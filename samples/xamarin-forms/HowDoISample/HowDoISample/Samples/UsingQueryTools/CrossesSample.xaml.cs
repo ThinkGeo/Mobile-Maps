@@ -32,7 +32,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
                        
             // Create a feature layer to hold the Frisco zoning data
@@ -96,8 +97,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
-            LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
-            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)highlightedFeaturesOverlay.Layers["Highlighted Features"];
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
+            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Highlighted Features"];
 
             // Clear the currently highlighted features
             highlightedFeaturesLayer.Open();
@@ -111,7 +112,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.Close();
 
             // Refresh the overlay so the layer is redrawn
-            highlightedFeaturesOverlay.Refresh();
+            layerOverlay.Refresh();
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text = string.Format("Number of features crossing the drawn shape: {0}", features.Count());
@@ -123,14 +124,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void GetFeaturesCrossing(BaseShape shape)
         {
             // Find the layers we will be modifying in the MapView
-            LayerOverlay queryFeaturesOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
-            InMemoryFeatureLayer queryFeatureLayer = (InMemoryFeatureLayer)queryFeaturesOverlay.Layers["Query Feature"];
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
+            InMemoryFeatureLayer queryFeatureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Query Feature"];
             ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
 
             // Clear the query shape layer and add the newly drawn shape
             queryFeatureLayer.InternalFeatures.Clear();
             queryFeatureLayer.InternalFeatures.Add(new Feature(shape));
-            queryFeaturesOverlay.Refresh();
+            layerOverlay.Refresh();
 
             // Perform the spatial query using the drawn shape and highlight features that were found
             var queriedFeatures = PerformSpatialQuery(shape, zoningLayer);

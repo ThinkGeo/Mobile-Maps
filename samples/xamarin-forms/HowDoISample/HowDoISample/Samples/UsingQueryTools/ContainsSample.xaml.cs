@@ -28,6 +28,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
@@ -52,15 +55,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Add each feature layer to it's own overlay
-            // We do this so we can control and refresh/redraw each layer individually
-            LayerOverlay zoningOverlay = new LayerOverlay();
-            zoningOverlay.Layers.Add("Frisco Zoning", zoningLayer);
-            mapView.Overlays.Add("Frisco Zoning Overlay", zoningOverlay);
+            LayerOverlay layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add("Frisco Zoning", zoningLayer);            
+            layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);            
 
-            LayerOverlay highlightedFeaturesOverlay = new LayerOverlay();
-            highlightedFeaturesOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
-            mapView.Overlays.Add("Highlighted Features Overlay", highlightedFeaturesOverlay);
+            mapView.Overlays.Add("Layer Overlay", layerOverlay);
 
             // Add a MarkerOverlay to the map to display the selected point for the query
             SimpleMarkerOverlay queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
@@ -69,9 +68,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add a sample point to the map for the initial query
             PointShape sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
             GetFeaturesContaining(sampleShape);
-
-            // Set the map extent to the sample shape
-            //mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
 
             mapView.Refresh();
         }
@@ -95,8 +91,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
-            LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Highlighted Features Overlay"];
-            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)highlightedFeaturesOverlay.Layers["Highlighted Features"];
+            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
+            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Highlighted Features"];
 
             // Clear the currently highlighted features
             highlightedFeaturesLayer.Open();
@@ -110,7 +106,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.Close();
 
             // Refresh the overlay so the layer is redrawn
-            highlightedFeaturesOverlay.Refresh();
+            layerOverlay.Refresh();
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text = $"Number of features containing the drawn shape: {features.Count()}";

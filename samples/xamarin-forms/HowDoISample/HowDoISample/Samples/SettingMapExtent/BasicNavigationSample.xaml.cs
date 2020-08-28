@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ThinkGeo.Core;
 using ThinkGeo.UI.XamarinForms;
+using System.IO;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
@@ -29,6 +30,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add Cloud Maps as a background overlay
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
             
             // Set the map extent
