@@ -26,13 +26,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
+            // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
+            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+                       
             // Create a feature layer to hold the Frisco zoning data
             ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
@@ -44,9 +46,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             zoningLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
 
-            // Set the map extent to Frisco, TX
-          //  mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
-
             // Create a layer to hold the feature we will perform the spatial query against
             InMemoryFeatureLayer queryFeatureLayer = new InMemoryFeatureLayer();
             queryFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Red, 6, false);
@@ -57,25 +56,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Add each feature layer to it's own overlay
-            // We do this so we can control and refresh/redraw each layer individually
-            LayerOverlay zoningOverlay = new LayerOverlay();
-            zoningOverlay.Layers.Add("Frisco Zoning", zoningLayer);
-            mapView.Overlays.Add("Frisco Zoning Overlay", zoningOverlay);
-
-            LayerOverlay queryFeaturesOverlay = new LayerOverlay();
-            queryFeaturesOverlay.Layers.Add("Query Feature", queryFeatureLayer);
-            mapView.Overlays.Add("Query Features Overlay", queryFeaturesOverlay);
-
-            LayerOverlay highlightedFeaturesOverlay = new LayerOverlay();
-            highlightedFeaturesOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
-            mapView.Overlays.Add("Highlighted Features Overlay", highlightedFeaturesOverlay);
+            LayerOverlay layerOverlay = new LayerOverlay();            
+            mapView.Overlays.Add("Layer Overlay", layerOverlay);
+            
+            layerOverlay.Layers.Add("Query Feature", queryFeatureLayer);                       
+            layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
+            layerOverlay.Layers.Add("Frisco Zoning", zoningLayer);
 
             // Add an event to handle new shapes that are drawn on the map
             mapView.TrackOverlay.TrackEnded += OnLineDrawn;
 
             // Add a sample shape to the map for the initial query
             LineShape sampleShape = new LineShape("LINESTRING(-10774628.8455729 3914024.82710629,-10776902.8471517 3915582.23154895,-10778030.2933127 3914368.79373166,-10778708.6719349 3914445.23075952)");
+                                  
             GetFeaturesCrossing(sampleShape);
 
             // Set the map extent to the sample shapes
@@ -103,7 +96,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
-            LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Highlighted Features Overlay"];
+            LayerOverlay highlightedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
             InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)highlightedFeaturesOverlay.Layers["Highlighted Features"];
 
             // Clear the currently highlighted features
@@ -130,7 +123,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void GetFeaturesCrossing(BaseShape shape)
         {
             // Find the layers we will be modifying in the MapView
-            LayerOverlay queryFeaturesOverlay = (LayerOverlay)mapView.Overlays["Query Features Overlay"];
+            LayerOverlay queryFeaturesOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
             InMemoryFeatureLayer queryFeatureLayer = (InMemoryFeatureLayer)queryFeaturesOverlay.Layers["Query Feature"];
             ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
 

@@ -17,6 +17,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     {
         bool cancelFeed;
         bool pauseFeed;
+        Task dataFeed;
 
         public RefreshDynamicItems()
         {
@@ -62,61 +63,66 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             StartDataFeed();
 
             // Refresh the map
-            mapView.Refresh();
+            mapView.Refresh();            
         }
-
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
+            // Set the data feed token to cancel and then wait for it to process the cancel. 
             cancelFeed = true;
+            dataFeed.Wait();
+            base.OnDisappearing();
         }
 
         private async void StartDataFeed()
         {
-            // Create a task that runs until we set the cacnelFeed variable
+            // Create a task that runs until we set the cancelFeed variable
 
-            var task = Task.Run(() =>
-            {
-                // Create a queue and load it up with coordinated from the CSV file
-                Queue<Feature> vehicleLocationQueue = new Queue<Feature>();
+            dataFeed = Task.Run(() =>
+           {
+               // Create a queue and load it up with coordinated from the CSV file
+               Queue<Feature> vehicleLocationQueue = new Queue<Feature>();
 
-                string[] locations = File.ReadAllLines(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Csv/vehicle-route.csv"));
+               string[] locations = File.ReadAllLines(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Csv/vehicle-route.csv"));
 
-                foreach (var location in locations)
-                {
-                    vehicleLocationQueue.Enqueue(new Feature(double.Parse(location.Split(',')[0]), double.Parse(location.Split(',')[1])));
-                }
+               foreach (var location in locations)
+               {
+                   vehicleLocationQueue.Enqueue(new Feature(double.Parse(location.Split(',')[0]), double.Parse(location.Split(',')[1])));
+               }
 
-                // Keep looping as long as it's not canceled
-                do
-                {
-                    // If the feed is not paused then update the vehicle location
-                    if (!pauseFeed)
-                    {
-                        // Get the latest point from the queue and then re-add it so the points
-                        // will loop forever
-                        Feature currentFeature = vehicleLocationQueue.Dequeue();
-                        vehicleLocationQueue.Enqueue(currentFeature);
+               // Keep looping as long as it's not canceled
+               while (cancelFeed == false)
+               {
+                   // If the feed is not paused then update the vehicle location
+                   if (!pauseFeed)
+                   {
+                       Debug.WriteLine($"Processing Vehicle Location Data Feed: {DateTime.Now.ToString()}");
+                       // Get the latest point from the queue and then re-add it so the points
+                       // will loop forever
+                       Feature currentFeature = vehicleLocationQueue.Dequeue();
+                       vehicleLocationQueue.Enqueue(currentFeature);
 
-                        // Call the invoke on the mapview so we pop over to the main UI thread
-                        // to update the map control
-                        mapView.Dispatcher.BeginInvokeOnMainThread(() =>
-                        {
-                            UpdateMap(currentFeature);
-                        });
-                    }
+                       // Call the invoke on the mapview so we pop over to the main UI thread
+                       // to update the map control                        
+                       mapView.Dispatcher.BeginInvokeOnMainThread(() =>
+                      {
+                          UpdateMap(currentFeature);
+                      });
+                   }
+                   else
+                   {
+                       Debug.WriteLine($"Paused Vehicle Location Data Feed: {DateTime.Now.ToString()}");
+                   }
 
-                    // Sleep for two second
-                    Debug.WriteLine($"Sleeping Vehicle Location Data Feed: {DateTime.Now.ToString()}");
-                    Thread.Sleep(1000);
-
-                } while (cancelFeed == false);
-            });
+                   // Sleep for one second
+                   Debug.WriteLine($"Sleeping Vehicle Location Data Feed: {DateTime.Now.ToString()}");
+                   Thread.Sleep(1000);
+               }
+           });
         }
 
         private void UpdateMap(Feature currentFeature)
-        {
+        {            
             // We need to first find our vehicle overlay and in memory layer in the map
             LayerOverlay vehicleOverlay = (LayerOverlay)mapView.Overlays["Vehicle Overlay"];
             InMemoryFeatureLayer vehicleLayer = (InMemoryFeatureLayer)vehicleOverlay.Layers["Vehicle Layer"];
@@ -132,7 +138,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Refresh the vehicle overlay
-            mapView.Refresh(new [] {mapView.Overlays["Vehicle Overlay"]});
+            mapView.Refresh(new[] { mapView.Overlays["Vehicle Overlay"] });            
         }
 
 
