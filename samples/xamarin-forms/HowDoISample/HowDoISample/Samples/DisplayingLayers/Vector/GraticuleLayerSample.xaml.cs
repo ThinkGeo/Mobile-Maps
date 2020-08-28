@@ -44,6 +44,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the layer to the overlay we created earlier.
             layerOverlay.Layers.Add("graticule", graticuleFeatureLayer);
+            layerOverlay.TileType = TileType.SingleTile;
 
             // Set the current extent of the map to start in Frisco TX
             mapView.CurrentExtent = new RectangleShape(-10782364.041857453, 3914916.6811720245, -10772029.75569071, 3908067.923475721);
