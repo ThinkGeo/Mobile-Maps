@@ -32,10 +32,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
-            MarkerOverlay geocodedLocationsOverlay = new MarkerOverlay();
+            SimpleMarkerOverlay geocodedLocationsOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("Geocoded Locations Overlay", geocodedLocationsOverlay);
 
             // Set the map extent to Frisco, TX
@@ -81,7 +81,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void UpdateSearchResultsOnUI(CloudGeocodingResult searchResult)
         {
             // Clear the locations list and existing location markers on the map
-            MarkerOverlay geocodedLocationOverlay = (MarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
+            SimpleMarkerOverlay geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
             geocodedLocationOverlay.Markers.Clear();
             lsbLocations.ItemsSource = null;
             geocodedLocationOverlay.Refresh();
@@ -129,7 +129,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             if (chosenLocation != null)
             {
                 // Get the MarkerOverlay from the MapView
-                MarkerOverlay geocodedLocationOverlay = (MarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
+                SimpleMarkerOverlay geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
 
                 // Clear the existing markers and add a new marker at the chosen location
                 geocodedLocationOverlay.Markers.Clear();

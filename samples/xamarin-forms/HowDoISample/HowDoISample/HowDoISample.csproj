@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -427,7 +427,7 @@
     <PackageReference Include="ThinkGeo.PostgreSql" Version="13.0.0-beta145" />
     <PackageReference Include="ThinkGeo.Printers" Version="13.0.0-beta145" />
     <PackageReference Include="ThinkGeo.SqlServer" Version="13.0.0-beta144" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta004" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta006" />
     <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="13.0.0-beta148" />
     <PackageReference Include="ThinkGeo.UnmanagedProj" Version="13.0.0-beta146" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />  

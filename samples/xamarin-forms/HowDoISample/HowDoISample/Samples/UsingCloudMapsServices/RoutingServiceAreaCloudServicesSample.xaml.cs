@@ -60,7 +60,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Service Area Overlay", serviceAreaOverlay);
 
             // Add a simple marker overlay to display the center point of the service area
-            MarkerOverlay serviceAreaMarkerOverlay = new MarkerOverlay();
+            SimpleMarkerOverlay serviceAreaMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("Service Area Marker Overlay", serviceAreaMarkerOverlay);
 
             mapView.CurrentExtent = new RectangleShape(-10895153.061011, 4016319.51333112, -10653612.0529718, 3797709.61365001);
@@ -110,7 +110,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             CloudRoutingServiceAreaResult serviceAreaResult = result.ServiceAreaResult;
 
             // Get the simple marker overlay from the map
-            MarkerOverlay serviceAreaMarkerOverlay = (MarkerOverlay)mapView.Overlays["Service Area Marker Overlay"];
+            SimpleMarkerOverlay serviceAreaMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Service Area Marker Overlay"];
 
             // Clear the previous markers
             serviceAreaMarkerOverlay.Markers.Clear();

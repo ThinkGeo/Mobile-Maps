@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void AddSimpleMarkers()
         {
-            MarkerOverlay simpleMarkerOverlay = new MarkerOverlay();
+            SimpleMarkerOverlay simpleMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
         }
 
@@ -53,20 +54,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void MapView_OnMapTouch(object sender, TouchMapViewEventArgs e)
         {
-            MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
+            SimpleMarkerOverlay simpleMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
 
-            // // Create a marker at the position the mouse was clicked
-            // var marker = new Marker()
-            // {
-            //     Position = e.PointInWorldCoordinate,
-            //     ImageSource = new BitmapImage(new Uri("/Resources/AQUA.png", UriKind.RelativeOrAbsolute)),
-            //     Width = 20,
-            //     Height = 34,
-            //     YOffset = -17
-            // };
+            // Create a marker at the position the mouse was clicked
+            var marker = new Marker()
+            {
+                Position = e.PointInWorldCoordinate,
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
+                YOffset = -17
+            };
 
             // Add the marker to the simpleMarkerOverlay and refresh the map
-            //simpleMarkerOverlay.Markers.Add(marker);
+            simpleMarkerOverlay.Markers.Add(marker);
             simpleMarkerOverlay.Refresh();
         }
 

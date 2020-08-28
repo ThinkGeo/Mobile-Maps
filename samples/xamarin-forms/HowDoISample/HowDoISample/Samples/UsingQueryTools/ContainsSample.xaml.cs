@@ -63,7 +63,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Highlighted Features Overlay", highlightedFeaturesOverlay);
 
             // Add a MarkerOverlay to the map to display the selected point for the query
-            MarkerOverlay queryFeatureMarkerOverlay = new MarkerOverlay();
+            SimpleMarkerOverlay queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("Query Feature Marker Overlay", queryFeatureMarkerOverlay);
 
             // Add a sample point to the map for the initial query
@@ -122,7 +122,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void GetFeaturesContaining(PointShape point)
         {
             // Find the layers we will be modifying in the MapView
-            MarkerOverlay queryFeatureMarkerOverlay = (MarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
+            SimpleMarkerOverlay queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
             ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
 
             // Clear the query point marker overlaylayer and add a marker on the newly drawn point
