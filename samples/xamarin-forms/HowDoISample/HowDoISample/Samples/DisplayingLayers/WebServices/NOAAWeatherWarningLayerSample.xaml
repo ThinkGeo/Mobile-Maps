@@ -8,18 +8,33 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherWarningLayerSample"
              Title="Display a NOAA Weather Warning Layer">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Sample Description -->
-            <Frame HasShadow="False">
-                <Label Text="This sample shows how to display NOAA weather warnings to your map."
-                       FontSize="Subtitle"
-                       VerticalOptions="Center"
-                       HorizontalOptions="StartAndExpand"/>
-            </Frame>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All">
+                <!-- Sample Description -->
+                <Frame HasShadow="False">
+                    <Label Text="This sample shows how to display NOAA weather warnings to your map."
+                           FontSize="Subtitle"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"/>
+                </Frame>
 
-            <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" MapSingleTap="mapView_MapClick" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+                <!-- Map Control -->
+                <ThinkGeoUI:MapView x:Name="mapView" MapSingleTap="mapView_MapClick" VerticalOptions="FillAndExpand"/>
+            </StackLayout>
 
-        </StackLayout>
+            <!-- Loading Layout -->
+            <StackLayout x:Name="loadingLayout"
+                         IsVisible="False"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="White"
+                         Opacity="0.5">
+                <ActivityIndicator x:Name="loadingIndicator"
+                                   IsRunning="False"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

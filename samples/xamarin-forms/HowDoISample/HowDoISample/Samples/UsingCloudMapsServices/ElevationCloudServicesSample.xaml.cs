@@ -98,7 +98,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             int projectionInSrid = 3857;
 
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             // The point interval distance determines how many elevation points are retrieved for line and area queries
             int pointIntervalDistance = (int)intervalDistance.Value;
@@ -148,12 +149,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             lsbElevations.ItemsSource = elevationPoints;
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             // Set the map extent to the elevation query feature
             drawnShapesLayer.Open();
             mapView.CurrentExtent = drawnShapesLayer.GetBoundingBox();
-            //mapView.ZoomToScale(mapView.CurrentScale * 2);
             drawnShapesLayer.Close();
             mapView.Refresh();
         }

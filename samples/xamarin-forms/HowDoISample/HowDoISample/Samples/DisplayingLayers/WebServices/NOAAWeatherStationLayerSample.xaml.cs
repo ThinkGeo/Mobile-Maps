@@ -18,9 +18,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
         }
 
-        //  We use this delegate for refreshing the map from another thread
-        public delegate void RefreshWeatherStations();
-
         /// <summary>
         ///
         /// </summary>
@@ -44,10 +41,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             nOAAWeatherStationLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             // Add the new layer to the overlay we created earlier
-            weatherOverlay.Layers.Add(nOAAWeatherStationLayer);
+            weatherOverlay.Layers.Add("Noaa Weather Stations", nOAAWeatherStationLayer);
 
             // Get the layers feature source and setup an event that will refresh the map when the data refreshes
             var featureSource = (NoaaWeatherStationFeatureSource)nOAAWeatherStationLayer.FeatureSource;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
             featureSource.StationsUpdated -= FeatureSource_StationsUpdated;
             featureSource.StationsUpdated += FeatureSource_StationsUpdated;
 
@@ -62,10 +61,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            var weatherStations = (NoaaWeatherStationFeatureSource)mapView.FindFeatureLayer("Noaa Weather Stations").FeatureSource;
+            weatherStations.StationsUpdated -= FeatureSource_StationsUpdated;
+        }
+
         private void FeatureSource_StationsUpdated(object sender, StationsUpdatedNoaaWeatherStationFeatureSourceEventArgs e)
         {
-            //// This event fires when the the feature source has new data.  We need to make sure we refresh the map
-            //// on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
+            // This event fires when the the feature source has new data.  We need to make sure we refresh the map
+            // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
             mapView.Dispatcher.BeginInvokeOnMainThread(UpdateWeatherStations);
         }
 
@@ -74,7 +81,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Here we fresh the map based on the delegate that fires when the feature source has new data.
             var weatherOverlay = mapView.Overlays["Weather"];
             weatherOverlay.Refresh();
-            //loadingImage.Visibility = Visibility.Hidden;
+
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
         }
     }
 }

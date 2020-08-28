@@ -13,16 +13,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    /// <summary>
-    /// Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud
-    /// </summary>
-
     public partial class ColorUtilitiesCloudServicesSample : ContentPage
     {
         private ColorCloudClient colorCloudClient;
         private Collection<RadioButton> baseColorRadioButtons;
 
-
+        /// <summary>
+        /// Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud
+        /// </summary>
         public ColorUtilitiesCloudServicesSample()
         {
             InitializeComponent();
@@ -72,8 +70,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Get the exttent of the features from the housing units shapefile, and set the map extent.
             housingUnitsLayer.Open();
             mapView.CurrentExtent = housingUnitsLayer.GetBoundingBox();
-            //mapView.ZoomOut();
             housingUnitsLayer.Close();
+
+            cboColorType.SelectedItem = "Hue";
+            cboDefaultColor.SelectedItem = "Blue";
 
             // Initialize the ColorCloudClient using our ThinkGeo Cloud credentials
             colorCloudClient = new ColorCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
@@ -97,9 +97,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create a new collection to hold the colors generated
             Collection<GeoColor> colors = new Collection<GeoColor>();
-
-            // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
 
             // Generate colors based on the selected 'color type'
             switch ((string)cboColorType.SelectedItem)
@@ -135,9 +132,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 default:
                     break;
             }
-
-            // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
 
             return colors;
         }
@@ -196,7 +190,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 legend.LegendItems.Add(legendItem);
             }
 
-            //mapView.AdornmentOverlay.Refresh();
+            mapView.AdornmentOverlay.Refresh();
         }
 
         /// <summary>
@@ -389,7 +383,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             Collection<GeoColor> qualityColors = new Collection<GeoColor>();
 
-            //// Generate colors based on the parameters selected in the UI
+            // Generate colors based on the parameters selected in the UI
             switch (baseColorRadioButtons.FirstOrDefault(btn => (bool)btn.IsChecked).AutomationId)
             {
                 case "rdoRandomColor":

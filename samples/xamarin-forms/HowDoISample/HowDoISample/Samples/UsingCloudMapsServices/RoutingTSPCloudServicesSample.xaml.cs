@@ -174,13 +174,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void RouteWaypoints()
         {
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             // Run the optimized routing query
             CloudRoutingOptimizationResult optimizedRoutingResult = await GetOptimizedRoute();
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             // Handle an exception returned from the service
             if (optimizedRoutingResult.Exception != null)

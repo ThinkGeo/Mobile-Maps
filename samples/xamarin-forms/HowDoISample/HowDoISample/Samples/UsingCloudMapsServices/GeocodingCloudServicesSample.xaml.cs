@@ -56,7 +56,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task<CloudGeocodingResult> PerformGeocodingQuery()
         {
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             CloudGeocodingOptions options = new CloudGeocodingOptions();
             // Set up the CloudGeocodingOptions object based on the parameters set in the UI
@@ -70,7 +71,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             CloudGeocodingResult searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             return searchResult;
         }
@@ -133,7 +135,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Clear the existing markers and add a new marker at the chosen location
                 geocodedLocationOverlay.Markers.Clear();
-                //geocodedLocationOverlay.Markers.Add(CreateNewMarker(chosenLocation.LocationPoint));
+                geocodedLocationOverlay.Markers.Add(CreateNewMarker(chosenLocation.LocationPoint));
 
                 // Center the map on the chosen location
                 mapView.CurrentExtent = chosenLocation.BoundingBox;
@@ -237,11 +239,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return new Marker()
             {
                 Position = point,
-                ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png"),
                 YOffset = -17
             };
         }
-
-
     }
 }

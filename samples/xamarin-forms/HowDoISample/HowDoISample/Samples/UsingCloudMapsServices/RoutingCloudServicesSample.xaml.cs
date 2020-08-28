@@ -149,13 +149,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             PointShape endPoint = new PointShape(-10779631.80, 3915721.82);
 
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             // Send the routing request
             CloudRoutingGetRouteResult routingResult = await GetRoute(new Collection<PointShape> { startPoint, waypoint1, waypoint2, endPoint });
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             // Handle an exception returned from the service
             if (routingResult.Exception != null)

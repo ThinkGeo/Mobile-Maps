@@ -54,6 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta158" />
+    <PackageReference Include="ThinkGeo.UI.Android">
+      <Version>13.0.0-beta101</Version>
+    </PackageReference>
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta008" />
     <PackageReference Include="ThinkGeo.UI.XamarinForms.Android">
       <Version>13.0.0-beta010</Version>
     </PackageReference>

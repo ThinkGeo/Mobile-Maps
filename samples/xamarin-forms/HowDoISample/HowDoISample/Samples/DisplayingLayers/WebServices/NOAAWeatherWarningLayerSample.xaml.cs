@@ -46,6 +46,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Get the layers feature source and setup an event that will refresh the map when the data refreshes
             var featureSource = (NoaaWeatherWarningsFeatureSource)noaaWeatherWarningsFeatureLayer.FeatureSource;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
             featureSource.WarningsUpdated -= FeatureSource_WarningsUpdated;
             featureSource.WarningsUpdated += FeatureSource_WarningsUpdated;
 
@@ -66,17 +68,35 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh the map.
             mapView.Refresh();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            var weatherWarnings = (NoaaWeatherWarningsFeatureSource)mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
+            weatherWarnings.WarningsUpdated -= FeatureSource_WarningsUpdated;
+            weatherWarnings.WarningsUpdating -= FeatureSource_WarningsUpdating;
+        }
+
         private void FeatureSource_WarningsUpdating(object sender, WarningsUpdatingNoaaWeatherWarningsFeatureSourceEventArgs e)
         {
-            // loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Visible);
+            mapView.Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                loadingIndicator.IsRunning = true;
+                loadingLayout.IsVisible = true;
+            });
         }
 
         private void FeatureSource_WarningsUpdated(object sender, WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
         {
             // This event fires when the the feature source has new data.  We need to make sure we refresh the map
             // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
-            // loadingImage.Dispatcher.Invoke(() => loadingImage.Visibility = Visibility.Hidden);
-            mapView.Dispatcher.BeginInvokeOnMainThread(() => mapView.Refresh(new[] {mapView.Overlays["Noaa Weather Warning"]}));
+            mapView.Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                mapView.Refresh(new[] {mapView.Overlays["Noaa Weather Warning"]});
+                loadingIndicator.IsRunning = false;
+                loadingLayout.IsVisible = false;
+            });
         }
 
         private void mapView_MapClick(object sender, TouchMapViewEventArgs e)
