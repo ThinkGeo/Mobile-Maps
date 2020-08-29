@@ -69,12 +69,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task<Feature> ReprojectAFeature(Feature decimalDegreeFeature)
         {
             //Show a loading graphic to let users know the request is running
-           //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             Feature reprojectedFeature = await projectionCloudClient.ProjectAsync(decimalDegreeFeature, 4326, 3857);
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             return reprojectedFeature;
         }
@@ -85,12 +87,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task<Collection<Feature>> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
         {
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             Collection<Feature> reprojectedFeatures = await projectionCloudClient.ProjectAsync(decimalDegreeFeatures, 4326, 3857);
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             return reprojectedFeatures;
         }

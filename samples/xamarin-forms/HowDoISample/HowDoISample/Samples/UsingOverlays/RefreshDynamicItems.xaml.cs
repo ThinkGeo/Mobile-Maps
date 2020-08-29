@@ -139,7 +139,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Refresh the vehicle overlay
-            mapView.Refresh(new[] { mapView.Overlays["Vehicle Overlay"] });            
+            mapView.Overlays["Vehicle Overlay"].Refresh();
         }
 
 

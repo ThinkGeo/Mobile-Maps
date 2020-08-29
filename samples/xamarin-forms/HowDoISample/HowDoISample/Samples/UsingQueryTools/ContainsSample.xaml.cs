@@ -121,11 +121,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             SimpleMarkerOverlay queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
             ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
 
-            // Clear the query point marker overlaylayer and add a marker on the newly drawn point
+            // Clear the query point marker overlay and add a marker on the newly drawn point
             queryFeatureMarkerOverlay.Markers.Clear();
 
             // Create a marker with a static marker image and add it to the map
-            var marker = CreateNewMarker(point);
+            var marker = new Marker(point)
+            {
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
+                YOffset = -17
+            };;
             queryFeatureMarkerOverlay.Markers.Add(marker);
             queryFeatureMarkerOverlay.Refresh();
 
@@ -143,19 +147,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void MapView_OnMapTap(object sender, TouchMapViewEventArgs e)
         {
             GetFeaturesContaining(e.PointInWorldCoordinate);
-        }
-
-        /// <summary>
-        /// Create a new map marker using preloaded image assets
-        /// </summary>
-        private Marker CreateNewMarker(PointShape point)
-        {
-            return new Marker
-            {
-                Position = point,
-                ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
-                YOffset = -17
-            };
         }
     }
 }

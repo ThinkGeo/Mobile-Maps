@@ -132,13 +132,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
 
                 // Show a loading graphic to let users know the request is running
-                //loadingImage.Visibility = Visibility.Visible;
+                loadingIndicator.IsRunning = true;
+                loadingLayout.IsVisible = true;
 
                 // Run the reverse geocode
                 CloudReverseGeocodingResult searchResult = await reverseGeocodingCloudClient.SearchPointAsync(lon, lat, pointProjectionInSrid, searchRadius, searchRadiusDistanceUnit, options);
 
                 // Hide the loading graphic
-                //loadingImage.Visibility = Visibility.Hidden;
+                loadingIndicator.IsRunning = false;
+                loadingLayout.IsVisible = false;
 
                 // Handle an exception returned from the service
                 if (searchResult.Exception != null)
@@ -186,8 +188,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Create a popup to display the best match, and add it to the PopupOverlay
                 Popup bestMatchPopup = new Popup();
                 bestMatchPopup.Content = "Best Match: " + searchResult.BestMatchLocation.Address;
-                //bestMatchPopup.FontSize = 10d;
-               // bestMatchPopup.FontFamily = new System.Windows.Media.FontFamily("Verdana");                
+
                 bestMatchPopupOverlay.Popups.Add(bestMatchPopup);
                 bestMatchPopup.Position = bestMatchLocation;
 

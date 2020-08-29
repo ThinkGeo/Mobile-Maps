@@ -151,13 +151,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void GetAndDrawServiceArea(PointShape point)
         {
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             // Run the service area query
             CloudRoutingGetServiceAreaResult getServiceAreaResult = await GetServiceArea(point);
 
             // Hide the loading graphic
-            //loadingImage.Visibility = Visibility.Hidden;
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
 
             // Handle an exception returned from the service
             if (getServiceAreaResult.Exception != null)
@@ -210,7 +212,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             return new Marker()
             { 
-                ImageSource = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png")),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png"),
                 YOffset = -17
             };
         }

@@ -103,7 +103,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             CloudMapsQueryResult result = new CloudMapsQueryResult();
 
             // Show a loading graphic to let users know the request is running
-            //loadingImage.Visibility = Visibility.Visible;
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
 
             // Perform the world maps query
             try
@@ -148,7 +149,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             finally
             {
                 // Hide the loading graphic
-                //loadingImage.Visibility = Visibility.Hidden;
+                loadingIndicator.IsRunning = false;
+                loadingLayout.IsVisible = false;
             }
 
             if (result.Features.Count > 0)

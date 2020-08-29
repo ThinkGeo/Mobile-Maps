@@ -87,16 +87,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Rotate the map at an angle using the value of the rotateAngle Slider. Since this is just setting a property, you must refresh the map in order for the rotation to show.
-        /// The same effect can be achieved by holding down the ALT key and left click dragging anywhere on the map.
-        /// </summary>
-        private void Rotate_Click(object sender, EventArgs e)
-        {
-            //mapView.RotatedAngle = (float)rotateAngle.Value;
-            mapView.Refresh();
-        }
-
-        /// <summary>
         /// Locks slider values to whole numbers
         /// </summary>
         private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)

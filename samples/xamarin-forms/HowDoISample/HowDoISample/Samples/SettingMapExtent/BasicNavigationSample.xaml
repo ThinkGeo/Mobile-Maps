@@ -13,7 +13,7 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn how to use code to zoom, pan, and rotate the map control."
+                        <Label Text="Learn how to use code to zoom and pan the map control."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
@@ -36,7 +36,7 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <ScrollView HeightRequest="300">
+                    <ScrollView>
                         <Grid>
                             <Label Grid.Column="1" Grid.Row="0" Text="Zooming:" FontSize="Subtitle" FontAttributes="Bold"/>
 
@@ -93,24 +93,6 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                             </Grid>
-
-                            <Label Grid.Column="1" Grid.Row="6" Text="Rotating:" FontSize="Subtitle" FontAttributes="Bold"></Label>
-                            <Label Grid.Column="1" Grid.Row="7" Text="Current Angle:" FontAttributes="Bold"/>
-                            <Grid Grid.Column="1" Grid.Row="8">
-
-                                <Slider Grid.Column="0" Grid.Row="0" x:Name="rotateAngle" Maximum="360" Value="0" ValueChanged="Slider_OnValueChanged"></Slider>
-                                <Label Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference Name=rotateAngle}"  Text="{Binding Path=Value}"></Label>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                            <Button Grid.Column="1" Text=" Update" Grid.Row="9" x:Name="rotate" Clicked="Rotate_Click"></Button>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5"/>
