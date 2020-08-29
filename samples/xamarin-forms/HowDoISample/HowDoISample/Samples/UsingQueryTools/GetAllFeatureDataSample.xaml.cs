@@ -28,6 +28,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
@@ -43,16 +45,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add a style to use to draw the Frisco hotel points
             hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             hotelsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Star, 24, GeoBrushes.MediumPurple, GeoPens.Purple);
-
+            
             InMemoryFeatureLayer highlightedHotelLayer = new InMemoryFeatureLayer();
             highlightedHotelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
             highlightedHotelLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Star, 30, GeoBrushes.BrightYellow, GeoPens.Black);
 
             // Add the feature layer to an overlay, and add the overlay to the map
-            LayerOverlay hotelsOverlay = new LayerOverlay();
-            hotelsOverlay.Layers.Add("Frisco Hotels", hotelsLayer);
-            hotelsOverlay.Layers.Add("Highlighted Hotel", highlightedHotelLayer);
-            mapView.Overlays.Add(hotelsOverlay);
+            LayerOverlay layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add("Frisco Hotels", hotelsLayer);
+            layerOverlay.Layers.Add("Highlighted Hotel", highlightedHotelLayer);
+            mapView.Overlays.Add(layerOverlay);
 
             // Open the hotels layer so we can read the data from it
             hotelsLayer.Open();
