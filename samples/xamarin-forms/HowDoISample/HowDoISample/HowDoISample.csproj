@@ -645,7 +645,7 @@
     <Compile Update="Samples\UsingMapTools\DisplayMapLogoSample.xaml.cs">
       <DependentUpon>DisplayMapLogoSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMapMouseCoordinatesSample.xaml.cs">
+    <Compile Update="Samples\UsingMapTools\DisplayMapCenterCoordinatesSample.xaml.cs">
       <DependentUpon>DisplayMapMouseCoordinatesSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingMapTools\DisplayMapPanZoomBarSample.xaml.cs">

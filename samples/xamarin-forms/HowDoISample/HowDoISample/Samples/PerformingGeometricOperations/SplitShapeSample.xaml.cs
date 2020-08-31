@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// TODO: Update sample once API has been ported
         /// </summary>
         protected override void OnAppearing()
         {
