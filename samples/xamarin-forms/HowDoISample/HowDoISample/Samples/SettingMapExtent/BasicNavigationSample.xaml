@@ -5,14 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.BasicNavigationSample">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.BasicNavigationSample"
+             Title="Basic Navigation">
     <ContentPage.Content>
         <StackLayout>
             <Expander x:Name="controlsExpander">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+                        <Label Text="Learn how to use code to zoom and pan the map control."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
