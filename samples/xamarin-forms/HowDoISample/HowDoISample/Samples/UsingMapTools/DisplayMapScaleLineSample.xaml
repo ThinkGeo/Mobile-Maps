@@ -5,15 +5,14 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapScaleLineSample"
-             Title="Display a Map ScaleLine">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapScaleLineSample">
     <ContentPage.Content>
         <StackLayout>
             <Expander>
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn to render a ScaleLine on the map in a variety of different of styles." 
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>

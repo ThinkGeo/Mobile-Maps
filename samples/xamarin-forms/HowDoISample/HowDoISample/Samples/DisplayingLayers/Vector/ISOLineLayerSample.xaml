@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ISOLineLayerSample"
-             Title="Display an ISOLine Layer">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ISOLineLayerSample">
     <ContentPage.Content>
         <StackLayout>
 
             <Frame>
-                <Label Text="This sample shows how to display an ISOLine layer."
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

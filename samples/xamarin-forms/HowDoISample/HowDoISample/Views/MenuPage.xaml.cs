@@ -25,8 +25,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             if (e.SelectedItem == null)
                 return;
 
-            var id = ((SampleMenuItem)e.SelectedItem).Id;
-            await RootPage.NavigateFromMenu(id);
+            SampleMenuItem sample = ((SampleMenuItem)e.SelectedItem);
+            await RootPage.NavigateFromMenu(sample);
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

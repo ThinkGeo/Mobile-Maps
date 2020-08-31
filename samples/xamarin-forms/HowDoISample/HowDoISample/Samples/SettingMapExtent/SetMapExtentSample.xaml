@@ -5,15 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample"
-             Title="Set Map Extent">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample">
     <ContentPage.Content>
         <StackLayout>
             <Expander x:Name="controlsExpander">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn how to set the map's extent in a variety of different methods."
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>

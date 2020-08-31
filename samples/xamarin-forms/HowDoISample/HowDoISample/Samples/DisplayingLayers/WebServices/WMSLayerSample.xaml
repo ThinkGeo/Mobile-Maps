@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.WMSLayerSample"
-             Title="Display a WMS Layer">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.WMSLayerSample">
     <ContentPage.Content>
         <StackLayout>
 
             <Frame HasShadow="False">
-                <Label Text="This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)"
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

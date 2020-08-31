@@ -19,17 +19,11 @@ namespace HowDoISample.ViewModels
 
         public ObservableCollection<MenuGroup> SampleMenuItems { get; set; }
 
-        // unused
-        public Command LoadSamplesCommand { get; set; }
-
         public SampleMenu()
         {
             _allMenuItems = new ObservableCollection<MenuGroup>();
             SampleMenuItems = new ObservableCollection<MenuGroup>();
             LoadMenu();
-
-            // unused
-            LoadSamplesCommand = new Command(async () => await LoadSamples());
         }
 
         public void ToggleGroupExpanded(int index)
@@ -58,7 +52,7 @@ namespace HowDoISample.ViewModels
                 var sampleGroup = new MenuGroup() { Title = category.Title, IsExpanded = false };
                 foreach (var sample in category.Children)
                 {
-                    sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title });
+                    sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title, Description = sample.Description });
                 }
                 _allMenuItems.Add(sampleGroup);
             }
@@ -75,38 +69,12 @@ namespace HowDoISample.ViewModels
                 {
                     foreach (var sample in group)
                     {
-                        sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title });
+                        sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title, Description = sample.Description });
                     }
                 }
                 updatedMenu.Add(sampleGroup);
             }
             SampleMenuItems = updatedMenu;
-        }
-
-        // unused
-        async Task LoadSamples()
-        {
-            List<SampleCategory> samplesJson;
-
-            // Deserialize samples.json
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(SampleMenu)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("HowDoISample.samples.json");
-            using (var reader = new StreamReader(stream))
-            {
-                var text = await reader.ReadToEndAsync();
-                samplesJson = JsonConvert.DeserializeObject<List<SampleCategory>>(text);
-            }
-
-            // Translate samples.json object into the master sample menu
-            foreach (var category in samplesJson)
-            {
-                var sampleGroup = new MenuGroup() { Title = category.Title };
-                foreach (var sample in category.Children)
-                {
-                    sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title });
-                }
-                _allMenuItems.Add(sampleGroup);
-            }
         }
 
         #region INotifyPropertyChanged

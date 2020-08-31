@@ -21,14 +21,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             MasterBehavior = MasterBehavior.Popover;
         }
 
-        public async Task NavigateFromMenu(string id)
+        public async Task NavigateFromMenu(SampleMenuItem sample)
         {
-            var type = Type.GetType(id);
-            var samplePage = new NavigationPage((Page)Activator.CreateInstance(type));
+            var type = Type.GetType(sample.Id);
+            var samplePage = (ContentPage)Activator.CreateInstance(type);
+            samplePage.Title = sample.Title;
+            samplePage.FindByName<Label>("descriptionLabel").Text = sample.Description;
 
-            if (samplePage != null && Detail != samplePage)
+            var sampleNavPage = new NavigationPage(samplePage);
+
+            if (Detail != sampleNavPage)
             {
-                Detail = samplePage;
+                Detail = sampleNavPage;
 
                 if (Device.RuntimePlatform == Device.Android)
                     await Task.Delay(100);

@@ -5,15 +5,14 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.BingMapLayerSample"
-             Title="Display a Bing Map Layer">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.BingMapLayerSample">
     <ContentPage.Content>
         <StackLayout>
             <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="This sample shows how to display a Bing Maps layer."
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>

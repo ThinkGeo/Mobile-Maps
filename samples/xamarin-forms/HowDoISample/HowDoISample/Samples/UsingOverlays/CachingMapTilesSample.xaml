@@ -5,15 +5,14 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample"
-             Title="Caching Map Tiles">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample">
     <ContentPage.Content>
         <StackLayout>
             <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="4">
-                        <Label Text="Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the device and reuse them for faster rendering times."
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>

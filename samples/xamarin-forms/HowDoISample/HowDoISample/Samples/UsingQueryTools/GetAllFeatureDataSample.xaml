@@ -5,15 +5,14 @@
               xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GetAllFeatureDataSample"
-             Title="Get Data from All Features">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GetAllFeatureDataSample">
     <ContentPage.Content>
         <StackLayout>
             <Expander x:Name="controlsExpander">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn how to get data from all features in a ShapeFile" 
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle" 
                                VerticalOptions="Center" 
                                HorizontalOptions="StartAndExpand"/>

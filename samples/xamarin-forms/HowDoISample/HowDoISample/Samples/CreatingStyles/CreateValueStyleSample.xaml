@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateValueStyleSample"
-             Title="Create a Value Style">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateValueStyleSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame HasShadow="False">
-                <Label Text="Learn how to style data based on data values using a ValueStyle"
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

@@ -5,15 +5,14 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample"
-             Title="Display Bing Maps Overlay">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample">
     <ContentPage.Content>
         <StackLayout>
             <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Margin="4">
-                        <Label Text="Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required."
+                        <Label x:Name="descriptionLabel"
                                FontSize="Subtitle" 
                                VerticalOptions="CenterAndExpand" 
                                HorizontalOptions="StartAndExpand"/>

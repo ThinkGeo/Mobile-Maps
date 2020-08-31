@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateLineStyleSample"
-             Title="Create a Line Style">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateLineStyleSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame HasShadow="False">
-                <Label Text="Learn how to style line data using a LineStyle"
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

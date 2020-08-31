@@ -4,14 +4,16 @@ using System.Text;
 
 namespace HowDoISample.Models
 {
-    class SampleMenuItem
+    public class SampleMenuItem
     {
         public string Id { get; set; }
 
         public string Title { get; set; }
+
+        public string Description { get; set; }
     }
 
-    class MenuGroup : List<SampleMenuItem>
+    public class MenuGroup : List<SampleMenuItem>
     {
         public string Title { get; set; }
 

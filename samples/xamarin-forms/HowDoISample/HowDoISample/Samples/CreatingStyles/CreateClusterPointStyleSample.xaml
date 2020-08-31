@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateClusterPointStyleSample"
-             Title="Create a Cluster Style">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateClusterPointStyleSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame HasShadow="False">
-                <Label Text="Learn how to cluster point data dynamically using a ClusterPointStyle"
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

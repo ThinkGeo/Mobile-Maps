@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample"
-             Title="Display a WMS Overlay">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample">
     <ContentPage.Content>
         <StackLayout>
           
             <Frame HasShadow="False">
-                <Label Text="Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load." 
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle" 
                        VerticalOptions="Center" 
                        HorizontalOptions="StartAndExpand"/>

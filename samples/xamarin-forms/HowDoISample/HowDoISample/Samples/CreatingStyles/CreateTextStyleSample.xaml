@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateTextStyleSample"
-             Title="Create a Text Style">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreateTextStyleSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame HasShadow="False">
-                <Label Text="Learn how to label data using a TextStyle"
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

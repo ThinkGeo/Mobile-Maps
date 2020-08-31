@@ -5,13 +5,12 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GraticuleLayerSample"
-             Title="Display a Graticule Layer">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GraticuleLayerSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame HasShadow="False">
-                <Label Text="This sample shows how to display a graticule line layer."
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

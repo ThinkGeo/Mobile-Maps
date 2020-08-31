@@ -6,8 +6,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ElevationCloudServicesSample"
-             Title="Elevation">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ElevationCloudServicesSample">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -16,11 +15,10 @@
                     <!-- Sample Description -->
                     <Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
-                            <Label
-                                Text="Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud"
-                                FontSize="Subtitle"
-                                VerticalOptions="Center"
-                                HorizontalOptions="StartAndExpand" />
+                            <Label x:Name="descriptionLabel"
+                                   FontSize="Subtitle"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand" />
                             <BoxView Color="LightGray"
                                      WidthRequest="1"
                                      VerticalOptions="Center"

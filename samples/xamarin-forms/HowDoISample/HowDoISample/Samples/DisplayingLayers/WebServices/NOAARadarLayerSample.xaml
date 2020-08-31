@@ -5,13 +5,12 @@
               xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAARadarLayerSample"
-             Title="Display a NOAA Radar Layer (TODO)">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAARadarLayerSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Description -->
             <Frame>
-                <Label Text="This sample shows how to add NOAA Radar weather to your map."
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle"
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand"/>

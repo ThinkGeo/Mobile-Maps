@@ -5,15 +5,14 @@
               xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherWarningLayerSample"
-             Title="Display a NOAA Weather Warning Layer">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherWarningLayerSample">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
                 <!-- Sample Description -->
                 <Frame HasShadow="False">
-                    <Label Text="This sample shows how to display NOAA weather warnings to your map."
+                    <Label x:Name="descriptionLabel"
                            FontSize="Subtitle"
                            VerticalOptions="Center"
                            HorizontalOptions="StartAndExpand"/>

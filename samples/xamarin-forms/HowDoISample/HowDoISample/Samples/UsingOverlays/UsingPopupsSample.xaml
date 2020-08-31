@@ -5,14 +5,13 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample"
-             Title="Using Popups">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample">
     <ContentPage.Content>
         <StackLayout>
             <!-- Sample Controls -->
 
             <Frame HasShadow="False">
-                <Label Text="Learn to add, edit, or remove popups on the map using the PopupOverlay." 
+                <Label x:Name="descriptionLabel"
                        FontSize="Subtitle" 
                        VerticalOptions="Center" 
                        HorizontalOptions="StartAndExpand"/>
