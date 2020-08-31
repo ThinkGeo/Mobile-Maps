@@ -669,9 +669,6 @@
     <Compile Update="Samples\UsingOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayOpenStreetMapOverlaySample.xaml.cs">
-      <DependentUpon>DisplayOpenStreetMapOverlaySample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\UsingOverlays\DisplayWMSOverlaySample.xaml.cs">
       <DependentUpon>DisplayWMSOverlaySample.xaml</DependentUpon>
     </Compile>

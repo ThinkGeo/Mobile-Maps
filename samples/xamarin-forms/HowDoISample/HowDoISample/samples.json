@@ -187,12 +187,6 @@
         "source": "Samples/UsingOverlays/DisplayGoogleMapsOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayOpenStreetMapOverlaySample",
-        "title": "Display OpenStreetMap Overlay",
-        "description": "Learn to render OpenStreetMap using the OpenStreetMapOverlay. OpenStreetMap Tiles are not meant for heavy production use without express permission from the OpenStreetMap Foundation. See https://operations.osmfoundation.org/ for details about their usage policies.",
-        "source": "Samples/UsingOverlays/DisplayOpenStreetMapOverlaySample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
         "title": "Display a WMS Overlay",
         "description": "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
