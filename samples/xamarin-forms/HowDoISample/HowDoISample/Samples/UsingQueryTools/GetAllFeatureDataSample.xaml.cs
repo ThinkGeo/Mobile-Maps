@@ -93,8 +93,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void lsbHotels_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
-            await CollapseExpander();
-
             InMemoryFeatureLayer highlightedHotelLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Highlighted Hotel");
             highlightedHotelLayer.Open();
             highlightedHotelLayer.InternalFeatures.Clear();
@@ -113,12 +111,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             highlightedHotelLayer.Close();
-        }
-
-        private async Task CollapseExpander()
-        {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
 
         /// <summary>

@@ -153,7 +153,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return new Marker()
             {
                 Position = point,
-                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png"),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
                 YOffset = -17
             };
         }

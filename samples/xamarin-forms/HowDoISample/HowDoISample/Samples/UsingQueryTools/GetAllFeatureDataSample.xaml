@@ -38,17 +38,26 @@
                     <Grid HeightRequest="300">
                         <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Select a hotel from the list to zoom to that location"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" FontSize="Subtitle" Text="Frisco Hotels Feature Data"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" FontSize="Subtitle" FontAttributes="Bold" Text="Frisco Hotels Feature Data"></Label>
 
                         <ListView Grid.Column="1" Grid.Row="2" x:Name="lsbHotels" ItemSelected="lsbHotels_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout>
-                                            <Label Text="{Binding Path=Name}" FontAttributes="Bold"/>
-                                            <Label Text="{Binding Path=Address, StringFormat='Address: {0}'}"/>
-                                            <Label Text="{Binding Path=Rooms, StringFormat='Rooms: {0}'}"/>
-                                        </StackLayout>
+                                        <Grid>
+                                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" FontAttributes="Bold"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=Rooms, StringFormat='Rooms: {0}'}"/>
+                                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Address, StringFormat='Address: {0}'}"/>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                        </Grid>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
