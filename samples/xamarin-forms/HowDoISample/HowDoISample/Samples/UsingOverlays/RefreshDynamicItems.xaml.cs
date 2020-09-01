@@ -15,9 +15,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RefreshDynamicItems : ContentPage
     {
-        bool cancelFeed;
-        bool pauseFeed;
-        Task dataFeed;
+        bool isFeedCanceled;
+        bool isFeedPaused;
+        
+        Task updateDataFeed;
 
         public RefreshDynamicItems()
         {
@@ -35,27 +36,25 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add Cloud Maps as a background overlay
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");            
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            // Setup the overlay that we will refresh often
-            LayerOverlay vehicleOverlay = new LayerOverlay();
+            // Create a marker overlay to show where the vehicle is
+            SimpleMarkerOverlay markerOverlay = new SimpleMarkerOverlay();
+            
+            // Create the marker of the vehicle
+            var marker = new Marker()
+            {
+                Position = new PointShape(-10778817.49746323, 3912420.8997628987),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle-location.png"),                
+                YOffset = -33
+            };
 
-            // This in memory layer will hold the active point, we will be adding and removing from it frequently
-            InMemoryFeatureLayer vehicleLayer = new InMemoryFeatureLayer();
-
-            // Set the points image to an car icon and then apply it to all zoomlevels            
-            PointStyle vehiclePointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle-location.png")));
-            vehiclePointStyle.YOffsetInPixel = -24;
-
-            vehicleLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = vehiclePointStyle;
-            vehicleLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            // Add the in memory layer to the overlay
-            vehicleOverlay.Layers.Add("Vehicle Layer", vehicleLayer);
-
-            // Add the overlay to the map
-            mapView.Overlays.Add("Vehicle Overlay", vehicleOverlay);
+            // Add the marker to the overlay
+            markerOverlay.Markers.Add("vehicle", marker);
+            
+            // Add the vehicle overlay to the maps
+            mapView.Overlays.Add("Vehicle Overlay", markerOverlay);
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10779430.188014803, 3912668.1732483786, -10778438.895309737, 3911814.2283277493);
@@ -70,16 +69,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override void OnDisappearing()
         {
             // Set the data feed token to cancel and then wait for it to process the cancel. 
-            cancelFeed = true;
-            dataFeed.Wait();
+            // This is important otherwise the feed will continue to run even if we navigate away
+            isFeedCanceled = true;
+
+            updateDataFeed.Wait();
+            
             base.OnDisappearing();
         }
 
-        private async void StartDataFeed()
+        private void StartDataFeed()
         {
-            // Create a task that runs until we set the cancelFeed variable
+            // Create a task that simulated the external data feed and run it until we cancel it
 
-            dataFeed = Task.Run(() =>
+            updateDataFeed = Task.Run(() =>
            {
                // Create a queue and load it up with coordinated from the CSV file
                Queue<Feature> vehicleLocationQueue = new Queue<Feature>();
@@ -92,10 +94,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                }
 
                // Keep looping as long as it's not canceled
-               while (cancelFeed == false)
+               while (isFeedCanceled == false)
                {
                    // If the feed is not paused then update the vehicle location
-                   if (!pauseFeed)
+                   if (!isFeedPaused)
                    {
                        Debug.WriteLine($"Processing Vehicle Location Data Feed: {DateTime.Now.ToString()}");
                        // Get the latest point from the queue and then re-add it so the points
@@ -115,41 +117,39 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                        Debug.WriteLine($"Paused Vehicle Location Data Feed: {DateTime.Now.ToString()}");
                    }
 
-                   // Sleep for one second
-                   Debug.WriteLine($"Sleeping Vehicle Location Data Feed: {DateTime.Now.ToString()}");
-                   Thread.Sleep(1000);
+                   // Delay the task for a few seconds before we update the feed
+                   Debug.WriteLine($"Vehicle Location Data Feed: Paused {isFeedPaused.ToString()} {DateTime.Now.ToString()}");
+                   Task.Delay(2000).Wait();
                }
            });
         }
 
         private void UpdateMap(Feature currentFeature)
-        {            
-            // We need to first find our vehicle overlay and in memory layer in the map
-            LayerOverlay vehicleOverlay = (LayerOverlay)mapView.Overlays["Vehicle Overlay"];
-            InMemoryFeatureLayer vehicleLayer = (InMemoryFeatureLayer)vehicleOverlay.Layers["Vehicle Layer"];
-
-            // Let's clear the old location and add the new one
-            vehicleLayer.InternalFeatures.Clear();
-            vehicleLayer.InternalFeatures.Add(currentFeature);
-
+        {
+            // We need to first find our vehicle overlay
+            SimpleMarkerOverlay vehicleOverlay = (SimpleMarkerOverlay)mapView.Overlays["Vehicle Overlay"];
+            
+            // Update the markers position
+            vehicleOverlay.Markers["vehicle"].Position = (PointShape)currentFeature.GetShape();
+            
             // If we have the center on vehicle check box checked then we center the map on the new location
             if (centerOnVehicle.IsChecked == true)
             {
-                mapView.CenterAt(currentFeature);
+                mapView.CenterAt(currentFeature);                
             }
-
-            // Refresh the vehicle overlay
-            mapView.Overlays["Vehicle Overlay"].Refresh();
+            else
+            {
+                // Refresh the vehicle overlay
+                mapView.Overlays["Vehicle Overlay"].Refresh();
+            }
         }
-
 
         /// <summary>
         /// Pause the data feed
         /// </summary>
         private void PauseDataFeed_Checked(object sender, EventArgs e)
         {
-            pauseFeed = pauseDataFeed.IsChecked;
+            isFeedPaused = pauseDataFeed.IsChecked;
         }
-
     }
 }
