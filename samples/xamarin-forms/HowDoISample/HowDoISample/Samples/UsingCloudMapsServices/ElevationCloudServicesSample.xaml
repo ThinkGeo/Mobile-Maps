@@ -11,7 +11,7 @@
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <Expander>
+                <Expander x:Name="controlsExpander">
                     <!-- Sample Description -->
                     <Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
@@ -54,11 +54,13 @@
                             <Button Clicked="DrawLine_Click" Text="Draw a New Line" />
                             <Button Clicked="DrawPolygon_Click" Text="Draw a New Polygon" />
 
-                            <Label x:Name="txtAverageElevation" />
-                            <Label x:Name="txtHighestElevation" />
-                            <Label x:Name="txtLowestElevation" />
+                            <Label x:Name="txtAverageElevation" FontAttributes="Italic"/>
+                            <Label x:Name="txtHighestElevation" FontAttributes="Italic"/>
+                            <Label x:Name="txtLowestElevation" FontAttributes="Italic"/>
 
-                            <ListView x:Name="lsbElevations" SelectedItem="lsbElevations_SelectionChanged">
+                            <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold"></Label>
+
+                            <ListView x:Name="lsbElevations" ItemSelected="lsbElevations_SelectionChanged">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -68,8 +70,7 @@
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold" />
-                                                <Label Grid.Row="1"
-                                                       Text="{Binding Path=Elevation, StringFormat=Elevation: {0:0.00} feet}" />
+                                                <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>

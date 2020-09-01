@@ -28,13 +28,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            // Set the map's unit of measurement to meters (Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
+
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
-
-            // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
             
             // Create a new feature layer to display the route
             InMemoryFeatureLayer routingLayer = new InMemoryFeatureLayer();
@@ -84,9 +85,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             CloudRoutingGetRouteOptions options = new CloudRoutingGetRouteOptions();
             options.TurnByTurn = true;
 
-            CloudRoutingGetRouteResult testRoute = routingCloudClient.GetRoute(waypoints, 3857, options);
+            CloudRoutingGetRouteResult route = await routingCloudClient.GetRouteAsync(waypoints, 3857, options);
 
-            return routingCloudClient.GetRoute(waypoints, 3857, options);
+            return route;
 
         }
 
@@ -189,10 +190,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Zoom to the selected feature and zoom out to an appropriate level
                 mapView.CurrentExtent = ((CloudRoutingSegment)routeSegments.SelectedItem).Shape.GetBoundingBox();
                 ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-                //if (mapView.CurrentScale < standardZoomLevelSet.ZoomLevel15.Scale)
-                //{
-                //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel15.Scale);
-                //}
+                mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel15.Scale);
                 mapView.Refresh();
             }
         }

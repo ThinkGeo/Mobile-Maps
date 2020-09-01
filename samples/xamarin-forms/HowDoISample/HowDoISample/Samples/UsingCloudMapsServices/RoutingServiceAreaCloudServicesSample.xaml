@@ -11,7 +11,7 @@
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <Expander>
+                <Expander IsExpanded="True">
                     <!-- Sample Description -->
                     <Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
@@ -39,18 +39,15 @@
 
                     <!-- Sample Controls -->
                     <Expander.Content>
-                        <Grid Grid.Column="1" Grid.Row="0">
-                            <Label Grid.Column="1" Grid.Row="0" Text="Find the Service Area of a Location" />
-                            <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold"
-                                   Text="Click On The Map To Calculate A New Service Area" />
+                        <Grid>
+                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Click On The Map To Calculate A New Service Area" />
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="280" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                         </Grid>

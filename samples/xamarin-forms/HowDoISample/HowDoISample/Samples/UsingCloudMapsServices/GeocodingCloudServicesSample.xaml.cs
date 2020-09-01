@@ -104,7 +104,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void Search_Click(object sender, EventArgs e)
         {
-            //// Perform some simple validation on the input text boxes
+            await CollapseExpander();
+
+            // Perform some simple validation on the input text boxes
             if (await ValidateSearchParameters())
             {
                 // Run the Cloud Geocoding query
@@ -113,7 +115,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Handle an error returned from the geocoding service
                 if (searchResult.Exception != null)
                 {
-                    await DisplayAlert("Alert", searchResult.Exception.Message, "Error");
+                    await DisplayAlert("Error", searchResult.Exception.Message, "OK");
                     return;
                 }
 
@@ -127,7 +129,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void lsbLocations_SelectionChanged(object sender, EventArgs e)
         {
-            //// Get the selected location
+            // Get the selected location
             var chosenLocation = lsbLocations.SelectedItem as CloudGeocodingLocation;
             if (chosenLocation != null)
             {
@@ -240,9 +242,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return new Marker()
             {
                 Position = point,
-                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "/Resources/AQUA.png"),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
                 YOffset = -17
             };
+        }
+
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
     }
 }

@@ -58,17 +58,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             elevationFeaturesOverlay.Layers.Add("Drawn Shape Layer", drawnShapeLayer);
             mapView.Overlays.Add("Elevation Features Overlay", elevationFeaturesOverlay);
 
-            // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
-
             // Add an event to trigger the elevation query when a new shape is drawn
             mapView.TrackOverlay.TrackEnded += OnShapeDrawn;
 
             // Initialize the ElevationCloudClient with our ThinkGeo Cloud credentials
-            elevationCloudClient = new ElevationCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
+            elevationCloudClient = new ElevationCloudClient("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
 
             // Create a sample line and get elevation along that line
             LineShape sampleShape = new LineShape("LINESTRING(-10776298.0601626 3912306.29684573,-10776496.3187036 3912399.45447343,-10776675.4679876 3912478.28015841,-10776890.4471285 3912516.49867234,-10777189.0292686 3912509.33270098,-10777329.9600387 3912442.4503016,-10777664.3720356 3912174.92070409)");
+
+            // Set the map extent to Frisco, TX
+            mapView.CurrentExtent = sampleShape.GetBoundingBox();
+
             await PerformElevationQuery(sampleShape);
 
             mapView.Refresh();
@@ -115,9 +116,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     elevationPoints.Add(new CloudElevationPointResult(elevation, drawnPoint));
 
                     // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = string.Format("Average Elevation: {0:0.00} feet", elevation);
-                    txtHighestElevation.Text = string.Format("Highest Elevation: {0:0.00} feet", elevation, drawnPoint);
-                    txtLowestElevation.Text = string.Format("Lowest Elevation: {0:0.00} feet", elevation, drawnPoint);
+                    txtAverageElevation.Text = $"Average Elevation: {elevation:0.00} feet";
+                    txtHighestElevation.Text = $"Highest Elevation: {elevation:0.00} feet";
+                    txtLowestElevation.Text = $"Lowest Elevation: {elevation:0.00} feet";
                     break;
                 case WellKnownType.Line:
                     LineShape drawnLine = (LineShape)queryShape;
@@ -125,9 +126,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     elevationPoints = result.ElevationPoints;
 
                     // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = string.Format("Average Elevation: {0:0.00} feet", result.AverageElevation);
-                    txtHighestElevation.Text = string.Format("Highest Elevation: {0:0.00} feet", result.HighestElevationPoint.Elevation, result.HighestElevationPoint.Point);
-                    txtLowestElevation.Text = string.Format("Lowest Elevation: {0:0.00} feet", result.LowestElevationPoint.Elevation, result.LowestElevationPoint.Point);
+                    txtAverageElevation.Text = $"Average Elevation: {result.AverageElevation:0.00} feet";
+                    txtHighestElevation.Text = $"Highest Elevation: {result.HighestElevationPoint.Elevation:0.00} feet";
+                    txtLowestElevation.Text = $"Lowest Elevation: {result.LowestElevationPoint.Elevation:0.00} feet";
                     break;
                 case WellKnownType.Polygon:
                     PolygonShape drawnPolygon = (PolygonShape)queryShape;
@@ -135,9 +136,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     elevationPoints = result.ElevationPoints;
 
                     // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = string.Format("Average Elevation: {0:0.00} feet", result.AverageElevation);
-                    txtHighestElevation.Text = string.Format("Highest Elevation: {0:0.00} feet", result.HighestElevationPoint.Elevation, result.HighestElevationPoint.Point);
-                    txtLowestElevation.Text = string.Format("Lowest Elevation: {0:0.00} feet", result.LowestElevationPoint.Elevation, result.LowestElevationPoint.Point);
+                    txtAverageElevation.Text = $"Average Elevation: {result.AverageElevation:0.00} feet";
+                    txtHighestElevation.Text = $"Highest Elevation: {result.HighestElevationPoint.Elevation:0.00} feet";
+                    txtLowestElevation.Text = $"Lowest Elevation: {result.LowestElevationPoint.Elevation:0.00} feet";
                     break;
                 default:
                     break;
@@ -156,14 +157,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent to the elevation query feature
             drawnShapesLayer.Open();
-            mapView.CurrentExtent = drawnShapesLayer.GetBoundingBox();
+            mapView.CenterAt(drawnShapesLayer.GetBoundingBox().GetCenterPoint());
             drawnShapesLayer.Close();
             mapView.Refresh();
         }
 
-        // <summary>
-        // Disable map drawing after a shape is drawn
-        // </summary>
+        /// <summary>
+        /// Disable map drawing after a shape is drawn
+        /// </summary>
         private async void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
         {
             // Disable drawing mode and clear the drawing layer
@@ -195,45 +196,59 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await PerformElevationQuery(e.TrackShape);
         }
 
-        // <summary>
-        // Center the map on a point when it's selected in the UI
-        // </summary>
-        private void lsbElevations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Center the map on a point when it's selected in the UI
+        /// </summary>
+        private async void lsbElevations_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
+            await CollapseExpander();
+
             if (lsbElevations.SelectedItem != null)
             {
                 // Set the map extent to the selected point
                 CloudElevationPointResult elevationPoint = (CloudElevationPointResult)lsbElevations.SelectedItem;
-                mapView.CurrentExtent = elevationPoint.Point.GetBoundingBox();
+                mapView.CenterAt(elevationPoint.Point);
                 mapView.Refresh();
             }
         }
 
-        // <summary>
-        // Set the map to 'Point Drawing Mode' when the user clicks the 'Draw a New Point' button
-        // </summary>
-        private void DrawPoint_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Point Drawing Mode' when the user clicks the 'Draw a New Point' button
+        /// </summary>
+        private async void DrawPoint_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
+
             // Set the drawing mode to 'Point'
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
         }
 
-        // <summary>
-        // Set the map to 'Line Drawing Mode' when the user clicks the 'Draw a New Line' button
-        // </summary>
-        private void DrawLine_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Line Drawing Mode' when the user clicks the 'Draw a New Line' button
+        /// </summary>
+        private async void DrawLine_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
+
             // Set the drawing mode to 'Line'
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
         }
 
-        // <summary>
-        // Set the map to 'Polygon Drawing Mode' when the user clicks the 'Draw a New Polygon' button
-        // </summary>
-        private void DrawPolygon_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Polygon Drawing Mode' when the user clicks the 'Draw a New Polygon' button
+        /// </summary>
+        private async void DrawPolygon_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
+
             // Set the drawing mode to 'Polygon'
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
+        }
+
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
     }
 }

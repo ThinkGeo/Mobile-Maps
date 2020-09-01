@@ -11,7 +11,7 @@
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <Expander IsExpanded="True">
+                <Expander x:Name="controlsExpander" IsExpanded="True">
                     <!-- Sample Description -->
                     <Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
