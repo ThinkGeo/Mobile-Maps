@@ -37,10 +37,10 @@
                 <Expander.Content>
                     <Grid>
                         <Label  Grid.Column="1" Grid.Row="0" Text="Starting Offset (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="0" x:Name="startingOffset" Text="5000" VerticalOptions="Center"></Entry>
+                        <Entry  Grid.Column="2" Grid.Row="0" x:Name="startingOffset" Text="5000" VerticalOptions="Center" Keyboard="Numeric"></Entry>
 
                         <Label  Grid.Column="1" Grid.Row="1" Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="1" x:Name="distance" Text="10000" VerticalOptions="Center"></Entry>
+                        <Entry  Grid.Column="2" Grid.Row="1" x:Name="distance" Text="10000" VerticalOptions="Center" Keyboard="Numeric"></Entry>
 
                         <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get Subline" Clicked="GetSubLine_OnClick"></Button>
                         <!-- Controls Grid Layout -->

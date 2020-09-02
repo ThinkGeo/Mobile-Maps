@@ -66,12 +66,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         private async void mapView_MapTap(object sender, TouchMapViewEventArgs e)
-        {  
-            // if (e.MouseButton == MapMouseButton.Left)
-            {
-                //Run the timezone info query
-                await GetTimeZoneInfo(e.PointInWorldCoordinate.X, e.PointInWorldCoordinate.Y);
-            }
+        {
+            //Run the timezone info query
+            await GetTimeZoneInfo(e.PointInWorldCoordinate.X, e.PointInWorldCoordinate.Y);
         }
 
         /// <summary>
@@ -83,21 +80,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             try
             {
                 // Show a loading graphic to let users know the request is running
-                //loadingImage.Visibility = Visibility.Visible;
+                loadingIndicator.IsRunning = true;
+                loadingLayout.IsVisible = true;
 
                 // Get timezone info based on the lon, lat, and input projection (Spherical Mercator in this case)
                 result = await timeZoneCloudClient.GetTimeZoneByCoordinateAsync(lon, lat, 3857);
-
-                // Hide the loading graphic
-                //loadingImage.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
-                // Hide the loading graphic
-                //loadingImage.Visibility = Visibility.Hidden;
-
-                await DisplayAlert("Alert", ex.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
                 return;
+            }
+            finally
+            {
+                loadingIndicator.IsRunning = false;
+                loadingLayout.IsVisible = false;
             }
 
             // Get the timezone info popup overlay from the mapview
@@ -106,11 +103,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the existing info popups from the map
             timezoneInfoPopupOverlay.Popups.Clear();
 
-            // Generate a new info popup and add it to the map
+            // Build a string description of the timezone
             StringBuilder timezoneInfoString = new StringBuilder();
-            timezoneInfoString.AppendLine(String.Format("{0}: {1}", "Time Zone", result.TimeZone));
-            timezoneInfoString.AppendLine(String.Format("{0}: {1}", "Current Local Time", result.CurrentLocalTime));
-            timezoneInfoString.AppendLine(String.Format("{0}: {1}", "Daylight Savings Active", result.DaylightSavingsActive));
+            timezoneInfoString.AppendLine($"Time Zone: {result.TimeZone}");
+            timezoneInfoString.AppendLine($"Current Local Time: {result.CurrentLocalTime}");
+            timezoneInfoString.AppendLine($"Daylight Savings Active: {result.DaylightSavingsActive}");
+
+            // Display the timezone info on a popup on the map
             Popup popup = new Popup();
             popup.Content = timezoneInfoString.ToString();
             popup.Position = new PointShape(lon, lat);

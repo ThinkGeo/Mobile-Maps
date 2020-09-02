@@ -48,7 +48,7 @@
 
                                 <Label Grid.Column="1" Grid.Row="3" Text="Maximum Results:" FontAttributes="Bold"
                                        VerticalOptions="Center" />
-                                <Entry Grid.Column="2" Grid.Row="3" x:Name="txtMaxResults" Text="10"
+                                <Entry Grid.Column="2" Grid.Row="3" x:Name="txtMaxResults" Text="10" Keyboard="Numeric"
                                        VerticalOptions="Center" />
 
                                 <Label Grid.Column="1" Grid.Row="4" Text="SearchType:" FontAttributes="Bold"

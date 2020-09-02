@@ -11,7 +11,7 @@
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <Expander>
+                <Expander x:Name="controlsExpander">
                     <!-- Sample Description -->
                     <Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
@@ -39,10 +39,9 @@
 
                     <!-- Sample Controls -->
                     <Expander.Content>
-                        <Grid Grid.Column="1" Grid.Row="0">
-                            <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Query World Maps Features" />
-                            <Label Grid.Column="1" Grid.Row="1" FontSize="14">Query Layer:</Label>
-                            <Picker Grid.Column="2" Grid.Row="1" x:Name="cboQueryLayer">
+                        <Grid>
+                            <Label Grid.Column="1" Grid.Row="0" Text="Query Layer:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Picker Grid.Column="2" Grid.Row="0" x:Name="cboQueryLayer">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Buildings</x:String>
@@ -62,8 +61,9 @@
 
                                 </Picker.ItemsSource>
                             </Picker>
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="14">Query Type:</Label>
-                            <Picker Grid.Column="2" Grid.Row="2" x:Name="cboQueryType">
+
+                            <Label Grid.Column="1" Grid.Row="1" Text="Query Type:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Picker Grid.Column="2" Grid.Row="1" x:Name="cboQueryType">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Containing</x:String>
@@ -75,14 +75,12 @@
                                 </Picker.ItemsSource>
                             </Picker>
 
-                            <Label Grid.Column="1" Grid.Row="3" Text="Maximum Results:" />
-                            <Entry Grid.Column="2" Grid.Row="3" x:Name="maxResults" Text="100" />
-                            <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPoint_Click"
-                                    Text="Draw New Point And Query" />
-                            <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Clicked="DrawLine_Click"
-                                    Text="Draw New Line And Query" />
-                            <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click"
-                                    Text="Draw New Polygon And Query" />
+                            <Label Grid.Column="1" Grid.Row="2" Text="Maximum Results:" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Entry Grid.Column="2" Grid.Row="2" x:Name="maxResults" Text="100" Keyboard="Numeric" />
+
+                            <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Clicked="DrawPoint_Click" Text="Draw New Point And Query" />
+                            <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Clicked="DrawLine_Click" Text="Draw New Line And Query" />
+                            <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click" Text="Draw New Polygon And Query" />
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />

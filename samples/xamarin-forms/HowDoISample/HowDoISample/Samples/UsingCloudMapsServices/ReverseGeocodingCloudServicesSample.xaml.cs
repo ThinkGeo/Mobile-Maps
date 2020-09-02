@@ -89,8 +89,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         /// Perform the reverse geocode when the user clicks the 'Search' button
         /// </summary>
-        private void Search_Click(object sender, EventArgs e)
+        private async void Search_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
             // Run the reverse geocode using the coordinates in the 'Location' text box
             PerformReverseGeocode();
         }
@@ -188,9 +189,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Create a popup to display the best match, and add it to the PopupOverlay
                 Popup bestMatchPopup = new Popup();
                 bestMatchPopup.Content = "Best Match: " + searchResult.BestMatchLocation.Address;
-
-                bestMatchPopupOverlay.Popups.Add(bestMatchPopup);
                 bestMatchPopup.Position = bestMatchLocation;
+                bestMatchPopupOverlay.Popups.Add(bestMatchPopup);
 
                 // Sort the locations found into three groups (Addresses, Places, Roads) based on their LocationCategory
                 Collection<CloudReverseGeocodingLocation> nearbyLocations = new Collection<CloudReverseGeocodingLocation>(searchResult.NearbyLocations);
@@ -221,6 +221,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 lsbRoads.ItemsSource = nearbyRoads;
                 lsbPlaces.ItemsSource = nearbyPlaces;
 
+                lsbPlaces.IsVisible = true;
+
                 txtSearchResultsBestMatch.Text = "Best Match: " + searchResult.BestMatchLocation.Address;
             }
             else
@@ -230,11 +232,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent to show the results of the search
             mapView.CurrentExtent = searchRadiusFeatureLayer.GetBoundingBox();
-            ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-            //if (mapView.CurrentScale < standardZoomLevelSet.ZoomLevel18.Scale)
-            //{
-                //mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
-            //}
+            mapView.ZoomToScale(mapView.ZoomLevelSet.ZoomLevel18.Scale);
             mapView.Refresh();
         }
 
@@ -258,11 +256,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Center the map on the chosen location
                 mapView.CurrentExtent = locationFeature.GetBoundingBox();
-                ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-               // if (mapView.CurrentScale < standardZoomLevelSet.ZoomLevel18.Scale)
-                //{
-                  //  mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
-                //}
+                mapView.ZoomToScale(mapView.ZoomLevelSet.ZoomLevel18.Scale);
                 mapView.Refresh();
             }
         }
@@ -365,6 +359,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             lsbAddresses.IsVisible = false;
             lsbRoads.IsVisible = false;
             lsbPlaces.IsVisible = true;
+        }
+
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
     }
 }

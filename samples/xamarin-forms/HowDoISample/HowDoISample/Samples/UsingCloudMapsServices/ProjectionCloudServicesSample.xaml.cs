@@ -34,7 +34,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Create a new feature layer to display the shapes we will be reprojecting
             InMemoryFeatureLayer reprojectedFeaturesLayer = new InMemoryFeatureLayer();
@@ -162,10 +162,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
             }
 
-            //// Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
+            // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
             Collection<Feature> sphericalMercatorFeatures = await ReprojectMultipleFeatures(decimalDegreeFeatures);
 
-            //// Add the reprojected features to the map
+            // Add the reprojected features to the map
             ClearMapAndAddFeatures(sphericalMercatorFeatures);
         }
     }

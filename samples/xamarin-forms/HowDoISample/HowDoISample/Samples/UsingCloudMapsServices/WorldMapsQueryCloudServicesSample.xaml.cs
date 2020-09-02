@@ -81,6 +81,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             mapView.Refresh();
         }
+
         private async void PerformWorldMapsQuery()
         {
             // Get the feature layers from the MapView
@@ -196,11 +197,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             PerformWorldMapsQuery();
         }
 
-        // <summary>
-        // Set the map to 'Point Drawing Mode' when the user clicks the 'Draw a New Query Point' button
-        // </summary>
-        private void DrawPoint_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Point Drawing Mode' when the user clicks the 'Draw a New Query Point' button
+        /// </summary>
+        private async void DrawPoint_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
             // Set the drawing mode to 'Point'
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
 
@@ -208,11 +210,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ClearQueryShapes();
         }
 
-        // <summary>
-        // Set the map to 'Line Drawing Mode' when the user clicks the 'Draw a New Query Line' button
-        // </summary>
-        private void DrawLine_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Line Drawing Mode' when the user clicks the 'Draw a New Query Line' button
+        /// </summary>
+        private async void DrawLine_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
             // Set the drawing mode to 'Line'
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
@@ -220,11 +223,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ClearQueryShapes();
         }
 
-        // <summary>
-        // Set the map to 'Polygon Drawing Mode' when the user clicks the 'Draw a New Query Polygon' button
-        // </summary>
-        private void DrawPolygon_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set the map to 'Polygon Drawing Mode' when the user clicks the 'Draw a New Query Polygon' button
+        /// </summary>
+        private async void DrawPolygon_Click(object sender, EventArgs e)
         {
+            await CollapseExpander();
             // Set the drawing mode to 'Polygon'
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
@@ -232,9 +236,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ClearQueryShapes();
         }
 
-        // <summary>
-        // Clear the query shapes from the map
-        // </summary>
+        /// <summary>
+        /// Clear the query shapes from the map
+        /// </summary>
         private void ClearQueryShapes()
         {
             // Get the query shape layer from the MapView
@@ -246,6 +250,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             queriedFeaturesLayer.InternalFeatures.Clear();
             queryShapeFeatureLayer.InternalFeatures.Clear();
             queriedFeaturesOverlay.Refresh();
+        }
+
+        private async Task CollapseExpander()
+        {
+            controlsExpander.IsExpanded = false;
+            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
         }
     }
 }
