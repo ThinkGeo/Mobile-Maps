@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -34,16 +29,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             thinkGeoCloudVectorMapsLayer.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
             thinkGeoCloudVectorMapsLayer.MapType = ThinkGeoCloudVectorMapsMapType.Light;
             var overlay = new LayerOverlay();
+            overlay.TileSnappingMode = TileSnappingMode.Snapping;
             overlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
             mapView.Overlays.Add("Cloud Overlay", overlay);
-
+            
             // Set the current extent to a neighborhood in Frisco Texas.
             mapView.CurrentExtent = new RectangleShape(-10781708.9749424, 3913502.90429046, -10777685.1114043, 3910360.79646662);
 
             // Refresh the map.
             mapView.Refresh();
-            var p = new Popup();
         }
-
     }
 }
