@@ -29,7 +29,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             thinkGeoCloudVectorMapsLayer.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
             thinkGeoCloudVectorMapsLayer.MapType = ThinkGeoCloudVectorMapsMapType.Light;
             var overlay = new LayerOverlay();
-            overlay.TileSnappingMode = TileSnappingMode.Snapping;
             overlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
             mapView.Overlays.Add("Cloud Overlay", overlay);
             
