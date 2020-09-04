@@ -85,8 +85,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
             hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
             {
-                TextPlacement = TextPlacement.Lower,
-                YOffsetInPixel = 4,
+                YOffsetInPixel = 1,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
                 DrawingLevel = DrawingLevel.LabelLevel,
                 AllowLineCarriage = true

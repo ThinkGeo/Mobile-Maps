@@ -8,7 +8,7 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapCenterCoordinatesSample">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
@@ -37,10 +37,10 @@
                 <Expander.Content>
                     <Grid>
                         <CheckBox Grid.Column="1" Grid.Row="0" x:Name="displayMouseCoordinates" IsChecked="True" CheckedChanged="DisplayMouseCoordinates_Checked" VerticalOptions="Center"></CheckBox>
-                        <Label Grid.Column="2" Grid.Row="0" Text="Display Center Coordinates" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Label Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Text="Display Center Coordinates" FontAttributes="Bold" VerticalOptions="Center"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="Select Coordinate Type:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Picker Grid.Column="2" Grid.Row="1" x:Name="coordinateType" SelectedIndexChanged="CoordinateType_SelectionChanged">
+                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Select Coordinate Type:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Picker Grid.Column="3" Grid.Row="1" x:Name="coordinateType" SelectedIndexChanged="CoordinateType_SelectionChanged">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>(x), (y)</x:String>
@@ -54,13 +54,12 @@
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>

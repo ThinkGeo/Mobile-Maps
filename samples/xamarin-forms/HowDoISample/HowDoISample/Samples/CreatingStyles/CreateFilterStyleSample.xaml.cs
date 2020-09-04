@@ -63,9 +63,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 Conditions = { new FilterCondition("OffenseGro", "Drugs") },
                 Styles = {
-                        new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/drugs_icon.png"))) { ImageScale = .60 }
-                    }
+                    new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
+                    new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/drugs_icon.png")))
+                }
             };
 
             // Create a filter style based on the "Weapons" Offense Group
@@ -73,9 +73,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 Conditions = { new FilterCondition("OffenseGro", "Weapons") },
                 Styles = {
-                        new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/weapon_icon.png"))) { ImageScale = .25 }
-                    }
+                    new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
+                    new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/weapon_icon.png"))) { ImageScale = .5 }
+                }
             };
 
             // Create a filter style based on the "Vandalism" Offense Group
@@ -83,9 +83,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 Conditions = { new FilterCondition("OffenseGro", "Vandalism") },
                 Styles = {
-                        new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
-                        new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/vandalism_icon.png"))) { ImageScale = .25 }
-                    }
+                    new PointStyle(PointSymbolType.Circle, 28, GeoBrushes.White,GeoPens.Red),
+                    new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Resources/vandalism_icon.png"))) { ImageScale = .5 }
+                }
             };
 
             // Add the filter styles to the CustomStyles collection

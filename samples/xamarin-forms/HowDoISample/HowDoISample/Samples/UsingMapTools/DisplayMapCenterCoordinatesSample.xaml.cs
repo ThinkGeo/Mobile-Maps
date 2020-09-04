@@ -33,12 +33,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
+            // Enable the CenterCoordinate map tool
+            mapView.MapTools.CenterCoordinate.IsEnabled = true;
+            coordinateType.SelectedItem = "(x), (y)";
+
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
-
-            // Enable the CenterCoordinate map tool
-            mapView.MapTools.CenterCoordinate.IsEnabled = displayMouseCoordinates.IsChecked;
-            coordinateType.SelectedItem = "(x), (y)";
 
             mapView.Refresh();
         }

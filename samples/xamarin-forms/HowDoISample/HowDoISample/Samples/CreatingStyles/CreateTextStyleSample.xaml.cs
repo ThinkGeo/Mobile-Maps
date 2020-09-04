@@ -69,7 +69,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var textStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
             {
                 TextPlacement = TextPlacement.Lower,
-                YOffsetInPixel = 2,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
                 DrawingLevel = DrawingLevel.LabelLevel,
                 AllowLineCarriage = true

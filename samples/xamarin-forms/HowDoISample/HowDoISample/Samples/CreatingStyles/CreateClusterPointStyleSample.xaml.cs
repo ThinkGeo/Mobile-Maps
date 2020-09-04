@@ -63,7 +63,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create the point style that will serve as the basis of the cluster style
             var pointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/coyote_paw.png")))
             {
-                ImageScale = .25,
+                ImageScale = .4,
                 Mask = new AreaStyle(GeoPens.Black, GeoBrushes.White),
                 MaskType = MaskType.RoundedCorners
             };
@@ -72,13 +72,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var textStyle = new TextStyle("FeatureCount", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold), GeoBrushes.DimGray)
             {
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
-                YOffsetInPixel = 12
+                YOffsetInPixel = 1
             };
 
             // Create the cluster point style
             var clusterPointStyle = new ClusterPointStyle(pointStyle, textStyle)
             {
-                MinimumFeaturesPerCellToCluster = 2
+                MinimumFeaturesPerCellToCluster = 1
             };
 
             // Add the point style to the collection of custom styles for ZoomLevel 1.

@@ -87,10 +87,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ShapeFileFeatureLayer hotelsLayer = (ShapeFileFeatureLayer)layerOverlay.Layers["hotels"];
 
             // Create a point style
-            var pointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/hotel_icon.png")))
-            {
-                ImageScale = .25
-            };
+            var pointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/hotel_icon.png")));
 
             // Add the point style to the collection of custom styles for ZoomLevel 1.
             hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();

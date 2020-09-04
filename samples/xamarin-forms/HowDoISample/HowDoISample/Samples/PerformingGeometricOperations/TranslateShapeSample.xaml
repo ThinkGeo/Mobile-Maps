@@ -8,7 +8,7 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.TranslateShapeSample">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
@@ -35,48 +35,50 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid>
-                        <!-- Translate By Offset -->
-                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Text="Translate By Offset:" FontSize="Subtitle"></Label>
+                    <ScrollView HeightRequest="300">
+                        <Grid>
+                            <!-- Translate By Offset -->
+                            <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Text="Translate By Offset:" FontAttributes="Bold" FontSize="Subtitle"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="Translate X (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1"  x:Name="translateX" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
+                            <Label Grid.Column="1" Grid.Row="1" Text="Translate X (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            <Entry Grid.Column="2" Grid.Row="1"  x:Name="translateX" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
 
-                        <Label  Grid.Column="1" Grid.Row="2" Text="Translate Y (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="2" x:Name="translateY" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
+                            <Label  Grid.Column="1" Grid.Row="2" Text="Translate Y (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            <Entry  Grid.Column="2" Grid.Row="2" x:Name="translateY" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
 
-                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="offsetTranslateShape" Text="Translate" Clicked="OffsetTranslateShape_OnClick"></Button>
+                            <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="offsetTranslateShape" Text="Translate" Clicked="OffsetTranslateShape_OnClick"></Button>
 
-                        <!-- Translate By Degree Angle -->
-                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Text="Translate By Degree Angle:" FontSize="Subtitle"></Label>
+                            <!-- Translate By Degree Angle -->
+                            <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Text="Translate By Degree Angle:" FontAttributes="Bold" FontSize="Subtitle"></Label>
 
-                        <Label Grid.Column="1" Grid.Row="5" Text="Angle:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="5" x:Name="translateAngle" Text="120" Keyboard="Numeric" VerticalOptions="Center"></Entry>
+                            <Label Grid.Column="1" Grid.Row="5" Text="Angle:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            <Entry Grid.Column="2" Grid.Row="5" x:Name="translateAngle" Text="120" Keyboard="Numeric" VerticalOptions="Center"></Entry>
 
-                        <Label Grid.Column="1" Grid.Row="6" Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="6" x:Name="translateDistance" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
+                            <Label Grid.Column="1" Grid.Row="6" Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            <Entry Grid.Column="2" Grid.Row="6" x:Name="translateDistance" Text="1000" Keyboard="Numeric" VerticalOptions="Center"></Entry>
 
-                        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" x:Name="degreeTranslateShape" Text="Translate" Clicked="DegreeTranslateShape_OnClick"></Button>
+                            <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" x:Name="degreeTranslateShape" Text="Translate" Clicked="DegreeTranslateShape_OnClick"></Button>
 
-                        <!-- Controls Grid Layout -->
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                            <!-- Controls Grid Layout -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </ScrollView>
                 </Expander.Content>
             </Expander>
 

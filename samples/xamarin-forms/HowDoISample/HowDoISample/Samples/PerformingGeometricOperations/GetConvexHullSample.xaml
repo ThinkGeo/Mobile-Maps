@@ -8,7 +8,7 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GetConvexHullSample">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
