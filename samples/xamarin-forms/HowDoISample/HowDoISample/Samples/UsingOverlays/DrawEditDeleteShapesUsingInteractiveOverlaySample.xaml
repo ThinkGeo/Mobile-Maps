@@ -35,31 +35,33 @@
 
                 <!-- Sample Controls -->
                 <Expander.Content>
-                    <Grid>
-                        <RadioButton Grid.Column="1" Grid.Row="0" x:Name="navMode" Text="Navigation Mode" IsChecked="True" Clicked="NavMode_Click"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="drawPoint" Text="Draw Point" Clicked="DrawPoint_Click"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="drawLine" Text="Draw Line" Clicked="DrawLine_Click"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="drawPolygon" Text="Draw Polygon" Clicked="DrawPolygon_Click"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="4" x:Name="editShape" Text="Edit Shape" Clicked="EditShape_Click"></RadioButton>
-                        <RadioButton Grid.Column="1" Grid.Row="5" x:Name="deleteShape" Text="Delete Shape" Clicked="DeleteShape_Click"></RadioButton>
+                    <ScrollView>
+                        <Grid>
+                            <RadioButton Grid.Column="1" Grid.Row="0" x:Name="navMode" Text="Navigation Mode" IsChecked="True" Clicked="NavMode_Click"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="drawPoint" Text="Draw Point" Clicked="DrawPoint_Click"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="2" x:Name="drawLine" Text="Draw Line" Clicked="DrawLine_Click"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="drawPolygon" Text="Draw Polygon" Clicked="DrawPolygon_Click"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="editShape" Text="Edit Shape" Clicked="EditShape_Click"></RadioButton>
+                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="deleteShape" Text="Delete Shape" Clicked="DeleteShape_Click"></RadioButton>
 
-                        <Label x:Name="instructions" Grid.Column="1" Grid.Row="6" FontAttributes="Italic"></Label>
+                            <Label x:Name="instructions" Grid.Column="1" Grid.Row="6" FontAttributes="Italic"></Label>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </ScrollView>
                 </Expander.Content>
             </Expander>
 

@@ -73,6 +73,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 featureLayer.InternalFeatures.Add(feature.Id, feature);
             }
+
             // Clear out all the TrackOverlay's features
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
@@ -81,11 +82,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 featureLayer.InternalFeatures.Add(feature.Id, feature);
             }
+
             // Clear out all the EditOverlay's features
             mapView.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
 
             // Refresh the overlays to show latest results
-           // mapView.Refresh(new Overlay[] { mapView.TrackOverlay, mapView.EditOverlay, layerOverlay });
             mapView.TrackOverlay.Refresh();
             mapView.EditOverlay.Refresh();
             layerOverlay.Refresh();
@@ -185,7 +186,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
             }
-            // Clear all the features inthe featureLayer so that the editing features don't overlap with the original shapes
+
+            // Clear all the features in the featureLayer so that the editing features don't overlap with the original shapes
             // In UpdateLayerFeatures, we will add them all back to the featureLayer once the user switches modes
             featureLayer.InternalFeatures.Clear();
 
@@ -193,9 +195,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.EditOverlay.CalculateAllControlPoints();
 
             // Refresh the map so that the features properly show that they are in edit mode
-            // mapView.Refresh(new Overlay[] { mapView.EditOverlay, layerOverlay });
             mapView.EditOverlay.Refresh();
             layerOverlay.Refresh();
+
             // Update instructions
             instructions.Text = "Edit Shapes Mode - Allows the user to modify Shapes. Translate, rotate, or scale a shape using the anchor controls around the shape. Line and Polygon Shapes can also be modified: move a vertex by taping and dragging on an existing vertex, add a vertex by tapping on a line segment, and remove a vertex by double tapping on an existing vertex.";
         }

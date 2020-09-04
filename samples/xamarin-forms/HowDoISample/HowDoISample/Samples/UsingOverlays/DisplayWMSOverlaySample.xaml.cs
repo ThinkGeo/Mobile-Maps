@@ -26,19 +26,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
+            mapView.MapUnit = GeographyUnit.DecimalDegree;
 
             // Add a simple background overlay
             mapView.BackgroundColor = new Color(234, 232, 226);
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
+            mapView.CurrentExtent = new RectangleShape(-96.8538765269409, 33.1618647290098, -96.7987487018851, 33.1054126590461);
 
             // Create a WmsOverlay and add it to the map.
             WmsOverlay wmsOverlay = new WmsOverlay() { ServerUris = { new Uri("http://ows.mundialis.de/services/service")}};
-            wmsOverlay.Parameters.Add("VERSION", "1.3.0");
             wmsOverlay.Parameters.Add("LAYERS", "OSM-WMS");
             wmsOverlay.Parameters.Add("STYLES", "default");
-            wmsOverlay.Parameters.Add("CRS", "EPSG:3857");  // Make sure to match the WMS CRS to the Map's projection
             mapView.Overlays.Add(wmsOverlay);
 
             mapView.Refresh();
