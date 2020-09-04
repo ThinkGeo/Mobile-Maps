@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta162" />
     <PackageReference Include="ThinkGeo.UI.Android">
       <Version>13.0.0-beta107</Version>
     </PackageReference>
@@ -141,7 +140,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
