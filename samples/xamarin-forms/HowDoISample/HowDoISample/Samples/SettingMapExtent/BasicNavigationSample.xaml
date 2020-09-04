@@ -13,7 +13,8 @@
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label Text="Learn how to use code to zoom and pan the map control."
+                        <Label x:Name="descriptionLabel"
+                               Text="Learn how to use code to zoom and pan the map control."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
