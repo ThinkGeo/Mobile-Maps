@@ -199,21 +199,21 @@
         "source": "Samples/UsingOverlays/GroupingLayersUsingLayerOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
-        "title": "Using Markers",
-        "description": "Learn to add, edit, or remove markers on the map using the MarkerOverlay.",
-        "source": "Samples/UsingOverlays/UsingMarkersSample"
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
+        "title": "Track Dynamic Data",
+        "description": "Learn how to use overlays to track dynamically updated data. This sample shows how to refresh an overlay to display a vehicle that gets updates every few seconds.",
+        "source": "Samples/UsingOverlays/TrackDynamicData"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.RefreshDynamicItems",
-        "title": "Refreshing Dynamic Items",
-        "description": "Learn how to use overlays to display dynamically refreshing data. This sample will shows how to refresh an overlay to display a vehicle that gets updates every few seconds.",
-        "source": "Samples/UsingOverlays/RefreshDynamicItems"
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
+        "title": "Using Markers",
+        "description": "Learn to add markers on the map using the MarkerOverlay.",
+        "source": "Samples/UsingOverlays/UsingMarkersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample",
         "title": "Using Popups",
-        "description": "Learn to add, edit, or remove popups on the map using the PopupOverlay.",
+        "description": "Learn to add or remove popups on the map using the PopupOverlay.",
         "source": "Samples/UsingOverlays/UsingPopupsSample"
       }
     ]
@@ -223,7 +223,7 @@
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapCenterCoordinatesSample",
-        "title": "Display Map Mouse Coordinates",
+        "title": "Display Map Center Coordinates",
         "description": "Learn to render coordinate info based on center of the map.",
         "source": "Samples/UsingMapTools/DisplayMapCenterCoordinatesSample"
       },

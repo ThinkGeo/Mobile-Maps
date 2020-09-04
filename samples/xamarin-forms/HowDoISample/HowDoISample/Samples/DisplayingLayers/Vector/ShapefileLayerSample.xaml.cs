@@ -50,7 +50,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             dashedPen.DashPattern.Add(1);
 
             // Create an Area style on zoom level 1 and then apply it to all zoom levels up to 20.
-            parksLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(dashedPen, new GeoSolidBrush(GeoColors.Transparent));
+            parksLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(dashedPen, new GeoSolidBrush(new GeoColor(64, GeoColors.Green)));
             parksLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Set the current extent of the map to a few parks in the area

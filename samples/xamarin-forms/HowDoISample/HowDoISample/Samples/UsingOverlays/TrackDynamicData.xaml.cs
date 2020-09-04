@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,14 +14,14 @@ using Xamarin.Forms.Xaml;
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RefreshDynamicItems : ContentPage
+    public partial class TrackDynamicData : ContentPage
     {
         bool isFeedCanceled;
         bool isFeedPaused;
         
         Task updateDataFeed;
 
-        public RefreshDynamicItems()
+        public TrackDynamicData()
         {
             InitializeComponent();
         }
@@ -37,7 +38,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add Cloud Maps as a background overlay
             ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");            
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            mapView.Overlays.Add("Background Maps", thinkGeoCloudVectorMapsOverlay);
 
             // Create a marker overlay to show where the vehicle is
             SimpleMarkerOverlay markerOverlay = new SimpleMarkerOverlay();
@@ -46,7 +47,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var marker = new Marker()
             {
                 Position = new PointShape(-10778817.49746323, 3912420.8997628987),
-                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle-location.png"),                
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/vehicle-location.png"),
                 YOffset = -33
             };
 
@@ -99,7 +100,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                    // If the feed is not paused then update the vehicle location
                    if (!isFeedPaused)
                    {
-                       Debug.WriteLine($"Processing Vehicle Location Data Feed: {DateTime.Now.ToString()}");
+                       Debug.WriteLine($"Processing Vehicle Location Data Feed: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
                        // Get the latest point from the queue and then re-add it so the points
                        // will loop forever
                        Feature currentFeature = vehicleLocationQueue.Dequeue();
@@ -114,11 +115,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                    }
                    else
                    {
-                       Debug.WriteLine($"Paused Vehicle Location Data Feed: {DateTime.Now.ToString()}");
+                       Debug.WriteLine($"Paused Vehicle Location Data Feed: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
                    }
 
                    // Delay the task for a few seconds before we update the feed
-                   Debug.WriteLine($"Vehicle Location Data Feed: Paused {isFeedPaused.ToString()} {DateTime.Now.ToString()}");
+                   Debug.WriteLine($"Vehicle Location Data Feed: Paused {isFeedPaused.ToString()} {DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
                    Task.Delay(2000).Wait();
                }
            });
@@ -133,9 +134,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             vehicleOverlay.Markers["vehicle"].Position = (PointShape)currentFeature.GetShape();
             
             // If we have the center on vehicle check box checked then we center the map on the new location
-            if (centerOnVehicle.IsChecked == true)
+            if (centerOnVehicle.IsChecked)
             {
-                mapView.CenterAt(currentFeature);                
+                mapView.CenterAt(currentFeature);
+                mapView.Overlays["Background Maps"].Refresh();
             }
             else
             {

@@ -91,7 +91,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         /// When a hotel is selected in the UI, center the map on it
         /// </summary>
-        private async void lsbHotels_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
+        private void lsbHotels_SelectionChanged(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
             InMemoryFeatureLayer highlightedHotelLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Highlighted Hotel");
             highlightedHotelLayer.Open();

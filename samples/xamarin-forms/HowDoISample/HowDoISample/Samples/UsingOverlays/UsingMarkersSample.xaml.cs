@@ -69,32 +69,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             simpleMarkerOverlay.Markers.Add(marker);
             simpleMarkerOverlay.Refresh();
         }
-
-        /// <summary>
-        /// Sets the simpleMarkerOverlay's drag mode to none, meaning that the markers cannot be moved or manipulated.
-        /// </summary>
-        private void StaticMode_OnClick(object sender, EventArgs e)
-        {
-            //MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
-            //simpleMarkerOverlay.DragMode = MarkerDragMode.None;
-        }
-
-        /// <summary>
-        /// Sets the simpleMarkerOverlay's drag mode to drag, which allows the user to click and drag on an icon to move it.
-        /// </summary>
-        private void DragMode_OnClick(object sender, EventArgs e)
-        {
-            // MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
-            // simpleMarkerOverlay.DragMode = MarkerDragMode.Drag;
-        }
-
-        /// <summary>
-        /// Sets the simpleMarkerOverlay's drag mode to copy, which allows the user to copy an existing marker by shift-clicking and dragging it.
-        /// </summary>
-        private void CopyMode_OnClick(object sender, EventArgs e)
-        {
-            //MarkerOverlay simpleMarkerOverlay = (MarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
-            //simpleMarkerOverlay.DragMode = MarkerDragMode.CopyWithShiftKey;
-        }
     }
 }

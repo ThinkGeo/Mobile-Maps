@@ -109,7 +109,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.None;
 
             // Update instructions
-            instructions.Text = "Navigation Mode - The default map state. Allows you to pan and zoom the map with mouse controls.";
+            instructions.Text = "Navigation Mode - The default map state. Allows you to pan and zoom the map with touch controls.";
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
 
             // Update instructions
-            instructions.Text = "Draw Point Mode - Creates a Point Shape where at the location of each left mouse click event on the map.";
+            instructions.Text = "Draw Point Mode - Creates a Point Shape where at the location of each single tap event on the map.";
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
             // Update instructions
-            instructions.Text = "Draw Line Mode - Begin creating a Line Shape by left clicking on the map. Each subsequent left click adds another vertex to the line. Double left click to finish creating the Shape. Middle mouse click and drag allows the user to pan the map while drawing the Shape.";
+            instructions.Text = "Draw Line Mode - Begin creating a Line Shape by tapping on the map. Each subsequent tap adds another vertex to the line. Long tap to finish creating the Shape.";
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
             // Update instructions
-            instructions.Text = "Draw Polygon Mode - Begin creating a Polygon Shape by left clicking on the map. Each subsequent left click adds another vertex to the polygon. Double left click to finish creating the Shape. Middle mouse click and drag allows the user to pan the map while drawing the Shape.";
+            instructions.Text = "Draw Polygon Mode - Begin creating a Polygon Shape by tapping on the map. Each subsequent tap adds another vertex to the polygon. Long tap to finish creating the Shape.";
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.EditOverlay.Refresh();
             layerOverlay.Refresh();
             // Update instructions
-            instructions.Text = "Edit Shapes Mode - Allows the user to modify Shapes. Translate, rotate, or scale a shape using the anchor controls around the shape. Line and Polygon Shapes can also be modified: move a vertex by left mouse click and dragging on an existing vertex, add a vertex by left mouse clicking on a line segment, and remove a vertex by double left mouse clicking on an existing vertex.";
+            instructions.Text = "Edit Shapes Mode - Allows the user to modify Shapes. Translate, rotate, or scale a shape using the anchor controls around the shape. Line and Polygon Shapes can also be modified: move a vertex by taping and dragging on an existing vertex, add a vertex by tapping on a line segment, and remove a vertex by double tapping on an existing vertex.";
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapSingleTap += MapView_SingleTap;
 
             // Update instructions
-            instructions.Text = "Delete Shape Mode - Deletes a shape by left mouse clicking on the shape.";
+            instructions.Text = "Delete Shape Mode - Deletes a shape by tapping on the shape.";
         }
 
         /// <summary>

@@ -48,8 +48,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Get the layers feature source and setup an event that will refresh the map when the data refreshes
             var featureSource = (NoaaWeatherWarningsFeatureSource)noaaWeatherWarningsFeatureLayer.FeatureSource;
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
             featureSource.WarningsUpdated -= FeatureSource_WarningsUpdated;
             featureSource.WarningsUpdated += FeatureSource_WarningsUpdated;
 

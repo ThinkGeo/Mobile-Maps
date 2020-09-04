@@ -417,7 +417,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta161" />
+    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta162" />
     <PackageReference Include="ThinkGeo.Ecw" Version="13.0.0-beta153" />
     <PackageReference Include="ThinkGeo.FileGeoDatabase" Version="13.0.0-beta154" />
     <PackageReference Include="ThinkGeo.Gdal" Version="13.0.0-beta155" />
@@ -678,7 +678,7 @@
     <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\RefreshDynamicItems.xaml.cs">
+    <Compile Update="Samples\UsingOverlays\TrackDynamicData.xaml.cs">
       <DependentUpon>RefreshDynamicItems.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingOverlays\UsingPopupsSample.xaml.cs">
