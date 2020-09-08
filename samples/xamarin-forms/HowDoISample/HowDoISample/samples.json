@@ -128,12 +128,6 @@
         "source": "Samples/DisplayingLayers/WebServices/WMSLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeoTiffLayerSample",
-        "title": "Display a GeoTiff Layer",
-        "description": "This sample shows how to display a GeoTiff image.",
-        "source": "Samples/DisplayingLayers/Raster/GeoTiffLayerSample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ESRIGridLayerSample",
         "title": "Display a ESRI Grid Layer",
         "description": "This sample shows how to display a ESRI grid layer.",

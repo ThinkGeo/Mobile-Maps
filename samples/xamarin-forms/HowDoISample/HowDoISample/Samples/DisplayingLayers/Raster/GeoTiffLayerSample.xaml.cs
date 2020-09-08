@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// TODO: Sample Disabled - SkiaSharp does not properly support GeoTiff for iOS and Android at this time due to blue channel reversal
         /// </summary>
         protected override void OnAppearing()
         {
