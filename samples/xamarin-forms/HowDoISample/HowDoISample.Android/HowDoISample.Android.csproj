@@ -55,11 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ThinkGeo.UI.Android">
-      <Version>13.0.0-beta110</Version>
+      <Version>13.0.0-beta111</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta016" />
     <PackageReference Include="ThinkGeo.UI.XamarinForms.Android">
-      <Version>13.0.0-beta020</Version>
+      <Version>13.0.0-beta021</Version>
     </PackageReference>
     <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="13.0.0-beta157" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />
@@ -140,7 +140,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHowDoISampleAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionHowDoISampleAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
