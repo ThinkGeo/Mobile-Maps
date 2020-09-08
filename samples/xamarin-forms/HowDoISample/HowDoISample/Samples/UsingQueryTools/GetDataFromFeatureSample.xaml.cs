@@ -72,7 +72,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Get the parks layer from the MapView
             FeatureLayer parksLayer = mapView.FindFeatureLayer("Frisco Parks");
 
-            // Find the feature that was clicked on by querying the layer for features containing the clicked coordinates
+            // Find the feature that was tapped on by querying the layer for features containing the tapped coordinates
             parksLayer.Open();
             Feature selectedFeature = parksLayer.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns).FirstOrDefault();
             parksLayer.Close();
@@ -109,11 +109,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Pull data from the selected feature and display it when clicked
+        /// Pull data from the selected feature and display it when tapped
         /// </summary>
         private void MapView_OnMapSingleTap(object sender, TouchMapViewEventArgs e)
         {
-            // Get the selected feature based on the map click location
+            // Get the selected feature based on the map tap location
             Feature selectedFeature = GetFeatureFromLocation(e.PointInWorldCoordinate);
 
             // If a feature was selected, get the data from it and display it

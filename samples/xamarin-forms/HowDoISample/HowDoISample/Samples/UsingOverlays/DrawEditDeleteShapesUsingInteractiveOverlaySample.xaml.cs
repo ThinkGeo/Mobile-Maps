@@ -124,7 +124,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Update the layer's features from any previous mode
             UpdateLayerFeatures(featureLayer, layerOverlay);
 
-            // Set TrackMode to Point, which draws a new point on the map on mouse click
+            // Set TrackMode to Point, which draws a new point on the map on mouse tap
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
 
             // Update instructions
@@ -142,7 +142,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Update the layer's features from any previous mode
             UpdateLayerFeatures(featureLayer, layerOverlay);
 
-            // Set TrackMode to Line, which draws a new line on the map on mouse click. Double click to finish drawing the line.
+            // Set TrackMode to Line, which draws a new line on the map on mouse tap. Double taps to finish drawing the line.
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
             // Update instructions
@@ -160,7 +160,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Update the layer's features from any previous mode
             UpdateLayerFeatures(featureLayer, layerOverlay);
 
-            // Set TrackMode to Polygon, which draws a new polygon on the map on mouse click. Double click to finish drawing the polygon.
+            // Set TrackMode to Polygon, which draws a new polygon on the map on touch. Double taps to finish drawing the polygon.
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
             // Update instructions
@@ -216,7 +216,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set TrackMode to None, so that the user will no longer draw shapes
             mapView.TrackOverlay.TrackMode = TrackMode.None;
 
-            // Add the event handler that will delete features on map click
+            // Add the event handler that will delete features on map tap
             mapView.MapSingleTap += MapView_SingleTap;
 
             // Update instructions

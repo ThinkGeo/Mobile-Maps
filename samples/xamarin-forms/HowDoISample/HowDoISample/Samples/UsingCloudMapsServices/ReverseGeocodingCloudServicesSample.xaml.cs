@@ -75,7 +75,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Perform the reverse geocode when the user clicks on the map
+        /// Perform the reverse geocode when the user taps on the map
         /// </summary>
         private void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
         {
@@ -87,7 +87,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Perform the reverse geocode when the user clicks the 'Search' button
+        /// Perform the reverse geocode when the user taps the 'Search' button
         /// </summary>
         private async void Search_Click(object sender, EventArgs e)
         {

@@ -83,7 +83,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InMemoryFeatureLayer stadiumLayer = (InMemoryFeatureLayer)layerOverlay.Layers["stadiumLayer"];
             InMemoryFeatureLayer shortestLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["shortestLineLayer"];
 
-            // Query the friscoParks layer to get the first feature closest to the map click event
+            // Query the friscoParks layer to get the first feature closest to the map tap event
             var park = friscoParks.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
                 ReturningColumnsType.NoColumns).First();
 

@@ -51,13 +51,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Adds a marker to the simpleMarkerOverlay where the map click event occurred.
+        /// Adds a marker to the simpleMarkerOverlay where the map tap event occurred.
         /// </summary>
         private void MapView_OnMapTouch(object sender, TouchMapViewEventArgs e)
         {
             SimpleMarkerOverlay simpleMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
 
-            // Create a marker at the position the mouse was clicked
+            // Create a marker at the position the mouse was tapped
             var marker = new Marker()
             {
                 Position = e.PointInWorldCoordinate,

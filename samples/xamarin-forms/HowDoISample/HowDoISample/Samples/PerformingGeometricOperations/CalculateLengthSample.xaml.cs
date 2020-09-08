@@ -73,7 +73,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ShapeFileFeatureLayer friscoTrails = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoTrails"];
             InMemoryFeatureLayer selectedLineLayer = (InMemoryFeatureLayer)layerOverlay.Layers["selectedLineLayer"];
 
-            // Query the friscoTrails layer to get the first feature closest to the map click event
+            // Query the friscoTrails layer to get the first feature closest to the map tap event
             var feature = friscoTrails.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
                 ReturningColumnsType.NoColumns).First();
 

@@ -103,14 +103,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Map event that fires whenever the user clicks on the map. Gets the closest feature from the click event and calculates the center point
+        /// Map event that fires whenever the user taps on the map. Gets the closest feature from the tap event and calculates the center point
         /// </summary>
         private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
             ShapeFileFeatureLayer censusHousing = (ShapeFileFeatureLayer)layerOverlay.Layers["censusHousing"];
 
-            // Query the censusHousing layer to get the first feature closest to the map click event
+            // Query the censusHousing layer to get the first feature closest to the map tap event
             var feature = censusHousing.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
                 ReturningColumnsType.NoColumns).First();
 

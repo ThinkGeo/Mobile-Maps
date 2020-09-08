@@ -151,7 +151,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set the map to 'Line Drawing Mode' when the user clicks on the map without panning
+        /// Set the map to 'Line Drawing Mode' when the user taps on the map without panning
         /// </summary>
         private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {

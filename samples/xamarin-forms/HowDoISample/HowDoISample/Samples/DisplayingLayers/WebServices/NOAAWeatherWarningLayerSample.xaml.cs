@@ -101,7 +101,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private void mapView_MapClick(object sender, TouchMapViewEventArgs e)
         {
-            // Get the selected feature based on the map click location
+            // Get the selected feature based on the tapped location
             Collection<Feature> selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
 
             // If a feature was selected, get the data from it and display it
@@ -116,7 +116,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Get the parks layer from the MapView
             FeatureLayer weatherWarnings = mapView.FindFeatureLayer("Noaa Weather Warning");
 
-            // Find the feature that was clicked on by querying the layer for features containing the clicked coordinates
+            // Find the feature that was tapped on by querying the layer for features containing the tapped coordinates
             Collection<Feature> selectedFeatures = weatherWarnings.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns);
 
             return selectedFeatures;

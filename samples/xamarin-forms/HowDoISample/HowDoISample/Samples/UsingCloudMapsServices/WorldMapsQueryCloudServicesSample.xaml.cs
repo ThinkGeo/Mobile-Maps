@@ -198,7 +198,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set the map to 'Point Drawing Mode' when the user clicks the 'Draw a New Query Point' button
+        /// Set the map to 'Point Drawing Mode' when the user taps the 'Draw a New Query Point' button
         /// </summary>
         private async void DrawPoint_Click(object sender, EventArgs e)
         {
@@ -211,7 +211,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set the map to 'Line Drawing Mode' when the user clicks the 'Draw a New Query Line' button
+        /// Set the map to 'Line Drawing Mode' when the user taps the 'Draw a New Query Line' button
         /// </summary>
         private async void DrawLine_Click(object sender, EventArgs e)
         {
@@ -224,7 +224,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set the map to 'Polygon Drawing Mode' when the user clicks the 'Draw a New Query Polygon' button
+        /// Set the map to 'Polygon Drawing Mode' when the user taps the 'Draw a New Query Polygon' button
         /// </summary>
         private async void DrawPolygon_Click(object sender, EventArgs e)
         {
