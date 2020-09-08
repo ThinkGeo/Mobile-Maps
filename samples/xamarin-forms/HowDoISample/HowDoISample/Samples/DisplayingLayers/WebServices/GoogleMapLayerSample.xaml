@@ -36,7 +36,7 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" Text="Sign up for a Google Maps Api Key" FontAttributes="Italic" TextColor="DarkBlue">
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Text="Sign up for a Google Maps Api Key" FontAttributes="Italic" TextColor="DarkBlue">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
                             </Label.GestureRecognizers>
@@ -52,7 +52,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
@@ -61,7 +61,6 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                     </Grid>
                 </Expander.Content>
