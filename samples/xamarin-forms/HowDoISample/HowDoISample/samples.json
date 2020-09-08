@@ -38,22 +38,10 @@
         "source": "Samples/DisplayingLayers/Vector/GPXLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.OfflineCloudMapsVectorLayerSample",
-        "title": "Display a Cloud Maps Vector Layer Off-line",
-        "description": "This sample show how to use an off-line version of ThinkGeo Cloud Map Vector data.",
-        "source": "Samples/DisplayingLayers/Vector/OfflineCloudMapsVectorLayerSample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TABLayerSample",
         "title": "Display a TAB Layer",
         "description": "This sample shows how to display a TAB layer.",
         "source": "Samples/DisplayingLayers/Vector/TABLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GenerateMapImageSample",
-        "title": "Generate a Map as an Image",
-        "description": "This sample shows how to draw your map onto an image file",
-        "source": "Samples/DisplayingLayers/GenerateMapImageSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ISOLineLayerSample",
@@ -156,6 +144,18 @@
         "title": "Display Common Raster Layers",
         "description": "This sample shows how to display common images types such as PNG, JPEG, Bitmap etc.",
         "source": "Samples/DisplayingLayers/Raster/CommonRasterLayersSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.OfflineCloudMapsVectorLayerSample",
+        "title": "Display a Cloud Maps Vector Layer Offline",
+        "description": "This sample shows how to use an offline version of ThinkGeo Cloud Map Vector data.",
+        "source": "Samples/DisplayingLayers/Vector/OfflineCloudMapsVectorLayerSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GenerateMapImageSample",
+        "title": "Generate a Map as an Image",
+        "description": "This sample shows how to draw your map onto an image.",
+        "source": "Samples/DisplayingLayers/GenerateMapImageSample"
       }
     ]
   },

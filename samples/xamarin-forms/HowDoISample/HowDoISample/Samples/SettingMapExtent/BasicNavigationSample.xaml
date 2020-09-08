@@ -9,7 +9,7 @@
              Title="Basic Navigation">
     <ContentPage.Content>
         <StackLayout>
-            <Expander x:Name="controlsExpander">
+            <Expander x:Name="controlsExpander" IsExpanded="True">
                 <!-- Sample Description -->
                 <Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
