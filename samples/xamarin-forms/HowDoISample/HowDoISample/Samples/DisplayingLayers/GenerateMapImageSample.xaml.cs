@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -68,15 +69,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create a memory stream and save the GeoImage as a standard PNG formatted image
             MemoryStream imageStream = new MemoryStream();
             geoImage.Save(imageStream, GeoImageFormat.Png);
-
-            // Create a new ImageBitmap using the stream as it's source
-            //BitmapImage bitmapImage = new BitmapImage();
-           //bitmapImage.BeginInit();
-            //bitmapImage.StreamSource = imageStream;
-           // bitmapImage.EndInit();
-
-            // Set the source of the image control to the BitmapImage
-            //MapImage.Source = bitmapImage;
+            
+            // Reset the image stream back to the beginning
+            imageStream.Position = 0;
+           
+            MapImage.Source = ImageSource.FromStream(() =>
+            {                 
+                return imageStream;
+            });
         }
     }
 }

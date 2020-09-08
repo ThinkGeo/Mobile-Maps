@@ -53,7 +53,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <Image x:Name="MapImage" Source="frisco_sat_map.png" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
+            <Image x:Name="MapImage" Source="frisco_sat_map.png"/>
 
         </StackLayout>
     </ContentPage.Content>
