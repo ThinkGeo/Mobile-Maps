@@ -50,7 +50,7 @@
         "source": "Samples/DisplayingLayers/Vector/TABLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayingLayers.GenerateMapImageSample",
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GenerateMapImageSample",
         "title": "Generate a Map as an Image",
         "description": "This sample shows how to draw your map onto an image file",
         "source": "Samples/DisplayingLayers/GenerateMapImageSample"

@@ -32,6 +32,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create the background world maps using vector tiles stored locally in our MBTiles file and also set the styling though a json file
             ThinkGeoMBTilesLayer mbTilesLayer = new ThinkGeoMBTilesLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Mbtiles/Frisco.mbtiles"), new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Json/thinkgeo-world-streets-dark.json"), UriKind.Relative));
+            mbTilesLayer.BitmapTileCache =  new FileRasterTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "OfflineCloudMapsImages", RasterTileFormat.Png);
+            
             layerOverlay.Layers.Add(mbTilesLayer);
 
             // Add the overlay to the map
