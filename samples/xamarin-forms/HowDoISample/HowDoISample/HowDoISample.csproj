@@ -72,6 +72,9 @@
     <None Remove="Data\Jp2\m_3309650_sw_14_1_20160911_20161121.jp2" />
     <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
     <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+    <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
+    <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
+    <None Remove="Data\Mbtiles\Frisco.mbtiles" />
     <None Remove="Data\MrSid\World.sdw" />
     <None Remove="Data\MrSid\World.sid" />
     <None Remove="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
@@ -275,6 +278,9 @@
     <EmbeddedResource Include="Data\Jp2\m_3309650_sw_14_1_20160911_20161121.jp2" />
     <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
     <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+    <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
+    <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
+    <EmbeddedResource Include="Data\Mbtiles\Frisco.mbtiles" />
     <EmbeddedResource Include="Data\MrSid\World.sdw" />
     <EmbeddedResource Include="Data\MrSid\World.sid" />
     <EmbeddedResource Include="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
@@ -492,6 +498,9 @@
     <Compile Update="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.xaml.cs">
       <DependentUpon>GeoTiffLayerSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\DisplayingLayers\GenerateMapImageSample.xaml.cs">
+      <DependentUpon>GenerateMapImageSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\GPXLayerSample.xaml.cs">
       <DependentUpon>GPXLayerSample.xaml</DependentUpon>
     </Compile>
@@ -503,6 +512,9 @@
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\ISOLineLayerSample.xaml.cs">
       <DependentUpon>ISOLineLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\DisplayingLayers\Vector\OfflineCloudMapsVectorLayerSample.xaml.cs">
+      <DependentUpon>OfflineCloudMapsVectorLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.xaml.cs">
       <DependentUpon>TinyGeoLayerSample.xaml</DependentUpon>
