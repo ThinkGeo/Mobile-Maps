@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HowDoISample.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Theme Colors-->
+            <Color x:Key="Primary">#5FB6D9</Color>
+            <Color x:Key="Accent">#05F2DB</Color>
+
+            <!-- Global Styles -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+            <Style TargetType="Slider">
+                <Setter Property="MaximumTrackColor" Value="#A6A6A6"/>
+                <Setter Property="MinimumTrackColor" Value="{StaticResource Accent}"/>
+                <Setter Property="ThumbColor" Value="{StaticResource Accent}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>
