@@ -80,8 +80,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             GetFeaturesOverlaps(sampleShape);
 
             // Set the map extent to the sample shapes
-            mapView.CurrentExtent = sampleShape.GetBoundingBox();
-            
+            mapView.CurrentExtent = RectangleShape.ScaleUp(sampleShape.GetBoundingBox(), 20).GetBoundingBox();
+
             mapView.Refresh();
         }
 

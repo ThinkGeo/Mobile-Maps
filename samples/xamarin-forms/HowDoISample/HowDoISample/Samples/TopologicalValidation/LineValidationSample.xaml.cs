@@ -395,9 +395,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Refresh/redraw the layers and reset the map extent
             LayerOverlay featureOverlay = (LayerOverlay)mapView.Overlays["Features Overlay"];
-            mapView.CurrentExtent = featureOverlay.GetBoundingBox();
-            //mapView.ZoomOut();
-            mapView.Refresh();
+            mapView.CurrentExtent = RectangleShape.ScaleUp(featureOverlay.GetBoundingBox(), 20).GetBoundingBox(); mapView.Refresh();
 
             validatedFeaturesLayer.Close();
             filterFeaturesLayer.Close();

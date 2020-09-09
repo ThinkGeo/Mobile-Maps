@@ -67,7 +67,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Routing Overlay", routingOverlay);
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
+            mapView.CurrentExtent = new RectangleShape(-10782288.5963252, 3917613.16813763, -10777138.4036748, 3913574.08186237);
 
             // Initialize the RoutingCloudClient with our ThinkGeo Cloud Client credentials
             routingCloudClient = new RoutingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
@@ -136,9 +136,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent to the newly displayed route
             routingLayer.Open();
-            mapView.CurrentExtent = routingLayer.GetBoundingBox();
-            ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-            mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel13.Scale);
+            mapView.CurrentExtent = RectangleShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetBoundingBox();
+
             routingLayer.Close();
             mapView.Refresh();
         }
