@@ -45,14 +45,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh the map.
             mapView.Refresh();
         }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
-
     }
 }
