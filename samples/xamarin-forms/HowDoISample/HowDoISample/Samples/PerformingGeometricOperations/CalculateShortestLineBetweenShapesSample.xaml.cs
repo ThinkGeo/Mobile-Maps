@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to calculate the shortest line between two shapes
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalculateShortestLineBetweenShapesSample : ContentPage
     {
@@ -20,7 +23,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the friscoParks, stadiumLayer, and
+        /// shortestLineLayer layers into a grouped LayerOverlay and display it on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -75,6 +79,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Calculates the shortest line from the selected park to the stadium and displays it's length and shows the line on the map
+        /// </summary>
         private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

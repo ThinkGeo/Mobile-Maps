@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DrawEditDeleteShapesUsingInteractiveOverlaySample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
         protected override void OnAppearing()
         {

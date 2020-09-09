@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReverseGeocodingCloudServicesSample : ContentPage
     {
@@ -24,7 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
 
         /// <summary>
-        /// Fix Font issue and CurrentScale issue when Ryan fixes them. Issue with address.
+        /// Set up the map with the ThinkGeo Cloud Maps overlay, as well as several feature layers to display the reverse geocoding search area and locations
         /// </summary>
         protected override void OnAppearing()
         {

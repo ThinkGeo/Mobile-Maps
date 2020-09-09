@@ -11,6 +11,10 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to render Google Maps using the GoogleMapsOverlay.
+    /// A Google Maps API key and secret is required.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DisplayGoogleMapsOverlaySample : ContentPage
     {
@@ -20,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
         protected override void OnAppearing()
         {

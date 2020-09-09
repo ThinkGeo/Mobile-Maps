@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to rotate a shape
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RotateShapeSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and rotatedLayer layers into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -65,6 +68,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Rotates the first feature in the cityLimits layer and displays the result on the map.
+        /// </summary>
         private void RotateShape_OnClick(object sender, EventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

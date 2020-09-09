@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimezoneCloudServicesSample : ContentPage
     {
@@ -22,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay
         /// </summary>
         protected override void OnAppearing()
         {

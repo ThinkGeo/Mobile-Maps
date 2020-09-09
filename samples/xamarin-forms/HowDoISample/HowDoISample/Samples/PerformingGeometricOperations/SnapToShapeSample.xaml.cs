@@ -11,6 +11,10 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// TODO: This sample is a Work In Progress and is disabled in the app!
+    /// Learn how to snap a shape to a nearby shape for precise placement.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SnapToShapeSample : ContentPage
     {
@@ -20,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// WIP
         /// </summary>
         protected override void OnAppearing()
         {

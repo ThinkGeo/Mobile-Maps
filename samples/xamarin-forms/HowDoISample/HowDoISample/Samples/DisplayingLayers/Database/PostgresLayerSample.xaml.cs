@@ -12,6 +12,9 @@ using System.IO;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a Postgres Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PostgresLayerSample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the PostgreSql layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

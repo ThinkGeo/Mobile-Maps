@@ -12,6 +12,10 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to render Bing Maps using the BingMapsOverlay.
+    /// A valid Bing Maps ApplicationID is required.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DisplayBingMapsOverlaySample : ContentPage
     {
@@ -21,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
         protected override void OnAppearing()
         {

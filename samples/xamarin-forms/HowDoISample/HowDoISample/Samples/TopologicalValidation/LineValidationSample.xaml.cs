@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the TopologyValidator APIs to perform validation on points
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LineValidationSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up feature layers in the MapView to display the validated features
         /// </summary>
         protected override void OnAppearing()
         {

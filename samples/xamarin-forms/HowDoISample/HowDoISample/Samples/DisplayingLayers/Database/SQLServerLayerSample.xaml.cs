@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a SQLServer Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SQLServerLayerSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the SQLServer layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to calculate the center point of a feature
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalculateCenterPointSample : ContentPage
     {

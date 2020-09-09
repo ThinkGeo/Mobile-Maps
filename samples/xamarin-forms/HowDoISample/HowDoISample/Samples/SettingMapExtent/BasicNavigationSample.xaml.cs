@@ -11,6 +11,9 @@ using System.IO;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to programmatically zoom, pan, and rotate the map control.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasicNavigationSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
         protected override async void OnAppearing()
         {

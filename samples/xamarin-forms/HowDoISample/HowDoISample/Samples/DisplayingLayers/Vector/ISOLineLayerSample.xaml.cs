@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display an ISOLine Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ISOLineLayerSample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the ISOLine layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

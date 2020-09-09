@@ -6,6 +6,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a CloudMapsVector Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CloudMapsVectorLayerSample : ContentPage
     {
@@ -15,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
         protected override void OnAppearing()
         {

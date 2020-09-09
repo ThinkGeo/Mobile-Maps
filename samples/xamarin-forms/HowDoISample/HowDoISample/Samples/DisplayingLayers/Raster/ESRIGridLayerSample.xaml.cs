@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display an ESRI Grid Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ESRIGridLayerSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the ESRI Grid layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

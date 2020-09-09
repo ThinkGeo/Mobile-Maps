@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to render a PanZoomBar on the map.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DisplayMapPanZoomBarSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
         protected override void OnAppearing()
         {

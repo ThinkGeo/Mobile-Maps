@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to render ThinkGeo Cloud Maps in vector format.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DisplayCloudMapsVectorOverlaySample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
         protected override void OnAppearing()
         {

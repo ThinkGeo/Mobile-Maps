@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ElevationCloudServicesSample : ContentPage
     {
@@ -23,7 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layers for the shape to be queried and the returned elevation points
         /// </summary>
         protected override async void OnAppearing()
         {

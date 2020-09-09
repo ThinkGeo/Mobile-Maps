@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to get the convex hull of a shape
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetConvexHullSample : ContentPage
     {
@@ -20,7 +23,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and convexHullLayer layers
+        /// into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -65,6 +69,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Gets Convex Hull of the first feature in the cityLimits layer and adds them to the convexHullLayer to display on the map
+        /// </summary>
         private void ShapeConvexHull_OnClick(object sender, EventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

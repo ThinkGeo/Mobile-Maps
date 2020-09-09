@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the TopologyValidator APIs to perform validation on points
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PolygonValidationSample : ContentPage
     {
@@ -19,7 +22,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Set up feature layers in the MapView to display the validated features
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -62,6 +67,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Validate polygons based on whether their boundaries overlap with the boundaries of a second set of polygons, and display the results on the map
+        /// </summary>
         private void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation

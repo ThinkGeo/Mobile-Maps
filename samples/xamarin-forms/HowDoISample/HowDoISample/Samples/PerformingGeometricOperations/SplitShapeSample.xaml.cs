@@ -11,6 +11,10 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// TODO: This sample is a Work In Progress and is disabled in the app!
+    /// Learn how to split a shape into multiple shapes
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplitShapeSample : ContentPage
     {

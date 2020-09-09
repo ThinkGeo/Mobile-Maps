@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to improve performance by locally caching map tiles
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CachingMapTilesSample : ContentPage
     {
@@ -22,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
         protected override void OnAppearing()
         {

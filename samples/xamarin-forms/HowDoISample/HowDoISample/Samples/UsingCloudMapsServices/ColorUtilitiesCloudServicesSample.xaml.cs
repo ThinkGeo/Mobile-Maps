@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
     public partial class ColorUtilitiesCloudServicesSample : ContentPage
@@ -18,9 +21,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private ColorCloudClient colorCloudClient;
         private Collection<RadioButton> baseColorRadioButtons;
 
-        /// <summary>
-        /// Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud
-        /// </summary>
         public ColorUtilitiesCloudServicesSample()
         {
             InitializeComponent();

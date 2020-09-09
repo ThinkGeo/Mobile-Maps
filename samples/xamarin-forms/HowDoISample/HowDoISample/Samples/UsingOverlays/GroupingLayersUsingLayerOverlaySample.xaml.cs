@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn to group layers into logical groups using LayerOverlays.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GroupingLayersUsingLayerOverlaySample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, load landuse and POI layers into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {

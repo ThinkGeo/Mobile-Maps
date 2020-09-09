@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to buffer a shape
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BufferShapeSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and bufferLayer layers into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {

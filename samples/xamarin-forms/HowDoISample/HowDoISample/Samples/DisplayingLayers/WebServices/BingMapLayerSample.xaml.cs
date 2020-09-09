@@ -13,6 +13,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a Bing Maps Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BingMapLayerSample : ContentPage
     {
@@ -21,6 +24,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Set up the MapView
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -37,7 +43,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Add the Bing Maps layer to the map
         /// </summary>
         private void btnActivate_Click(object sender, EventArgs e)
         {

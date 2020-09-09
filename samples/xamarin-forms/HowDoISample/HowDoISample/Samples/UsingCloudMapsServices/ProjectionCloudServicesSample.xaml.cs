@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjectionCloudServicesSample : ContentPage
     {
@@ -23,7 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer for the reprojected features
         /// </summary>
         protected override void OnAppearing()
         {

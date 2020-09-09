@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a Shapefile Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShapefileLayerSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Interaction logic for ShapefileLayer.xaml
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the shapefile layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

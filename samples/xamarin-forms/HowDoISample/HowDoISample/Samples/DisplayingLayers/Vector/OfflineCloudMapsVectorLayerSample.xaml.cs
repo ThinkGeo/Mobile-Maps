@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display ThinkGeo Vector Tiles offline from a local data source
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OfflineCloudMapsVectorLayerSample : ContentPage
     {
@@ -19,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Add the ThinkGeoMBTiles Layer to the map and load the data
         /// </summary>
         protected override void OnAppearing()
         {

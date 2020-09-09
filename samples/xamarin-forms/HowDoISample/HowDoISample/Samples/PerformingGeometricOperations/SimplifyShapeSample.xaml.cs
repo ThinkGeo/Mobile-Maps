@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to simplify a shape's geometry
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SimplifyShapeSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and simplifyLayer layers into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -65,6 +68,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Simplifies the first feature in the cityLimits layer and displays the results on the map.
+        /// </summary>
         private void SimplifyShape_OnClick(object sender, EventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

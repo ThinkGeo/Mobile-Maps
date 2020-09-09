@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to reproject features using the ProjectionConverter class
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjectLatLonCoordinatesSample : ContentPage
     {
@@ -20,6 +23,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Set up the map with the ThinkGeo Cloud Maps overlay to show a basic map
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -54,6 +60,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             mapView.Refresh();
         }
+
+        /// <summary>
+        /// Use the ProjectionConverter to reproject a single feature
+        /// </summary>
         private Feature ReprojectFeature(Feature decimalDegreeFeature)
         {
             //Create a new ProjectionConverter to convert between Decimal Degrees(4326) and Spherical Mercator(3857)
@@ -67,6 +77,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //Return the reprojected feature
             return sphericalMercatorFeature;
         }
+
+        /// <summary>
+        /// Use the ProjectionConverter to reproject multiple features
+        /// </summary>
         private Collection<Feature> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
         {
             //Create a new ProjectionConverter to convert between Decimal Degrees(4326) and Spherical Mercator(3857)
@@ -81,6 +95,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return sphericalMercatorFeatures;
         }
 
+        /// <summary>
+        /// Draw reprojected features on the map
+        /// </summary>
         private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
         {
             // Get the layer we prepared from the MapView
@@ -104,6 +121,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Use the ProjectionConverter class to reproject a single feature
+        /// </summary>
         private void ReprojectFeature_Click(object sender, EventArgs e)
         {
             // Create a feature with coordinates in Decimal Degrees (4326)

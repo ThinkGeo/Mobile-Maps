@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to automatically reproject a layer using the ProjectionConverter class
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetLayerProjectionSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
         protected override void OnAppearing()
         {
@@ -44,6 +47,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Use the ProjectionConverter class to reproject features in a ShapeFileFeatureLayer
+        /// </summary>
         private void ReprojectFeaturesFromShapefile()
         {
             // Create a feature layer to hold the Frisco subdivisions data

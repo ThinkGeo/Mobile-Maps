@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to calculate the area of a feature
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalculateAreaSample : ContentPage
     {
@@ -20,7 +23,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the friscoParks and selectedAreaLayer layers
+        /// into a grouped LayerOverlay and display it on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -63,6 +67,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Calculates the area of a feature selected on the map and displays it in the areaResult TextBox
+        /// </summary>
         private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

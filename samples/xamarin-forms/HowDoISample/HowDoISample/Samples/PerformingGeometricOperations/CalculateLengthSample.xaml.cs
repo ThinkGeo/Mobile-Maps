@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to calculate the length of a line
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalculateLengthSample : ContentPage
     {
@@ -20,7 +23,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the friscoTrails and selectedLineLayer layers
+        /// into a grouped LayerOverlay and display it on the map.
         /// </summary>
         protected override void OnAppearing()
         {

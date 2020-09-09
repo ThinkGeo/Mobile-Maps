@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a CloudRasterMaps Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CloudMapsRasterLayerSample : ContentPage
     {
@@ -19,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -39,6 +42,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Switch the Map Type based on the radio buttons
+        /// </summary>
         private void rbMapType_Checked(object sender, EventArgs e)
         {
             RadioButton button = (RadioButton)sender;

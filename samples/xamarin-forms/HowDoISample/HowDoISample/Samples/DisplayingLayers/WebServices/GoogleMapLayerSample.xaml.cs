@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display a Google Maps Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GoogleMapLayerSample : ContentPage
     {
@@ -20,6 +23,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Set up the MapView
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -34,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Add the Google Maps Layer to the map
         /// </summary>
         private void btnActivate_OnClicked(object sender, EventArgs e)
         {

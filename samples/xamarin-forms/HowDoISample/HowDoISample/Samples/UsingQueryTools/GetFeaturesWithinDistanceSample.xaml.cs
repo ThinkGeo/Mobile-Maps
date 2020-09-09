@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use layer query tools to find features in a layer within a given distance of a point
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetFeaturesWithinDistanceSample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco zoning data
         /// </summary>
         protected override void OnAppearing()
         {

@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to get data from a feature in a ShapeFile
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetDataFromFeatureSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco parks data
         /// </summary>
         protected override void OnAppearing()
         {

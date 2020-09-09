@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorldMapsQueryCloudServicesSample : ContentPage
     {
@@ -22,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and feature layers for the queried shapes
         /// </summary>
         protected override void OnAppearing()
         {
@@ -82,6 +85,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Get features from the WorldMapsQuery service based on the UI parameters
+        /// </summary>
         private async void PerformWorldMapsQuery()
         {
             // Get the feature layers from the MapView

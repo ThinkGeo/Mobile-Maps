@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to display an OpenStreetMaps Layer on the map
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OpenStreetMapLayerSample : ContentPage
     {
@@ -19,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Add the OpenStreetMaps layer to the map
         /// </summary>
         protected override void OnAppearing()
         {

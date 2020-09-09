@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to get data from all features in a ShapeFile
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetAllFeatureDataSample : ContentPage
     {
@@ -21,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco hotels data
         /// </summary>
         protected override void OnAppearing()
         {

@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to get part of a line from an existing line
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetLineOnALineSample : ContentPage
     {
@@ -20,7 +23,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the railway and subLineLayer layers into a
+        /// grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -64,6 +68,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             mapView.Refresh();
         }
+
+        /// <summary>
+        /// Get a subLine of a line and displays it on the map
+        /// </summary>
         private void GetSubLine_OnClick(object sender, EventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];

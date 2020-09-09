@@ -11,6 +11,9 @@ using System.IO;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to set the map extent using a variety of different methods.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetMapExtentSample : ContentPage
     {
@@ -22,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Learn how to set the map extent using a variety of different methods.
+        /// Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map and a shapefile with simple data to work with
         /// </summary>
         protected override void OnAppearing()
         {

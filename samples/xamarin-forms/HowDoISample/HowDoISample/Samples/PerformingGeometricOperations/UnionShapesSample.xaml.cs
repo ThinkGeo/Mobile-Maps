@@ -11,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
+    /// <summary>
+    /// Learn how to union shapes into a single shape
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UnionShapesSample : ContentPage
     {
@@ -20,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the dividedCityLimits and unionLayer layers into a grouped LayerOverlay and display them on the map.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -66,6 +69,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Refresh();
         }
 
+        /// <summary>
+        /// Unions all the features in the dividedCityLimits layer and displays the results on the map
+        /// </summary>
         private void UnionShapes_OnClick(object sender, EventArgs e)
         {
             LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
