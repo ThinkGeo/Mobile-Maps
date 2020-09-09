@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <Expander IsExpanded="True">
+                <!-- Sample Description -->
+                <Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="4">
+                        <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand"/>
+                        <BoxView Color="LightGray" 
+                                 WidthRequest="1" 
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"/>
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Center" HorizontalOptions="End">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Value="True">
+                                    <Setter Property="Rotation"
+                                            Value="180"/>
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        
+                    </StackLayout>
+                </Expander.Header>
+
+                <!-- Sample Controls -->
+                <Expander.Content>
+                    <Grid>
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+                            <CheckBox x:Name="useCache" IsChecked="False" CheckedChanged="UseCache_OnCheckedChanged"></CheckBox>
+                            <Label Text="Use Tile Cache" VerticalOptions="Center" ></Label>
+                        </StackLayout>
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Map Control -->
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

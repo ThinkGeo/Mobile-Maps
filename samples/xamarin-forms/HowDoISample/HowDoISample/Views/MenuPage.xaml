@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MenuPage"
+             Title="Menu">
+    <StackLayout VerticalOptions="FillAndExpand">
+        <!-- Logo -->
+        <Frame BackgroundColor="Black">
+            <Image Source="thinkgeo_logo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
+        </Frame>
+
+        <!-- Sample Menu -->
+        <ListView x:Name="ListViewMenu"
+                  IsGroupingEnabled="True"
+                  GroupDisplayBinding="{Binding Title}"
+                  ItemSelected="ListViewMenu_ItemSelected">
+
+            <!-- Sample Category -->
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="4">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="{Binding Title}"
+                                   FontSize="Subtitle"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand"/>
+                            <BoxView Color="LightGray"
+                                     WidthRequest="1"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"/>
+                            <Image Source="chevron_down.png" 
+                                   HeightRequest="44" 
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="End">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                                 Binding="{Binding IsExpanded}"
+                                                 Value="True">
+                                        <Setter Property="Rotation"
+                                                Value="180"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            <!-- Sample Item -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
