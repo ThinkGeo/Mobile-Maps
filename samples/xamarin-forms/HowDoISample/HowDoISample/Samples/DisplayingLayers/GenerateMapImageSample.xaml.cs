@@ -23,9 +23,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         /// ...
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            loadingIndicator.IsRunning = true;
+            loadingLayout.IsVisible = true;
+
+            MapImage.Source = await Task.Run(GenerateMapImage);
+
+            loadingIndicator.IsRunning = false;
+            loadingLayout.IsVisible = false;
+        }
+
+        private ImageSource GenerateMapImage()
+        {
             Collection<Layer> layersToDraw = new Collection<Layer>();
 
             // Create the background world maps using vector tiles stored locally in our MBTiles file and also set the styling though a json file
@@ -69,12 +81,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create a memory stream and save the GeoImage as a standard PNG formatted image
             MemoryStream imageStream = new MemoryStream();
             geoImage.Save(imageStream, GeoImageFormat.Png);
-            
+
             // Reset the image stream back to the beginning
             imageStream.Position = 0;
-           
-            MapImage.Source = ImageSource.FromStream(() =>
-            {                 
+
+            return ImageSource.FromStream(() =>
+            {
                 return imageStream;
             });
         }

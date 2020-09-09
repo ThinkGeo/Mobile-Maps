@@ -7,7 +7,9 @@
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GenerateMapImageSample">
     <ContentPage.Content>
-        <StackLayout>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All">
             <!-- Sample Description -->
             <Frame HasShadow="False">
                 <Label x:Name="descriptionLabel"
@@ -19,6 +21,20 @@
             <!-- Map Control -->
             <Image x:Name="MapImage" VerticalOptions="CenterAndExpand"/>
 
-        </StackLayout>
+            </StackLayout>
+
+            <!-- Loading Layout -->
+            <StackLayout x:Name="loadingLayout"
+                         IsVisible="False"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="White"
+                         Opacity="0.5">
+                <ActivityIndicator x:Name="loadingIndicator"
+                                   IsRunning="False"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
