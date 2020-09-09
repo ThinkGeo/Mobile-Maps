@@ -55,13 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ThinkGeo.UI.Android">
-      <Version>13.0.0-beta112</Version>
+      <Version>12.2.20</Version>
     </PackageReference>
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta017" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="12.2.1" />
     <PackageReference Include="ThinkGeo.UI.XamarinForms.Android">
-      <Version>13.0.0-beta022</Version>
+      <Version>12.2.1</Version>
     </PackageReference>
-    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="13.0.0-beta158" />
+    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="12.2.20" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
