@@ -67,7 +67,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Best Match Popup Overlay", bestMatchPopupOverlay);
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
+            mapView.CurrentExtent = new RectangleShape(-10780022.026198, 3915814.54657467, -10779119.113802, 3914667.51342533);
 
             // Initialize the ReverseGeocodingCloudClient with our ThinkGeo Cloud credentials
             reverseGeocodingCloudClient = new ReverseGeocodingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
@@ -191,7 +191,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
          
                 // Create a popup to display the best match, and add it to the PopupOverlay
                 Popup bestMatchPopup = new Popup();
-                bestMatchPopup.Content = "Best Match: " + searchResult.BestMatchLocation.Address;
+                bestMatchPopup.Content = "Best Match: " + searchResult.BestMatchLocation.LocationName;
                 bestMatchPopup.Position = bestMatchLocation;
                 bestMatchPopupOverlay.Popups.Add(bestMatchPopup);
 
@@ -234,8 +234,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Set the map extent to show the results of the search
-            mapView.CurrentExtent = searchRadiusFeatureLayer.GetBoundingBox();
-            mapView.ZoomToScale(mapView.ZoomLevelSet.ZoomLevel18.Scale);
+            mapView.CurrentExtent = RectangleShape.ScaleUp(searchRadiusFeatureLayer.GetBoundingBox(), 20).GetBoundingBox();
             mapView.Refresh();
         }
 

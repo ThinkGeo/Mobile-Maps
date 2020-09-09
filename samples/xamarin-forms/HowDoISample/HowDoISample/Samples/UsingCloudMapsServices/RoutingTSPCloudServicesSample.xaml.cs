@@ -165,9 +165,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             //// Set the map extent to the newly displayed route
             routingLayer.Open();
-            mapView.CurrentExtent = routingLayer.GetBoundingBox();
-            ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
-            mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel13.Scale);
+            mapView.CurrentExtent = RectangleShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetBoundingBox();
             routingLayer.Close();
             mapView.Refresh();
         }
