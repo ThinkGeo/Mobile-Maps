@@ -1,7 +1,6 @@
-# ThinkGeo Mobile Maps 
+# ThinkGeo Mobile Maps
 
-
-Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up and running with some external data and styling.  After reviewing this, we strongly recommend that you check out our samples for both [iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios) and [android](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android).  It's packed with examples covering nearly everything you can do with our Mobile Maps control.
+Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up and running with some external data and styling.  After reviewing this, we strongly recommend that you check out our HowDoI samples for [Xamarin.Forms](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). It's packed with examples covering nearly everything you can do with our Mobile Maps control.
 
 ## Repository Layout
 
@@ -13,17 +12,257 @@ Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we su
 
 `README.md`: A quick start guide to show you how to quickly get up and running.
 
-## Samples ##
+## Samples
 
 We have a number of samples for both Android and iOS that show off ThinkGeo Mobile Maps' full capabilities. You can use these samples as a starting point for your own application, or simply reference them for how to use our controls using best practices.
 
 - [iOS samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios)
 - [Android samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android)
 
-## Quickstarts
+## Quickstart Guides
 
-- [Quick Start Guide for Android](#quick-start-display-a-simple-map-on-android)
-- [Quick Start Guide for iOS](#quick-start-display-a-simple-map-on-ios)
+- [Xamarin.Forms Quickstart Guide](#xamarinforms-quickstart-guide)
+- [Android Quickstart Guide](#quick-start-display-a-simple-map-on-android)
+- [iOS Quickstart Guide](#quick-start-display-a-simple-map-on-ios)
+
+## Xamarin.Forms Quickstart Guide
+
+This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with ThinkGeo background map along with some external data on a Xamarin.Forms application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
+
+>todo update image
+![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
+
+### Step 1: Install Prerequisites
+
+Visual Studio will help guide you to setup your XamarinForms environment for both iOS and Android. Refer to the [Xamarin for Visual Studio guide](https://docs.microsoft.com/en-us/xamarin/get-started/installation) for more info.
+
+#### Android Prerequisites
+
+- Xamarin
+- The [Android SDK](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-sdk)
+- An [Android Emulator](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/device-manager)
+
+#### iOS Prerequisites
+
+To develop on Mac, you need:
+
+- XCode, which provides iOS emulator.
+- A development IDE, it could be Visual Studio for Mac, Xamarin Studio or others.
+- Xamarin.
+- A provisioning profile is needed if you want to test on an iOS device.
+
+To develop on Windows, you need:
+
+- A development IDE, such as Visual Studio or Xamarin Studio
+- Xamarin.
+- A Mac machine with XCode installed and on the same network as your Windows machine.
+
+### Step 2: Set Up a New Project
+
+Create a new project and select the `Mobile App (Xamarin.Forms)` project template. Name your application `ThinkGeoMobileQuickstart` and select the Blank application project template.
+
+Once created, there will be 3 projects in the solution:
+
+- `ThinkGeoMobileQuickstart` - The is where our shared will live
+- `ThinkGeoMobileQuickstart.Android` - Android specific code (no modifications will be needed to this project in this demo)
+- `ThinkGeoMobileQuickstart.iOS` - iOS specific code (no modifications will be needed to this project in this demo)
+
+Go ahead and run the application. By default, Visual Studio will set you up with an Android emulator if you do not already have one. If you wish to debug the application for iOS, set your starting project to `ThinkGeoMobileQuickstart.iOS` and Visual Studio will assist you to connect to your remote Mac machine.
+
+### Step 3: Implement the code
+
+Once your blank application is up and running, install the following NuGet packages for each project:
+
+- `ThinkGeoMobileQuickstart`
+  - `ThinkGeo.UI.XamarinForms`
+- `ThinkGeoMobileQuickstart.Android`
+  - `ThinkGeo.UI.XamarinForms.Android`
+- `ThinkGeoMobileQuickstart.iOS`
+  - `ThinkGeo.UI.XamarinForms.iOS`
+
+Open the `MainPage.xaml` found in the `ThinkGeoMobileQuickstart` project and add the following XML namespace to the `ContentPage`:
+
+```xml
+<!-- MainPage.xaml -->
+xmlns:ThinkGeo="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+```
+
+Next, replace all elements in the `StackLayout` with a single `MapView`:
+
+```xml
+<!-- MainPage.xaml -->
+<ThinkGeo:MapView x:Name="mapView" VerticalOptions="FillAndExpand"/>
+```
+
+Now that the `MapView` has been added to the MainPage, we need to setup the map on the code side. For that, you will need to add two usings to `MainPage.xaml.cs`:
+
+```cs
+// MainPage.xaml.cs
+using ThinkGeo.Core;
+using ThinkGeo.UI.XamarinForms;
+```
+
+Next, override the `ContentPage`'s `OnAppearing` method to setup the map:
+
+```cs
+// MainPage.xaml.cs
+protected override void OnAppearing()
+{
+    base.OnAppearing();
+
+    // Set the map's unit of measurement to meters(Spherical Mercator)
+    mapView.MapUnit = GeographyUnit.Meter;
+
+    // Add Cloud Maps as a background overlay. The keys provided below are just demo keys
+    var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+
+    mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+
+    // Set the map extent
+    mapView.CurrentExtent = new RectangleShape(-10000000, 10000000, 10000000, -10000000);
+}
+```
+
+Build the project and make sure it builds successfully.
+
+### Step 4: Activate a Free Evaluation License
+
+If you try to run the application now, "A license is needed" exception will be thrown if a valid `.mapsuitelicense` file is not found. A free 60-day license can be created using the following steps:
+
+#### Launching ThinkGeo Product Center
+
+1. Run `ThinkGeo.ProductCenter.exe` to open the product center. This can be found in the `bin` folder of the `ThinkGeoMobileQuickstart.Android` or `ThinkGeoMobileQuickstart.iOS` project. (`ThinkGeo.ProductCenter.exe` can only be opened on Windows, there's a CLI version for Mac.)
+1. Click on `Log In` in the upper-right corner, input the username/password to login or click `Create a new account` to create a free ThinkGeo account.
+
+#### Activating and Creating an Android License
+
+1. Click on the `ThinkGeo UI Mobile for Android` tab and activate an evaluation license.
+1. To generate a runtime license for the sample app, you'll need to find the package name for your sample project. In Visual Studio, this can be found by right-clicking on the `ThinkGeoMobileQuickstart.Android` project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`
+1. Copy the `Package Name` to the `Runtime License` input box to the right of the Product Center and click `Create`. Save the newly created license to the `Assets` folder of the solution (`ThinkGeoMobileQuickstart.Android\Assets`).
+1. Add the license to the project in the solution explorer by right-clicking on the `Assets` folder and selecting `Add -> Existing Item`.
+1. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `AndroidAsset`
+
+#### Activating and Creating an iOS License
+
+1. Click the `ThinkGeo UI Mobile for iOS` tile and then click on `Start Evaluation` (or `Activate License` if you already have purchased a full license). Now you can see a textbox with text placeholder `Bundle Identifer` on the right.
+1. Get the project's bundle identifier in `info.plist`, copy and paste it to the 'bundle dentifier' textbox in product center.
+1. Click 'Create' and save the license file (the file name would be `<bundle-identifer>.mapsuitelicense`) to the solution's root folder.
+1. Add the license to the project in the solution explorer by right-clicking the project and elect `Add -> Existing Item...`.
+1. Right-click the license file in the solution explorer, select `Properties` and change the `Build Action` to `BundleResource`.
+
+Rebuild the solution after adding the license files and then run the application. If all is well, you should see a map!
+
+### Step 5: Adding an External Data Source
+
+Now let's add an external data source (Shape File) to the map.
+
+1. Download [WorldCapitals.zip](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/assets/WorldCapitals.zip) shapefile and unzip it in your project under a new folder called `SampleData`.
+1. Include those files to the project. Multi-select them and change the Build Action to "EmbeddedResource".
+
+Unfortunately, reading from the filesystem is a bit tricky with Xamarin. So, we will need to take our EmbeddedResource shapefiles and copy them to the LocalApplicationData directory before we can display them on the map. To do this, we can run some code on application startup in `App.xaml.cs`:
+
+```cs
+// App.xaml.cs
+
+public App()
+{
+    InitializeComponent();
+}
+
+protected override async void OnStart()
+{
+    await CopyAssets();
+
+    MainPage = new MainPage(); // Moved from App constructor
+}
+
+/// <summary>
+/// Copies all embedded resources to the LocalApplicationData directory
+/// </summary>
+private async Task CopyAssets()
+{
+    var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
+    foreach (var resourceName in assembly.GetManifestResourceNames())
+    {
+        string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        List<string> filesWithoutExtenstions = new List<string>() { "gdb", "timestamps" };
+
+        // Change the replace value to whatever your project's name is
+        string[] parts = resourceName.Replace("ThinkGeoMobileQuickstart.", "").Split('.');
+
+        string localPath = "";
+        for (int i = 0; i < parts.Length; i++)
+        {
+            // Default delimiter to '/' for the directory structure
+            var delimiter = "/";
+
+            // Use '.' delimiter for file extensions
+            if ((i == parts.Length - 1 && !filesWithoutExtenstions.Contains(parts[i])))
+            {
+                delimiter = ".";
+            }
+
+            localPath += $"{delimiter}{parts[i]}";
+        }
+
+        string targetFilePath = Path.Combine(appDataPath, localPath);
+        string targetDir = Path.GetDirectoryName(targetFilePath);
+
+        if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
+
+        if (!File.Exists(targetFilePath))
+        {
+            using (var targetStream = File.Create(targetFilePath))
+            {
+                Stream sourceStream = assembly.GetManifestResourceStream(resourceName);
+                await sourceStream.CopyToAsync(targetStream);
+                sourceStream.Close();
+            }
+        }
+    }
+}
+```
+
+There's a few important notes about the above code. First, we need to copy these files asynchronously, so we needed to add the async keyword to the `OnStart` method. Second, we moved the assignment of the `MainPage` to the `OnStart` method after we finished copying the assets. Finally, EmbeddedResources are always named `ProjectName.Path.To.File.txt`. When we copy the files to the filesystem, we are stripping `ProjectName.`.
+
+Now, that we can copy over the WorldCapital shapefile, let's add it to the map:
+
+```cs
+// MainPage.xaml.cs
+protected override void OnAppearing()
+{
+    base.OnAppearing();
+
+    //...
+
+    // Create a new Feature Layer using the WorldCapitals.shp Shapefile.
+    ShapeFileFeatureLayer worldCapitalsFeatureLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SampleData/WorldCapitals.shp"));
+    // Set the pointstyle to black circle with the size of 8.
+    worldCapitalsFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.White, 8, GeoColors.Black);
+    // Apply the point style from zoomlevel01 to zoomlevel20, that's across all the zoomlevels.
+    worldCapitalsFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+    // Convert the world capital featurelayer from DecimalDegrees, which is the projection of the raw data, to Spherical Mercator, which is the projection of the map.
+    worldCapitalsFeatureLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(Projection.GetDecimalDegreesProjString(), Projection.GetSphericalMercatorProjString());
+
+    // Add the Layer to an Overlay and add the overlay to the map.
+    LayerOverlay layerOverlay = new LayerOverlay();
+    layerOverlay.Layers.Add(worldCapitalsFeatureLayer);
+    mapView.Overlays.Add(layerOverlay);
+}
+```
+
+### Summary
+
+You now know the basics of using the ThinkGeo Map controls and are able to get started adding functionality into your own applications. Let's recap what we have learned about the object relationships and how the pieces of ThinkGeo UI work together:
+
+1. It is of the utmost importance that the units (feet, meters, decimal degrees, etc.) be set properly for the Map control based on the data.
+1. FeatureLayers provide the data used by a Map control to render a map.
+1. A Map is the basic control that contains all of the other objects that are used to tell how the map is to be rendered.
+1. A Map has many layers. A Layer correlates one-to-one with a single data source and typically of one type (point, polygon, line etc).
+1. A FeatureLayer can have several ZoomLevels. ZoomLevels help to define ranges (upper and lower) of when a Layer should be shown or hidden.
+
+You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms) and explore our other features.
 
 ## Quick Start: Display a Simple Map on iOS
 
@@ -345,7 +584,7 @@ RequestRequiredPermissions();
 
 ### Step 9: Adding an External Data Source - Importing Data
 
-Now that we have storage permissions set up, we can store the data locally on the Android device. Create a new folder named `SampleData` under the `Assets` folder in the solution, then add the map data to it. Make sure the resources’ build action is `AndroidAsset`.
+Now that we have storage permissions set up, we can store the data locally on the Android device. Create a new folder named `SampleData` under the `Assets` folder in the solution, then add the map data to it. Make sure the resources� build action is `AndroidAsset`.
 
 Now, we can add a method to copy the data to the external storage for the application to use.
 
