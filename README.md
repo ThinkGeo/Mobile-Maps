@@ -29,8 +29,7 @@ We have a number of samples for both Android and iOS that show off ThinkGeo Mobi
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running with ThinkGeo background map along with some external data on a Xamarin.Forms application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
->todo update image
-![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/assets/ios_quickstart_shapefile_pointstyle_screenshot.png)
+![Simple Map](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/assets/xamarinforms_quickstart_screenshot.png)
 
 ### Step 1: Install Prerequisites
 
@@ -185,7 +184,6 @@ private async Task CopyAssets()
     foreach (var resourceName in assembly.GetManifestResourceNames())
     {
         string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        List<string> filesWithoutExtenstions = new List<string>() { "gdb", "timestamps" };
 
         // Change the replace value to whatever your project's name is
         string[] parts = resourceName.Replace("ThinkGeoMobileQuickstart.", "").Split('.');
@@ -197,10 +195,10 @@ private async Task CopyAssets()
             var delimiter = "/";
 
             // Use '.' delimiter for file extensions
-            if ((i == parts.Length - 1 && !filesWithoutExtenstions.Contains(parts[i])))
-            {
-                delimiter = ".";
-            }
+            if (i == parts.Length - 1) delimiter = ".";
+
+            // Don't use a delimiter for the first part
+            if (i == 0) delimiter = "";
 
             localPath += $"{delimiter}{parts[i]}";
         }
@@ -223,7 +221,7 @@ private async Task CopyAssets()
 }
 ```
 
-There's a few important notes about the above code. First, we need to copy these files asynchronously, so we needed to add the async keyword to the `OnStart` method. Second, we moved the assignment of the `MainPage` to the `OnStart` method after we finished copying the assets. Finally, EmbeddedResources are always named `ProjectName.Path.To.File.txt`. When we copy the files to the filesystem, we are stripping `ProjectName.`.
+There's a few important notes about the above code. First, we need to copy these files asynchronously, so we needed to add the async keyword to the `OnStart` method. Second, we moved the assignment of the `MainPage` to the `OnStart` method after we finished copying the assets. Finally, EmbeddedResources are always named `ProjectName.Path.To.File.txt`. So, when we copy the files to the filesystem, we are stripping `ProjectName.`.
 
 Now, that we can copy over the WorldCapital shapefile, let's add it to the map:
 
@@ -251,6 +249,8 @@ protected override void OnAppearing()
     mapView.Overlays.Add(layerOverlay);
 }
 ```
+
+Now, when you run the application, the shapefiles will be added to the LocalApplicationData directory which then allows it to be displayed on the map!
 
 ### Summary
 
