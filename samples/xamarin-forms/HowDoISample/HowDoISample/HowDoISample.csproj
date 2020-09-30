@@ -188,6 +188,11 @@
     <None Remove="Data\Shapefile\Subdivisions.prj" />
     <None Remove="Data\Shapefile\Subdivisions.shp" />
     <None Remove="Data\Shapefile\Subdivisions.shx" />
+    <None Remove="Data\Shapefile\WorldCapitals.dbf" />
+    <None Remove="Data\Shapefile\WorldCapitals.ids" />
+    <None Remove="Data\Shapefile\WorldCapitals.idx" />
+    <None Remove="Data\Shapefile\WorldCapitals.shp" />
+    <None Remove="Data\Shapefile\WorldCapitals.shx" />
     <None Remove="Data\Shapefile\Zoning.dbf" />
     <None Remove="Data\Shapefile\Zoning.ids" />
     <None Remove="Data\Shapefile\Zoning.idx" />
@@ -394,6 +399,11 @@
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.prj" />
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.shp" />
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.shx" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.dbf" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.ids" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.idx" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shp" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shx" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.dbf" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.ids" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.idx" />
@@ -551,6 +561,15 @@
     </Compile>
     <Compile Update="Samples\DisplayingLayers\WebServices\WMSLayerSample.xaml.cs">
       <DependentUpon>WMSLayerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingFeatureSourcesSample.xaml.cs">
+      <DependentUpon>ExtendingFeatureSourcesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingLayersSample.xaml.cs">
+      <DependentUpon>ExtendingLayersSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingStylesSample.xaml.cs">
+      <DependentUpon>ExtendingStylesSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\PerformingGeometricOperations\BufferShapeSample.xaml.cs">
       <DependentUpon>BufferShapeSample.xaml</DependentUpon>
