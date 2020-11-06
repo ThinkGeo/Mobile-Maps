@@ -45,6 +45,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the layer to a layer overlay
             var layerOverlay = new LayerOverlay();
+            layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(coyoteSightings);
 
             // Add the overlay to the map
