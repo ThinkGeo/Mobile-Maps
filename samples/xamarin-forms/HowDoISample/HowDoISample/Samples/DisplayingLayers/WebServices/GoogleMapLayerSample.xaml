@@ -42,8 +42,8 @@
                             </Label.GestureRecognizers>
                         </Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="Client ID:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name ="txtClientId"></Entry>
+                        <Label Grid.Column="1" Grid.Row="1" Text="API Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name ="txtApiKey"></Entry>
 
                         <Label Grid.Column="1" Grid.Row="2" Text="Uri Signing Secret:" FontAttributes="Bold" VerticalOptions="Center"></Label>
                         <Entry Grid.Column="2" Grid.Row="2" x:Name ="txtUriSigningSecret"></Entry>

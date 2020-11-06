@@ -37,7 +37,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = new RectangleShape(-96.8538765269409, 33.1618647290098, -96.7987487018851, 33.1054126590461);
 
             // Create a WmsOverlay and add it to the map.
-            WmsOverlay wmsOverlay = new WmsOverlay() { ServerUris = { new Uri("http://ows.mundialis.de/services/service")}};
+            WmsOverlay wmsOverlay = new WmsOverlay(new Uri("http://ows.mundialis.de/services/service"));
             wmsOverlay.Parameters.Add("LAYERS", "OSM-WMS");
             wmsOverlay.Parameters.Add("STYLES", "default");
             mapView.Overlays.Add(wmsOverlay);
