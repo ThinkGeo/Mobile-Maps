@@ -5,7 +5,7 @@ The Map Suite iOS QuickStart Guide will guide you through the process of creatin
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/QuickstartSample-ForiOS/blob/master/Screenshot.PNG)
+![Screenshot](Screenshot.PNG)
 
 ### Requirements
 This sample makes use of the following NuGet Packages

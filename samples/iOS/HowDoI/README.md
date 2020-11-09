@@ -6,7 +6,7 @@ The "How Do I?" samples collection is a comprehensive set containing dozens of i
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/HowDoISample-ForiOS/blob/master/Screenshot.png)
+![Screenshot](Screenshot.png)
 
 ### Requirements
 
@@ -49,8 +49,8 @@ This example makes use of the following APIs:
 - [ThinkGeo.MapSuite.iOS.MapView](http://wiki.thinkgeo.com/wiki/api/thinkgeo.mapsuite.ios.mapview)
 
 ### FAQ
-- __Q: How do I make background map work?__  
-A: Backgrounds for this sample are powered by ThinkGeo Cloud Maps and require a Client ID and Secret. These were sent to you via email when you signed up with ThinkGeo, or you can register now at https://cloud.thinkgeo.com. Once you get them, please update the code in method ViewDidLoad() in all  ViewController classes.  
+- __Q: How do I make background map work?__
+A: Backgrounds for this sample are powered by ThinkGeo Cloud Maps and require a Client ID and Secret. These were sent to you via email when you signed up with ThinkGeo, or you can register now at https://cloud.thinkgeo.com. Once you get them, please update the code in method ViewDidLoad() in all  ViewController classes.
 
 ### About Map Suite
 

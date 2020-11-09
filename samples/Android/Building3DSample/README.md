@@ -6,7 +6,7 @@ This project shows to create a simulated 3D buildings with Android map control a
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_android) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/Building3DSample-ForAndroid/blob/master/Screenshot.png)
+![Screenshot](Screenshot.png)
 
 ### Requirements
 This sample makes use of the following NuGet Packages

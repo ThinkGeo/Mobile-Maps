@@ -5,7 +5,7 @@ This project shows to create a simulated 3D buildings with iOS map control and s
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/Building3DSample-foriOS/blob/master/ScreenShot.png)
+![Screenshot](ScreenShot.png)
 
 ### Requirements
 This sample makes use of the following NuGet Packages

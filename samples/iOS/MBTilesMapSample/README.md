@@ -12,7 +12,7 @@ If you want the *.mbtile file of any area in the world, or you have any requirem
 
 Please refer to [Wiki](https://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/ThinkGeoMBTilesMapsSample-ForiOS/blob/master/Screenshot.gif)
+![Screenshot](Screenshot.gif)
 
 ### Requirements
 This sample makes use of the following NuGet Packages
@@ -24,7 +24,7 @@ This sample makes use of the following NuGet Packages
 this.mapView.MapUnit = GeographyUnit.Meter;
 this.mapView.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-// Create background map for Frisco with MB tile requested from mbtiles Database.  
+// Create background map for Frisco with MB tile requested from mbtiles Database.
 ThinkGeoMBTilesFeatureLayer thinkGeoMBTilesFeatureLayer = new ThinkGeoMBTilesFeatureLayer("AppData/tiles_Frisco.mbtiles", new Uri("AppData/thinkgeo-world-streets-light.json", UriKind.Relative));
 
 LayerOverlay layerOverlay = new LayerOverlay();
@@ -47,7 +47,7 @@ If you would like to draw the *.MbTiles with ThinkGeo pre-built StyleJson file, 
    * Change ‘Copy to output directory’ to ‘Always copy’.
 
 3. To tell iOS you are using custom fonts, you should open the Info.plist file and add following parts to "<dict></dict>".
-	
+
 ```
   <array>
 	<string>vectormap-icons.ttf</string>

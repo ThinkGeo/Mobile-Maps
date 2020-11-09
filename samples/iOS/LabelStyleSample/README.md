@@ -6,7 +6,7 @@ This samples shows you how to examine different labeling techniques to make your
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/LabelingStyleSample-ForiOS/blob/master/ScreenShot.gif)
+![Screenshot](ScreenShot.gif)
 
 ### Requirements
 This sample makes use of the following NuGet Packages

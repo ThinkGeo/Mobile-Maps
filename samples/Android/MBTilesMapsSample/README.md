@@ -12,7 +12,7 @@ If you want the *.mbtile file of any area in the world, or you have any requirem
 
 Please refer to [Wiki](https://wiki.thinkgeo.com/wiki/map_suite_mobile_for_android) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/ThinkGeoMBTilesMapsSample-ForAndroid/blob/master/Screenshot.gif)
+![Screenshot](Screenshot.gif)
 
 ### Requirements
 This sample makes use of the following NuGet Packages
@@ -24,7 +24,7 @@ This sample makes use of the following NuGet Packages
 this.androidMap.MapUnit = GeographyUnit.Meter;
 this.androidMap.ZoomLevelSet = new ThinkGeoCloudMapsZoomLevelSet();
 
-// Create background map for Frisco with MB tile requested from mbtiles Database.  
+// Create background map for Frisco with MB tile requested from mbtiles Database.
 ThinkGeoMBTilesFeatureLayer thinkGeoMBTilesFeatureLayer = new ThinkGeoMBTilesFeatureLayer(Path.Combine(targetDirectory, "tiles_Frisco.mbtiles"), new Uri(Path.Combine(targetDirectory, "thinkgeo-world-streets-light.json"), UriKind.Relative));
 
 LayerOverlay layerOverlay = new LayerOverlay();

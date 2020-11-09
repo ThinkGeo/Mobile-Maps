@@ -6,7 +6,7 @@ This samples shows you how to implement drawing and editing shapes into your web
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_ios) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/DrawEditFeaturesSample-ForiOS/blob/master/ScreenShot.gif)
+![Screenshot](ScreenShot.gif)
 
 ### Requirements
 This sample makes use of the following NuGet Packages

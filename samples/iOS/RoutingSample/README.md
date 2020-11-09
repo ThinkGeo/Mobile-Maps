@@ -8,7 +8,7 @@ The Map Suite Routing “How Do I?” solution offers a series of useful how-to 
 
 Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_mobile_for_iOS) for the details.
 
-![Screenshot](https://github.com/ThinkGeo/RoutingSample-ForiOS/blob/master/ScreenShot.gif)
+![Screenshot](ScreenShot.gif)
 
 ### Requirements
 This sample makes use of the following NuGet Packages
