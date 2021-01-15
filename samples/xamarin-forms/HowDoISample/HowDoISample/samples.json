@@ -181,12 +181,6 @@
         "source": "Samples/UsingOverlays/DisplayCloudMapsRasterOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplaySimpleBackgroundOverlaySample",
-        "title": "Display Simple Background Overlay Sample",
-        "description": "Replace ME",
-        "source": "Samples/UsingOverlays/DisplaySimpleBackgroundOverlaySample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsVectorOverlaySample",
         "title": "Display Cloud Maps Vector Overlay",
         "description": "Learn to render ThinkGeo Cloud Maps in vector format.",
@@ -291,12 +285,6 @@
         "title": "Create Regex Style",
         "description": "Replace ME",
         "source": "Samples/CreatingStyles/CreateRegexStyleSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateCustomStyleSample",
-        "title": "Create custom Style",
-        "description": "Replace ME",
-        "source": "Samples/CreatingStyles/CreateCustomStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateDotDensityStyleSample",

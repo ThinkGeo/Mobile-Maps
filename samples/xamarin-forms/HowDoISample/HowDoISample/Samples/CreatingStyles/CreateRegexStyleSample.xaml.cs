@@ -24,22 +24,43 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
 
-            // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.Meter;            
+            // Set the map's unit of measurement to meters(Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
 
-            // Create the layer overlay with some additional settings and add to the map.
-            ThinkGeoCloudVectorMapsLayer thinkGeoCloudVectorMapsLayer = new ThinkGeoCloudVectorMapsLayer("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
-            thinkGeoCloudVectorMapsLayer.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
-            thinkGeoCloudVectorMapsLayer.MapType = ThinkGeoCloudVectorMapsMapType.Light;
-            var overlay = new LayerOverlay();
-            overlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
-            mapView.Overlays.Add("Cloud Overlay", overlay);
-            
-            // Set the current extent to a neighborhood in Frisco Texas.
-            mapView.CurrentExtent = new RectangleShape(-10781708.9749424, 3913502.90429046, -10777685.1114043, 3910360.79646662);
+            // Add Cloud Maps as a background overlay
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            // Refresh the map.
-            mapView.Refresh();
+            ShapeFileFeatureLayer coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
+
+            // Project the layer's data to match the projection of the map
+            coyoteSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+
+            // Add the layer to a layer overlay
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add("coyoteSightings", coyoteSightings);
+
+            // Add the overlay to the map
+            mapView.Overlays.Add(layerOverlay);
+
+            RegexStyle regexStyle = new RegexStyle();
+            regexStyle.ColumnName = "Comments";
+
+            RegexItem largeItem = new RegexItem("big|large|huge", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
+            regexStyle.RegexItems.Add(largeItem);
+
+            PointStyle allSightingsStyle = new PointStyle(PointSymbolType.Circle, 5, GeoBrushes.Green);
+
+            // Add the point style to the collection of custom styles for ZoomLevel 1.
+            coyoteSightings.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(allSightingsStyle);
+            coyoteSightings.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(regexStyle);
+
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
+            coyoteSightings.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            // Set the map extent
+            mapView.CurrentExtent = new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);
+
         }
     }
 }

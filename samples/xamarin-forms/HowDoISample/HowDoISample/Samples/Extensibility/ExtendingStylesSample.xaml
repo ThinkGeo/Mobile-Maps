@@ -37,9 +37,9 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Time Based Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Daylight Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
                         <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="TimeBasedPointStyle" Text="Apply Style" Clicked="TimeBasedPointStyle_Click" MinimumWidthRequest="64"></Button>
-                        <Label Grid.Column="1" Grid.Row="2" Text="Population Size Based Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Capitol Population Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
                         <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="SizedBasedPointStyle" Text="Apply Style" Clicked="SizedBasedPointStyle_Click"></Button>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

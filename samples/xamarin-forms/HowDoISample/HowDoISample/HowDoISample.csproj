@@ -463,9 +463,6 @@
     <Compile Update="Samples\CreatingStyles\CreateDotDensityStyleSample.xaml.cs">
       <DependentUpon>CreateDotDensityStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateCustomStyleSample.xaml.cs">
-      <DependentUpon>CreateCustomStyleSample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\CreatingStyles\CreateRegexStyleSample.xaml.cs">
       <DependentUpon>CreateRegexStyleSample.xaml</DependentUpon>
     </Compile>
@@ -702,9 +699,6 @@
     </Compile>
     <Compile Update="Samples\UsingOverlays\CachingMapTilesSample.xaml.cs">
       <DependentUpon>CachingMapTilesSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplaySimpleBackgroundOverlaySample.xaml.cs">
-      <DependentUpon>DisplaySimpleBackgroundOverlaySample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingOverlays\DisplayBingMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
