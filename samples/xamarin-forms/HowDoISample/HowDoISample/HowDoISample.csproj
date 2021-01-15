@@ -188,6 +188,11 @@
     <None Remove="Data\Shapefile\Subdivisions.prj" />
     <None Remove="Data\Shapefile\Subdivisions.shp" />
     <None Remove="Data\Shapefile\Subdivisions.shx" />
+    <None Remove="Data\Shapefile\WorldCapitals.dbf" />
+    <None Remove="Data\Shapefile\WorldCapitals.ids" />
+    <None Remove="Data\Shapefile\WorldCapitals.idx" />
+    <None Remove="Data\Shapefile\WorldCapitals.shp" />
+    <None Remove="Data\Shapefile\WorldCapitals.shx" />
     <None Remove="Data\Shapefile\Zoning.dbf" />
     <None Remove="Data\Shapefile\Zoning.ids" />
     <None Remove="Data\Shapefile\Zoning.idx" />
@@ -394,6 +399,11 @@
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.prj" />
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.shp" />
     <EmbeddedResource Include="Data\Shapefile\Subdivisions.shx" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.dbf" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.ids" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.idx" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shp" />
+    <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shx" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.dbf" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.ids" />
     <EmbeddedResource Include="Data\Shapefile\Zoning.idx" />
@@ -423,10 +433,19 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ThinkGeo.Core" Version="12.3.0" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="12.3.0" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="12.3.0" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="12.3.0" />
+    <PackageReference Include="ThinkGeo.Core" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.Ecw" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.FileGeoDatabase" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.Gdal" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.MrSid" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.NauticalCharts" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.Oracle" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.Printers" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="12.3.2" />
+    <PackageReference Include="ThinkGeo.UnmanagedProj" Version="12.3.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
@@ -441,6 +460,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Samples\CreatingStyles\CreateDotDensityStyleSample.xaml.cs">
+      <DependentUpon>CreateDotDensityStyleSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\CreatingStyles\CreateRegexStyleSample.xaml.cs">
+      <DependentUpon>CreateRegexStyleSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\CreatingStyles\CreateAreaStyleSample.xaml.cs">
       <DependentUpon>CreateAreaStyleSample.xaml</DependentUpon>
     </Compile>
@@ -543,6 +568,15 @@
     <Compile Update="Samples\DisplayingLayers\WebServices\WMSLayerSample.xaml.cs">
       <DependentUpon>WMSLayerSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingFeatureSourcesSample.xaml.cs">
+      <DependentUpon>ExtendingFeatureSourcesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingLayersSample.xaml.cs">
+      <DependentUpon>ExtendingLayersSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\Extensibility\ExtendingStylesSample.xaml.cs">
+      <DependentUpon>ExtendingStylesSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\PerformingGeometricOperations\BufferShapeSample.xaml.cs">
       <DependentUpon>BufferShapeSample.xaml</DependentUpon>
     </Compile>
@@ -644,6 +678,12 @@
     </Compile>
     <Compile Update="Samples\UsingCloudMapsServices\TimezoneCloudServicesSample.xaml.cs">
       <DependentUpon>TimezoneCloudServicesSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayCompassSample.xaml.cs">
+      <DependentUpon>DisplayCompassSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingMapTools\DisplayMagneticNorthSample.xaml.cs">
+      <DependentUpon>DisplayMagneticNorthSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingMapTools\DisplayMapLogoSample.xaml.cs">
       <DependentUpon>DisplayMapLogoSample.xaml</DependentUpon>

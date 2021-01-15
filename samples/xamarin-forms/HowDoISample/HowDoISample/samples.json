@@ -240,6 +240,18 @@
         "source": "Samples/UsingMapTools/DisplayMapCenterCoordinatesSample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMagneticNorthSample",
+        "title": "Display Magnetic North",
+        "description": "Replace ME",
+        "source": "Samples/UsingMapTools/DisplayMagneticNorthSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCompassSample",
+        "title": "Display Compass",
+        "description": "Replace ME",
+        "source": "Samples/UsingMapTools/DisplayCompassSample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapPanZoomBarSample",
         "title": "Display a Map PanZoomBar",
         "description": "Learn to render a PanZoomBar on the map.",
@@ -267,6 +279,18 @@
         "title": "Create an Area Style",
         "description": "Learn how to style polygon data using an AreaStyle",
         "source": "Samples/CreatingStyles/CreateAreaStyleSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateRegexStyleSample",
+        "title": "Create Regex Style",
+        "description": "Replace ME",
+        "source": "Samples/CreatingStyles/CreateRegexStyleSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateDotDensityStyleSample",
+        "title": "Create Dot Density Style",
+        "description": "Replace ME",
+        "source": "Samples/CreatingStyles/CreateDotDensityStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateTextStyleSample",
@@ -516,6 +540,30 @@
         "description": "Learn how to use the TopologyValidator APIs to perform validation on polygons",
         "source": "Samples/TopologicalValidation/PolygonValidationSample"
       }
+    ]
+  },
+  {
+    "title": "Extensibility",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
+        "title": "Extending Styles",
+        "description": "Learn how to use the Style base class to create your own custom styles.",
+        "source": "Samples/Extensibility/ExtendingStylesSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
+        "title": "Extending Layers",
+        "description": "Learn how to use the Layer base class to create your own custom layers.",
+        "source": "Samples/Extensibility/ExtendingLayersSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
+        "title": "Extending Feature Sources",
+        "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
+        "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
+      }
+
     ]
   },
   {
