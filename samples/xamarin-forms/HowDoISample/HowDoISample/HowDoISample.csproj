@@ -631,6 +631,9 @@
     <Compile Update="Samples\ProjectingData\ProjectLatLonCoordinatesSample.xaml.cs">
       <DependentUpon>ProjectLatLonCoordinatesSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\ProjectingData\WorldProjectionSample.xaml.cs">
+      <DependentUpon>WorldProjectionSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\ProjectingData\SetLayerProjectionSample.xaml.cs">
       <DependentUpon>SetLayerProjectionSample.xaml</DependentUpon>
     </Compile>
@@ -720,6 +723,9 @@
     </Compile>
     <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\DrawGPSLocationOverlaySample.xaml.cs">
+      <DependentUpon>DrawGPSLocationOverlaySample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingOverlays\TrackDynamicData.xaml.cs">
       <DependentUpon>RefreshDynamicItems.xaml</DependentUpon>

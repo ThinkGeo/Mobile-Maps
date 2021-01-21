@@ -204,7 +204,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// Perform the service area query when a new point is drawn
         /// </summary>
         private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
-        {
+        {           
             GetAndDrawServiceArea(e.PointInWorldCoordinate);
         }
 

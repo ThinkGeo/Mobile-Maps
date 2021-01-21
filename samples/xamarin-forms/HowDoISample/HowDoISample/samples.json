@@ -175,6 +175,12 @@
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGPSLocationOverlaySample",
+        "title": "Draw GPS Location Overlay Sample",
+        "description": "Replace Me",
+        "source": "Samples/UsingOverlays/DrawGPSLocationOverlaySample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",
         "title": "Display Cloud Maps Raster Overlay",
         "description": "Learn to render ThinkGeo Cloud Maps in raster format.",
@@ -344,6 +350,12 @@
         "title": "Setting the Projection of a Layer",
         "description": "Learn how to automatically reproject a layer using the ProjectionConverter class",
         "source": "Samples/ProjectingData/SetLayerProjectionSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
+        "title": "World Projection Sample",
+        "description": "Replace Me",
+        "source": "Samples/ProjectingData/WorldProjectionSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",
