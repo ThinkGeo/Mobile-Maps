@@ -46,8 +46,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             mapView.CurrentExtent = new RectangleShape(-139.971925820039, 140.267236484135, 151.824949179961, -111.099951015865);
 
-            // Refresh the map.
-            mapView.Refresh();
+            // Set the default radio button to Polar Stereographic
+            rdoPolar.IsChecked = true;
         }
 
         private void Radial_Checked(object sender, EventArgs e)
