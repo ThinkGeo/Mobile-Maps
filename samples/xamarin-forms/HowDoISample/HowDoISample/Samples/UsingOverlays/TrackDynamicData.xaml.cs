@@ -21,6 +21,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     public partial class TrackDynamicData : ContentPage
     {
 
+        private bool timerRunning = false;
+
         public TrackDynamicData()
         {
             InitializeComponent();
@@ -48,6 +50,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             //Set the maps current extent so we start there
             mapView.CurrentExtent = currentExtent;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            timerRunning = false;
         }
 
         private void AddPolygonOverlay(RectangleShape boundingRectangle)
@@ -125,26 +134,32 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private void btnStartRefresh_Click(object sender, EventArgs e)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            if (!timerRunning)
             {
-                //I go to find the layer and then loop through all of the features and assign them new
-                // random colors and refresh just the overlay that we are using to draw the polygons
-
-                var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
-
-                Random random = new Random();
-
-                foreach (var feature in polygonLayer.InternalFeatures)
+                timerRunning = true;
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    feature.ColumnValues["DataPoint1"] = random.Next(1, 5).ToString();
-                }
+                    if (timerRunning)
+                    {
+                        //I go to find the layer and then loop through all of the features and assign them new
+                        // random colors and refresh just the overlay that we are using to draw the polygons
 
-                // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
-                mapView.Refresh(mapView.Overlays["PolygonOverlay"]);
+                        var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
 
-                return true; // True = Repeat again, False = Stop the timer
-            });
+                        Random random = new Random();
 
+                        foreach (var feature in polygonLayer.InternalFeatures)
+                        {
+                            feature.ColumnValues["DataPoint1"] = random.Next(1, 5).ToString();
+                        }
+
+                        // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
+                        mapView.Refresh(mapView.Overlays["PolygonOverlay"]);
+                    }
+
+                    return timerRunning; // True = Repeat again, False = Stop the timer
+                });
+            }
         }
 
         private void btnRotate_Click(object sender, EventArgs e)
@@ -227,7 +242,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
 
             var features = polygonLayer.QueryTools.GetFeaturesContaining(e.PointInWorldCoordinate, ReturningColumnsType.AllColumns);
-            
+
             if (features.Count > 0)
             {
                 await DisplayAlert("Alert", $"Feature: {features[0].Id} DataPoint1: {features[0].ColumnValues["DataPoint1"]}", "OK");
