@@ -175,6 +175,12 @@
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGPSLocationOverlaySample",
+        "title": "Draw GPS Location Overlay Sample",
+        "description": "Learn how to display a GPS vehicle's movements in real-time",
+        "source": "Samples/UsingOverlays/DrawGPSLocationOverlaySample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",
         "title": "Display Cloud Maps Raster Overlay",
         "description": "Learn to render ThinkGeo Cloud Maps in raster format.",
@@ -242,13 +248,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMagneticNorthSample",
         "title": "Display Magnetic North",
-        "description": "Replace ME",
+        "description": "Learn how to display the Magnetic North indicator on the map",
         "source": "Samples/UsingMapTools/DisplayMagneticNorthSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCompassSample",
         "title": "Display Compass",
-        "description": "Replace ME",
+        "description": "Learn how to display a compass on the map contol",
         "source": "Samples/UsingMapTools/DisplayCompassSample"
       },
       {
@@ -283,13 +289,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateRegexStyleSample",
         "title": "Create Regex Style",
-        "description": "Replace ME",
+        "description": "Learn how to style select features using regex expressions",
         "source": "Samples/CreatingStyles/CreateRegexStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateDotDensityStyleSample",
         "title": "Create Dot Density Style",
-        "description": "Replace ME",
+        "description": "Learn how to style polygons based on numeric data values",
         "source": "Samples/CreatingStyles/CreateDotDensityStyleSample"
       },
       {
@@ -344,6 +350,12 @@
         "title": "Setting the Projection of a Layer",
         "description": "Learn how to automatically reproject a layer using the ProjectionConverter class",
         "source": "Samples/ProjectingData/SetLayerProjectionSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
+        "title": "World Projection Sample",
+        "description": "Learn how to set the map's world projection to several different Spatial References",
+        "source": "Samples/ProjectingData/WorldProjectionSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",

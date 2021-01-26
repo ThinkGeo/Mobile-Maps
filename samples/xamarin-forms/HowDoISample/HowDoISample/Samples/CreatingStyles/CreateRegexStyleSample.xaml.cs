@@ -59,7 +59,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             coyoteSightings.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);
+            mapView.CurrentExtent = new RectangleShape(-10781794.4716492, 3917077.66579861, -10775416.8466492, 3913528.63559028);
 
         }
     }
