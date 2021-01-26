@@ -5,16 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SampleTemplate">
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample">
     <ContentPage.Content>
         <StackLayout>
-            <!-- Use frame for samples with no controls -->
-            <!--<Frame HasShadow="False">
-                <Label x:Name="descriptionLabel"
-                       FontSize="Subtitle"
-                       VerticalOptions="Center"
-                       HorizontalOptions="StartAndExpand"/>
-            </Frame>-->
             <!-- Expander is used for samples with controls -->
             <Expander>
                 <!-- Sample Description -->
@@ -44,17 +37,17 @@
                 <!-- Sample Controls -->
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="1" Text="Numerical Value:" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="numericalEntry" Text="1000" MinimumWidthRequest="64" Keyboard="Numeric"></Entry>
-                        
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="button" Text="Button" Clicked="button_Clicked"></Button>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Daylight Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                        <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="TimeBasedPointStyle" Text="Apply Style" Clicked="TimeBasedPointStyle_Click" MinimumWidthRequest="64"></Button>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Capitol Population Point Style:" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="SizedBasedPointStyle" Text="Apply Style" Clicked="SizedBasedPointStyle_Click"></Button>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

@@ -175,6 +175,12 @@
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGPSLocationOverlaySample",
+        "title": "Draw GPS Location Overlay Sample",
+        "description": "Learn how to display a GPS vehicle's movements in real-time",
+        "source": "Samples/UsingOverlays/DrawGPSLocationOverlaySample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",
         "title": "Display Cloud Maps Raster Overlay",
         "description": "Learn to render ThinkGeo Cloud Maps in raster format.",
@@ -269,6 +275,18 @@
         "source": "Samples/CreatingStyles/CreateAreaStyleSample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateRegexStyleSample",
+        "title": "Create Regex Style",
+        "description": "Learn how to style select features using regex expressions",
+        "source": "Samples/CreatingStyles/CreateRegexStyleSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateDotDensityStyleSample",
+        "title": "Create Dot Density Style",
+        "description": "Learn how to style polygons based on numeric data values",
+        "source": "Samples/CreatingStyles/CreateDotDensityStyleSample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateTextStyleSample",
         "title": "Create a Text Style",
         "description": "Learn how to label data using a TextStyle",
@@ -320,6 +338,12 @@
         "title": "Setting the Projection of a Layer",
         "description": "Learn how to automatically reproject a layer using the ProjectionConverter class",
         "source": "Samples/ProjectingData/SetLayerProjectionSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
+        "title": "World Projection Sample",
+        "description": "Learn how to set the map's world projection to several different Spatial References",
+        "source": "Samples/ProjectingData/WorldProjectionSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",
@@ -516,6 +540,30 @@
         "description": "Learn how to use the TopologyValidator APIs to perform validation on polygons",
         "source": "Samples/TopologicalValidation/PolygonValidationSample"
       }
+    ]
+  },
+  {
+    "title": "Extensibility",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
+        "title": "Extending Styles",
+        "description": "Learn how to use the Style base class to create your own custom styles.",
+        "source": "Samples/Extensibility/ExtendingStylesSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
+        "title": "Extending Layers",
+        "description": "Learn how to use the Layer base class to create your own custom layers.",
+        "source": "Samples/Extensibility/ExtendingLayersSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
+        "title": "Extending Feature Sources",
+        "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
+        "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
+      }
+
     ]
   },
   {

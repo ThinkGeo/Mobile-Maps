@@ -37,10 +37,9 @@
                 <Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
                         <Label Text="Feed Controls:" FontSize="16" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
-                        <Label Text="Pause Data Feed" Grid.Column="2" Grid.Row="1"></Label>
-                        <CheckBox x:Name="pauseDataFeed" IsChecked="False" CheckedChanged="PauseDataFeed_Checked" Grid.Column="1" Grid.Row="1"></CheckBox>
-                        <Label Text="Center on Vehicle" Grid.Column="2" Grid.Row="2"></Label>
-                        <CheckBox x:Name="centerOnVehicle" IsChecked="False" Grid.Column="1" Grid.Row="2"></CheckBox>
+                        <Button Text="Auto-Refresh" x:Name="btnStartRefresh" Clicked="btnStartRefresh_Click" Grid.Column="2" Grid.Row="1"></Button>
+                        <Button Text="Rotate" x:Name="btnRotate" Clicked="btnRotate_Click" Grid.Column="2" Grid.Row="2"></Button>
+                        <Button Text="Offset"  x:Name="btnOffset" Clicked="btnOffset_Click" Grid.Column="2" Grid.Row="3"></Button>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="*" />
@@ -59,7 +58,7 @@
             </Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="mapView_MapSingleTap"></ThinkGeoUI:MapView>
 
         </StackLayout>
     </ContentPage.Content>
