@@ -34,7 +34,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Set the map zoom level set to the bing map zoom level set so all the zoom levels line up.
-            mapView.ZoomLevelSet = new BingMapsZoomLevelSet(256);
+            mapView.ZoomLevelSet = new BingMapsZoomLevelSet();
 
             // Set the current extent to the whole world.
             mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015, 3910065.3144544438);
@@ -52,7 +52,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Bing Map", layerOverlay);
 
             // Create the bing map layer and add it to the map.
-            BingMapsLayer bingMapsLayer = new BingMapsLayer(txtApplicationID.Text, BingMapsMapType.Road, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache/bing_maps"));
+            BingMapsLayer bingMapsLayer = new BingMapsLayer(txtApplicationID.Text, BingMapsMapType.Road);
+            bingMapsLayer.TileCache = new FileRasterTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache/bing_maps"));
             layerOverlay.Layers.Add(bingMapsLayer);
 
             // Refresh the map.
