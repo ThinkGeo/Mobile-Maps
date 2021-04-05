@@ -11,9 +11,9 @@ using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using Xamarin.Essentials;
 
 namespace HowDoISample.Droid
