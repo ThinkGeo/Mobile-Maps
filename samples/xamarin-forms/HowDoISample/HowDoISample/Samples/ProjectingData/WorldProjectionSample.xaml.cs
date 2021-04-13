@@ -57,7 +57,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             if (layer != null)
             {
-                switch (radioButton.Text)
+                switch (radioButton.Content)
                 {
                     case "Decimal Degrees":
                         // Set the new projection converter and open it.  Next set the map to the correct map unit and lastley set the new extent

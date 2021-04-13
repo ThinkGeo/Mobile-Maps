@@ -4,14 +4,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample">
     <ContentPage.Content>
         <StackLayout>
-            <Expander>
+            <xct:Expander>
                 <!-- Sample Description -->
-                <Expander.Header>
+                <xct:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
                         <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
@@ -25,7 +26,7 @@
                                HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
                                              Value="True">
                                     <Setter Property="Rotation"
                                             Value="180" />
@@ -33,10 +34,10 @@
                             </Image.Triggers>
                         </Image>
                     </StackLayout>
-                </Expander.Header>
+                </xct:Expander.Header>
 
                 <!-- Sample Controls -->
-                <Expander.Content>
+                <xct:Expander.Content>
                     <Grid>
                         <Label Text="Category:" Grid.Column="1" Grid.Row="1" FontAttributes="Bold"
                                VerticalOptions="Center" />
@@ -67,16 +68,16 @@
 
                         <RadioButton x:Name="rdoRandomColor" AutomationId="rdoRandomColor"
                                      Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" GroupName="SelectedColor"
-                                     Text="Random Color" />
+                                     Content="Random Color" />
 
                         <RadioButton x:Name="rdoSpecificColor" AutomationId="rdoSpecificColor"
                                      Grid.Column="1" Grid.Row="5" GroupName="SelectedColor"
-                                     Text="Specific Color:" />
+                                     Content="Specific Color:" />
                         <Editor x:Name="txtSpecificColor" Text="#AB2567" Grid.Column="2" Grid.Row="5" />
 
                         <RadioButton x:Name="rdoDefaultColor" AutomationId="rdoDefaultColor"
                                      Grid.Column="1" Grid.Row="6" GroupName="SelectedColor"
-                                     Text="Default Color:" IsChecked="True" />
+                                     Content="Default Color:" IsChecked="True" />
                         <Picker x:Name="cboDefaultColor" Grid.Column="2" Grid.Row="6">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -110,8 +111,8 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                     </Grid>
-                </Expander.Content>
-            </Expander>
+                </xct:Expander.Content>
+            </xct:Expander>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
