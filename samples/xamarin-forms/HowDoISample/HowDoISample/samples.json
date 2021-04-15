@@ -68,12 +68,6 @@
         "source": "Samples/DisplayingLayers/Database/SQLiteLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.PostgresLayerSample",
-        "title": "Display a Postgres Layer",
-        "description": "This sample shows how to display a Postgres layer.",
-        "source": "Samples/DisplayingLayers/Database/PostgresLayerSample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SQLServerLayerSample",
         "title": "Display a SQL Server Layer",
         "description": "This sample shows how to display a SQL Server layer.",
