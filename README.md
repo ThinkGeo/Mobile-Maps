@@ -96,3 +96,65 @@ The Map Suite Routing “How Do I?” solution offers a series of useful how-to 
 The Site Selection sample template allows you to view, understand, interpret, and visualize spatial data in many ways that reveal relationships, patterns, and trends. In the example illustrated, the user can apply the features of GIS to analyze spatial data to efficiently choose a suitable site for a new retail outlet.
 
 ![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/Android/SiteSelectionSample/ScreenShot.png)
+
+# [Analyzing Visualization Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/AnalizingVisualization)
+
+This samples shows you how to explore the different styles available to help you analyze and visualize your data.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/AnalizingVisualization/ScreenShot.gif)
+
+# [Building 3D Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/Building3DSamples)
+
+This project shows to create a simulated 3D buildings with iOS map control and shapefile.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/Building3DSamples/ScreenShot.png)
+
+# [ThinkGeo Cloud Vector Maps Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/CloudVetorMaps)
+
+This sample demonstrates how you can draw the map with Vector Tiles requested from ThinkGeo Cloud Services in your Map Suite GIS applications, with any style you want from [StyleJSON (Mapping Definition Grammar)](https://wiki.thinkgeo.com/wiki/thinkgeo_stylejson). It will show you how to use the XyzFileBitmapTileCache and XyzFileVectorTileCache to improve the performance of map rendering. It supports have 3 built-in default map styles and more awasome styles from StyleJSON file you passed in, by 'Custom':
+- Light
+- Dark
+- TransparentBackground
+- Custom
+
+ThinkGeo Cloud Vector Maps support would work in all of the Map Suite controls such as Wpf, Web, MVC, WebApi, Android and iOS.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/CloudVetorMaps/Screenshot.gif)
+
+# [Draw Edit Features Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/DrawEditFeatures)
+
+This samples shows you how to implement drawing and editing shapes into your web application.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/DrawEditFeatures/ScreenShot.gif)
+
+# [Earthquake Statistics Sample Template for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/EarthQuakeStatistics)
+
+The Earthquake Statistics sample template is a statistical report system for earthquakes that have occurred in the past few years across the United States. It can help you generate infographics and analyze the severely afflicted areas, or used as supporting evidence when recommending measures to minimize the damage in future quakes.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/EarthQuakeStatistics/ScreenShot.png)
+
+# [Geometric Functions Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/GeometricFunctions)
+
+This samples shows you how to explore all the different Geometric Functions API's .
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/GeometricFunctions/ScreenShot.gif)
+
+# [Getting Started Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/GettingStarted)
+
+This samples shows you how to get started building your first application with the Map Suite iOS Edition.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/GettingStarted/ScreenShot.gif)
+
+# [Hello World Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/HelloWorldSample)
+
+This sample shows you how to get started building your first application with the Map Suite Mobile for iOS 10.0.0.
+
+![Screenshot](Screenshot.png)
+
+# [How Do I Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/HowDoI)
+
+The "How Do I?" samples collection is a comprehensive set containing dozens of interactive samples.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/HowDoI/Screenshot.png)
+
+
