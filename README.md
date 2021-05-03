@@ -15,3 +15,16 @@ This samples shows you how to explore the different styles available to help you
 This project shows to create a simulated 3D buildings with Android map control and shapefile.
 
 ![Screenshot](Screenshot.png)
+
+# [ThinkGeo Cloud Maps Sample for Android](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/Android/CloudMapsSample)
+
+This sample demonstrates how you can display ThinkGeo Cloud Maps in your Map Suite GIS applications. It will show you how to use the XYZFileBitmapTileCache to improve the performance of map rendering. ThinkGeoCloudMapsOverlay uses the ThinkGeo Cloud XYZ Tile Server as raster map tile server. It supports 5 different map styles:
+- Light
+- Dark
+- Aerial
+- Hybrid
+- TransparentBackground
+
+ThinkGeo Cloud Maps support would work in all of the Map Suite controls such as Wpf, WinForms, Web, MVC, WebApi and iOS.
+
+![Screenshot](Screenshot.gif)
