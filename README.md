@@ -8,7 +8,7 @@
 
 This samples shows you how to explore the different styles available to help you analyze and visualize your data.
 
-![Screenshot](ScreenShot.png)
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/blob/support/v10/samples/Android/AnalyzingVisualizationSample/ScreenShot.png)
 
 # [Building 3D Sample for Android](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/Android/Building3DSample)
 
