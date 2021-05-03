@@ -14,7 +14,7 @@ This samples shows you how to explore the different styles available to help you
 
 This project shows to create a simulated 3D buildings with Android map control and shapefile.
 
-![Screenshot](Screenshot.png)
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/Android/Building3DSample/Screenshot.png)
 
 # [ThinkGeo Cloud Maps Sample for Android](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/Android/CloudMapsSample)
 
@@ -27,4 +27,4 @@ This sample demonstrates how you can display ThinkGeo Cloud Maps in your Map Sui
 
 ThinkGeo Cloud Maps support would work in all of the Map Suite controls such as Wpf, WinForms, Web, MVC, WebApi and iOS.
 
-![Screenshot](Screenshot.gif)
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/Android/CloudMapsSample/Screenshot.gif)
