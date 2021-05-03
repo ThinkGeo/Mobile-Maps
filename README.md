@@ -157,4 +157,54 @@ The "How Do I?" samples collection is a comprehensive set containing dozens of i
 
 ![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/HowDoI/Screenshot.png)
 
+# [Labeling Style Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/LabelStyleSample)
 
+This samples shows you how to examine different labeling techniques to make your maps informative.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/LabelStyleSample/ScreenShot.gif)
+
+# [ThinkGeo MBTiles Maps Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/MBTilesMapSample)
+
+This sample demonstrates how you can draw the map with Vector Tiles saved in *.MBTiles in your Map Suite GIS applications, with any style you want from [StyleJSON (Mapping Defination Grammar)](https://wiki.thinkgeo.com/wiki/thinkgeo_stylejson). It will show you how to use the XyzFileBitmapTileCache to improve the performance of map rendering.
+
+
+If you want the *.mbtile file of any area in the world, or you have any requirement of building *.mbtile file based on your own data, such as shape file, Oracle, MsSql and more, please contact support@thinkgeo.com.
+
+
+*.MBTile format can be supported in all of the Map Suite controls such as Wpf, Web, MVC, WebApi, Android and iOS.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/MBTilesMapSample/Screenshot.gif)
+
+# [Quickstart Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/QuickStartSample)
+
+The Map Suite iOS QuickStart Guide will guide you through the process of creating a sample application and will help you become familiar with Map Suite. The QuickStart Guide supports iOS 10.0.0.0 and higher and will show you how to create an iOS application.
+
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/QuickStartSample/Screenshot.PNG)
+
+# [Routing Sample For iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/RoutingSample)
+
+[Sample Data Download](http://wiki.thinkgeo.com/wiki/_media/routing/routing_howdoi_samples_data.zip)
+
+The Map Suite Routing “How Do I?” solution offers a series of useful how-to examples for using the Map Suite Routing extension. The bundled solution comes with a small set of routable street data from Dallas, TX and demonstrates simple routing, avoiding specific areas, getting turn-by-turn directions, optimizing for the Traveling Salesman Problem, and much more. Full source code is included in both C# and VB.NET languages; simply select your preferred language to download the associated solution.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/RoutingSample/ScreenShot.gif)
+
+# [Site Selection Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/SiteSelectionSample)
+
+The Site Selection sample template allows you to view, understand, interpret, and visualize spatial data in many ways that reveal relationships, patterns, and trends. In the example illustrated, the user can apply the features of GIS to analyze spatial data to efficiently choose a suitable site for a new retail outlet.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/SiteSelectionSample/ScreenShot.png)
+
+# [ThinkGeo Cloud Maps Sample for iOS](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/support/v10/samples/iOS/ThinkGeoCloudMaps)
+
+This sample demonstrates how you can display ThinkGeo Cloud Maps in your Map Suite GIS applications. It will show you how to use the XYZFileBitmapTileCache to improve the performance of map rendering. ThinkGeoCloudMapsOverlay uses the ThinkGeo Cloud XYZ Tile Server as raster map tile server. It supports 5 different map styles:
+- Light
+- Dark
+- Aerial
+- Hybrid
+- TransparentBackground
+
+ThinkGeo Cloud Maps support would work in all of the Map Suite controls such as Wpf, WinForms, Web, MVC, WebApi and Android.
+
+![Screenshot](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/support/v10/samples/iOS/ThinkGeoCloudMaps/Screenshot.gif)
