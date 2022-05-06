@@ -52,7 +52,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 ThinkGeoCloudRasterMapsOverlay cloudOverlay = (ThinkGeoCloudRasterMapsOverlay)mapView.Overlays["Cloud Overlay"];
 
-                switch (button.Text.ToString())
+                switch (button.Content.ToString())
                 {
                     case "Light":
                         cloudOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Light;
