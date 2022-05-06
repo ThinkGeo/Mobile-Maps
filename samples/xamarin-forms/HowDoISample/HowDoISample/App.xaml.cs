@@ -17,7 +17,7 @@ namespace HowDoISample
         public App()
         {
             InitializeComponent();
-            Device.SetFlags(new string[] { "Expander_Experimental", "RadioButton_Experimental" });
+           // Device.SetFlags(new string[] { "Expander_Experimental", "RadioButton_Experimental" });
             MainPage = new LoadingPage();
         }
 

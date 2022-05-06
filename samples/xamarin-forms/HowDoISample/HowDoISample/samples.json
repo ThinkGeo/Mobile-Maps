@@ -68,12 +68,6 @@
         "source": "Samples/DisplayingLayers/Database/SQLiteLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.PostgresLayerSample",
-        "title": "Display a Postgres Layer",
-        "description": "This sample shows how to display a Postgres layer.",
-        "source": "Samples/DisplayingLayers/Database/PostgresLayerSample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SQLServerLayerSample",
         "title": "Display a SQL Server Layer",
         "description": "This sample shows how to display a SQL Server layer.",
@@ -219,7 +213,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
         "title": "Track Dynamic Data",
-        "description": "Learn how to use overlays to track dynamically updated data. This sample shows how to refresh an overlay to display a vehicle that gets updates every few seconds.",
+        "description": "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
         "source": "Samples/UsingOverlays/TrackDynamicData"
       },
       {
