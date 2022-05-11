@@ -79,6 +79,12 @@
     <None Remove="Data\MrSid\World.sid" />
     <None Remove="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
     <None Remove="Data\Png\m_3309650_sw_14_1_20160911_20161121.png" />
+    <None Remove="Data\Railroad\Railroad.dbf" />
+    <None Remove="Data\Railroad\Railroad.ids" />
+    <None Remove="Data\Railroad\Railroad.idx" />
+    <None Remove="Data\Railroad\Railroad.prj" />
+    <None Remove="Data\Railroad\Railroad.shp" />
+    <None Remove="Data\Railroad\Railroad.shx" />
     <None Remove="Data\S57\US1GC09M\US1GC09A.TXT" />
     <None Remove="Data\S57\US1GC09M\US1GC09B.TXT" />
     <None Remove="Data\S57\US1GC09M\US1GC09C.TXT" />
@@ -290,6 +296,12 @@
     <EmbeddedResource Include="Data\MrSid\World.sid" />
     <EmbeddedResource Include="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
     <EmbeddedResource Include="Data\Png\m_3309650_sw_14_1_20160911_20161121.png" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.prj" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.shp" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.shx" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09A.TXT" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09B.TXT" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09C.TXT" />
