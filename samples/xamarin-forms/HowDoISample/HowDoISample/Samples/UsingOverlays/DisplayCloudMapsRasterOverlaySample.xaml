@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -14,20 +15,21 @@
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
                         <Label x:Name="descriptionLabel"
-                               FontSize="Subtitle" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Center" 
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center" />
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
+                               HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
                                              Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
                                              Value="True">
                                     <Setter Property="Rotation"
-                                            Value="180"/>
+                                            Value="180" />
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
@@ -37,19 +39,25 @@
                 <!-- Sample Controls -->
                 <views:Expander.Content>
                     <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontAttributes="Italic" TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!">
+                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontAttributes="Italic"
+                               TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
                             </Label.GestureRecognizers>
                         </Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="API Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Editor Grid.Column="2" Grid.Row="1" x:Name="cloudMapsApiKey" Text="9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~" ></Editor>
+                        <Label Grid.Column="1" Grid.Row="1" Text="API Key:" FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Editor Grid.Column="2" Grid.Row="1" x:Name="cloudMapsApiKey"
+                                Text="9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~" />
 
-                        <Label Grid.Column="1" Grid.Row="2"  Text="Secret Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Editor Grid.Column="2" Grid.Row="2"  x:Name="cloudMapsSecretKey" Text="vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~"></Editor>
- 
-                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayRasterCloudMaps" Text="Update" Clicked="DisplayRasterCloudMaps_Click"></Button>
+                        <Label Grid.Column="1" Grid.Row="2" Text="Secret Key:" FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Editor Grid.Column="2" Grid.Row="2" x:Name="cloudMapsSecretKey"
+                                Text="vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~" />
+
+                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayRasterCloudMaps"
+                                Text="Update" Clicked="DisplayRasterCloudMaps_Click" />
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -58,17 +66,17 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                     </Grid>
                 </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

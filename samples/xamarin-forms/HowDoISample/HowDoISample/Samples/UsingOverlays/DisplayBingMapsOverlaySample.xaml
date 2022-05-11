@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -14,20 +15,21 @@
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Margin="4">
                         <Label x:Name="descriptionLabel"
-                               FontSize="Subtitle" 
-                               VerticalOptions="CenterAndExpand" 
-                               HorizontalOptions="StartAndExpand"/>
-                        <BoxView Color="LightGray" 
-                                 WidthRequest="1" 
-                                 VerticalOptions="Start" 
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                               FontSize="Subtitle"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="StartAndExpand" />
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Start"
+                                 HorizontalOptions="Center" />
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
+                               HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
                                              Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
                                              Value="True">
                                     <Setter Property="Rotation"
-                                            Value="180"/>
+                                            Value="180" />
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
@@ -37,16 +39,19 @@
                 <!-- Sample Controls -->
                 <views:Expander.Content>
                     <Grid>
-                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontAttributes="Italic" TextColor="Blue" Text="Sign up for a Bing Maps Api Key">
+                        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontAttributes="Italic"
+                               TextColor="Blue" Text="Sign up for a Bing Maps Api Key">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
                             </Label.GestureRecognizers>
                         </Label>
-                       
-                        <Label Grid.Column="1" Grid.Row="2" Text="API Key:" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="bingApplicationId"></Entry>
 
-                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayBingMaps" Text="Update" Clicked="DisplayBingMaps_Click"></Button>
+                        <Label Grid.Column="1" Grid.Row="2" Text="API Key:" FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="2" Grid.Row="2" x:Name="bingApplicationId" />
+
+                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayBingMaps" Text="Update"
+                                Clicked="DisplayBingMaps_Click" />
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -55,17 +60,17 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                     </Grid>
                 </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

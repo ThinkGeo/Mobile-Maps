@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to display a CloudMapsVector Layer on the map
+    ///     Learn how to display a CloudMapsVector Layer on the map
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateRegexStyleSample : ContentPage
@@ -18,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay.
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -28,10 +28,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~",
+                "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
+            var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
 
             // Project the layer's data to match the projection of the map
             coyoteSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -43,13 +47,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add the overlay to the map
             mapView.Overlays.Add(layerOverlay);
 
-            RegexStyle regexStyle = new RegexStyle();
+            var regexStyle = new RegexStyle();
             regexStyle.ColumnName = "Comments";
 
-            RegexItem largeItem = new RegexItem("big|large|huge", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
+            var largeItem = new RegexItem("big|large|huge", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
             regexStyle.RegexItems.Add(largeItem);
 
-            PointStyle allSightingsStyle = new PointStyle(PointSymbolType.Circle, 5, GeoBrushes.Green);
+            var allSightingsStyle = new PointStyle(PointSymbolType.Circle, 5, GeoBrushes.Green);
 
             // Add the point style to the collection of custom styles for ZoomLevel 1.
             coyoteSightings.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(allSightingsStyle);
@@ -59,8 +63,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             coyoteSightings.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10781794.4716492, 3917077.66579861, -10775416.8466492, 3913528.63559028);
-
+            mapView.CurrentExtent =
+                new RectangleShape(-10781794.4716492, 3917077.66579861, -10775416.8466492, 3913528.63559028);
         }
     }
 }

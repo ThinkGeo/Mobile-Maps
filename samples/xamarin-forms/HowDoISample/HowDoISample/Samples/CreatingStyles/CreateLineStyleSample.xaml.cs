@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +15,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, load Frisco Streets shapefile data and add it to the map
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, load Frisco Streets shapefile data and add it to the map
         /// </summary>
         protected override void OnAppearing()
         {
@@ -29,15 +24,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudRasterMapsOverlay("itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~", "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudRasterMapsMapType.Aerial);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudRasterMapsOverlay(
+                "itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~",
+                "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudRasterMapsMapType.Aerial);
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10779675.1746605, 3914631.77546835, -10779173.5566652, 3914204.80300804);
+            mapView.CurrentExtent =
+                new RectangleShape(-10779675.1746605, 3914631.77546835, -10779173.5566652, 3914204.80300804);
 
             // Create a layer with line data
-            ShapeFileFeatureLayer friscoRailroad = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Railroad/Railroad.shp"));
-            LayerOverlay layerOverlay = new LayerOverlay();
+            var friscoRailroad = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Railroad/Railroad.shp"));
+            var layerOverlay = new LayerOverlay();
 
             // Project the layer's data to match the projection of the map
             friscoRailroad.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -55,8 +55,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             if (mapView.Overlays.Count > 0)
             {
-                LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["overlay"];
-                ShapeFileFeatureLayer friscoRailroad = (ShapeFileFeatureLayer)layerOverlay.Layers["Railroad"];
+                var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
+                var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
 
                 // Create a line style
                 var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 6), new GeoPen(GeoBrushes.WhiteSmoke, 4));
@@ -77,15 +77,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             if (mapView.Overlays.Count > 0)
             {
-                LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["overlay"];
-                ShapeFileFeatureLayer friscoRailroad = (ShapeFileFeatureLayer)layerOverlay.Layers["Railroad"];
+                var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
+                var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
 
                 var lineStyle = new LineStyle(
-                    outerPen: new GeoPen(GeoColors.Black, 6),
-                    innerPen: new GeoPen(GeoColors.White, 4)
+                    new GeoPen(GeoColors.Black, 6),
+                    new GeoPen(GeoColors.White, 4)
                     {
                         DashStyle = LineDashStyle.Custom,
-                        DashPattern = { 3f, 3f },
+                        DashPattern = {3f, 3f},
                         StartCap = DrawingLineCap.Flat,
                         EndCap = DrawingLineCap.Flat
                     }

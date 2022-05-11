@@ -118,7 +118,8 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WMSLayerSample",
         "title": "Display a WMS Layer",
-        "description": "This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)",
+        "description":
+          "This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)",
         "source": "Samples/DisplayingLayers/WebServices/WMSLayerSample"
       },
       {
@@ -159,13 +160,15 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample",
         "title": "Caching Map Tiles",
-        "description": "Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times.",
+        "description":
+          "Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times.",
         "source": "Samples/UsingOverlays/CachingMapTilesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample",
         "title": "Display Bing Maps Overlay",
-        "description": "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
+        "description":
+          "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
@@ -189,13 +192,15 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayGoogleMapsOverlaySample",
         "title": "Display Google Maps Overlay",
-        "description": "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
+        "description":
+          "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
         "source": "Samples/UsingOverlays/DisplayGoogleMapsOverlaySample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
         "title": "Display a WMS Overlay",
-        "description": "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
+        "description":
+          "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
         "source": "Samples/UsingOverlays/DisplayWMSOverlaySample"
       },
       {
@@ -213,7 +218,8 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
         "title": "Track Dynamic Data",
-        "description": "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
+        "description":
+          "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
         "source": "Samples/UsingOverlays/TrackDynamicData"
       },
       {
@@ -319,7 +325,8 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.StylingAcrossMultipleScales",
         "title": "Styling Across Multiple Scales",
-        "description": "Learn how to style layers across multiple scales using different styles assigned to different ZoomLevels",
+        "description":
+          "Learn how to style layers across multiple scales using different styles assigned to different ZoomLevels",
         "source": "Samples/CreatingStyles/StylingAcrossMultipleScales"
       }
     ]
@@ -466,7 +473,8 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.EqualsSample",
         "title": "Check if Features are Equal",
-        "description": "Learn how to use layer query tools to find which features in a layer are topologically equal to a shape",
+        "description":
+          "Learn how to use layer query tools to find which features in a layer are topologically equal to a shape",
         "source": "Samples/UsingQueryTools/EqualsSample"
       },
       {
@@ -496,7 +504,8 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetFeaturesWithinDistanceSample",
         "title": "Get Features Within a Distance",
-        "description": "Learn how to use layer query tools to find features in a layer within a given distance of a point",
+        "description":
+          "Learn how to use layer query tools to find features in a layer within a given distance of a point",
         "source": "Samples/UsingQueryTools/GetFeaturesWithinDistanceSample"
       },
       {
@@ -557,7 +566,6 @@
         "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
         "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
       }
-
     ]
   },
   {
@@ -566,19 +574,22 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingCloudServicesSample",
         "title": "Routing",
-        "description": "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingServiceAreaCloudServicesSample",
         "title": "Routing - Service Area",
-        "description": "Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingTSPCloudServicesSample",
         "title": "Routing - Traveling Sales Person",
-        "description": "Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
       },
       {
@@ -590,37 +601,43 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeocodingCloudServicesSample",
         "title": "Geocoding",
-        "description": "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/GeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ReverseGeocodingCloudServicesSample",
         "title": "Reverse Geocoding",
-        "description": "Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ReverseGeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample",
         "title": "Color Utilities",
-        "description": "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ColorUtilitiesCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TimezoneCloudServicesSample",
         "title": "Timezone",
-        "description": "Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/TimezoneCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectionCloudServicesSample",
         "title": "Projection",
-        "description": "Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/ProjectionCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldMapsQueryCloudServicesSample",
         "title": "World Maps Query",
-        "description": "Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud",
+        "description":
+          "Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud",
         "source": "Samples/UsingCloudMapsServices/WorldMapsQueryCloudServicesSample"
       }
     ]

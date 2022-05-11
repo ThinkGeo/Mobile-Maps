@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,21 +17,27 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and style the friscoCrime layer
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and style the friscoCrime layer
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer friscoCrime = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco_Crime.shp"));
-            LegendAdornmentLayer legend = new LegendAdornmentLayer();
+            var friscoCrime = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Frisco_Crime.shp"));
+            var legend = new LegendAdornmentLayer();
 
             // Project the layer's data to match the projection of the map
             friscoCrime.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -46,9 +47,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add(friscoCrime);
 
             // Setup the legend adornment
-            legend.Title = new LegendItem()
+            legend.Title = new LegendItem
             {
-                TextStyle = new TextStyle("Crime Categories", new GeoFont("Verdana", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
+                TextStyle = new TextStyle("Crime Categories", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+                    GeoBrushes.Black)
             };
             legend.Height = 600;
             legend.Location = AdornmentLocation.LowerRight;
@@ -60,13 +62,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(layerOverlay);
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10780196.9469504, 3916119.49665258, -10776231.7761301, 3912703.71697007);
+            mapView.CurrentExtent =
+                new RectangleShape(-10780196.9469504, 3916119.49665258, -10776231.7761301, 3912703.71697007);
 
             mapView.Refresh();
         }
 
         /// <summary>
-        /// Adds a ValueStyle to the friscoCrime layer that represents each OffenseGroup as a different color
+        ///     Adds a ValueStyle to the friscoCrime layer that represents each OffenseGroup as a different color
         /// </summary>
         private void AddValueStyle(ShapeFileFeatureLayer friscoCrime, LegendAdornmentLayer legend)
         {
@@ -90,7 +93,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 valueItems.Add(new ValueItem(offenseGroup.ColumnValue, style));
 
                 // Add a LegendItem to the legend adornment
-                var legendItem = new LegendItem()
+                var legendItem = new LegendItem
                 {
                     ImageStyle = style,
                     TextStyle = new TextStyle(offenseGroup.ColumnValue, new GeoFont("Verdana", 10), GeoBrushes.Black)

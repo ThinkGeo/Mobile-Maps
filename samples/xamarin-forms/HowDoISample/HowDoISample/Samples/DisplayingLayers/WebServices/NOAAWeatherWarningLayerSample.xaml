@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherWarningLayerSample">
@@ -15,11 +16,11 @@
                     <Label x:Name="descriptionLabel"
                            FontSize="Subtitle"
                            VerticalOptions="Center"
-                           HorizontalOptions="StartAndExpand"/>
+                           HorizontalOptions="StartAndExpand" />
                 </Frame>
 
                 <!-- Map Control -->
-                <ThinkGeoUI:MapView x:Name="mapView" MapSingleTap="mapView_MapClick" VerticalOptions="FillAndExpand"/>
+                <ThinkGeoUI:MapView x:Name="mapView" MapSingleTap="mapView_MapClick" VerticalOptions="FillAndExpand" />
             </StackLayout>
 
             <!-- Loading Layout -->
@@ -32,7 +33,7 @@
                 <ActivityIndicator x:Name="loadingIndicator"
                                    IsRunning="False"
                                    HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
+                                   VerticalOptions="CenterAndExpand" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

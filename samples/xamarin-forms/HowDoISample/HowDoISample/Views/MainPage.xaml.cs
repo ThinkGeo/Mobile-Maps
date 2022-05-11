@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-
 using HowDoISample.Models;
+using Xamarin.Forms;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
@@ -21,7 +19,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         public async Task NavigateFromMenu(SampleMenuItem sample)
         {
             var type = Type.GetType(sample.Id);
-            var samplePage = (ContentPage)Activator.CreateInstance(type);
+            var samplePage = (ContentPage) Activator.CreateInstance(type);
             samplePage.Title = sample.Title;
             samplePage.FindByName<Label>("descriptionLabel").Text = sample.Description;
 

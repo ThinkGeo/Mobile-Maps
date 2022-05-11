@@ -42,20 +42,28 @@
                     <views:Expander.Content>
                         <ScrollView HeightRequest="320">
                             <Grid>
-                                <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="Click on the Map or Enter a Location to Reverse Geocode" FontAttributes="Italic" />
+                                <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                       Text="Click on the Map or Enter a Location to Reverse Geocode"
+                                       FontAttributes="Italic" />
 
-                                <Label Grid.Column="1" Grid.Row="1" Text="Location:" FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Grid.Row="1" Text="Location:" FontAttributes="Bold" />
 
-                                <Entry Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="txtCoordinates" Text="3915241.03,-10779570.57" />
+                                <Entry Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="txtCoordinates"
+                                       Text="3915241.03,-10779570.57" />
 
-                                <Label Grid.Column="1" Grid.Row="3" Text="Search Radius:" FontAttributes="Bold" VerticalOptions="Center"/>
-                                <Entry Grid.Column="3" Grid.Row="3" x:Name="txtSearchRadius" Text="400" Keyboard="Numeric" />
+                                <Label Grid.Column="1" Grid.Row="3" Text="Search Radius:" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Entry Grid.Column="3" Grid.Row="3" x:Name="txtSearchRadius" Text="400"
+                                       Keyboard="Numeric" />
 
-                                <Label Grid.Column="1" Grid.Row="4" Text="Maximum Results:" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Grid.Row="4" Text="Maximum Results:" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
                                 <Entry Grid.Column="3" Grid.Row="4" x:Name="txtMaxResults" Text="10" Keyboard="Numeric" />
 
-                                <Label Grid.Column="1" Grid.Row="5" Text="Categories:" FontAttributes="Bold" VerticalOptions="Center"/>
-                                <Picker Grid.Column="3" Grid.Row="5" x:Name="cboLocationCategories" SelectedIndexChanged="cboLocationType_SelectionChanged">
+                                <Label Grid.Column="1" Grid.Row="5" Text="Categories:" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Picker Grid.Column="3" Grid.Row="5" x:Name="cboLocationCategories"
+                                        SelectedIndexChanged="cboLocationType_SelectionChanged">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>All</x:String>
@@ -65,24 +73,32 @@
                                     </Picker.ItemsSource>
                                 </Picker>
 
-                                <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" x:Name="txtLocationCategoriesDescription" FontAttributes="Italic"/>
+                                <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3"
+                                       x:Name="txtLocationCategoriesDescription" FontAttributes="Italic" />
 
-                                <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Clicked="Search_Click" Text="Search" />
+                                <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Clicked="Search_Click"
+                                        Text="Search" />
 
-                                <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" x:Name="txtSearchResultsBestMatch" FontAttributes="Italic"/>
+                                <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3"
+                                       x:Name="txtSearchResultsBestMatch" FontAttributes="Italic" />
 
-                                <Button Grid.Column="1" Grid.Row="9" Text="Addresses" Clicked="btnNearbyAddresses_Clicked" />
+                                <Button Grid.Column="1" Grid.Row="9" Text="Addresses"
+                                        Clicked="btnNearbyAddresses_Clicked" />
                                 <Button Grid.Column="2" Grid.Row="9" Text="Roads" Clicked="btnNearbyRoads_Clicked" />
                                 <Button Grid.Column="3" Grid.Row="9" Text="Places" Clicked="btnNearbyPlaces_Clicked" />
 
                                 <!-- Address List -->
-                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbAddresses" Header="Addresses" ItemSelected="lsbSearchResults_SelectionChanged" IsVisible="false">
+                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbAddresses"
+                                          Header="Addresses" ItemSelected="lsbSearchResults_SelectionChanged"
+                                          IsVisible="false">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
                                                 <Grid>
                                                     <Label Grid.Row="0" Text="{Binding Path=Address}" />
-                                                    <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat='Type: {0}'}" FontAttributes="Bold" />
+                                                    <Label Grid.Row="1"
+                                                           Text="{Binding Path=LocationType, StringFormat='Type: {0}'}"
+                                                           FontAttributes="Bold" />
                                                     <!-- Address List Item Layout -->
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
@@ -95,13 +111,17 @@
                                 </ListView>
 
                                 <!-- Roads List -->
-                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbRoads" Header="Roads" ItemSelected="lsbSearchResults_SelectionChanged" IsVisible="false">
+                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbRoads"
+                                          Header="Roads" ItemSelected="lsbSearchResults_SelectionChanged"
+                                          IsVisible="false">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
                                                 <Grid>
                                                     <Label Grid.Row="0" Text="{Binding Path=Address}" />
-                                                    <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat='Type: {0}'}" FontAttributes="Bold" />
+                                                    <Label Grid.Row="1"
+                                                           Text="{Binding Path=LocationType, StringFormat='Type: {0}'}"
+                                                           FontAttributes="Bold" />
                                                     <!-- Roads List Item Layout -->
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
@@ -114,13 +134,17 @@
                                 </ListView>
 
                                 <!-- POI List -->
-                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbPlaces" Header="POIs" ItemSelected="lsbSearchResults_SelectionChanged" IsVisible="false">
+                                <ListView Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" x:Name="lsbPlaces"
+                                          Header="POIs" ItemSelected="lsbSearchResults_SelectionChanged"
+                                          IsVisible="false">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
                                                 <Grid>
                                                     <Label Grid.Row="0" Text="{Binding Path=Address}" />
-                                                    <Label Grid.Row="1" Text="{Binding Path=LocationType, StringFormat='Type: {0}'}" FontAttributes="Bold" />
+                                                    <Label Grid.Row="1"
+                                                           Text="{Binding Path=LocationType, StringFormat='Type: {0}'}"
+                                                           FontAttributes="Bold" />
                                                     <!-- POI List Item Layout -->
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
@@ -158,7 +182,8 @@
                 </views:Expander>
 
                 <!-- Map Control -->
-                <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="mapView_MapSingleTap" />
+                <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"
+                                    MapSingleTap="mapView_MapSingleTap" />
             </StackLayout>
 
             <!-- Loading Layout -->

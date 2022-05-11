@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace HowDoISample.Models
 {
-    class Sample
+    internal class Sample
     {
         public string Id { get; set; }
 
@@ -15,7 +13,7 @@ namespace HowDoISample.Models
         public string Source { get; set; }
     }
 
-    class SampleCategory
+    internal class SampleCategory
     {
         public string Title { get; set; }
 

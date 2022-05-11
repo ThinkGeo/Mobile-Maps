@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
@@ -16,18 +17,19 @@
                         <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
+                               HorizontalOptions="StartAndExpand" />
                         <BoxView Color="LightGray"
                                  WidthRequest="1"
                                  VerticalOptions="Center"
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                                 HorizontalOptions="Center" />
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
+                               HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
                                              Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
                                              Value="True">
                                     <Setter Property="Rotation"
-                                            Value="180"/>
+                                            Value="180" />
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
@@ -38,7 +40,8 @@
                 <views:Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
 
-                        <Button Grid.Column="1" Grid.Row="1" x:Name="shapeConvexHull" Text="Get Convex Hull" Clicked="ShapeConvexHull_OnClick"></Button>
+                        <Button Grid.Column="1" Grid.Row="1" x:Name="shapeConvexHull" Text="Get Convex Hull"
+                                Clicked="ShapeConvexHull_OnClick" />
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -46,16 +49,16 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                     </Grid>
                 </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

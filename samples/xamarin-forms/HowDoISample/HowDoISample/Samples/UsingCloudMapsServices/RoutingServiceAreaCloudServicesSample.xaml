@@ -41,7 +41,8 @@
                     <!-- Sample Controls -->
                     <views:Expander.Content>
                         <Grid>
-                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" Text="Click On The Map To Calculate A New Service Area" />
+                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic"
+                                   Text="Click On The Map To Calculate A New Service Area" />
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to display a Google Maps Layer on the map
+    ///     Learn how to display a Google Maps Layer on the map
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GoogleMapLayerSample : ContentPage
@@ -24,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set up the MapView
+        ///     Set up the MapView
         /// </summary>
         protected override void OnAppearing()
         {
@@ -36,11 +30,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.ZoomLevelSet = new GoogleMapsZoomLevelSet();
 
             // Set the current extent to the whole world.
-            mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015, 3910065.3144544438);
+            mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015,
+                3910065.3144544438);
         }
 
         /// <summary>
-        /// Add the Google Maps Layer to the map
+        ///     Add the Google Maps Layer to the map
         /// </summary>
         private void btnActivate_OnClicked(object sender, EventArgs e)
         {
@@ -48,11 +43,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Clear();
 
             // Create a new overlay that will hold our new layer and add it to the map.
-            LayerOverlay worldOverlay = new LayerOverlay();
+            var worldOverlay = new LayerOverlay();
             mapView.Overlays.Add("WorldOverlay", worldOverlay);
 
             // Create the new layer.
-            GoogleMapsLayer googleMapsLayer = new GoogleMapsLayer();
+            var googleMapsLayer = new GoogleMapsLayer();
 
             // Add the layer to the overlay we created earlier.
             worldOverlay.Layers.Add("GoogleLayer", googleMapsLayer);

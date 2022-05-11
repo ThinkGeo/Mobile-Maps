@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to display a WMS Layer on the map
+    ///     Learn how to display a WMS Layer on the map
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WMSLayerSample : ContentPage
@@ -22,7 +17,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Add the WMS layer to the map
+        ///     Add the WMS layer to the map
         /// </summary>
         protected override void OnAppearing()
         {
@@ -34,18 +29,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             AddWmsLayer();
 
             // Set the current extent to a local area.
-            mapView.CurrentExtent = new RectangleShape(-96.8538765269409, 33.1618647290098, -96.7987487018851, 33.1054126590461);
+            mapView.CurrentExtent =
+                new RectangleShape(-96.8538765269409, 33.1618647290098, -96.7987487018851, 33.1054126590461);
         }
 
         private void AddWmsLayer()
         {
             // Create an overlay that we will add the layer to.
-            LayerOverlay staticOverlay = new LayerOverlay();
+            var staticOverlay = new LayerOverlay();
             mapView.Overlays.Add(staticOverlay);
 
             // Create the WMS layer using the parameters below.
             // This is a public service and is very slow most of the time.
-            WmsRasterLayer wmsImageLayer = new WmsRasterLayer(new Uri("http://ows.mundialis.de/services/service"));
+            var wmsImageLayer = new WmsRasterLayer(new Uri("http://ows.mundialis.de/services/service"));
             wmsImageLayer.UpperThreshold = double.MaxValue;
             wmsImageLayer.LowerThreshold = 0;
             wmsImageLayer.ActiveLayerNames.Add("OSM-WMS");

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +15,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and add styles to the Hotels, Streets, and Parks layer.
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and add styles to the Hotels, Streets, and Parks
+        ///     layer.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -32,9 +28,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map background color
             mapView.BackgroundColor = new Color(100, 232, 226, 255);
 
-            ShapeFileFeatureLayer hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Hotels.shp"));
-            ShapeFileFeatureLayer streetsLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Streets.shp"));
-            ShapeFileFeatureLayer parksLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
+            var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Hotels.shp"));
+            var streetsLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Streets.shp"));
+            var parksLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
 
             // Project the layer's data to match the projection of the map
             hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -56,35 +57,40 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(layerOverlay);
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
+            mapView.CurrentExtent =
+                new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
 
             mapView.Refresh();
         }
 
         /// <summary>
-        /// Adds a PointStyle and TextStyle to the Hotels Layer
+        ///     Adds a PointStyle and TextStyle to the Hotels Layer
         /// </summary>
         private void StyleHotelsLayer(ShapeFileFeatureLayer hotelsLayer)
         {
             //********************
             // * Zoom Level 12-13 *
             // ********************/
-            hotelsLayer.ZoomLevelSet.ZoomLevel12.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 4, GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
+            hotelsLayer.ZoomLevelSet.ZoomLevel12.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 4,
+                GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
 
             hotelsLayer.ZoomLevelSet.ZoomLevel12.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level13;
 
             //********************
             // * Zoom Level 14-15 *
             // ********************/
-            hotelsLayer.ZoomLevelSet.ZoomLevel14.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 6, GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
+            hotelsLayer.ZoomLevelSet.ZoomLevel14.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 6,
+                GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
 
             hotelsLayer.ZoomLevelSet.ZoomLevel14.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level15;
 
             //********************
             // * Zoom Level 16-20 *
             // ********************/
-            hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 10, GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
-            hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
+            hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 10,
+                GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
+            hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("NAME",
+                new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
             {
                 YOffsetInPixel = 1,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -96,7 +102,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Adds a LineStyle and TextStyle to the Streets Layer
+        ///     Adds a LineStyle and TextStyle to the Streets Layer
         /// </summary>
         private void StyleStreetsLayer(ShapeFileFeatureLayer streetsLayer)
         {
@@ -110,13 +116,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //*****************
             // * Zoom Level 14 *
             // *****************/
-            streetsLayer.ZoomLevelSet.ZoomLevel14.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.LightGray, 2), new GeoPen(GeoBrushes.White, 1));
+            streetsLayer.ZoomLevelSet.ZoomLevel14.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.LightGray, 2),
+                new GeoPen(GeoBrushes.White, 1));
 
             //*****************
             // * Zoom Level 15 *
             // *****************/
-            streetsLayer.ZoomLevelSet.ZoomLevel15.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.LightGray, 4) { EndCap = DrawingLineCap.Round }, new GeoPen(GeoBrushes.White, 2) { EndCap = DrawingLineCap.Round });
-            streetsLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            streetsLayer.ZoomLevelSet.ZoomLevel15.DefaultLineStyle = new LineStyle(
+                new GeoPen(GeoBrushes.LightGray, 4) {EndCap = DrawingLineCap.Round},
+                new GeoPen(GeoBrushes.White, 2) {EndCap = DrawingLineCap.Round});
+            streetsLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("FULL_NAME",
+                new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
             {
                 SplineType = SplineType.StandardSplining,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -127,8 +137,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //*****************
             // * Zoom Level 16 *
             // *****************/
-            streetsLayer.ZoomLevelSet.ZoomLevel16.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.Gray, 5) { EndCap = DrawingLineCap.Round }, new GeoPen(GeoBrushes.White, 4) { EndCap = DrawingLineCap.Round });
-            streetsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            streetsLayer.ZoomLevelSet.ZoomLevel16.DefaultLineStyle = new LineStyle(
+                new GeoPen(GeoBrushes.Gray, 5) {EndCap = DrawingLineCap.Round},
+                new GeoPen(GeoBrushes.White, 4) {EndCap = DrawingLineCap.Round});
+            streetsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("FULL_NAME",
+                new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
             {
                 SplineType = SplineType.StandardSplining,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -139,8 +152,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //*****************
             // * Zoom Level 17 *
             // *****************/
-            streetsLayer.ZoomLevelSet.ZoomLevel17.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.Gray, 7) { EndCap = DrawingLineCap.Round }, new GeoPen(GeoBrushes.White, 6) { EndCap = DrawingLineCap.Round });
-            streetsLayer.ZoomLevelSet.ZoomLevel17.DefaultTextStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            streetsLayer.ZoomLevelSet.ZoomLevel17.DefaultLineStyle = new LineStyle(
+                new GeoPen(GeoBrushes.Gray, 7) {EndCap = DrawingLineCap.Round},
+                new GeoPen(GeoBrushes.White, 6) {EndCap = DrawingLineCap.Round});
+            streetsLayer.ZoomLevelSet.ZoomLevel17.DefaultTextStyle = new TextStyle("FULL_NAME",
+                new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
             {
                 SplineType = SplineType.StandardSplining,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -151,8 +167,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //*****************
             // * Zoom Level 18 *
             // *****************/
-            streetsLayer.ZoomLevelSet.ZoomLevel18.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.Gray, 9) { EndCap = DrawingLineCap.Round }, new GeoPen(GeoBrushes.White, 8) { EndCap = DrawingLineCap.Round });
-            streetsLayer.ZoomLevelSet.ZoomLevel18.DefaultTextStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
+            streetsLayer.ZoomLevelSet.ZoomLevel18.DefaultLineStyle = new LineStyle(
+                new GeoPen(GeoBrushes.Gray, 9) {EndCap = DrawingLineCap.Round},
+                new GeoPen(GeoBrushes.White, 8) {EndCap = DrawingLineCap.Round});
+            streetsLayer.ZoomLevelSet.ZoomLevel18.DefaultTextStyle = new TextStyle("FULL_NAME",
+                new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
             {
                 SplineType = SplineType.StandardSplining,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -163,8 +182,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //********************
             // * Zoom Level 19-20 *
             // ********************/
-            streetsLayer.ZoomLevelSet.ZoomLevel19.DefaultLineStyle = new LineStyle(new GeoPen(GeoBrushes.Gray, 13) { EndCap = DrawingLineCap.Round }, new GeoPen(GeoBrushes.White, 12) { EndCap = DrawingLineCap.Round });
-            streetsLayer.ZoomLevelSet.ZoomLevel19.DefaultTextStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
+            streetsLayer.ZoomLevelSet.ZoomLevel19.DefaultLineStyle = new LineStyle(
+                new GeoPen(GeoBrushes.Gray, 13) {EndCap = DrawingLineCap.Round},
+                new GeoPen(GeoBrushes.White, 12) {EndCap = DrawingLineCap.Round});
+            streetsLayer.ZoomLevelSet.ZoomLevel19.DefaultTextStyle = new TextStyle("FULL_NAME",
+                new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
             {
                 SplineType = SplineType.StandardSplining,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -176,7 +198,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Adds an AreaStyle and TextStyle to the Parks Layer
+        ///     Adds an AreaStyle and TextStyle to the Parks Layer
         /// </summary>
         private void StyleParksLayer(ShapeFileFeatureLayer parksLayer)
         {
@@ -191,7 +213,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // * Zoom Level 15-20 *
             // ********************/
             parksLayer.ZoomLevelSet.ZoomLevel15.DefaultAreaStyle = new AreaStyle(GeoBrushes.PastelGreen);
-            parksLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkGreen)
+            parksLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("NAME",
+                new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkGreen)
             {
                 FittingPolygon = false,
                 HaloPen = new GeoPen(GeoBrushes.White, 2),

@@ -55,11 +55,11 @@
                             <Button Clicked="DrawLine_Click" Text="Draw a New Line" />
                             <Button Clicked="DrawPolygon_Click" Text="Draw a New Polygon" />
 
-                            <Label x:Name="txtAverageElevation" FontAttributes="Italic"/>
-                            <Label x:Name="txtHighestElevation" FontAttributes="Italic"/>
-                            <Label x:Name="txtLowestElevation" FontAttributes="Italic"/>
+                            <Label x:Name="txtAverageElevation" FontAttributes="Italic" />
+                            <Label x:Name="txtHighestElevation" FontAttributes="Italic" />
+                            <Label x:Name="txtLowestElevation" FontAttributes="Italic" />
 
-                            <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold"></Label>
+                            <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold" />
 
                             <ListView x:Name="lsbElevations" ItemSelected="lsbElevations_SelectionChanged">
                                 <ListView.ItemTemplate>
@@ -71,7 +71,8 @@
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold" />
-                                                <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
+                                                <Label Grid.Row="1"
+                                                       Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>

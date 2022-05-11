@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,20 +16,26 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay.
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
-            ShapeFileFeatureLayer coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
+            var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
 
             // Project the layer's data to match the projection of the map
             coyoteSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -50,18 +51,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             AddClusterPointStyle(coyoteSightings);
 
             // Set the map extent
-            mapView.CurrentExtent = new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);
+            mapView.CurrentExtent =
+                new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);
 
             mapView.Refresh();
         }
 
         /// <summary>
-        /// Create and add a cluster style to the coyote layer
+        ///     Create and add a cluster style to the coyote layer
         /// </summary>
         private void AddClusterPointStyle(ShapeFileFeatureLayer layer)
         {
             // Create the point style that will serve as the basis of the cluster style
-            var pointStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/coyote_paw.png")))
+            var pointStyle = new PointStyle(new GeoImage(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/coyote_paw.png")))
             {
                 ImageScale = .4,
                 Mask = new AreaStyle(GeoPens.Black, GeoBrushes.White),
@@ -69,7 +72,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             };
 
             // Create a text style that will display the number of features within a clustered point
-            var textStyle = new TextStyle("FeatureCount", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold), GeoBrushes.DimGray)
+            var textStyle = new TextStyle("FeatureCount", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold),
+                GeoBrushes.DimGray)
             {
                 HaloPen = new GeoPen(GeoBrushes.White, 2),
                 YOffsetInPixel = 1

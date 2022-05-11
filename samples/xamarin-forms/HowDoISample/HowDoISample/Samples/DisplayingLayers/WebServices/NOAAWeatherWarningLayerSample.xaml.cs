@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to display a NOAA Weather Warning Layer on the map
+    ///     Learn how to display a NOAA Weather Warning Layer on the map
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NOAAWeatherWarningLayerSample : ContentPage
@@ -24,33 +20,37 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the NOAA Weather Warning layer to the map
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the NOAA Weather Warning layer to the map
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Create background world map with vector tile requested from ThinkGeo Cloud Service.
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Create a new overlay that will hold our new layer and add it to the map.
-            LayerOverlay noaaWeatherWarningsOverlay = new LayerOverlay();
+            var noaaWeatherWarningsOverlay = new LayerOverlay();
             mapView.Overlays.Add("Noaa Weather Warning", noaaWeatherWarningsOverlay);
 
             // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
-            NoaaWeatherWarningsFeatureLayer noaaWeatherWarningsFeatureLayer = new NoaaWeatherWarningsFeatureLayer();
+            var noaaWeatherWarningsFeatureLayer = new NoaaWeatherWarningsFeatureLayer();
             noaaWeatherWarningsFeatureLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             // Add the new layer to the overlay we created earlier
             noaaWeatherWarningsOverlay.Layers.Add("Noaa Weather Warning", noaaWeatherWarningsFeatureLayer);
 
             // Get the layers feature source and setup an event that will refresh the map when the data refreshes
-            var featureSource = (NoaaWeatherWarningsFeatureSource)noaaWeatherWarningsFeatureLayer.FeatureSource;
+            var featureSource = (NoaaWeatherWarningsFeatureSource) noaaWeatherWarningsFeatureLayer.FeatureSource;
             featureSource.WarningsUpdated -= FeatureSource_WarningsUpdated;
             featureSource.WarningsUpdated += FeatureSource_WarningsUpdated;
 
@@ -62,10 +62,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             noaaWeatherWarningsFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Set the extent to a view of the US
-            mapView.CurrentExtent = new RectangleShape(-14927495.374917, 8262593.0543992, -6686622.84891633, 1827556.23117885);
+            mapView.CurrentExtent =
+                new RectangleShape(-14927495.374917, 8262593.0543992, -6686622.84891633, 1827556.23117885);
 
             // Add a PopupOverlay to the map, to display feature information
-            PopupOverlay popupOverlay = new PopupOverlay();
+            var popupOverlay = new PopupOverlay();
             mapView.Overlays.Add("Info Popup Overlay", popupOverlay);
 
             // Refresh the map.
@@ -76,12 +77,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnDisappearing();
 
-            var weatherWarnings = (NoaaWeatherWarningsFeatureSource)mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
+            var weatherWarnings =
+                (NoaaWeatherWarningsFeatureSource) mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
             weatherWarnings.WarningsUpdated -= FeatureSource_WarningsUpdated;
             weatherWarnings.WarningsUpdating -= FeatureSource_WarningsUpdating;
         }
 
-        private void FeatureSource_WarningsUpdating(object sender, WarningsUpdatingNoaaWeatherWarningsFeatureSourceEventArgs e)
+        private void FeatureSource_WarningsUpdating(object sender,
+            WarningsUpdatingNoaaWeatherWarningsFeatureSourceEventArgs e)
         {
             mapView.Dispatcher.BeginInvokeOnMainThread(() =>
             {
@@ -90,7 +93,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             });
         }
 
-        private void FeatureSource_WarningsUpdated(object sender, WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
+        private void FeatureSource_WarningsUpdated(object sender,
+            WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
         {
             // This event fires when the the feature source has new data.  We need to make sure we refresh the map
             // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
@@ -105,22 +109,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private void mapView_MapClick(object sender, TouchMapViewEventArgs e)
         {
             // Get the selected feature based on the tapped location
-            Collection<Feature> selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
+            var selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
 
             // If a feature was selected, get the data from it and display it
-            if (selectedFeatures != null)
-            {
-               DisplayFeatureInfo(selectedFeatures);
-            }
+            if (selectedFeatures != null) DisplayFeatureInfo(selectedFeatures);
         }
 
         private Collection<Feature> GetFeaturesFromLocation(PointShape location)
         {
             // Get the parks layer from the MapView
-            FeatureLayer weatherWarnings = mapView.FindFeatureLayer("Noaa Weather Warning");
+            var weatherWarnings = mapView.FindFeatureLayer("Noaa Weather Warning");
 
             // Find the feature that was tapped on by querying the layer for features containing the tapped coordinates
-            Collection<Feature> selectedFeatures = weatherWarnings.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns);
+            var selectedFeatures =
+                weatherWarnings.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns);
 
             return selectedFeatures;
         }
@@ -129,18 +131,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             if (features.Count > 0)
             {
-                StringBuilder weatherWarningString = new StringBuilder();
+                var weatherWarningString = new StringBuilder();
 
                 // Each column in a feature is a data attribute
                 // Add all attribute pairs to the info string
-                foreach (Feature feature in features)
-                {
-                    weatherWarningString.AppendLine($"{feature.ColumnValues["TITLE"]}");
-                }
+                foreach (var feature in features) weatherWarningString.AppendLine($"{feature.ColumnValues["TITLE"]}");
 
                 // Create a new popup with the park info string
-                PopupOverlay popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
-                Popup popup = new Popup();
+                var popupOverlay = (PopupOverlay) mapView.Overlays["Info Popup Overlay"];
+                var popup = new Popup();
                 popup.Position = features[0].GetShape().GetCenterPoint();
                 popup.Content = weatherWarningString.ToString();
 
