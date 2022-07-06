@@ -1,39 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Content.Res;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using AndroidX.AppCompat.App;
-using Xamarin.Essentials;
 
 namespace HowDoISample.Droid
 {
     [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
     public class SplashScreen : AppCompatActivity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-        }
-
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(() => { Startup(); });
+            var startupWork = new Task(() => { Startup(); });
             startupWork.Start();
         }
 
-        public override void OnBackPressed() { }
+        public override void OnBackPressed()
+        {
+        }
 
         private async void Startup()
         {

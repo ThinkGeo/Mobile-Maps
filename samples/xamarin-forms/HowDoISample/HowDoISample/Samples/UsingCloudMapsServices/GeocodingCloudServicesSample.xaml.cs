@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud
+    ///     Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GeocodingCloudServicesSample : ContentPage
@@ -25,28 +21,34 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set up the map with the ThinkGeo Cloud Maps overlay
+        ///     Set up the map with the ThinkGeo Cloud Maps overlay
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
-            SimpleMarkerOverlay geocodedLocationsOverlay = new SimpleMarkerOverlay();
+            var geocodedLocationsOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("Geocoded Locations Overlay", geocodedLocationsOverlay);
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
+            mapView.CurrentExtent =
+                new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
 
             // Initialize the GeocodingCloudClient using our ThinkGeo Cloud credentials
-            geocodingCloudClient = new GeocodingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~", "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
+            geocodingCloudClient = new GeocodingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~",
+                "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
 
             cboSearchType.SelectedIndex = 0;
             cboLocationType.SelectedIndex = 0;
@@ -55,7 +57,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Search for an address using the GeocodingCloudClient
+        ///     Search for an address using the GeocodingCloudClient
         /// </summary>
         private async Task<CloudGeocodingResult> PerformGeocodingQuery()
         {
@@ -63,16 +65,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             loadingIndicator.IsRunning = true;
             loadingLayout.IsVisible = true;
 
-            CloudGeocodingOptions options = new CloudGeocodingOptions();
+            var options = new CloudGeocodingOptions();
             // Set up the CloudGeocodingOptions object based on the parameters set in the UI
             options.MaxResults = int.Parse(txtMaxResults.Text);
-            options.SearchMode = ((string)cboSearchType.SelectedItem) == "Fuzzy" ? CloudGeocodingSearchMode.FuzzyMatch : CloudGeocodingSearchMode.ExactMatch;
-            options.LocationType = (CloudGeocodingLocationType)Enum.Parse(typeof(CloudGeocodingLocationType), (string)cboLocationType.SelectedItem);
+            options.SearchMode = (string) cboSearchType.SelectedItem == "Fuzzy"
+                ? CloudGeocodingSearchMode.FuzzyMatch
+                : CloudGeocodingSearchMode.ExactMatch;
+            options.LocationType = (CloudGeocodingLocationType) Enum.Parse(typeof(CloudGeocodingLocationType),
+                (string) cboLocationType.SelectedItem);
             options.ResultProjectionInSrid = 3857;
 
             // Run the geocode
-            string searchString = txtSearchString.Text.Trim();
-            CloudGeocodingResult searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
+            var searchString = txtSearchString.Text.Trim();
+            var searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
 
             // Hide the loading graphic
             loadingIndicator.IsRunning = false;
@@ -82,12 +87,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Update the UI based on the results of a Cloud Geocoding Query
+        ///     Update the UI based on the results of a Cloud Geocoding Query
         /// </summary>
         private void UpdateSearchResultsOnUI(CloudGeocodingResult searchResult)
         {
             // Clear the locations list and existing location markers on the map
-            SimpleMarkerOverlay geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
+            var geocodedLocationOverlay = (SimpleMarkerOverlay) mapView.Overlays["Geocoded Locations Overlay"];
             geocodedLocationOverlay.Markers.Clear();
             lsbLocations.ItemsSource = null;
             geocodedLocationOverlay.Refresh();
@@ -103,7 +108,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Search for an address using the GeocodingCloudClient and update the UI
+        ///     Search for an address using the GeocodingCloudClient and update the UI
         /// </summary>
         private async void Search_Click(object sender, EventArgs e)
         {
@@ -113,7 +118,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             if (await ValidateSearchParameters())
             {
                 // Run the Cloud Geocoding query
-                CloudGeocodingResult searchResult = await PerformGeocodingQuery();
+                var searchResult = await PerformGeocodingQuery();
 
                 // Handle an error returned from the geocoding service
                 if (searchResult.Exception != null)
@@ -128,7 +133,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// When a location is selected in the UI, add a marker at that location and center the map on it
+        ///     When a location is selected in the UI, add a marker at that location and center the map on it
         /// </summary>
         private void lsbLocations_SelectionChanged(object sender, EventArgs e)
         {
@@ -137,7 +142,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             if (chosenLocation != null)
             {
                 // Get the MarkerOverlay from the MapView
-                SimpleMarkerOverlay geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
+                var geocodedLocationOverlay = (SimpleMarkerOverlay) mapView.Overlays["Geocoded Locations Overlay"];
 
                 // Clear the existing markers and add a new marker at the chosen location
                 geocodedLocationOverlay.Markers.Clear();
@@ -145,44 +150,40 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Center the map on the chosen location
                 mapView.CurrentExtent = chosenLocation.BoundingBox;
-                ZoomLevelSet standardZoomLevelSet = new ZoomLevelSet();
+                var standardZoomLevelSet = new ZoomLevelSet();
                 mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
                 mapView.Refresh();
             }
         }
 
         /// <summary>
-        /// Helper function to change the tip shown for different Search Types
+        ///     Helper function to change the tip shown for different Search Types
         /// </summary>
         private void cboSearchType_SelectionChanged(object sender, EventArgs e)
         {
-            var pickerContent = (string)cboSearchType.SelectedItem;
+            var pickerContent = (string) cboSearchType.SelectedItem;
 
             if (pickerContent != null)
-            {
                 switch (pickerContent)
                 {
                     case "Fuzzy":
-                        txtSearchTypeDescription.Text = "(Returns both exact and approximate matches for the search address)";
+                        txtSearchTypeDescription.Text =
+                            "(Returns both exact and approximate matches for the search address)";
                         break;
                     case "Exact":
                         txtSearchTypeDescription.Text = "(Only returns exact matches for the search address)";
                         break;
-                    default:
-                        break;
                 }
-            }
         }
 
         /// <summary>
-        /// Helper function to change the tip shown for different Location Types
+        ///     Helper function to change the tip shown for different Location Types
         /// </summary>
         private void cboLocationType_SelectionChanged(object sender, EventArgs e)
         {
-            var pickerItem = (string)cboLocationType.SelectedItem;
+            var pickerItem = (string) cboLocationType.SelectedItem;
 
             if (pickerItem != null)
-            {
                 switch (pickerItem)
                 {
                     case "Default":
@@ -206,14 +207,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     case "State":
                         txtLocationTypeDescription.Text = "(Searches for states matching the search string)";
                         break;
-                    default:
-                        break;
                 }
-            }
         }
 
         /// <summary>
-        /// Helper function to perform simple validation on the input text boxes
+        ///     Helper function to perform simple validation on the input text boxes
         /// </summary>
         private async Task<bool> ValidateSearchParameters()
         {
@@ -226,7 +224,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Check if the 'Max Results' text box has a valid value
-            if (string.IsNullOrWhiteSpace(txtMaxResults.Text) || !(int.TryParse(txtMaxResults.Text, out int result) && result > 0 && result < 101))
+            if (string.IsNullOrWhiteSpace(txtMaxResults.Text) ||
+                !(int.TryParse(txtMaxResults.Text, out var result) && result > 0 && result < 101))
             {
                 txtMaxResults.Focus();
                 await DisplayAlert("Alert", "Please enter a number between 1 - 100", "OK");
@@ -238,14 +237,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Create a new map marker using preloaded image assets
+        ///     Create a new map marker using preloaded image assets
         /// </summary>
         private Marker CreateNewMarker(PointShape point)
         {
-            return new Marker()
+            return new Marker
             {
                 Position = point,
-                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Resources/AQUA.png"),
                 YOffset = -17
             };
         }
@@ -253,7 +253,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task CollapseExpander()
         {
             controlsExpander.IsExpanded = false;
-            await Task.Delay((int)controlsExpander.CollapseAnimationLength);
+            await Task.Delay((int) controlsExpander.CollapseAnimationLength);
         }
     }
 }

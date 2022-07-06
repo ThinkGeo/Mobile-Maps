@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -8,16 +9,16 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample">
     <ContentPage.Content>
         <StackLayout>
-          
+
             <Frame HasShadow="False">
                 <Label x:Name="descriptionLabel"
-                       FontSize="Subtitle" 
-                       VerticalOptions="Center" 
-                       HorizontalOptions="StartAndExpand"/>
+                       FontSize="Subtitle"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
             </Frame>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

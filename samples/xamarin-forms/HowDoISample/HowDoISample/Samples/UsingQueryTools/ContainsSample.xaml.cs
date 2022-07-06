@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
     /// <summary>
-    /// Learn how to use layer query tools to find which features in a layer contain a shape
+    ///     Learn how to use layer query tools to find which features in a layer contain a shape
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContainsSample : ContentPage
@@ -24,59 +21,68 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco zoning data
+        ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco zoning data
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
 
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
 
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the Map Unit to meters (used in Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;           
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Create a feature layer to hold the Frisco zoning data
-            ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
+            var zoningLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Zoning.shp"));
 
             // Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
-            ProjectionConverter projectionConverter = new ProjectionConverter(2276, 3857);
+            var projectionConverter = new ProjectionConverter(2276, 3857);
             zoningLayer.FeatureSource.ProjectionConverter = projectionConverter;
 
             // Add a style to use to draw the Frisco zoning polygons
             zoningLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
+            zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
+                AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple,
+                    2);
 
             // Set the map extent to Frisco, TX
             mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
 
             // Create a layer to hold features found by the spatial query
-            InMemoryFeatureLayer highlightedFeaturesLayer = new InMemoryFeatureLayer();
-            highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
+            var highlightedFeaturesLayer = new InMemoryFeatureLayer();
+            highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
+                AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            LayerOverlay layerOverlay = new LayerOverlay();
-            layerOverlay.Layers.Add("Frisco Zoning", zoningLayer);            
-            layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);            
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add("Frisco Zoning", zoningLayer);
+            layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
 
             mapView.Overlays.Add("Layer Overlay", layerOverlay);
 
             // Add a MarkerOverlay to the map to display the selected point for the query
-            SimpleMarkerOverlay queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
+            var queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("Query Feature Marker Overlay", queryFeatureMarkerOverlay);
 
             // Add a sample point to the map for the initial query
-            PointShape sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
+            var sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
             GetFeaturesContaining(sampleShape);
 
             mapView.Refresh();
         }
 
         /// <summary>
-        /// Perform the 'Contains' spatial query using the layer's QueryTools
+        ///     Perform the 'Contains' spatial query using the layer's QueryTools
         /// </summary>
         private Collection<Feature> PerformSpatialQuery(BaseShape shape, FeatureLayer layer)
         {
@@ -89,23 +95,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Highlight the features that were found by the spatial query
+        ///     Highlight the features that were found by the spatial query
         /// </summary>
         private void HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
-            LayerOverlay layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
-            InMemoryFeatureLayer highlightedFeaturesLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Highlighted Features"];
+            var layerOverlay = (LayerOverlay) mapView.Overlays["Layer Overlay"];
+            var highlightedFeaturesLayer = (InMemoryFeatureLayer) layerOverlay.Layers["Highlighted Features"];
 
             // Clear the currently highlighted features
             highlightedFeaturesLayer.Open();
             highlightedFeaturesLayer.InternalFeatures.Clear();
 
             // Add new features to the layer
-            foreach (var feature in features)
-            {
-                highlightedFeaturesLayer.InternalFeatures.Add(feature);
-            }
+            foreach (var feature in features) highlightedFeaturesLayer.InternalFeatures.Add(feature);
             highlightedFeaturesLayer.Close();
 
             // Refresh the overlay so the layer is redrawn
@@ -116,13 +119,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Perform the spatial query and draw the shapes on the map
+        ///     Perform the spatial query and draw the shapes on the map
         /// </summary>
         private void GetFeaturesContaining(PointShape point)
         {
             // Find the layers we will be modifying in the MapView
-            SimpleMarkerOverlay queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Query Feature Marker Overlay"];
-            ShapeFileFeatureLayer zoningLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("Frisco Zoning");
+            var queryFeatureMarkerOverlay = (SimpleMarkerOverlay) mapView.Overlays["Query Feature Marker Overlay"];
+            var zoningLayer = (ShapeFileFeatureLayer) mapView.FindFeatureLayer("Frisco Zoning");
 
             // Clear the query point marker overlay and add a marker on the newly drawn point
             queryFeatureMarkerOverlay.Markers.Clear();
@@ -130,9 +133,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create a marker with a static marker image and add it to the map
             var marker = new Marker(point)
             {
-                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
+                ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Resources/AQUA.png"),
                 YOffset = -17
-            };;
+            };
+            ;
             queryFeatureMarkerOverlay.Markers.Add(marker);
             queryFeatureMarkerOverlay.Refresh();
 
@@ -145,7 +150,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Perform the spatial query when a new point is drawn
+        ///     Perform the spatial query when a new point is drawn
         /// </summary>
         private void MapView_OnMapTap(object sender, TouchMapViewEventArgs e)
         {

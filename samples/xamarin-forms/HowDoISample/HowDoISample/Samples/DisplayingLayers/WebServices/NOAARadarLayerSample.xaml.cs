@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +13,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// TODO: Update sample once API has been ported
+        ///     TODO: Update sample once API has been ported
         /// </summary>
         protected override void OnAppearing()
         {
@@ -26,7 +21,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // It is important to set the map unit first to either feet, meters or decimal degrees.
             mapView.MapUnit = GeographyUnit.Meter;
-            
         }
     }
 }

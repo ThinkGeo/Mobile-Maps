@@ -79,6 +79,12 @@
     <None Remove="Data\MrSid\World.sid" />
     <None Remove="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
     <None Remove="Data\Png\m_3309650_sw_14_1_20160911_20161121.png" />
+    <None Remove="Data\Railroad\Railroad.dbf" />
+    <None Remove="Data\Railroad\Railroad.ids" />
+    <None Remove="Data\Railroad\Railroad.idx" />
+    <None Remove="Data\Railroad\Railroad.prj" />
+    <None Remove="Data\Railroad\Railroad.shp" />
+    <None Remove="Data\Railroad\Railroad.shx" />
     <None Remove="Data\S57\US1GC09M\US1GC09A.TXT" />
     <None Remove="Data\S57\US1GC09M\US1GC09B.TXT" />
     <None Remove="Data\S57\US1GC09M\US1GC09C.TXT" />
@@ -290,6 +296,12 @@
     <EmbeddedResource Include="Data\MrSid\World.sid" />
     <EmbeddedResource Include="Data\Png\m_3309650_sw_14_1_20160911_20161121.pgw" />
     <EmbeddedResource Include="Data\Png\m_3309650_sw_14_1_20160911_20161121.png" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.prj" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.shp" />
+    <EmbeddedResource Include="Data\Railroad\Railroad.shx" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09A.TXT" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09B.TXT" />
     <EmbeddedResource Include="Data\S57\US1GC09M\US1GC09C.TXT" />
@@ -432,22 +444,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ThinkGeo.Core" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.Ecw" Version="12.3.2" />
-    <PackageReference Include="ThinkGeo.FileGeoDatabase" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.Gdal" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.MrSid" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.NauticalCharts" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.Oracle" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.Printers" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.UnmanagedGeoTiff" Version="12.3.5" />
-    <PackageReference Include="ThinkGeo.UnmanagedProj" Version="12.3.5" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta337" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.0.0-beta327" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="13.0.0-beta326" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta192" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -639,9 +643,6 @@
     </Compile>
     <Compile Update="Samples\SettingMapExtent\BasicNavigationSample.xaml.cs">
       <DependentUpon>BasicNavigationSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\SettingMapExtent\SetMapExtentSample.xaml.cs">
-      <DependentUpon>SetMapExtentSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\TopologicalValidation\LineValidationSample.xaml.cs">
       <DependentUpon>LineValidationSample.xaml</DependentUpon>

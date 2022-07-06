@@ -1,23 +1,17 @@
-﻿using HowDoISample.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+using HowDoISample.Models;
+using Newtonsoft.Json;
 
 namespace HowDoISample.ViewModels
 {
-    class SampleMenu : INotifyPropertyChanged
+    internal class SampleMenu : INotifyPropertyChanged
     {
-        private ObservableCollection<MenuGroup> _allMenuItems;
-
-        public ObservableCollection<MenuGroup> SampleMenuItems { get; set; }
+        private readonly ObservableCollection<MenuGroup> _allMenuItems;
 
         public SampleMenu()
         {
@@ -25,6 +19,8 @@ namespace HowDoISample.ViewModels
             SampleMenuItems = new ObservableCollection<MenuGroup>();
             LoadMenu();
         }
+
+        public ObservableCollection<MenuGroup> SampleMenuItems { get; set; }
 
         public void ToggleGroupExpanded(int index)
         {
@@ -37,8 +33,8 @@ namespace HowDoISample.ViewModels
             List<SampleCategory> samplesJson;
 
             // Deserialize samples.json
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(SampleMenu)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("HowDoISample.samples.json");
+            var assembly = typeof(SampleMenu).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream("HowDoISample.samples.json");
             using (var reader = new StreamReader(stream))
             {
                 var text = reader.ReadToEnd();
@@ -49,13 +45,13 @@ namespace HowDoISample.ViewModels
             foreach (var category in samplesJson)
             {
                 // Make the group
-                var sampleGroup = new MenuGroup() { Title = category.Title, IsExpanded = false };
+                var sampleGroup = new MenuGroup {Title = category.Title, IsExpanded = false};
                 foreach (var sample in category.Children)
-                {
-                    sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title, Description = sample.Description });
-                }
+                    sampleGroup.Add(new SampleMenuItem
+                        {Id = sample.Id, Title = sample.Title, Description = sample.Description});
                 _allMenuItems.Add(sampleGroup);
             }
+
             UpdateMenu();
         }
 
@@ -64,21 +60,21 @@ namespace HowDoISample.ViewModels
             var updatedMenu = new ObservableCollection<MenuGroup>();
             foreach (var group in _allMenuItems)
             {
-                var sampleGroup = new MenuGroup() { Title = group.Title, IsExpanded = group.IsExpanded };
+                var sampleGroup = new MenuGroup {Title = group.Title, IsExpanded = group.IsExpanded};
                 if (sampleGroup.IsExpanded)
-                {
-                    foreach (var sample in group)
-                    {
-                        sampleGroup.Add(new SampleMenuItem() { Id = sample.Id, Title = sample.Title, Description = sample.Description });
-                    }
-                }
+                    foreach (var sample in @group)
+                        sampleGroup.Add(new SampleMenuItem
+                            {Id = sample.Id, Title = sample.Title, Description = sample.Description});
                 updatedMenu.Add(sampleGroup);
             }
+
             SampleMenuItems = updatedMenu;
         }
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -87,6 +83,7 @@ namespace HowDoISample.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

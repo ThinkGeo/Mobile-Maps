@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,25 +15,30 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
 
-
         /// <summary>
-        /// Setup the map with the ThinkGeo Cloud Maps overlay.
+        ///     Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
         protected override void OnAppearing()
         {
             // Set the map's unit of measurement to meters(Spherical Mercator)
             base.OnAppearing();
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            ShapeFileFeatureLayer coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
+            var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Frisco_Coyote_Sightings.shp"));
 
             // Project the layer's data to match the projection of the map
             coyoteSightings.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -58,7 +58,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Create a heat style that bases the color intensity on the proximity of surrounding points
+        ///     Create a heat style that bases the color intensity on the proximity of surrounding points
         /// </summary>
         private void AddHeatStyle(ShapeFileFeatureLayer layer)
         {

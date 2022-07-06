@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -21,7 +17,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        ///     ...
         /// </summary>
         protected override async void OnAppearing()
         {
@@ -38,15 +34,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private ImageSource GenerateMapImage()
         {
-            Collection<Layer> layersToDraw = new Collection<Layer>();
+            var layersToDraw = new Collection<Layer>();
 
             // Create the background world maps using vector tiles stored locally in our MBTiles file and also set the styling though a json file
-            ThinkGeoMBTilesLayer mbTilesLayer = new ThinkGeoMBTilesLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Mbtiles/Frisco.mbtiles"), new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Json/thinkgeo-world-streets-light.json"), UriKind.Relative));
+            var mbTilesLayer = new ThinkGeoMBTilesLayer(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Data/Mbtiles/Frisco.mbtiles"),
+                new Uri(
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "Data/Json/thinkgeo-world-streets-light.json"), UriKind.Relative));
             mbTilesLayer.Open();
             layersToDraw.Add(mbTilesLayer);
 
             // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
-            ShapeFileFeatureLayer zoningLayer = new ShapeFileFeatureLayer(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
+            var zoningLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Data/Shapefile/Zoning.shp"));
             zoningLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
             zoningLayer.Open();
 
@@ -56,16 +59,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layersToDraw.Add(zoningLayer);
 
             // Create a GeoCanvas to do the drawing
-            GeoCanvas canvas = GeoCanvas.CreateDefaultGeoCanvas();
+            var canvas = GeoCanvas.CreateDefaultGeoCanvas();
 
             // Create a GeoImage as the image to draw on
-            GeoImage geoImage = new GeoImage(800, 600);
+            var geoImage = new GeoImage(800, 600);
 
             // Start the drawing by specifying the image, extent and map units
-            canvas.BeginDrawing(geoImage, MapUtil.GetDrawingExtent(zoningLayer.GetBoundingBox(), 800, 600), GeographyUnit.Meter);
+            canvas.BeginDrawing(geoImage, MapUtil.GetDrawingExtent(zoningLayer.GetBoundingBox(), 800, 600),
+                GeographyUnit.Meter);
 
             // This collection is used during drawing to pass labels in between layers so we can track collisions
-            Collection<SimpleCandidate> labels = new Collection<SimpleCandidate>();
+            var labels = new Collection<SimpleCandidate>();
 
             // Loop through all the layers and draw them to the GeoCanvas
             // The flush is to compact styles that use different drawing levels
@@ -79,16 +83,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             canvas.EndDrawing();
 
             // Create a memory stream and save the GeoImage as a standard PNG formatted image
-            MemoryStream imageStream = new MemoryStream();
+            var imageStream = new MemoryStream();
             geoImage.Save(imageStream, GeoImageFormat.Png);
 
             // Reset the image stream back to the beginning
             imageStream.Position = 0;
 
-            return ImageSource.FromStream(() =>
-            {
-                return imageStream;
-            });
+            return ImageSource.FromStream(() => { return imageStream; });
         }
     }
 }

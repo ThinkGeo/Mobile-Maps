@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +13,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// ...
+        ///     ...
         /// </summary>
         protected override void OnAppearing()
         {
@@ -41,7 +35,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private void button_Clicked(object sender, EventArgs e)
         {
-
         }
     }
 }

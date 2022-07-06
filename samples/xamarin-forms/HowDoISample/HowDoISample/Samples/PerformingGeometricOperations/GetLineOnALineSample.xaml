@@ -1,48 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.GetLineOnALineSample">
     <ContentPage.Content>
         <StackLayout>
-            <Expander IsExpanded="True">
+            <views:Expander IsExpanded="True">
                 <!-- Sample Description -->
-                <Expander.Header>
+                <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
                         <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
+                               HorizontalOptions="StartAndExpand" />
                         <BoxView Color="LightGray"
                                  WidthRequest="1"
                                  VerticalOptions="Center"
-                                 HorizontalOptions="Center"/>
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start" HorizontalOptions="End">
+                                 HorizontalOptions="Center" />
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
+                               HorizontalOptions="End">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
                                              Value="True">
                                     <Setter Property="Rotation"
-                                            Value="180"/>
+                                            Value="180" />
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
                     </StackLayout>
-                </Expander.Header>
+                </views:Expander.Header>
 
                 <!-- Sample Controls -->
-                <Expander.Content>
+                <views:Expander.Content>
                     <Grid>
-                        <Label  Grid.Column="1" Grid.Row="0" Text="Starting Offset (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="0" x:Name="startingOffset" Text="5000" VerticalOptions="Center" Keyboard="Numeric"></Entry>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Starting Offset (m):" FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="2" Grid.Row="0" x:Name="startingOffset" Text="5000"
+                               VerticalOptions="Center" Keyboard="Numeric" />
 
-                        <Label  Grid.Column="1" Grid.Row="1" Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                        <Entry  Grid.Column="2" Grid.Row="1" x:Name="distance" Text="10000" VerticalOptions="Center" Keyboard="Numeric"></Entry>
+                        <Label Grid.Column="1" Grid.Row="1" Text="Distance (m):" FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="2" Grid.Row="1" x:Name="distance" Text="10000" VerticalOptions="Center"
+                               Keyboard="Numeric" />
 
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get Subline" Clicked="GetSubLine_OnClick"></Button>
+                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get Subline"
+                                Clicked="GetSubLine_OnClick" />
                         <!-- Controls Grid Layout -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
@@ -51,16 +59,16 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                     </Grid>
-                </Expander.Content>
-            </Expander>
+                </views:Expander.Content>
+            </views:Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"></ThinkGeoUI:MapView>
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
         </StackLayout>
     </ContentPage.Content>

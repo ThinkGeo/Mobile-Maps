@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
-using ThinkGeo.UI.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,17 +15,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// TODO: Update sample once API has been ported
+        ///     TODO: Update sample once API has been ported
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;            
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"), "CloudMapsVector");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
+                "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
             // Set the map extent
@@ -41,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
 
         /// <summary>
-        /// Enable the ScaleLine and add it to the MapView (default: bottom left)
+        ///     Enable the ScaleLine and add it to the MapView (default: bottom left)
         /// </summary>
         private void DisplayScaleLine_Checked(object sender, EventArgs e)
         {
@@ -49,7 +48,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        /// Disable the ScaleLine and remove it from the MapView
+        ///     Disable the ScaleLine and remove it from the MapView
         /// </summary>
         private void DisplayScaleLine_Unchecked(object sender, EventArgs e)
         {

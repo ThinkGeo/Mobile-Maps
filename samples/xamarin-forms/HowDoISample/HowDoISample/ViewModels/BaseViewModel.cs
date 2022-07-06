@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
 namespace HowDoISample.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private bool isBusy;
 
-        private bool isBusy = false;
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get => isBusy;
+            set => SetProperty(ref isBusy, value);
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
+        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "",
+            Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
@@ -29,7 +28,9 @@ namespace HowDoISample.ViewModels
         }
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -38,6 +39,7 @@ namespace HowDoISample.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

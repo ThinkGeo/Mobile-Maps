@@ -9,9 +9,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        private SampleMenu sampleMenu;
-
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+        private readonly SampleMenu sampleMenu;
 
         public MenuPage()
         {
@@ -20,22 +18,24 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             ListViewMenu.ItemsSource = sampleMenu.SampleMenuItems;
         }
 
+        private MainPage RootPage => Application.Current.MainPage as MainPage;
+
         private async void ListViewMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
                 return;
 
-            SampleMenuItem sample = ((SampleMenuItem)e.SelectedItem);
+            var sample = (SampleMenuItem) e.SelectedItem;
             await RootPage.NavigateFromMenu(sample);
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             // TODO: Use MVVM properly
-            StackLayout stackLayout = (StackLayout)sender;
-            var item = (TapGestureRecognizer)stackLayout.GestureRecognizers[0];
+            var stackLayout = (StackLayout) sender;
+            var item = (TapGestureRecognizer) stackLayout.GestureRecognizers[0];
             var id = item.CommandParameter;
-            int i = sampleMenu.SampleMenuItems.IndexOf((MenuGroup)id);
+            var i = sampleMenu.SampleMenuItems.IndexOf((MenuGroup) id);
             sampleMenu.ToggleGroupExpanded(i);
             ListViewMenu.ItemsSource = sampleMenu.SampleMenuItems;
         }
