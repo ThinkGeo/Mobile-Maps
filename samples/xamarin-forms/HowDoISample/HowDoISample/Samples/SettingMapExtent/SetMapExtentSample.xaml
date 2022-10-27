@@ -10,7 +10,7 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander x:Name="controlsExpander">
+            <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
                 <!-- Sample Description -->
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">

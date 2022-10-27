@@ -11,7 +11,7 @@
              Title="Basic Navigation">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander x:Name="controlsExpander" IsExpanded="True">
+            <views:Expander x:Name="controlsExpander" IsExpanded="True" CollapseAnimationLength="250">
                 <!-- Sample Description -->
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">

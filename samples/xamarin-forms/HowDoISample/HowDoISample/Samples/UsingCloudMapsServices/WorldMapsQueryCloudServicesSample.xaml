@@ -12,7 +12,7 @@
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <views:Expander x:Name="controlsExpander">
+                <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
                     <!-- Sample Description -->
                     <views:Expander.Header>
                         <StackLayout Orientation="Horizontal" Padding="8">
