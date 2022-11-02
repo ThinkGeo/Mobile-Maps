@@ -47,14 +47,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("WorldOverlay", worldOverlay);
 
             // Create the new layer.
-            var googleMapsLayer = new GoogleMapsLayer();
+            var googleMapsLayer = new GoogleMapsLayer(txtApiKey.Text, string.Empty);
 
             // Add the layer to the overlay we created earlier.
             worldOverlay.Layers.Add("GoogleLayer", googleMapsLayer);
-
-            // Set the API Key and URI Signing Secret from the text box on the sample.
-            googleMapsLayer.ApiKey = txtApiKey.Text;
-            googleMapsLayer.UriSigningSecret = txtUriSigningSecret.Text;
 
             // Refresh the map.
             mapView.Refresh();

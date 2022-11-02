@@ -41,7 +41,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private void DisplayGoogleMaps_Click(object sender, EventArgs e)
         {
-            var googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, googleSigningSecret.Text);
+            var googleMapsOverlay = new GoogleMapsOverlay(googleApiKey.Text, string.Empty);
             mapView.Overlays.Add(googleMapsOverlay);
             mapView.Refresh();
         }

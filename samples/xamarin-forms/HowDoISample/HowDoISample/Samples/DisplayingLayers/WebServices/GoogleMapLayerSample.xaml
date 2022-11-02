@@ -50,10 +50,6 @@
                                VerticalOptions="Center" />
                         <Entry Grid.Column="2" Grid.Row="1" x:Name="txtApiKey" />
 
-                        <Label Grid.Column="1" Grid.Row="2" Text="Uri Signing Secret:" FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="txtUriSigningSecret" />
-
                         <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="btnActivate"
                                 Clicked="btnActivate_OnClicked" Text="Activate" />
 

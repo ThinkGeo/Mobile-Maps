@@ -50,10 +50,6 @@
                                VerticalOptions="Center" />
                         <Entry Grid.Column="2" Grid.Row="1" x:Name="googleApiKey" />
 
-                        <Label Grid.Column="1" Grid.Row="2" Text="Secret:" FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Entry Grid.Column="2" Grid.Row="2" x:Name="googleSigningSecret" VerticalOptions="Center" />
-
                         <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="displayGoogleMaps"
                                 Text="Update" Clicked="DisplayGoogleMaps_Click" />
 

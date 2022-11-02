@@ -193,7 +193,7 @@
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayGoogleMapsOverlaySample",
         "title": "Display Google Maps Overlay",
         "description":
-          "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
+          "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key is required.",
         "source": "Samples/UsingOverlays/DisplayGoogleMapsOverlaySample"
       },
       {
