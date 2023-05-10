@@ -206,7 +206,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Create a popup to display the best match, and add it to the PopupOverlay
                 var bestMatchPopup = new Popup();
-                bestMatchPopup.Content = "Best Match: " + searchResult.BestMatchLocation.LocationName;
+                bestMatchPopup.Text = "Best Match: " + searchResult.BestMatchLocation.LocationName;
                 bestMatchPopup.Position = bestMatchLocation;
                 bestMatchPopupOverlay.Popups.Add(bestMatchPopup);
 
