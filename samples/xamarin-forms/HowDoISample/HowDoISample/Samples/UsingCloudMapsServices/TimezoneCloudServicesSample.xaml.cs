@@ -118,7 +118,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Display the timezone info on a popup on the map
             var popup = new Popup();
-            popup.Content = timezoneInfoString.ToString();
+            popup.Text = timezoneInfoString.ToString();
             popup.Position = new PointShape(lon, lat);
             timezoneInfoPopupOverlay.Popups.Add(popup);
 

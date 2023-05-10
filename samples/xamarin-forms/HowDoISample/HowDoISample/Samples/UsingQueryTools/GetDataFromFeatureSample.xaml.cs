@@ -102,7 +102,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //Create a new popup with the park info string
             var popupOverlay = (PopupOverlay) mapView.Overlays["Info Popup Overlay"];
             var popup = new Popup {Position = feature.GetShape().GetCenterPoint()};
-            popup.Content = parkInfoString.ToString();
+            popup.Text = parkInfoString.ToString();
 
             //Clear the popup overlay and add the new popup to it
             popupOverlay.Popups.Clear();

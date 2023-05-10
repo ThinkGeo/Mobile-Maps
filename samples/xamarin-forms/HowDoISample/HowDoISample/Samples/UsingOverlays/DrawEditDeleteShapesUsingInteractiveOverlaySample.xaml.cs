@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +11,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     ///     Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DrawEditDeleteShapesUsingInteractiveOverlaySample : ContentPage
+    public partial class DrawEditDeleteShapesUsingInteractiveOverlaySample
     {
         public DrawEditDeleteShapesUsingInteractiveOverlaySample()
         {
@@ -21,29 +21,24 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+            var background = new ThinkGeoCloudVectorMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
                 "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
-                "CloudMapsVector");
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            background.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(background);
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            LayerOverlay layerOverlay;
-            InMemoryFeatureLayer featureLayer;
-
             // Create the layer that will store the drawn shapes
-            featureLayer = new InMemoryFeatureLayer();
+            var featureLayer = new InMemoryFeatureLayer();
 
             // Add styles for the layer
             featureLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle =
@@ -55,7 +50,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             featureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Add the layer to a LayerOverlay
-            layerOverlay = new LayerOverlay();
+            var layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add("featureLayer", featureLayer);
 
             // Add the LayerOverlay to the map
@@ -65,14 +60,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             instructions.Text =
                 "Navigation Mode - The default map state. Allows you to pan and zoom the map with mouse controls.";
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
         /// <summary>
         ///     Update the layer whenever the user switches modes
         /// </summary>
-        private void UpdateLayerFeatures(InMemoryFeatureLayer featureLayer, LayerOverlay layerOverlay)
+        private async Task UpdateLayerFeaturesAsync(InMemoryFeatureLayer featureLayer, LayerOverlay layerOverlay)
         {
             // If the user switched away from a Drawing Mode, add all the newly drawn shapes in the TrackOverlay into the the featureLayer
             foreach (var feature in mapView.TrackOverlay.TrackShapeLayer.InternalFeatures)
@@ -89,9 +84,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
 
             // Refresh the overlays to show latest results
-            mapView.TrackOverlay.Refresh();
-            mapView.EditOverlay.Refresh();
-            layerOverlay.Refresh();
+            await mapView.TrackOverlay.RefreshAsync();
+            await mapView.EditOverlay.RefreshAsync();
+            await layerOverlay.RefreshAsync();
 
             // In case the user was in Delete Mode, remove the event handler to avoid deleting features unintentionally
             mapView.MapSingleTap -= MapView_SingleTap;
@@ -100,15 +95,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to normal navigation. This is the default.
         /// </summary>
-        private void NavMode_Click(object sender, EventArgs e)
+        private async void NavMode_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
-            // Set TrackMode to None, so that the user will no longer draw shapes and will be able to naviage the map normally
+            // Set TrackMode to None, so that the user will no longer draw shapes and will be able to navigate the map normally
             mapView.TrackOverlay.TrackMode = TrackMode.None;
 
             // Update instructions
@@ -119,17 +119,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to draw points on the map
         /// </summary>
-        private void DrawPoint_Click(object sender, EventArgs e)
+        private async void DrawPoint_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
             // Set TrackMode to Point, which draws a new point on the map on mouse tap
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
-
             // Update instructions
             instructions.Text =
                 "Draw Point Mode - Creates a Point Shape where at the location of each single tap event on the map.";
@@ -138,13 +142,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to draw lines on the map
         /// </summary>
-        private void DrawLine_Click(object sender, EventArgs e)
+        private async void DrawLine_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
             // Set TrackMode to Line, which draws a new line on the map on mouse tap. Double taps to finish drawing the line.
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
@@ -157,13 +166,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to draw polygons on the map
         /// </summary>
-        private void DrawPolygon_Click(object sender, EventArgs e)
+        private async void DrawPolygon_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
             // Set TrackMode to Polygon, which draws a new polygon on the map on touch. Double taps to finish drawing the polygon.
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
@@ -176,13 +190,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to edit drawn shapes
         /// </summary>
-        private void EditShape_Click(object sender, EventArgs e)
+        private async void EditShape_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
             // Set TrackMode to None, so that the user will no longer draw shapes
             mapView.TrackOverlay.TrackMode = TrackMode.None;
@@ -199,8 +218,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.EditOverlay.CalculateAllControlPoints();
 
             // Refresh the map so that the features properly show that they are in edit mode
-            mapView.EditOverlay.Refresh();
-            layerOverlay.Refresh();
+            await mapView.EditOverlay.RefreshAsync();
+            await layerOverlay.RefreshAsync();
 
             // Update instructions
             instructions.Text =
@@ -210,13 +229,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set the mode to delete features ont the map
         /// </summary>
-        private void DeleteShape_Click(object sender, EventArgs e)
+        private async void DeleteShape_Click(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Update the layer's features from any previous mode
-            UpdateLayerFeatures(featureLayer, layerOverlay);
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
 
             // Set TrackMode to None, so that the user will no longer draw shapes
             mapView.TrackOverlay.TrackMode = TrackMode.None;
@@ -231,10 +250,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Event handler that finds the nearest feature and removes it from the layer
         /// </summary>
-        private void MapView_SingleTap(object sender, TouchMapViewEventArgs e)
+        private async void MapView_SingleTap(object sender, TouchMapViewEventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var featureLayer = (InMemoryFeatureLayer) layerOverlay.Layers["featureLayer"];
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
             // Query the layer for the closest feature within 100 meters
             var closestFeatures = featureLayer.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate,
@@ -246,7 +265,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 featureLayer.InternalFeatures.Remove(closestFeatures[0]);
 
                 // Refresh the layerOverlay to show the results
-                layerOverlay.Refresh();
+                await layerOverlay.RefreshAsync();
             }
         }
     }

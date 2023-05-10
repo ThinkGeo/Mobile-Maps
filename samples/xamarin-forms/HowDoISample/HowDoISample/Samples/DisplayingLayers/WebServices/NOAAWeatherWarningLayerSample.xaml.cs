@@ -141,7 +141,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 var popupOverlay = (PopupOverlay) mapView.Overlays["Info Popup Overlay"];
                 var popup = new Popup();
                 popup.Position = features[0].GetShape().GetCenterPoint();
-                popup.Content = weatherWarningString.ToString();
+                popup.Text = weatherWarningString.ToString();
 
                 // Clear the popup overlay and add the new popup to it
                 popupOverlay.Popups.Clear();

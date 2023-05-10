@@ -72,7 +72,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 var popup = new Popup
                 {
                     Position = feature.GetShape().GetCenterPoint(),
-                    Content = feature.ColumnValues["NAME"]
+                    Text = feature.ColumnValues["NAME"]
                 };
                 popupOverlay.Popups.Add(popup);
             }
