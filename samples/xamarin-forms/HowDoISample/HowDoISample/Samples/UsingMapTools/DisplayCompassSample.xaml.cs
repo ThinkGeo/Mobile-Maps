@@ -28,16 +28,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Create the layer overlay with some additional settings and add to the map.
-            var thinkGeoCloudVectorMapsLayer = new ThinkGeoCloudVectorMapsLayer(
-                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~");
-            thinkGeoCloudVectorMapsLayer.VectorTileCache = new FileVectorTileCache(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
-                "CloudMapsVector");
-            thinkGeoCloudVectorMapsLayer.MapType = ThinkGeoCloudVectorMapsMapType.Light;
-            var overlay = new LayerOverlay();
-            overlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
-            mapView.Overlays.Add("Cloud Overlay", overlay);
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+               "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+               "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             // Set the current extent to a neighborhood in Frisco Texas.
             mapView.CurrentExtent =

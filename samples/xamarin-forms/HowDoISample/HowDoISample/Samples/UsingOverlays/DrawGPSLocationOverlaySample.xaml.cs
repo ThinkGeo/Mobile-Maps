@@ -36,13 +36,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
-                "itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~",
-                "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
-                "CloudMapsVector");
-            mapView.Overlays.Add("Background Maps", thinkGeoCloudVectorMapsOverlay);
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             // Create a marker overlay to show where the vehicle is
             var markerOverlay = new SimpleMarkerOverlay();

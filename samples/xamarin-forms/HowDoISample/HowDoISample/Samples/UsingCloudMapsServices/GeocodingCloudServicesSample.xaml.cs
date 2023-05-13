@@ -26,14 +26,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
                 "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
-                "CloudMapsVector");
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             // Set the map's unit of measurement to meters (Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;

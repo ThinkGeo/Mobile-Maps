@@ -96,9 +96,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Perform the spatial query using the drawn shape 
             friscoLayer.Open();
-            var queriedFeatures = friscoLayer.QueryTools.GetFeaturesCrossing(shape, ReturningColumnsType.AllColumns);
+            var crossingFeatures = friscoLayer.QueryTools.GetFeaturesCrossing(shape, ReturningColumnsType.AllColumns);
 
-            foreach (var feature in queriedFeatures) 
+            foreach (var feature in crossingFeatures) 
                 highlightLayer.InternalFeatures.Add(feature);
 
             // Highlight the found features
@@ -107,7 +107,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Disable map drawing and clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
-            txtNumberOfFeaturesFound.Text = $"Number of features crossing the drawn shape: {queriedFeatures.Count}";
+            txtNumberOfFeaturesFound.Text = $"Number of features crossing the drawn shape: {crossingFeatures.Count}";
         }
 
         /// <summary>

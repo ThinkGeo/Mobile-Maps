@@ -30,10 +30,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.DecimalDegree;
 
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
-                "itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~",
-                "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             // Creating a rectangle area we will use to generate the polygons and also start the map there.
             var currentExtent =

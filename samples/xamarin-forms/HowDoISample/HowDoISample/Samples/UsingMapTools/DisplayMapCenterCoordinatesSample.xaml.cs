@@ -20,20 +20,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
-                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsOverlay.VectorTileCache = new FileVectorTileCache(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
-                "CloudMapsVector");
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+               "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+               "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             // Enable the CenterCoordinate map tool
             mapView.MapTools.CenterCoordinate.IsEnabled = true;
@@ -42,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
