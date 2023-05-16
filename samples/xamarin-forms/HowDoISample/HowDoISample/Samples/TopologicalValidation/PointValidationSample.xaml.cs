@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up feature layers in the MapView to display the validated features
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to Decimal Degree
@@ -68,10 +69,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckIfPointsAreTouchingLines.IsChecked = true;
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
-        private void CheckIfPointsAreTouchingLines(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingLines(object sender, EventArgs e)
         {
             // Create a sample set of point and line features to use for the validation
             var uncoveredPointFeature1 = new Feature("POINT(0 0)");
@@ -88,7 +89,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(
+            await ClearMapAndAddFeatures(
                 new Collection<Feature> {uncoveredPointFeature1, uncoveredPointFeature2, coveredPointFeature},
                 invalidResultFeatures, new Collection<Feature> {lineFeature});
 
@@ -100,7 +101,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate points based on whether they are touching line endpoints, and display the results on the map
         /// </summary>
-        private void CheckIfPointsAreTouchingLineEndpoints(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingLineEndpoints(object sender, EventArgs e)
         {
             // Create a sample set of point and line features to use for the validation
             var pointFeature1 = new Feature("POINT(0 0)");
@@ -117,7 +118,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureOnEndpoint},
+            await ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureOnEndpoint},
                 invalidResultFeatures, new Collection<Feature> {lineFeature});
 
             // Update the help text
@@ -128,7 +129,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate points based on whether they are touching polygon boundaries, and display the results on the map
         /// </summary>
-        private void CheckIfPointsAreTouchingPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingPolygonBoundaries(object sender, EventArgs e)
         {
             // Create a sample set of point and polygon features to use for the validation
             var pointFeature1 = new Feature("POINT(150 0)");
@@ -145,7 +146,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureOnBoundary},
+            await ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureOnBoundary},
                 invalidResultFeatures, new Collection<Feature> {polygonFeature});
 
             // Update the help text
@@ -156,7 +157,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate points based on whether they are within polygons, and display the results on the map
         /// </summary>
-        private void CheckIfPointsAreWithinPolygons(object sender, EventArgs e)
+        private async void CheckIfPointsAreWithinPolygons(object sender, EventArgs e)
         {
             // Create a sample set of point and polygon features to use for the validation
             var pointFeature1 = new Feature("POINT(150 0)");
@@ -173,7 +174,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureInsidePolygon},
+            await ClearMapAndAddFeatures(new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureInsidePolygon},
                 invalidResultFeatures, new Collection<Feature> {polygonFeature});
 
             // Update the help text
@@ -184,7 +185,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Clear the previously displayed features from the map, and add new features
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
+        private async Task ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
             Collection<Feature> filterFeatures = null)
         {
             // Get the InMemoryFeatureLayers from the MapView
@@ -216,7 +217,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh/redraw the layers and reset the map extent
             var featureOverlay = (LayerOverlay) mapView.Overlays["Features Overlay"];
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(featureOverlay.GetBoundingBox(), 20).GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
 
             validatedFeaturesLayer.Close();
             filterFeaturesLayer.Close();

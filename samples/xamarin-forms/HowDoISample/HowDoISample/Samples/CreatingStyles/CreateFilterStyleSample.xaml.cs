@@ -17,7 +17,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and style the Frisco Crime layer
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -50,7 +50,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add layerOverlay to the mapView
             mapView.Overlays.Add(layerOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

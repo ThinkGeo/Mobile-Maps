@@ -25,7 +25,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay, as well as a feature layer to display the route
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -82,7 +82,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Run the routing request
             RouteWaypoints();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw the result of a Cloud Routing request on the map
         /// </summary>
-        private void DrawRoute(CloudRoutingGetRouteResult routingResult)
+        private async Task DrawRoute(CloudRoutingGetRouteResult routingResult)
         {
             // Get the routing feature layer from the MapView
             var routingLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Routing Layer");
@@ -146,7 +146,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetBoundingBox();
 
             routingLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -179,13 +179,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             //Draw the result on the map
-            DrawRoute(routingResult);
+            await DrawRoute(routingResult);
         }
 
         /// <summary>
         ///     When a route segment is selected in the UI, highlight it
         /// </summary>
-        private void lsbRouteSegments_SelectionChanged(object sender,
+        private async void lsbRouteSegments_SelectionChanged(object sender,
             SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
             var routeSegments = (ListView) sender;
@@ -201,8 +201,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Zoom to the selected feature and zoom out to an appropriate level
                 mapView.CurrentExtent = ((CloudRoutingSegment) routeSegments.SelectedItem).Shape.GetBoundingBox();
                 var standardZoomLevelSet = new ZoomLevelSet();
-                mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel15.Scale);
-                mapView.Refresh();
+                await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel15.Scale);
+                await mapView.RefreshAsync();
             }
         }
     }

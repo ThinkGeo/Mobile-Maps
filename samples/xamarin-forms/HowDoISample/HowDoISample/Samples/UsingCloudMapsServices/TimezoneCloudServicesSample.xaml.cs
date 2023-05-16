@@ -24,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
            
@@ -68,7 +68,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Get Timezone info for Frisco, TX
             //GetTimeZoneInfo(-10779572.80, 3915268.68);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         private async void mapView_MapTap(object sender, TouchMapViewEventArgs e)
@@ -137,7 +137,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             timezonesFeatureLayer.Close();
 
             // Refresh and redraw the map
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

@@ -55,7 +55,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Changes the display format of the CenterCoordinates based on ComboBox selection
         /// </summary>
-        private void CoordinateType_SelectionChanged(object sender, EventArgs e)
+        private async void CoordinateType_SelectionChanged(object sender, EventArgs e)
         {
             switch ((string) coordinateType.SelectedItem)
             {
@@ -71,7 +71,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     break;
             }
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

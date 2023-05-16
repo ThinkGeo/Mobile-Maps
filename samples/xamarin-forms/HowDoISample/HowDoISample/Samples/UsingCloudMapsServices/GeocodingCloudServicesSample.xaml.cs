@@ -23,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -52,7 +52,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             cboSearchType.SelectedIndex = 0;
             cboLocationType.SelectedIndex = 0;
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -88,13 +88,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Update the UI based on the results of a Cloud Geocoding Query
         /// </summary>
-        private void UpdateSearchResultsOnUI(CloudGeocodingResult searchResult)
+        private async Task UpdateSearchResultsOnUI(CloudGeocodingResult searchResult)
         {
             // Clear the locations list and existing location markers on the map
             var geocodedLocationOverlay = (SimpleMarkerOverlay) mapView.Overlays["Geocoded Locations Overlay"];
             geocodedLocationOverlay.Markers.Clear();
             lsbLocations.ItemsSource = null;
-            geocodedLocationOverlay.Refresh();
+            await geocodedLocationOverlay.RefreshAsync();
 
             // Update the UI with the number of results found and the list of locations found
             txtSearchResultsDescription.Text = $"Found {searchResult.Locations.Count} matching locations.";
@@ -127,14 +127,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
 
                 // Update the UI based on the results
-                UpdateSearchResultsOnUI(searchResult);
+                await UpdateSearchResultsOnUI(searchResult);
             }
         }
 
         /// <summary>
         ///     When a location is selected in the UI, add a marker at that location and center the map on it
         /// </summary>
-        private void lsbLocations_SelectionChanged(object sender, EventArgs e)
+        private async void lsbLocations_SelectionChanged(object sender, EventArgs e)
         {
             // Get the selected location
             var chosenLocation = lsbLocations.SelectedItem as CloudGeocodingLocation;
@@ -150,8 +150,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Center the map on the chosen location
                 mapView.CurrentExtent = chosenLocation.BoundingBox;
                 var standardZoomLevelSet = new ZoomLevelSet();
-                mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
-                mapView.Refresh();
+                await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
+                await mapView.RefreshAsync();
             }
         }
 

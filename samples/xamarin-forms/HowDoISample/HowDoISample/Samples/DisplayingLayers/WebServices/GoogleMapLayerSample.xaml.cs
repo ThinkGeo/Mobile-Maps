@@ -37,7 +37,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Add the Google Maps Layer to the map
         /// </summary>
-        private void btnActivate_OnClicked(object sender, EventArgs e)
+        private async void btnActivate_OnClicked(object sender, EventArgs e)
         {
             // Clear the current overlay
             mapView.Overlays.Clear();
@@ -57,7 +57,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             googleMapsLayer.UriSigningSecret = txtUriSigningSecret.Text;
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         private async void TapGestureRecognizer_OnTapped(object sender, EventArgs eventArgs)

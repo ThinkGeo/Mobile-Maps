@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -30,19 +30,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
         /// <summary>
         ///     Create a Bing Maps overlay and add it to the map view.
         /// </summary>
-        private void DisplayBingMaps_Click(object sender, EventArgs e)
+        private async void DisplayBingMaps_Click(object sender, EventArgs e)
         {
             var bingMapsOverlay = new BingMapsOverlay
                 {ApplicationId = bingApplicationId.Text, MapStyle = BingMapsMapType.Road};
             mapView.Overlays.Add(bingMapsOverlay);
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

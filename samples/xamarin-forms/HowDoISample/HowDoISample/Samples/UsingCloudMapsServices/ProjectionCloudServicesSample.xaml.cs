@@ -24,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer for the reprojected features
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -68,7 +68,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             projectionCloudClient = new ProjectionCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~",
                 "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw reprojected features on the map
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> features)
+        private async Task ClearMapAndAddFeatures(Collection<Feature> features)
         {
             // Get the layer we prepared from the MapView
             var reprojectedFeatureLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Reprojected Features Layer");
@@ -126,10 +126,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
 
             var standardZoomLevelSet = new ZoomLevelSet();
-            mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
+            await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
 
             reprojectedFeatureLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var sphericalMercatorFeature = await ReprojectAFeature(decimalDegreeFeature);
 
             // Add the reprojected features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {sphericalMercatorFeature});
+            await ClearMapAndAddFeatures(new Collection<Feature> {sphericalMercatorFeature});
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var sphericalMercatorFeatures = await ReprojectMultipleFeatures(decimalDegreeFeatures);
 
             // Add the reprojected features to the map
-            ClearMapAndAddFeatures(sphericalMercatorFeatures);
+            await ClearMapAndAddFeatures(sphericalMercatorFeatures);
         }
     }
 }

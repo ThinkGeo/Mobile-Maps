@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     WIP
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -69,7 +69,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var stadium = new Feature(new PointShape(-10779651.500992451, 3915933.0023557912));
             snapLayer.InternalFeatures.Add(stadium);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         private void SnapToShape_Click(object sender, EventArgs e)

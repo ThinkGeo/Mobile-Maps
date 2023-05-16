@@ -18,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             // Set the map's unit of measurement to meters(Spherical Mercator)
             base.OnAppearing();
@@ -52,7 +52,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Apply HeatStyle
             AddHeatStyle(coyoteSightings);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

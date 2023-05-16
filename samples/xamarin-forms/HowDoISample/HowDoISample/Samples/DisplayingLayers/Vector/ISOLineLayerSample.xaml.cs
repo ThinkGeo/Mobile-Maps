@@ -23,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the ISOLine layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -64,7 +64,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mosquitosLayer.Close();
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         private static Dictionary<PointShape, double> GetDataFromCSV(string csvFilePath)

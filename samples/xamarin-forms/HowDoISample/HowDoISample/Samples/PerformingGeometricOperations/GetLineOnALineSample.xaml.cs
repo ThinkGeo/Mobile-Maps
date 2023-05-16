@@ -22,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the railway and subLineLayer layers into a
         ///     grouped LayerOverlay and display them on the map.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -67,13 +67,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Get a subLine of a line and displays it on the map
         /// </summary>
-        private void GetSubLine_OnClick(object sender, EventArgs e)
+        private async void GetSubLine_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
 
@@ -95,7 +95,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             subLineLayer.InternalFeatures.Add(new Feature(subLine));
 
             // Redraw the layerOverlay to see the subLine on the map
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
         }
     }
 }

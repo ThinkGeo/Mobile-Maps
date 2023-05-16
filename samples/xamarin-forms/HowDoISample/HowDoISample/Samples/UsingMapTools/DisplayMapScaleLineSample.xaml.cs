@@ -17,7 +17,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     TODO: Update sample once API has been ported
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -35,7 +35,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 

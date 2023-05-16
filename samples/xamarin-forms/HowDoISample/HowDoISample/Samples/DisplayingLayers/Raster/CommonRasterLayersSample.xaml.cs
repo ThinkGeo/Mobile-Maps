@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the common raster layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -48,7 +48,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new RectangleShape(-10783910.2966461, 3917274.29233111, -10777309.4670677, 3912119.9131963);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

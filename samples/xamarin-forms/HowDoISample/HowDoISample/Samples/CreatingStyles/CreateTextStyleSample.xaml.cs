@@ -18,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, project and add styles to the Hotels, Streets, and Parks
         ///     layer.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -59,7 +59,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent =
                 new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

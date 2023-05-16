@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up feature layers in the MapView to display the validated features
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to Decimal Degree
@@ -68,14 +69,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries.IsChecked = true;
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Validate polygons based on whether their boundaries overlap with the boundaries of a second set of polygons, and
         ///     display the results on the map
         /// </summary>
-        private void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var coveringPolygonFeature = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
@@ -91,7 +92,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {coveredPolygonFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {coveredPolygonFeature}, invalidResultFeatures,
                 new Collection<Feature> {coveringPolygonFeature});
 
             // Update the help text
@@ -103,7 +104,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate polygons based on whether their boundaries overlap with a separate set of lines, and display the results
         ///     on the map
         /// </summary>
-        private void CheckIfPolygonBoundariesOverlapLines(object sender, EventArgs e)
+        private async void CheckIfPolygonBoundariesOverlapLines(object sender, EventArgs e)
         {
             // Create a sample set of polygon and line features to use for the validation
             var polygonFeature = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
@@ -118,7 +119,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature}, invalidResultFeatures,
                 new Collection<Feature> {lineFeature});
 
             // Update the help text
@@ -129,7 +130,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate polygons based on whether they overlap a second set of polygons, and display the results on the map
         /// </summary>
-        private void CheckIfPolygonsOverlapPolygons(object sender, EventArgs e)
+        private async void CheckIfPolygonsOverlapPolygons(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
@@ -146,7 +147,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
                 invalidResultFeatures, new Collection<Feature> {coveringPolygonFeature});
 
             // Update the help text
@@ -157,7 +158,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate polygons based on whether they lie within other polygons, and display the results on the map
         /// </summary>
-        private void CheckIfPolygonsAreWithinPolygons(object sender, EventArgs e)
+        private async void CheckIfPolygonsAreWithinPolygons(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
@@ -174,7 +175,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
                 invalidResultFeatures, new Collection<Feature> {coveringPolygonFeature});
 
             // Update the help text
@@ -185,7 +186,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate polygons based on whether they contain points, and display the results on the map
         /// </summary>
-        private void CheckIfPolygonsContainPoints(object sender, EventArgs e)
+        private async void CheckIfPolygonsContainPoints(object sender, EventArgs e)
         {
             // Create a sample set of points and polygon features to use for the validation
             var pointFeature = new Feature("POINT(50 50)");
@@ -201,7 +202,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature, polygonWithPointFeature},
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature, polygonWithPointFeature},
                 invalidResultFeatures, new Collection<Feature> {pointFeature});
 
             // Update the help text
@@ -213,7 +214,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate polygons based on whether they overlap each other, and display the results on the map. Unlike other
         ///     validations, this function validates and returns invalid polygons from both input sets
         /// </summary>
-        private void CheckIfPolygonsCoverEachOther(object sender, EventArgs e)
+        private async void CheckIfPolygonsCoverEachOther(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
@@ -228,7 +229,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2}, invalidResultFeatures);
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2}, invalidResultFeatures);
 
             // Update the help text
             txtValidationInfo.Text =
@@ -239,7 +240,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate polygons based on whether the union of the polygons has any interior gaps, and display the results on the
         ///     map
         /// </summary>
-        private void CheckIfPolygonsHaveGaps(object sender, EventArgs e)
+        private async void CheckIfPolygonsHaveGaps(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((0 0,40 0,40 40,0 40,0 0))");
@@ -255,7 +256,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(
+            await ClearMapAndAddFeatures(
                 new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3, polygonFeature4},
                 invalidResultFeatures);
 
@@ -267,7 +268,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate polygons based on whether polygons within the same set overlap, and display the results on the map
         /// </summary>
-        private void CheckPolygonsMustNotOverlap(object sender, EventArgs e)
+        private async void CheckPolygonsMustNotOverlap(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
@@ -283,7 +284,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(
+            await ClearMapAndAddFeatures(
                 new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3, polygonFeature4},
                 invalidResultFeatures);
 
@@ -295,7 +296,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate polygons based on whether they overlap polygons from a separate set, and display the results on the map
         /// </summary>
-        private void CheckPolygonsMustNotOverlapPolygons(object sender, EventArgs e)
+        private async void CheckPolygonsMustNotOverlapPolygons(object sender, EventArgs e)
         {
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
@@ -312,7 +313,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {polygonFeature1, polygonFeature2, polygonFeature3},
                 invalidResultFeatures, new Collection<Feature> {coveringPolygonFeature});
 
             // Update the help text
@@ -323,7 +324,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Clear the previously displayed features from the map, and add new features
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
+        private async Task ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
             Collection<Feature> filterFeatures = null)
         {
             // Get the InMemoryFeatureLayers from the MapView
@@ -355,7 +356,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh/redraw the layers and reset the map extent
             var featureOverlay = (LayerOverlay) mapView.Overlays["Features Overlay"];
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(featureOverlay.GetBoundingBox(), 20).GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
 
             validatedFeaturesLayer.Close();
             filterFeaturesLayer.Close();

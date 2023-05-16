@@ -23,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and feature layers for the queried shapes
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -85,15 +85,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             cboQueryLayer.SelectedItem = "Buildings";
             cboQueryType.SelectedItem = "Intersecting";
 
-            PerformWorldMapsQuery();
+            await PerformWorldMapsQuery();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Get features from the WorldMapsQuery service based on the UI parameters
         /// </summary>
-        private async void PerformWorldMapsQuery()
+        private async Task PerformWorldMapsQuery()
         {
             // Get the feature layers from the MapView
             var queriedFeaturesOverlay = (LayerOverlay) mapView.Overlays["Queried Features Overlay"];
@@ -155,13 +155,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 if (ex is ArgumentException)
                 {
                     await DisplayAlert("Error", ex.Message, "OK");
-                    mapView.Refresh();
+                    await mapView.RefreshAsync();
                     return;
                 }
                 else
                 {
                     await DisplayAlert("Alert", ex.Message, "OK");
-                    mapView.Refresh();
+                    await mapView.RefreshAsync();
                     return;
                 }
             }
@@ -188,13 +188,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Refresh and redraw the map
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Disable drawing mode and draw the new query shape on the map when finished drawing a shape
         /// </summary>
-        private void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
+        private async void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
         {
             // Disable drawing mode and clear the drawing layer
             mapView.TrackOverlay.TrackMode = TrackMode.None;
@@ -206,9 +206,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the newly drawn shape, then redraw the overlay
             queryShapeFeatureLayer.InternalFeatures.Add(new Feature(e.TrackShape));
-            queriedFeaturesOverlay.Refresh();
+            await queriedFeaturesOverlay.RefreshAsync();
 
-            PerformWorldMapsQuery();
+            await PerformWorldMapsQuery();
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
 
             // Clear the old shapes from the map
-            ClearQueryShapes();
+            await ClearQueryShapes();
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
             // Clear the old shapes from the map
-            ClearQueryShapes();
+            await ClearQueryShapes();
         }
 
         /// <summary>
@@ -247,13 +247,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
             // Clear the old shapes from the map
-            ClearQueryShapes();
+            await ClearQueryShapes();
         }
 
         /// <summary>
         ///     Clear the query shapes from the map
         /// </summary>
-        private void ClearQueryShapes()
+        private async Task ClearQueryShapes()
         {
             // Get the query shape layer from the MapView
             var queriedFeaturesOverlay = (LayerOverlay) mapView.Overlays["Queried Features Overlay"];
@@ -263,7 +263,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the old query result and query shape from the map
             queriedFeaturesLayer.InternalFeatures.Clear();
             queryShapeFeatureLayer.InternalFeatures.Clear();
-            queriedFeaturesOverlay.Refresh();
+            await queriedFeaturesOverlay.RefreshAsync();
         }
 
         private async Task CollapseExpander()

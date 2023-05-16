@@ -3,6 +3,7 @@ using System.IO;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
 {
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -36,7 +37,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -44,9 +45,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double tapping on the
         ///     map, or pinching the map.
         /// </summary>
-        private void ZoomIn_Click(object sender, EventArgs e)
+        private async void ZoomIn_Click(object sender, EventArgs e)
         {
-            mapView.ZoomIn();
+            await mapView.ZoomInAsync();
         }
 
         /// <summary>
@@ -54,35 +55,35 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     The same effect can be achieved by using the ZoomPanBar bar on the upper left of the map, double tapping on the
         ///     map, or pinching the map.
         /// </summary>
-        private void ZoomOut_Click(object sender, EventArgs e)
+        private async void ZoomOut_Click(object sender, EventArgs e)
         {
-            mapView.ZoomOut();
+            await mapView.ZoomOutAsync();
         }
 
         /// <summary>
         ///     Pan the map in a direction using the PanDirection enum and set how far to pan based on percentage.
         ///     The same effect can be achieved by tap dragging anywhere on the map.
         /// </summary>
-        private void PanArrow_Click(object sender, EventArgs e)
+        private async void PanArrow_Click(object sender, EventArgs e)
         {
             var percentage = (int) panPercentage.Value;
             switch (((ImageButton) sender).AutomationId)
             {
                 case "panNorth":
-                    mapView.Pan(PanDirection.Up, percentage);
+                    await mapView.PanAsync(PanDirection.Up, percentage);
                     break;
                 case "panEast":
-                    mapView.Pan(PanDirection.Right, percentage);
+                    await mapView.PanAsync(PanDirection.Right, percentage);
                     break;
                 case "panWest":
-                    mapView.Pan(PanDirection.Left, percentage);
+                    await mapView.PanAsync(PanDirection.Left, percentage);
                     break;
                 case "panSouth":
-                    mapView.Pan(PanDirection.Down, percentage);
+                    await mapView.PanAsync(PanDirection.Down, percentage);
                     break;
             }
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

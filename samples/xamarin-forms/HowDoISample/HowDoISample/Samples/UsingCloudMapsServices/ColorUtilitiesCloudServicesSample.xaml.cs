@@ -86,7 +86,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the initial color scheme for the housing units layer
             var colors = await GetColorsFromCloud();
             // If colors were successfully generated, update the map
-            if (colors.Count > 0) UpdateHousingUnitsLayerColors(colors);
+            if (colors.Count > 0) await UpdateHousingUnitsLayerColors(colors);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Update the colors for the housing units layers
         /// </summary>
-        private void UpdateHousingUnitsLayerColors(Collection<GeoColor> colors)
+        private async Task UpdateHousingUnitsLayerColors(Collection<GeoColor> colors)
         {
             // Get the housing units layer from the MapView
             var housingUnitsOverlay = (LayerOverlay) mapView.Overlays["Frisco Housing Units Overlay"];
@@ -167,13 +167,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             housingUnitsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(classBreakStyle);
             housingUnitsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            GenerateNewLegendItems(classBreaks);
+            await GenerateNewLegendItems(classBreaks);
 
             // Refresh the overlay to redraw the features
-            housingUnitsOverlay.Refresh();
+            await housingUnitsOverlay.RefreshAsync();
         }
 
-        private void GenerateNewLegendItems(Collection<ClassBreak> classBreaks)
+        private async Task GenerateNewLegendItems(Collection<ClassBreak> classBreaks)
         {
             //// Clear the previous legend adornment
             var legend = (LegendAdornmentLayer) mapView.AdornmentOverlay.Layers["Legend"];
@@ -191,7 +191,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 legend.LegendItems.Add(legendItem);
             }
 
-            mapView.AdornmentOverlay.Refresh();
+            await mapView.AdornmentOverlay.RefreshAsync();
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colors = await GetColorsFromCloud();
 
             // If colors were successfully generated, update the map
-            if (colors.Count > 0) UpdateHousingUnitsLayerColors(colors);
+            if (colors.Count > 0) await UpdateHousingUnitsLayerColors(colors);
         }
 
         /// <summary>

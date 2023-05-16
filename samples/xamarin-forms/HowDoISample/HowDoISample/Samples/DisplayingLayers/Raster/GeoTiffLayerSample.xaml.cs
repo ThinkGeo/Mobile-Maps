@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Add the GeoTiff layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -40,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new RectangleShape(-90.5399054799761, 68.8866552710533, 57.5181302343096, -43.7137911575181);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

@@ -79,7 +79,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await PerformElevationQuery(sampleShape);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent to the elevation query feature
             drawnShapesLayer.Open();
-            mapView.CenterAt(drawnShapesLayer.GetBoundingBox().GetCenterPoint());
+            await mapView.CenterAtAsync(drawnShapesLayer.GetBoundingBox().GetCenterPoint());
             drawnShapesLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -214,8 +214,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 // Set the map extent to the selected point
                 var elevationPoint = (CloudElevationPointResult) lsbElevations.SelectedItem;
-                mapView.CenterAt(elevationPoint.Point);
-                mapView.Refresh();
+                await mapView.CenterAtAsync(elevationPoint.Point);
+                await mapView.RefreshAsync();
             }
         }
 

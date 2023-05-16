@@ -26,7 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay, as well as a feature layer to display the route
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -92,7 +92,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var samplePoint = new PointShape(-10776836.140633, 3912350.714164);
             GetAndDrawServiceArea(samplePoint);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw the ServiceArea polygons on the map
         /// </summary>
-        private void DrawServiceArea(CloudRoutingGetServiceAreaResult result)
+        private async Task DrawServiceArea(CloudRoutingGetServiceAreaResult result)
         {
             var serviceAreaResult = result.ServiceAreaResult;
 
@@ -155,7 +155,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = serviceAreaLayer.GetBoundingBox();
             serviceAreaLayer.Close();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Draw the result on the map
-            DrawServiceArea(getServiceAreaResult);
+            await DrawServiceArea(getServiceAreaResult);
         }
 
         private void SetUpLegendAdornment(Collection<ClassBreak> classBreaks)

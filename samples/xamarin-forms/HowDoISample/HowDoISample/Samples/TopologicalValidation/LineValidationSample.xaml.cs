@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up feature layers in the MapView to display the validated features
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to Decimal Degree
@@ -68,13 +69,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             rdoCheckLineEndpointsMustTouchPoints.IsChecked = true;
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Validate lines based on whether their endpoints are touching points, and display the results on the map
         /// </summary>
-        private void CheckLineEndpointsMustTouchPoints(object sender, EventArgs e)
+        private async void CheckLineEndpointsMustTouchPoints(object sender, EventArgs e)
         {
             // Create a sample set of point and line features to use for the validation
             var lineFeature = new Feature("LINESTRING(0 0,100 0,100 50)");
@@ -89,7 +90,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature}, invalidResultFeatures,
                 new Collection<Feature> {pointOnEndpointFeature});
 
             // Update the help text
@@ -100,7 +101,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they are overlapping polygon boundaries, and display the results on the map
         /// </summary>
-        private void CheckLinesMustOverlapPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckLinesMustOverlapPolygonBoundaries(object sender, EventArgs e)
         {
             // Create a sample set of line and polygon features to use for the validation
             var lineFeature = new Feature("LINESTRING(-50 0,150 0)");
@@ -116,7 +117,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature, lineOnBoundaryFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature, lineOnBoundaryFeature}, invalidResultFeatures,
                 new Collection<Feature> {polygonFeature});
 
             // Update the help text
@@ -128,7 +129,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate lines based on whether they are overlapping lines from a separate set of features, and display the results
         ///     on the map
         /// </summary>
-        private void CheckLinesMustOverlapLines(object sender, EventArgs e)
+        private async void CheckLinesMustOverlapLines(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineFeature = new Feature("LINESTRING(0 0,100 0,100 100,0 100)");
@@ -143,7 +144,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature}, invalidResultFeatures,
                 new Collection<Feature> {coveringLineFeature});
 
             // Update the help text
@@ -154,7 +155,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they are composed of a single part, and display the results on the map
         /// </summary>
-        private void CheckLinesMustBeSinglePart(object sender, EventArgs e)
+        private async void CheckLinesMustBeSinglePart(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var singleLineFeature = new Feature("MULTILINESTRING((0 -50,100 -50,100 -100,0 -100))");
@@ -168,7 +169,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {singleLineFeature, multiLineFeature},
+            await ClearMapAndAddFeatures(new Collection<Feature> {singleLineFeature, multiLineFeature},
                 invalidResultFeatures);
 
             // Update the help text
@@ -179,7 +180,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they form a closed polygon, and display the results on the map
         /// </summary>
-        private void CheckLinesMustFormClosedPolygon(object sender, EventArgs e)
+        private async void CheckLinesMustFormClosedPolygon(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100,20 100)");
@@ -193,7 +194,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(lines, invalidResultFeatures);
+            await ClearMapAndAddFeatures(lines, invalidResultFeatures);
 
             // Update the help text
             txtValidationInfo.Text =
@@ -203,7 +204,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they form pseudonodes, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotHavePseudonodes(object sender, EventArgs e)
+        private async void CheckLinesMustNotHavePseudonodes(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineSegmentFeature1 = new Feature("LINESTRING(0 0,50 0,50 50,0 0)");
@@ -225,7 +226,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(lines, invalidResultFeatures);
+            await ClearMapAndAddFeatures(lines, invalidResultFeatures);
 
             // Update the help text
             txtValidationInfo.Text = "Lines being validated are shown in green. \n\nPseudonodes are shown in red.";
@@ -234,7 +235,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they intersect other lines, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotIntersect(object sender, EventArgs e)
+        private async void CheckLinesMustNotIntersect(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
@@ -249,7 +250,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
                 invalidResultFeatures);
 
             // Update the help text
@@ -259,7 +260,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they intersect or touch other lines, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotSelfIntersectOrTouch(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfIntersectOrTouch(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
@@ -274,7 +275,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
                 invalidResultFeatures);
 
             // Update the help text
@@ -285,7 +286,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they overlap other lines, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotOverlap(object sender, EventArgs e)
+        private async void CheckLinesMustNotOverlap(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
@@ -300,7 +301,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
+            await ClearMapAndAddFeatures(new Collection<Feature> {lineFeature1, lineFeature2, lineFeature3},
                 invalidResultFeatures);
 
             // Update the help text
@@ -312,7 +313,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate lines based on whether they overlap other lines from a separate set of features, and display the results
         ///     on the map
         /// </summary>
-        private void CheckLinesMustNotOverlapLines(object sender, EventArgs e)
+        private async void CheckLinesMustNotOverlapLines(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var overlappingLineFeature = new Feature("LINESTRING(0 0,100 0,100 100,0 100)");
@@ -327,7 +328,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {overlappedLineFeature}, invalidResultFeatures,
+            await ClearMapAndAddFeatures(new Collection<Feature> {overlappedLineFeature}, invalidResultFeatures,
                 new Collection<Feature> {overlappingLineFeature});
 
             // Update the help text
@@ -338,7 +339,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they self-intersect, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotSelfIntersect(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfIntersect(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var selfIntersectingLine = new Feature("LINESTRING(0 0,100 0,100 100,50 100,50 -50)");
@@ -351,7 +352,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {selfIntersectingLine}, invalidResultFeatures);
+            await ClearMapAndAddFeatures(new Collection<Feature> {selfIntersectingLine}, invalidResultFeatures);
 
             // Update the help text
             txtValidationInfo.Text =
@@ -361,7 +362,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether they elf-overlap, and display the results on the map
         /// </summary>
-        private void CheckLinesMustNotSelfOverlap(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfOverlap(object sender, EventArgs e)
         {
             // Create a sample set of line features to use for the validation
             var selfOverlappingLine = new Feature("LINESTRING(0 0,100 0,100 100,0 100,20 0,40 0,40 -50)");
@@ -374,7 +375,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var invalidResultFeatures = result.InvalidFeatures;
 
             // Clear the MapView and add the new valid/invalid features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {selfOverlappingLine}, invalidResultFeatures);
+            await ClearMapAndAddFeatures(new Collection<Feature> {selfOverlappingLine}, invalidResultFeatures);
 
             // Update the help text
             txtValidationInfo.Text =
@@ -384,7 +385,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Clear the previously displayed features from the map, and add new features
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
+        private async Task ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
             Collection<Feature> filterFeatures = null)
         {
             // Get the InMemoryFeatureLayers from the MapView
@@ -416,7 +417,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh/redraw the layers and reset the map extent
             var featureOverlay = (LayerOverlay) mapView.Overlays["Features Overlay"];
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(featureOverlay.GetBoundingBox(), 20).GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
 
             validatedFeaturesLayer.Close();
             filterFeaturesLayer.Close();

@@ -22,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the friscoParks and selectedAreaLayer layers
         ///     into a grouped LayerOverlay and display it on the map.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -66,13 +66,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Calculates the area of a feature selected on the map and displays it in the areaResult TextBox
         /// </summary>
-        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
 
@@ -86,7 +86,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Show the selected feature on the map
             selectedAreaLayer.InternalFeatures.Clear();
             selectedAreaLayer.InternalFeatures.Add(feature);
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
 
             // Get the area of the first feature
             var area = ((AreaBaseShape) feature.GetShape()).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers);

@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -30,13 +30,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Create a ThinkGeo Cloud Maps vector overlay and add it to the map view.
         /// </summary>
-        private void DisplayVectorCloudMaps_Click(object sender, EventArgs e)
+        private async void DisplayVectorCloudMaps_Click(object sender, EventArgs e)
         {
             var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(cloudMapsApiKey.Text,
                 cloudMapsSecretKey.Text, ThinkGeoCloudVectorMapsMapType.Light);
@@ -44,7 +44,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "cache"),
                 "CloudMapsVector");
             mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

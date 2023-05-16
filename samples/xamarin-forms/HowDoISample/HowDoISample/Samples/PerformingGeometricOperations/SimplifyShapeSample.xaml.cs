@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and simplifyLayer layers into a
         ///     grouped LayerOverlay and display them on the map.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -67,13 +67,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Simplifies the first feature in the cityLimits layer and displays the results on the map.
         /// </summary>
-        private void SimplifyShape_OnClick(object sender, EventArgs e)
+        private async void SimplifyShape_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
 
@@ -95,7 +95,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             simplifyLayer.InternalFeatures.Add(new Feature(simplify));
 
             // Redraw the layerOverlay to see the simplified feature on the map
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
         }
     }
 }

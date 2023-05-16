@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the NOAA Weather Warning layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -68,7 +69,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Info Popup Overlay", popupOverlay);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         protected override void OnDisappearing()
@@ -104,13 +105,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             });
         }
 
-        private void mapView_MapClick(object sender, TouchMapViewEventArgs e)
+        private async void mapView_MapClick(object sender, TouchMapViewEventArgs e)
         {
             // Get the selected feature based on the tapped location
             var selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
 
             // If a feature was selected, get the data from it and display it
-            if (selectedFeatures != null) DisplayFeatureInfo(selectedFeatures);
+            if (selectedFeatures != null) await DisplayFeatureInfo(selectedFeatures);
         }
 
         private Collection<Feature> GetFeaturesFromLocation(PointShape location)
@@ -125,7 +126,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             return selectedFeatures;
         }
 
-        private void DisplayFeatureInfo(Collection<Feature> features)
+        private async Task DisplayFeatureInfo(Collection<Feature> features)
         {
             if (features.Count > 0)
             {
@@ -146,7 +147,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 popupOverlay.Popups.Add(popup);
 
                 // Refresh the overlay to redraw the popups
-                popupOverlay.Refresh();
+                await popupOverlay.RefreshAsync();
             }
         }
     }

@@ -28,7 +28,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Set up the map with the ThinkGeo Cloud Maps overlay, as well as several feature layers to display the reverse
         ///     geocoding search area and locations
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -85,7 +85,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             cboLocationCategories.SelectedIndex = 0;
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -167,14 +167,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
 
                 // Update the UI
-                DisplaySearchResults(searchPoint, searchRadius, searchResult);
+                await DisplaySearchResults(searchPoint, searchRadius, searchResult);
             }
         }
 
         /// <summary>
         ///     Update the UI based on the search results from the reverse geocode
         /// </summary>
-        private void DisplaySearchResults(PointShape searchPoint, int searchRadius,
+        private async Task DisplaySearchResults(PointShape searchPoint, int searchRadius,
             CloudReverseGeocodingResult searchResult)
         {
             // Get the 'Search Radius' layer from the MapView
@@ -242,13 +242,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent to show the results of the search
             mapView.CurrentExtent =
                 AreaBaseShape.ScaleUp(searchRadiusFeatureLayer.GetBoundingBox(), 20).GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     When a location is selected in the UI, draw the matching feature found and center the map on it
         /// </summary>
-        private void lsbSearchResults_SelectionChanged(object sender, EventArgs e)
+        private async void lsbSearchResults_SelectionChanged(object sender, EventArgs e)
         {
             var selectedResultList = (ListView) sender;
             if (selectedResultList.SelectedItem != null)
@@ -266,8 +266,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
                 // Center the map on the chosen location
                 mapView.CurrentExtent = locationFeature.GetBoundingBox();
-                mapView.ZoomToScale(mapView.ZoomLevelSet.ZoomLevel18.Scale);
-                mapView.Refresh();
+                await mapView.ZoomToScaleAsync(mapView.ZoomLevelSet.ZoomLevel18.Scale);
+                await mapView.RefreshAsync();
             }
         }
 

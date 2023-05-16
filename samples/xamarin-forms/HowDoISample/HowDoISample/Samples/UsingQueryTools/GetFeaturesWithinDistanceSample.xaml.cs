@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco zoning data
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -73,13 +74,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add a sample point to the map for the initial query
             var sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
-            GetFeaturesWithinDistance(sampleShape);
+            await GetFeaturesWithinDistance(sampleShape);
 
             // Set the map extent to the initial area
             mapView.CurrentExtent =
                 new RectangleShape(-10781338.5834248, 3916678.62545891, -10777511.9547176, 3913262.84577639);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
@@ -102,7 +103,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Highlight the features that were found by the spatial query
         /// </summary>
-        private void HighlightQueriedFeatures(IEnumerable<Feature> features)
+        private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
             var layerOverlay = (LayerOverlay) mapView.Overlays["Layer Overlay"];
@@ -117,14 +118,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.Close();
 
             // Refresh the overlay so the layer is redrawn
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text =
                 $"Number of features within distance of the drawn shape: {features.Count()}";
         }
 
-        private void GetFeaturesWithinDistance(PointShape point)
+        private async Task GetFeaturesWithinDistance(PointShape point)
         {
             // Find the layers we will be modifying in the MapView
             var queryFeatureMarkerOverlay = (SimpleMarkerOverlay) mapView.Overlays["Query Feature Marker Overlay"];
@@ -133,11 +134,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the query point marker overlaylayer and add a marker on the newly drawn point
             queryFeatureMarkerOverlay.Markers.Clear();
             queryFeatureMarkerOverlay.Markers.Add(CreateNewMarker(point));
-            queryFeatureMarkerOverlay.Refresh();
+            await queryFeatureMarkerOverlay.RefreshAsync();
 
             // Perform the spatial query using the drawn point and highlight features that were found
             var queriedFeatures = PerformSpatialQuery(point, zoningLayer);
-            HighlightQueriedFeatures(queriedFeatures);
+            await HighlightQueriedFeatures(queriedFeatures);
 
             // Disable map drawing and clear the drawn point
             mapView.TrackOverlay.TrackMode = TrackMode.None;
@@ -147,9 +148,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Perform the spatial query when a new point is drawn
         /// </summary>
-        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
-            GetFeaturesWithinDistance(e.PointInWorldCoordinate);
+            await GetFeaturesWithinDistance(e.PointInWorldCoordinate);
         }
 
         /// <summary>

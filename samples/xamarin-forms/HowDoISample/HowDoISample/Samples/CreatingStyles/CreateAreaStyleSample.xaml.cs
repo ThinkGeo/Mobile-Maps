@@ -18,7 +18,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the cityLimits and bufferLayer layers into a grouped
         ///     LayerOverlay and display them on the map.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -51,7 +51,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add the area style to the historicSites layer
             AddAreaStyle(friscoSubdivisions);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

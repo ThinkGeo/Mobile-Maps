@@ -51,7 +51,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             rbLineStyle.IsChecked = true;
         }
 
-        private void rbLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private async void rbLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (mapView.Overlays.Count > 0)
             {
@@ -69,11 +69,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                 // Refresh the layerOverlay to show the new style
-                layerOverlay.Refresh();
+                await layerOverlay.RefreshAsync();
             }
         }
 
-        private void rbDashedLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private async void rbDashedLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (mapView.Overlays.Count > 0)
             {
@@ -99,7 +99,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                 // Refresh the layerOverlay to show the new style
-                layerOverlay.Refresh();
+                await layerOverlay.RefreshAsync();
             }
         }
     }

@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the SQLite layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -66,7 +66,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new RectangleShape(-10776971.1234695, 3915454.06613793, -10775965.157585, 3914668.53918197);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

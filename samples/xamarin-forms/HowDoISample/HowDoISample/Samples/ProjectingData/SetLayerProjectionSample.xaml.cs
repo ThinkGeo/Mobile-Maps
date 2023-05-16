@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -40,15 +41,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Frisco Subdivisions Overlay", subdivisionsOverlay);
 
             // Reproject a shapefile and set the extent
-            ReprojectFeaturesFromShapefile();
+            await ReprojectFeaturesFromShapefile();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Use the ProjectionConverter class to reproject features in a ShapeFileFeatureLayer
         /// </summary>
-        private void ReprojectFeaturesFromShapefile()
+        private async Task ReprojectFeaturesFromShapefile()
         {
             // Create a feature layer to hold the Frisco subdivisions data
             var subdivisionsLayer = new ShapeFileFeatureLayer(Path.Combine(
@@ -76,7 +77,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             subdivisionsLayer.Open();
             mapView.CurrentExtent = subdivisionsLayer.GetBoundingBox();
             subdivisionsLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

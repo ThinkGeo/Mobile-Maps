@@ -19,7 +19,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -36,13 +36,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new RectangleShape(-10781708.9749424, 3913502.90429046, -10777685.1114043, 3910360.79646662);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Switch the Map Type based on the radio buttons
         /// </summary>
-        private void rbMapType_Checked(object sender, EventArgs e)
+        private async void rbMapType_Checked(object sender, EventArgs e)
         {
             var button = (RadioButton) sender;
             if (mapView.Overlays.Contains("Cloud Overlay"))
@@ -65,7 +65,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                         break;
                 }
 
-                mapView.Refresh();
+                await mapView.RefreshAsync();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,7 +24,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco zoning data
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -82,12 +83,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var sampleShape =
                 new PolygonShape(
                     "POLYGON((-10779148.1848451 3916088.62700432,-10779960.3282662 3913862.39842209,-10777189.4860062 3911913.25450323,-10777179.9313777 3915754.21500743,-10779148.1848451 3916088.62700432))");
-            GetFeaturesWithin(sampleShape);
+            await GetFeaturesWithin(sampleShape);
 
             // Set the map extent to the sample shapes
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(sampleShape.GetBoundingBox(), 20).GetBoundingBox();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Highlight the features that were found by the spatial query
         /// </summary>
-        private void HighlightQueriedFeatures(IEnumerable<Feature> features)
+        private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
         {
             // Find the layers we will be modifying in the MapView dictionary
             var layerOverlay = (LayerOverlay) mapView.Overlays["Layer Overlay"];
@@ -121,7 +122,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             highlightedFeaturesLayer.Close();
 
             // Refresh the overlay so the layer is redrawn
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text = $"Number of features within the drawn shape: {features.Count()}";
@@ -130,7 +131,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Perform the spatial query and draw the shapes on the map
         /// </summary>
-        private void GetFeaturesWithin(PolygonShape polygon)
+        private async Task GetFeaturesWithin(PolygonShape polygon)
         {
             // Find the layers we will be modifying in the MapView
             var layerOverlay = (LayerOverlay) mapView.Overlays["Layer Overlay"];
@@ -140,11 +141,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the query shape layer and add the newly drawn shape
             queryFeatureLayer.InternalFeatures.Clear();
             queryFeatureLayer.InternalFeatures.Add(new Feature(polygon));
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
 
             // Perform the spatial query using the drawn shape and highlight features that were found
             var queriedFeatures = PerformSpatialQuery(polygon, zoningLayer);
-            HighlightQueriedFeatures(queriedFeatures);
+            await HighlightQueriedFeatures(queriedFeatures);
 
             // Disable map drawing and clear the drawn shape
             mapView.TrackOverlay.TrackMode = TrackMode.None;
@@ -154,9 +155,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Performs the spatial query when a new polygon is drawn
         /// </summary>
-        private void OnPolygonDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
+        private async void OnPolygonDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
         {
-            GetFeaturesWithin((PolygonShape) e.TrackShape);
+            await GetFeaturesWithin((PolygonShape) e.TrackShape);
         }
 
         /// <summary>

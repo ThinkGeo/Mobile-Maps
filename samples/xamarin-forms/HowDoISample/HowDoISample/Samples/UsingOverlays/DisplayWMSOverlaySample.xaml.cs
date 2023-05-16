@@ -19,7 +19,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with a background overlay and set the map's extent to Frisco, Tx.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -37,7 +37,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             wmsOverlay.Parameters.Add("STYLES", "default");
             mapView.Overlays.Add(wmsOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

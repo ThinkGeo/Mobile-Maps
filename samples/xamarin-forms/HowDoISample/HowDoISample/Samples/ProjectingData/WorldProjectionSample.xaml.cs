@@ -50,7 +50,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             rdoPolar.IsChecked = true;
         }
 
-        private void Radial_Checked(object sender, EventArgs e)
+        private async void Radial_Checked(object sender, EventArgs e)
         {
             var radioButton = (RadioButton) sender;
             var layer = mapView.FindFeatureLayer("world layer");
@@ -105,7 +105,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                         break;
                 }
 
-                mapView.Refresh();
+                await mapView.RefreshAsync();
             }
         }
 

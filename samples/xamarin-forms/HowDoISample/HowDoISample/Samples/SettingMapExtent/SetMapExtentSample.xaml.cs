@@ -72,7 +72,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             await CollapseExpander();
 
-            mapView.ZoomToScale(Convert.ToDouble(zoomScale.Text));
+            await mapView.ZoomToScaleAsync(Convert.ToDouble(zoomScale.Text));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await CollapseExpander();
 
             mapView.CurrentExtent = friscoCityBoundary.GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var feature = friscoCityBoundary.FeatureSource.GetFeatureById(featureIds.SelectedItem.ToString(),
                 ReturningColumnsType.NoColumns);
             mapView.CurrentExtent = feature.GetBoundingBox();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             projectionConverter.Close();
 
             // Zoom to the converted lat-lon at the desired scale
-            mapView.ZoomTo(convertedPoint, Convert.ToDouble(latlonScale.Text));
+            await mapView.ZoomToAsync(convertedPoint, Convert.ToDouble(latlonScale.Text));
         }
 
         private async Task CollapseExpander()

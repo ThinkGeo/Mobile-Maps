@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the MapView
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -34,13 +34,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = new RectangleShape(-10785086.173498387, 3913489.693302595, -10779919.030415015,
                 3910065.3144544438);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Add the Bing Maps layer to the map
         /// </summary>
-        private void btnActivate_Click(object sender, EventArgs e)
+        private async void btnActivate_Click(object sender, EventArgs e)
         {
             // Create the layer overlay with some additional settings and add to the map.
             var layerOverlay = new LayerOverlay();
@@ -53,7 +53,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add(bingMapsLayer);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)

@@ -22,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the friscoParks, stadiumLayer, and
         ///     shortestLineLayer layers into a grouped LayerOverlay and display it on the map.
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -79,14 +79,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var stadium = new Feature(new PointShape(-10779651.500992451, 3915933.0023557912));
             stadiumLayer.InternalFeatures.Add(stadium);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Calculates the shortest line from the selected park to the stadium and displays it's length and shows the line on
         ///     the map
         /// </summary>
-        private void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
+        private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
 
@@ -107,7 +107,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Show the shortestLine on the map
             shortestLineLayer.InternalFeatures.Clear();
             shortestLineLayer.InternalFeatures.Add(new Feature(shortestLine));
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
 
             // Get the area of the first feature
             var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);

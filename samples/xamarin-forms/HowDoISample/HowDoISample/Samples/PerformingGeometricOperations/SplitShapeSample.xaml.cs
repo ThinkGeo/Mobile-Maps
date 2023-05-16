@@ -22,7 +22,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     TODO: Update sample once API has been ported
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -79,10 +79,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
-        private void SplitShape_OnClick(object sender, EventArgs e)
+        private async void SplitShape_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
 
@@ -104,7 +104,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             splitLayer.InternalFeatures.Add(split);
 
             // Redraw the layerOverlay to see the split features on the map
-            layerOverlay.Refresh();
+            await layerOverlay.RefreshAsync();
         }
     }
 }

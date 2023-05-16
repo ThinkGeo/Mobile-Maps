@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay. Also, add the NOAA Weather Station layer to the map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -61,7 +62,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new RectangleShape(-14927495.374917, 8262593.0543992, -6686622.84891633, 1827556.23117885);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         protected override void OnDisappearing()
@@ -81,11 +82,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Dispatcher.BeginInvokeOnMainThread(UpdateWeatherStations);
         }
 
-        private void UpdateWeatherStations()
+        private async void UpdateWeatherStations()
         {
             // Here we fresh the map based on the delegate that fires when the feature source has new data.
             var weatherOverlay = mapView.Overlays["Weather"];
-            weatherOverlay.Refresh();
+            await weatherOverlay.RefreshAsync();
 
             loadingIndicator.IsRunning = false;
             loadingLayout.IsVisible = false;

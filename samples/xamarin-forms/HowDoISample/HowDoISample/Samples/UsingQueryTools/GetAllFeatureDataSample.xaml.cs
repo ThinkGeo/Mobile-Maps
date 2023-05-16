@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco hotels data
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -89,13 +89,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             hotelsLayer.Close();
 
             // Refresh and redraw the map
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     When a hotel is selected in the UI, center the map on it
         /// </summary>
-        private void lsbHotels_SelectionChanged(object sender,
+        private async void lsbHotels_SelectionChanged(object sender,
             SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
             var highlightedHotelLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Highlighted Hotel");
@@ -111,8 +111,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 // Center the map on the chosen location
                 mapView.CurrentExtent = hotel.Location.GetBoundingBox();
                 var standardZoomLevelSet = new ZoomLevelSet();
-                mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
-                mapView.Refresh();
+                await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
+                await mapView.RefreshAsync();
             }
 
             highlightedHotelLayer.Close();

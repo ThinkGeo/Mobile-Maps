@@ -27,7 +27,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay, as well as a feature layer to display the route
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -97,7 +97,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Run the routing request
             RouteWaypoints();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
@@ -130,7 +130,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw the result of an optimized routing request on the map
         /// </summary>
-        private void DrawOptimizedRoute(CloudRoutingOptimizationResult optimizedRoutingResult)
+        private async Task DrawOptimizedRoute(CloudRoutingOptimizationResult optimizedRoutingResult)
         {
             // Get the routing feature layer from the MapView
             var routingLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Routing Layer");
@@ -179,7 +179,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             routingLayer.Open();
             mapView.CurrentExtent = AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetBoundingBox();
             routingLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
 
@@ -207,13 +207,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             // Draw the result on the map
-            DrawOptimizedRoute(optimizedRoutingResult);
+            await DrawOptimizedRoute(optimizedRoutingResult);
         }
 
         /// <summary>
         ///     When a route segment is selected in the UI, center the map on it
         /// </summary>
-        private void lsbRouteSegments_SelectionChanged(object sender,
+        private async void lsbRouteSegments_SelectionChanged(object sender,
             SelectedItemChangedEventArgs selectedItemChangedEventArgs)
         {
             var routeSegments = (ListView) sender;
@@ -233,7 +233,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 //{
                 //    mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel15.Scale);
                 //}
-                mapView.Refresh();
+                await mapView.RefreshAsync();
             }
         }
     }
