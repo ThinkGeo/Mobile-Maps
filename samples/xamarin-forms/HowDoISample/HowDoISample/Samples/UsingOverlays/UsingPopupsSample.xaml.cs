@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -37,15 +38,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent =
                 new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
 
-            AddHotelPopups();
+            await AddHotelPopupsAsync();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
         ///     Adds hotel popups to the map
         /// </summary>
-        private void AddHotelPopups()
+        private async Task AddHotelPopupsAsync()
         {
             // Create a PopupOverlay
             var popupOverlay = new PopupOverlay();
@@ -80,7 +81,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the popupOverlay to the map and refresh
             mapView.Overlays.Add(popupOverlay);
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

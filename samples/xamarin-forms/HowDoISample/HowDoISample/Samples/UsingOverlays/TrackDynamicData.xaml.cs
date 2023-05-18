@@ -147,7 +147,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                             feature.ColumnValues["DataPoint1"] = random.Next(1, 5).ToString();
 
                         // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
-                        mapView.Refresh(mapView.Overlays["PolygonOverlay"]);
+                        mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]).ContinueWith(t =>
+                        {
+                            if (t.IsFaulted)
+                            {
+                                // Handle exceptions if necessary
+                            }
+                        });
                     }
 
                     return timerRunning; // True = Repeat again, False = Stop the timer
@@ -155,7 +161,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
         }
 
-        private void btnRotate_Click(object sender, EventArgs e)
+        private async void btnRotate_Click(object sender, EventArgs e)
         {
             //I go to find the layer and then loop through all of the features and rotate them
             var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
@@ -182,10 +188,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             foreach (var feature in newFeatures) polygonLayer.InternalFeatures.Add(feature);
 
             // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.
-            mapView.Refresh(mapView.Overlays["PolygonOverlay"]);
+            await mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]);
         }
 
-        private void btnOffset_Click(object sender, EventArgs e)
+        private async void btnOffset_Click(object sender, EventArgs e)
         {
             //I go to find the layer and then loop through all of the features and rotate them
             var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
@@ -212,7 +218,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             foreach (var feature in newFeatures) polygonLayer.InternalFeatures.Add(feature);
 
             // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.
-            mapView.Refresh(mapView.Overlays["PolygonOverlay"]);
+            await mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]);
         }
 
         public void Dispose()

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,7 +23,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay and a feature layer containing Frisco parks data
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -66,7 +67,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             parksLayer.Close();
 
             // Refresh and redraw the map
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Display a popup containing a feature's info
         /// </summary>
-        private void DisplayFeatureInfo(Feature feature)
+        private async Task DisplayFeatureInfoAsync(Feature feature)
         {
             var parkInfoString = new StringBuilder();
 
@@ -107,19 +108,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             popupOverlay.Popups.Add(popup);
 
             //Refresh the overlay to redraw the popups
-            popupOverlay.Refresh();
+            await popupOverlay.RefreshAsync();
         }
 
         /// <summary>
         ///     Pull data from the selected feature and display it when tapped
         /// </summary>
-        private void MapView_OnMapSingleTap(object sender, TouchMapViewEventArgs e)
+        private async void MapView_OnMapSingleTap(object sender, TouchMapViewEventArgs e)
         {
             // Get the selected feature based on the map tap location
             var selectedFeature = GetFeatureFromLocation(e.PointInWorldCoordinate);
 
             // If a feature was selected, get the data from it and display it
-            if (selectedFeature != null) DisplayFeatureInfo(selectedFeature);
+            if (selectedFeature != null) 
+                await DisplayFeatureInfoAsync(selectedFeature);
         }
     }
 }

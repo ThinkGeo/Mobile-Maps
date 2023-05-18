@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -39,7 +39,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             AddSimpleMarkers();
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Adds a marker to the simpleMarkerOverlay where the map tap event occurred.
         /// </summary>
-        private void MapView_OnMapTouch(object sender, TouchMapViewEventArgs e)
+        private async void MapView_OnMapTouch(object sender, TouchMapViewEventArgs e)
         {
             var simpleMarkerOverlay = (SimpleMarkerOverlay) mapView.Overlays["simpleMarkerOverlay"];
 
@@ -69,7 +69,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the marker to the simpleMarkerOverlay and refresh the map
             simpleMarkerOverlay.Markers.Add(marker);
-            simpleMarkerOverlay.Refresh();
+            await simpleMarkerOverlay.RefreshAsync();
         }
     }
 }

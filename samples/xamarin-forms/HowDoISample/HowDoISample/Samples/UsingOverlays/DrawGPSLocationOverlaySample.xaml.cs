@@ -29,7 +29,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Setup the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // Set the map's unit of measurement to meters(Spherical Mercator)
@@ -65,10 +65,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 3911814.2283277493);
 
             //  Here we call the method below to start the background data feed
-            StartDataFeed();
+            await StartDataFeedAsync();
 
             // Refresh the map
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         protected override void OnDisappearing()
@@ -82,12 +82,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnDisappearing();
         }
 
-        private void StartDataFeed()
+        private async Task StartDataFeedAsync()
         {
             // Create a task that simulated the external data feed and run it until we cancel it
 
-            updateDataFeed = Task.Run(() =>
-            {
+            //updateDataFeed = Task.Run(() =>
+            //{
                 // Create a queue and load it up with coordinated from the CSV file
                 var vehicleLocationQueue = new Queue<Feature>();
 
@@ -112,9 +112,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                         var currentFeature = vehicleLocationQueue.Dequeue();
                         vehicleLocationQueue.Enqueue(currentFeature);
 
-                        // Call the invoke on the mapview so we pop over to the main UI thread
-                        // to update the map control                        
-                        mapView.Dispatcher.BeginInvokeOnMainThread(() => { UpdateMap(currentFeature); });
+                    // Call the invoke on the mapview so we pop over to the main UI thread
+                    // to update the map control                        
+                    //mapView.Dispatcher.BeginInvokeOnMainThread(() => { UpdateMap(currentFeature); });
+                    await UpdateMapAsync(currentFeature);
                     }
                     else
                     {
@@ -127,10 +128,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                         $"Vehicle Location Data Feed: Paused {isFeedPaused.ToString()} {DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
                     Task.Delay(2000).Wait();
                 }
-            });
+            //});
         }
 
-        private void UpdateMap(Feature currentFeature)
+        private async Task UpdateMapAsync(Feature currentFeature)
         {
             // We need to first find our vehicle overlay
             var vehicleOverlay = (SimpleMarkerOverlay) mapView.Overlays["Vehicle Overlay"];
@@ -141,13 +142,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // If we have the center on vehicle check box checked then we center the map on the new location
             if (centerOnVehicle.IsChecked)
             {
-                mapView.CenterAt(currentFeature);
-                mapView.Overlays["Background Maps"].Refresh();
+                await mapView.CenterAtAsync(currentFeature);
+                await mapView.Overlays["Background Maps"].RefreshAsync();
             }
             else
             {
                 // Refresh the vehicle overlay
-                mapView.Overlays["Vehicle Overlay"].Refresh();
+                await mapView.Overlays["Vehicle Overlay"].RefreshAsync();
             }
         }
 

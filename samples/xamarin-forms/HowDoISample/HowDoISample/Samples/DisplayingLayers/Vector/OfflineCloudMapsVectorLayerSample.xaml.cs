@@ -20,7 +20,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Add the ThinkGeoMBTiles Layer to the map and load the data
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             // It is important to set the map unit first to either feet, meters or decimal degrees.
@@ -47,7 +47,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 3910065.3144544438);
 
             // Refresh the map.
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 }

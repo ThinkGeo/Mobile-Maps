@@ -21,7 +21,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Set up the map with the ThinkGeo Cloud Maps overlay to show a basic map
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -60,7 +60,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10779751.80, 3915369.33, -10779407.60, 3915141.57);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw reprojected features on the map
         /// </summary>
-        private void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
+        private async void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
         {
             // Get the layer we prepared from the MapView
             var reprojectedFeatureLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Reprojected Features Layer");
@@ -115,10 +115,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
 
             var standardZoomLevelSet = new ZoomLevelSet();
-            mapView.ZoomToScale(standardZoomLevelSet.ZoomLevel18.Scale);
+            await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
 
             reprojectedFeatureLayer.Close();
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

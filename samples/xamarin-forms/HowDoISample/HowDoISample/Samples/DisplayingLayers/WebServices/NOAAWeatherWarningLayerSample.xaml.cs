@@ -97,9 +97,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             // This event fires when the the feature source has new data.  We need to make sure we refresh the map
             // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
-            mapView.Dispatcher.BeginInvokeOnMainThread(() =>
+            mapView.Dispatcher.BeginInvokeOnMainThread(async () =>
             {
-                mapView.Refresh(new[] {mapView.Overlays["Noaa Weather Warning"]});
+                await mapView.RefreshAsync(new[] {mapView.Overlays["Noaa Weather Warning"]});
                 loadingIndicator.IsRunning = false;
                 loadingLayout.IsVisible = false;
             });
