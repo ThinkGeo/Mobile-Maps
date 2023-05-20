@@ -96,6 +96,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var friscoOverlay = (LayerOverlay)mapView.Overlays["FriscoOverlay"];
             var friscoLayer = (FeatureLayer)friscoOverlay.Layers["FriscoLayer"];
 
+            // Clear the query shape layer and add the newly drawn shape
             queryLayer.InternalFeatures.Clear();
             queryLayer.InternalFeatures.Add(new Feature(polygon));
                       
@@ -114,7 +115,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //TODO: throw error: "The parameter you supplied may not be null. Parameter name: worldExtent"
             //await mapView.RefreshAsync(highlightOverlay);             
 
-            // Disable map drawing and clear the drawn shape
+            // Clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
             // Update the number of matching features found in the UI

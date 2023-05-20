@@ -46,6 +46,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             csvLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             var layerOverlay = new LayerOverlay();
+            layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(csvLayer);
             mapView.Overlays.Add(layerOverlay);
 

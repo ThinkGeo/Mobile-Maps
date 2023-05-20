@@ -126,7 +126,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     // Delay the task for a few seconds before we update the feed
                     Debug.WriteLine(
                         $"Vehicle Location Data Feed: Paused {isFeedPaused.ToString()} {DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
-                    Task.Delay(2000).Wait();
+                    await Task.Delay(2000);
                 }
             //});
         }
