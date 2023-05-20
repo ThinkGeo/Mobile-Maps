@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms.Xaml;
@@ -110,13 +109,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 highlightLayer.InternalFeatures.Add(feature);
 
             // Highlight the found features
-            //TODO: do not refresh automatically
             await highlightOverlay.RefreshAsync();
-            //TODO: throw error: "The parameter you supplied may not be null. Parameter name: worldExtent"
-            //await mapView.RefreshAsync(highlightOverlay);             
 
             // Clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+            await mapView.TrackOverlay.RefreshAsync();
 
             // Update the number of matching features found in the UI
             txtNumberOfFeaturesFound.Text = $"Number of features disjoint from the drawn shape: {queriedFeatures.Count}";            
@@ -129,6 +126,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             await GetFeaturesDisjointAsync((PolygonShape) e.TrackShape);
         }
-
     }
 }

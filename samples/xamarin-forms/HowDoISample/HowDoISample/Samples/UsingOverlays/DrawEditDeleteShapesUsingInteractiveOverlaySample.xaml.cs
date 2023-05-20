@@ -52,6 +52,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add the layer to a LayerOverlay
             var layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add("featureLayer", featureLayer);
+            layerOverlay.TileType = TileType.SingleTile;
 
             // Add the LayerOverlay to the map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
@@ -82,6 +83,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Clear out all the EditOverlay's features
             mapView.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
+            mapView.EditOverlay.ClearAllControlPoints();
 
             // Refresh the overlays to show latest results
             await mapView.TrackOverlay.RefreshAsync();
