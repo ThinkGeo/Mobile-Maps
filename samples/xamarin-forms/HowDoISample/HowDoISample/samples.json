@@ -5,8 +5,14 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.BasicNavigationSample",
         "title": "Basic Navigation",
-        "description": "Learn how to use code to zoom, pan, and rotate the map control.",
+        "description": "Learn how to use code to zoom and pan the map control.",
         "source": "Samples/SettingMapExtent/BasicNavigationSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.RotationSample",
+        "title": "Rotate the map",
+        "description": "Rotate the map, marker, and popup using fingers and programmatically.",
+        "source": "Samples/SettingMapExtent/RotationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample",

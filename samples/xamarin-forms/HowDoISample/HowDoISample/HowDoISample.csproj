@@ -641,8 +641,14 @@
     <Compile Update="Samples\ProjectingData\SetLayerProjectionSample.xaml.cs">
       <DependentUpon>SetLayerProjectionSample.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Samples\SettingMapExtent\RotationSample.xaml.cs">
+      <DependentUpon>RotationSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Samples\SettingMapExtent\BasicNavigationSample.xaml.cs">
       <DependentUpon>BasicNavigationSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\SettingMapExtent\SetMapExtentSample.xaml.cs">
+      <DependentUpon>SetMapExtentSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\TopologicalValidation\LineValidationSample.xaml.cs">
       <DependentUpon>LineValidationSample.xaml</DependentUpon>
