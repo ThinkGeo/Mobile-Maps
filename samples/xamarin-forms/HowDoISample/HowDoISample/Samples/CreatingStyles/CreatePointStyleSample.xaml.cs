@@ -9,6 +9,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreatePointStyleSample : ContentPage
     {
+        private PointStyle predefinedStyle;
+        private PointStyle imageStyle;
+        private PointStyle fontStyle;
+        private LayerOverlay layerOverlay;
+
         public CreatePointStyleSample()
         {
             InitializeComponent();
@@ -37,8 +42,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Data/Shapefile/Hotels.shp"));
-            var layerOverlay = new LayerOverlay();
 
+            layerOverlay = new LayerOverlay();
             // Project the layer's data to match the projection of the map
             hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
@@ -48,7 +53,27 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add the overlay to the map
             mapView.Overlays.Add("hotels", layerOverlay);
 
-            pointSymbol.IsChecked = true;
+            // Create a predefined point style
+            predefinedStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue, new GeoPen(GeoBrushes.White, 2));
+
+            // Create a image point style
+            imageStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/hotel_icon.png")));
+            imageStyle.SymbolSize = 40;
+            //imageStyle.IsActive = false;
+
+            // Create a font point style
+            fontStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black);
+            fontStyle.Mask = new AreaStyle(GeoBrushes.White);
+            fontStyle.MaskType = MaskType.Circle;
+            //fontStyle.IsActive = false;
+
+            // Add the point style to the collection of custom styles for ZoomLevel 1.
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(predefinedStyle);
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(imageStyle);
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(fontStyle);
+            hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            predefinedStyleRadioButton.IsChecked = true;
 
             await mapView.RefreshAsync();
         }
@@ -56,78 +81,36 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Create a pointStyle using a PointSymbol and add it to the Hotels layer
         /// </summary>
-        private async void PointSymbol_OnChecked(object sender, EventArgs e)
+        private async void PredefinedStyle_OnChecked(object sender, EventArgs e)
         {
-            if (mapView.Overlays.Count > 0)
-            {
-                var layerOverlay = (LayerOverlay) mapView.Overlays["hotels"];
-                var hotelsLayer = (ShapeFileFeatureLayer) layerOverlay.Layers["hotels"];
+            predefinedStyle.IsActive = true;
+            imageStyle.IsActive = false;
+            fontStyle.IsActive = false;
 
-                // Create a point style
-                var pointStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue,
-                    new GeoPen(GeoBrushes.White, 2));
-
-                // Add the point style to the collection of custom styles for ZoomLevel 1.
-                hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-                hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
-
-                // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
-                hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-                // Refresh the layerOverlay to show the new style
-                await layerOverlay.RefreshAsync();
-            }
+            await layerOverlay.RefreshAsync();
         }
 
         /// <summary>
         ///     Create a pointStyle using an icon image and add it to the Hotels layer
         /// </summary>
-        private async void Icon_OnChecked(object sender, EventArgs e)
+        private async void ImageStyle_OnChecked(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["hotels"];
-            var hotelsLayer = (ShapeFileFeatureLayer) layerOverlay.Layers["hotels"];
+            predefinedStyle.IsActive = false;
+            imageStyle.IsActive = true;
+            fontStyle.IsActive = false;
 
-            // Create a point style
-            var pointStyle = new PointStyle(new GeoImage(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Resources/hotel_icon.png")));
-
-            // Add the point style to the collection of custom styles for ZoomLevel 1.
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(pointStyle);
-
-            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            // Refresh the layerOverlay to show the new style
             await layerOverlay.RefreshAsync();
         }
-
 
         /// <summary>
         ///     Create a pointStyle using a font symbol and add it to the Hotels layer
         /// </summary>
-        private async void Symbol_Checked(object sender, EventArgs e)
+        private async void FontStyle_Checked(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["hotels"];
-            var hotelsLayer = (ShapeFileFeatureLayer) layerOverlay.Layers["hotels"];
+            predefinedStyle.IsActive = false;
+            imageStyle.IsActive = false;
+            fontStyle.IsActive = true;
 
-            // Create a point style
-            var symbolPointStyle =
-                new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
-                {
-                    Mask = new AreaStyle(GeoBrushes.White),
-                    MaskType = MaskType.Circle
-                };
-
-            // Add the point style to the collection of custom styles for ZoomLevel 1.
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(symbolPointStyle);
-
-            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
-            hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            // Refresh the layerOverlay to show the new style
             await layerOverlay.RefreshAsync();
         }
     }

@@ -40,12 +40,12 @@
                 <views:Expander.Content>
                     <Grid Grid.Column="1" Grid.Row="0">
 
-                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="pointSymbol" Content="Point Symbol Style"
-                                     CheckedChanged="PointSymbol_OnChecked" />
-                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="icon" Content="Point Icon Style"
-                                     CheckedChanged="Icon_OnChecked" />
-                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="symbol" Content="Point Symbol Style"
-                                     CheckedChanged="Symbol_Checked" />
+                        <RadioButton Grid.Column="1" Grid.Row="1" x:Name="predefinedStyleRadioButton" Content="Predefined Style"
+                                     CheckedChanged="PredefinedStyle_OnChecked" />
+                        <RadioButton Grid.Column="1" Grid.Row="2" x:Name="imageStyleRadioButton" Content="Image Style"
+                                     CheckedChanged="ImageStyle_OnChecked" />
+                        <RadioButton Grid.Column="1" Grid.Row="3" x:Name="fontStyleRadioButton" Content="Font Style"
+                                     CheckedChanged="FontStyle_Checked" />
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
