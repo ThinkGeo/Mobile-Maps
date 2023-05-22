@@ -11,7 +11,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RotationSample",
         "title": "Rotate the map",
-        "description": "Rotate the map, marker, and popup using fingers and programmatically.",
+        "description": "Rotate the map programmatically / with fingers.",
         "source": "Samples/SettingMapExtent/RotationSample"
       },
       {
@@ -178,10 +178,10 @@
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGPSLocationOverlaySample",
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGpsLocationOverlaySample",
         "title": "Draw GPS Location Overlay Sample",
-        "description": "Learn how to display a GPS vehicle's movements in real-time",
-        "source": "Samples/UsingOverlays/DrawGPSLocationOverlaySample"
+        "description": "Display a vehicle's position in real-time",
+        "source": "Samples/UsingOverlays/DrawGpsLocationOverlaySample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",

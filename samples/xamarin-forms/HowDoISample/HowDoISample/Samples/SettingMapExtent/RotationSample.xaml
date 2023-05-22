@@ -22,7 +22,6 @@
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
                         <Label x:Name="descriptionLabel"
-                               Text="Learn how to rotate the map."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
