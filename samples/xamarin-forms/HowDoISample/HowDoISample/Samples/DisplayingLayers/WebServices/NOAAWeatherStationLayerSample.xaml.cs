@@ -37,25 +37,26 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create a new overlay that will hold our new layer and add it to the map.
             var weatherOverlay = new LayerOverlay();
+            weatherOverlay.TileType = TileType.SingleTile;
             mapView.Overlays.Add("Weather", weatherOverlay);
 
             // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
-            var nOAAWeatherStationLayer = new NoaaWeatherStationFeatureLayer();
-            nOAAWeatherStationLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
+            var noaaWeatherStationLayer = new NoaaWeatherStationFeatureLayer();
+            noaaWeatherStationLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             // Add the new layer to the overlay we created earlier
-            weatherOverlay.Layers.Add("Noaa Weather Stations", nOAAWeatherStationLayer);
+            weatherOverlay.Layers.Add("Noaa Weather Stations", noaaWeatherStationLayer);
 
             // Get the layers feature source and setup an event that will refresh the map when the data refreshes
-            var featureSource = (NoaaWeatherStationFeatureSource) nOAAWeatherStationLayer.FeatureSource;
+            var featureSource = (NoaaWeatherStationFeatureSource) noaaWeatherStationLayer.FeatureSource;
             loadingIndicator.IsRunning = true;
             loadingLayout.IsVisible = true;
             featureSource.StationsUpdated -= FeatureSource_StationsUpdated;
             featureSource.StationsUpdated += FeatureSource_StationsUpdated;
 
             // Create the weather stations style and add it on zoom level 1 and then apply it to all zoom levels up to 20.
-            nOAAWeatherStationLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new NoaaWeatherStationStyle());
-            nOAAWeatherStationLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            noaaWeatherStationLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new NoaaWeatherStationStyle());
+            noaaWeatherStationLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Set the extent to a view of the US
             mapView.CurrentExtent =

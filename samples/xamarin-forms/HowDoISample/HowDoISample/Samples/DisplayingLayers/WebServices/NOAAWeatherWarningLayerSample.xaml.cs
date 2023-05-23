@@ -39,6 +39,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create a new overlay that will hold our new layer and add it to the map.
             var noaaWeatherWarningsOverlay = new LayerOverlay();
+            noaaWeatherWarningsOverlay.TileType = TileType.SingleTile;
             mapView.Overlays.Add("Noaa Weather Warning", noaaWeatherWarningsOverlay);
 
             // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
@@ -47,14 +48,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the new layer to the overlay we created earlier
             noaaWeatherWarningsOverlay.Layers.Add("Noaa Weather Warning", noaaWeatherWarningsFeatureLayer);
-
-            // Get the layers feature source and setup an event that will refresh the map when the data refreshes
-            var featureSource = (NoaaWeatherWarningsFeatureSource) noaaWeatherWarningsFeatureLayer.FeatureSource;
-            featureSource.WarningsUpdated -= FeatureSource_WarningsUpdated;
-            featureSource.WarningsUpdated += FeatureSource_WarningsUpdated;
-
-            featureSource.WarningsUpdating -= FeatureSource_WarningsUpdating;
-            featureSource.WarningsUpdating += FeatureSource_WarningsUpdating;
 
             // Create the weather warnings style and add it on zoom level 1 and then apply it to all zoom levels up to 20.
             noaaWeatherWarningsFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new NoaaWeatherWarningsStyle());
@@ -77,53 +70,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnDisappearing();
 
             var weatherWarnings =
-                (NoaaWeatherWarningsFeatureSource) mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
-            weatherWarnings.WarningsUpdated -= FeatureSource_WarningsUpdated;
-            weatherWarnings.WarningsUpdating -= FeatureSource_WarningsUpdating;
+                (NoaaWeatherWarningsFeatureSource)mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
         }
 
-        private void FeatureSource_WarningsUpdating(object sender,
-            WarningsUpdatingNoaaWeatherWarningsFeatureSourceEventArgs e)
-        {
-            mapView.Dispatcher.BeginInvokeOnMainThread(() =>
-            {
-                loadingIndicator.IsRunning = true;
-                loadingLayout.IsVisible = true;
-            });
-        }
-
-        private void FeatureSource_WarningsUpdated(object sender,
-            WarningsUpdatedNoaaWeatherWarningsFeatureSourceEventArgs e)
-        {
-            // This event fires when the the feature source has new data.  We need to make sure we refresh the map
-            // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
-            mapView.Dispatcher.BeginInvokeOnMainThread(async () =>
-            {
-                await mapView.RefreshAsync(new[] {mapView.Overlays["Noaa Weather Warning"]});
-                loadingIndicator.IsRunning = false;
-                loadingLayout.IsVisible = false;
-            });
-        }
 
         private async void mapView_MapClick(object sender, TouchMapViewEventArgs e)
-        {
-            // Get the selected feature based on the tapped location
-            var selectedFeatures = GetFeaturesFromLocation(e.PointInWorldCoordinate);
-
-            // If a feature was selected, get the data from it and display it
-            if (selectedFeatures != null) await DisplayFeatureInfo(selectedFeatures);
-        }
-
-        private Collection<Feature> GetFeaturesFromLocation(PointShape location)
         {
             // Get the parks layer from the MapView
             var weatherWarnings = mapView.FindFeatureLayer("Noaa Weather Warning");
 
             // Find the feature that was tapped on by querying the layer for features containing the tapped coordinates
             var selectedFeatures =
-                weatherWarnings.QueryTools.GetFeaturesContaining(location, ReturningColumnsType.AllColumns);
+                weatherWarnings.QueryTools.GetFeaturesContaining(e.PointInWorldCoordinate, ReturningColumnsType.AllColumns);
 
-            return selectedFeatures;
+            // If a feature was selected, get the data from it and display it
+            if (selectedFeatures != null) await DisplayFeatureInfo(selectedFeatures);
         }
 
         private async Task DisplayFeatureInfo(Collection<Feature> features)
@@ -137,10 +98,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 foreach (var feature in features) weatherWarningString.AppendLine($"{feature.ColumnValues["TITLE"]}");
 
                 // Create a new popup with the park info string
-                var popupOverlay = (PopupOverlay) mapView.Overlays["Info Popup Overlay"];
+                var popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
                 var popup = new Popup();
                 popup.Position = features[0].GetShape().GetCenterPoint();
-                popup.Text = weatherWarningString.ToString();
+                popup.Text = ToMultiline(weatherWarningString.ToString());
 
                 // Clear the popup overlay and add the new popup to it
                 popupOverlay.Popups.Clear();
@@ -150,5 +111,32 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 await popupOverlay.RefreshAsync();
             }
         }
+
+
+        public static string ToMultiline(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            string[] words = str.Split(' ');
+            StringBuilder line = new StringBuilder();
+
+            foreach (var word in words)
+            {
+                if ((line.Length + word.Length + 1) > 30)
+                {
+                    sb.AppendLine(line.ToString().TrimEnd());
+                    line.Clear();
+                }
+                line.Append(word + " ");
+            }
+
+            if (line.Length > 0)
+            {
+                sb.Append(line.ToString().TrimEnd());
+            }
+
+            return sb.ToString();
+        }
+
+
     }
 }
