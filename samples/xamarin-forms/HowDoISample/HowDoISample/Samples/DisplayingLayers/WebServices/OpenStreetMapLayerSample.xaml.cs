@@ -36,13 +36,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Create the new layer and add it to the overlay.  We set the user agent to specify the requests are coming from our samples.
             // You need to change this to your application so they can identify you for usage.
-            var openStreetMapLayer =
-                new OpenStreetMapLayer("ThinkGeo Samples/12.0 (http://thinkgeo.com/; system@thinkgeo.com)");
+            var openStreetMapLayer = new OpenStreetMapLayer("ThinkGeo Samples");
             layerOverlay.Layers.Add(openStreetMapLayer);
 
             // Set the current extent to a local area.
-            mapView.CurrentExtent =
-                new RectangleShape(-10789388.4602951, 3923878.18083465, -10768258.7082788, 3906668.46719412);
+            mapView.CurrentExtent = new RectangleShape(-10789388, 3923878, -10768258, 3906668);
 
             // Refresh the map.
             await mapView.RefreshAsync();
