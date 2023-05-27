@@ -93,9 +93,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_120x120.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_120x1201.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_152x152.png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -105,25 +102,10 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_180x180.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_20x20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_29x29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_40x40.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_40x401.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_40x402.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_58x58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_58x581.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_60x60.png">
@@ -133,9 +115,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_80x80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_80x801.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_87x87.png">
@@ -226,6 +205,12 @@
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_128x128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_136x136.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_114x114.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_192x192.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_120x120 1.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
