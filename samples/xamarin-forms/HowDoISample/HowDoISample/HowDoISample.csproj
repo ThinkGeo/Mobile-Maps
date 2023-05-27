@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -445,10 +446,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="ThinkGeo.Core" Version="13.1.0-beta032" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta032" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta032" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta034" />
+    <PackageReference Include="ThinkGeo.Core" Version="13.1.0-beta033" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta033" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta033" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta035" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
