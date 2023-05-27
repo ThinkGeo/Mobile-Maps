@@ -45,16 +45,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtentChanged += MapView_CurrentExtentChanged;
 
             IsRotationEnabled = true;
-            // TODO: make it work. 
-            //mapView.MapRotation = 30;
-
 
             AddMarker(friscoCityHall);
             AddPopup(thinkgeoHeadquarter, "ThinkGeo Headquarter");
 
 
+            // Use CenterPoint/MapScale for the map extent. 
+            mapView.ExtentSettingMode = ExtentSettingMode.CenterPointAndMapScale;
+            MapRotation = 30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
             mapView.CenterPoint = new PointShape(thinkgeoHeadquarter);
+
             await mapView.RefreshAsync();
         }
 

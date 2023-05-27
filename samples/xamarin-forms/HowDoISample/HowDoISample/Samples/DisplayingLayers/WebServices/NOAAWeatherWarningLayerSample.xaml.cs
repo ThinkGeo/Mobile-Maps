@@ -69,8 +69,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnDisappearing();
 
-            var weatherWarnings =
-                (NoaaWeatherWarningsFeatureSource)mapView.FindFeatureLayer("Noaa Weather Warning").FeatureSource;
+            var overlay = mapView.Overlays["Noaa Weather Warning"] as LayerOverlay;
+            var layer = overlay.Layers["Noaa Weather Warning"] as FeatureLayer;
+            layer?.Close();
         }
 
 
