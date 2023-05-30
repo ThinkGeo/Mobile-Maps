@@ -726,8 +726,11 @@
     <Compile Update="Samples\UsingOverlays\DisplayWMSOverlaySample.xaml.cs">
       <DependentUpon>DisplayWMSOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml.cs">
-      <DependentUpon>DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml</DependentUpon>
+    <Compile Update="Samples\UsingOverlays\EditSample.xaml.cs">
+      <DependentUpon>EditSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\UsingOverlays\EditWithSnappingSample.xaml.cs">
+      <DependentUpon>EditWithSnappingSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>

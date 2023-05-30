@@ -11,9 +11,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     ///     Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DrawEditDeleteShapesUsingInteractiveOverlaySample
+    public partial class EditSample
     {
-        public DrawEditDeleteShapesUsingInteractiveOverlaySample()
+        public EditSample()
         {
             InitializeComponent();
         }

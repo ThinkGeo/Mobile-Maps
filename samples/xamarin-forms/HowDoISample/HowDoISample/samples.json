@@ -166,15 +166,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample",
         "title": "Caching Map Tiles",
-        "description":
-          "Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times.",
+        "description": "Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times.",
         "source": "Samples/UsingOverlays/CachingMapTilesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample",
         "title": "Display Bing Maps Overlay",
-        "description":
-          "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
+        "description": "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
         "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
       },
       {
@@ -198,22 +196,26 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayGoogleMapsOverlaySample",
         "title": "Display Google Maps Overlay",
-        "description":
-          "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
+        "description": "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
         "source": "Samples/UsingOverlays/DisplayGoogleMapsOverlaySample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
         "title": "Display a WMS Overlay",
-        "description":
-          "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
+        "description": "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
         "source": "Samples/UsingOverlays/DisplayWMSOverlaySample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawEditDeleteShapesUsingInteractiveOverlaySample",
-        "title": "Draw, Edit, or Delete Shapes using the InteractiveOverlay",
-        "description": "Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.",
-        "source": "Samples/UsingOverlays/DrawEditDeleteShapesUsingInteractiveOverlaySample"
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditSample",
+        "title": "Edit Features",
+        "description": "Draw, edit, or delete shapes.",
+        "source": "Samples/UsingOverlays/EditSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditWithSnappingSample",
+        "title": "Edit Features with Snapping",
+        "description": "Drag a vertex within the circle and it will snap to the center.",
+        "source": "Samples/UsingOverlays/EditWithSnappingSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GroupingLayersUsingLayerOverlaySample",
@@ -224,8 +226,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
         "title": "Track Dynamic Data",
-        "description":
-          "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
+        "description": "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
         "source": "Samples/UsingOverlays/TrackDynamicData"
       },
       {
