@@ -7,8 +7,8 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.RotationSample"
-             Title="Map Rotation"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.NavigationSample"
+             Title="Navigate the map"
              x:Name="mapPage">
 
     <ContentPage.BindingContext>
@@ -22,6 +22,7 @@
                 <views:Expander.Header>
                     <StackLayout Orientation="Horizontal" Padding="8">
                         <Label x:Name="descriptionLabel"
+                               Text="Double click to zoom in, pinch to zoom/rotate. tap compass to north up, tap globe to zoom to an extent."
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />

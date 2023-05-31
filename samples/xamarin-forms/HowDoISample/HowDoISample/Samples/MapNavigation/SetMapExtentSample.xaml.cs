@@ -40,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Load the Frisco data to a layer
             friscoCityBoundary = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Data/Shapefile/City_ETJ.shp"));
+                "Data/Shapefile/Subdivisions.shp"));
 
             // Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
             friscoCityBoundary.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -57,12 +57,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-10786436, 3918518, -10769429, 3906002);
-
-            // Populate Controls
-            friscoCityBoundary.Open();
-            featureIds.ItemsSource = friscoCityBoundary.FeatureSource.GetFeatureIds();
-            friscoCityBoundary.Close();
-            featureIds.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -72,7 +66,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             await CollapseExpander();
 
-            await mapView.ZoomToScaleAsync(Convert.ToDouble(zoomScale.Text));
+            await mapView.ZoomToScaleAsync(10000);
         }
 
         /// <summary>
@@ -93,8 +87,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             await CollapseExpander();
 
-            var feature = friscoCityBoundary.FeatureSource.GetFeatureById(featureIds.SelectedItem.ToString(),
-                ReturningColumnsType.NoColumns);
+            var feature = friscoCityBoundary.FeatureSource.GetFeatureById("1", ReturningColumnsType.NoColumns);
             mapView.CurrentExtent = feature.GetBoundingBox();
             await mapView.RefreshAsync();
         }
@@ -107,16 +100,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await CollapseExpander();
 
             // Create a PointShape from the lat-lon
-            var latlonPoint = new PointShape(Convert.ToDouble(latitude.Text), Convert.ToDouble(longitude.Text));
+            var latlon = new PointShape(-96.82, 33.15);
 
-            // Convert the lat-lon projection to match the map
+            // Convert the lat-lon point to Spherical Mercator
             var projectionConverter = new ProjectionConverter(4326, 3857);
             projectionConverter.Open();
-            var convertedPoint = (PointShape) projectionConverter.ConvertToExternalProjection(latlonPoint);
+            var poingInSphericalMercator = (PointShape) projectionConverter.ConvertToExternalProjection(latlon);
             projectionConverter.Close();
 
             // Zoom to the converted lat-lon at the desired scale
-            await mapView.ZoomToAsync(convertedPoint, Convert.ToDouble(latlonScale.Text));
+            await mapView.ZoomToAsync(poingInSphericalMercator);
         }
 
         private async Task CollapseExpander()

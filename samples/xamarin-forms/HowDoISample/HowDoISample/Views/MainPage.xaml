@@ -18,7 +18,7 @@
     <FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <samples:BasicNavigationSample />
+                <samples:NavigationSample />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

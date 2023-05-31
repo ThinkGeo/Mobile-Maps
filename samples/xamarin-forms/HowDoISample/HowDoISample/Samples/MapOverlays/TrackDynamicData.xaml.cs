@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Timers;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +13,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TrackDynamicData : ContentPage
     {
-        private bool timerRunning;
+        //private bool timerRunning;
+        private Timer timer;
 
         public TrackDynamicData()
         {
@@ -26,8 +28,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
 
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
+
             // It is important to set the map unit first to either feet, meters or decimal degrees.
-            mapView.MapUnit = GeographyUnit.DecimalDegree;
+            mapView.MapUnit = GeographyUnit.Meter;
 
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
             var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
@@ -37,21 +44,49 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(backgroundOverlay);
 
             // Creating a rectangle area we will use to generate the polygons and also start the map there.
-            var currentExtent =
-                new RectangleShape(-10810995.245624, 3939081.90719325, -10747552.5124997, 3884429.43227297);
+            var currentExtent = new RectangleShape(-10810995, 3939081, -10747552, 3884429);
 
             //Do all the things we need to setup the polygon layer and overlay such as creating all the polygons etc.
             AddPolygonOverlay(AreaBaseShape.ScaleDown(currentExtent.GetBoundingBox(), 80).GetBoundingBox());
 
             //Set the maps current extent so we start there
             mapView.CurrentExtent = currentExtent;
+
+            mapView.IsRotationEnabled = true;
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                //I go to find the layer and then loop through all of the features and assign them new
+                // random colors and refresh just the overlay that we are using to draw the polygons
+
+                var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
+                if (polygonLayer == null)
+                    return;
+
+                var random = new Random();
+
+                foreach (var feature in polygonLayer.InternalFeatures)
+                    feature.ColumnValues["DataValue"] = random.Next(1, 5).ToString();
+
+                // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
+                 mapView.Overlays["PolygonOverlay"].RefreshAsync().ContinueWith(t =>
+                 {
+                     if (t.IsFaulted)
+                     {
+                     }
+                 });
+            });
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            timerRunning = false;
+            timer.Stop();
         }
 
         private void AddPolygonOverlay(RectangleShape boundingRectangle)
@@ -65,9 +100,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //Add all of the polygons to the layer
             foreach (var feature in features) polygonLayer.InternalFeatures.Add(feature);
 
-            //We are going to style them based on their values we randomly added using the column DataPoint1
+            //We are going to style them based on their values we randomly added using the column DataValue
             var valueStyle = new ValueStyle();
-            valueStyle.ColumnName = "DataPoint1";
+            valueStyle.ColumnName = "DataValue";
 
             //Here we add all of the different sub styles so for example "1" is going to be a red semitransparent fill with a black border etc.
             valueStyle.ValueItems.Add(new ValueItem("1",
@@ -109,62 +144,29 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var features = new Collection<Feature>();
 
             for (var x = 1; x < 150; x++)
-            for (var y = 1; y < 150; y++)
-            {
-                var upperLeftX = boundingRectangle.UpperLeftPoint.X + x * boundingRectangle.Width / 150;
-                var upperLeftY = boundingRectangle.UpperLeftPoint.Y - y * boundingRectangle.Height / 150;
+                for (var y = 1; y < 150; y++)
+                {
+                    var upperLeftX = boundingRectangle.UpperLeftPoint.X + x * boundingRectangle.Width / 150;
+                    var upperLeftY = boundingRectangle.UpperLeftPoint.Y - y * boundingRectangle.Height / 150;
 
-                var lowerRightX = upperLeftX + boundingRectangle.Width / 150;
-                var lowerRightY = upperLeftY - boundingRectangle.Height / 150;
+                    var lowerRightX = upperLeftX + boundingRectangle.Width / 150;
+                    var lowerRightY = upperLeftY - boundingRectangle.Height / 150;
 
-                var feature = new Feature(new RectangleShape(new PointShape(upperLeftX, upperLeftY),
-                    new PointShape(lowerRightX, lowerRightY)));
-                feature.ColumnValues.Add("DataPoint1", random.Next(1, 5).ToString());
+                    var feature = new Feature(new RectangleShape(new PointShape(upperLeftX, upperLeftY),
+                        new PointShape(lowerRightX, lowerRightY)));
+                    feature.ColumnValues.Add("DataValue", random.Next(1, 5).ToString());
 
-                features.Add(feature);
-            }
+                    features.Add(feature);
+                }
 
             return features;
         }
 
-        private void btnStartRefresh_Click(object sender, EventArgs e)
-        {
-            if (!timerRunning)
-            {
-                timerRunning = true;
-                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                {
-                    if (timerRunning)
-                    {
-                        //I go to find the layer and then loop through all of the features and assign them new
-                        // random colors and refresh just the overlay that we are using to draw the polygons
-
-                        var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
-
-                        var random = new Random();
-
-                        foreach (var feature in polygonLayer.InternalFeatures)
-                            feature.ColumnValues["DataPoint1"] = random.Next(1, 5).ToString();
-
-                        // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
-                        mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]).ContinueWith(t =>
-                        {
-                            if (t.IsFaulted)
-                            {
-                                // Handle exceptions if necessary
-                            }
-                        });
-                    }
-
-                    return timerRunning; // True = Repeat again, False = Stop the timer
-                });
-            }
-        }
 
         private async void btnRotate_Click(object sender, EventArgs e)
         {
             //I go to find the layer and then loop through all of the features and rotate them
-            var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
+            var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
 
             var newFeatures = new Collection<Feature>();
 
@@ -173,13 +175,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             foreach (var feature in polygonLayer.InternalFeatures)
             {
                 // Here we need to clone the features and add them back to the layer
-                var shape = (PolygonShape) feature.GetShape();
+                var shape = (PolygonShape)feature.GetShape();
 
                 shape.Rotate(center, 10);
                 shape.Id = feature.Id;
 
                 var newFeature = new Feature(shape);
-                newFeature.ColumnValues.Add("DataPoint1", feature.ColumnValues["DataPoint1"]);
+                newFeature.ColumnValues.Add("DataValue", feature.ColumnValues["DataValue"]);
                 newFeatures.Add(newFeature);
             }
 
@@ -194,7 +196,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void btnOffset_Click(object sender, EventArgs e)
         {
             //I go to find the layer and then loop through all of the features and rotate them
-            var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
+            var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
 
             var newFeatures = new Collection<Feature>();
 
@@ -203,13 +205,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             foreach (var feature in polygonLayer.InternalFeatures)
             {
                 // Here we need to clone the features and add them back to the layer
-                var shape = (PolygonShape) feature.GetShape();
+                var shape = (PolygonShape)feature.GetShape();
 
                 shape.TranslateByOffset(2000, 2000);
                 shape.Id = feature.Id;
 
                 var newFeature = new Feature(shape);
-                newFeature.ColumnValues.Add("DataPoint1", feature.ColumnValues["DataPoint1"]);
+                newFeature.ColumnValues.Add("DataValue", feature.ColumnValues["DataValue"]);
                 newFeatures.Add(newFeature);
             }
 
@@ -227,20 +229,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Dispose();
             // Suppress finalization.
             GC.SuppressFinalize(this);
-        }
-
-        private async void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
-        {
-            //I go to find the layer and then loop through all of the features and rotate them
-            var polygonLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("PolygonLayer");
-
-            var features =
-                polygonLayer.QueryTools.GetFeaturesContaining(e.PointInWorldCoordinate,
-                    ReturningColumnsType.AllColumns);
-
-            if (features.Count > 0)
-                await DisplayAlert("Alert",
-                    $"Feature: {features[0].Id} DataPoint1: {features[0].ColumnValues["DataPoint1"]}", "OK");
         }
     }
 }

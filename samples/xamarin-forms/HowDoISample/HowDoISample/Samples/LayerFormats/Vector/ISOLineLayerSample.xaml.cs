@@ -34,10 +34,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
                 "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
-            mapView.Overlays.Add(backgroundOverlay);
+            //mapView.Overlays.Add(backgroundOverlay);
 
             // Create a new overlay that will hold our new layer and add it to the map.
             var isoLineOverlay = new LayerOverlay();
+            isoLineOverlay.TileType = TileType.SingleTile;
             mapView.Overlays.Add("isoLineOverlay", isoLineOverlay);
 
             // Load a csv file with the mosquito data that we will use for the iso line.
@@ -48,6 +49,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create the layer based on the method GetDynamicIsoLineLayer and pass in the points we loaded above and add it to the map.
             //  We then set the drawing quality high so we get a crisp rendering.
             var isoLineLayer = GetDynamicIsoLineLayer(csvPointData);
+            isoLineLayer.CustomStyles.Add(new LineStyle(new GeoPen(GeoColors.Red, 2)));
             isoLineOverlay.Layers.Add("IsoLineLayer", isoLineLayer);
             isoLineOverlay.DrawingQuality = DrawingQuality.HighQuality;
 
@@ -104,8 +106,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 new InverseDistanceWeightedGridInterpolationModel(), IsoLineType.LinesOnly);
 
             // Set the cell height and width dynamically based on the map view size
-            //dynamicIsoLineLayer.CellHeightInPixel = (int)(mapView.ActualHeight / 80);
-            //dynamicIsoLineLayer.CellWidthInPixel = (int)(mapView.ActualWidth / 80);
+            //dynamicIsoLineLayer.CellHeightInPixel = (int)(mapView.Height / 80);
+            //dynamicIsoLineLayer.CellWidthInPixel = (int)(mapView.Width / 80);
 
             //Create a series of colors from blue to red that we will use for the breaks based on the number of iso line levels we want.
             var colors = GeoColor.GetColorsInQualityFamily(GeoColors.Blue, GeoColors.Red, isoLineLevels.Count,
@@ -145,7 +147,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             textStyle.TextLineSegmentRatio = 9999999;
             textStyle.FittingLineInScreen = true;
             textStyle.SuppressPartialLabels = true;
-            dynamicIsoLineLayer.CustomStyles.Add(textStyle);
+            //dynamicIsoLineLayer.CustomStyles.Add(textStyle);
 
             return dynamicIsoLineLayer;
         }

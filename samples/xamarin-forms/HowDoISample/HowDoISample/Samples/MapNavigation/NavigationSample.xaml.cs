@@ -10,17 +10,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     ///     Learn how to programmatically zoom, pan, and rotate the map control.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RotationSample : ContentPage
+    public partial class NavigationSample : ContentPage
     {
-        private Vertex thinkgeoHeadquarter;
-        private Vertex friscoCityHall;
+        private Vertex empireStateBuiilding;
 
-        public RotationSample()
+        public NavigationSample()
         {
             var projectionConverter = new ProjectionConverter(4326, 3857);
             projectionConverter.Open();
-            thinkgeoHeadquarter = projectionConverter.ConvertToExternalProjection(-96.86645043135411, 33.15485751478618);
-            friscoCityHall = projectionConverter.ConvertToExternalProjection(-96.83465918810519, 33.15031358483132);
+            empireStateBuiilding = projectionConverter.ConvertToExternalProjection(-73.985665442769, 40.7484366107232);
 
             InitializeComponent();
         }
@@ -46,15 +44,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             IsRotationEnabled = true;
 
-            AddMarker(friscoCityHall);
-            AddPopup(thinkgeoHeadquarter, "ThinkGeo Headquarter");
-
+            AddMarker(empireStateBuiilding);
 
             // Use CenterPoint/MapScale for the map extent. 
             mapView.ExtentSettingMode = ExtentSettingMode.CenterPointAndMapScale;
-            MapRotation = 30;
+            MapRotation = -30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
-            mapView.CenterPoint = new PointShape(thinkgeoHeadquarter);
+            mapView.CenterPoint = new PointShape(empireStateBuiilding);
 
             await mapView.RefreshAsync();
         }
@@ -63,7 +59,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             var simpleMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
-
 
             var marker = new Marker
             {
@@ -75,27 +70,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             simpleMarkerOverlay.Markers.Add(marker);
         }
 
-        public void AddPopup(Vertex position, string text)
-        {
-            var popupOverlay = new PopupOverlay();
-            var popup = new Popup
-            {
-                Position = new PointShape(position),
-                Text = text,
-                WidthRequest = 100,
-                HeightRequest = 40
-            };
-            popupOverlay.Popups.Add(popup);
-
-            mapView.Overlays.Add(popupOverlay);
-        }
-
-
         private async void DefaultExtentButton_OnClicked(object sender, System.EventArgs e)
         {
-            mapView.MapRotation = 45;
+            mapView.MapRotation = -30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
-            mapView.CenterPoint = new PointShape(thinkgeoHeadquarter);
+            mapView.CenterPoint = new PointShape(empireStateBuiilding);
             await mapView.RefreshAsync();
         }
 
@@ -105,12 +84,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await mapView.RefreshAsync();
         }
 
-
         private void MapView_CurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
         {
             MapRotation = mapView.MapRotation;
         }
-
 
         public double MapRotation
         {
@@ -140,6 +117,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 OnPropertyChanged();
             }
         }
-
     }
 }
