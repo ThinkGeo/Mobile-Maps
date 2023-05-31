@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <views:Expander>
+                <views:Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="8">
+                        <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                    </StackLayout>
+                </views:Expander.Header>
+            </views:Expander>
+
+            <!-- Map Control -->
+            <Grid VerticalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+                <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
+                <StackLayout Grid.Row="1" VerticalOptions="End" WidthRequest="100" BackgroundColor="#A0FFFFFF" InputTransparent="True" CascadeInputTransparent="False" >
+
+                    <RadioButton Content="Polar Stereographic" CheckedChanged="Radial_Checked" />
+                    <RadioButton Content="MGA Zone 55" CheckedChanged="Radial_Checked" />
+                    <RadioButton Content="Albers Equal Area Conic" CheckedChanged="Radial_Checked" />
+                    <RadioButton Content="Equal Area Cylindrical" CheckedChanged="Radial_Checked" />
+                    <RadioButton Content="Decimal Degrees" CheckedChanged="Radial_Checked" IsChecked="True"/>
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

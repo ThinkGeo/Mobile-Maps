@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -444,14 +445,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="ThinkGeo.Core" Version="13.0.0-beta337" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.0.0-beta327" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="13.0.0-beta326" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.0.0-beta192" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ThinkGeo.Core" Version="13.1.0-beta034" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta034" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta034" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta036" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
 
   <ItemGroup>
@@ -464,112 +465,112 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Samples\CreatingStyles\CreateDotDensityStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateDotDensityStyleSample.xaml.cs">
       <DependentUpon>CreateDotDensityStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateRegexStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateRegexStyleSample.xaml.cs">
       <DependentUpon>CreateRegexStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateAreaStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateAreaStyleSample.xaml.cs">
       <DependentUpon>CreateAreaStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateClassBreakStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateClassBreakStyleSample.xaml.cs">
       <DependentUpon>CreateClassBreakStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateClusterPointStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateClusterPointStyleSample.xaml.cs">
       <DependentUpon>CreateClusterPointStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateFilterStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateFilterStyleSample.xaml.cs">
       <DependentUpon>CreateFilterStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateHeatStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateHeatStyleSample.xaml.cs">
       <DependentUpon>CreateHeatStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateLineStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateLineStyleSample.xaml.cs">
       <DependentUpon>CreateLineStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreatePointStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreatePointStyleSample.xaml.cs">
       <DependentUpon>CreatePointStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateTextStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateTextStyleSample.xaml.cs">
       <DependentUpon>CreateTextStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\CreateValueStyleSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\CreateValueStyleSample.xaml.cs">
       <DependentUpon>CreateValueStyleSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\CreatingStyles\StylingAcrossMultipleScales.xaml.cs">
+    <Compile Update="Samples\LayerStyles\StylingAcrossMultipleScales.xaml.cs">
       <DependentUpon>StylingAcrossMultipleScales.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Database\PostgresLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Database\PostgresLayerSample.xaml.cs">
       <DependentUpon>PostgresLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Database\SQLServerLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Database\SQLServerLayerSample.xaml.cs">
       <DependentUpon>SQLServerLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Database\SQLiteLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Database\SQLiteLayerSample.xaml.cs">
       <DependentUpon>SQLiteLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\CommonRasterLayersSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Raster\CommonRasterLayersSample.xaml.cs">
       <DependentUpon>CommonRasterLayersSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\ESRIGridLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Raster\ESRIGridLayerSample.xaml.cs">
       <DependentUpon>ESRIGridLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Raster\GeoTiffLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Raster\GeoTiffLayerSample.xaml.cs">
       <DependentUpon>GeoTiffLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\GenerateMapImageSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\GenerateMapImageSample.xaml.cs">
       <DependentUpon>GenerateMapImageSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\GPXLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\GPXLayerSample.xaml.cs">
       <DependentUpon>GPXLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\GraticuleLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\GraticuleLayerSample.xaml.cs">
       <DependentUpon>GraticuleLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\InMemoryLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\InMemoryLayerSample.xaml.cs">
       <DependentUpon>InMemoryLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\ISOLineLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\ISOLineLayerSample.xaml.cs">
       <DependentUpon>ISOLineLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\OfflineCloudMapsVectorLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\OfflineCloudMapsVectorLayerSample.xaml.cs">
       <DependentUpon>OfflineCloudMapsVectorLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\TinyGeoLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\TinyGeoLayerSample.xaml.cs">
       <DependentUpon>TinyGeoLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\TABLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\TABLayerSample.xaml.cs">
       <DependentUpon>TABLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\Vector\ShapefileLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\ShapefileLayerSample.xaml.cs">
       <DependentUpon>ShapefileLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\BingMapLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\BingMapLayerSample.xaml.cs">
       <DependentUpon>BingMapLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\CloudMapsRasterLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\CloudMapsRasterLayerSample.xaml.cs">
       <DependentUpon>CloudMapsRasterLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\CloudMapsVectorLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\CloudMapsVectorLayerSample.xaml.cs">
       <DependentUpon>CloudMapsVectorLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\GoogleMapLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\GoogleMapLayerSample.xaml.cs">
       <DependentUpon>GoogleMapLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\NOAARadarLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\NOAARadarLayerSample.xaml.cs">
       <DependentUpon>NOAARadarLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\NOAAWeatherStationLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\NOAAWeatherStationLayerSample.xaml.cs">
       <DependentUpon>NOAAWeatherStationLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\NOAAWeatherWarningLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\NOAAWeatherWarningLayerSample.xaml.cs">
       <DependentUpon>NOAAWeatherWarningLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\OpenStreetMapLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\OpenStreetMapLayerSample.xaml.cs">
       <DependentUpon>OpenStreetMapLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\DisplayingLayers\WebServices\WMSLayerSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\WebServices\WMSLayerSample.xaml.cs">
       <DependentUpon>WMSLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\Extensibility\ExtendingFeatureSourcesSample.xaml.cs">
@@ -581,190 +582,178 @@
     <Compile Update="Samples\Extensibility\ExtendingStylesSample.xaml.cs">
       <DependentUpon>ExtendingStylesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\BufferShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\BufferShapeSample.xaml.cs">
       <DependentUpon>BufferShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\CalculateAreaSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\CalculateAreaSample.xaml.cs">
       <DependentUpon>CalculateAreaSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\CalculateCenterPointSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\CalculateCenterPointSample.xaml.cs">
       <DependentUpon>CalculateCenterPointSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\CalculateLengthSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\CalculateLengthSample.xaml.cs">
       <DependentUpon>CalculateLengthSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\CalculateShortestLineBetweenShapesSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\CalculateShortestLineBetweenShapesSample.xaml.cs">
       <DependentUpon>CalculateShortestLineBetweenShapesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\ClipShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\ClipShapeSample.xaml.cs">
       <DependentUpon>ClipShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\DifferenceShapesSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\DifferenceShapesSample.xaml.cs">
       <DependentUpon>DifferenceShapesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\GetConvexHullSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\GetConvexHullSample.xaml.cs">
       <DependentUpon>GetConvexHullSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\GetEnvelopeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\GetEnvelopeSample.xaml.cs">
       <DependentUpon>GetEnvelopeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\GetLineOnALineSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\GetLineOnALineSample.xaml.cs">
       <DependentUpon>GetLineOnALineSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\RotateShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\RotateShapeSample.xaml.cs">
       <DependentUpon>RotateShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\UnionShapesSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\UnionShapesSample.xaml.cs">
       <DependentUpon>UnionShapesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\TranslateShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\TranslateShapeSample.xaml.cs">
       <DependentUpon>TranslateShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\SplitShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\SplitShapeSample.xaml.cs">
       <DependentUpon>SplitShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\SnapToShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\SnapToShapeSample.xaml.cs">
       <DependentUpon>SnapToShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\SimplifyShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\SimplifyShapeSample.xaml.cs">
       <DependentUpon>SimplifyShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\PerformingGeometricOperations\ScaleShapeSample.xaml.cs">
+    <Compile Update="Samples\ShapeGeometricOperations\ScaleShapeSample.xaml.cs">
       <DependentUpon>ScaleShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\ProjectingData\ProjectLatLonCoordinatesSample.xaml.cs">
+    <Compile Update="Samples\MapProjection\ProjectLatLonCoordinatesSample.xaml.cs">
       <DependentUpon>ProjectLatLonCoordinatesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\ProjectingData\WorldProjectionSample.xaml.cs">
+    <Compile Update="Samples\MapProjection\WorldProjectionSample.xaml.cs">
       <DependentUpon>WorldProjectionSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\ProjectingData\SetLayerProjectionSample.xaml.cs">
-      <DependentUpon>SetLayerProjectionSample.xaml</DependentUpon>
+    <Compile Update="Samples\MapNavigation\NavigationSample.xaml.cs">
+      <DependentUpon>NavigationSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\SettingMapExtent\BasicNavigationSample.xaml.cs">
-      <DependentUpon>BasicNavigationSample.xaml</DependentUpon>
+    <Compile Update="Samples\MapNavigation\SetMapExtentSample.xaml.cs">
+      <DependentUpon>SetMapExtentSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\TopologicalValidation\LineValidationSample.xaml.cs">
+    <Compile Update="Samples\ShapeTopologicalValidation\LineValidationSample.xaml.cs">
       <DependentUpon>LineValidationSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\TopologicalValidation\PointValidationSample.xaml.cs">
+    <Compile Update="Samples\ShapeTopologicalValidation\PointValidationSample.xaml.cs">
       <DependentUpon>PointValidationSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\TopologicalValidation\PolygonValidationSample.xaml.cs">
+    <Compile Update="Samples\ShapeTopologicalValidation\PolygonValidationSample.xaml.cs">
       <DependentUpon>PolygonValidationSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\ColorUtilitiesCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\ColorUtilitiesCloudServicesSample.xaml.cs">
       <DependentUpon>ColorUtilitiesCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\ElevationCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\ElevationCloudServicesSample.xaml.cs">
       <DependentUpon>ElevationCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\GeocodingCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\GeocodingCloudServicesSample.xaml.cs">
       <DependentUpon>GeocodingCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\ProjectionCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\ProjectionCloudServicesSample.xaml.cs">
       <DependentUpon>ProjectionCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\ReverseGeocodingCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\ReverseGeocodingCloudServicesSample.xaml.cs">
       <DependentUpon>ReverseGeocodingCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\RoutingCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\RoutingCloudServicesSample.xaml.cs">
       <DependentUpon>RoutingCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\RoutingServiceAreaCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\RoutingServiceAreaCloudServicesSample.xaml.cs">
       <DependentUpon>RoutingServiceAreaCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\RoutingTSPCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\RoutingTSPCloudServicesSample.xaml.cs">
       <DependentUpon>RoutingTSPCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\WorldMapsQueryCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\WorldMapsQueryCloudServicesSample.xaml.cs">
       <DependentUpon>WorldMapsQueryCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingCloudMapsServices\TimezoneCloudServicesSample.xaml.cs">
+    <Compile Update="Samples\UsingThinkGeoCloud\TimezoneCloudServicesSample.xaml.cs">
       <DependentUpon>TimezoneCloudServicesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayCompassSample.xaml.cs">
-      <DependentUpon>DisplayCompassSample.xaml</DependentUpon>
+    <Compile Update="Samples\MapNavigation\DisplayMapToolsSample.xaml.cs">
+      <DependentUpon>DisplayMapToolsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMagneticNorthSample.xaml.cs">
-      <DependentUpon>DisplayMagneticNorthSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMapLogoSample.xaml.cs">
-      <DependentUpon>DisplayMapLogoSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMapCenterCoordinatesSample.xaml.cs">
-      <DependentUpon>DisplayMapMouseCoordinatesSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMapPanZoomBarSample.xaml.cs">
-      <DependentUpon>DisplayMapPanZoomBarSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingMapTools\DisplayMapScaleLineSample.xaml.cs">
-      <DependentUpon>DisplayMapScaleLineSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\UsingOverlays\CachingMapTilesSample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\CachingMapTilesSample.xaml.cs">
       <DependentUpon>CachingMapTilesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayBingMapsOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DisplayBingMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayCloudMapsRasterOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DisplayCloudMapsRasterOverlaySample.xaml.cs">
       <DependentUpon>DisplayCloudMapsRasterOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayCloudMapsVectorOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DisplayCloudMapsVectorOverlaySample.xaml.cs">
       <DependentUpon>DisplayCloudMapsVectorOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DisplayWMSOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DisplayWMSOverlaySample.xaml.cs">
       <DependentUpon>DisplayWMSOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml.cs">
-      <DependentUpon>DrawEditDeleteShapesUsingInteractiveOverlaySample.xaml</DependentUpon>
+    <Compile Update="Samples\LayerEdits\EditSample.xaml.cs">
+      <DependentUpon>EditSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
+    <Compile Update="Samples\LayerEdits\EditWithSnappingSample.xaml.cs">
+      <DependentUpon>EditWithSnappingSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Samples\MapOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\DrawGPSLocationOverlaySample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\DrawGPSLocationOverlaySample.xaml.cs">
       <DependentUpon>DrawGPSLocationOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\TrackDynamicData.xaml.cs">
+    <Compile Update="Samples\MapOverlays\TrackDynamicData.xaml.cs">
       <DependentUpon>RefreshDynamicItems.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\UsingPopupsSample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\UsingPopupsSample.xaml.cs">
       <DependentUpon>UsingPopupsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingOverlays\UsingMarkersSample.xaml.cs">
+    <Compile Update="Samples\MapOverlays\UsingMarkersSample.xaml.cs">
       <DependentUpon>UsingMarkersSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\ContainsSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\ContainsSample.xaml.cs">
       <DependentUpon>ContainsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\CrossesSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\CrossesSample.xaml.cs">
       <DependentUpon>CrossesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\DisjointSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\DisjointSample.xaml.cs">
       <DependentUpon>DisjointSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\EqualsSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\EqualsSample.xaml.cs">
       <DependentUpon>EqualsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\GetDataFromFeatureSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\GetDataFromFeatureSample.xaml.cs">
       <DependentUpon>GetDataFromFeatureSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\GetFeaturesWithinDistanceSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\GetFeaturesWithinDistanceSample.xaml.cs">
       <DependentUpon>GetFeaturesWithinDistanceSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\IntersectsSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\IntersectsSample.xaml.cs">
       <DependentUpon>IntersectsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\OverlapsSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\OverlapsSample.xaml.cs">
       <DependentUpon>OverlapsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\WithinSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\WithinSample.xaml.cs">
       <DependentUpon>WithinSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\UsingQueryTools\TouchesSample.xaml.cs">
+    <Compile Update="Samples\LayerQueries\TouchesSample.xaml.cs">
       <DependentUpon>TouchesSample.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -20,16 +20,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     ...
         /// </summary>
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(
-                "itZGOI8oafZwmtxP-XGiMvfWJPPc-dX35DmESmLlQIU~",
-                "bcaCzPpmOG6le2pUz5EAaEKYI-KSMny_WxEAe7gMNQgGeN9sqL12OA~~", ThinkGeoCloudVectorMapsMapType.Light);
-            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+                "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+            mapView.Overlays.Add(backgroundOverlay);
 
             var worldCapitalsLayer = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -45,7 +46,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent =
                 new RectangleShape(-15360785.1188513, 14752615.1010077, 16260907.558937, -12603279.9259404);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
         public void Dispose()
@@ -56,7 +57,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             GC.SuppressFinalize(this);
         }
 
-        private void TimeBasedPointStyle_Click(object sender, EventArgs e)
+        private async void TimeBasedPointStyle_Click(object sender, EventArgs e)
         {
             var worldCapitalsLayer = mapView.FindFeatureLayer("WorldCapitals");
 
@@ -70,10 +71,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(timeBasedPointStyle);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
 
-        private void SizedBasedPointStyle_Click(object sender, EventArgs e)
+        private async void SizedBasedPointStyle_Click(object sender, EventArgs e)
         {
             var worldCapitalsLayer = mapView.FindFeatureLayer("WorldCapitals");
 
@@ -83,7 +84,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
             worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(sizedpointStyle);
 
-            mapView.Refresh();
+            await mapView.RefreshAsync();
         }
     }
 

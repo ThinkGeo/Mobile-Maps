@@ -42,7 +42,7 @@ namespace HowDoISample
                 // HowDoISample.Data.Shapefile.City_ETJ.shp
                 // HowDoISample.Data.FileGeoDatabase.zoning.gdb.a00000003.gdbindexes
                 var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var filesWithoutExtenstions = new List<string> {"gdb", "timestamps"};
+                var filesWithoutExtensions = new List<string> {"gdb", "timestamps"};
 
                 var parts = resourceName.Replace("HowDoISample.", "").Split('.');
 
@@ -52,8 +52,8 @@ namespace HowDoISample
                     // Default delimiter to '/' for the directory structure
                     var delimiter = "/";
 
-                    // Use '.' delimiter for file extensions and for any FileGeoDatabase directory names and any filenames within FileGeoDatabase directory contents
-                    if (i == parts.Length - 1 && !filesWithoutExtenstions.Contains(parts[i]) // files with extensions
+                    // Use '.' delimiter for file extensions and for any FileGeoDatabase directory names and any file names within FileGeoDatabase directory contents
+                    if (i == parts.Length - 1 && !filesWithoutExtensions.Contains(parts[i]) // files with extensions
                         || localPath.EndsWith("FileGeoDatabase/zoning") // the FileGeoDatabase zoning.gdb directory name
                         || localPath.Contains("zoning.gdb/")) // any files within zoning.gdb directory
                         delimiter = ".";

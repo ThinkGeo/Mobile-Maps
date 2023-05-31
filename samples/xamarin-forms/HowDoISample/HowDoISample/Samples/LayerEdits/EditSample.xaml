@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.EditSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <views:Expander>
+                <!-- Sample Description -->
+                <views:Expander.Header>
+                    <StackLayout Orientation="Horizontal" Padding="8">
+                        <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                        <BoxView Color="LightGray"
+                                 WidthRequest="1"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center" />
+                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
+                               HorizontalOptions="End">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
+                                             Value="True">
+                                    <Setter Property="Rotation"
+                                            Value="180" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+                </views:Expander.Header>
+
+                <!-- Sample Controls -->
+                <views:Expander.Content>
+                    <ScrollView>
+                        <Grid>
+                            <RadioButton Grid.Column="1" Grid.Row="0" x:Name="navMode" Content="Navigation Mode"
+                                         IsChecked="True" CheckedChanged="NavMode_Click" />
+                            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="drawPoint" Content="Draw Point"
+                                         CheckedChanged="DrawPoint_Click" />
+                            <RadioButton Grid.Column="1" Grid.Row="2" x:Name="drawLine" Content="Draw Line"
+                                         CheckedChanged="DrawLine_Click" />
+                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="drawPolygon" Content="Draw Polygon"
+                                         CheckedChanged="DrawPolygon_Click" />
+                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="editShape" Content="Edit Shape"
+                                         CheckedChanged="EditShape_Click" />
+                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="deleteShape" Content="Delete Shape"
+                                         CheckedChanged="DeleteShape_Click" />
+
+                            <Label x:Name="instructions" Grid.Column="1" Grid.Row="6" FontAttributes="Italic" />
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </ScrollView>
+                </views:Expander.Content>
+            </views:Expander>
+
+            <!-- Map Control -->
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_SingleTap" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
