@@ -25,12 +25,17 @@
   {
     "title": "Map Overlays",
     "children": [
-
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGpsLocationOverlaySample",
         "title": "Update GPS Location",
         "description": "Display a vehicle's position in real-time",
         "source": "Samples/MapOverlays/DrawGpsLocationOverlaySample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
+        "title": "ThinkGeo Background Overlays",
+        "description": "Display ThinkGeo Background Overlays",
+        "source": "Samples/MapOverlays/ThinkGeoBackgroundOverlaysSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
@@ -94,7 +99,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
         "title": "World Projection Sample",
-        "description": "Learn how to set the map's world projection to several different Spatial References",
+        "description": "Set the map to different projections. A projection may work well for a specific area, meaning other places might appear distorted.",
         "source": "Samples/MapProjection/WorldProjectionSample"
       },
       {
@@ -214,13 +219,13 @@
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
         "title": "Extending Layers",
         "description": "Learn how to use the Layer base class to create your own custom layers.",
-        "source": "Samples/Extensibility/ExtendingLayersSample"
+        "source": "Samples/LayerFormats/Vector/ExtendingLayersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
         "title": "Extending Feature Sources",
         "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
-        "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
+        "source": "Samples/LayerFormats/Vector/ExtendingFeatureSourcesSample"
       }
     ]
   },
@@ -303,7 +308,7 @@
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
         "title": "Extending Styles",
         "description": "Learn how to use the Style base class to create your own custom styles.",
-        "source": "Samples/Extensibility/ExtendingStylesSample"
+        "source": "Samples/LayerStyles/ExtendingStylesSample"
       }
     ]
   },
