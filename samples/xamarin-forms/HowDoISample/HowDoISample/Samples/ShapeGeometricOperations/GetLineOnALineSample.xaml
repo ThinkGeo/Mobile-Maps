@@ -18,57 +18,39 @@
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
                     </StackLayout>
                 </views:Expander.Header>
-
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" Text="Starting Offset (m):" FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Entry Grid.Column="2" Grid.Row="0" x:Name="startingOffset" Text="5000"
-                               VerticalOptions="Center" Keyboard="Numeric" />
-
-                        <Label Grid.Column="1" Grid.Row="1" Text="Distance (m):" FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="distance" Text="10000" VerticalOptions="Center"
-                               Keyboard="Numeric" />
-
-                        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get Subline"
-                                Clicked="GetSubLine_OnClick" />
-                        <!-- Controls Grid Layout -->
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+
+            <Grid HorizontalOptions="FillAndExpand" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="10,0,0,0">
+                    <Label Text="Starting Offset (m):" FontAttributes="Bold"
+                           VerticalOptions="Center" />
+                    <Entry x:Name="startingOffset" Text="5000"
+                           VerticalOptions="Center" Keyboard="Numeric" />
+                </StackLayout>
+            
+                <StackLayout Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" Margin="10,0,0,0">
+                    <Label Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Entry x:Name="distance" Text="10000" VerticalOptions="Center" Keyboard="Numeric" />
+                </StackLayout>
+
+                <Button Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get the Subline"
+                        Clicked="GetSubLine_OnClick"  Margin="0,0,0,10"/>
+            </Grid>
 
         </StackLayout>
     </ContentPage.Content>

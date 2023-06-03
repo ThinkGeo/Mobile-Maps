@@ -376,91 +376,91 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UnionShapesSample",
         "title": "Union Shapes",
-        "description": "Learn how to union shapes into a single shape",
+        "description": "Union two shapes into one",
         "source": "Samples/ShapeGeometricOperations/UnionShapesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.BufferShapeSample",
-        "title": "Buffer Shape",
-        "description": "Learn how to buffer a shape",
+        "title": "Buffer a Shape",
+        "description": "Input the distance and buffer a shape",
         "source": "Samples/ShapeGeometricOperations/BufferShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SimplifyShapeSample",
-        "title": "Simplify Shape",
-        "description": "Learn how to simplify a shape's geometry",
+        "title": "Simplify a Shape",
+        "description": "Simplify a shape",
         "source": "Samples/ShapeGeometricOperations/SimplifyShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RotateShapeSample",
-        "title": "Rotate Shape",
-        "description": "Learn how to rotate a shape",
+        "title": "Rotate a Shape",
+        "description": "Rotate a shape by a given angle",
         "source": "Samples/ShapeGeometricOperations/RotateShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ScaleShapeSample",
-        "title": "Scale Shape",
-        "description": "Learn how to scale a shape",
+        "title": "Scale a Shape",
+        "description": "Scale a shape",
         "source": "Samples/ShapeGeometricOperations/ScaleShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TranslateShapeSample",
-        "title": "Translate Shape",
-        "description": "Learn how to translate a shape",
+        "title": "Translate a Shape",
+        "description": "Translate a shape by x/y, or by distance/angle",
         "source": "Samples/ShapeGeometricOperations/TranslateShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateCenterPointSample",
-        "title": "Calculate Center Point",
-        "description": "Learn how to calculate the center point of a feature",
+        "title": "Calculate the Center Point",
+        "description": "Tap on a feature to display its center point based on the selected algorithm.",
         "source": "Samples/ShapeGeometricOperations/CalculateCenterPointSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateAreaSample",
         "title": "Calculate Area",
-        "description": "Learn how to calculate the area of a feature",
+        "description": "Tap on a feature to get its area.",
         "source": "Samples/ShapeGeometricOperations/CalculateAreaSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateLengthSample",
         "title": "Calculate Length",
-        "description": "Learn how to calculate the length of a line",
+        "description": "Tap on a feature to get its length.",
         "source": "Samples/ShapeGeometricOperations/CalculateLengthSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateShortestLineBetweenShapesSample",
-        "title": "Calculate Shortest Line Between Shapes",
-        "description": "Learn how to calculate the shortest line between two shapes",
+        "title": "Get Shortest Line",
+        "description": "Tap on a Park (green) to get the shortest line to the Frisco Stadium (blue point).",
         "source": "Samples/ShapeGeometricOperations/CalculateShortestLineBetweenShapesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetLineOnALineSample",
         "title": "Get Line on a Line",
-        "description": "Learn how to get part of a line from an existing line",
+        "description": "Get part of a line from an existing line",
         "source": "Samples/ShapeGeometricOperations/GetLineOnALineSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ClipShapeSample",
         "title": "Clip Shape",
-        "description": "Learn how to clip a shape from another shape",
+        "description": "Clip a shape from another shape",
         "source": "Samples/ShapeGeometricOperations/ClipShapeSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DifferenceShapesSample",
-        "title": "Difference Shapes",
-        "description": "Learn how to find the difference of shapes",
+        "title": "Get Shape Differences",
+        "description": "Get the difference of two shapes",
         "source": "Samples/ShapeGeometricOperations/DifferenceShapesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetConvexHullSample",
         "title": "Get Convex Hull",
-        "description": "Learn how to get the convex hull of a shape",
+        "description": "Get the convex hull of a shape",
         "source": "Samples/ShapeGeometricOperations/GetConvexHullSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetEnvelopeSample",
         "title": "Get Envelope",
-        "description": "Learn how to get the envelope of a shape",
+        "description": "Get the envelope of a shape",
         "source": "Samples/ShapeGeometricOperations/GetEnvelopeSample"
       }
     ]

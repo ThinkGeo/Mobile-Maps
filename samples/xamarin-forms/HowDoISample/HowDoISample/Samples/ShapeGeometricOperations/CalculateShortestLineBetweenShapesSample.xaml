@@ -10,55 +10,21 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CalculateShortestLineBetweenShapesSample">
     <ContentPage.Content>
         <StackLayout>
+
             <views:Expander IsExpanded="True">
                 <!-- Sample Description -->
                 <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
+                    <StackLayout Orientation="Vertical" Padding="8">
                         <Label x:Name="descriptionLabel"
-                               FontSize="Subtitle"
-                               VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
+                           FontSize="Subtitle"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Distance:" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Label x:Name="distanceResult" VerticalOptions="Center" />
+                        </StackLayout>
                     </StackLayout>
                 </views:Expander.Header>
-
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
-                               Text="Tap on a Park (green) on the map to get the shortest line to the Frisco Stadium (blue)."
-                               FontAttributes="Italic" />
-
-                        <Label Grid.Column="1" Grid.Row="1" Text="Distance: " FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Entry Grid.Column="2" Grid.Row="1" x:Name="distanceResult" IsReadOnly="True"
-                               VerticalOptions="Center" />
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
