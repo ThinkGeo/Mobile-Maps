@@ -107,8 +107,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Disable map drawing and clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
-
-            txtNumberOfFeaturesFound.Text = $"Number of features crossing the drawn shape: {crossingFeatures.Count}";
         }
 
         /// <summary>

@@ -136,13 +136,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             foreach (var feature in features) highlightedFeaturesLayer.InternalFeatures.Add(feature);
             highlightedFeaturesLayer.Close();
 
-            // Refresh the overlay so the layer is redrawn
-            await layerOverlay.RefreshAsync();
-
-            // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text =
-                string.Format("Number of features topologically equal to the drawn shape: {0}", features.Count());
-
             await mapView.RefreshAsync();
         }
 

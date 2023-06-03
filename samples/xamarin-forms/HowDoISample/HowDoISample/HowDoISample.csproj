@@ -697,12 +697,6 @@
     <Compile Update="Samples\MapOverlays\DisplayBingMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayCloudMapsRasterOverlaySample.xaml.cs">
-      <DependentUpon>DisplayCloudMapsRasterOverlaySample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayCloudMapsVectorOverlaySample.xaml.cs">
-      <DependentUpon>DisplayCloudMapsVectorOverlaySample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\MapOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>
     </Compile>
