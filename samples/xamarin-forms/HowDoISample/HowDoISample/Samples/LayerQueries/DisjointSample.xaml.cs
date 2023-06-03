@@ -75,7 +75,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await GetFeaturesDisjointAsync(sampleShape);
 
             // Set the map extent to the sample shapes
-            mapView.CurrentExtent = AreaBaseShape.ScaleUp(sampleShape.GetBoundingBox(), 20).GetBoundingBox();
+            mapView.CurrentExtent = AreaBaseShape.ScaleUp(sampleShape.GetBoundingBox(), 200).GetBoundingBox();
 
             mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
@@ -114,9 +114,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
             await mapView.TrackOverlay.RefreshAsync();
-
-            // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = $"Number of features disjoint from the drawn shape: {queriedFeatures.Count}";            
         }
 
         /// <summary>

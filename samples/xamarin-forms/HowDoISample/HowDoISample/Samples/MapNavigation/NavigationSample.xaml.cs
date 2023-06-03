@@ -33,12 +33,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+            var backgroundOverlay = new ThinkGeoCloudRasterMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
-            mapView.Overlays.Add(backgroundOverlay);
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudRasterMapsMapType.Light_V2_X2);
+            // ThinkGeoCloudRasterMapsOverlay includes a default cache; however, we recommend specifying the cache location in your code to ensure you have control over its storage location.
+            // This allows you to easily manage and access the cache as needed.
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoCloudRasterMaps");
 
+            // You can also utilize ThinkGeo's vector maps overlay. Keep in mind that this option may result in slower performance since the tiles will be rendered on the client-side.
+            // However, the advantage is that it will provide a sharper appearance due to the vector rendering.
+            //var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
+            //    "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+            //    "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            //backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+
+
+            mapView.Overlays.Add(backgroundOverlay);
 
             mapView.CurrentExtentChanged += MapView_CurrentExtentChanged;
 
@@ -116,6 +126,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 mapView.IsRotationEnabled = value;
                 OnPropertyChanged();
             }
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            mapView.Overlays.Clear();
         }
     }
 }

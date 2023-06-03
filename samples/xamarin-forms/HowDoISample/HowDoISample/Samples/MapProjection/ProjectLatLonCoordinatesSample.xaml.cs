@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -64,40 +63,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        ///     Use the ProjectionConverter to reproject a single feature
-        /// </summary>
-        private Feature ReprojectFeature(Feature decimalDegreeFeature)
-        {
-            //Create a new ProjectionConverter to convert between Decimal Degrees(4326) and Spherical Mercator(3857)
-            var projectionConverter = new ProjectionConverter(4326, 3857);
-
-            //Convert the feature to Spherical Mercator
-            projectionConverter.Open();
-            var sphericalMercatorFeature = projectionConverter.ConvertToExternalProjection(decimalDegreeFeature);
-            projectionConverter.Close();
-
-            //Return the reprojected feature
-            return sphericalMercatorFeature;
-        }
-
-        /// <summary>
-        ///     Use the ProjectionConverter to reproject multiple features
-        /// </summary>
-        private Collection<Feature> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
-        {
-            //Create a new ProjectionConverter to convert between Decimal Degrees(4326) and Spherical Mercator(3857)
-            var projectionConverter = new ProjectionConverter(4326, 3857);
-
-            //Convert the feature to Spherical Mercator
-            projectionConverter.Open();
-            var sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
-            projectionConverter.Close();
-
-            //Return the reprojected features
-            return sphericalMercatorFeatures;
-        }
-
-        /// <summary>
         ///     Draw reprojected features on the map
         /// </summary>
         private async void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
@@ -122,41 +87,26 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        ///     Use the ProjectionConverter class to reproject a single feature
-        /// </summary>
-        private void ReprojectFeature_Click(object sender, EventArgs e)
-        {
-            // Create a feature with coordinates in Decimal Degrees (4326)
-            var decimalDegreeFeature = new Feature(-96.834516, 33.150083);
-
-            // Convert the feature to Spherical Mercator
-            var sphericalMercatorFeature = ReprojectFeature(decimalDegreeFeature);
-
-            // Add the reprojected features to the map
-            ClearMapAndAddFeatures(new Collection<Feature> {sphericalMercatorFeature});
-        }
-
-        /// <summary>
         ///     Use the ProjectionConverter class to reproject multiple different features
         /// </summary>
         private async void ReprojectMultipleFeatures_Click(object sender, EventArgs e)
         {
             // Create features based on the WKT in the textbox in the UI
             var decimalDegreeFeatures = new Collection<Feature>();
-            var wktStrings = txtWKT.Text.Split('\n');
-            foreach (var wktString in wktStrings)
-                try
-                {
-                    var wktFeature = new Feature(wktString);
-                    decimalDegreeFeatures.Add(wktFeature);
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", ex.Message, "OK");
-                }
+            var wktStrings = new Collection<string>();
+            wktStrings.Add("POINT(-96.834516 33.150083)");
+            wktStrings.Add("LINESTRING(-96.83559 33.149,-96.835866046134 33.1508413556856,-96.835793626491 33.1508974965687,-96.8336008970734 33.1511063402186,-96.83356 33.15109,-96.83328 33.14922)");
+            wktStrings.Add("POLYGON((-96.83582 33.1508,-96.83578 33.15046,-96.83353 33.15068,-96.83358 33.15102,-96.83582 33.1508))");
 
-            // Convert the features to Spherical Mercator
-            var sphericalMercatorFeatures = ReprojectMultipleFeatures(decimalDegreeFeatures);
+            foreach (var wktString in wktStrings)
+                    decimalDegreeFeatures.Add(new Feature(wktString));
+
+            //Create a new ProjectionConverter to convert between Decimal Degrees(4326) and Spherical Mercator(3857)
+            var projectionConverter = new ProjectionConverter(4326, 3857);
+
+            //Convert the feature to Spherical Mercator
+            projectionConverter.Open();
+            var sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
 
             // Add the reprojected features to the map
             ClearMapAndAddFeatures(sphericalMercatorFeatures);

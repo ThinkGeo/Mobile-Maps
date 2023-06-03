@@ -25,17 +25,38 @@
             <Grid VerticalOptions="FillAndExpand" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="200" />
+                    <RowDefinition Height="200"/>
                 </Grid.RowDefinitions>
                 <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
-                <StackLayout Grid.Row="1" VerticalOptions="End" WidthRequest="100" BackgroundColor="#A0FFFFFF" InputTransparent="True" CascadeInputTransparent="False" >
 
-                    <RadioButton Content="Polar Stereographic" CheckedChanged="Radial_Checked" />
-                    <RadioButton Content="MGA Zone 55" CheckedChanged="Radial_Checked" />
-                    <RadioButton Content="Albers Equal Area Conic" CheckedChanged="Radial_Checked" />
-                    <RadioButton Content="Equal Area Cylindrical" CheckedChanged="Radial_Checked" />
-                    <RadioButton Content="Decimal Degrees" CheckedChanged="Radial_Checked" IsChecked="True"/>
-                </StackLayout>
+
+                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton x:Name="PolarStereographic" Grid.Column="0" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
+                    <RadioButton x:Name="MgaZone55" Grid.Column="0" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
+                    <RadioButton x:Name="AlbersEqualAreaConic" Grid.Column="0" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
+                    <RadioButton x:Name="EqualAreaCylindrical" Grid.Column="0" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
+                    <RadioButton x:Name="DecimalDegrees" Grid.Column="0" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" IsChecked="True"/>
+
+                    <Label Grid.Column="1" Grid.Row ="0"  Text="Polar Stereographic" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="1"  Text="MGA Zone 55" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="2"  Text="Albers Equal Area Conic" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="3"  Text="Equal Area Cylindrical" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="4"  Text="Decimal Degrees" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+
+                </Grid>
+
             </Grid>
 
         </StackLayout>

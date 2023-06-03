@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -119,10 +118,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Refresh the overlay so the layer is redrawn
             await layerOverlay.RefreshAsync();
-
-            // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text =
-                $"Number of features within distance of the drawn shape: {features.Count()}";
         }
 
         private async Task GetFeaturesWithinDistance(PointShape point)

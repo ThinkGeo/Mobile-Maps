@@ -116,9 +116,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Clear the drawn shape            
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
             await mapView.TrackOverlay.RefreshAsync();
-
-            // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = $"Number of features within the drawn shape: {queriedFeatures.Count}";
         }
 
         /// <summary>
@@ -128,6 +125,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             await GetFeaturesWithin((PolygonShape) e.TrackShape);
         }
-         
     }
 }

@@ -73,6 +73,8 @@
     <None Remove="Data\Jp2\m_3309650_sw_14_1_20160911_20161121.jp2" />
     <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
     <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+    <None Remove="Data\Json\mutedblue.json" />
+    <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
     <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
     <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
     <None Remove="Data\Mbtiles\Frisco.mbtiles" />
@@ -290,6 +292,8 @@
     <EmbeddedResource Include="Data\Jp2\m_3309650_sw_14_1_20160911_20161121.jp2" />
     <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
     <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+    <EmbeddedResource Include="Data\Json\mutedblue.json" />
+    <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
     <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
     <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
     <EmbeddedResource Include="Data\Mbtiles\Frisco.mbtiles" />
@@ -573,13 +577,13 @@
     <Compile Update="Samples\LayerFormats\WebServices\WMSLayerSample.xaml.cs">
       <DependentUpon>WMSLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\Extensibility\ExtendingFeatureSourcesSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\ExtendingFeatureSourcesSample.xaml.cs">
       <DependentUpon>ExtendingFeatureSourcesSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\Extensibility\ExtendingLayersSample.xaml.cs">
+    <Compile Update="Samples\LayerFormats\Vector\ExtendingLayersSample.xaml.cs">
       <DependentUpon>ExtendingLayersSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\Extensibility\ExtendingStylesSample.xaml.cs">
+    <Compile Update="Samples\LayerStyles\ExtendingStylesSample.xaml.cs">
       <DependentUpon>ExtendingStylesSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\ShapeGeometricOperations\BufferShapeSample.xaml.cs">
@@ -687,17 +691,11 @@
     <Compile Update="Samples\MapNavigation\DisplayMapToolsSample.xaml.cs">
       <DependentUpon>DisplayMapToolsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\MapOverlays\CachingMapTilesSample.xaml.cs">
-      <DependentUpon>CachingMapTilesSample.xaml</DependentUpon>
+    <Compile Update="Samples\MapOverlays\ThinkGeoBackgroundOverlays.xaml.cs">
+      <DependentUpon>ThinkGeoBackgroundOverlays.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\MapOverlays\DisplayBingMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayCloudMapsRasterOverlaySample.xaml.cs">
-      <DependentUpon>DisplayCloudMapsRasterOverlaySample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayCloudMapsVectorOverlaySample.xaml.cs">
-      <DependentUpon>DisplayCloudMapsVectorOverlaySample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\MapOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
       <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>

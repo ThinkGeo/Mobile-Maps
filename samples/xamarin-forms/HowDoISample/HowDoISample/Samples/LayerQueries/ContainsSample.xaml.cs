@@ -113,7 +113,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await layerOverlay.RefreshAsync();
 
             // Update the number of matching features found in the UI
-            txtNumberOfFeaturesFound.Text = $"Number of features containing the drawn shape: {features.Count()}";
         }
 
         /// <summary>

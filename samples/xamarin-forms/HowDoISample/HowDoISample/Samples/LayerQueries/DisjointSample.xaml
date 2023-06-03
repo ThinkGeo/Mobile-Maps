@@ -18,48 +18,8 @@
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
                     </StackLayout>
                 </views:Expander.Header>
-
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <Grid>
-                        <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic"
-                               Text="Tap On The Map To Start Drawing a New Polygon" />
-
-                        <Label Grid.Column="1" Grid.Row="1" FontAttributes="Italic"
-                               Text="Long Press On The Map To Finish Drawing" />
-
-                        <Label Grid.Column="1" Grid.Row="2" FontAttributes="Bold" x:Name="txtNumberOfFeaturesFound" />
-
-                        <!-- Controls Grid Layout -->
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->

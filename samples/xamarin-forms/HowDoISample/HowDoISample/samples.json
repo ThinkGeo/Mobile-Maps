@@ -5,13 +5,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.NavigationSample",
         "title": "Navigate the map",
-        "description": "Double click to zoom in, pinch to zoom/rotate. tap compass to north up, tap globe to zoom to an extent.",
+        "description": "Double click to zoom in, pinch to zoom/rotate. Tap compass to north up, tap globe to zoom to an extent.",
         "source": "Samples/MapNavigation/NavigationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample",
         "title": "Set the Map Extent",
-        "description": "Learn how to set the map extent in a variety of different ways.",
+        "description": "Set the map extent in different ways.",
         "source": "Samples/MapNavigation/SetMapExtentSample"
       },
       {
@@ -25,59 +25,40 @@
   {
     "title": "Map Overlays",
     "children": [
-
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGpsLocationOverlaySample",
         "title": "Update GPS Location",
-        "description": "Display a vehicle's position in real-time",
+        "description": "Display a vehicle in real-time.",
         "source": "Samples/MapOverlays/DrawGpsLocationOverlaySample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
+        "title": "ThinkGeo Background Overlays",
+        "description": "Display ThinkGeo Background Overlays.",
+        "source": "Samples/MapOverlays/ThinkGeoBackgroundOverlaysSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
         "title": "Using Markers",
-        "description": "Learn to add markers on the map using the MarkerOverlay.",
+        "description": "Tap anywhere on the map to place a marker.",
         "source": "Samples/MapOverlays/UsingMarkersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample",
         "title": "Using Popups",
-        "description": "Learn to add or remove popups on the map using the PopupOverlay.",
+        "description": "Check the code see how to add popups.",
         "source": "Samples/MapOverlays/UsingPopupsSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",
-        "title": "Display Cloud Maps Raster Overlay",
-        "description": "Learn to render ThinkGeo Cloud Maps in raster format.",
-        "source": "Samples/MapOverlays/DisplayCloudMapsRasterOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsVectorOverlaySample",
-        "title": "Display Cloud Maps Vector Overlay",
-        "description": "Learn to render ThinkGeo Cloud Maps in vector format.",
-        "source": "Samples/MapOverlays/DisplayCloudMapsVectorOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayGoogleMapsOverlaySample",
-        "title": "Display Google Maps Overlay",
-        "description": "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key and secret is required.",
-        "source": "Samples/MapOverlays/DisplayGoogleMapsOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample",
-        "title": "Display Bing Maps Overlay",
-        "description": "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
-        "source": "Samples/MapOverlays/DisplayBingMapsOverlaySample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
         "title": "Display a WMS Overlay",
-        "description": "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
+        "description": "Fetch map tiles from a WMS. Be aware it's a 3rd party server and may be slow.",
         "source": "Samples/MapOverlays/DisplayWMSOverlaySample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GroupingLayersUsingLayerOverlaySample",
-        "title": "Grouping Layers Using LayerOverlay",
-        "description": "Learn to group layers into logical groups using LayerOverlays.",
+        "title": "Grouping Layers into Overlay",
+        "description": "Group layers into logical groups using LayerOverlay.",
         "source": "Samples/MapOverlays/GroupingLayersUsingLayerOverlaySample"
       },
       {
@@ -94,13 +75,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
         "title": "World Projection Sample",
-        "description": "Learn how to set the map's world projection to several different Spatial References",
+        "description": "Set the map to different projections. A projection may work well for a specific area, meaning other places might appear distorted.",
         "source": "Samples/MapProjection/WorldProjectionSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",
         "title": "Projecting Features",
-        "description": "Learn how to reproject features using the ProjectionConverter class",
+        "description": "Reproject features and display them on the map",
         "source": "Samples/MapProjection/ProjectLatLonCoordinatesSample"
       }
     ]
@@ -214,13 +195,13 @@
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
         "title": "Extending Layers",
         "description": "Learn how to use the Layer base class to create your own custom layers.",
-        "source": "Samples/Extensibility/ExtendingLayersSample"
+        "source": "Samples/LayerFormats/Vector/ExtendingLayersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
         "title": "Extending Feature Sources",
         "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
-        "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
+        "source": "Samples/LayerFormats/Vector/ExtendingFeatureSourcesSample"
       }
     ]
   },
@@ -303,7 +284,7 @@
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
         "title": "Extending Styles",
         "description": "Learn how to use the Style base class to create your own custom styles.",
-        "source": "Samples/Extensibility/ExtendingStylesSample"
+        "source": "Samples/LayerStyles/ExtendingStylesSample"
       }
     ]
   },
@@ -312,68 +293,62 @@
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ContainsSample",
-        "title": "Check if Feature Contains",
-        "description": "Learn how to use layer query tools to find which features in a layer contain a shape",
+        "title": "Find Containing Feature",
+        "description": "Tap a point on the map and see which feature contains it.",
         "source": "Samples/LayerQueries/ContainsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CrossesSample",
-        "title": "Check if Feature Crosses",
-        "description": "Learn how to use layer query tools to find which features in a layer a shape crosses",
+        "title": "Find Crossing Features",
+        "description": "Draw a line and find out the crossing features. Long press to end drawing.",
         "source": "Samples/LayerQueries/CrossesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisjointSample",
-        "title": "Check if Features are Disjoint",
-        "description": "Learn how to use layer query tools to find which features in a layer are disjoint from a shape",
+        "title": "Find Disjoint Features",
+        "description": "Draw a polygon and find out the disjoing features. Long press to end drawing.",
         "source": "Samples/LayerQueries/DisjointSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.EqualsSample",
         "title": "Check if Features are Equal",
-        "description": "Learn how to use layer query tools to find which features in a layer are topologically equal to a shape",
+        "description": "Check out the code and see how to find out if 2 shapes are topologically equal.",
         "source": "Samples/LayerQueries/EqualsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.IntersectsSample",
-        "title": "Check if Feature Intersects",
-        "description": "Learn how to use layer query tools to find which features in a layer intersect a shape",
+        "title": "Find Intersecting Features",
+        "description": "Draw a polygon and find out the intersecting features. Long press to end drawing.",
         "source": "Samples/LayerQueries/IntersectsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.OverlapsSample",
-        "title": "Check if Feature Overlaps",
-        "description": "Learn how to use layer query tools to find which features in a layer overlap a shape",
+        "title": "Find Overlapping Feature",
+        "description": "Draw a polygon and find out the overlapping features. Long press to end drawing.",
         "source": "Samples/LayerQueries/OverlapsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TouchesSample",
-        "title": "Check if Feature Touches",
-        "description": "Learn how to use layer query tools to find which features in a layer are touching a shape",
+        "title": "Find out the Touching Feature",
+        "description": "Check out the code and see how to get the features touching a given shape",
         "source": "Samples/LayerQueries/TouchesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WithinSample",
-        "title": "Check if Feature is Within Another Feature",
-        "description": "Learn how to use layer query tools to find which features in a layer are within a shape",
+        "title": "Find Features within a Feature",
+        "description": "Draw a polygon and find out the features within. Long press to end drawing.",
         "source": "Samples/LayerQueries/WithinSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetFeaturesWithinDistanceSample",
-        "title": "Get Features Within a Distance",
-        "description": "Learn how to use layer query tools to find features in a layer within a given distance of a point",
+        "title": "Find Features Within a Distance",
+        "description": "Tap a point on the map and find the features within a given distance.",
         "source": "Samples/LayerQueries/GetFeaturesWithinDistanceSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetAllFeatureDataSample",
-        "title": "Get Data from All Features",
-        "description": "Learn how to get data from all features in a ShapeFile",
-        "source": "Samples/LayerQueries/GetAllFeatureDataSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetDataFromFeatureSample",
         "title": "Get Data from One Feature",
-        "description": "Learn how to get data from a feature in a ShapeFile",
+        "description": "Tap on a feature to view its info.",
         "source": "Samples/LayerQueries/GetDataFromFeatureSample"
       }
     ]
