@@ -10,7 +10,6 @@
             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MainPage"
             FlyoutLayoutBehavior="Popover">
 
-
     <FlyoutPage.Flyout>
         <views:MenuPage />
     </FlyoutPage.Flyout>
@@ -20,11 +19,11 @@
             <x:Arguments>
                 <samples:NavigationSample />
             </x:Arguments>
-            <NavigationPage.Icon>
+            <NavigationPage.TitleIconImageSource>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_feed.png" />
                 </OnPlatform>
-            </NavigationPage.Icon>
+            </NavigationPage.TitleIconImageSource>
         </NavigationPage>
     </FlyoutPage.Detail>
 

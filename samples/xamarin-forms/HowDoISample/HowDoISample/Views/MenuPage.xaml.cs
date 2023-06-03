@@ -31,7 +31,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            // TODO: Use MVVM properly
             var stackLayout = (StackLayout) sender;
             var item = (TapGestureRecognizer) stackLayout.GestureRecognizers[0];
             var id = item.CommandParameter;

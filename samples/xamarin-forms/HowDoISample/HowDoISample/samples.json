@@ -492,6 +492,12 @@
     "title": "Using ThinkGeo Cloud",
     "children": [
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
+        "title": "ThinkGeo Background Overlays",
+        "description": "Display ThinkGeo Background Overlays.",
+        "source": "Samples/MapOverlays/ThinkGeoBackgroundOverlaysSample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingCloudServicesSample",
         "title": "Routing",
         "description": "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
