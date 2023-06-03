@@ -450,10 +450,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="ThinkGeo.Core" Version="13.1.0-beta034" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta034" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta034" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta036" />
+    <PackageReference Include="ThinkGeo.Core" Version="13.1.0-beta036" />
+    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta036" />
+    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta036" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta038" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
