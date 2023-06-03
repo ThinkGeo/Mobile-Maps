@@ -19,54 +19,15 @@
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
                     </StackLayout>
                 </views:Expander.Header>
 
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <Label Grid.Column="1" Grid.Row="0" Text="Daylight Point Style:" VerticalOptions="Center"
-                               FontAttributes="Bold" />
-                        <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="TimeBasedPointStyle"
-                                Text="Apply Style" Clicked="TimeBasedPointStyle_Click" MinimumWidthRequest="64" />
-                        <Label Grid.Column="1" Grid.Row="2" Text="Capitol Population Point Style:"
-                               VerticalOptions="Center" FontAttributes="Bold" />
-                        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="SizedBasedPointStyle"
-                                Text="Apply Style" Clicked="SizedBasedPointStyle_Click" />
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-
+            <Button Text="Show Capital Day/Night Style" Clicked="TimeBasedPointStyle_Click" />
+            <Button Text="Show Capital Population Style" Clicked="SizedBasedPointStyle_Click" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

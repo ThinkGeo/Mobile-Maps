@@ -47,8 +47,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the overlay to the map
             mapView.Overlays.Add("overlay", layerOverlay);
-
-            rbLineStyle.IsChecked = true;
         }
 
         private async void rbLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)

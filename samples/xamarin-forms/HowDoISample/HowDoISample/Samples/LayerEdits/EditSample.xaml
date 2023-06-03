@@ -10,72 +10,60 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.EditSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander>
+            <views:Expander MinimumWidthRequest="900">
                 <!-- Sample Description -->
                 <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
+                    <StackLayout Padding="8" >
                         <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
+                        <Label x:Name="instructions" FontAttributes="Italic" HeightRequest="70"/>
                     </StackLayout>
                 </views:Expander.Header>
-
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <ScrollView>
-                        <Grid>
-                            <RadioButton Grid.Column="1" Grid.Row="0" x:Name="navMode" Content="Navigation Mode"
-                                         IsChecked="True" CheckedChanged="NavMode_Click" />
-                            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="drawPoint" Content="Draw Point"
-                                         CheckedChanged="DrawPoint_Click" />
-                            <RadioButton Grid.Column="1" Grid.Row="2" x:Name="drawLine" Content="Draw Line"
-                                         CheckedChanged="DrawLine_Click" />
-                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="drawPolygon" Content="Draw Polygon"
-                                         CheckedChanged="DrawPolygon_Click" />
-                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="editShape" Content="Edit Shape"
-                                         CheckedChanged="EditShape_Click" />
-                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="deleteShape" Content="Delete Shape"
-                                         CheckedChanged="DeleteShape_Click" />
-
-                            <Label x:Name="instructions" Grid.Column="1" Grid.Row="6" FontAttributes="Italic" />
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </ScrollView>
-                </views:Expander.Content>
             </views:Expander>
 
             <!-- Map Control -->
-            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_SingleTap" />
+
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="250"/>
+                </Grid.RowDefinitions>
+                <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
+
+                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="10" BackgroundColor="#80FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row="0" CheckedChanged="NavMode_Click"  IsChecked="True" />
+                    <RadioButton Grid.Column="0" Grid.Row="1" CheckedChanged="DrawPoint_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="2" CheckedChanged="DrawLine_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="3" CheckedChanged="DrawPolygon_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="4" CheckedChanged="EditShape_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="5" CheckedChanged="DeleteShape_Click" />
+
+
+                    <Label Grid.Column="1" Grid.Row ="0"  Text="Navigation Mode" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="1"  Text="Draw Point" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="2"  Text="Draw Line" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="3"  Text="Draw Polygon" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="4"  Text="Edit Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="5"  Text="Delete Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+
+                </Grid>
+
+            </Grid>
 
         </StackLayout>
     </ContentPage.Content>

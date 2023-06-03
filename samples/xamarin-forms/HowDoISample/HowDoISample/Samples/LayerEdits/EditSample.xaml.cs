@@ -59,7 +59,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update instructions
             instructions.Text =
-                "Navigation Mode - The default map state. Allows you to pan and zoom the map with mouse controls.";
+                "Navigation Mode - The default map state. Allows you to pan and zoom the map.";
 
             await mapView.RefreshAsync();
         }
@@ -103,6 +103,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 return;
             if (!radioButton.IsChecked)
                 return;
+            if (!mapView.Overlays.Contains("layerOverlay"))
+                return;
 
             var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
             var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
@@ -115,7 +117,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update instructions
             instructions.Text =
-                "Navigation Mode - The default map state. Allows you to pan and zoom the map with touch controls.";
+                "Navigation Mode - The default map state. Allows you to pan and zoom the map.";
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.TrackOverlay.TrackMode = TrackMode.Point;
             // Update instructions
             instructions.Text =
-                "Draw Point Mode - Creates a Point Shape where at the location of each single tap event on the map.";
+                "Draw Point Mode - Tap the map to add a point.";
         }
 
         /// <summary>
@@ -162,7 +164,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update instructions
             instructions.Text =
-                "Draw Line Mode - Begin creating a Line Shape by tapping on the map. Each subsequent tap adds another vertex to the line. Long tap to finish creating the Shape.";
+                "Draw Line Mode - Tap the map to add a vertex, tap-move to relocate the vertex, long press to finish.";
         }
 
         /// <summary>
@@ -186,7 +188,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update instructions
             instructions.Text =
-                "Draw Polygon Mode - Begin creating a Polygon Shape by tapping on the map. Each subsequent tap adds another vertex to the polygon. Long tap to finish creating the Shape.";
+                "Draw Polygon Mode - Tap the map to add a vertex, tap-move to relocate the vertex, long press to finish.";
         }
 
         /// <summary>
@@ -225,7 +227,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update instructions
             instructions.Text =
-                "Edit Shapes Mode - Allows the user to modify Shapes. Translate, rotate, or scale a shape using the anchor controls around the shape. Line and Polygon Shapes can also be modified: move a vertex by taping and dragging on an existing vertex, add a vertex by tapping on a line segment, and remove a vertex by double tapping on an existing vertex.";
+                "Edit Shapes Mode - Translate, rotate, or scale a shape using control points. Move a vertex by taping and dragging on an existing vertex, add a vertex by tapping on a line segment, remove a vertex by double tapping on an existing vertex.";
         }
 
         /// <summary>
@@ -246,7 +248,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapSingleTap += MapView_SingleTap;
 
             // Update instructions
-            instructions.Text = "Delete Shape Mode - Deletes a shape by tapping on the shape.";
+            instructions.Text = "Delete Shape Mode - Tap a shape to delete it.";
         }
 
         /// <summary>

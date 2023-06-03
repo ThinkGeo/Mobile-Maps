@@ -73,8 +73,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(fontStyle);
             hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            predefinedStyleRadioButton.IsChecked = true;
-
             await mapView.RefreshAsync();
         }
 
