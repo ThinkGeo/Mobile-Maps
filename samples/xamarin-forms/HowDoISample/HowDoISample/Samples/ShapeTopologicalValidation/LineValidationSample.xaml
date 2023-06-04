@@ -5,105 +5,56 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.LineValidationSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander>
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <!-- Sample Description -->
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </views:Expander.Header>
+                <Label FontAttributes="Italic" x:Name="txtValidationInfo" HeightRequest="60"/>
 
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <ScrollView HeightRequest="300">
-                        <Grid>
-                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" x:Name="txtValidationInfo" />
-                            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="rdoCheckLineEndpointsMustTouchPoints"
-                                         CheckedChanged="CheckLineEndpointsMustTouchPoints"
-                                         Content="Line Endpoints Must Touch Points" />
-                            <RadioButton Grid.Column="1" Grid.Row="2"
-                                         x:Name="rdoCheckLinesMustOverlapPolygonBoundaries"
-                                         CheckedChanged="CheckLinesMustOverlapPolygonBoundaries"
-                                         Content="Lines Must Overlap Polygon Boundaries" />
-                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckLinesMustOverlapLines"
-                                         CheckedChanged="CheckLinesMustOverlapLines" Content="Lines Must Overlap Lines" />
-                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckLinesMustBeSinglePart"
-                                         CheckedChanged="CheckLinesMustBeSinglePart"
-                                         Content="Lines Must Be Single Part" />
-                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="rdoCheckLinesMustFormClosedPolygon"
-                                         CheckedChanged="CheckLinesMustFormClosedPolygon"
-                                         Content="Lines Must Form Closed Polygons" />
-                            <RadioButton Grid.Column="1" Grid.Row="6" x:Name="rdoCheckLinesMustNotHavePseudonodes"
-                                         CheckedChanged="CheckLinesMustNotHavePseudonodes"
-                                         Content="Lines Must Not Have Pseudonodes" />
-                            <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckLinesMustNotIntersect"
-                                         CheckedChanged="CheckLinesMustNotIntersect" Content="Lines Must Not Intersect" />
-                            <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckLinesMustNotSelfIntersectOrTouch"
-                                         CheckedChanged="CheckLinesMustNotSelfIntersectOrTouch"
-                                         Content="Lines Must Not Self-Intersect Or Touch" />
-                            <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckLinesMustNotOverlap"
-                                         CheckedChanged="CheckLinesMustNotOverlap" Content="Lines Must Not Overlap" />
-                            <RadioButton Grid.Column="1" Grid.Row="10" x:Name="rdoCheckLinesMustNotOverlapLines"
-                                         CheckedChanged="CheckLinesMustNotOverlapLines"
-                                         Content="Lines Must Not Overlap With Lines" />
-                            <RadioButton Grid.Column="1" Grid.Row="11" x:Name="rdoCheckLinesMustNotSelfIntersect"
-                                         CheckedChanged="CheckLinesMustNotSelfIntersect"
-                                         Content="Lines Must Not Self-Intersect" />
-                            <RadioButton Grid.Column="1" Grid.Row="12" x:Name="rdoCheckLinesMustNotSelfOverlap"
-                                         CheckedChanged="CheckLinesMustNotSelfOverlap"
-                                         Content="Lines Must Not Self-Overlap" />
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </ScrollView>
-                </views:Expander.Content>
-            </views:Expander>
+            </StackLayout>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <!-- Set the desired width here -->
+                </Grid.RowDefinitions>
+
+                <ScrollView VerticalScrollBarVisibility="Always" >
+                    <StackLayout BackgroundColor="LightGray">
+                        <RadioButton x:Name="rdoCheckLineEndpointsMustTouchPoints"
+                                 CheckedChanged="CheckLineEndpointsMustTouchPoints"
+                                 Content="Line Endpoints Must Touch Points" />
+                        <RadioButton CheckedChanged="CheckLinesMustOverlapPolygonBoundaries"
+                                     Content="Lines Must Overlap Polygon Boundaries" />
+                        <RadioButton CheckedChanged="CheckLinesMustOverlapLines" Content="Lines Must Overlap Lines" />
+                        <RadioButton CheckedChanged="CheckLinesMustBeSinglePart"
+                                     Content="Lines Must Be Single Part" />
+                        <RadioButton CheckedChanged="CheckLinesMustFormClosedPolygon"
+                                     Content="Lines Must Form Closed Polygons" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotHavePseudonodes"
+                                     Content="Lines Must Not Have Pseudo nodes" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotIntersect" Content="Lines Must Not Intersect" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfIntersectOrTouch"
+                                     Content="Lines Must Not Self-Intersect Or Touch" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotOverlap" Content="Lines Must Not Overlap" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotOverlapLines"
+                                     Content="Lines Must Not Overlap With Lines" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfIntersect"
+                                     Content="Lines Must Not Self-Intersect" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfOverlap"
+                                     Content="Lines Must Not Self-Overlap" />
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
 
         </StackLayout>
     </ContentPage.Content>

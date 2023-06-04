@@ -5,23 +5,18 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <!-- Sample Description -->
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
 
-                    </StackLayout>
-                </views:Expander.Header>
-            </views:Expander>
+            </StackLayout>
 
             <!-- Map Control -->
             <Grid VerticalOptions="FillAndExpand">

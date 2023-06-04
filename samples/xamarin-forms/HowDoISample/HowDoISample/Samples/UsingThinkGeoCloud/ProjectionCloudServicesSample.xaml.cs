@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -62,7 +61,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent =
-                new RectangleShape(-10798419.605087, 3934270.12359632, -10759021.6785336, 3896039.57306867);
+                new RectangleShape(-10779897.2471527, 3915795.035256, -10779253.4730711, 3914680.94844247);
 
             // Initialize the ProjectionCloudClient with our ThinkGeo Cloud credentials
             projectionCloudClient = new ProjectionCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~",
@@ -71,41 +70,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await mapView.RefreshAsync();
         }
 
-        /// <summary>
-        ///     Use the ProjectionCloudClient to reproject a single feature
-        /// </summary>
-        private async Task<Feature> ReprojectAFeature(Feature decimalDegreeFeature)
-        {
-            //Show a loading graphic to let users know the request is running
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
-
-            var reprojectedFeature = await projectionCloudClient.ProjectAsync(decimalDegreeFeature, 4326, 3857);
-
-            // Hide the loading graphic
-            loadingIndicator.IsRunning = false;
-            loadingLayout.IsVisible = false;
-
-            return reprojectedFeature;
-        }
-
-        /// <summary>
-        ///     Use the ProjectionCloudClient to reproject multiple features
-        /// </summary>
-        private async Task<Collection<Feature>> ReprojectMultipleFeatures(Collection<Feature> decimalDegreeFeatures)
-        {
-            // Show a loading graphic to let users know the request is running
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
-
-            var reprojectedFeatures = await projectionCloudClient.ProjectAsync(decimalDegreeFeatures, 4326, 3857);
-
-            // Hide the loading graphic
-            loadingIndicator.IsRunning = false;
-            loadingLayout.IsVisible = false;
-
-            return reprojectedFeatures;
-        }
 
         /// <summary>
         ///     Draw reprojected features on the map
@@ -127,24 +91,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             var standardZoomLevelSet = new ZoomLevelSet();
             await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
-
-            reprojectedFeatureLayer.Close();
-            await mapView.RefreshAsync();
-        }
-
-        /// <summary>
-        ///     Use the ProjectionCloudClient to reproject a single feature
-        /// </summary>
-        private async void ReprojectFeature_Click(object sender, EventArgs e)
-        {
-            // Create a feature with coordinates in Decimal Degrees (4326)
-            var decimalDegreeFeature = new Feature(-96.834516, 33.150083);
-
-            // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
-            var sphericalMercatorFeature = await ReprojectAFeature(decimalDegreeFeature);
-
-            // Add the reprojected features to the map
-            await ClearMapAndAddFeatures(new Collection<Feature> {sphericalMercatorFeature});
         }
 
         /// <summary>
@@ -154,7 +100,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             // Create features based on the WKT in the textbox in the UI
             var decimalDegreeFeatures = new Collection<Feature>();
-            var wktStrings = txtWKT.Text.Split('\n');
+            var wktStrings = new Collection<string>();
+            wktStrings.Add("POINT(-96.834516 33.150083)");
+            wktStrings.Add("LINESTRING(-96.83559 33.149,-96.835866046134 33.1508413556856,-96.835793626491 33.1508974965687,-96.8336008970734 33.1511063402186,-96.83356 33.15109,-96.83328 33.14922)");
+            wktStrings.Add("POLYGON((-96.83582 33.1508,-96.83578 33.15046,-96.83353 33.15068,-96.83358 33.15102,-96.83582 33.1508))");
+
             foreach (var wktString in wktStrings)
                 try
                 {
@@ -167,8 +117,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
 
             // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)
-            var sphericalMercatorFeatures = await ReprojectMultipleFeatures(decimalDegreeFeatures);
-
+            var sphericalMercatorFeatures = await projectionCloudClient.ProjectAsync(decimalDegreeFeatures, 4326, 3857);
+            
             // Add the reprojected features to the map
             await ClearMapAndAddFeatures(sphericalMercatorFeatures);
         }

@@ -64,8 +64,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void ZoomToScale_Click(object sender, EventArgs e)
         {
-            await CollapseExpander();
-
             await mapView.ZoomToScaleAsync(10000);
         }
 
@@ -74,8 +72,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void LayerBoundingBox_Click(object sender, EventArgs e)
         {
-            await CollapseExpander();
-
             mapView.CurrentExtent = friscoCityBoundary.GetBoundingBox();
             await mapView.RefreshAsync();
         }
@@ -85,8 +81,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void FeatureBoundingBox_Click(object sender, EventArgs e)
         {
-            await CollapseExpander();
-
             var feature = friscoCityBoundary.FeatureSource.GetFeatureById("1", ReturningColumnsType.NoColumns);
             mapView.CurrentExtent = feature.GetBoundingBox();
             await mapView.RefreshAsync();
@@ -97,8 +91,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void ZoomToLatLon_Click(object sender, EventArgs e)
         {
-            await CollapseExpander();
-
             // Create a PointShape from the lat-lon
             var latlon = new PointShape(-96.82, 33.15);
 
@@ -110,12 +102,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Zoom to the converted lat-lon at the desired scale
             await mapView.ZoomToAsync(poingInSphericalMercator);
-        }
-
-        private async Task CollapseExpander()
-        {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay((int) controlsExpander.CollapseAnimationLength);
         }
     }
 }

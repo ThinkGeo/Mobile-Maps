@@ -5,66 +5,43 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.RoutingCloudServicesSample">
+
+
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <views:Expander>
-                    <!-- Sample Description -->
-                    <views:Expander.Header>
-                        <StackLayout Orientation="Horizontal" Padding="8">
-                            <Label x:Name="descriptionLabel"
+
+                <StackLayout Padding="8">
+                    <Label x:Name="descriptionLabel"
                                    FontSize="Subtitle"
                                    VerticalOptions="Center"
                                    HorizontalOptions="StartAndExpand" />
-                            <BoxView Color="LightGray"
-                                     WidthRequest="1"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center" />
-                            <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                                   HorizontalOptions="End">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                                 Value="True">
-                                        <Setter Property="Rotation"
-                                                Value="180" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </StackLayout>
-                    </views:Expander.Header>
-
-                    <!-- Sample Controls -->
-                    <views:Expander.Content>
-                        <Grid>
-                            <ListView Grid.Column="1" Grid.Row="0" x:Name="lsbRouteSegments" HeightRequest="200"
-                                      ItemSelected="lsbRouteSegments_SelectionChanged">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextCell Text="{Binding Path=Instruction}"
-                                                  Detail="{Binding Path=Distance, StringFormat='Distance: {0:0.00} meters'}" />
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </views:Expander.Content>
-                </views:Expander>
+                </StackLayout>
 
                 <!-- Map Control -->
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-
+                <Grid HeightRequest="200">
+                    <ListView Grid.Column="1" Grid.Row="0" x:Name="lsbRouteSegments" HeightRequest="200"
+                              ItemSelected="lsbRouteSegments_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Path=Instruction}"
+                                          Detail="{Binding Path=Distance, StringFormat='Distance: {0:0.00} meters'}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                </Grid>
             </StackLayout>
 
             <!-- Loading Layout -->

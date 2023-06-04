@@ -471,19 +471,19 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.PointValidationSample",
         "title": "Validate Point Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on points",
+        "description": "Perform validation on points",
         "source": "Samples/ShapeTopologicalValidation/PointValidationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.LineValidationSample",
         "title": "Validate Line Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on lines",
+        "description": "Perform validation on lines",
         "source": "Samples/ShapeTopologicalValidation/LineValidationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.PolygonValidationSample",
         "title": "Validate Polygon Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on polygons",
+        "description": "Perform validation on polygons",
         "source": "Samples/ShapeTopologicalValidation/PolygonValidationSample"
       }
     ]
@@ -500,61 +500,61 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingCloudServicesSample",
         "title": "Routing",
-        "description": "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
+        "description": "Route through a set of waypoints with ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingServiceAreaCloudServicesSample",
         "title": "Routing - Service Area",
-        "description": "Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud",
+        "description": "Find the service area of a location with ThinkGeo Cloud. ",
         "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingTSPCloudServicesSample",
-        "title": "Routing - Traveling Sales Person",
-        "description": "Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud",
+        "title": "Routing - Travelling Salesman",
+        "description": "Find an optimized route of the Travelling Salesman (TSP) problem with ThinkGeo Cloud.",
         "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ElevationCloudServicesSample",
         "title": "Elevation",
-        "description": "Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud",
+        "description": "Draw a line on the map and it gets the elevations along the line. Long press to end drawing",
         "source": "Samples/UsingThinkGeoCloud/ElevationCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeocodingCloudServicesSample",
         "title": "Geocoding",
-        "description": "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud",
+        "description": "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/GeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ReverseGeocodingCloudServicesSample",
         "title": "Reverse Geocoding",
-        "description": "Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud",
+        "description": "Tap on the Map to get 20 nearby entities using ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/ReverseGeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample",
         "title": "Color Utilities",
-        "description": "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud",
+        "description": "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/ColorUtilitiesCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TimezoneCloudServicesSample",
         "title": "Timezone",
-        "description": "Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud",
+        "description": "Tap on the map to Get TimeZone from ThinkGeo Cloud.",
         "source": "Samples/UsingThinkGeoCloud/TimezoneCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectionCloudServicesSample",
         "title": "Projection",
-        "description": "Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud",
+        "description": "Project features using ThinkGeo Cloud.",
         "source": "Samples/UsingThinkGeoCloud/ProjectionCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldMapsQueryCloudServicesSample",
         "title": "World Maps Query",
-        "description": "Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud",
+        "description": "Draw a polygon and get the intersecting buildings using ThinkGeo Cloud, long press to end drawing. ",
         "source": "Samples/UsingThinkGeoCloud/WorldMapsQueryCloudServicesSample"
       }
     ]

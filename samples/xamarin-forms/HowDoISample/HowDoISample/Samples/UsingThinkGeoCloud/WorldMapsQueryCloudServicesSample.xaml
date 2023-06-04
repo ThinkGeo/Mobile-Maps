@@ -5,128 +5,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.WorldMapsQueryCloudServicesSample">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
-                    <!-- Sample Description -->
-                    <views:Expander.Header>
-                        <StackLayout Orientation="Horizontal" Padding="8">
-                            <Label x:Name="descriptionLabel"
+                <StackLayout Orientation="Horizontal" Padding="8">
+                    <Label x:Name="descriptionLabel"
                                    FontSize="Subtitle"
                                    VerticalOptions="Center"
                                    HorizontalOptions="StartAndExpand" />
-                            <BoxView Color="LightGray"
-                                     WidthRequest="1"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center" />
-                            <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                                   HorizontalOptions="End">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                                 Value="True">
-                                        <Setter Property="Rotation"
-                                                Value="180" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </StackLayout>
-                    </views:Expander.Header>
 
-                    <!-- Sample Controls -->
-                    <views:Expander.Content>
-                        <Grid>
-                            <Label Grid.Column="1" Grid.Row="0" Text="Query Layer:" FontAttributes="Bold"
-                                   VerticalOptions="Center" />
-                            <Picker Grid.Column="2" Grid.Row="0" x:Name="cboQueryLayer">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Buildings</x:String>
-                                        <x:String>Countries</x:String>
-                                        <x:String>States</x:String>
-                                        <x:String>Roads</x:String>
-                                        <x:String>Rail</x:String>
-                                        <x:String>Addresses</x:String>
-                                        <x:String>Cities</x:String>
-                                        <x:String>Land-Use</x:String>
-                                        <x:String>Places</x:String>
-                                        <x:String>POIs</x:String>
-                                        <x:String>Transport</x:String>
-                                        <x:String>Water</x:String>
-                                        <x:String>Waterways</x:String>
-                                    </x:Array>
+                </StackLayout>
 
-                                </Picker.ItemsSource>
-                            </Picker>
-
-                            <Label Grid.Column="1" Grid.Row="1" Text="Query Type:" FontAttributes="Bold"
-                                   VerticalOptions="Center" />
-                            <Picker Grid.Column="2" Grid.Row="1" x:Name="cboQueryType">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Containing</x:String>
-                                        <x:String>Nearest</x:String>
-                                        <x:String>Intersecting</x:String>
-                                        <x:String>Overlapping</x:String>
-                                        <x:String>Within</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-
-                            <Label Grid.Column="1" Grid.Row="2" Text="Maximum Results:" FontAttributes="Bold"
-                                   VerticalOptions="Center" />
-                            <Entry Grid.Column="2" Grid.Row="2" x:Name="maxResults" Text="100" Keyboard="Numeric" />
-
-                            <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Clicked="DrawPoint_Click"
-                                    Text="Draw New Point And Query" />
-                            <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Clicked="DrawLine_Click"
-                                    Text="Draw New Line And Query" />
-                            <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Clicked="DrawPolygon_Click"
-                                    Text="Draw New Polygon And Query" />
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </views:Expander.Content>
-                </views:Expander>
-
-                <!-- Map Control -->
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
-            </StackLayout>
-
-            <!-- Loading Layout -->
-            <StackLayout x:Name="loadingLayout"
-                         IsVisible="False"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1"
-                         AbsoluteLayout.LayoutFlags="All"
-                         BackgroundColor="White"
-                         Opacity="0.5">
-                <ActivityIndicator x:Name="loadingIndicator"
-                                   IsRunning="False"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

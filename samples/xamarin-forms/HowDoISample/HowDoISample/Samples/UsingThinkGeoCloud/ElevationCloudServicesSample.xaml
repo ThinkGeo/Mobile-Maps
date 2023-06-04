@@ -5,100 +5,49 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ElevationCloudServicesSample">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
-                    <!-- Sample Description -->
-                    <views:Expander.Header>
-                        <StackLayout Orientation="Horizontal" Padding="8">
-                            <Label x:Name="descriptionLabel"
+                <StackLayout Orientation="Horizontal" Padding="8">
+                    <Label x:Name="descriptionLabel"
                                    FontSize="Subtitle"
                                    VerticalOptions="Center"
                                    HorizontalOptions="StartAndExpand" />
-                            <BoxView Color="LightGray"
-                                     WidthRequest="1"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center" />
-                            <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                                   HorizontalOptions="End">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                                 Value="True">
-                                        <Setter Property="Rotation"
-                                                Value="180" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </StackLayout>
-                    </views:Expander.Header>
 
-                    <!-- Sample Controls -->
-                    <views:Expander.Content>
-                        <StackLayout Padding="5">
-                            <Label Text="Interval Distance (m):" FontAttributes="Bold" />
-
-                            <StackLayout Orientation="Horizontal">
-                                <Slider x:Name="intervalDistance" Maximum="1000" Minimum="50" Value="100"
-                                        HorizontalOptions="FillAndExpand" />
-                                <Label BindingContext="{x:Reference Name=intervalDistance}" Text="{Binding Path=Value}"
-                                       HorizontalOptions="End" />
-
-                            </StackLayout>
-
-                            <Button Clicked="DrawPoint_Click" Text="Draw a New Point" />
-                            <Button Clicked="DrawLine_Click" Text="Draw a New Line" />
-                            <Button Clicked="DrawPolygon_Click" Text="Draw a New Polygon" />
-
-                            <Label x:Name="txtAverageElevation" FontAttributes="Italic" />
-                            <Label x:Name="txtHighestElevation" FontAttributes="Italic" />
-                            <Label x:Name="txtLowestElevation" FontAttributes="Italic" />
-
-                            <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold" />
-
-                            <ListView x:Name="lsbElevations" ItemSelected="lsbElevations_SelectionChanged">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Row="0" Text="{Binding Path=Point}" FontAttributes="Bold" />
-                                                <Label Grid.Row="1"
-                                                       Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
-                                            </Grid>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-
-                        </StackLayout>
-                    </views:Expander.Content>
-                </views:Expander>
+                </StackLayout>
 
                 <!-- Map Control -->
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-            </StackLayout>
 
-            <!-- Loading Layout -->
-            <StackLayout x:Name="loadingLayout"
-                         IsVisible="False"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1"
-                         AbsoluteLayout.LayoutFlags="All"
-                         BackgroundColor="White"
-                         Opacity="0.5">
-                <ActivityIndicator x:Name="loadingIndicator"
-                                   IsRunning="False"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand" />
+                <ScrollView HeightRequest="200" Margin="5">
+                    <StackLayout>
+                        <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold" />
+                        <ListView x:Name="lsbElevations">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                                                <Label Text="{Binding Path=Point.Y, StringFormat='Lat: {0:0.0000} '}" FontAttributes="Bold" />
+                                                <Label Text="{Binding Path=Point.X, StringFormat='Lon: {0:0.0000} '}" FontAttributes="Bold" />
+                                            </StackLayout>
+                                            <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
+         
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
