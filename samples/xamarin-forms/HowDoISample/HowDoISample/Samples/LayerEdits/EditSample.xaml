@@ -40,6 +40,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
@@ -49,17 +50,19 @@
                     <RadioButton Grid.Column="0" Grid.Row="0" CheckedChanged="NavMode_Click"  IsChecked="True" />
                     <RadioButton Grid.Column="0" Grid.Row="1" CheckedChanged="DrawPoint_Click" />
                     <RadioButton Grid.Column="0" Grid.Row="2" CheckedChanged="DrawLine_Click" />
-                    <RadioButton Grid.Column="0" Grid.Row="3" CheckedChanged="DrawPolygon_Click" />
-                    <RadioButton Grid.Column="0" Grid.Row="4" CheckedChanged="EditShape_Click" />
-                    <RadioButton Grid.Column="0" Grid.Row="5" CheckedChanged="DeleteShape_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="3" CheckedChanged="DrawEllipse_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="4" CheckedChanged="DrawPolygon_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="5" CheckedChanged="EditShape_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="6" CheckedChanged="DeleteShape_Click" />
 
 
                     <Label Grid.Column="1" Grid.Row ="0"  Text="Navigation Mode" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="1" Grid.Row ="1"  Text="Draw Point" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="1" Grid.Row ="2"  Text="Draw Line" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
-                    <Label Grid.Column="1" Grid.Row ="3"  Text="Draw Polygon" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
-                    <Label Grid.Column="1" Grid.Row ="4"  Text="Edit Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
-                    <Label Grid.Column="1" Grid.Row ="5"  Text="Delete Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="3"  Text="Draw Ellipse" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="4"  Text="Draw Polygon" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="5"  Text="Edit Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="6"  Text="Delete Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
 
                 </Grid>
 

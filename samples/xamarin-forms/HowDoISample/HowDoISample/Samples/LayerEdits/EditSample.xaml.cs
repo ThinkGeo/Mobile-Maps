@@ -168,6 +168,30 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
+        ///     Set the mode to draw lines on the map
+        /// </summary>
+        private async void DrawEllipse_Click(object sender, EventArgs e)
+        {
+            if (!(sender is RadioButton radioButton))
+                return;
+            if (!radioButton.IsChecked)
+                return;
+
+            var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+            var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
+
+            // Update the layer's features from any previous mode
+            await UpdateLayerFeaturesAsync(featureLayer, layerOverlay);
+
+            // Set TrackMode to Line, which draws a new line on the map on mouse tap. Double taps to finish drawing the line.
+            mapView.TrackOverlay.TrackMode = TrackMode.Ellipse;
+
+            // Update instructions
+            instructions.Text =
+                "Draw Ellipse Mode - Tap-move on the map to draw an ellipse.";
+        }
+
+        /// <summary>
         ///     Set the mode to draw polygons on the map
         /// </summary>
         private async void DrawPolygon_Click(object sender, EventArgs e)
