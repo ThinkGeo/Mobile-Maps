@@ -49,16 +49,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             geocodingCloudClient = new GeocodingCloudClient("FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~",
                 "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
 
-            cboSearchType.SelectedIndex = 0;
-            cboLocationType.SelectedIndex = 0;
+            await GeocodeAddressAsync(txtSearchString.Text.Trim());
+
 
             await mapView.RefreshAsync();
         }
+        
 
-        /// <summary>
-        ///     Search for an address using the GeocodingCloudClient
-        /// </summary>
-        private async Task<CloudGeocodingResult> PerformGeocodingQuery()
+        private async Task GeocodeAddressAsync(string searchString)
         {
             // Show a loading graphic to let users know the request is running
             loadingIndicator.IsRunning = true;
@@ -66,23 +64,27 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             var options = new CloudGeocodingOptions();
             // Set up the CloudGeocodingOptions object based on the parameters set in the UI
-            options.MaxResults = int.Parse(txtMaxResults.Text);
-            options.SearchMode = (string) cboSearchType.SelectedItem == "Fuzzy"
-                ? CloudGeocodingSearchMode.FuzzyMatch
-                : CloudGeocodingSearchMode.ExactMatch;
-            options.LocationType = (CloudGeocodingLocationType) Enum.Parse(typeof(CloudGeocodingLocationType),
-                (string) cboLocationType.SelectedItem);
+            options.MaxResults = 10;
+            options.SearchMode = CloudGeocodingSearchMode.FuzzyMatch;
+            options.LocationType = CloudGeocodingLocationType.Default;
             options.ResultProjectionInSrid = 3857;
 
             // Run the geocode
-            var searchString = txtSearchString.Text.Trim();
             var searchResult = await geocodingCloudClient.SearchAsync(searchString, options);
 
             // Hide the loading graphic
             loadingIndicator.IsRunning = false;
             loadingLayout.IsVisible = false;
 
-            return searchResult;
+            // Handle an error returned from the geocoding service
+            if (searchResult.Exception != null)
+            {
+                await DisplayAlert("Error", searchResult.Exception.Message, "OK");
+                return;
+            }
+
+            // Update the UI based on the results
+            await UpdateSearchResultsOnUI(searchResult);
         }
 
         /// <summary>
@@ -111,23 +113,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void Search_Click(object sender, EventArgs e)
         {
-            await CollapseExpander();
-
             // Perform some simple validation on the input text boxes
             if (await ValidateSearchParameters())
             {
                 // Run the Cloud Geocoding query
-                var searchResult = await PerformGeocodingQuery();
-
-                // Handle an error returned from the geocoding service
-                if (searchResult.Exception != null)
-                {
-                    await DisplayAlert("Error", searchResult.Exception.Message, "OK");
-                    return;
-                }
-
-                // Update the UI based on the results
-                await UpdateSearchResultsOnUI(searchResult);
+                await GeocodeAddressAsync(txtSearchString.Text.Trim());
             }
         }
 
@@ -155,59 +145,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
         }
 
-        /// <summary>
-        ///     Helper function to change the tip shown for different Search Types
-        /// </summary>
-        private void cboSearchType_SelectionChanged(object sender, EventArgs e)
-        {
-            var pickerContent = (string) cboSearchType.SelectedItem;
 
-            if (pickerContent != null)
-                switch (pickerContent)
-                {
-                    case "Fuzzy":
-                        txtSearchTypeDescription.Text =
-                            "(Returns both exact and approximate matches for the search address)";
-                        break;
-                    case "Exact":
-                        txtSearchTypeDescription.Text = "(Only returns exact matches for the search address)";
-                        break;
-                }
-        }
-
-        /// <summary>
-        ///     Helper function to change the tip shown for different Location Types
-        /// </summary>
-        private void cboLocationType_SelectionChanged(object sender, EventArgs e)
-        {
-            var pickerItem = (string) cboLocationType.SelectedItem;
-
-            if (pickerItem != null)
-                switch (pickerItem)
-                {
-                    case "Default":
-                        txtLocationTypeDescription.Text = "(Searches for any matches to the search string)";
-                        break;
-                    case "Address":
-                        txtLocationTypeDescription.Text = "(Searches for addresses matching the search string)";
-                        break;
-                    case "Street":
-                        txtLocationTypeDescription.Text = "(Searches for streets matching the search string)";
-                        break;
-                    case "City":
-                        txtLocationTypeDescription.Text = "(Searches for cities matching the search string)";
-                        break;
-                    case "County":
-                        txtLocationTypeDescription.Text = "(Searches for counties matching the search string)";
-                        break;
-                    case "ZipCode":
-                        txtLocationTypeDescription.Text = "(Searches for zip codes matching the search string)";
-                        break;
-                    case "State":
-                        txtLocationTypeDescription.Text = "(Searches for states matching the search string)";
-                        break;
-                }
-        }
 
         /// <summary>
         ///     Helper function to perform simple validation on the input text boxes
@@ -219,16 +157,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 txtSearchString.Focus();
                 await DisplayAlert("Alert", "Please enter an address to search", "OK");
-                return false;
-            }
-
-            // Check if the 'Max Results' text box has a valid value
-            if (string.IsNullOrWhiteSpace(txtMaxResults.Text) ||
-                !(int.TryParse(txtMaxResults.Text, out var result) && result > 0 && result < 101))
-            {
-                txtMaxResults.Focus();
-                await DisplayAlert("Alert", "Please enter a number between 1 - 100", "OK");
-
                 return false;
             }
 
@@ -247,12 +175,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     "Resources/AQUA.png"),
                 YOffset = -17
             };
-        }
-
-        private async Task CollapseExpander()
-        {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay((int) controlsExpander.CollapseAnimationLength);
         }
     }
 }

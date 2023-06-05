@@ -524,7 +524,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeocodingCloudServicesSample",
         "title": "Geocoding",
-        "description": "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from ThinkGeo Cloud",
+        "description": "Type in an address and get its location/other info using ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/GeocodingCloudServicesSample"
       },
       {
