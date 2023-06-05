@@ -536,7 +536,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample",
         "title": "Color Utilities",
-        "description": "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from ThinkGeo Cloud",
+        "description": "Generate color families using ThinkGeo Cloud",
         "source": "Samples/UsingThinkGeoCloud/ColorUtilitiesCloudServicesSample"
       },
       {

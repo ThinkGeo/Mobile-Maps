@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -16,15 +15,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ColorUtilitiesCloudServicesSample : ContentPage
     {
-        private readonly Collection<RadioButton> baseColorRadioButtons;
         private ColorCloudClient colorCloudClient;
 
         public ColorUtilitiesCloudServicesSample()
         {
             InitializeComponent();
-
-            // Group the 'Base Color' radio buttons in a collection for easier iteration
-            baseColorRadioButtons = new Collection<RadioButton> {rdoDefaultColor, rdoRandomColor, rdoSpecificColor};
         }
 
         /// <summary>
@@ -101,7 +96,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colors = new Collection<GeoColor>();
 
             // Generate colors based on the selected 'color type'
-            switch ((string) cboColorType.SelectedItem)
+            switch ((string)cboColorType.SelectedItem)
             {
                 case "Hue":
                     // Get a family of colors with the same hue and sequential variances in lightness and saturation
@@ -142,8 +137,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task UpdateHousingUnitsLayerColors(Collection<GeoColor> colors)
         {
             // Get the housing units layer from the MapView
-            var housingUnitsOverlay = (LayerOverlay) mapView.Overlays["Frisco Housing Units Overlay"];
-            var housingUnitsLayer = (ShapeFileFeatureLayer) housingUnitsOverlay.Layers["Frisco Housing Units"];
+            var housingUnitsOverlay = (LayerOverlay)mapView.Overlays["Frisco Housing Units Overlay"];
+            var housingUnitsLayer = (ShapeFileFeatureLayer)housingUnitsOverlay.Layers["Frisco Housing Units"];
 
             // Clear the previous style from the housing units layer
             housingUnitsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
@@ -154,7 +149,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Different features will be styled differently based on the 'H_UNITS' attribute of the features
             classBreakStyle.ColumnName = "H_UNITS";
-            double[] classBreaksIntervals = {0, 1000, 2000, 3000, 4000, 5000};
+            double[] classBreaksIntervals = { 0, 1000, 2000, 3000, 4000, 5000 };
             for (var i = 0; i < colors.Count; i++)
             {
                 // Create a differently colored area style for housing units counts of 0, 1000, 2000, etc
@@ -176,7 +171,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task GenerateNewLegendItems(Collection<ClassBreak> classBreaks)
         {
             //// Clear the previous legend adornment
-            var legend = (LegendAdornmentLayer) mapView.AdornmentOverlay.Layers["Legend"];
+            var legend = (LegendAdornmentLayer)mapView.AdornmentOverlay.Layers["Legend"];
 
             legend.LegendItems.Clear();
             // Add a LegendItems to the legend adornment for each ClassBreak
@@ -212,30 +207,15 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async Task<Collection<GeoColor>> GetColorsByHue(int numberOfColors)
         {
-            var hueColors = new Collection<GeoColor>();
-
             // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    hueColors = await colorCloudClient.GetColorsInHueFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        hueColors = await colorCloudClient.GetColorsInHueFamilyAsync(colorFromInputString,
-                            numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    hueColors = await colorCloudClient.GetColorsInHueFamilyAsync(GetGeoColorFromDefaultColors(),
-                        numberOfColors);
-                    break;
-            }
-
-            return hueColors;
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                return await colorCloudClient.GetColorsInHueFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                return await colorCloudClient.GetColorsInHueFamilyAsync(GetGeoColorFromDefaultColors(),
+                    numberOfColors);
+            return new Collection<GeoColor>();
         }
 
         /// <summary>
@@ -247,34 +227,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
 
             // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    colorsDictionary = await colorCloudClient.GetColorsInAnalogousFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        colorsDictionary =
-                            await colorCloudClient.GetColorsInAnalogousFamilyAsync(colorFromInputString,
-                                numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    colorsDictionary =
-                        await colorCloudClient.GetColorsInAnalogousFamilyAsync(GetGeoColorFromDefaultColors(),
-                            numberOfColors);
-                    break;
-            }
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                colorsDictionary = await colorCloudClient.GetColorsInAnalogousFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                colorsDictionary =
+                    await colorCloudClient.GetColorsInAnalogousFamilyAsync(GetGeoColorFromDefaultColors(),
+                        numberOfColors);
 
             // Some color generation APIs use multiple base colors based on the original input color
             // These APIs return a dictionary where the 'keys' are the base colors and the 'values' are the colors generated from that base
             // For this sample we will simply utilize all of the colors generated
             foreach (var colors in colorsDictionary.Values)
-            foreach (var color in colors)
-                analogousColors.Add(color);
+                foreach (var color in colors)
+                    analogousColors.Add(color);
 
             return analogousColors;
         }
@@ -288,34 +255,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
 
             // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    colorsDictionary = await colorCloudClient.GetColorsInComplementaryFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        colorsDictionary =
-                            await colorCloudClient.GetColorsInComplementaryFamilyAsync(colorFromInputString,
-                                numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    colorsDictionary =
-                        await colorCloudClient.GetColorsInComplementaryFamilyAsync(GetGeoColorFromDefaultColors(),
-                            numberOfColors);
-                    break;
-            }
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                colorsDictionary = await colorCloudClient.GetColorsInComplementaryFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                colorsDictionary = await colorCloudClient.GetColorsInComplementaryFamilyAsync(GetGeoColorFromDefaultColors(),
+                        numberOfColors);
 
             // Some color generation APIs use multiple base colors based on the original input color
             // These APIs return a dictionary where the 'keys' are the base colors and the 'values' are the colors generated from that base
             // For this sample we will simply utilize all of the colors generated
             foreach (var colors in colorsDictionary.Values)
-            foreach (var color in colors)
-                complementaryColors.Add(color);
+                foreach (var color in colors)
+                    complementaryColors.Add(color);
 
             return complementaryColors;
         }
@@ -329,34 +282,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
 
             // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    colorsDictionary = await colorCloudClient.GetColorsInContrastingFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        colorsDictionary =
-                            await colorCloudClient.GetColorsInContrastingFamilyAsync(colorFromInputString,
-                                numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    colorsDictionary =
-                        await colorCloudClient.GetColorsInContrastingFamilyAsync(GetGeoColorFromDefaultColors(),
-                            numberOfColors);
-                    break;
-            }
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                colorsDictionary = await colorCloudClient.GetColorsInContrastingFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                colorsDictionary = await colorCloudClient.GetColorsInContrastingFamilyAsync(GetGeoColorFromDefaultColors(),
+                        numberOfColors);
 
             // Some color generation APIs use multiple base colors based on the original input color
             // These APIs return a dictionary where the 'keys' are the base colors and the 'values' are the colors generated from that base
             // For this sample we will simply utilize all of the colors generated
             foreach (var colors in colorsDictionary.Values)
-            foreach (var color in colors)
-                contrastingColors.Add(color);
+                foreach (var color in colors)
+                    contrastingColors.Add(color);
 
             return contrastingColors;
         }
@@ -366,31 +305,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async Task<Collection<GeoColor>> GetQualityColors(int numberOfColors)
         {
-            var qualityColors = new Collection<GeoColor>();
-
-            // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    qualityColors = await colorCloudClient.GetColorsInQualityFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        qualityColors =
-                            await colorCloudClient.GetColorsInQualityFamilyAsync(colorFromInputString, numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    qualityColors =
-                        await colorCloudClient.GetColorsInQualityFamilyAsync(GetGeoColorFromDefaultColors(),
-                            numberOfColors);
-                    break;
-            }
-
-            return qualityColors;
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                return await colorCloudClient.GetColorsInQualityFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                return await colorCloudClient.GetColorsInQualityFamilyAsync(GetGeoColorFromDefaultColors(),
+                    numberOfColors);
+            return new Collection<GeoColor>();
         }
 
         /// <summary>
@@ -401,34 +323,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var tetradColors = new Collection<GeoColor>();
             var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
 
-            // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    colorsDictionary = await colorCloudClient.GetColorsInTetradFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        colorsDictionary =
-                            await colorCloudClient.GetColorsInTetradFamilyAsync(colorFromInputString, numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    colorsDictionary =
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                colorsDictionary = await colorCloudClient.GetColorsInTetradFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                colorsDictionary =
                         await colorCloudClient.GetColorsInTetradFamilyAsync(GetGeoColorFromDefaultColors(),
                             numberOfColors);
-                    break;
-            }
 
             // Some color generation APIs use multiple base colors based on the original input color
             // These APIs return a dictionary where the 'keys' are the base colors and the 'values' are the colors generated from that base
             // For this sample we will simply utilize all of the colors generated
             foreach (var colors in colorsDictionary.Values)
-            foreach (var color in colors)
-                tetradColors.Add(color);
+                foreach (var color in colors)
+                    tetradColors.Add(color);
 
             return tetradColors;
         }
@@ -442,55 +351,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
 
             // Generate colors based on the parameters selected in the UI
-            switch (baseColorRadioButtons.FirstOrDefault(btn => btn.IsChecked).AutomationId)
-            {
-                case "rdoRandomColor":
-                    // Use a random base color
-                    colorsDictionary = await colorCloudClient.GetColorsInTriadFamilyAsync(numberOfColors);
-                    break;
-                case "rdoSpecificColor":
-                    // Use the HTML color code specified for the base color
-                    var colorFromInputString = await GetGeoColorFromString(txtSpecificColor.Text);
-                    if (colorFromInputString != null)
-                        colorsDictionary =
-                            await colorCloudClient.GetColorsInTriadFamilyAsync(colorFromInputString, numberOfColors);
-                    break;
-                case "rdoDefaultColor":
-                    // Use a default color for the base color
-                    colorsDictionary =
-                        await colorCloudClient.GetColorsInTriadFamilyAsync(GetGeoColorFromDefaultColors(),
+            if (rdoRandomColor.IsChecked)
+                // Use a random base color
+                colorsDictionary = await colorCloudClient.GetColorsInTriadFamilyAsync(numberOfColors);
+            if (rdoDefaultColor.IsChecked)
+                // Use a default color for the base color
+                colorsDictionary = await colorCloudClient.GetColorsInTriadFamilyAsync(GetGeoColorFromDefaultColors(),
                             numberOfColors);
-                    break;
-            }
 
             // Some color generation APIs use multiple base colors based on the original input color
             // These APIs return a dictionary where the 'keys' are the base colors and the 'values' are the colors generated from that base
             // For this sample we will simply utilize all of the colors generated
             foreach (var colors in colorsDictionary.Values)
-            foreach (var color in colors)
-                triadColors.Add(color);
+                foreach (var color in colors)
+                    triadColors.Add(color);
 
             return triadColors;
-        }
-
-        /// <summary>
-        ///     Helper function using the GeoColor API to generate a color from an HTML string
-        /// </summary>
-        private async Task<GeoColor> GetGeoColorFromString(string htmlColorString)
-        {
-            GeoColor color = null;
-
-            try
-            {
-                // Get a GeoColor based on an HTML color code
-                color = GeoColor.FromHtml(htmlColorString);
-            }
-            catch
-            {
-                await DisplayAlert("Error", "Invalid HTML color string", "OK");
-            }
-
-            return color;
         }
 
         /// <summary>
@@ -499,7 +375,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private GeoColor GetGeoColorFromDefaultColors()
         {
             var color = GeoColors.White;
-            var selectedColorItem = (string) cboDefaultColor.SelectedItem;
+            var selectedColorItem = (string)cboDefaultColor.SelectedItem;
 
             switch (selectedColorItem)
             {
@@ -528,7 +404,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private void cboColorType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var comboBoxContent = (string) cboColorType.SelectedItem;
+            var comboBoxContent = (string)cboColorType.SelectedItem;
 
             if (comboBoxContent != null)
                 switch (comboBoxContent)
@@ -547,12 +423,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                         txtColorCategoryDescription.Text = "Get a family of colors based on contrasting hues";
                         break;
                     case "Quality":
-                        txtColorCategoryDescription.Text =
-                            "Get a family of colors with qualitative variances in hue, but similar lightness and saturation";
+                        txtColorCategoryDescription.Text = "Get a family of colors with qualitative variances in hue, but similar lightness and saturation";
                         break;
                     case "Tetrad":
-                        txtColorCategoryDescription.Text =
-                            "Get a family of colors based on a harmonious tetrad of hues";
+                        txtColorCategoryDescription.Text = "Get a family of colors based on a harmonious tetrad of hues";
                         break;
                     case "Triad":
                         txtColorCategoryDescription.Text = "Get a family of colors based on a harmonious tried of hues";

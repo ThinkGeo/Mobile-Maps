@@ -1,122 +1,81 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander>
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <!-- Sample Description -->
+            <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </views:Expander.Header>
 
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <Grid>
-                        <Label Text="Category:" Grid.Column="1" Grid.Row="1" FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                        <Picker Grid.Column="2" Grid.Row="1" x:Name="cboColorType"
-                                SelectedIndexChanged="cboColorType_SelectedIndexChanged">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Hue</x:String>
-                                    <x:String>Triad</x:String>
-                                    <x:String>Tetrad</x:String>
-                                    <x:String>Quality</x:String>
-                                    <x:String>Analogous</x:String>
-                                    <x:String>Contrasting</x:String>
-                                    <x:String>Complementary</x:String>
-                                </x:Array>
-
-                            </Picker.ItemsSource>
-                        </Picker>
-
-                        <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
-                               x:Name="txtColorCategoryDescription"
-                               FontAttributes="Italic"
-                               Text="Get a family of colors with the same hue and sequential variances in lightness and saturation" />
-
-                        <Label Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"
-                               FontAttributes="Bold"
-                               Text="Base Color:" />
-
-                        <RadioButton x:Name="rdoRandomColor" AutomationId="rdoRandomColor"
-                                     Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" GroupName="SelectedColor"
-                                     Content="Random Color" />
-
-                        <RadioButton x:Name="rdoSpecificColor" AutomationId="rdoSpecificColor"
-                                     Grid.Column="1" Grid.Row="5" GroupName="SelectedColor"
-                                     Content="Specific Color:" />
-                        <Editor x:Name="txtSpecificColor" Text="#AB2567" Grid.Column="2" Grid.Row="5" />
-
-                        <RadioButton x:Name="rdoDefaultColor" AutomationId="rdoDefaultColor"
-                                     Grid.Column="1" Grid.Row="6" GroupName="SelectedColor"
-                                     Content="Default Color:" IsChecked="True" />
-                        <Picker x:Name="cboDefaultColor" Grid.Column="2" Grid.Row="6">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Red</x:String>
-                                    <x:String>Orange</x:String>
-                                    <x:String>Yellow</x:String>
-                                    <x:String>Green</x:String>
-                                    <x:String>Blue</x:String>
-                                    <x:String>Purple</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-
-                        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Text="Generate"
-                                VerticalOptions="Start" Clicked="GenerateColors_Click" />
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="5" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </views:Expander.Content>
-            </views:Expander>
 
             <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
+            <Grid HeightRequest="150" Margin="20,0,10,0">
+
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="txtColorCategoryDescription"
+                       FontAttributes="Italic"
+                       Text="Get a family of colors with the same hue and sequential variances in lightness and saturation" />
+
+                <Label Grid.Column="0" Grid.Row="1" FontAttributes="Bold" Text="Base Color:" VerticalTextAlignment="Center"/>
+                
+                <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <RadioButton x:Name="rdoDefaultColor" 
+                                 GroupName="SelectedColor"
+                                 Content="" IsChecked="True" />
+                    <Picker x:Name="cboDefaultColor" WidthRequest="70" >
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Red</x:String>
+                                <x:String>Orange</x:String>
+                                <x:String>Yellow</x:String>
+                                <x:String>Green</x:String>
+                                <x:String>Blue</x:String>
+                                <x:String>Purple</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </StackLayout>
+                <RadioButton Grid.Column="2" Grid.Row="1"  x:Name="rdoRandomColor" 
+                             GroupName="SelectedColor"
+                             Content="Random" />
+
+                <Label Text="Category:" Grid.Column="0" Grid.Row="2" FontAttributes="Bold" VerticalOptions="Center" />
+                <Picker Grid.Column="1" Grid.Row="2" x:Name="cboColorType"
+                        SelectedIndexChanged="cboColorType_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Hue</x:String>
+                            <x:String>Triad</x:String>
+                            <x:String>Tetrad</x:String>
+                            <x:String>Quality</x:String>
+                            <x:String>Analogous</x:String>
+                            <x:String>Contrasting</x:String>
+                            <x:String>Complementary</x:String>
+                        </x:Array>
+
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button Grid.Column="2" Grid.Row="2" Text="Generate" Clicked="GenerateColors_Click" />
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
