@@ -1,30 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample">
     <ContentPage.Content>
         <StackLayout>
-            <!-- Expander is used for samples with controls -->
-            <views:Expander>
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Orientation="Horizontal" Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                    </StackLayout>
-                </views:Expander.Header>
+            </StackLayout>
 
-            </views:Expander>
-
-            <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
             <Button Text="Show Capital Day/Night Style" Clicked="TimeBasedPointStyle_Click" />
             <Button Text="Show Capital Population Style" Clicked="SizedBasedPointStyle_Click" />

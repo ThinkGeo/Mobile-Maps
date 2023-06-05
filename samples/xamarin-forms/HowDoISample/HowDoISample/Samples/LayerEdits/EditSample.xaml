@@ -1,29 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.EditSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander MinimumWidthRequest="900">
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Padding="8" >
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Padding="8" >
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <Label x:Name="instructions" FontAttributes="Italic" HeightRequest="70"/>
-                    </StackLayout>
-                </views:Expander.Header>
-            </views:Expander>
-
-            <!-- Map Control -->
+                <Label x:Name="instructions" FontAttributes="Italic" HeightRequest="70"/>
+            </StackLayout>
 
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>

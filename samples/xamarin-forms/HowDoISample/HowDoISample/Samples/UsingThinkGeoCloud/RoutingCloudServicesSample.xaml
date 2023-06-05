@@ -1,6 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
@@ -21,7 +19,6 @@
                                    HorizontalOptions="StartAndExpand" />
                 </StackLayout>
 
-                <!-- Map Control -->
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
                 <Grid HeightRequest="200">
                     <ListView Grid.Column="1" Grid.Row="0" x:Name="lsbRouteSegments" HeightRequest="200"
@@ -44,7 +41,6 @@
                 </Grid>
             </StackLayout>
 
-            <!-- Loading Layout -->
             <StackLayout x:Name="loadingLayout"
                          IsVisible="False"
                          AbsoluteLayout.LayoutBounds="0,0,1,1"

@@ -1,33 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CalculateAreaSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander IsExpanded="True">
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Vertical" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Orientation="Vertical" Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Area (sq km):" FontAttributes="Bold"
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Area (sq km):" FontAttributes="Bold"
                                VerticalOptions="Center" />
-                            <Label x:Name="areaResult" VerticalOptions="Center" />
-                        </StackLayout>
-                    </StackLayout>
-                </views:Expander.Header>
-            </views:Expander>
+                    <Label x:Name="areaResult" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
 
-            <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_OnMapClick" />
 
         </StackLayout>
