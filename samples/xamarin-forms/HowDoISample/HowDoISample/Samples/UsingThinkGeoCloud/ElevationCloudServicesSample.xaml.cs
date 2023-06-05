@@ -124,9 +124,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
 
             lsbElevations.ItemsSource = result.ElevationPoints;
-
-            // Set the map extent to the elevation query feature
-            await mapView.CenterAtAsync(drawnShapesLayer.GetBoundingBox().GetCenterPoint());
         }
 
         /// <summary>
@@ -148,6 +145,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Get elevation data for the drawn shape and update the UI
             await PerformElevationQuery(e.TrackShape);
+
+            await mapView.RefreshAsync();
         }
     }
 }

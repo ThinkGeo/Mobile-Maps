@@ -80,22 +80,24 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 "FSDgWMuqGhZCmZnbnxh-Yl1HOaDQcQ6mMaZZ1VkQNYw~",
                 "IoOZkBJie0K9pz10jTRmrUclX6UYssZBeed401oAfbxb9ufF1WVUvg~~");
 
-            PerformReverseGeocode(-10779570, 3915241);
+            await PerformReverseGeocodeAsync(-10779570, 3915241);
+
+
         }
 
         /// <summary>
         ///     Perform the reverse geocode when the user taps on the map
         /// </summary>
-        private void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
+        private async void mapView_MapSingleTap(object sender, TouchMapViewEventArgs e)
         {
             // Run the reverse geocode
-            PerformReverseGeocode(e.PointInWorldCoordinate.X, e.PointInWorldCoordinate.Y);
+            await PerformReverseGeocodeAsync(e.PointInWorldCoordinate.X, e.PointInWorldCoordinate.Y);
         }
 
         /// <summary>
         ///     Perform the reverse geocode using the ReverseGeocodingCloudClient and update the UI
         /// </summary>
-        private async void PerformReverseGeocode(double x, double y)
+        private async Task PerformReverseGeocodeAsync(double x, double y)
         {
             // Perform some simple validation on the input text boxes
             var options = new CloudReverseGeocodingOptions();

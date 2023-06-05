@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -65,7 +66,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Draw reprojected features on the map
         /// </summary>
-        private async void ClearMapAndAddFeatures(Collection<Feature> reprojectedFeatures)
+        private async Task ClearMapAndAddFeaturesAsync(Collection<Feature> reprojectedFeatures)
         {
             // Get the layer we prepared from the MapView
             var reprojectedFeatureLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Reprojected Features Layer");
@@ -109,7 +110,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
 
             // Add the reprojected features to the map
-            ClearMapAndAddFeatures(sphericalMercatorFeatures);
+            await ClearMapAndAddFeaturesAsync(sphericalMercatorFeatures);
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -460,9 +460,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Samples\SampleTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -550,18 +547,6 @@
     <Compile Update="Samples\LayerFormats\Vector\ShapefileLayerSample.xaml.cs">
       <DependentUpon>ShapefileLayerSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\LayerFormats\WebServices\BingMapLayerSample.xaml.cs">
-      <DependentUpon>BingMapLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\WebServices\CloudMapsRasterLayerSample.xaml.cs">
-      <DependentUpon>CloudMapsRasterLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\WebServices\CloudMapsVectorLayerSample.xaml.cs">
-      <DependentUpon>CloudMapsVectorLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\WebServices\GoogleMapLayerSample.xaml.cs">
-      <DependentUpon>GoogleMapLayerSample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\LayerFormats\WebServices\NOAARadarLayerSample.xaml.cs">
       <DependentUpon>NOAARadarLayerSample.xaml</DependentUpon>
     </Compile>
@@ -625,12 +610,6 @@
     <Compile Update="Samples\ShapeGeometricOperations\TranslateShapeSample.xaml.cs">
       <DependentUpon>TranslateShapeSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\ShapeGeometricOperations\SplitShapeSample.xaml.cs">
-      <DependentUpon>SplitShapeSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\ShapeGeometricOperations\SnapToShapeSample.xaml.cs">
-      <DependentUpon>SnapToShapeSample.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Samples\ShapeGeometricOperations\SimplifyShapeSample.xaml.cs">
       <DependentUpon>SimplifyShapeSample.xaml</DependentUpon>
     </Compile>
@@ -693,12 +672,6 @@
     </Compile>
     <Compile Update="Samples\MapOverlays\ThinkGeoBackgroundOverlays.xaml.cs">
       <DependentUpon>ThinkGeoBackgroundOverlays.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayBingMapsOverlaySample.xaml.cs">
-      <DependentUpon>DisplayBingMapsOverlaySample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\MapOverlays\DisplayGoogleMapsOverlaySample.xaml.cs">
-      <DependentUpon>DisplayGoogleMapsOverlaySample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\MapOverlays\DisplayWMSOverlaySample.xaml.cs">
       <DependentUpon>DisplayWMSOverlaySample.xaml</DependentUpon>
