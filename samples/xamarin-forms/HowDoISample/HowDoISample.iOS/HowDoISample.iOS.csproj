@@ -84,9 +84,9 @@
     <BundleResource Include="Resources\tab_feed.png" />
     <BundleResource Include="Resources\tab_feed%402x.png" />
     <BundleResource Include="Resources\tab_feed%403x.png" />
-    <BundleResource Include="Resources\xamarin_logo.png" />
-    <BundleResource Include="Resources\xamarin_logo%402x.png" />
-    <BundleResource Include="Resources\xamarin_logo%403x.png" />
+    <BundleResource Include="Resources\thinkgeo_logo.png" />
+    <BundleResource Include="Resources\thinkgeo_logo%402x.png" />
+    <BundleResource Include="Resources\thinkgeo_logo%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\thinkgeo_icon_1024x1024.png">
       <Visible>false</Visible>
     </ImageAsset>
