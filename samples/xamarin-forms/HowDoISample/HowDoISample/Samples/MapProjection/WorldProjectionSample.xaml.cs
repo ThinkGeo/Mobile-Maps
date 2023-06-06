@@ -94,13 +94,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await mapView.RefreshAsync();
         }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
     }
 }

@@ -78,14 +78,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await mapView.RefreshAsync();
         }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
     }
 
     // This style draws points on the capitols with their color based on the current time and if

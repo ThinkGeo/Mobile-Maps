@@ -16,8 +16,8 @@
         <StackLayout  VerticalOptions="FillAndExpand" >
             <StackLayout Orientation="Horizontal" Padding="8">
                 <Label x:Name="descriptionLabel"
-                               Text="Double click to zoom in, pinch to zoom/rotate. tap compass to north up, tap globe to zoom to an extent."
-                               FontSize="Subtitle"
+                               Text="Double click to zoom in, pinch to zoom/rotate. Tap compass to north up, tap globe to zoom to an extent."
+                               FontSize="15"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
             </StackLayout>
@@ -42,7 +42,7 @@
                 </StackLayout>
 
 
-                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="10" HorizontalOptions="Start" VerticalOptions="End">
+                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="30" HorizontalOptions="Start" VerticalOptions="End">
                     <StackLayout Orientation="Horizontal" HeightRequest="20">
                         <CheckBox IsChecked="{Binding IsRotationEnabled}"></CheckBox>
                         <Label>Rotation Enabled</Label>

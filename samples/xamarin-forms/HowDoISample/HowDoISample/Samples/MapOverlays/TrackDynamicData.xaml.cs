@@ -222,13 +222,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.
             await mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]);
         }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
     }
 }
