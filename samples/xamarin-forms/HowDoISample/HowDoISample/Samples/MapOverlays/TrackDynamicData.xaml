@@ -7,26 +7,15 @@
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData">
     <ContentPage.Content>
         <StackLayout>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Orientation="Horizontal" Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                    </StackLayout>
+            </StackLayout>
 
-            <Grid VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <ThinkGeoUI:MapView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="mapView"/>
-                <Button Text="Rotate the Overlay" Clicked="btnRotate_Click" Grid.Column="1" Grid.Row="1" />
-                <Button Text="Move the Overlay" Clicked="btnOffset_Click" Grid.Column="0" Grid.Row="1" />
-            </Grid>
+
+            <ThinkGeoUI:MapView  x:Name="mapView" VerticalOptions="FillAndExpand"/>
 
         </StackLayout>
     </ContentPage.Content>

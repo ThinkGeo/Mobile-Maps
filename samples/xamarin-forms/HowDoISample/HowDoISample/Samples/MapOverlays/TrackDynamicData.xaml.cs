@@ -29,7 +29,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
 
             timer = new Timer();
-            timer.Interval = 1000;
+            timer.Interval = 10000;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
 
@@ -44,6 +44,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(backgroundOverlay);
 
             // Creating a rectangle area we will use to generate the polygons and also start the map there.
+            //var currentExtent = MaxExtents.SphericalMercator;mapScale5
             var currentExtent = new RectangleShape(-10810995, 3939081, -10747552, 3884429);
 
             //Do all the things we need to setup the polygon layer and overlay such as creating all the polygons etc.
@@ -62,7 +63,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             {
                 //I go to find the layer and then loop through all of the features and assign them new
                 // random colors and refresh just the overlay that we are using to draw the polygons
-
                 var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
                 if (polygonLayer == null)
                     return;
@@ -73,12 +73,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                     feature.ColumnValues["DataValue"] = random.Next(1, 5).ToString();
 
                 // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.            
-                 mapView.Overlays["PolygonOverlay"].RefreshAsync().ContinueWith(t =>
-                 {
-                     if (t.IsFaulted)
-                     {
-                     }
-                 });
+                mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]).ContinueWith(t =>
+                //mapView.Overlays["PolygonOverlay"].RefreshAsync().ContinueWith(t =>
+                {
+                    if (t.IsFaulted)
+                    {
+                    }
+                });
             });
         }
 
@@ -93,6 +94,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             //We are going to store all of the polygons in an in memory layer
             var polygonLayer = new InMemoryFeatureLayer();
+            //polygonLayer.ThreadSafe = ThreadSafetyLevel.Safe;
 
             //Here we generate all of our make believe polygons
             var features = GetGeneratedPolygons(boundingRectangle.GetBoundingBox());
@@ -160,67 +162,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 }
 
             return features;
-        }
-
-
-        private async void btnRotate_Click(object sender, EventArgs e)
-        {
-            //I go to find the layer and then loop through all of the features and rotate them
-            var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
-
-            var newFeatures = new Collection<Feature>();
-
-            var center = polygonLayer.GetBoundingBox().GetCenterPoint();
-
-            foreach (var feature in polygonLayer.InternalFeatures)
-            {
-                // Here we need to clone the features and add them back to the layer
-                var shape = (PolygonShape)feature.GetShape();
-
-                shape.Rotate(center, 10);
-                shape.Id = feature.Id;
-
-                var newFeature = new Feature(shape);
-                newFeature.ColumnValues.Add("DataValue", feature.ColumnValues["DataValue"]);
-                newFeatures.Add(newFeature);
-            }
-
-            polygonLayer.InternalFeatures.Clear();
-
-            foreach (var feature in newFeatures) polygonLayer.InternalFeatures.Add(feature);
-
-            // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.
-            await mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]);
-        }
-
-        private async void btnOffset_Click(object sender, EventArgs e)
-        {
-            //I go to find the layer and then loop through all of the features and rotate them
-            var polygonLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("PolygonLayer");
-
-            var newFeatures = new Collection<Feature>();
-
-            var center = polygonLayer.GetBoundingBox().GetCenterPoint();
-
-            foreach (var feature in polygonLayer.InternalFeatures)
-            {
-                // Here we need to clone the features and add them back to the layer
-                var shape = (PolygonShape)feature.GetShape();
-
-                shape.TranslateByOffset(2000, 2000);
-                shape.Id = feature.Id;
-
-                var newFeature = new Feature(shape);
-                newFeature.ColumnValues.Add("DataValue", feature.ColumnValues["DataValue"]);
-                newFeatures.Add(newFeature);
-            }
-
-            polygonLayer.InternalFeatures.Clear();
-
-            foreach (var feature in newFeatures) polygonLayer.InternalFeatures.Add(feature);
-
-            // We are only going to refresh the one overlay that draws the polygons.  This saves us having toe refresh the background data.
-            await mapView.RefreshAsync(mapView.Overlays["PolygonOverlay"]);
         }
     }
 }

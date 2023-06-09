@@ -64,7 +64,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void ZoomToScale_Click(object sender, EventArgs e)
         {
-            await mapView.ZoomToScaleAsync(10000);
+            await mapView.ZoomToScaleAsync(20000);
         }
 
         /// <summary>
