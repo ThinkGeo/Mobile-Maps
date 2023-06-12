@@ -64,7 +64,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
         "title": "Refresh Dynamic Data",
-        "description": "This sample refreshes an overlay every second, while we can smoothly navigate the map at the same time",
+        "description": "This sample refreshes an overlay every other second, while we can smoothly navigate the map at the same time",
         "source": "Samples/MapOverlays/TrackDynamicData"
       }
     ]
@@ -354,19 +354,19 @@
     ]
   },
   {
-    "title": "Layer Edits",
+    "title": "Layer Editing",
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditSample",
         "title": "Edit Features",
         "description": "Draw, edit, or delete shapes.",
-        "source": "Samples/LayerEdits/EditSample"
+        "source": "Samples/LayerEditing/EditSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditWithSnappingSample",
         "title": "Edit Features with Snapping",
         "description": "Drag a vertex into a circle and it will snap to its center.",
-        "source": "Samples/LayerEdits/EditWithSnappingSample"
+        "source": "Samples/LayerEditing/EditWithSnappingSample"
       }
     ]
   },

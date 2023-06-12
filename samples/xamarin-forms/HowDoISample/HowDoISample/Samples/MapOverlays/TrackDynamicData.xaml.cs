@@ -29,7 +29,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             base.OnAppearing();
 
             timer = new Timer();
-            timer.Interval = 10000;
+            timer.Interval = 2000;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
 
