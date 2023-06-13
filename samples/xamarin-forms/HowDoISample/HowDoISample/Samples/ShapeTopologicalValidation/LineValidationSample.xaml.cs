@@ -75,8 +75,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <summary>
         ///     Validate lines based on whether their endpoints are touching points, and display the results on the map
         /// </summary>
-        private async void CheckLineEndpointsMustTouchPoints(object sender, EventArgs e)
+        private async void CheckLineEndpointsMustTouchPoints(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of point and line features to use for the validation
             var lineFeature = new Feature("LINESTRING(0 0,100 0,100 50)");
             var pointOnEndpointFeature = new Feature("POINT(0 0)");
@@ -95,14 +98,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nLine endpoints touching points are shown in green. \n\nInvalid endpoints are shown in red.";
+                "Features being validated against are shown in blue. \nLine endpoints touching points are shown in green. \nInvalid endpoints are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they are overlapping polygon boundaries, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustOverlapPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckLinesMustOverlapPolygonBoundaries(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line and polygon features to use for the validation
             var lineFeature = new Feature("LINESTRING(-50 0,150 0)");
             var lineOnBoundaryFeature = new Feature("LINESTRING(-50 0,150 0)");
@@ -122,15 +128,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nLine segments overlapping polygon boundaries are shown in green. \n\nInvalid line segments are shown in red.";
+                "Features being validated against are shown in blue. \nLine segments overlapping polygon boundaries are in green. \nInvalid line segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they are overlapping lines from a separate set of features, and display the results
         ///     on the map
         /// </summary>
-        private async void CheckLinesMustOverlapLines(object sender, EventArgs e)
+        private async void CheckLinesMustOverlapLines(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineFeature = new Feature("LINESTRING(0 0,100 0,100 100,0 100)");
             var coveringLineFeature = new Feature("LINESTRING(0 -50,50 0,100 0,100 150)");
@@ -149,14 +158,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nLine segments overlapping lines are shown in green. \n\nInvalid line segments are shown in red.";
+                "Features being validated against are shown in blue. \nLine segments overlapping lines are shown in green. \nInvalid line segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they are composed of a single part, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustBeSinglePart(object sender, EventArgs e)
+        private async void CheckLinesMustBeSinglePart(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var singleLineFeature = new Feature("MULTILINESTRING((0 -50,100 -50,100 -100,0 -100))");
             var multiLineFeature = new Feature("MULTILINESTRING((0 0,100 0),(100 100,0 100))");
@@ -174,14 +186,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines made of single segments are shown in green. \n\nLines with disjoint segments are shown in red.";
+                "Lines made of single segments are shown in green. \nLines with disjoint segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they form a closed polygon, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustFormClosedPolygon(object sender, EventArgs e)
+        private async void CheckLinesMustFormClosedPolygon(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100,20 100)");
             var lineFeature2 = new Feature("LINESTRING(0 0,-50 0,-50 100,0 100)");
@@ -198,14 +213,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines being validated are shown in green. \n\nLine endpoints that do not form a closed polygon are shown in red.";
+                "Lines being validated are shown in green. \nLine endpoints that do not form a closed polygon are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they form pseudonodes, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotHavePseudonodes(object sender, EventArgs e)
+        private async void CheckLinesMustNotHavePseudonodes(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineSegmentFeature1 = new Feature("LINESTRING(0 0,50 0,50 50,0 0)");
             var lineSegmentFeature2 = new Feature("LINESTRING(-50 0,-50 50)");
@@ -229,14 +247,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await ClearMapAndAddFeatures(lines, invalidResultFeatures);
 
             // Update the help text
-            txtValidationInfo.Text = "Lines being validated are shown in green. \n\nPseudonodes are shown in red.";
+            txtValidationInfo.Text = "Lines being validated are shown in green. \nPseudonodes are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they intersect other lines, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotIntersect(object sender, EventArgs e)
+        private async void CheckLinesMustNotIntersect(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
             var lineFeature2 = new Feature("LINESTRING(0 -50,30 0,60 0,100 50)");
@@ -254,14 +275,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 invalidResultFeatures);
 
             // Update the help text
-            txtValidationInfo.Text = "Lines being validated are shown in green. \n\nIntersections are shown in red.";
+            txtValidationInfo.Text = "Lines being validated are shown in green. \nIntersections are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they intersect or touch other lines, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotSelfIntersectOrTouch(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfIntersectOrTouch(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
             var lineFeature2 = new Feature("LINESTRING(0 -50,30 0,60 0,100 50)");
@@ -280,14 +304,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines being validated are shown in green. \n\nIntersecting points and overlapping segments are shown in red.";
+                "Lines being validated are shown in green. \nIntersecting points and overlapping segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they overlap other lines, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotOverlap(object sender, EventArgs e)
+        private async void CheckLinesMustNotOverlap(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var lineFeature1 = new Feature("LINESTRING(0 0,100 0,100 100)");
             var lineFeature2 = new Feature("LINESTRING(0 -50,30 0,60 0,100 50)");
@@ -306,15 +333,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines being validated are shown in green. \n\nOverlapping segments are shown in red.";
+                "Lines being validated are shown in green. \nOverlapping segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they overlap other lines from a separate set of features, and display the results
         ///     on the map
         /// </summary>
-        private async void CheckLinesMustNotOverlapLines(object sender, EventArgs e)
+        private async void CheckLinesMustNotOverlapLines(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var overlappingLineFeature = new Feature("LINESTRING(0 0,100 0,100 100,0 100)");
             var overlappedLineFeature = new Feature("LINESTRING(150 0,100 30,100 60,150 100)");
@@ -333,14 +363,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nLines being validated are shown in green. \n\nOverlapping line segments are shown in red.";
+                "Features being validated against are shown in blue. \nLines being validated are shown in green. \nOverlapping line segments are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they self-intersect, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotSelfIntersect(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfIntersect(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var selfIntersectingLine = new Feature("LINESTRING(0 0,100 0,100 100,50 100,50 -50)");
 
@@ -356,14 +389,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines being validated are shown in green. \n\nSelf-intersections are shown in red.";
+                "Lines being validated are shown in green. \nSelf-intersections are shown in red.";
         }
 
         /// <summary>
         ///     Validate lines based on whether they elf-overlap, and display the results on the map
         /// </summary>
-        private async void CheckLinesMustNotSelfOverlap(object sender, EventArgs e)
+        private async void CheckLinesMustNotSelfOverlap(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of line features to use for the validation
             var selfOverlappingLine = new Feature("LINESTRING(0 0,100 0,100 100,0 100,20 0,40 0,40 -50)");
 
@@ -379,7 +415,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Lines being validated are shown in green. \n\nOverlapping segments are shown in red.";
+                "Lines being validated are shown in green. \nOverlapping segments are shown in red.";
         }
 
         /// <summary>

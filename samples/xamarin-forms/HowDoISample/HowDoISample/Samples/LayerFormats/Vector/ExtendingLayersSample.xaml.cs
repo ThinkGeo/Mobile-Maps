@@ -39,18 +39,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             radiusLayer.RingGeography = GeographyUnit.Meter;
             radiusLayer.RingDistance = 5;
 
-            layerOverlay.Layers.Add(radiusLayer);
-
+            //layerOverlay.Layers.Add(radiusLayer);
+            mapView.AdornmentOverlay.Layers.Add(radiusLayer);
             mapView.CurrentExtent =
                 new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);
-        }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
         }
     }
 
@@ -58,7 +50,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     // of the screen.  You notice in the DrawCore we can draw directly on the canvas which gives us
     // allot of power.  This is similar to custom styles where we can also draw directly on the canvas
     // from the style.
-    public class RadiusLayer : Layer
+    public class RadiusLayer : AdornmentLayer
     {
         public RadiusLayer()
         {

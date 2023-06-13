@@ -62,6 +62,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the layers to an overlay, and add the overlay to the map
             var featuresOverlay = new LayerOverlay();
+            featuresOverlay.TileType = TileType.SingleTile;
             featuresOverlay.Layers.Add("Filter Features", filterFeaturesLayer);
             featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
             featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
@@ -76,8 +77,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         ///     Validate polygons based on whether their boundaries overlap with the boundaries of a second set of polygons, and
         ///     display the results on the map
         /// </summary>
-        private async void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckIfPolygonBoundariesOverlapPolygonBoundaries(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var coveringPolygonFeature = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
             var coveredPolygonFeature = new Feature("POLYGON((0 0,50 0,50 50,0 50,0 0))");
@@ -97,15 +101,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPolygons being validated are shown in green. \n\nNon-overlapping polygon boundaries are shown in red.";
+                "Features being validated against are shown in blue. \nPolygons being validated are shown in green. \nNon-overlapping polygon boundaries are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether their boundaries overlap with a separate set of lines, and display the results
         ///     on the map
         /// </summary>
-        private async void CheckIfPolygonBoundariesOverlapLines(object sender, EventArgs e)
+        private async void CheckIfPolygonBoundariesOverlapLines(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon and line features to use for the validation
             var polygonFeature = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
             var lineFeature = new Feature("LINESTRING(-50 0,100 0,100 150)");
@@ -124,14 +131,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPolygons being validated are shown in green. \n\nNon-overlapping polygon boundaries are shown in red.";
+                "Features being validated against are shown in blue. \nPolygons being validated are shown in green. \nNon-overlapping polygon boundaries are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether they overlap a second set of polygons, and display the results on the map
         /// </summary>
-        private async void CheckIfPolygonsOverlapPolygons(object sender, EventArgs e)
+        private async void CheckIfPolygonsOverlapPolygons(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
             var polygonFeature2 = new Feature("POLYGON((75 25,125 25,125 75,75 75,75 25))");
@@ -152,14 +162,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nOverlapping regions are shown in green. \n\nNon-overlapping regions are shown in red.";
+                "Features being validated against are shown in blue. \nOverlapping regions are shown in green. \nNon-overlapping regions are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether they lie within other polygons, and display the results on the map
         /// </summary>
-        private async void CheckIfPolygonsAreWithinPolygons(object sender, EventArgs e)
+        private async void CheckIfPolygonsAreWithinPolygons(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
             var polygonFeature2 = new Feature("POLYGON((75 25,125 25,125 75,75 75,75 25))");
@@ -180,14 +193,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPolygons fully within polygons are shown in green. \n\nPolygons not within polygons are shown in red.";
+                "Features being validated against are shown in blue. \nPolygons fully within polygons are shown in green. \nPolygons not within polygons are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether they contain points, and display the results on the map
         /// </summary>
-        private async void CheckIfPolygonsContainPoints(object sender, EventArgs e)
+        private async void CheckIfPolygonsContainPoints(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of points and polygon features to use for the validation
             var pointFeature = new Feature("POINT(50 50)");
             var polygonWithPointFeature = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
@@ -207,15 +223,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPolygons containing points are shown in green. \n\nPolygons not containing points are shown in red.";
+                "Features being validated against are shown in blue. \nPolygons containing points are shown in green. \nPolygons not containing points are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether they overlap each other, and display the results on the map. Unlike other
         ///     validations, this function validates and returns invalid polygons from both input sets
         /// </summary>
-        private async void CheckIfPolygonsCoverEachOther(object sender, EventArgs e)
+        private async void CheckIfPolygonsCoverEachOther(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((0 0,100 0,100 100,0 100,0 0))");
             var polygonFeature2 = new Feature("POLYGON((-50 -50,50 -50,50 50,-50 50,-50 -50))");
@@ -233,15 +252,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "All non-overlapping regions from two different sets of polygons are shown in red. \n\nOverlapping regions are shown in green";
+                "All non-overlapping regions from two different sets of polygons are shown in red. \nOverlapping regions are shown in green";
         }
 
         /// <summary>
         ///     Validate polygons based on whether the union of the polygons has any interior gaps, and display the results on the
         ///     map
         /// </summary>
-        private async void CheckIfPolygonsHaveGaps(object sender, EventArgs e)
+        private async void CheckIfPolygonsHaveGaps(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((0 0,40 0,40 40,0 40,0 0))");
             var polygonFeature2 = new Feature("POLYGON((30 30,70 30,70 70,30 70,30 30))");
@@ -262,14 +284,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated are shown in green. \n\nGaps (Inner rings) within the union of the polygons are shown in red.";
+                "Features being validated are shown in green. \nGaps (Inner rings) within the union of the polygons are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether polygons within the same set overlap, and display the results on the map
         /// </summary>
-        private async void CheckPolygonsMustNotOverlap(object sender, EventArgs e)
+        private async void CheckPolygonsMustNotOverlap(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
             var polygonFeature2 = new Feature("POLYGON((75 25,125 25,125 75,75 75,75 25))");
@@ -290,14 +315,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated are shown in green. \n\nOverlapping polygon regions are shown in red.";
+                "Features being validated are shown in green. \nOverlapping polygon regions are shown in red.";
         }
 
         /// <summary>
         ///     Validate polygons based on whether they overlap polygons from a separate set, and display the results on the map
         /// </summary>
-        private async void CheckPolygonsMustNotOverlapPolygons(object sender, EventArgs e)
+        private async void CheckPolygonsMustNotOverlapPolygons(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of polygon features to use for the validation
             var polygonFeature1 = new Feature("POLYGON((25 25,50 25,50 50,25 50,25 25))");
             var polygonFeature2 = new Feature("POLYGON((75 25,125 25,125 75,75 75,75 25))");
@@ -318,7 +346,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nNon-overlapping polygon regions are shown in green. \n\nOverlapping polygon regions are shown in red.";
+                "Features being validated against are shown in blue. \nNon-overlapping polygon regions are shown in green. \nOverlapping polygon regions are shown in red.";
         }
 
         /// <summary>

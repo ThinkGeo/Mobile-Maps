@@ -1,0 +1,63 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.EditSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="8" >
+                <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                <Label x:Name="instructions" FontAttributes="Italic" HeightRequest="70"/>
+            </StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="280"/>
+                </Grid.RowDefinitions>
+                <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
+
+                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="10" BackgroundColor="#80FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row="0" CheckedChanged="NavMode_Click"  IsChecked="True" />
+                    <RadioButton Grid.Column="0" Grid.Row="1" CheckedChanged="DrawPoint_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="2" CheckedChanged="DrawLine_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="3" CheckedChanged="DrawEllipse_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="4" CheckedChanged="DrawPolygon_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="5" CheckedChanged="EditShape_Click" />
+                    <RadioButton Grid.Column="0" Grid.Row="6" CheckedChanged="DeleteShape_Click" />
+
+
+                    <Label Grid.Column="1" Grid.Row ="0"  Text="Navigation Mode" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="1"  Text="Draw Point" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="2"  Text="Draw Line" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="3"  Text="Draw Ellipse" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="4"  Text="Draw Polygon" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="5"  Text="Edit Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="6"  Text="Delete Shape" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+
+                </Grid>
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

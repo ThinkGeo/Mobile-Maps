@@ -37,7 +37,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map view current extent to a slightly zoomed in area of the image.
             mapView.CurrentExtent =
-                new RectangleShape(-90.5399054799761, 68.8866552710533, 57.5181302343096, -43.7137911575181);
+                new RectangleShape(-130.762644644151, 87.8332771640585, -35.6692397481878, -70.9198793428127);
 
             // Refresh the map.
             await mapView.RefreshAsync();

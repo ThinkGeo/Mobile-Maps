@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using ThinkGeo.Core;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkGeo.UI.XamarinForms.HowDoI
@@ -11,7 +10,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     ///     Learn how to get the convex hull of a shape
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GetConvexHullSample : ContentPage
+    public partial class GetConvexHullSample
     {
         public GetConvexHullSample()
         {
@@ -96,6 +95,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Redraw the layerOverlay to see the convexHull feature on the map
             await layerOverlay.RefreshAsync();
+        }
+
+        //TODO: apply it to other samples. 
+        protected override void OnDisappearing()
+        {
+            // You can use `mapView.Dispose()` to release all the resources. However, we don't call `mapView.Dispose()` here because
+            // the `mapView` will not be initialized again if revisiting this page, which would result in accessing disposed object issues.
+            // This limitation is specific to the structure of this HowDoI sample. You may consider using `mapView.Dispose()` as needed in your own project.
+            mapView.Overlays.Clear();
+            base.OnDisappearing();
         }
     }
 }

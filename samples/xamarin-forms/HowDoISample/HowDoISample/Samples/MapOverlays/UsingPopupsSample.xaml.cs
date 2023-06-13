@@ -40,6 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await AddHotelPopupsAsync();
 
+            mapView.IsRotationEnabled = true;
             await mapView.RefreshAsync();
         }
 

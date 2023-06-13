@@ -68,8 +68,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add("Queried Features Overlay", queriedFeaturesOverlay);
 
             // Set the map extent to Frisco, TX
-            mapView.CurrentExtent =
-                new RectangleShape(-10780136.4424059, 3915901.47975593, -10779033.5515421, 3914500.39988761);
+            mapView.CurrentExtent = new RectangleShape(-10780136.4424059, 3915901.47975593, -10779033.5515421, 3914500.39988761);
 
             // Add an event to handle new shapes that are drawn on the map
             mapView.TrackOverlay.TrackEnded += OnShapeDrawn;
@@ -82,9 +81,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var sampleShape = new RectangleShape(-10779877.70, 3915441.00, -10779248.97, 3915119.63);
             queryShapeFeatureLayer.InternalFeatures.Add(new Feature(sampleShape));
             // Run the world maps query
-            cboQueryLayer.SelectedItem = "Buildings";
-            cboQueryType.SelectedItem = "Intersecting";
 
+            mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
             await PerformWorldMapsQuery();
 
             await mapView.RefreshAsync();
@@ -96,9 +94,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task PerformWorldMapsQuery()
         {
             // Get the feature layers from the MapView
-            var queriedFeaturesOverlay = (LayerOverlay) mapView.Overlays["Queried Features Overlay"];
-            var queryShapeFeatureLayer = (InMemoryFeatureLayer) queriedFeaturesOverlay.Layers["Query Shape Layer"];
-            var queriedFeaturesLayer = (InMemoryFeatureLayer) queriedFeaturesOverlay.Layers["Queried Features Layer"];
+            var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
+            var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
+            var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 
             // Show an error if trying to query with no query shape
             if (queryShapeFeatureLayer.InternalFeatures.Count == 0)
@@ -109,45 +107,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the MapsQuery parameters based on the drawn query shape and the UI
             var queryShape = queryShapeFeatureLayer.InternalFeatures[0].GetShape();
-            var projectionInSrid = 3857;
-            var queryLayer = ((string) cboQueryLayer.SelectedItem).ToLower();
-
-            var result = new CloudMapsQueryResult();
-
-            // Show a loading graphic to let users know the request is running
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
+            CloudMapsQueryResult result;
 
             // Perform the world maps query
             try
             {
-                switch ((string) cboQueryType.SelectedItem)
-                {
-                    case "Containing":
-                        result = await mapsQueryCloudClient.GetFeaturesContainingAsync(queryLayer, queryShape,
-                            projectionInSrid,
-                            new CloudMapsQuerySpatialQueryOptions {MaxResults = Convert.ToInt32(maxResults.Text)});
-                        break;
-                    case "Nearest":
-                        result = await mapsQueryCloudClient.GetFeaturesNearestAsync(queryLayer, queryShape,
-                            projectionInSrid, Convert.ToInt32(maxResults.Text));
-                        break;
-                    case "Intersecting":
-                        result = await mapsQueryCloudClient.GetFeaturesIntersectingAsync(queryLayer, queryShape,
-                            projectionInSrid,
-                            new CloudMapsQuerySpatialQueryOptions {MaxResults = Convert.ToInt32(maxResults.Text)});
-                        break;
-                    case "Overlapping":
-                        result = await mapsQueryCloudClient.GetFeaturesOverlappingAsync(queryLayer, queryShape,
-                            projectionInSrid,
-                            new CloudMapsQuerySpatialQueryOptions {MaxResults = Convert.ToInt32(maxResults.Text)});
-                        break;
-                    case "Within":
-                        result = await mapsQueryCloudClient.GetFeaturesWithinAsync(queryLayer, queryShape,
-                            projectionInSrid,
-                            new CloudMapsQuerySpatialQueryOptions {MaxResults = Convert.ToInt32(maxResults.Text)});
-                        break;
-                }
+                var projectionInSrid = 3857;
+                var queryLayer = "buildings";
+                result = await mapsQueryCloudClient.GetFeaturesIntersectingAsync(queryLayer, queryShape, projectionInSrid,
+                    new CloudMapsQuerySpatialQueryOptions { MaxResults = 100 });
+
             }
             catch (Exception ex)
             {
@@ -155,40 +124,25 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 if (ex is ArgumentException)
                 {
                     await DisplayAlert("Error", ex.Message, "OK");
-                    await mapView.RefreshAsync();
                     return;
                 }
                 else
                 {
                     await DisplayAlert("Alert", ex.Message, "OK");
-                    await mapView.RefreshAsync();
                     return;
                 }
             }
-            finally
-            {
-                // Hide the loading graphic
-                loadingIndicator.IsRunning = false;
-                loadingLayout.IsVisible = false;
-            }
+
 
             if (result.Features.Count > 0)
             {
                 // Add any features found by the query to the map
                 foreach (var feature in result.Features) queriedFeaturesLayer.InternalFeatures.Add(feature);
-
-                // Set the map extent to the extent of the query results
-                queriedFeaturesLayer.Open();
-                mapView.CurrentExtent = queriedFeaturesLayer.GetBoundingBox();
-                queriedFeaturesLayer.Close();
             }
             else
             {
                 await DisplayAlert("Alert", "No features found in the selected area", "OK");
             }
-
-            // Refresh and redraw the map
-            await mapView.RefreshAsync();
         }
 
         /// <summary>
@@ -197,79 +151,33 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
         {
             // Disable drawing mode and clear the drawing layer
-            mapView.TrackOverlay.TrackMode = TrackMode.None;
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+            ClearQueryShapes();
 
             // Get the query shape layer from the MapView
-            var queriedFeaturesOverlay = (LayerOverlay) mapView.Overlays["Queried Features Overlay"];
-            var queryShapeFeatureLayer = (InMemoryFeatureLayer) queriedFeaturesOverlay.Layers["Query Shape Layer"];
+            var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
+            var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
 
             // Add the newly drawn shape, then redraw the overlay
             queryShapeFeatureLayer.InternalFeatures.Add(new Feature(e.TrackShape));
-            await queriedFeaturesOverlay.RefreshAsync();
 
             await PerformWorldMapsQuery();
-        }
-
-        /// <summary>
-        ///     Set the map to 'Point Drawing Mode' when the user taps the 'Draw a New Query Point' button
-        /// </summary>
-        private async void DrawPoint_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-            // Set the drawing mode to 'Point'
-            mapView.TrackOverlay.TrackMode = TrackMode.Point;
-
-            // Clear the old shapes from the map
-            await ClearQueryShapes();
-        }
-
-        /// <summary>
-        ///     Set the map to 'Line Drawing Mode' when the user taps the 'Draw a New Query Line' button
-        /// </summary>
-        private async void DrawLine_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-            // Set the drawing mode to 'Line'
-            mapView.TrackOverlay.TrackMode = TrackMode.Line;
-
-            // Clear the old shapes from the map
-            await ClearQueryShapes();
-        }
-
-        /// <summary>
-        ///     Set the map to 'Polygon Drawing Mode' when the user taps the 'Draw a New Query Polygon' button
-        /// </summary>
-        private async void DrawPolygon_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-            // Set the drawing mode to 'Polygon'
-            mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
-
-            // Clear the old shapes from the map
-            await ClearQueryShapes();
+            await queriedFeaturesOverlay.RefreshAsync();
         }
 
         /// <summary>
         ///     Clear the query shapes from the map
         /// </summary>
-        private async Task ClearQueryShapes()
+        private void ClearQueryShapes()
         {
             // Get the query shape layer from the MapView
-            var queriedFeaturesOverlay = (LayerOverlay) mapView.Overlays["Queried Features Overlay"];
-            var queryShapeFeatureLayer = (InMemoryFeatureLayer) queriedFeaturesOverlay.Layers["Query Shape Layer"];
-            var queriedFeaturesLayer = (InMemoryFeatureLayer) queriedFeaturesOverlay.Layers["Queried Features Layer"];
+            var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
+            var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
+            var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 
             // Clear the old query result and query shape from the map
             queriedFeaturesLayer.InternalFeatures.Clear();
             queryShapeFeatureLayer.InternalFeatures.Clear();
-            await queriedFeaturesOverlay.RefreshAsync();
-        }
-
-        private async Task CollapseExpander()
-        {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay((int) controlsExpander.CollapseAnimationLength);
         }
     }
 }

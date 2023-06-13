@@ -1,100 +1,53 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.PolygonValidationSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander>
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
-                        <BoxView Color="LightGray"
-                                 WidthRequest="1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center" />
-                        <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                               HorizontalOptions="End">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                             Value="True">
-                                    <Setter Property="Rotation"
-                                            Value="180" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                    </StackLayout>
-                </views:Expander.Header>
+                <Label FontAttributes="Italic" x:Name="txtValidationInfo" />
+            </StackLayout>
 
-                <!-- Sample Controls -->
-                <views:Expander.Content>
-                    <ScrollView HeightRequest="300">
-                        <Grid>
-                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Italic" x:Name="txtValidationInfo" />
-                            <RadioButton Grid.Column="1" Grid.Row="1"
-                                         x:Name="rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries"
-                                         CheckedChanged="CheckIfPolygonBoundariesOverlapPolygonBoundaries"
-                                         Content="Polygon Boundaries Must Overlap Polygon Boundaries" />
-                            <RadioButton Grid.Column="1" Grid.Row="2" x:Name="rdoCheckIfPolygonBoundariesOverlapLines"
-                                         CheckedChanged="CheckIfPolygonBoundariesOverlapLines"
-                                         Content="Polygon Boundaries Must Overlap Lines" />
-                            <RadioButton Grid.Column="1" Grid.Row="3" x:Name="rdoCheckIfPolygonsOverlapPolygons"
-                                         CheckedChanged="CheckIfPolygonsOverlapPolygons"
-                                         Content="Polygons Must Overlap Polygons" />
-                            <RadioButton Grid.Column="1" Grid.Row="4" x:Name="rdoCheckIfPolygonsAreWithinPolygons"
-                                         CheckedChanged="CheckIfPolygonsAreWithinPolygons"
-                                         Content="Polygons Must Be Within Polygons" />
-                            <RadioButton Grid.Column="1" Grid.Row="5" x:Name="rdoCheckIfPolygonsContainPoints"
-                                         CheckedChanged="CheckIfPolygonsContainPoints"
-                                         Content="Polygons Must Contain Points" />
-                            <RadioButton Grid.Column="1" Grid.Row="6" x:Name="rdoCheckIfPolygonsCoverEachOther"
-                                         CheckedChanged="CheckIfPolygonsCoverEachOther"
-                                         Content="Polygons Must Overlap Each Other" />
-                            <RadioButton Grid.Column="1" Grid.Row="7" x:Name="rdoCheckIfPolygonsHaveGaps"
-                                         CheckedChanged="CheckIfPolygonsHaveGaps"
-                                         Content="Union of Polygons Must Not Have Gaps" />
-                            <RadioButton Grid.Column="1" Grid.Row="8" x:Name="rdoCheckPolygonsMustNotOverlap"
-                                         CheckedChanged="CheckPolygonsMustNotOverlap"
-                                         Content="Polygons Must Not Overlap" />
-                            <RadioButton Grid.Column="1" Grid.Row="9" x:Name="rdoCheckPolygonsMustNotOverlapPolygons"
-                                         CheckedChanged="CheckPolygonsMustNotOverlapPolygons"
-                                         Content="Polygons Must Not Overlap Other Polygons" />
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </ScrollView>
-                </views:Expander.Content>
-            </views:Expander>
-
-            <!-- Map Control -->
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <!-- Set the desired width here -->
+                </Grid.RowDefinitions>
+
+                <ScrollView VerticalScrollBarVisibility="Always" >
+                    <StackLayout BackgroundColor="LightGray">
+                        <RadioButton x:Name="rdoCheckIfPolygonBoundariesOverlapPolygonBoundaries"
+                                     CheckedChanged="CheckIfPolygonBoundariesOverlapPolygonBoundaries"
+                                     Content="Polygon Boundaries Must Overlap Polygon Boundaries" FontSize="14"/>
+                        <RadioButton CheckedChanged="CheckIfPolygonBoundariesOverlapLines"
+                                     Content="Polygon Boundaries Must Overlap Lines" />
+                        <RadioButton CheckedChanged="CheckIfPolygonsOverlapPolygons"
+                                     Content="Polygons Must Overlap Polygons" />
+                        <RadioButton CheckedChanged="CheckIfPolygonsAreWithinPolygons"
+                                     Content="Polygons Must Be Within Polygons" />
+                        <RadioButton CheckedChanged="CheckIfPolygonsContainPoints"
+                                     Content="Polygons Must Contain Points" />
+                        <RadioButton CheckedChanged="CheckIfPolygonsCoverEachOther"
+                                     Content="Polygons Must Overlap Each Other" />
+                        <RadioButton CheckedChanged="CheckIfPolygonsHaveGaps"
+                                     Content="Union of Polygons Must Not Have Gaps" />
+                        <RadioButton CheckedChanged="CheckPolygonsMustNotOverlap"
+                                     Content="Polygons Must Not Overlap" />
+                        <RadioButton CheckedChanged="CheckPolygonsMustNotOverlapPolygons"
+                                     Content="Polygons Must Not Overlap Other Polygons" />
+
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
 
         </StackLayout>
     </ContentPage.Content>

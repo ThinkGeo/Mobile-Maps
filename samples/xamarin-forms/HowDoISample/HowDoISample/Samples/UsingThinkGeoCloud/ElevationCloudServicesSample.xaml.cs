@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -79,6 +77,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             await PerformElevationQuery(sampleShape);
 
+            mapView.TrackOverlay.TrackMode = TrackMode.Line;
+
             await mapView.RefreshAsync();
         }
 
@@ -88,85 +88,42 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task PerformElevationQuery(BaseShape queryShape)
         {
             // Get feature layers from the MapView
-            var elevationPointsOverlay = (LayerOverlay) mapView.Overlays["Elevation Features Overlay"];
-            var drawnShapesLayer = (InMemoryFeatureLayer) elevationPointsOverlay.Layers["Drawn Shape Layer"];
-            var elevationPointsLayer = (InMemoryFeatureLayer) elevationPointsOverlay.Layers["Elevation Points Layer"];
+            var elevationPointsOverlay = (LayerOverlay)mapView.Overlays["Elevation Features Overlay"];
+            var drawnShapesLayer = (InMemoryFeatureLayer)elevationPointsOverlay.Layers["Drawn Shape Layer"];
+            var elevationPointsLayer = (InMemoryFeatureLayer)elevationPointsOverlay.Layers["Elevation Points Layer"];
 
             // Clear the existing shapes from the map
             elevationPointsLayer.Open();
             elevationPointsLayer.Clear();
-            elevationPointsLayer.Close();
             drawnShapesLayer.Open();
             drawnShapesLayer.Clear();
-            drawnShapesLayer.Close();
 
             // Add the drawn shape to the map
             drawnShapesLayer.InternalFeatures.Add(new Feature(queryShape));
 
             // Set options from the UI and run the query using the ElevationCloudClient
-            var elevationPoints = new Collection<CloudElevationPointResult>();
             var projectionInSrid = 3857;
 
-            // Show a loading graphic to let users know the request is running
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
-
             // The point interval distance determines how many elevation points are retrieved for line and area queries
-            var pointIntervalDistance = (int) intervalDistance.Value;
-            switch (queryShape.GetWellKnownType())
-            {
-                case WellKnownType.Point:
-                    var drawnPoint = (PointShape) queryShape;
-                    var elevation =
-                        await elevationCloudClient.GetElevationOfPointAsync(drawnPoint.X, drawnPoint.Y,
-                            projectionInSrid);
+            var pointIntervalDistance = 100;
+            var drawnLine = (LineShape)queryShape;
+            var result = await elevationCloudClient.GetElevationOfLineAsync(drawnLine, projectionInSrid,
+                pointIntervalDistance, DistanceUnit.Meter, DistanceUnit.Feet);
 
-                    // The API for getting the elevation of a single point returns a double, so we manually create a CloudElevationPointResult to use as a data source for the Elevations list
-                    elevationPoints.Add(new CloudElevationPointResult(elevation, drawnPoint));
-
-                    // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = $"Average Elevation: {elevation:0.00} feet";
-                    txtHighestElevation.Text = $"Highest Elevation: {elevation:0.00} feet";
-                    txtLowestElevation.Text = $"Lowest Elevation: {elevation:0.00} feet";
-                    break;
-                case WellKnownType.Line:
-                    var drawnLine = (LineShape) queryShape;
-                    var result = await elevationCloudClient.GetElevationOfLineAsync(drawnLine, projectionInSrid,
-                        pointIntervalDistance, DistanceUnit.Meter, DistanceUnit.Feet);
-                    elevationPoints = result.ElevationPoints;
-
-                    // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = $"Average Elevation: {result.AverageElevation:0.00} feet";
-                    txtHighestElevation.Text = $"Highest Elevation: {result.HighestElevationPoint.Elevation:0.00} feet";
-                    txtLowestElevation.Text = $"Lowest Elevation: {result.LowestElevationPoint.Elevation:0.00} feet";
-                    break;
-                case WellKnownType.Polygon:
-                    var drawnPolygon = (PolygonShape) queryShape;
-                    result = await elevationCloudClient.GetElevationOfAreaAsync(drawnPolygon, projectionInSrid,
-                        pointIntervalDistance, DistanceUnit.Meter);
-                    elevationPoints = result.ElevationPoints;
-
-                    // Update the UI with the average, highest, and lowest elevations
-                    txtAverageElevation.Text = $"Average Elevation: {result.AverageElevation:0.00} feet";
-                    txtHighestElevation.Text = $"Highest Elevation: {result.HighestElevationPoint.Elevation:0.00} feet";
-                    txtLowestElevation.Text = $"Lowest Elevation: {result.LowestElevationPoint.Elevation:0.00} feet";
-                    break;
-            }
+            // Get DecimalDegrees from the output spherical mercator
+            var projectionConverter = new ProjectionConverter(3857, 4326);
+            projectionConverter.Open();
 
             // Add the elevation result points to the map and list box
-            foreach (var elevationPoint in elevationPoints)
+            foreach (var elevationPoint in result.ElevationPoints)
+            {
                 elevationPointsLayer.InternalFeatures.Add(new Feature(elevationPoint.Point));
-            lsbElevations.ItemsSource = elevationPoints;
+                var vertexInDecimalDegrees = projectionConverter.ConvertToExternalProjection(elevationPoint.Point.X, elevationPoint.Point.Y);
+                elevationPoint.Point.X = vertexInDecimalDegrees.X;
+                elevationPoint.Point.Y = vertexInDecimalDegrees.Y;
+            }
 
-            // Hide the loading graphic
-            loadingIndicator.IsRunning = false;
-            loadingLayout.IsVisible = false;
-
-            // Set the map extent to the elevation query feature
-            drawnShapesLayer.Open();
-            await mapView.CenterAtAsync(drawnShapesLayer.GetBoundingBox().GetCenterPoint());
-            drawnShapesLayer.Close();
-            await mapView.RefreshAsync();
+            lsbElevations.ItemsSource = result.ElevationPoints;
         }
 
         /// <summary>
@@ -175,87 +132,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
         {
             // Disable drawing mode and clear the drawing layer
-            mapView.TrackOverlay.TrackMode = TrackMode.None;
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
             // Validate shape size to avoid queries that are too large
             // Maximum length of a line is 10km
-            // Maximum area of a polygon is 10km^2
-            if (e.TrackShape.GetWellKnownType() == WellKnownType.Polygon)
+
+            if (((LineShape)e.TrackShape).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer) > 5)
             {
-                if (((PolygonShape) e.TrackShape).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers) > 5)
-                {
-                    await DisplayAlert("Error", "Please draw a smaller polygon (limit: 5km^2)", "OK");
-                    return;
-                }
-            }
-            else if (e.TrackShape.GetWellKnownType() == WellKnownType.Line)
-            {
-                if (((LineShape) e.TrackShape).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer) > 5)
-                {
-                    await DisplayAlert("Alert", "Please draw a shorter line (limit: 5km)", "OK");
-                    return;
-                }
+                await DisplayAlert("Alert", "Please draw a shorter line (limit: 5km)", "OK");
+                return;
             }
 
             // Get elevation data for the drawn shape and update the UI
             await PerformElevationQuery(e.TrackShape);
-        }
 
-        /// <summary>
-        ///     Center the map on a point when it's selected in the UI
-        /// </summary>
-        private async void lsbElevations_SelectionChanged(object sender,
-            SelectedItemChangedEventArgs selectedItemChangedEventArgs)
-        {
-            await CollapseExpander();
-
-            if (lsbElevations.SelectedItem != null)
-            {
-                // Set the map extent to the selected point
-                var elevationPoint = (CloudElevationPointResult) lsbElevations.SelectedItem;
-                await mapView.CenterAtAsync(elevationPoint.Point);
-                await mapView.RefreshAsync();
-            }
-        }
-
-        /// <summary>
-        ///     Set the map to 'Point Drawing Mode' when the user taps the 'Draw a New Point' button
-        /// </summary>
-        private async void DrawPoint_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-
-            // Set the drawing mode to 'Point'
-            mapView.TrackOverlay.TrackMode = TrackMode.Point;
-        }
-
-        /// <summary>
-        ///     Set the map to 'Line Drawing Mode' when the user taps the 'Draw a New Line' button
-        /// </summary>
-        private async void DrawLine_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-
-            // Set the drawing mode to 'Line'
-            mapView.TrackOverlay.TrackMode = TrackMode.Line;
-        }
-
-        /// <summary>
-        ///     Set the map to 'Polygon Drawing Mode' when the user taps the 'Draw a New Polygon' button
-        /// </summary>
-        private async void DrawPolygon_Click(object sender, EventArgs e)
-        {
-            await CollapseExpander();
-
-            // Set the drawing mode to 'Polygon'
-            mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
-        }
-
-        private async Task CollapseExpander()
-        {
-            controlsExpander.IsExpanded = false;
-            await Task.Delay((int) controlsExpander.CollapseAnimationLength);
+            await mapView.RefreshAsync();
         }
     }
 }

@@ -62,18 +62,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the layers to an overlay, and add the overlay to the map
             var featuresOverlay = new LayerOverlay();
+            featuresOverlay.TileType = TileType.SingleTile;
             featuresOverlay.Layers.Add("Filter Features", filterFeaturesLayer);
             featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
             featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
             mapView.Overlays.Add("Features Overlay", featuresOverlay);
-
             rdoCheckIfPointsAreTouchingLines.IsChecked = true;
 
             await mapView.RefreshAsync();
         }
 
-        private async void CheckIfPointsAreTouchingLines(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingLines(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
+
             // Create a sample set of point and line features to use for the validation
             var uncoveredPointFeature1 = new Feature("POINT(0 0)");
             var uncoveredPointFeature2 = new Feature("POINT(50 0)");
@@ -95,19 +98,21 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPoints touching lines are shown in green. \n\nPoints not touching lines are shown in red.";
+                "Features being validated against are shown in blue. \nPoints touching lines are shown in green. \nPoints not touching lines are shown in red.";
         }
 
         /// <summary>
         ///     Validate points based on whether they are touching line endpoints, and display the results on the map
         /// </summary>
-        private async void CheckIfPointsAreTouchingLineEndpoints(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingLineEndpoints(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
             // Create a sample set of point and line features to use for the validation
             var pointFeature1 = new Feature("POINT(0 0)");
             var pointFeature2 = new Feature("POINT(50 0)");
             var pointFeatureOnEndpoint = new Feature("POINT(100 0)");
-            var lineFeature = new Feature("LINESTRING(0 0,100 0,100 100,0 100)");
+            var lineFeature = new Feature("LINESTRING(0 0,100 0,100 -100)");
 
             // Use the TopologyValidator API to validate the sample data
             var points = new Collection<Feature> {pointFeature1, pointFeature2, pointFeatureOnEndpoint};
@@ -123,14 +128,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPoints touching line endpoints are shown in green. \n\nPoints not touching line endpoints are shown in red.";
+                "Features being validated against are shown in blue. \nPoints touching line endpoints are shown in green. \nPoints not touching line endpoints are shown in red.";
         }
 
         /// <summary>
         ///     Validate points based on whether they are touching polygon boundaries, and display the results on the map
         /// </summary>
-        private async void CheckIfPointsAreTouchingPolygonBoundaries(object sender, EventArgs e)
+        private async void CheckIfPointsAreTouchingPolygonBoundaries(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
             // Create a sample set of point and polygon features to use for the validation
             var pointFeature1 = new Feature("POINT(150 0)");
             var pointFeature2 = new Feature("POINT(50 50)");
@@ -151,14 +158,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPoints touching polygon boundaries are shown in green. \n\nPoints not touching polygon boundaries are shown in red.";
+                "Features being validated against are shown in blue. \nPoints touching polygon boundaries are shown in green. \nPoints not touching polygon boundaries are shown in red.";
         }
 
         /// <summary>
         ///     Validate points based on whether they are within polygons, and display the results on the map
         /// </summary>
-        private async void CheckIfPointsAreWithinPolygons(object sender, EventArgs e)
+        private async void CheckIfPointsAreWithinPolygons(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value)
+                return;
             // Create a sample set of point and polygon features to use for the validation
             var pointFeature1 = new Feature("POINT(150 0)");
             var pointFeature2 = new Feature("POINT(0 0)");
@@ -179,7 +188,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Update the help text
             txtValidationInfo.Text =
-                "Features being validated against are shown in blue. \n\nPoints within polygons are shown in green. \n\nPoints not within polygons are shown in red.";
+                "Features being validated against are shown in blue. \nPoints within polygons are shown in green. \nPoints not within polygons are shown in red.";
         }
 
         /// <summary>

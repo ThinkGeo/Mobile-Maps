@@ -1,29 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample">
     <ContentPage.Content>
         <StackLayout>
-            <views:Expander x:Name="controlsExpander" CollapseAnimationLength="250">
-                <!-- Sample Description -->
-                <views:Expander.Header>
-                    <StackLayout Orientation="Horizontal" Padding="8">
-                        <Label x:Name="descriptionLabel"
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
                                FontSize="Subtitle"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand" />
 
-                    </StackLayout>
-                </views:Expander.Header>
-            </views:Expander>
+            </StackLayout>
 
-            <!-- Map Control -->
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -36,7 +27,7 @@
                 </Grid.RowDefinitions>
                 <ThinkGeoUI:MapView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" x:Name="mapView" />
 
-                <Button Text="Zoom To Scale 10000" Clicked="ZoomToScale_Click" Grid.Row="1" Grid.Column="0" />
+                <Button Text="Zoom To Scale 20000" Clicked="ZoomToScale_Click" Grid.Row="1" Grid.Column="0" />
                 <Button Text="Zoom to Layer BBox" Clicked="LayerBoundingBox_Click" Grid.Row="1" Grid.Column="1" />
                 <Button Text="Zoom to a feature" Clicked="FeatureBoundingBox_Click" Grid.Row="2" Grid.Column="0" />
                 <Button Text="Zoom to (33.15, -96.82)" Clicked="ZoomToLatLon_Click" Grid.Row="2" Grid.Column="1" />

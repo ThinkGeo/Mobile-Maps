@@ -73,8 +73,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(fontStyle);
             hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            predefinedStyleRadioButton.IsChecked = true;
-
             await mapView.RefreshAsync();
         }
 
@@ -83,6 +81,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void PredefinedStyle_OnChecked(object sender, EventArgs e)
         {
+            if (predefinedStyle == null)
+                return;
+
             predefinedStyle.IsActive = true;
             imageStyle.IsActive = false;
             fontStyle.IsActive = false;
@@ -95,6 +96,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void ImageStyle_OnChecked(object sender, EventArgs e)
         {
+            if (predefinedStyle == null)
+                return;
+
             predefinedStyle.IsActive = false;
             imageStyle.IsActive = true;
             fontStyle.IsActive = false;
@@ -107,6 +111,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void FontStyle_Checked(object sender, EventArgs e)
         {
+            if (predefinedStyle == null)
+                return;
+
             predefinedStyle.IsActive = false;
             imageStyle.IsActive = false;
             fontStyle.IsActive = true;

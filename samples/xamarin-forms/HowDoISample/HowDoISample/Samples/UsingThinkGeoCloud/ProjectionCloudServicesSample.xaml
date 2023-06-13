@@ -1,86 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.ProjectionCloudServicesSample">
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
-                         AbsoluteLayout.LayoutFlags="All">
-                <views:Expander>
-                    <!-- Sample Description -->
-                    <views:Expander.Header>
-                        <StackLayout Orientation="Horizontal" Padding="8">
-                            <Label x:Name="descriptionLabel"
-                                   FontSize="Subtitle"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="StartAndExpand" />
-                            <BoxView Color="LightGray"
-                                     WidthRequest="1"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center" />
-                            <Image Source="chevron_down.png" HeightRequest="44" VerticalOptions="Start"
-                                   HorizontalOptions="End">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
-                                                 Value="True">
-                                        <Setter Property="Rotation"
-                                                Value="180" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                        </StackLayout>
-                    </views:Expander.Header>
+        <StackLayout>
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
+                       FontSize="Subtitle"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
+            </StackLayout>
 
-                    <!-- Sample Controls -->
-                    <views:Expander.Content>
-                        <Grid>
-                            <Button Grid.Column="1" Grid.Row="0" Clicked="ReprojectFeature_Click"
-                                    Text="Reproject and Display a Feature" />
-
-                            <Editor Grid.Column="1" Grid.Row="1" x:Name="txtWKT"
-                                    Text="POINT(-96.834516 33.150083)&#x0a;LINESTRING(-96.83559 33.149,-96.835866046134 33.1508413556856,-96.835793626491 33.1508974965687,-96.8336008970734 33.1511063402186,-96.83356 33.15109,-96.83328 33.14922)&#x0a;POLYGON((-96.83582 33.1508,-96.83578 33.15046,-96.83353 33.15068,-96.83358 33.15102,-96.83582 33.1508))" />
-
-                            <Button Grid.Column="1" Grid.Row="2" Clicked="ReprojectMultipleFeatures_Click"
-                                    Text="Reproject and Display Multiple Features" />
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </views:Expander.Content>
-                </views:Expander>
-
-                <!-- Map Control -->
+            <Grid VerticalOptions="FillAndExpand">
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-
-            </StackLayout>
-
-            <!-- Loading Layout -->
-            <StackLayout x:Name="loadingLayout"
-                         IsVisible="False"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1"
-                         AbsoluteLayout.LayoutFlags="All"
-                         BackgroundColor="White"
-                         Opacity="0.5">
-                <ActivityIndicator x:Name="loadingIndicator"
-                                   IsRunning="False"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand" />
-            </StackLayout>
-        </AbsoluteLayout>
+                <Button Clicked="ReprojectMultipleFeatures_Click" Text="Project WKT" VerticalOptions="End"/>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

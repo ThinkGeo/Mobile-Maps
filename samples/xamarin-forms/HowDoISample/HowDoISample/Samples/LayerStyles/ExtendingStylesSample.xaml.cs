@@ -39,22 +39,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             worldCapitalsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
             var worldOverlay = new LayerOverlay();
+            worldOverlay.TileType = TileType.SingleTile;
             worldOverlay.Layers.Add("WorldCapitals", worldCapitalsLayer);
 
             mapView.Overlays.Add("Overlay", worldOverlay);
 
-            mapView.CurrentExtent =
-                new RectangleShape(-15360785.1188513, 14752615.1010077, 16260907.558937, -12603279.9259404);
+            mapView.CurrentExtent = new RectangleShape(-15360785, 14752615, 16260907, -12603279);
 
             await mapView.RefreshAsync();
-        }
-
-        public void Dispose()
-        {
-            // Dispose of unmanaged resources.
-            mapView.Dispose();
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
         }
 
         private async void TimeBasedPointStyle_Click(object sender, EventArgs e)
@@ -78,11 +70,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             var worldCapitalsLayer = mapView.FindFeatureLayer("WorldCapitals");
 
-            var sizedpointStyle = new SizedPointStyle(PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 1),
+            var sizedPointStyle = new SizedPointStyle(PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 1),
                 "population", 500000);
 
             worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-            worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(sizedpointStyle);
+            worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(sizedPointStyle);
 
             await mapView.RefreshAsync();
         }
@@ -181,7 +173,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override void DrawCore(IEnumerable<Feature> features, GeoCanvas canvas,
             Collection<SimpleCandidate> labelsInThisLayer, Collection<SimpleCandidate> labelsInAllLayers)
         {
-            // Loop through each feaure and determine how large the point should 
+            // Loop through each feature and determine how large the point should 
             // be then adjust it's size.
             foreach (var feature in features)
             {
@@ -197,8 +189,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Here we grab the columns from the pointStyle and then add
             // the sizeColumn name to make sure we pull back the column
             //  that we need to calculate the size
-            var columns = new Collection<string>();
-            columns = PointStyle.GetRequiredColumnNames();
+            var columns = PointStyle.GetRequiredColumnNames();
             if (!columns.Contains(SizeColumnName)) columns.Add(SizeColumnName);
 
             return columns;

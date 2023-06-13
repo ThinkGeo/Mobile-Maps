@@ -85,10 +85,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             CloudTimeZoneResult result;
             try
             {
-                // Show a loading graphic to let users know the request is running
-                loadingIndicator.IsRunning = true;
-                loadingLayout.IsVisible = true;
-
                 // Get timezone info based on the lon, lat, and input projection (Spherical Mercator in this case)
                 result = await timeZoneCloudClient.GetTimeZoneByCoordinateAsync(lon, lat, 3857);
             }
@@ -97,11 +93,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 await DisplayAlert("Error", ex.Message, "OK");
                 return;
             }
-            finally
-            {
-                loadingIndicator.IsRunning = false;
-                loadingLayout.IsVisible = false;
-            }
+         
 
             // Get the timezone info popup overlay from the mapview
             var timezoneInfoPopupOverlay = (PopupOverlay) mapView.Overlays["Timezone Info Popup Overlay"];
