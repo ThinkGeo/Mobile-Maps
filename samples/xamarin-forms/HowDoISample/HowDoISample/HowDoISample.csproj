@@ -452,9 +452,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta044" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta040" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta040" />
   </ItemGroup>
 
   <ItemGroup>
@@ -725,5 +722,11 @@
     <Compile Update="Samples\LayerQueries\TouchesSample.xaml.cs">
       <DependentUpon>TouchesSample.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\thinkgeosdks\ThinkGeo.Core\Extensions\PostgreSql\ThinkGeo.PostgreSql.csproj" />
+    <ProjectReference Include="..\..\..\..\..\thinkgeosdks\ThinkGeo.Core\Extensions\SqlServer\ThinkGeo.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\..\..\thinkgeosdks\ThinkGeo.UI\Mobile\XamarinForms\ThinkGeo.UI.XamarinForms.csproj" />
+    <ProjectReference Include="..\..\..\..\..\thinkgeosdks\ThinkGeo.Core\Core\ThinkGeo.Core.csproj" />
   </ItemGroup>
 </Project>
