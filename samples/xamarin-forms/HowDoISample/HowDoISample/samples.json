@@ -52,7 +52,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
         "title": "Display a WMS Overlay",
-        "description": "Fetch map tiles from a WMS. Be aware it's a 3rd party server and may be slow.",
+        "description": "Fetch map tiles from a WMS. Be aware it's a 3rd party server and could be slow.",
         "source": "Samples/MapOverlays/DisplayWMSOverlaySample"
       },
       {
@@ -142,12 +142,6 @@
         "title": "Display a SQLite Layer",
         "description": "Display a SQLite Layer.",
         "source": "Samples/LayerFormats/Database/SQLiteLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.SQLServerLayerSample",
-        "title": "Display a SQL Server Layer",
-        "description": "Display a SQL Server Layer.",
-        "source": "Samples/LayerFormats/Database/SQLServerLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherStationLayerSample",

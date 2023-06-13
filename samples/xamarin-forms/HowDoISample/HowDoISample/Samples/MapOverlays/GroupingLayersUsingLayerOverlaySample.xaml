@@ -15,9 +15,9 @@
             </StackLayout>
 
             <Grid VerticalOptions="FillAndExpand" >
-                <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+                <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand"/>
 
-                <StackLayout VerticalOptions="End" Margin="10">
+                <StackLayout VerticalOptions="End" Margin="10,0,0,30">
                     <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                         <CheckBox x:Name="ShowPoi" CheckedChanged="ShowPoiGroup_Checked" VerticalOptions="Center" />
                         <Label Text="Show POI Group" VerticalOptions="Center" />

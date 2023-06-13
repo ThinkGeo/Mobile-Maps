@@ -15,7 +15,7 @@
             </StackLayout>
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-            <Button  x:Name="clipShape" Text="Clip" Clicked="ClipShape_OnClick"  Margin="5"/>
+            <Button  x:Name="clipShape" Text="Clip" Clicked="ClipShape_OnClick"  Margin="10" BackgroundColor="LightGray"/>
 
         </StackLayout>
     </ContentPage.Content>

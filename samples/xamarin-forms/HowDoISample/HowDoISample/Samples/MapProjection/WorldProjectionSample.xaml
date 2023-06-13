@@ -17,7 +17,7 @@
             <Grid VerticalOptions="FillAndExpand" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="230"/>
                 </Grid.RowDefinitions>
                 <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
 
@@ -35,11 +35,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton x:Name="PolarStereographic" Grid.Column="0" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
-                    <RadioButton x:Name="MgaZone55" Grid.Column="0" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
-                    <RadioButton x:Name="AlbersEqualAreaConic" Grid.Column="0" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
-                    <RadioButton x:Name="EqualAreaCylindrical" Grid.Column="0" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30"/>
-                    <RadioButton x:Name="DecimalDegrees" Grid.Column="0" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" IsChecked="True"/>
+                    <RadioButton x:Name="PolarStereographic" Grid.Column="0" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent"/>
+                    <RadioButton x:Name="MgaZone55" Grid.Column="0" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent"/>
+                    <RadioButton x:Name="AlbersEqualAreaConic" Grid.Column="0" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent"/>
+                    <RadioButton x:Name="EqualAreaCylindrical" Grid.Column="0" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent"/>
+                    <RadioButton x:Name="DecimalDegrees" Grid.Column="0" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" IsChecked="True" BackgroundColor="Transparent"/>
 
                     <Label Grid.Column="1" Grid.Row ="0"  Text="Polar Stereographic" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="1" Grid.Row ="1"  Text="MGA Zone 55" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>

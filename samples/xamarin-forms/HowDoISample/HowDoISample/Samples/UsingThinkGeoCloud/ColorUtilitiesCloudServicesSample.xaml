@@ -63,12 +63,12 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Button Grid.Column="2" Grid.Row="2" Text="Generate" Clicked="GenerateColors_Click" />
+                <Button Grid.Column="2" Grid.Row="2" Text="Generate" Clicked="GenerateColors_Click" BackgroundColor="LightGray"/>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

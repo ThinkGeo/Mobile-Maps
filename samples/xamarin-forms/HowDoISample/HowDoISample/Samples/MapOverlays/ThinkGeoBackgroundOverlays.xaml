@@ -23,7 +23,7 @@
             <Grid VerticalOptions="FillAndExpand" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="230"/>
                 </Grid.RowDefinitions>
                 <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
 
@@ -42,11 +42,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton Grid.Column="0" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="VectorLight" IsChecked="True"/>
-                    <RadioButton Grid.Column="0" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="RasterLightV1" />
-                    <RadioButton Grid.Column="0" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="RasterLightV2" />
-                    <RadioButton Grid.Column="0" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="Aerial" />
-                    <RadioButton Grid.Column="0" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="Hybrid" />
+                    <RadioButton Grid.Column="0" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="VectorLight" IsChecked="True"/>
+                    <RadioButton Grid.Column="0" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="RasterLightV1" />
+                    <RadioButton Grid.Column="0" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="RasterLightV2" />
+                    <RadioButton Grid.Column="0" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="Aerial" />
+                    <RadioButton Grid.Column="0" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="Hybrid" />
 
                     <Label Grid.Column="1" Grid.Row ="0"  Text="Vector Light" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="1" Grid.Row ="1"  Text="Raster Light V1" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
@@ -54,11 +54,11 @@
                     <Label Grid.Column="1" Grid.Row ="3"  Text="Aerial" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="1" Grid.Row ="4"  Text="Hybrid" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
 
-                    <RadioButton Grid.Column="2" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="VectorDark" />
-                    <RadioButton Grid.Column="2" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="RasterDarkV1" />
-                    <RadioButton Grid.Column="2" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="RasterDarkV2" />
-                    <RadioButton Grid.Column="2" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="TransparentBg" />
-                    <RadioButton Grid.Column="2" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" x:Name="VectorCustom" />
+                    <RadioButton Grid.Column="2" Grid.Row ="0"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="VectorDark" />
+                    <RadioButton Grid.Column="2" Grid.Row ="1"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="RasterDarkV1" />
+                    <RadioButton Grid.Column="2" Grid.Row ="2"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="RasterDarkV2" />
+                    <RadioButton Grid.Column="2" Grid.Row ="3"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="TransparentBg" />
+                    <RadioButton Grid.Column="2" Grid.Row ="4"  CheckedChanged="Radial_Checked" WidthRequest="30" BackgroundColor="Transparent" x:Name="VectorCustom" />
 
                     <Label Grid.Column="3" Grid.Row ="0"  Text="Vector Dark" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
                     <Label Grid.Column="3" Grid.Row ="1"  Text="Raster Dark V1" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>

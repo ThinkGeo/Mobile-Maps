@@ -35,16 +35,16 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton Grid.Column="0" Grid.Row="0" x:Name="rdoCheckIfPointsAreTouchingLines"
+                    <RadioButton Grid.Column="0" Grid.Row="0" x:Name="rdoCheckIfPointsAreTouchingLines" BackgroundColor="Transparent"
                                  CheckedChanged="CheckIfPointsAreTouchingLines" />
 
-                    <RadioButton Grid.Column="0" Grid.Row="1"
+                    <RadioButton Grid.Column="0" Grid.Row="1" BackgroundColor="Transparent"
                                  CheckedChanged="CheckIfPointsAreTouchingLineEndpoints" />
 
-                    <RadioButton Grid.Column="0" Grid.Row="2" 
+                    <RadioButton Grid.Column="0" Grid.Row="2" BackgroundColor="Transparent"
                                  CheckedChanged="CheckIfPointsAreTouchingPolygonBoundaries"/>
 
-                    <RadioButton Grid.Column="0" Grid.Row="3" 
+                    <RadioButton Grid.Column="0" Grid.Row="3" BackgroundColor="Transparent"
                                  CheckedChanged="CheckIfPointsAreWithinPolygons"/>
 
                     <Label Grid.Column="1" Grid.Row ="0"  Text="Points Must Be Touching Lines" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>

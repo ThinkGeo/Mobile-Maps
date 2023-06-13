@@ -24,13 +24,14 @@
                     <RowDefinition/>
                     <RowDefinition Height ="50"/>
                     <RowDefinition Height ="50"/>
+                    <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <ThinkGeoUI:MapView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" x:Name="mapView" />
+                <ThinkGeoUI:MapView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" x:Name="mapView" />
 
-                <Button Text="Zoom To Scale 20000" Clicked="ZoomToScale_Click" Grid.Row="1" Grid.Column="0" />
-                <Button Text="Zoom to Layer BBox" Clicked="LayerBoundingBox_Click" Grid.Row="1" Grid.Column="1" />
-                <Button Text="Zoom to a feature" Clicked="FeatureBoundingBox_Click" Grid.Row="2" Grid.Column="0" />
-                <Button Text="Zoom to (33.15, -96.82)" Clicked="ZoomToLatLon_Click" Grid.Row="2" Grid.Column="1" />
+                <Button Text="Zoom To Scale 20000" Clicked="ZoomToScale_Click" Grid.Row="1" Grid.Column="0" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to Layer BBox" Clicked="LayerBoundingBox_Click" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to a feature" Clicked="FeatureBoundingBox_Click" Grid.Row="2" Grid.Column="0" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to (33.15, -96.82)" Clicked="ZoomToLatLon_Click" Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray"/>
             </Grid>
 
         </StackLayout>

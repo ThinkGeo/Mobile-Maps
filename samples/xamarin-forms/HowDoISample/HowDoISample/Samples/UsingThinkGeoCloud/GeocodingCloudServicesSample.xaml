@@ -20,7 +20,8 @@
 
                 <Grid HeightRequest="200" VerticalOptions="End" Padding="10">
                     
-                    <Button Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2" Clicked="Search_Click" Text="Type in an address and hit Search" HorizontalOptions="CenterAndExpand" HeightRequest="40"/>
+                    <Button Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2" Clicked="Search_Click" 
+                            Text="Type in an address and hit Search" HorizontalOptions="CenterAndExpand" HeightRequest="40"/>
                     <Entry Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  x:Name="txtSearchString" Text="6101 Frisco Square Blvd, Frisco, TX 75034" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
                     <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="txtSearchResultsDescription" FontAttributes="Italic" />
                     <ListView Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="lsbLocations"

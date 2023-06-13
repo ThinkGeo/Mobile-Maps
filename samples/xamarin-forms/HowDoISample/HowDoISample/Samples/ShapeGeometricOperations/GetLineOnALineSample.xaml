@@ -40,7 +40,7 @@
                 </StackLayout>
 
                 <Button Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" x:Name="getSubLine" Text="Get the Subline"
-                        Clicked="GetSubLine_OnClick"  Margin="0,0,0,10"/>
+                        Clicked="GetSubLine_OnClick"  Margin="0,0,0,10" BackgroundColor="LightGray"/>
             </Grid>
 
         </StackLayout>

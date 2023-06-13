@@ -22,11 +22,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20">
                     <Label Text="Tolerance (m):" FontAttributes="Bold" VerticalOptions="Center" />
                     <Entry x:Name="tolerance" Text="500" Keyboard="Numeric" WidthRequest="60"/>
                 </StackLayout>
-                <Button Grid.Column="1" x:Name="simplifyShape" Text="Simplify" Clicked="SimplifyShape_OnClick" Margin="10" />
+                <Button Grid.Column="1" x:Name="simplifyShape" Text="Simplify" Clicked="SimplifyShape_OnClick"
+                        BackgroundColor="LightGray" Margin="10,0, 0, 20"/>
             </Grid>
 
         </StackLayout>

@@ -17,8 +17,8 @@
             <Grid VerticalOptions="FillAndExpand">
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
                 <StackLayout VerticalOptions="End" Margin="20">
-                    <RadioButton Content="Solid Line" CheckedChanged="rbLineStyle_CheckedChanged" IsChecked="True" />
-                    <RadioButton Content="Dashed Line" CheckedChanged="rbDashedLineStyle_CheckedChanged" />
+                    <RadioButton Content="Solid Line" CheckedChanged="rbLineStyle_CheckedChanged" IsChecked="True" BackgroundColor="Transparent"/>
+                    <RadioButton Content="Dashed Line" CheckedChanged="rbDashedLineStyle_CheckedChanged" BackgroundColor="Transparent"/>
                 </StackLayout>
             </Grid>
 

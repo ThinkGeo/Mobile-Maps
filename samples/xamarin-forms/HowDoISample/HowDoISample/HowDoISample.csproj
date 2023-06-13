@@ -453,8 +453,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta044" />
-    <PackageReference Include="ThinkGeo.SqlServer" Version="13.1.0-beta040" />
-    <PackageReference Include="ThinkGeo.PostgreSql" Version="13.1.0-beta040" />
   </ItemGroup>
 
   <ItemGroup>
@@ -499,12 +497,6 @@
     </Compile>
     <Compile Update="Samples\LayerStyles\StylingAcrossMultipleScales.xaml.cs">
       <DependentUpon>StylingAcrossMultipleScales.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\Database\PostgresLayerSample.xaml.cs">
-      <DependentUpon>PostgresLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\Database\SQLServerLayerSample.xaml.cs">
-      <DependentUpon>SQLServerLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\LayerFormats\Database\SQLiteLayerSample.xaml.cs">
       <DependentUpon>SQLiteLayerSample.xaml</DependentUpon>

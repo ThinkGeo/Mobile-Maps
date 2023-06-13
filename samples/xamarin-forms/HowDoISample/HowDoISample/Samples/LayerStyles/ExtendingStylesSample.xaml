@@ -15,8 +15,8 @@
             </StackLayout>
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-            <Button Text="Show Capital Day/Night Style" Clicked="TimeBasedPointStyle_Click" />
-            <Button Text="Show Capital Population Style" Clicked="SizedBasedPointStyle_Click" />
+            <Button Text="Show Capital Day/Night Style" Clicked="TimeBasedPointStyle_Click" BackgroundColor="LightGray"/>
+            <Button Text="Show Capital Population Style" Clicked="SizedBasedPointStyle_Click" BackgroundColor="LightGray" Margin="0,0,0,20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

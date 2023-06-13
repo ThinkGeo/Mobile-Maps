@@ -42,7 +42,7 @@
                 </StackLayout>
 
 
-                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="30" HorizontalOptions="Start" VerticalOptions="End">
+                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="40" HorizontalOptions="Start" VerticalOptions="End">
                     <StackLayout Orientation="Horizontal" HeightRequest="20">
                         <CheckBox IsChecked="{Binding IsRotationEnabled}"></CheckBox>
                         <Label>Rotation Enabled</Label>

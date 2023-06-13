@@ -15,7 +15,8 @@
             </StackLayout>
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-            <Button x:Name="shapeConvexHull" Text="Get Convex Hull" Clicked="ShapeConvexHull_OnClick" />
+            <Button x:Name="shapeConvexHull" Text="Get Convex Hull" Clicked="ShapeConvexHull_OnClick"
+                     Margin="10" BackgroundColor="LightGray"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

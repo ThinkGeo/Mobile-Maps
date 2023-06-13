@@ -16,9 +16,9 @@
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_OnMapClick" />
             <RadioButton x:Name="centroidCenter" Content="Show Centroid Center"
-                         CheckedChanged="RadioButton_Checked" />
+                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,0"/>
             <RadioButton x:Name="bboxCenter" Content="Show Bounding Box Center"
-                         CheckedChanged="RadioButton_Checked"/>
+                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

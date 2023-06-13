@@ -22,11 +22,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10,0, 0, 20">
                     <Label Text="Buffer Distance(m):" FontAttributes="Bold" VerticalOptions="Center" />
                     <Entry x:Name="bufferDistance" Text="1000" Keyboard="Numeric"  WidthRequest="60"/>
                 </StackLayout>
-                <Button Grid.Column="1" Text="Buffer" Clicked="BufferShape_OnClick" HorizontalOptions="FillAndExpand"  Margin="10"/>
+                <Button Grid.Column="1" Text="Buffer" Clicked="BufferShape_OnClick" HorizontalOptions="FillAndExpand"
+                        BackgroundColor="LightGray" Margin="10,0, 0, 20"/>
             </Grid>
 
         </StackLayout>
