@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
@@ -28,6 +26,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         {
             base.OnAppearing();
 
+            // Set the Map Unit to meters (used in Spherical Mercator)
+            mapView.MapUnit = GeographyUnit.Meter;
+
             // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
             var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
@@ -35,26 +36,23 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
             mapView.Overlays.Add(backgroundOverlay);
 
-            // Set the Map Unit to meters (used in Spherical Mercator)
-            mapView.MapUnit = GeographyUnit.Meter;
-
             // Create a feature layer to hold the Frisco zoning data
-            var zoningLayer = new ShapeFileFeatureLayer(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Data/Shapefile/Zoning.shp"));
+            var friscoLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Zoning.shp"));
 
             // Convert the Frisco shapefile from its native projection to Spherical Mercator, to match the map
             var projectionConverter = new ProjectionConverter(2276, 3857);
-            zoningLayer.FeatureSource.ProjectionConverter = projectionConverter;
+            friscoLayer.FeatureSource.ProjectionConverter = projectionConverter;
 
             // Add a style to use to draw the Frisco zoning polygons
-            zoningLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            zoningLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
+            friscoLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            friscoLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(50, GeoColors.MediumPurple), GeoColors.MediumPurple,
                     2);
 
-            // Set the map extent to Frisco, TX
-            mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
+            var friscoOverlay = new LayerOverlay();
+            friscoOverlay.Layers.Add("FriscoLayer", friscoLayer);
+            mapView.Overlays.Add("FriscoOverlay", friscoOverlay);
 
             // Create a layer to hold features found by the spatial query
             var highlightedFeaturesLayer = new InMemoryFeatureLayer();
@@ -62,57 +60,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.MidnightBlue), GeoColors.MidnightBlue);
             highlightedFeaturesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            var layerOverlay = new LayerOverlay();
-            layerOverlay.Layers.Add("Frisco Zoning", zoningLayer);
-            layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
-
-            mapView.Overlays.Add("Layer Overlay", layerOverlay);
+            var highlightOverlay = new LayerOverlay();
+            highlightOverlay.Layers.Add("HighlightLayer", highlightedFeaturesLayer);
+            mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
 
             // Add a MarkerOverlay to the map to display the selected point for the query
-            var queryFeatureMarkerOverlay = new SimpleMarkerOverlay();
-            mapView.Overlays.Add("Query Feature Marker Overlay", queryFeatureMarkerOverlay);
+            var markerOverlay = new SimpleMarkerOverlay();
+            mapView.Overlays.Add("MarkerOverlay", markerOverlay);
 
             // Add a sample point to the map for the initial query
             var sampleShape = new PointShape(-10779425.2690712, 3914970.73561765);
             await GetFeaturesContaining(sampleShape);
 
+            // Set the map extent to Frisco, TX
+            mapView.CurrentExtent = new RectangleShape(-10781137.28, 3917162.59, -10774579.34, 3911241.35);
+
             await mapView.RefreshAsync();
-        }
-
-        /// <summary>
-        ///     Perform the 'Contains' spatial query using the layer's QueryTools
-        /// </summary>
-        private Collection<Feature> PerformSpatialQuery(BaseShape shape, FeatureLayer layer)
-        {
-            // Perform the spatial query on features in the specified layer
-            layer.Open();
-            var features = layer.QueryTools.GetFeaturesContaining(shape, ReturningColumnsType.AllColumns);
-            layer.Close();
-
-            return features;
-        }
-
-        /// <summary>
-        ///     Highlight the features that were found by the spatial query
-        /// </summary>
-        private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
-        {
-            // Find the layers we will be modifying in the MapView dictionary
-            var layerOverlay = (LayerOverlay) mapView.Overlays["Layer Overlay"];
-            var highlightedFeaturesLayer = (InMemoryFeatureLayer) layerOverlay.Layers["Highlighted Features"];
-
-            // Clear the currently highlighted features
-            highlightedFeaturesLayer.Open();
-            highlightedFeaturesLayer.InternalFeatures.Clear();
-
-            // Add new features to the layer
-            foreach (var feature in features) highlightedFeaturesLayer.InternalFeatures.Add(feature);
-            highlightedFeaturesLayer.Close();
-
-            // Refresh the overlay so the layer is redrawn
-            await layerOverlay.RefreshAsync();
-
-            // Update the number of matching features found in the UI
         }
 
         /// <summary>
@@ -121,8 +84,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async Task GetFeaturesContaining(PointShape point)
         {
             // Find the layers we will be modifying in the MapView
-            var queryFeatureMarkerOverlay = (SimpleMarkerOverlay) mapView.Overlays["Query Feature Marker Overlay"];
-            var zoningLayer = (ShapeFileFeatureLayer) mapView.FindFeatureLayer("Frisco Zoning");
+            var queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["MarkerOverlay"];
+            var friscoLayer = (ShapeFileFeatureLayer)mapView.FindFeatureLayer("FriscoLayer");
 
             // Clear the query point marker overlay and add a marker on the newly drawn point
             queryFeatureMarkerOverlay.Markers.Clear();
@@ -138,12 +101,34 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             queryFeatureMarkerOverlay.Markers.Add(marker);
             await queryFeatureMarkerOverlay.RefreshAsync();
 
-            // Perform the spatial query using the drawn point and highlight features that were found
-            var queriedFeatures = PerformSpatialQuery(point, zoningLayer);
+            // Perform the spatial query on features in the specified layer
+            friscoLayer.Open();
+            var queriedFeatures = friscoLayer.QueryTools.GetFeaturesContaining(point, ReturningColumnsType.AllColumns);
+
             await HighlightQueriedFeatures(queriedFeatures);
 
             // Clear the drawn point
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        }
+
+        /// <summary>
+        ///     Highlight the features that were found by the spatial query
+        /// </summary>
+        private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
+        {
+            // Find the layers we will be modifying in the MapView dictionary
+            var highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
+            var highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
+
+            // Clear the currently highlighted features
+            highlightLayer.Open();
+            highlightLayer.InternalFeatures.Clear();
+
+            // Add new features to the layer
+            foreach (var feature in features) highlightLayer.InternalFeatures.Add(feature);
+
+            // Refresh the overlay so the layer is redrawn
+            await highlightOverlay.RefreshAsync();
         }
 
         /// <summary>
