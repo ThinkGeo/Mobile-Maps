@@ -4,7 +4,4 @@ The “How Do I?” samples collection is a comprehensive set containing dozens 
 
 ![Screenshot](Screenshot.mp4)
 
-<video width="320" height="240" controls autoplay loop>
-  <source src="Screenshot.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<embed type="video/mp4" src="./Screenshot.mp4">
