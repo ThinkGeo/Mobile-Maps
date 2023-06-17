@@ -44,6 +44,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 "Data/Shapefile/Hotels.shp"));
 
             layerOverlay = new LayerOverlay();
+            layerOverlay.TileType = TileType.SingleTile;
             // Project the layer's data to match the projection of the map
             hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
@@ -59,13 +60,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Create a image point style
             imageStyle = new PointStyle(new GeoImage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/hotel_icon.png")));
             imageStyle.SymbolSize = 40;
-            //imageStyle.IsActive = false;
+            imageStyle.IsActive = false;
 
             // Create a font point style
             fontStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black);
             fontStyle.Mask = new AreaStyle(GeoBrushes.White);
             fontStyle.MaskType = MaskType.Circle;
-            //fontStyle.IsActive = false;
+            fontStyle.IsActive = false;
 
             // Add the point style to the collection of custom styles for ZoomLevel 1.
             hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(predefinedStyle);
@@ -81,6 +82,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void PredefinedStyle_OnChecked(object sender, EventArgs e)
         {
+            var radioButton = sender as Xamarin.Forms.RadioButton;
+            if (!radioButton.IsChecked)
+                return;
+
             if (predefinedStyle == null)
                 return;
 
@@ -96,6 +101,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void ImageStyle_OnChecked(object sender, EventArgs e)
         {
+            var radioButton = sender as Xamarin.Forms.RadioButton;
+            if (!radioButton.IsChecked)
+                return;
+
             if (predefinedStyle == null)
                 return;
 
@@ -111,6 +120,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void FontStyle_Checked(object sender, EventArgs e)
         {
+            var radioButton = sender as Xamarin.Forms.RadioButton;
+            if (!radioButton.IsChecked)
+                return;
+
             if (predefinedStyle == null)
                 return;
 

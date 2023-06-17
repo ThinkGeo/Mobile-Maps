@@ -48,6 +48,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add layers to a layerOverlay
             var layerOverlay = new LayerOverlay();
+            layerOverlay.TileType = TileType.SingleTile;
             layerOverlay.Layers.Add(parksLayer);
             layerOverlay.Layers.Add(streetsLayer);
             layerOverlay.Layers.Add(hotelsLayer);
