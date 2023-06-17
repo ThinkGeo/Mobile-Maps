@@ -28,8 +28,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchI18n>west</MtouchI18n>
-    <CodesignProvision>howdoI-Clint_BensIPhoneMini</CodesignProvision>
-    <CodesignKey>Apple Development: Clint Batman (55SN22CLT6)</CodesignKey>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
