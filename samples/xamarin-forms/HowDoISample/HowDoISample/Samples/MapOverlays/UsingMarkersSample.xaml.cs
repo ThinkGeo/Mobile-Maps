@@ -37,18 +37,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.CurrentExtent =
                 new RectangleShape(-10778329.017082, 3909598.36751101, -10776250.8853871, 3907890.47766975);
 
-            AddSimpleMarkers();
-
-            await mapView.RefreshAsync();
-        }
-
-        /// <summary>
-        ///     Add a SimpleMarkerOverlay to the map
-        /// </summary>
-        private void AddSimpleMarkers()
-        {
             var simpleMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
+
+            mapView.IsRotationEnabled = true;
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

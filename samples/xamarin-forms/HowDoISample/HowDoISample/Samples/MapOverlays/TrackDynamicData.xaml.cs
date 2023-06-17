@@ -45,10 +45,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Creating a rectangle area we will use to generate the polygons and also start the map there.
             //var currentExtent = MaxExtents.SphericalMercator;mapScale5
-            var currentExtent = new RectangleShape(-10810995, 3939081, -10747552, 3884429);
+            var currentExtent = new RectangleShape(-10800272, 3917583, -10760735, 3878046);
 
             //Do all the things we need to setup the polygon layer and overlay such as creating all the polygons etc.
-            AddPolygonOverlay(AreaBaseShape.ScaleDown(currentExtent.GetBoundingBox(), 80).GetBoundingBox());
+            AddPolygonOverlay(currentExtent);
 
             //Set the maps current extent so we start there
             mapView.CurrentExtent = currentExtent;
@@ -97,7 +97,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //polygonLayer.ThreadSafe = ThreadSafetyLevel.Safe;
 
             //Here we generate all of our make believe polygons
-            var features = GetGeneratedPolygons(boundingRectangle.GetBoundingBox());
+            var features = GetGeneratedPolygons(boundingRectangle);
 
             //Add all of the polygons to the layer
             foreach (var feature in features) polygonLayer.InternalFeatures.Add(feature);
@@ -141,18 +141,17 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             var random = new Random();
 
-            boundingRectangle.ScaleTo(10);
-
             var features = new Collection<Feature>();
 
-            for (var x = 1; x < 150; x++)
-                for (var y = 1; y < 150; y++)
+            int squareSize = 100;
+            for (var x = 1; x < squareSize; x++)
+                for (var y = 1; y < squareSize; y++)
                 {
-                    var upperLeftX = boundingRectangle.UpperLeftPoint.X + x * boundingRectangle.Width / 150;
-                    var upperLeftY = boundingRectangle.UpperLeftPoint.Y - y * boundingRectangle.Height / 150;
+                    var upperLeftX = boundingRectangle.UpperLeftPoint.X + x * boundingRectangle.Width / squareSize;
+                    var upperLeftY = boundingRectangle.UpperLeftPoint.Y - y * boundingRectangle.Height / squareSize;
 
-                    var lowerRightX = upperLeftX + boundingRectangle.Width / 150;
-                    var lowerRightY = upperLeftY - boundingRectangle.Height / 150;
+                    var lowerRightX = upperLeftX + boundingRectangle.Width / squareSize;
+                    var lowerRightY = upperLeftY - boundingRectangle.Height / squareSize;
 
                     var feature = new Feature(new RectangleShape(new PointShape(upperLeftX, upperLeftY),
                         new PointShape(lowerRightX, lowerRightY)));
