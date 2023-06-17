@@ -26,6 +26,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
             // Set the map's unit of measurement to meters(Spherical Mercator)
             mapView.MapUnit = GeographyUnit.Meter;
 
@@ -36,41 +37,41 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
             mapView.Overlays.Add(backgroundOverlay);
 
-            var censusHousing = new ShapeFileFeatureLayer(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Data/Shapefile/Frisco 2010 Census Housing Units.shp"));
-            var centerPointLayer = new InMemoryFeatureLayer();
-            var layerOverlay = new LayerOverlay();
+            // Create a feature layer to hold the Census Housing data
+            var censusHousingLayer = new ShapeFileFeatureLayer(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Frisco 2010 Census Housing Units.shp"));
 
             // Project censusHousing layer to Spherical Mercator to match the map projection
-            censusHousing.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+            var projectionConverter = new ProjectionConverter(2276, 3857);
+            censusHousingLayer.FeatureSource.ProjectionConverter = projectionConverter;
 
-            // Style censusHousing layer
-            censusHousing.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
+            // Add a style to use to draw the censusHousing layer
+            censusHousingLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            censusHousingLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Orange), GeoColors.DimGray);
-            censusHousing.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Style centerPointLayer
+            var censusHousingOverlay = new LayerOverlay();
+            censusHousingOverlay.Layers.Add("CensusHousingLayer", censusHousingLayer);
+            mapView.Overlays.Add("CensusHousingOverlay", censusHousingOverlay);
+
+            // Create a layer to hold the centerPointLayer and Style it
+            var centerPointLayer = new InMemoryFeatureLayer();
             centerPointLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle =
                 PointStyle.CreateSimpleCircleStyle(GeoColors.Green, 12, GeoColors.White, 4);
             centerPointLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(64, GeoColors.Green), GeoColors.Black, 2);
             centerPointLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Add censusHousing layer to a LayerOverlay
-            layerOverlay.Layers.Add("censusHousing", censusHousing);
-
-            // Add centerPointLayer to the layerOverlay
-            layerOverlay.Layers.Add("centerPointLayer", centerPointLayer);
+            var centerPointOverlay = new LayerOverlay();
+            centerPointOverlay.Layers.Add("CenterPointLayer", centerPointLayer);
+            mapView.Overlays.Add("CenterPointOverlay", centerPointOverlay);
 
             // Set the map extent to the censusHousing layer bounding box
-            censusHousing.Open();
-            mapView.CurrentExtent = censusHousing.GetBoundingBox();
-            censusHousing.Close();
+            censusHousingLayer.Open();
+            mapView.CurrentExtent = censusHousingLayer.GetBoundingBox();
+            censusHousingLayer.Close();
 
-            // Add LayerOverlay to Map
-            mapView.Overlays.Add("layerOverlay", layerOverlay);
-
+            // Add centerPointOverlay to Map
             centroidCenter.IsChecked = true;
 
             await mapView.RefreshAsync();
@@ -82,8 +83,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// <param name="feature"> The target feature to calculate it's center point</param>
         private async Task CalculateCenterPoint(Feature feature)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var centerPointLayer = (InMemoryFeatureLayer) layerOverlay.Layers["centerPointLayer"];
+            var centerPointOverlay = (LayerOverlay)mapView.Overlays["CenterPointOverlay"];
+            var centerPointLayer = (InMemoryFeatureLayer)centerPointOverlay.Layers["CenterPointLayer"];
 
             PointShape centerPoint;
 
@@ -101,7 +102,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             centerPointLayer.InternalFeatures.Add("centerPoint", new Feature(centerPoint));
 
             // Refresh the overlay to show the results
-            await layerOverlay.RefreshAsync();
+            await centerPointOverlay.RefreshAsync();
         }
 
         /// <summary>
@@ -110,11 +111,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var censusHousing = (ShapeFileFeatureLayer) layerOverlay.Layers["censusHousing"];
+            var censusHousingOverlay = (LayerOverlay)mapView.Overlays["CensusHousingOverlay"];
+            var censusHousingLayer = (ShapeFileFeatureLayer)censusHousingOverlay.Layers["CensusHousingLayer"];
 
             // Query the censusHousing layer to get the first feature closest to the map tap event
-            var feature = censusHousing.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter,
+            var feature = censusHousingLayer.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter,
                 1,
                 ReturningColumnsType.NoColumns).First();
 
@@ -126,8 +127,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void RadioButton_Checked(object sender, EventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-            var centerPointLayer = (InMemoryFeatureLayer) layerOverlay.Layers["centerPointLayer"];
+            var centerPointOverlay = (LayerOverlay)mapView.Overlays["CenterPointOverlay"];
+            var centerPointLayer = (InMemoryFeatureLayer)centerPointOverlay.Layers["CenterPointLayer"];
 
             // Recalculate the center point if a feature has already been selected
             if (centerPointLayer.InternalFeatures.Contains("selectedFeature"))

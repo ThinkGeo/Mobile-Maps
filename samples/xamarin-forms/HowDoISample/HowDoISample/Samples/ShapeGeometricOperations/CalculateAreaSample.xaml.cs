@@ -35,36 +35,36 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
             mapView.Overlays.Add(backgroundOverlay);
 
-            var friscoParks = new ShapeFileFeatureLayer(Path.Combine(
+            // Create a feature layer to hold the Frisco Parks data
+            var friscoParksLayer = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Shapefile/Parks.shp"));
-            var selectedAreaLayer = new InMemoryFeatureLayer();
-            var layerOverlay = new LayerOverlay();
 
             // Project friscoParks layer to Spherical Mercator to match the map projection
-            friscoParks.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
-
+            var projectionConverter = new ProjectionConverter(2276, 3857);
+            friscoParksLayer.FeatureSource.ProjectionConverter = projectionConverter;
+            
             // Style friscoParks layer
-            friscoParks.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
+            friscoParksLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Orange), GeoColors.DimGray);
-            friscoParks.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            friscoParksLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Style selectedAreaLayer
+            var friscoParkOverlay = new LayerOverlay();
+            friscoParkOverlay.Layers.Add("FriscoParksLayer", friscoParksLayer);
+            mapView.Overlays.Add("FriscoParksOverlay", friscoParkOverlay);
+
+            // Create a layer to hold features found by the selected area query
+            var selectedAreaLayer = new InMemoryFeatureLayer();
             selectedAreaLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(64, GeoColors.Green), GeoColors.DimGray);
             selectedAreaLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-            // Add friscoParks layer to a LayerOverlay
-            layerOverlay.Layers.Add("friscoParks", friscoParks);
-
-            // Add selectedAreaLayer to the layerOverlay
-            layerOverlay.Layers.Add("selectedAreaLayer", selectedAreaLayer);
+            var selectedAreaOverlay = new LayerOverlay();
+            selectedAreaOverlay.Layers.Add("SelectedAreaLayer", selectedAreaLayer);
+            mapView.Overlays.Add("SelectedAreaOverlay", selectedAreaOverlay);
 
             // Set the map extent
             mapView.CurrentExtent =
                 new RectangleShape(-10782307.6877106, 3918904.87378907, -10774377.3460701, 3912073.31442403);
-
-            // Add LayerOverlay to Map
-            mapView.Overlays.Add("layerOverlay", layerOverlay);
 
             await mapView.RefreshAsync();
         }
@@ -74,19 +74,20 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         /// </summary>
         private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
-            var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var friscoParkOverlay = (LayerOverlay) mapView.Overlays["FriscoParksOverlay"];
+            var friscoParksLayer = (ShapeFileFeatureLayer)friscoParkOverlay.Layers["FriscoParksLayer"];
 
-            var friscoParks = (ShapeFileFeatureLayer) layerOverlay.Layers["friscoParks"];
-            var selectedAreaLayer = (InMemoryFeatureLayer) layerOverlay.Layers["selectedAreaLayer"];
+            var selectedAreaOverlay = (LayerOverlay)mapView.Overlays["SelectedAreaOverlay"];
+            var selectedAreaLayer = (InMemoryFeatureLayer) selectedAreaOverlay.Layers["SelectedAreaLayer"];
 
             // Query the friscoParks layer to get the first feature closest to the map tap event
-            var feature = friscoParks.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
+            var feature = friscoParksLayer.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
                 ReturningColumnsType.NoColumns).First();
 
             // Show the selected feature on the map
             selectedAreaLayer.InternalFeatures.Clear();
             selectedAreaLayer.InternalFeatures.Add(feature);
-            await layerOverlay.RefreshAsync();
+            await selectedAreaOverlay.RefreshAsync();
 
             // Get the area of the first feature
             var area = ((AreaBaseShape) feature.GetShape()).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers);
