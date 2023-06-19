@@ -133,7 +133,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 CreateNewMarker(new PointShape(serviceAreaResult.Waypoint.Coordinate)));
 
             // Get the service area polygons layer from the map
-            var serviceAreaLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Service Area Layer");
+            var serviceAreaOverlay = (LayerOverlay)mapView.Overlays["Service Area Overlay"];
+            var serviceAreaLayer = (InMemoryFeatureLayer)serviceAreaOverlay.Layers["Service Area Layer"];
 
             // Clear the previous polygons
             serviceAreaLayer.InternalFeatures.Clear();
@@ -150,12 +151,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 serviceAreaLayer.InternalFeatures.Add(new Feature(serviceAreaPolygon, columnValues));
             }
 
-            // Zoom to the extent of the service area and refresh the map
-            serviceAreaLayer.Open();
-            mapView.CurrentExtent = serviceAreaLayer.GetBoundingBox();
-            serviceAreaLayer.Close();
-
-            await mapView.RefreshAsync();
+            await serviceAreaMarkerOverlay.RefreshAsync();
+            await serviceAreaOverlay.RefreshAsync();
         }
 
         /// <summary>

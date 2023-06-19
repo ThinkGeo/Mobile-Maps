@@ -89,8 +89,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             reprojectedFeatureLayer.Open();
             mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
 
-            var standardZoomLevelSet = new ZoomLevelSet();
-            await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
+            await mapView.RefreshAsync();
         }
 
         /// <summary>

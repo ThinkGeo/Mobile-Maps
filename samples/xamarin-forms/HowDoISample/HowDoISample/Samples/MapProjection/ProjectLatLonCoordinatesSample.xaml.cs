@@ -63,29 +63,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             await mapView.RefreshAsync();
         }
 
-        /// <summary>
-        ///     Draw reprojected features on the map
-        /// </summary>
-        private async Task ClearMapAndAddFeaturesAsync(Collection<Feature> reprojectedFeatures)
-        {
-            // Get the layer we prepared from the MapView
-            var reprojectedFeatureLayer = (InMemoryFeatureLayer) mapView.FindFeatureLayer("Reprojected Features Layer");
-
-            // Clear old features from the feature layer and add the newly reprojected features
-            reprojectedFeatureLayer.InternalFeatures.Clear();
-            foreach (var sphericalMercatorFeature in reprojectedFeatures)
-                reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
-
-            // Set the map extent to zoom into the feature and refresh the map
-            reprojectedFeatureLayer.Open();
-            mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
-
-            var standardZoomLevelSet = new ZoomLevelSet();
-            await mapView.ZoomToScaleAsync(standardZoomLevelSet.ZoomLevel18.Scale);
-
-            reprojectedFeatureLayer.Close();
-            await mapView.RefreshAsync();
-        }
 
         /// <summary>
         ///     Use the ProjectionConverter class to reproject multiple different features
@@ -109,8 +86,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             projectionConverter.Open();
             var sphericalMercatorFeatures = projectionConverter.ConvertToExternalProjection(decimalDegreeFeatures);
 
-            // Add the reprojected features to the map
-            await ClearMapAndAddFeaturesAsync(sphericalMercatorFeatures);
+            // Get the layer we prepared from the MapView
+            var reprojectedFeatureLayer = (InMemoryFeatureLayer)mapView.FindFeatureLayer("Reprojected Features Layer");
+
+            // Clear old features from the feature layer and add the newly reprojected features
+            reprojectedFeatureLayer.InternalFeatures.Clear();
+            foreach (var sphericalMercatorFeature in sphericalMercatorFeatures)
+                reprojectedFeatureLayer.InternalFeatures.Add(sphericalMercatorFeature);
+
+            // Set the map extent to zoom into the feature and refresh the map
+            reprojectedFeatureLayer.Open();
+            mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
+
+            await mapView.RefreshAsync();
         }
     }
 }
