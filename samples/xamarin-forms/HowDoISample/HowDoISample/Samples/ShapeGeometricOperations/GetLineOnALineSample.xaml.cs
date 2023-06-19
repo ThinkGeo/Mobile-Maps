@@ -34,12 +34,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                  "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
             backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
             mapView.Overlays.Add(backgroundOverlay);
-
-            var railway = new InMemoryFeatureLayer();
-            var subLineLayer = new InMemoryFeatureLayer();
-            var layerOverlay = new LayerOverlay();
-
+            
             // Add the rail line feature to the railway layer
+            var railway = new InMemoryFeatureLayer();
             railway.InternalFeatures.Add(new Feature(
                 "LineString (-10776730.91861553490161896 3925750.69222266925498843, -10778989.31895966082811356 3915278.00731692276895046, -10781766.12723691388964653 3909228.15506267035380006, -10782065.98029803484678268 3907458.59967381786555052, -10781867.48601813986897469 3905465.21030976390466094)"));
 
@@ -47,17 +44,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             railway.ZoomLevelSet.ZoomLevel01.DefaultLineStyle =
                 LineStyle.CreateSimpleLineStyle(GeoColors.Red, 2, false);
             railway.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            
+            // Add railway to the layerOverlay
+            var layerOverlay = new LayerOverlay();
+            layerOverlay.Layers.Add("railway", railway);
+            mapView.Overlays.Add("layerOverlay", layerOverlay);
 
             // Style the subLineLayer
+            var subLineLayer = new InMemoryFeatureLayer();
             subLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle =
                 LineStyle.CreateSimpleLineStyle(GeoColors.Green, 2, false);
             subLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            // Add railway to the layerOverlay
-            layerOverlay.Layers.Add("railway", railway);
-
+            
             // Add subLineLayer to the layerOverlay
-            layerOverlay.Layers.Add("subLineLayer", subLineLayer);
+            var subLineOverlay = new LayerOverlay();
+            subLineOverlay.Layers.Add("subLineLayer", subLineLayer);
+            mapView.Overlays.Add("subLineOverlay", subLineOverlay);
 
             // Set the map extent to the railway layer bounding box
             railway.Open();
@@ -65,7 +67,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             railway.Close();
 
             // Add LayerOverlay to Map
-            mapView.Overlays.Add("layerOverlay", layerOverlay);
 
             await mapView.RefreshAsync();
         }
@@ -76,9 +77,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void GetSubLine_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
-
+            var subLineOverlay = (LayerOverlay)mapView.Overlays["subLineOverlay"];
+            
             var railway = (InMemoryFeatureLayer) layerOverlay.Layers["railway"];
-            var subLineLayer = (InMemoryFeatureLayer) layerOverlay.Layers["subLineLayer"];
+            var subLineLayer = (InMemoryFeatureLayer)subLineOverlay.Layers["subLineLayer"];
 
             // Query the railway layer to get all the features
             railway.Open();
@@ -95,7 +97,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             subLineLayer.InternalFeatures.Add(new Feature(subLine));
 
             // Redraw the layerOverlay to see the subLine on the map
-            await layerOverlay.RefreshAsync();
+            await subLineOverlay.RefreshAsync();
         }
     }
 }

@@ -37,8 +37,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Data/Shapefile/FriscoCityLimits.shp"));
-            var convexHullLayer = new InMemoryFeatureLayer();
-            var layerOverlay = new LayerOverlay();
 
             // Project cityLimits layer to Spherical Mercator to match the map projection
             cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -49,15 +47,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Style the convexHullLayer
+            var convexHullLayer = new InMemoryFeatureLayer();
             convexHullLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Green), GeoColors.DimGray);
             convexHullLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Add cityLimits to a LayerOverlay
+            var layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add("cityLimits", cityLimits);
 
             // Add convexHullLayer to the layerOverlay
-            layerOverlay.Layers.Add("convexHullLayer", convexHullLayer);
+            var convexHullOverlay = new LayerOverlay();
+            convexHullOverlay.Layers.Add("convexHullLayer", convexHullLayer);
 
             // Set the map extent to the cityLimits layer bounding box
             cityLimits.Open();
@@ -66,6 +67,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+            mapView.Overlays.Add("convexHullOverlay", convexHullOverlay);
 
             await mapView.RefreshAsync();
         }
@@ -77,9 +79,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void ShapeConvexHull_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var convexHullOverlay = (LayerOverlay)mapView.Overlays["convexHullOverlay"];
 
             var cityLimits = (ShapeFileFeatureLayer) layerOverlay.Layers["cityLimits"];
-            var convexHullLayer = (InMemoryFeatureLayer) layerOverlay.Layers["convexHullLayer"];
+            var convexHullLayer = (InMemoryFeatureLayer)convexHullOverlay.Layers["convexHullLayer"];
 
             // Query the cityLimits layer to get the first feature
             cityLimits.Open();
@@ -94,7 +97,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             convexHullLayer.InternalFeatures.Add(convexHull);
 
             // Redraw the layerOverlay to see the convexHull feature on the map
-            await layerOverlay.RefreshAsync();
+            await convexHullOverlay.RefreshAsync();
         }
 
         //TODO: apply it to other samples. 

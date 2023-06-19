@@ -38,8 +38,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Data/Shapefile/FriscoCityLimits.shp"));
-            var envelopeLayer = new InMemoryFeatureLayer();
-            var layerOverlay = new LayerOverlay();
 
             // Project cityLimits layer to Spherical Mercator to match the map projection
             cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -50,15 +48,18 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Style the envelopeLayer
+            var envelopeLayer = new InMemoryFeatureLayer();
             envelopeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle =
                 AreaStyle.CreateSimpleAreaStyle(new GeoColor(32, GeoColors.Green), GeoColors.DimGray);
             envelopeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             // Add cityLimits to a LayerOverlay
+            var layerOverlay = new LayerOverlay();
             layerOverlay.Layers.Add("cityLimits", cityLimits);
 
             // Add envelopeLayer to the layerOverlay
-            layerOverlay.Layers.Add("envelopeLayer", envelopeLayer);
+            var envelopeOverlay = new LayerOverlay();
+            envelopeOverlay.Layers.Add("envelopeLayer", envelopeLayer);
 
             // Set the map extent to the cityLimits layer bounding box
             cityLimits.Open();
@@ -67,6 +68,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add LayerOverlay to Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+            mapView.Overlays.Add("envelopeOverlay", envelopeOverlay);
 
             await mapView.RefreshAsync();
         }
@@ -78,9 +80,10 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void ShapeEnvelope_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var envelopeOverlay = (LayerOverlay)mapView.Overlays["envelopeOverlay"];
 
             var cityLimits = (ShapeFileFeatureLayer) layerOverlay.Layers["cityLimits"];
-            var envelopeLayer = (InMemoryFeatureLayer) layerOverlay.Layers["envelopeLayer"];
+            var envelopeLayer = (InMemoryFeatureLayer)envelopeOverlay.Layers["envelopeLayer"];
 
             // Query the cityLimits layer to get the first feature
             cityLimits.Open();
@@ -95,7 +98,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             envelopeLayer.InternalFeatures.Add(new Feature(envelope));
 
             // Redraw the layerOverlay to see the envelope feature on the map
-            await layerOverlay.RefreshAsync();
+            await envelopeOverlay.RefreshAsync();
         }
     }
 }

@@ -66,7 +66,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add("stadiumLayer", stadiumLayer);
 
             // Add shortestLineLayer to the layerOverlay
-            layerOverlay.Layers.Add("shortestLineLayer", shortestLineLayer);
+            var shortestLineOverlay = new LayerOverlay();
+            shortestLineOverlay.Layers.Add("shortestLineLayer", shortestLineLayer);
+            mapView.Overlays.Add("shortestLineOverlay", shortestLineOverlay);
 
             // Set the map extent
             mapView.CurrentExtent =
@@ -89,10 +91,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void MapView_OnMapClick(object sender, TouchMapViewEventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var shortestLineOverlay = (LayerOverlay)mapView.Overlays["shortestLineOverlay"];
 
             var friscoParks = (ShapeFileFeatureLayer) layerOverlay.Layers["friscoParks"];
             var stadiumLayer = (InMemoryFeatureLayer) layerOverlay.Layers["stadiumLayer"];
-            var shortestLineLayer = (InMemoryFeatureLayer) layerOverlay.Layers["shortestLineLayer"];
+            var shortestLineLayer = (InMemoryFeatureLayer)shortestLineOverlay.Layers["shortestLineLayer"];
 
             // Query the friscoParks layer to get the first feature closest to the map tap event
             var park = friscoParks.QueryTools.GetFeaturesNearestTo(e.PointInWorldCoordinate, GeographyUnit.Meter, 1,
@@ -107,7 +110,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Show the shortestLine on the map
             shortestLineLayer.InternalFeatures.Clear();
             shortestLineLayer.InternalFeatures.Add(new Feature(shortestLine));
-            await layerOverlay.RefreshAsync();
+            await shortestLineOverlay.RefreshAsync();
 
             // Get the area of the first feature
             var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);

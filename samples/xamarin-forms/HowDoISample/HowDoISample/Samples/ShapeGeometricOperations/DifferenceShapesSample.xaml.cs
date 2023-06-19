@@ -41,6 +41,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var westRegionLayer = new InMemoryFeatureLayer();
             var differenceLayer = new InMemoryFeatureLayer();
             var layerOverlay = new LayerOverlay();
+            var differenceOverlay = new LayerOverlay();
 
             // Project cityLimits layer to Spherical Mercator to match the map projection
             cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -67,15 +68,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add("westRegionLayer", westRegionLayer);
 
             // Add differenceLayer to the layerOverlay
-            layerOverlay.Layers.Add("differenceLayer", differenceLayer);
+            differenceOverlay.Layers.Add("differenceLayer", differenceLayer);
 
             // Set the map extent to the cityLimits layer bounding box
             cityLimits.Open();
             mapView.CurrentExtent = cityLimits.GetBoundingBox();
             cityLimits.Close();
 
-            // Add LayerOverlay to Map
+            // Add LayerOverlay and differenceOverlay to the Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+            mapView.Overlays.Add("differenceOverlay", differenceOverlay);
 
             // Add west region area to westRegionLayer
             westRegionLayer.InternalFeatures.Add(new Feature(
@@ -90,10 +92,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void DifferenceShape_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var differenceOverlay = (LayerOverlay) mapView.Overlays["differenceOverlay"];
 
             var cityLimits = (ShapeFileFeatureLayer) layerOverlay.Layers["cityLimits"];
             var westRegionLayer = (InMemoryFeatureLayer) layerOverlay.Layers["westRegionLayer"];
-            var differenceLayer = (InMemoryFeatureLayer) layerOverlay.Layers["differenceLayer"];
+            var differenceLayer = (InMemoryFeatureLayer)differenceOverlay.Layers["differenceLayer"];
 
             // Query the cityLimits layer to get the first feature
             cityLimits.Open();
@@ -111,7 +114,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             differenceLayer.InternalFeatures.Add(difference);
 
             // Redraw the layerOverlay to see the difference feature on the map
-            await layerOverlay.RefreshAsync();
+            await differenceOverlay.RefreshAsync();
         }
     }
 }

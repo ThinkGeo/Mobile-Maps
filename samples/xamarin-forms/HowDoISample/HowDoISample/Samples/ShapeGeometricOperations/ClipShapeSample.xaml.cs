@@ -41,6 +41,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var westRegionLayer = new InMemoryFeatureLayer();
             var clipLayer = new InMemoryFeatureLayer();
             var layerOverlay = new LayerOverlay();
+            var clipOverlay = new LayerOverlay();
 
             // Project cityLimits layer to Spherical Mercator to match the map projection
             cityLimits.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -67,15 +68,16 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add("westRegionLayer", westRegionLayer);
 
             // Add clipLayer to the layerOverlay
-            layerOverlay.Layers.Add("clipLayer", clipLayer);
+            clipOverlay.Layers.Add("clipLayer", clipLayer);
 
             // Set the map extent to the cityLimits layer bounding box
             cityLimits.Open();
             mapView.CurrentExtent = cityLimits.GetBoundingBox();
             cityLimits.Close();
 
-            // Add LayerOverlay to Map
+            // Add LayerOverlay and clipOverlay to the Map
             mapView.Overlays.Add("layerOverlay", layerOverlay);
+            mapView.Overlays.Add("clipOverlay", clipOverlay);
 
             // Add west region area to westRegionLayer
             westRegionLayer.InternalFeatures.Add(new Feature(
@@ -90,10 +92,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         private async void ClipShape_OnClick(object sender, EventArgs e)
         {
             var layerOverlay = (LayerOverlay) mapView.Overlays["layerOverlay"];
+            var clipOverlay = (LayerOverlay)mapView.Overlays["clipOverlay"];
 
             var cityLimits = (ShapeFileFeatureLayer) layerOverlay.Layers["cityLimits"];
             var westRegionLayer = (InMemoryFeatureLayer) layerOverlay.Layers["westRegionLayer"];
-            var clipLayer = (InMemoryFeatureLayer) layerOverlay.Layers["clipLayer"];
+            var clipLayer = (InMemoryFeatureLayer)clipOverlay.Layers["clipLayer"];
 
             // Query the cityLimits layer to get the first feature
             cityLimits.Open();
@@ -111,7 +114,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             clipLayer.InternalFeatures.Add(clip);
 
             // Redraw the layerOverlay to see the clip feature on the map
-            await layerOverlay.RefreshAsync();
+            await clipOverlay.RefreshAsync();
         }
     }
 }
