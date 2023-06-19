@@ -39,7 +39,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             radiusLayer.RingGeography = GeographyUnit.Meter;
             radiusLayer.RingDistance = 5;
 
-            //layerOverlay.Layers.Add(radiusLayer);
+            layerOverlay.Layers.Add(radiusLayer);
             mapView.AdornmentOverlay.Layers.Add(radiusLayer);
             mapView.CurrentExtent =
                 new RectangleShape(-10812042.5236828, 3942445.36497713, -10748599.7905585, 3887792.89005685);

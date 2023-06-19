@@ -188,13 +188,13 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
         "title": "Create a custom layer",
-        "description": "Create a custom layer.",
+        "description": "Create a custom layer by drawing a collection of circles in the current extent",
         "source": "Samples/LayerFormats/Vector/ExtendingLayersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
         "title": "Support Custom Data",
-        "description": "Customize the FeatureSource/FeatureLayer to support a custom data format.",
+        "description": "Customize the FeatureSource/FeatureLayer and use a csv as the data source.",
         "source": "Samples/LayerFormats/Vector/ExtendingFeatureSourcesSample"
       }
     ]

@@ -12,15 +12,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavigationSample : ContentPage
     {
-        private Vertex empireStateBuiilding;
+        private Vertex empireStateBuilding;
+        private PopupOverlay popupOverlay;
 
         public NavigationSample()
         {
             var projectionConverter = new ProjectionConverter(4326, 3857);
             projectionConverter.Open();
-            empireStateBuiilding = projectionConverter.ConvertToExternalProjection(-73.985665442769, 40.7484366107232);
+            empireStateBuilding = projectionConverter.ConvertToExternalProjection(-73.985665442769, 40.7484366107232);
 
             InitializeComponent();
+
+            popupOverlay = new PopupOverlay();
+            mapView.Overlays.Add(popupOverlay);
         }
 
         /// <summary>
@@ -54,13 +58,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             IsRotationEnabled = true;
 
-            AddMarker(empireStateBuiilding);
+            AddMarker(empireStateBuilding);
 
             // Use CenterPoint/MapScale for the map extent. 
             mapView.ExtentSettingMode = ExtentSettingMode.CenterPointAndMapScale;
             MapRotation = -30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
-            mapView.CenterPoint = new PointShape(empireStateBuiilding);
+            mapView.CenterPoint = new PointShape(empireStateBuilding);
 
             await mapView.RefreshAsync();
         }
@@ -76,15 +80,31 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 ImageSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/AQUA.png"),
                 YOffset = -17
             };
+            marker.TagObject = "Empire State Building";
+            marker.Tap += Marker_Tap;
+
 
             simpleMarkerOverlay.Markers.Add(marker);
+        }
+
+        private async void Marker_Tap(object sender, EventArgs e)
+        {
+            var marker = (Marker)sender;
+            var popup = new Popup
+            {
+                Position = marker.Position,
+                Text = marker.TagObject.ToString()
+            };
+            popupOverlay.Popups.Clear();
+            popupOverlay.Popups.Add(popup);
+            await popupOverlay.RefreshAsync();
         }
 
         private async void DefaultExtentButton_OnClicked(object sender, System.EventArgs e)
         {
             mapView.MapRotation = -30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
-            mapView.CenterPoint = new PointShape(empireStateBuiilding);
+            mapView.CenterPoint = new PointShape(empireStateBuilding);
             await mapView.RefreshAsync();
         }
 
