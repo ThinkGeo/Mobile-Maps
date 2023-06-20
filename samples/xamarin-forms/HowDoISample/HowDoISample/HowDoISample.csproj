@@ -12,6 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Samples\LayerFormats\Vector\ISOLineLayerSample.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Samples\LayerFormats\Vector\ISOLineLayerSample.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bmp" />
     <None Remove="Data\Bmp\m_3309650_sw_14_1_20160911_20161121.bpw" />
     <None Remove="Data\Csv\Frisco_Mosquitos.csv" />
@@ -450,9 +458,9 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.6" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta044" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta049" />
   </ItemGroup>
 
   <ItemGroup>
@@ -521,9 +529,6 @@
     </Compile>
     <Compile Update="Samples\LayerFormats\Vector\InMemoryLayerSample.xaml.cs">
       <DependentUpon>InMemoryLayerSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Samples\LayerFormats\Vector\ISOLineLayerSample.xaml.cs">
-      <DependentUpon>ISOLineLayerSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\LayerFormats\Vector\OfflineCloudMapsVectorLayerSample.xaml.cs">
       <DependentUpon>OfflineCloudMapsVectorLayerSample.xaml</DependentUpon>

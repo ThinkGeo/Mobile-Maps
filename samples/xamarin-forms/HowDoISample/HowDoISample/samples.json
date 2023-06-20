@@ -120,12 +120,6 @@
         "source": "Samples/LayerFormats/Vector/TABLayerSample"
       },
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ISOLineLayerSample",
-        "title": "Display an ISOLine Layer",
-        "description": "This sample shows how to display an ISOLine layer.",
-        "source": "Samples/LayerFormats/Vector/ISOLineLayerSample"
-      },
-      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.InMemoryLayerSample",
         "title": "Display an InMemory Layer",
         "description": "Display an InMemory Layer.",
