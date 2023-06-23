@@ -9,6 +9,12 @@
         "source": "Samples/MapNavigation/NavigationSample"
       },
       {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UpdateVehicleLocationSample",
+        "title": "Update Vehicle Location",
+        "description": "Display a vehicle in real-time.",
+        "source": "Samples/MapNavigation/UpdateVehicleLocationSample"
+      },
+      {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample",
         "title": "Set the Map Extent",
         "description": "Set the map extent in different ways.",
@@ -25,12 +31,6 @@
   {
     "title": "Map Overlays",
     "children": [
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGpsLocationOverlaySample",
-        "title": "Update GPS Location",
-        "description": "Display a vehicle in real-time.",
-        "source": "Samples/MapOverlays/DrawGpsLocationOverlaySample"
-      },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
         "title": "ThinkGeo Background Overlays",

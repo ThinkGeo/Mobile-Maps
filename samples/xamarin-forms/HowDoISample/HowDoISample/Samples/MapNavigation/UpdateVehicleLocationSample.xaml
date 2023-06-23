@@ -4,7 +4,7 @@
              xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.DrawGpsLocationOverlaySample"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.UpdateVehicleLocationSample"
              x:Name="mapPage">
 
     <ContentPage.BindingContext>
@@ -23,12 +23,10 @@
             <Grid  VerticalOptions="FillAndExpand" >
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapUnit="Meter" />
 
-                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="40,0,0,40" HorizontalOptions="Start" VerticalOptions="End">
-                    <StackLayout Orientation="Horizontal" HeightRequest="20">
-                        <CheckBox IsChecked="{Binding CenterOnVehicle}"></CheckBox>
-                        <Label>Center on Vehicle</Label>
-                    </StackLayout>
-                </StackLayout>
+                <ImageButton x:Name="NorthUpButton" BackgroundColor="Transparent" 
+                             VerticalOptions="Start" HorizontalOptions="End"
+                             WidthRequest="40" HeightRequest="40" CornerRadius="20" Source="icon_north_arrow.png" 
+                             Rotation="{Binding MapRotation}"/>
             </Grid>
 
         </StackLayout>
