@@ -23,15 +23,15 @@
 	<key>MinimumOSVersion</key>
 	<string>12.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>ThinkGeo Map Demo</string>
+	<string>ThinkGeo Maps</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.thinkgeo.ioshowdoi</string>
 	<key>CFBundleVersion</key>
-	<string>3.0.4</string>
+	<string>3.1.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>HowDoISample</string>
+	<string>ThinkGeoMaps</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSCalendarsUsageDescription</key>
