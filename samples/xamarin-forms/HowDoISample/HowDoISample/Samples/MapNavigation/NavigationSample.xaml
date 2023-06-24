@@ -44,7 +44,7 @@
 
                 <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="40" HorizontalOptions="Start" VerticalOptions="End">
                     <StackLayout Orientation="Horizontal" HeightRequest="20">
-                        <CheckBox IsChecked="{Binding IsRotationEnabled}"></CheckBox>
+                        <CheckBox IsChecked="{Binding RotationEnabled}"></CheckBox>
                         <Label>Rotation Enabled</Label>
                     </StackLayout>
                 </StackLayout>

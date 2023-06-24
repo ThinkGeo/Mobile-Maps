@@ -40,7 +40,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var simpleMarkerOverlay = new SimpleMarkerOverlay();
             mapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
 
-            mapView.IsRotationEnabled = true;
+            mapView.RotationEnabled = true;
             await mapView.RefreshAsync();
         }
 

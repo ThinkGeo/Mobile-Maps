@@ -233,6 +233,7 @@
     <None Remove="Resources\hotel_icon.png" />
     <None Remove="Resources\vandalism_icon.png" />
     <None Remove="Resources\vehicle-location.png" />
+    <None Remove="Resources\vehicle-location2.png" />
     <None Remove="Resources\vehicle.png" />
     <None Remove="Resources\weapon_icon.png" />
     <None Remove="samples.json" />
@@ -680,8 +681,8 @@
     <Compile Update="Samples\MapOverlays\GroupingLayersUsingLayerOverlaySample.xaml.cs">
       <DependentUpon>GroupingLayersUsingLayerOverlaySample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Samples\MapOverlays\DrawGPSLocationOverlaySample.xaml.cs">
-      <DependentUpon>DrawGPSLocationOverlaySample.xaml</DependentUpon>
+    <Compile Update="Samples\MapNavigation\UpdateVehicleLocationSample.xaml.cs">
+      <DependentUpon>UpdateVehicleLocationSample.xaml</DependentUpon>
     </Compile>
     <Compile Update="Samples\MapOverlays\TrackDynamicData.xaml.cs">
       <DependentUpon>RefreshDynamicItems.xaml</DependentUpon>

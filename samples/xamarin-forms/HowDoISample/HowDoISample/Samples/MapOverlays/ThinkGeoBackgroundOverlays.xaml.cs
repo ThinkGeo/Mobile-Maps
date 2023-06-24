@@ -48,7 +48,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Set the map extent
             mapView.CurrentExtent = new RectangleShape(-16061259, 13162974, -5494605, -5338454);
-            mapView.IsRotationEnabled = true;
+            mapView.RotationEnabled = true;
 
             await mapView.RefreshAsync();
         }

@@ -53,7 +53,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             //Set the maps current extent so we start there
             mapView.CurrentExtent = currentExtent;
 
-            mapView.IsRotationEnabled = true;
+            mapView.RotationEnabled = true;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)

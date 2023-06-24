@@ -56,7 +56,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             mapView.CurrentExtentChanged += MapView_CurrentExtentChanged;
 
-            IsRotationEnabled = true;
+            RotationEnabled = true;
 
             AddMarker(empireStateBuilding);
 
@@ -137,13 +137,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
         }
 
-        public bool IsRotationEnabled
+        public bool RotationEnabled
         {
-            get => mapView.IsRotationEnabled;
+            get => mapView.RotationEnabled;
             set
             {
-                if (mapView.IsRotationEnabled == value) return;
-                mapView.IsRotationEnabled = value;
+                if (mapView.RotationEnabled == value) return;
+                mapView.RotationEnabled = value;
                 OnPropertyChanged();
             }
         }
