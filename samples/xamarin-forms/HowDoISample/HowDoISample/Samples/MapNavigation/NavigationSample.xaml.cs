@@ -61,7 +61,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             AddMarker(empireStateBuilding);
 
             // Use CenterPoint/MapScale for the map extent. 
-            mapView.ExtentSettingMode = ExtentSettingMode.CenterPointAndMapScale;
             MapRotation = -30;
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel14.Scale;
             mapView.CenterPoint = new PointShape(empireStateBuilding);

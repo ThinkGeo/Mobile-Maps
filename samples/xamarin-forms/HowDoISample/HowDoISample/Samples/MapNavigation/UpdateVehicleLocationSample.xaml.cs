@@ -110,7 +110,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             layerOverlay.Layers.Add(visitedRoutesLayer);
             mapView.Overlays.Add(layerOverlay);
 
-            mapView.ExtentSettingMode = ExtentSettingMode.CenterPointAndMapScale;
             mapView.CenterPoint = new PointShape(gpsPoints[0]);
             mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel19.Scale;
             await mapView.RefreshAsync();
