@@ -52,7 +52,6 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchLink>None</MtouchLink>
     <MtouchInterpreter>-all</MtouchInterpreter>
-    <CodesignProvision>howdoI-Clint_BensIPhoneMini</CodesignProvision>
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
