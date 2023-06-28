@@ -200,7 +200,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private async void NorthUpButton_OnClicked(object sender, System.EventArgs e)
         {
-            mapView.MapRotation = 0;
+            MapRotation = 0;
             await mapView.RefreshAsync();
         }
 
