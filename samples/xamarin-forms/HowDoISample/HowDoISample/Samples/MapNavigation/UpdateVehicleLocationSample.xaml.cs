@@ -50,8 +50,8 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add Cloud Maps as a background overlay
             var backgroundOverlay = new ThinkGeoCloudVectorMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoLightBackground");
+                "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Dark);
+            backgroundOverlay.TileCache = new FileRasterTileCache(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ThinkGeoDarkBackground");
             mapView.Overlays.Add("Background Maps", backgroundOverlay);
 
             await InitGpsData();
@@ -69,14 +69,22 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var locations = await File.ReadAllLinesAsync(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Data/Csv/vehicle-route.csv"));
 
+            // Convert the Lat/Lon read from GPS to the projection (spherical mercator) of the base map;
+            ProjectionConverter converter = new ProjectionConverter(Projection.GetDecimalDegreesProjString(), Projection.GetSphericalMercatorProjString());
+            converter.Open();
+
             var lineShape = new LineShape();
             foreach (var location in locations)
             {
                 var posItems = location.Split(',');
-                var vertex = new Vertex(double.Parse(posItems[0]), double.Parse(posItems[1]));
-                gpsPoints.Add(vertex);
-                lineShape.Vertices.Add(vertex);
+                var lat = double.Parse(posItems[0]);
+                var lon = double.Parse(posItems[1]);
+                var vertexInSphericalMercator = converter.ConvertToExternalProjection(lon, lat);
+                gpsPoints.Add(vertexInSphericalMercator);
+                lineShape.Vertices.Add(vertexInSphericalMercator);
             }
+            converter.Close();
+
             previousVertex = 0;
 
             // Create the marker of the vehicle
@@ -97,11 +105,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // create the layers for the routes.
             routesLayer = new InMemoryFeatureLayer();
             routesLayer.InternalFeatures.Add(new Feature(lineShape));
-            routesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.SkyBlue, 6, true);
+            routesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Yellow, 6, true);
             routesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             visitedRoutesLayer = new InMemoryFeatureLayer();
-            visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.DarkSeaGreen, 6, true);
+            visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 6, true);
             visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             var layerOverlay = new LayerOverlay();
@@ -111,7 +119,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.Overlays.Add(layerOverlay);
 
             mapView.CenterPoint = new PointShape(gpsPoints[0]);
-            mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel19.Scale;
+            mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel18.Scale;
             await mapView.RefreshAsync();
         }
 
@@ -188,6 +196,12 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 angle = nextLocation.Y - currentLocation.Y >= 0 ? 0 : 180;
             }
             return angle;
+        }
+
+        private async void NorthUpButton_OnClicked(object sender, System.EventArgs e)
+        {
+            mapView.MapRotation = 0;
+            await mapView.RefreshAsync();
         }
 
         protected override void OnDisappearing()

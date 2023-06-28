@@ -26,7 +26,8 @@
                 <ImageButton x:Name="NorthUpButton" BackgroundColor="Transparent" 
                              VerticalOptions="Start" HorizontalOptions="End"
                              WidthRequest="40" HeightRequest="40" CornerRadius="20" Source="icon_north_arrow.png" 
-                             Rotation="{Binding MapRotation}"/>
+                             Rotation="{Binding MapRotation}" 
+                             Clicked="NorthUpButton_OnClicked" />
             </Grid>
 
         </StackLayout>
