@@ -36,12 +36,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 @"Data/Csv/vehicle-route.csv"));
 
-            // Set the points image to an car icon and then apply it to all zoomlevels
-            var vehiclePointStyle = new PointStyle(new GeoImage(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                @"Resources/vehicle-location.png")));
-            vehiclePointStyle.YOffsetInPixel = -12;
+            // this converter convert Decimal Degrees GPS points(epsg:4326) to the projection of ThinkGeo Background map (epsg:3857).
+            csvLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 3857);
 
+            // Set the points image to an car icon and then apply it to all zoomlevels
+            var vehiclePointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 8, GeoColors.Black);
             csvLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = vehiclePointStyle;
             csvLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
@@ -79,8 +78,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 var locations = File.ReadAllLines(CsvPathFileName);
 
                 foreach (var location in locations)
-                    features.Add(
-                        new Feature(double.Parse(location.Split(',')[0]), double.Parse(location.Split(',')[1])));
+                {
+                    var items = location.Split(',');
+                    var (lat, lon) = (double.Parse(items[0]), double.Parse(items[1]));
+                    features.Add(new Feature(lon, lat));
+                }
             }
 
             return features;

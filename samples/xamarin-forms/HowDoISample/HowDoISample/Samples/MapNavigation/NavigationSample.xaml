@@ -48,6 +48,10 @@
                         <CheckBox IsChecked="{Binding RotationEnabled}"></CheckBox>
                         <Label>Rotation Enabled</Label>
                     </StackLayout>
+                    <StackLayout Orientation="Horizontal" HeightRequest="20">
+                        <CheckBox IsChecked="{Binding DarkTheme}"></CheckBox>
+                        <Label>Dark Theme</Label>
+                    </StackLayout>
                 </StackLayout>
 
             </Grid>

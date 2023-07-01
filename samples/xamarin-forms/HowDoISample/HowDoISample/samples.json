@@ -188,7 +188,7 @@
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
         "title": "Support Custom Data",
-        "description": "Customize the FeatureSource/FeatureLayer and use a CSV file as the data source.",
+        "description": "Read GPS Points from a CSV file.",
         "source": "Samples/LayerFormats/Vector/ExtendingFeatureSourcesSample"
       }
     ]

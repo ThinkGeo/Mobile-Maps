@@ -14,6 +14,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     {
         private Vertex empireStateBuilding;
         private PopupOverlay popupOverlay;
+        private ThinkGeoCloudRasterMapsOverlay backgroundOverlay;
 
         public NavigationSample()
         {
@@ -37,7 +38,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             mapView.MapUnit = GeographyUnit.Meter;
 
             // Add Cloud Maps as a background overlay
-            var backgroundOverlay = new ThinkGeoCloudRasterMapsOverlay(
+            backgroundOverlay = new ThinkGeoCloudRasterMapsOverlay(
                 "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
                 "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudRasterMapsMapType.Light_V2_X2);
             // ThinkGeoCloudRasterMapsOverlay includes a default cache; however, we recommend specifying the cache location in your code to ensure you have control over its storage location.
@@ -146,6 +147,30 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
                 OnPropertyChanged();
             }
         }
+
+
+        private bool _darkTheme;
+
+        public bool DarkTheme
+        {
+            get => _darkTheme;
+            set
+            {
+                if (_darkTheme == value) return;
+
+                _darkTheme = value;
+
+                // Add Cloud Maps as a background overlay
+                backgroundOverlay.MapType = _darkTheme
+                    ? ThinkGeoCloudRasterMapsMapType.Dark_V2_X2
+                    : ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
+
+                backgroundOverlay.RefreshAsync();
+
+                OnPropertyChanged();
+            }
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
