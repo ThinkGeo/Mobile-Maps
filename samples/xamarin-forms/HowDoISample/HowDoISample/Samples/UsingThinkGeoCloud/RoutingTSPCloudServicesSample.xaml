@@ -20,7 +20,7 @@
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
                 <Grid>
                     <ListView Grid.Column="1" Grid.Row="1" x:Name="lsbRouteSegments" HeightRequest="200"
-                              ItemSelected="lsbRouteSegments_SelectionChanged">
+                              ItemSelected="lsbRouteSegments_SelectionChanged"  BackgroundColor="#80777777">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextCell Text="{Binding Path=Instruction}"

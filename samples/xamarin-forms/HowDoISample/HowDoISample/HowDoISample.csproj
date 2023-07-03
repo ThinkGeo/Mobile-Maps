@@ -461,7 +461,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.6" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta051" />
+    <PackageReference Include="ThinkGeo.UI.XamarinForms" Version="13.1.0-beta055" />
   </ItemGroup>
 
   <ItemGroup>

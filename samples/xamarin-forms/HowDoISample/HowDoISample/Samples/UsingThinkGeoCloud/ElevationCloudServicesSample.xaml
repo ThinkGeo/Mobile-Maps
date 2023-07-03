@@ -19,7 +19,7 @@
 
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
-                <ScrollView HeightRequest="200" Margin="5">
+                <ScrollView HeightRequest="200" Margin="5"  BackgroundColor="#80777777">
                     <StackLayout>
                         <Label Text="Elevation Points" FontSize="Subtitle" FontAttributes="Bold" />
                         <ListView x:Name="lsbElevations">

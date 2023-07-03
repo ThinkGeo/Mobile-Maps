@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10,0, 0, 20">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10,0, 0, 20"  BackgroundColor="#80777777">
                     <Label Text="Buffer Distance(m):" FontAttributes="Bold" VerticalOptions="Center" />
                     <Entry x:Name="bufferDistance" Text="1000" Keyboard="Numeric"  WidthRequest="60"/>
                 </StackLayout>

@@ -18,7 +18,7 @@
                 <!-- Map Control -->
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
-                <Grid HeightRequest="200" VerticalOptions="End" Padding="10">
+                <Grid HeightRequest="200" VerticalOptions="End" Padding="10"  BackgroundColor="#80777777">
                     
                     <Button Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2" Clicked="Search_Click" 
                             Text="Type in an address and hit Search" HorizontalOptions="CenterAndExpand" HeightRequest="40"/>

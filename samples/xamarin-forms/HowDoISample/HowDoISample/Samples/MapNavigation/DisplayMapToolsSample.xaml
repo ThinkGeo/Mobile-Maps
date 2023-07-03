@@ -23,7 +23,7 @@
             <Grid  VerticalOptions="FillAndExpand" >
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapUnit="Meter" />
 
-                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="20,0,0,50" HorizontalOptions="Start" VerticalOptions="End">
+                <StackLayout InputTransparent="True" CascadeInputTransparent="False" Margin="20,0,0,50" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="#80777777">
                     <StackLayout Orientation="Horizontal" HeightRequest="20">
                         <CheckBox IsChecked="{Binding DisplayCoordinate}"></CheckBox>
                         <Label>Display Coordinate</Label>

@@ -23,7 +23,7 @@
                 </Grid.RowDefinitions>
                 <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="3" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
 
-                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="10" BackgroundColor="#80FFFFFF">
+                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="10,0,160,10"  BackgroundColor="#80777777">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />

@@ -20,7 +20,7 @@
                 </StackLayout>
 
                 <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
-                <Grid HeightRequest="200">
+                <Grid HeightRequest="200"  BackgroundColor="#80777777">
                     <ListView Grid.Column="1" Grid.Row="0" x:Name="lsbRouteSegments" HeightRequest="200"
                               ItemSelected="lsbRouteSegments_SelectionChanged">
                         <ListView.ItemTemplate>

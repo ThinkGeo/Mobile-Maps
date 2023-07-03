@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20"  BackgroundColor="#80777777">
                     <Label Text="Rotation Degree:" FontAttributes="Bold"
                            VerticalOptions="Center" />
                     <Entry x:Name="rotateDegree" Text="90" Keyboard="Numeric"  WidthRequest="40"/>
