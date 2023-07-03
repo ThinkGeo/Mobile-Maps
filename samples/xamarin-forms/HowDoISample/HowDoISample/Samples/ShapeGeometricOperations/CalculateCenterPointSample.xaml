@@ -15,10 +15,13 @@
             </StackLayout>
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_OnMapClick" />
-            <RadioButton x:Name="centroidCenter" Content="Show Centroid Center"
-                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,0"  BackgroundColor="#80777777"/>
-            <RadioButton x:Name="bboxCenter" Content="Show Bounding Box Center"
-                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,10"  BackgroundColor="#80777777"/>
+
+            <StackLayout BackgroundColor="#80777777">
+                <RadioButton x:Name="centroidCenter" Content="Show Centroid Center"
+                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,0" BackgroundColor="Transparent" />
+                <RadioButton x:Name="bboxCenter" Content="Show Bounding Box Center"
+                         CheckedChanged="RadioButton_Checked" Margin="10,0,0,10" BackgroundColor="Transparent" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

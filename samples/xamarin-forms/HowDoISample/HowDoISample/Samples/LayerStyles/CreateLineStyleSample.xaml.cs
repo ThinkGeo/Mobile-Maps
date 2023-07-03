@@ -42,6 +42,13 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Project the layer's data to match the projection of the map
             friscoRailroad.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
+            // Create a line style
+            var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 6), new GeoPen(GeoBrushes.WhiteSmoke, 4));
+            // Add the line style to the collection of custom styles for ZoomLevel 1.
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = lineStyle;
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
             // Add the layer to a layer overlay
             layerOverlay.Layers.Add("Railroad", friscoRailroad);
 
@@ -51,54 +58,56 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
         private async void rbLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (mapView.Overlays.Count > 0)
-            {
-                var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
-                var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
+            if (mapView.Overlays.Count <= 0) return;
 
-                // Create a line style
-                var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 6), new GeoPen(GeoBrushes.WhiteSmoke, 4));
+            var radioButton = sender as Xamarin.Forms.RadioButton;
+            if (!radioButton.IsChecked)
+                return;
 
-                // Add the line style to the collection of custom styles for ZoomLevel 1.
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(lineStyle);
+            var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
+            var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
 
-                // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            // Create a line style
+            var lineStyle = new LineStyle(new GeoPen(GeoBrushes.DimGray, 6), new GeoPen(GeoBrushes.WhiteSmoke, 4));
 
-                // Refresh the layerOverlay to show the new style
-                await layerOverlay.RefreshAsync();
-            }
+            // Add the line style to the collection of custom styles for ZoomLevel 1.
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = lineStyle;
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            // Refresh the layerOverlay to show the new style
+            await layerOverlay.RefreshAsync();
         }
 
         private async void rbDashedLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (mapView.Overlays.Count > 0)
-            {
-                var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
-                var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
+            if (mapView.Overlays.Count <= 0) return;
 
-                var lineStyle = new LineStyle(
-                    new GeoPen(GeoColors.Black, 6),
-                    new GeoPen(GeoColors.White, 4)
-                    {
-                        DashStyle = LineDashStyle.Custom,
-                        DashPattern = {3f, 3f},
-                        StartCap = DrawingLineCap.Flat,
-                        EndCap = DrawingLineCap.Flat
-                    }
-                );
+            var radioButton = sender as Xamarin.Forms.RadioButton;
+            if (!radioButton.IsChecked)
+                return;
 
-                // Add the line style to the collection of custom styles for ZoomLevel 1.
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(lineStyle);
+            var layerOverlay = (LayerOverlay) mapView.Overlays["overlay"];
+            var friscoRailroad = (ShapeFileFeatureLayer) layerOverlay.Layers["Railroad"];
 
-                // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
-                friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            var lineStyle = new LineStyle(
+                new GeoPen(GeoColors.Black, 6),
+                new GeoPen(GeoColors.White, 4)
+                {
+                    DashStyle = LineDashStyle.Custom,
+                    DashPattern = {3f, 3f},
+                    StartCap = DrawingLineCap.Flat,
+                    EndCap = DrawingLineCap.Flat
+                }
+            );
 
-                // Refresh the layerOverlay to show the new style
-                await layerOverlay.RefreshAsync();
-            }
+            // Add the line style to the collection of custom styles for ZoomLevel 1.
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = lineStyle;
+            // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the line style on every zoom level on the map. 
+            friscoRailroad.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            // Refresh the layerOverlay to show the new style
+            await layerOverlay.RefreshAsync();
         }
     }
 }

@@ -16,13 +16,13 @@
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
-            <Grid>
+            <Grid  BackgroundColor="#80777777">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10,0,0,20"  BackgroundColor="#80777777">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal" Margin="10,0,0,20" >
                     <Label Text="Scale Factor:" FontAttributes="Bold" VerticalOptions="Center" />
                     <Entry x:Name="scaleFactor" Text=".5" VerticalOptions="Center" Keyboard="Numeric" WidthRequest="50" />
                 </StackLayout>

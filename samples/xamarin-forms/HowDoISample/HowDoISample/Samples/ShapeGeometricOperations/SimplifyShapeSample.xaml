@@ -16,13 +16,13 @@
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
 
-            <Grid>
+            <Grid  BackgroundColor="#80777777">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20"  BackgroundColor="#80777777">
+                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20">
                     <Label Text="Tolerance (m):" FontAttributes="Bold" VerticalOptions="Center" />
                     <Entry x:Name="tolerance" Text="500" Keyboard="Numeric" WidthRequest="60"/>
                 </StackLayout>

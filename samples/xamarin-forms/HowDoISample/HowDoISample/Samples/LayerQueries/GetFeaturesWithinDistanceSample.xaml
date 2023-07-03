@@ -15,7 +15,7 @@
             </StackLayout>
 
             <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" MapSingleTap="MapView_OnMapClick" />
-            <StackLayout Orientation="Horizontal" Margin="10,10,10,30" VerticalOptions="End" BackgroundColor="#80777777">
+            <StackLayout Orientation="Horizontal" Margin="10,0,10,20" VerticalOptions="End"  BackgroundColor="#80777777">
                 <Slider x:Name="searchRadius" Maximum="1600" Minimum="100" Value="400" HorizontalOptions="FillAndExpand"/>
                 <Label BindingContext="{x:Reference Name=searchRadius}"
                            Text="{Binding Path=Value, StringFormat='{0} m'}"  />
