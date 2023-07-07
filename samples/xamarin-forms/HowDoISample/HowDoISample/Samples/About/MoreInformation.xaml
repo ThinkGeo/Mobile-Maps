@@ -19,6 +19,9 @@
             <Label Text=""></Label>
 
             <StackLayout Orientation="Horizontal">
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
                 <ImageButton Source="thinkgeo_icon.png" HeightRequest="14" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#00000000" Clicked="HyperlinkButton_Tapped" BindingContext="https://thinkgeo.com/mobile-maps"/>
                 <Label>
                     <Label.FormattedText>
@@ -91,6 +94,9 @@
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            </StackLayout>
+
             <Label Text=""></Label>
             <Label>
                 <Label.FormattedText>
