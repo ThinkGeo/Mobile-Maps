@@ -546,5 +546,16 @@
         "source": "Samples/UsingThinkGeoCloud/WorldMapsQueryCloudServicesSample"
       }
     ]
+  },
+  {
+    "title": "About",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.MoreInformation",
+        "title": "More Information",
+        "description": "ThinkGeo is a GIS software company founded in 2004 and headquartered in Frisco, TX.  We have established ourselves as a leading provider of .NET-based GIS solutions.  Our client base encompasses a wide array of industries, ranging from agriculture, energy, and transportation to government, engineering, IT, and defense.",
+        "source": "Samples/About/MoreInformation"
+      }
+    ]
   }
 ]

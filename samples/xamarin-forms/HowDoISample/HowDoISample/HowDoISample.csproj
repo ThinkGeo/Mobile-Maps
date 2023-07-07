@@ -465,6 +465,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Samples\About\MoreInformation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

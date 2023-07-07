@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MoreInformation"
+             >
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="thinkgeo_logo_2.png" HeightRequest="30" VerticalOptions="Start" HorizontalOptions="Start"/>
+            </StackLayout>
+           
+            <StackLayout Orientation="Horizontal">
+            </StackLayout>
+
+
+            <Label x:Name="descriptionLabel"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" TextColor="#777777" />
+            <Label Text=""></Label>
+
+            <StackLayout Orientation="Horizontal">
+                <ImageButton Source="thinkgeo_icon.png" HeightRequest="14" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#00000000" Clicked="HyperlinkButton_Tapped" BindingContext="https://thinkgeo.com/mobile-maps"/>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text=" "></Span>
+                            <Span Text="Product Page" TextColor="#777777">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="https://thinkgeo.com/mobile-maps" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <ImageButton Source="documentation.png" HeightRequest="14" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#00000000" Clicked="HyperlinkButton_Tapped" BindingContext="https://docs.thinkgeo.com/products/mobile-maps/quickstart/"/>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  "></Span>
+                            <Span Text="Documentation" TextColor="#777777">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="https://docs.thinkgeo.com/products/mobile-maps/quickstart/" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <ImageButton Source="laptop_code_solid.png" HeightRequest="20" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#00000000" Clicked="HyperlinkButton_Tapped" BindingContext="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample"/>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text=" "></Span>
+                            <Span Text="Sample Code" TextColor="#777777">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <ImageButton Source="free_evaluation.png" HeightRequest="20" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#00000000" Clicked="HyperlinkButton_Tapped" BindingContext="https://helpdesk.thinkgeo.com/register?Context=ThinkGeoComponents"/>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text=" "></Span>
+                            <Span Text="Start a Free Evaluation" TextColor="#777777">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="https://helpdesk.thinkgeo.com/register?Context=ThinkGeoComponents" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <Label Text=""></Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Check  out our " TextColor="#777777"></Span>
+                        <Span Text="FAQs"
+                     TextColor="#777777"
+                     TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="https://thinkgeo.com/faq" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=", or email us at " TextColor="#777777"></Span>
+                        <Span Text="sales@thinkgeo.com" TextColor="#777777" TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Hyperlink_Tapped"
+                                          CommandParameter="mailto:sales@thinkgeo.com" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=" and we would be happy to answer any questions." TextColor="#777777"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
