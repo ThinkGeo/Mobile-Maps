@@ -183,13 +183,13 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
     <PackageReference Include="ThinkGeo.UI.XamarinForms.iOS">
-      <Version>13.1.0-beta066</Version>
+      <Version>13.1.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\HowDoISample\HowDoISample.csproj">
-      <Project>{0268EF4B-EDAD-4F67-BF5F-8F6472073ED4}</Project>
+      <Project>{9FD88926-0914-4B7C-83C9-3FA4CD51372D}</Project>
       <Name>HowDoISample</Name>
     </ProjectReference>
   </ItemGroup>
