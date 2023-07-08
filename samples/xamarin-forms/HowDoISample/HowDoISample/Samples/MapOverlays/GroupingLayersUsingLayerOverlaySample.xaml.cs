@@ -126,21 +126,23 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
         }
 
         /// <summary>
-        ///     Show the Landuse overlay
+        ///     Show the Land Use overlay
         /// </summary>
-        private void ShowLanduseGroup_Checked(object sender, EventArgs e)
+        private async void ShowLanduseGroup_Checked(object sender, EventArgs e)
         {
-            var landuseOverlay = (LayerOverlay) mapView.Overlays["landuseOverlay"];
-            landuseOverlay.IsVisible = ShowLandUse.IsChecked;
+            var landUseOverlay = (LayerOverlay) mapView.Overlays["landuseOverlay"];
+            landUseOverlay.IsVisible = ShowLandUse.IsChecked;
+            await landUseOverlay.RefreshAsync();
         }
 
         /// <summary>
         ///     Show the POI overlay
         /// </summary>
-        private void ShowPoiGroup_Checked(object sender, EventArgs e)
+        private async void ShowPoiGroup_Checked(object sender, EventArgs e)
         {
             var poiOverlay = (LayerOverlay) mapView.Overlays["poiOverlay"];
             poiOverlay.IsVisible = ShowPoi.IsChecked;
+            await poiOverlay.RefreshAsync();
         }
     }
 }

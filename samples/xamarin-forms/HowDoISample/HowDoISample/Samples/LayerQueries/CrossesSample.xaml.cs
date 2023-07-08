@@ -107,6 +107,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Disable map drawing and clear the drawn shape
             mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+            await mapView.TrackOverlay.RefreshAsync();
         }
 
         /// <summary>
