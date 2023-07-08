@@ -47,11 +47,11 @@ namespace HowDoISample.ViewModels
                 // Make the group
                 var sampleGroup = new MenuGroup {Title = category.Title, IsExpanded = false};
                 foreach (var sample in category.Children)
-                    sampleGroup.Add(new SampleMenuItem
-                        {Id = sample.Id, Title = sample.Title, Description = sample.Description});
+                    sampleGroup.Add(sample);
                 _allMenuItems.Add(sampleGroup);
             }
 
+            _allMenuItems[0].IsExpanded = true;
             UpdateMenu();
         }
 
@@ -63,8 +63,7 @@ namespace HowDoISample.ViewModels
                 var sampleGroup = new MenuGroup {Title = group.Title, IsExpanded = group.IsExpanded};
                 if (sampleGroup.IsExpanded)
                     foreach (var sample in @group)
-                        sampleGroup.Add(new SampleMenuItem
-                            {Id = sample.Id, Title = sample.Title, Description = sample.Description});
+                        sampleGroup.Add(sample);
                 updatedMenu.Add(sampleGroup);
             }
 

@@ -8,7 +8,8 @@
             xmlns:views="clr-namespace:ThinkGeo.UI.XamarinForms.HowDoI"
             xmlns:samples="clr-namespace:ThinkGeo.UI.XamarinForms.HowDoI"
             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MainPage"
-            FlyoutLayoutBehavior="Popover">
+            FlyoutLayoutBehavior="Popover" 
+            IsGestureEnabled="False">
 
     <FlyoutPage.Flyout>
         <views:MenuPage />
