@@ -16,16 +16,19 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             InitializeComponent();
             sampleMenu = new SampleMenu();
             ListViewMenu.ItemsSource = sampleMenu.SampleMenuItems;
+            
+            // Set the first item as the selected item
+            ListViewMenu.SelectedItem = sampleMenu.SampleMenuItems[0][0];
         }
 
         private MainPage RootPage => Application.Current.MainPage as MainPage;
 
         private async void ListViewMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
+            if (RootPage == null) 
                 return;
-
-            var sample = (SampleMenuItem) e.SelectedItem;
+            
+            var sample = (SampleMenuItem) e.SelectedItem; 
             await RootPage.NavigateFromMenu(sample);
         }
 
