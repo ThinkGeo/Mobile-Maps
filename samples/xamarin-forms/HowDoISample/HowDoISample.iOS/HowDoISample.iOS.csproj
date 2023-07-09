@@ -72,6 +72,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\chevron_down.png" />
     <BundleResource Include="Resources\icon_globe_black.png" />
     <BundleResource Include="Resources\icon_north_arrow.png" />
   </ItemGroup>

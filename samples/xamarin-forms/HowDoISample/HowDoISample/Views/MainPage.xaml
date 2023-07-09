@@ -27,11 +27,6 @@
             <x:Arguments>
                 <samples:NavigationSample />
             </x:Arguments>
-            <NavigationPage.TitleIconImageSource>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png" />
-                </OnPlatform>
-            </NavigationPage.TitleIconImageSource>
         </NavigationPage>
     </FlyoutPage.Detail>
 
