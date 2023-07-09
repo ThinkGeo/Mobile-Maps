@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 namespace HowDoISample.ViewModels
 {
-    internal class SampleMenu : INotifyPropertyChanged
+    internal class MenuViewModel : INotifyPropertyChanged
     {
         private readonly ObservableCollection<MenuGroup> _allMenuItems;
 
-        public SampleMenu()
+        public MenuViewModel()
         {
             _allMenuItems = new ObservableCollection<MenuGroup>();
             SampleMenuItems = new ObservableCollection<MenuGroup>();
@@ -33,7 +33,7 @@ namespace HowDoISample.ViewModels
             List<SampleCategory> samplesJson;
 
             // Deserialize samples.json
-            var assembly = typeof(SampleMenu).GetTypeInfo().Assembly;
+            var assembly = typeof(MenuViewModel).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream("HowDoISample.samples.json");
             using (var reader = new StreamReader(stream))
             {
@@ -45,7 +45,7 @@ namespace HowDoISample.ViewModels
             foreach (var category in samplesJson)
             {
                 // Make the group
-                var sampleGroup = new MenuGroup {Title = category.Title, IsExpanded = false};
+                var sampleGroup = new MenuGroup { Title = category.Title, IsExpanded = false };
                 foreach (var sample in category.Children)
                     sampleGroup.Add(sample);
                 _allMenuItems.Add(sampleGroup);
@@ -60,7 +60,7 @@ namespace HowDoISample.ViewModels
             var updatedMenu = new ObservableCollection<MenuGroup>();
             foreach (var group in _allMenuItems)
             {
-                var sampleGroup = new MenuGroup {Title = group.Title, IsExpanded = group.IsExpanded};
+                var sampleGroup = new MenuGroup { Title = group.Title, IsExpanded = group.IsExpanded };
                 if (sampleGroup.IsExpanded)
                     foreach (var sample in @group)
                         sampleGroup.Add(sample);

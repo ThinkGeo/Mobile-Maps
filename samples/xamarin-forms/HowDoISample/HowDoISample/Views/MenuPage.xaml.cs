@@ -9,16 +9,14 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        private readonly SampleMenu sampleMenu;
+        private readonly MenuViewModel sampleMenu;
 
         public MenuPage()
         {
             InitializeComponent();
-            sampleMenu = new SampleMenu();
-            ListViewMenu.ItemsSource = sampleMenu.SampleMenuItems;
-            
+            sampleMenu = BindingContext as MenuViewModel;
             // Set the first item as the selected item
-            ListViewMenu.SelectedItem = sampleMenu.SampleMenuItems[0][0];
+            ListViewMenu.SelectedItem = sampleMenu?.SampleMenuItems[0][0];
         }
 
         private MainPage RootPage => Application.Current.MainPage as MainPage;
