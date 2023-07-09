@@ -65,7 +65,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text=" "></Span>
-                            <Span Text="Sample Code" TextColor="#777777">
+                            <Span Text="Source Code of this App" TextColor="#777777">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Hyperlink_Tapped"
                                           CommandParameter="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample" />
