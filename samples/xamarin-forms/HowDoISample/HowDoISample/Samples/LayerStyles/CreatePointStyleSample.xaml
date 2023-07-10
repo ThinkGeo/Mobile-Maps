@@ -1,0 +1,29 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.CreatePointStyleSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="8">
+                <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+            </StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand">
+                <!-- Map Control -->
+                <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+
+                <StackLayout VerticalOptions="End" Margin="10,0,150,30"  BackgroundColor="#80777777">
+                    <RadioButton Content="Predefined Style" CheckedChanged="PredefinedStyle_OnChecked" IsChecked="True" BackgroundColor="Transparent"/>
+                    <RadioButton Content="Image Style" CheckedChanged="ImageStyle_OnChecked" BackgroundColor="Transparent"/>
+                    <RadioButton Content="Font Style" CheckedChanged="FontStyle_Checked" BackgroundColor="Transparent"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

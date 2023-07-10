@@ -1,0 +1,39 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+
+            </StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height ="50"/>
+                    <RowDefinition Height ="50"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <ThinkGeoUI:MapView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" x:Name="mapView" />
+
+                <Button Text="Zoom To Scale 20000" Clicked="ZoomToScale_Click" Grid.Row="1" Grid.Column="0" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to Layer BBox" Clicked="LayerBoundingBox_Click" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to a feature" Clicked="FeatureBoundingBox_Click" Grid.Row="2" Grid.Column="0" BackgroundColor="LightGray"/>
+                <Button Text="Zoom to (33.15, -96.82)" Clicked="ZoomToLatLon_Click" Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray"/>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

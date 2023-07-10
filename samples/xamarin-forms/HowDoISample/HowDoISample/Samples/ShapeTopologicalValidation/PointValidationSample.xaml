@@ -1,0 +1,58 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.PointValidationSample">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                <Label x:Name="txtValidationInfo" FontAttributes="Italic" />
+            </StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+                <ThinkGeoUI:MapView Grid.Row="0" Grid.RowSpan="2" x:Name="mapView" VerticalOptions="FillAndExpand" BackgroundColor="#42B2EE" />
+
+                <Grid Grid.Row="1" InputTransparent="True" CascadeInputTransparent="False" Margin="0,30,0,0"  BackgroundColor="#80777777">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row="0" x:Name="rdoCheckIfPointsAreTouchingLines" BackgroundColor="Transparent"
+                                 CheckedChanged="CheckIfPointsAreTouchingLines" />
+
+                    <RadioButton Grid.Column="0" Grid.Row="1" BackgroundColor="Transparent"
+                                 CheckedChanged="CheckIfPointsAreTouchingLineEndpoints" />
+
+                    <RadioButton Grid.Column="0" Grid.Row="2" BackgroundColor="Transparent"
+                                 CheckedChanged="CheckIfPointsAreTouchingPolygonBoundaries"/>
+
+                    <RadioButton Grid.Column="0" Grid.Row="3" BackgroundColor="Transparent"
+                                 CheckedChanged="CheckIfPointsAreWithinPolygons"/>
+
+                    <Label Grid.Column="1" Grid.Row ="0"  Text="Points Must Be Touching Lines" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="1"  Text="Points Must Be Touching Line Endpoints" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="2"  Text="Points Must Be Touching Polygon Boundaries" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                    <Label Grid.Column="1" Grid.Row ="3"  Text="Points Must Be Within Polygons" VerticalTextAlignment="Center" FontSize="15" FontAttributes="Bold" InputTransparent="True"></Label>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

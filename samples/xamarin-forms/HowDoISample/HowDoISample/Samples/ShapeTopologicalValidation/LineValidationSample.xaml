@@ -1,0 +1,57 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ThinkGeoUI="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.LineValidationSample">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="8">
+                <Label x:Name="descriptionLabel"
+                               FontSize="Subtitle"
+                               VerticalOptions="Center"
+                               HorizontalOptions="StartAndExpand" />
+                <Label FontAttributes="Italic" x:Name="txtValidationInfo" HeightRequest="60"/>
+
+            </StackLayout>
+
+            <ThinkGeoUI:MapView x:Name="mapView" VerticalOptions="FillAndExpand" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <!-- Set the desired width here -->
+                </Grid.RowDefinitions>
+
+                <ScrollView VerticalScrollBarVisibility="Always" >
+                    <StackLayout BackgroundColor="LightGray">
+                        <RadioButton x:Name="rdoCheckLineEndpointsMustTouchPoints"
+                                 CheckedChanged="CheckLineEndpointsMustTouchPoints"
+                                 Content="Line Endpoints Must Touch Points" />
+                        <RadioButton CheckedChanged="CheckLinesMustOverlapPolygonBoundaries"
+                                     Content="Lines Must Overlap Polygon Boundaries" />
+                        <RadioButton CheckedChanged="CheckLinesMustOverlapLines" Content="Lines Must Overlap Lines" />
+                        <RadioButton CheckedChanged="CheckLinesMustBeSinglePart"
+                                     Content="Lines Must Be Single Part" />
+                        <RadioButton CheckedChanged="CheckLinesMustFormClosedPolygon"
+                                     Content="Lines Must Form Closed Polygons" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotHavePseudonodes"
+                                     Content="Lines Must Not Have Pseudo nodes" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotIntersect" Content="Lines Must Not Intersect" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfIntersectOrTouch"
+                                     Content="Lines Must Not Self-Intersect Or Touch" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotOverlap" Content="Lines Must Not Overlap" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotOverlapLines"
+                                     Content="Lines Must Not Overlap With Lines" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfIntersect"
+                                     Content="Lines Must Not Self-Intersect" />
+                        <RadioButton CheckedChanged="CheckLinesMustNotSelfOverlap"
+                                     Content="Lines Must Not Self-Overlap" />
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

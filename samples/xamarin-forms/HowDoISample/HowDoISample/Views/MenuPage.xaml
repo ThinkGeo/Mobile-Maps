@@ -1,12 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:HowDoISample.ViewModels;assembly=HowDoISample"
              mc:Ignorable="d"
              x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MenuPage"
              Title="Menu">
+
+    <ContentPage.BindingContext>
+        <vm:MenuViewModel />
+    </ContentPage.BindingContext>
+
     <StackLayout VerticalOptions="FillAndExpand">
         <!-- Logo -->
         <Frame BackgroundColor="Black">
@@ -14,10 +18,17 @@
                    HorizontalOptions="Center" />
         </Frame>
 
+        <Frame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0,40,0,0" />
+                <On Platform="Android" Value="0,0,0,0" />
+            </OnPlatform>
+        </Frame.Margin>
+
         <!-- Sample Menu -->
         <ListView x:Name="ListViewMenu"
                   IsGroupingEnabled="True"
-                  GroupDisplayBinding="{Binding Title}"
+                  ItemsSource="{Binding SampleMenuItems}"
                   ItemSelected="ListViewMenu_ItemSelected">
 
             <!-- Sample Category -->
@@ -32,7 +43,7 @@
                             <Label Text="{Binding Title}"
                                    FontSize="Subtitle"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="StartAndExpand" />
+                                   HorizontalOptions="StartAndExpand"/>
                             <BoxView Color="LightGray"
                                      WidthRequest="1"
                                      VerticalOptions="Center"

@@ -1,644 +1,560 @@
 [
   {
-    "title": "Setting The Map Extent",
+    "title": "Map Navigation",
     "children": [
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.BasicNavigationSample",
-        "title": "Basic Navigation",
-        "description": "Learn how to use code to zoom, pan, and rotate the map control.",
-        "source": "Samples/SettingMapExtent/BasicNavigationSample"
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.NavigationSample",
+        "title": "Navigate the Map",
+        "description": "Double-click to zoom in, pinch to zoom/rotate. Tap the compass to align with the north, tap the globe to zoom to a specific extent.",
+        "source": "Samples/MapNavigation/NavigationSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UpdateVehicleLocationSample",
+        "title": "Vehicle Navigation",
+        "description": "Navigate to the Empire State Building using GPS points.",
+        "source": "Samples/MapNavigation/UpdateVehicleLocationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SetMapExtentSample",
         "title": "Set the Map Extent",
-        "description": "Learn how to set the map extent in a variety of different ways.",
-        "source": "Samples/SettingMapExtent/SetMapExtentSample"
+        "description": "Set the map extent using different methods.",
+        "source": "Samples/MapNavigation/SetMapExtentSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapToolsSample",
+        "title": "Display/Hide a MapTool",
+        "description": "Display/Hide the ZoomBar/Coordinates.",
+        "source": "Samples/MapNavigation/DisplayMapToolsSample"
       }
     ]
   },
   {
-    "title": "Displaying Layers",
+    "title": "Map Overlays",
     "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
+        "title": "ThinkGeo Background Overlays",
+        "description": "Display ThinkGeo background overlays.",
+        "source": "Samples/MapOverlays/ThinkGeoBackgroundOverlaysSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
+        "title": "Using Markers",
+        "description": "Tap anywhere on the map to place a marker.",
+        "source": "Samples/MapOverlays/UsingMarkersSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample",
+        "title": "Using Popups",
+        "description": "Check the code to see how to add popups.",
+        "source": "Samples/MapOverlays/UsingPopupsSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
+        "title": "Display a WMS Overlay",
+        "description": "Fetch map tiles from a WMS. Note that it's a third-party server and may have slow performance.",
+        "source": "Samples/MapOverlays/DisplayWMSOverlaySample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GroupingLayersUsingLayerOverlaySample",
+        "title": "Grouping Layers into Overlay",
+        "description": "Group layers into logical groups using LayerOverlay.",
+        "source": "Samples/MapOverlays/GroupingLayersUsingLayerOverlaySample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
+        "title": "Refresh Dynamic Data",
+        "description": "This sample refreshes an overlay every other second while allowing smooth map navigation.",
+        "source": "Samples/MapOverlays/TrackDynamicData"
+      }
+    ]
+  },
+  {
+    "title": "Map Projection",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
+        "title": "World Projection Sample",
+        "description": "Set the map to different projections. A projection may work well for a specific area, but it may distort other places.",
+        "source": "Samples/MapProjection/WorldProjectionSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",
+        "title": "Projecting Features",
+        "description": "Project features and display them on the map.",
+        "source": "Samples/MapProjection/ProjectLatLonCoordinatesSample"
+      }
+    ]
+  },
+  {
+    "title": "Layer Formats",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.OfflineCloudMapsVectorLayerSample",
+        "title": "ThinkGeo Offline Layer",
+        "description": "Show ThinkGeo Background Map Offline.",
+        "source": "Samples/LayerFormats/Vector/OfflineCloudMapsVectorLayerSample"
+      },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ShapefileLayerSample",
         "title": "Display a Shapefile Layer",
-        "description": "This sample shows how to display a shapefile layer.",
-        "source": "Samples/DisplayingLayers/Vector/ShapefileLayerSample"
+        "description": "Display a shapefile layer.",
+        "source": "Samples/LayerFormats/Vector/ShapefileLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TinyGeoLayerSample",
         "title": "Display a TinyGeo Layer",
-        "description": "This sample shows how to display a TinyGeo layer.",
-        "source": "Samples/DisplayingLayers/Vector/TinyGeoLayerSample"
+        "description": "Display a TinyGeo layer.",
+        "source": "Samples/LayerFormats/Vector/TinyGeoLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GPXLayerSample",
         "title": "Display a GPX Layer",
-        "description": "This sample shows how to display a GPX layer.",
-        "source": "Samples/DisplayingLayers/Vector/GPXLayerSample"
+        "description": "Display a GPX layer.",
+        "source": "Samples/LayerFormats/Vector/GPXLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TABLayerSample",
         "title": "Display a TAB Layer",
-        "description": "This sample shows how to display a TAB layer.",
-        "source": "Samples/DisplayingLayers/Vector/TABLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ISOLineLayerSample",
-        "title": "Display an ISOLine Layer",
-        "description": "This sample shows how to display an ISOLine layer.",
-        "source": "Samples/DisplayingLayers/Vector/ISOLineLayerSample"
+        "description": "Display a TAB layer.",
+        "source": "Samples/LayerFormats/Vector/TABLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.InMemoryLayerSample",
         "title": "Display an InMemory Layer",
-        "description": "This sample shows how to display an in memory layer.",
-        "source": "Samples/DisplayingLayers/Vector/InMemoryLayerSample"
+        "description": "Display an InMemory layer.",
+        "source": "Samples/LayerFormats/Vector/InMemoryLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GraticuleLayerSample",
         "title": "Display a Graticule Layer",
-        "description": "This sample shows how to display a graticule line layer.",
-        "source": "Samples/DisplayingLayers/Vector/GraticuleLayerSample"
+        "description": "Display a Graticule layer.",
+        "source": "Samples/LayerFormats/Vector/GraticuleLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.SQLiteLayerSample",
         "title": "Display a SQLite Layer",
-        "description": "This sample shows how to display a SQLite layer.",
-        "source": "Samples/DisplayingLayers/Database/SQLiteLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.SQLServerLayerSample",
-        "title": "Display a SQL Server Layer",
-        "description": "This sample shows how to display a SQL Server layer.",
-        "source": "Samples/DisplayingLayers/Database/SQLServerLayerSample"
+        "description": "Display a SQLite layer.",
+        "source": "Samples/LayerFormats/Database/SQLiteLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherStationLayerSample",
-        "title": "Display a NOAA Weather Station Layer",
-        "description": "This sample shows how to display NOAA weather stations current readings to your map.",
-        "source": "Samples/DisplayingLayers/WebServices/NOAAWeatherStationLayerSample"
+        "title": "Display NOAA Weather Stations",
+        "description": "Display a NOAA Weather Station layer.",
+        "source": "Samples/LayerFormats/WebServices/NOAAWeatherStationLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.NOAAWeatherWarningLayerSample",
-        "title": "Display a NOAA Weather Warning Layer",
-        "description": "This sample shows how to display NOAA weather warnings to your map.",
-        "source": "Samples/DisplayingLayers/WebServices/NOAAWeatherWarningLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CloudMapsRasterLayerSample",
-        "title": "Display a Cloud Maps Raster Layer",
-        "description": "This sample shows how to display ThinkGeo cloud raster background images.",
-        "source": "Samples/DisplayingLayers/WebServices/CloudMapsRasterLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CloudMapsVectorLayerSample",
-        "title": "Display a Cloud Maps Vector Layer",
-        "description": "This sample shows how to display ThinkGeo cloud vector background maps.",
-        "source": "Samples/DisplayingLayers/WebServices/CloudMapsVectorLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.BingMapLayerSample",
-        "title": "Display a Bing Map Layer",
-        "description": "This sample shows how to display a Bing Maps layer.",
-        "source": "Samples/DisplayingLayers/WebServices/BingMapLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GoogleMapLayerSample",
-        "title": "Display a Google Map Layer",
-        "description": "This sample shows how to display a Google Maps layer.",
-        "source": "Samples/DisplayingLayers/WebServices/GoogleMapLayerSample"
+        "title": "Display NOAA Weather Warnings",
+        "description": "Display a NOAA Weather Warning layer.",
+        "source": "Samples/LayerFormats/WebServices/NOAAWeatherWarningLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.OpenStreetMapLayerSample",
         "title": "Display an OpenStreetMap Layer",
-        "description": "This sample shows how to display a Open Street Maps layer.",
-        "source": "Samples/DisplayingLayers/WebServices/OpenStreetMapLayerSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WMSLayerSample",
-        "title": "Display a WMS Layer",
-        "description":
-          "This sample shows how to display a WMS layer. (This sample may be slow as we use a public WMS sever)",
-        "source": "Samples/DisplayingLayers/WebServices/WMSLayerSample"
+        "description": "Display an OpenStreetMap layer.",
+        "source": "Samples/LayerFormats/WebServices/OpenStreetMapLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeoTiffLayerSample",
         "title": "Display a GeoTiff Layer",
-        "description": "This sample shows how to display a GeoTiff image.",
-        "source": "Samples/DisplayingLayers/Raster/GeoTiffLayerSample"
+        "description": "Display a GeoTiff layer.",
+        "source": "Samples/LayerFormats/Raster/GeoTiffLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ESRIGridLayerSample",
-        "title": "Display a ESRI Grid Layer",
-        "description": "This sample shows how to display a ESRI grid layer.",
-        "source": "Samples/DisplayingLayers/Raster/ESRIGridLayerSample"
+        "title": "Display a Grid Layer",
+        "description": "Display a grid layer.",
+        "source": "Samples/LayerFormats/Raster/ESRIGridLayerSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CommonRasterLayersSample",
-        "title": "Display Common Raster Layers",
-        "description": "This sample shows how to display common images types such as PNG, JPEG, Bitmap etc.",
-        "source": "Samples/DisplayingLayers/Raster/CommonRasterLayersSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.OfflineCloudMapsVectorLayerSample",
-        "title": "Display a Cloud Maps Vector Layer Offline",
-        "description": "This sample shows how to use an offline version of ThinkGeo Cloud Map Vector data.",
-        "source": "Samples/DisplayingLayers/Vector/OfflineCloudMapsVectorLayerSample"
+        "title": "Display Jpg/Png/Bmp Files",
+        "description": "This sample displays a JPEG image, but you can use the same code to display common image types such as PNG and BMP.",
+        "source": "Samples/LayerFormats/Raster/CommonRasterLayersSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GenerateMapImageSample",
         "title": "Generate a Map as an Image",
         "description": "This sample shows how to draw your map onto an image.",
-        "source": "Samples/DisplayingLayers/GenerateMapImageSample"
+        "source": "Samples/LayerFormats/GenerateMapImageSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
+        "title": "Create a Custom Layer",
+        "description": "Create a custom layer by drawing a collection of circles within the current extent.",
+        "source": "Samples/LayerFormats/Vector/ExtendingLayersSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
+        "title": "Support Custom Data",
+        "description": "Read GPS Points from a CSV file.",
+        "source": "Samples/LayerFormats/Vector/ExtendingFeatureSourcesSample"
       }
     ]
   },
   {
-    "title": "Using Overlays",
-    "children": [
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CachingMapTilesSample",
-        "title": "Caching Map Tiles",
-        "description":
-          "Learn how to cache map tiles. Caching tiles on an Overlay allows you to store images of rendered areas on the local disk and reuse them for faster rendering times.",
-        "source": "Samples/UsingOverlays/CachingMapTilesSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayBingMapsOverlaySample",
-        "title": "Display Bing Maps Overlay",
-        "description":
-          "Learn to render Bing Maps using the BingMapsOverlay. A valid Bing Maps ApplicationID is required.",
-        "source": "Samples/UsingOverlays/DisplayBingMapsOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawGPSLocationOverlaySample",
-        "title": "Draw GPS Location Overlay Sample",
-        "description": "Learn how to display a GPS vehicle's movements in real-time",
-        "source": "Samples/UsingOverlays/DrawGPSLocationOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsRasterOverlaySample",
-        "title": "Display Cloud Maps Raster Overlay",
-        "description": "Learn to render ThinkGeo Cloud Maps in raster format.",
-        "source": "Samples/UsingOverlays/DisplayCloudMapsRasterOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayCloudMapsVectorOverlaySample",
-        "title": "Display Cloud Maps Vector Overlay",
-        "description": "Learn to render ThinkGeo Cloud Maps in vector format.",
-        "source": "Samples/UsingOverlays/DisplayCloudMapsVectorOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayGoogleMapsOverlaySample",
-        "title": "Display Google Maps Overlay",
-        "description":
-          "Learn to render Google Maps using the GoogleMapsOverlay. A Google Maps API key is required.",
-        "source": "Samples/UsingOverlays/DisplayGoogleMapsOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayWMSOverlaySample",
-        "title": "Display a WMS Overlay",
-        "description":
-          "Learn to render a Web Map Service using the WMSOverlay. Please be aware that this is a publicly available WMS server and it may be slow to load.",
-        "source": "Samples/UsingOverlays/DisplayWMSOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DrawEditDeleteShapesUsingInteractiveOverlaySample",
-        "title": "Draw, Edit, or Delete Shapes using the InteractiveOverlay",
-        "description": "Learn to draw, edit, or delete shapes using the map's TrackOverlay and EditOverlay.",
-        "source": "Samples/UsingOverlays/DrawEditDeleteShapesUsingInteractiveOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GroupingLayersUsingLayerOverlaySample",
-        "title": "Grouping Layers Using LayerOverlay",
-        "description": "Learn to group layers into logical groups using LayerOverlays.",
-        "source": "Samples/UsingOverlays/GroupingLayersUsingLayerOverlaySample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.TrackDynamicData",
-        "title": "Track Dynamic Data",
-        "description":
-          "Learn how to use overlays to dynamically refresh updated data. This sample shows how to refresh an overlay to display several hundred squares that change their values over time.",
-        "source": "Samples/UsingOverlays/TrackDynamicData"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingMarkersSample",
-        "title": "Using Markers",
-        "description": "Learn to add markers on the map using the MarkerOverlay.",
-        "source": "Samples/UsingOverlays/UsingMarkersSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UsingPopupsSample",
-        "title": "Using Popups",
-        "description": "Learn to add or remove popups on the map using the PopupOverlay.",
-        "source": "Samples/UsingOverlays/UsingPopupsSample"
-      }
-    ]
-  },
-  {
-    "title": "Using Map Tools",
-    "children": [
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapCenterCoordinatesSample",
-        "title": "Display Map Center Coordinates",
-        "description": "Learn to render coordinate info based on center of the map.",
-        "source": "Samples/UsingMapTools/DisplayMapCenterCoordinatesSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisplayMapPanZoomBarSample",
-        "title": "Display a Map PanZoomBar",
-        "description": "Learn to render a PanZoomBar on the map.",
-        "source": "Samples/UsingMapTools/DisplayMapPanZoomBarSample"
-      }
-    ]
-  },
-  {
-    "title": "Creating Styles",
+    "title": "Layer Styles",
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreatePointStyleSample",
-        "title": "Create a Point Style",
-        "description": "Learn how to style point data using a PointStyle",
-        "source": "Samples/CreatingStyles/CreatePointStyleSample"
+        "title": "Render Points",
+        "description": "Render points using a PointStyle.",
+        "source": "Samples/LayerStyles/CreatePointStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateLineStyleSample",
-        "title": "Create a Line Style",
-        "description": "Learn how to style line data using a LineStyle",
-        "source": "Samples/CreatingStyles/CreateLineStyleSample"
+        "title": "Render Lines",
+        "description": "Render lines using a LineStyle.",
+        "source": "Samples/LayerStyles/CreateLineStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateAreaStyleSample",
-        "title": "Create an Area Style",
-        "description": "Learn how to style polygon data using an AreaStyle",
-        "source": "Samples/CreatingStyles/CreateAreaStyleSample"
+        "title": "Render Areas",
+        "description": "Render polygons using an AreaStyle.",
+        "source": "Samples/LayerStyles/CreateAreaStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateRegexStyleSample",
-        "title": "Create Regex Style",
-        "description": "Learn how to style select features using regex expressions",
-        "source": "Samples/CreatingStyles/CreateRegexStyleSample"
+        "title": "Render Based on Regex",
+        "description": "Render certain features using regular expressions.",
+        "source": "Samples/LayerStyles/CreateRegexStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateDotDensityStyleSample",
-        "title": "Create Dot Density Style",
-        "description": "Learn how to style polygons based on numeric data values",
-        "source": "Samples/CreatingStyles/CreateDotDensityStyleSample"
+        "title": "Render Dot Density",
+        "description": "Render polygons with dot densities based on their values.",
+        "source": "Samples/LayerStyles/CreateDotDensityStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateTextStyleSample",
-        "title": "Create a Text Style",
-        "description": "Learn how to label data using a TextStyle",
-        "source": "Samples/CreatingStyles/CreateTextStyleSample"
+        "title": "Render Labels",
+        "description": "Render labels using a TextStyle.",
+        "source": "Samples/LayerStyles/CreateTextStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateFilterStyleSample",
-        "title": "Create a Filter Style",
-        "description": "Learn how to selectively style features using a FilterStyle",
-        "source": "Samples/CreatingStyles/CreateFilterStyleSample"
+        "title": "Render Based on Filters",
+        "description": "Render certain features using a FilterStyle.",
+        "source": "Samples/LayerStyles/CreateFilterStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateHeatStyleSample",
-        "title": "Create a Heat Style",
-        "description": "Learn how to create a heat map from data using a HeatStyle",
-        "source": "Samples/CreatingStyles/CreateHeatStyleSample"
+        "title": "Render a Heat Map",
+        "description": "Render a heatmap using a HeatStyle.",
+        "source": "Samples/LayerStyles/CreateHeatStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateClusterPointStyleSample",
-        "title": "Create a Cluster Style",
-        "description": "Learn how to cluster point data dynamically using a ClusterPointStyle",
-        "source": "Samples/CreatingStyles/CreateClusterPointStyleSample"
+        "title": "Render Cluster Points",
+        "description": "Cluster points using a ClusterPointStyle.",
+        "source": "Samples/LayerStyles/CreateClusterPointStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateClassBreakStyleSample",
-        "title": "Create a ClassBreak Style",
-        "description": "Learn how to style data based on numeric values using a ClassBreakStyle",
-        "source": "Samples/CreatingStyles/CreateHeatStyleSample"
+        "title": "Render with Class Breaks",
+        "description": "Render polygons based on their values using a ClassBreakStyle.",
+        "source": "Samples/LayerStyles/CreateClassBreakStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CreateValueStyleSample",
-        "title": "Create a Value Style",
-        "description": "Learn how to style data based on data values using a ValueStyle",
-        "source": "Samples/CreatingStyles/CreateValueStyleSample"
+        "title": "Render Based on Values",
+        "description": "Render points based on their values using a ValueStyle.",
+        "source": "Samples/LayerStyles/CreateValueStyleSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.StylingAcrossMultipleScales",
-        "title": "Styling Across Multiple Scales",
-        "description":
-          "Learn how to style layers across multiple scales using different styles assigned to different ZoomLevels",
-        "source": "Samples/CreatingStyles/StylingAcrossMultipleScales"
+        "title": "Render Based on Scales",
+        "description": "Render the data based on zoom levels. Zoom in and out to see the style difference.",
+        "source": "Samples/LayerStyles/StylingAcrossMultipleScales"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
+        "title": "Custom Styles",
+        "description": "Render capitals using custom styles.",
+        "source": "Samples/LayerStyles/ExtendingStylesSample"
       }
     ]
   },
   {
-    "title": "Projecting Data",
-    "children": [
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.SetLayerProjectionSample",
-        "title": "Setting the Projection of a Layer",
-        "description": "Learn how to automatically reproject a layer using the ProjectionConverter class",
-        "source": "Samples/ProjectingData/SetLayerProjectionSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldProjectionSample",
-        "title": "World Projection Sample",
-        "description": "Learn how to set the map's world projection to several different Spatial References",
-        "source": "Samples/ProjectingData/WorldProjectionSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectLatLonCoordinatesSample",
-        "title": "Projecting Features",
-        "description": "Learn how to reproject features using the ProjectionConverter class",
-        "source": "Samples/ProjectingData/ProjectLatLonCoordinatesSample"
-      }
-    ]
-  },
-  {
-    "title": "Performing Geometric Operations",
-    "children": [
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UnionShapesSample",
-        "title": "Union Shapes",
-        "description": "Learn how to union shapes into a single shape",
-        "source": "Samples/PerformingGeometricOperations/UnionShapesSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.BufferShapeSample",
-        "title": "Buffer Shape",
-        "description": "Learn how to buffer a shape",
-        "source": "Samples/PerformingGeometricOperations/BufferShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.SimplifyShapeSample",
-        "title": "Simplify Shape",
-        "description": "Learn how to simplify a shape's geometry",
-        "source": "Samples/PerformingGeometricOperations/SimplifyShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.RotateShapeSample",
-        "title": "Rotate Shape",
-        "description": "Learn how to rotate a shape",
-        "source": "Samples/PerformingGeometricOperations/RotateShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ScaleShapeSample",
-        "title": "Scale Shape",
-        "description": "Learn how to scale a shape",
-        "source": "Samples/PerformingGeometricOperations/ScaleShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.TranslateShapeSample",
-        "title": "Translate Shape",
-        "description": "Learn how to translate a shape",
-        "source": "Samples/PerformingGeometricOperations/TranslateShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateCenterPointSample",
-        "title": "Calculate Center Point",
-        "description": "Learn how to calculate the center point of a feature",
-        "source": "Samples/PerformingGeometricOperations/CalculateCenterPointSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateAreaSample",
-        "title": "Calculate Area",
-        "description": "Learn how to calculate the area of a feature",
-        "source": "Samples/PerformingGeometricOperations/CalculateAreaSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateLengthSample",
-        "title": "Calculate Length",
-        "description": "Learn how to calculate the length of a line",
-        "source": "Samples/PerformingGeometricOperations/CalculateLengthSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateShortestLineBetweenShapesSample",
-        "title": "Calculate Shortest Line Between Shapes",
-        "description": "Learn how to calculate the shortest line between two shapes",
-        "source": "Samples/PerformingGeometricOperations/CalculateShortestLineBetweenShapesSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetLineOnALineSample",
-        "title": "Get Line on a Line",
-        "description": "Learn how to get part of a line from an existing line",
-        "source": "Samples/PerformingGeometricOperations/GetLineOnALineSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ClipShapeSample",
-        "title": "Clip Shape",
-        "description": "Learn how to clip a shape from another shape",
-        "source": "Samples/PerformingGeometricOperations/ClipShapeSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DifferenceShapesSample",
-        "title": "Difference Shapes",
-        "description": "Learn how to find the difference of shapes",
-        "source": "Samples/PerformingGeometricOperations/DifferenceShapesSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetConvexHullSample",
-        "title": "Get Convex Hull",
-        "description": "Learn how to get the convex hull of a shape",
-        "source": "Samples/PerformingGeometricOperations/GetConvexHullSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetEnvelopeSample",
-        "title": "Get Envelope",
-        "description": "Learn how to get the envelope of a shape",
-        "source": "Samples/PerformingGeometricOperations/GetEnvelopeSample"
-      }
-    ]
-  },
-  {
-    "title": "Using Query Tools",
+    "title": "Layer Queries",
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ContainsSample",
-        "title": "Check if Feature Contains",
-        "description": "Learn how to use layer query tools to find which features in a layer contain a shape",
-        "source": "Samples/UsingQueryTools/ContainsSample"
+        "title": "Find Containing Features",
+        "description": "Tap a point on the map and see which feature contains it.",
+        "source": "Samples/LayerQueries/ContainsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.CrossesSample",
-        "title": "Check if Feature Crosses",
-        "description": "Learn how to use layer query tools to find which features in a layer a shape crosses",
-        "source": "Samples/UsingQueryTools/CrossesSample"
+        "title": "Find Crossing Features",
+        "description": "Draw a line and find out the crossing features. Long press to end drawing.",
+        "source": "Samples/LayerQueries/CrossesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.DisjointSample",
-        "title": "Check if Features are Disjoint",
-        "description": "Learn how to use layer query tools to find which features in a layer are disjoint from a shape",
-        "source": "Samples/UsingQueryTools/DisjointSample"
+        "title": "Find Disjoint Features",
+        "description": "Draw a polygon and find out the disjoint features. Long press to end drawing.",
+        "source": "Samples/LayerQueries/DisjointSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.EqualsSample",
         "title": "Check if Features are Equal",
-        "description":
-          "Learn how to use layer query tools to find which features in a layer are topologically equal to a shape",
-        "source": "Samples/UsingQueryTools/EqualsSample"
+        "description": "Check out the code and see how to find out if two shapes are topologically equal.",
+        "source": "Samples/LayerQueries/EqualsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.IntersectsSample",
-        "title": "Check if Feature Intersects",
-        "description": "Learn how to use layer query tools to find which features in a layer intersect a shape",
-        "source": "Samples/UsingQueryTools/IntersectsSample"
+        "title": "Find Intersecting Features",
+        "description": "Draw a polygon and find out the intersecting features. Long press to end drawing.",
+        "source": "Samples/LayerQueries/IntersectsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.OverlapsSample",
-        "title": "Check if Feature Overlaps",
-        "description": "Learn how to use layer query tools to find which features in a layer overlap a shape",
-        "source": "Samples/UsingQueryTools/OverlapsSample"
+        "title": "Find Overlapping Features",
+        "description": "Draw a polygon and find out the overlapping features. Long press to end drawing.",
+        "source": "Samples/LayerQueries/OverlapsSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TouchesSample",
-        "title": "Check if Feature Touches",
-        "description": "Learn how to use layer query tools to find which features in a layer are touching a shape",
-        "source": "Samples/UsingQueryTools/TouchesSample"
+        "title": "Find Touching Features",
+        "description": "Check out the code and see how to get the features touching a given shape.",
+        "source": "Samples/LayerQueries/TouchesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WithinSample",
-        "title": "Check if Feature is Within Another Feature",
-        "description": "Learn how to use layer query tools to find which features in a layer are within a shape",
-        "source": "Samples/UsingQueryTools/WithinSample"
+        "title": "Find Features within a Feature",
+        "description": "Draw a polygon and find out the features within. Long press to end drawing.",
+        "source": "Samples/LayerQueries/WithinSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetFeaturesWithinDistanceSample",
-        "title": "Get Features Within a Distance",
-        "description":
-          "Learn how to use layer query tools to find features in a layer within a given distance of a point",
-        "source": "Samples/UsingQueryTools/GetFeaturesWithinDistanceSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetAllFeatureDataSample",
-        "title": "Get Data from All Features",
-        "description": "Learn how to get data from all features in a ShapeFile",
-        "source": "Samples/UsingQueryTools/GetAllFeatureDataSample"
+        "title": "Find Features Within a Distance",
+        "description": "Tap a point on the map and find the features within a given distance.",
+        "source": "Samples/LayerQueries/GetFeaturesWithinDistanceSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetDataFromFeatureSample",
-        "title": "Get Data from One Feature",
-        "description": "Learn how to get data from a feature in a ShapeFile",
-        "source": "Samples/UsingQueryTools/GetDataFromFeatureSample"
+        "title": "Get Data from a Feature",
+        "description": "Tap on a feature to view its information.",
+        "source": "Samples/LayerQueries/GetDataFromFeatureSample"
       }
     ]
   },
   {
-    "title": "Topological Validation",
+    "title": "Layer Editing",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditSample",
+        "title": "Edit Features",
+        "description": "Draw, edit, or delete shapes.",
+        "source": "Samples/LayerEditing/EditSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.EditWithSnappingSample",
+        "title": "Edit Features with Snapping",
+        "description": "Drag a vertex into a circle, and it will snap to its center.",
+        "source": "Samples/LayerEditing/EditWithSnappingSample"
+      }
+    ]
+  },
+  {
+    "title": "Shape Geometric Operations",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.UnionShapesSample",
+        "title": "Union Shapes",
+        "description": "Combine two shapes into one.",
+        "source": "Samples/ShapeGeometricOperations/UnionShapesSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.BufferShapeSample",
+        "title": "Buffer a Shape",
+        "description": "Input the distance and buffer a shape.",
+        "source": "Samples/ShapeGeometricOperations/BufferShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.SimplifyShapeSample",
+        "title": "Simplify a Shape",
+        "description": "Simplify a shape.",
+        "source": "Samples/ShapeGeometricOperations/SimplifyShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.RotateShapeSample",
+        "title": "Rotate a Shape",
+        "description": "Rotate a shape by a given angle.",
+        "source": "Samples/ShapeGeometricOperations/RotateShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ScaleShapeSample",
+        "title": "Scale a Shape",
+        "description": "Scale a shape.",
+        "source": "Samples/ShapeGeometricOperations/ScaleShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.TranslateShapeSample",
+        "title": "Translate a Shape",
+        "description": "Translate a shape by x/y or by distance/angle.",
+        "source": "Samples/ShapeGeometricOperations/TranslateShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateCenterPointSample",
+        "title": "Calculate the Center Point",
+        "description": "Tap on a feature to display its center point based on the selected algorithm.",
+        "source": "Samples/ShapeGeometricOperations/CalculateCenterPointSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateAreaSample",
+        "title": "Calculate Area",
+        "description": "Tap on a feature to get its area.",
+        "source": "Samples/ShapeGeometricOperations/CalculateAreaSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateLengthSample",
+        "title": "Calculate Length",
+        "description": "Tap on a feature to get its length.",
+        "source": "Samples/ShapeGeometricOperations/CalculateLengthSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.CalculateShortestLineBetweenShapesSample",
+        "title": "Get Shortest Line",
+        "description": "Tap on a park (green) to get the shortest line to the Frisco Stadium (blue point).",
+        "source": "Samples/ShapeGeometricOperations/CalculateShortestLineBetweenShapesSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetLineOnALineSample",
+        "title": "Get Line on a Line",
+        "description": "Get part of a line from an existing line.",
+        "source": "Samples/ShapeGeometricOperations/GetLineOnALineSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ClipShapeSample",
+        "title": "Clip Shape",
+        "description": "Clip a shape from another shape.",
+        "source": "Samples/ShapeGeometricOperations/ClipShapeSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.DifferenceShapesSample",
+        "title": "Get Shape Differences",
+        "description": "Get the difference of two shapes.",
+        "source": "Samples/ShapeGeometricOperations/DifferenceShapesSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetConvexHullSample",
+        "title": "Get Convex Hull",
+        "description": "Get the convex hull of a shape.",
+        "source": "Samples/ShapeGeometricOperations/GetConvexHullSample"
+      },
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.GetEnvelopeSample",
+        "title": "Get Envelope",
+        "description": "Get the envelope of a shape.",
+        "source": "Samples/ShapeGeometricOperations/GetEnvelopeSample"
+      }
+    ]
+  },
+  {
+    "title": "Shape Topological Validation",
     "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.PointValidationSample",
         "title": "Validate Point Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on points",
-        "source": "Samples/TopologicalValidation/PointValidationSample"
+        "description": "Perform validation on points.",
+        "source": "Samples/ShapeTopologicalValidation/PointValidationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.LineValidationSample",
         "title": "Validate Line Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on lines",
-        "source": "Samples/TopologicalValidation/LineValidationSample"
+        "description": "Perform validation on lines.",
+        "source": "Samples/ShapeTopologicalValidation/LineValidationSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.PolygonValidationSample",
         "title": "Validate Polygon Topology",
-        "description": "Learn how to use the TopologyValidator APIs to perform validation on polygons",
-        "source": "Samples/TopologicalValidation/PolygonValidationSample"
+        "description": "Perform validation on polygons.",
+        "source": "Samples/ShapeTopologicalValidation/PolygonValidationSample"
       }
     ]
   },
   {
-    "title": "Extensibility",
+    "title": "Using ThinkGeo Cloud",
     "children": [
       {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingStylesSample",
-        "title": "Extending Styles",
-        "description": "Learn how to use the Style base class to create your own custom styles.",
-        "source": "Samples/Extensibility/ExtendingStylesSample"
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ThinkGeoBackgroundOverlaysSample",
+        "title": "ThinkGeo Background Overlays",
+        "description": "Display ThinkGeo Background Overlays.",
+        "source": "Samples/MapOverlays/ThinkGeoBackgroundOverlaysSample"
       },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingLayersSample",
-        "title": "Extending Layers",
-        "description": "Learn how to use the Layer base class to create your own custom layers.",
-        "source": "Samples/Extensibility/ExtendingLayersSample"
-      },
-      {
-        "id": "ThinkGeo.UI.XamarinForms.HowDoI.ExtendingFeatureSourcesSample",
-        "title": "Extending Feature Sources",
-        "description": "Learn how to use the FeatureSource base class to create your own custom Feature Source.",
-        "source": "Samples/Extensibility/ExtendingFeatureSourcesSample"
-      }
-    ]
-  },
-  {
-    "title": "Using Cloud Maps Services",
-    "children": [
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingCloudServicesSample",
         "title": "Routing",
-        "description":
-          "Learn how to use the RoutingCloudClient to route through a set of waypoints with the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
+        "description": "Route through a set of waypoints with ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingServiceAreaCloudServicesSample",
         "title": "Routing - Service Area",
-        "description":
-          "Learn how to use the RoutingCloudClient to find the service area of a location with the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
+        "description": "Find the service area of a location with ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.RoutingTSPCloudServicesSample",
-        "title": "Routing - Traveling Sales Person",
-        "description":
-          "Learn how to use the RoutingCloudClient to find an optimized route through a set of waypoints with the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/RoutingCloudServicesSample"
+        "title": "Routing - Travelling Salesman",
+        "description": "Find an optimized route of the Travelling Salesman (TSP) problem with ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/RoutingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ElevationCloudServicesSample",
         "title": "Elevation",
-        "description": "Learn how to use the ElevationCloudClient class to get elevation data from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/ElevationCloudServicesSample"
+        "description": "Draw a line on the map and get the elevations along the line. Long press to end drawing.",
+        "source": "Samples/UsingThinkGeoCloud/ElevationCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.GeocodingCloudServicesSample",
         "title": "Geocoding",
-        "description":
-          "Learn how to use the GeocodingCloudClient to access the Geocoding APIs available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/GeocodingCloudServicesSample"
+        "description": "Type in an address and get its location/other information using ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/GeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ReverseGeocodingCloudServicesSample",
         "title": "Reverse Geocoding",
-        "description":
-          "Learn how to use the ReverseGeocodingCloudClient to access the ReverseGeocoding APIs available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/ReverseGeocodingCloudServicesSample"
+        "description": "Tap on the Map to get 20 nearby entities using ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/ReverseGeocodingCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ColorUtilitiesCloudServicesSample",
         "title": "Color Utilities",
-        "description":
-          "Learn how to use the ColorCloudClient class to access the ColorUtilities APIs available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/ColorUtilitiesCloudServicesSample"
+        "description": "Generate color families using ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/ColorUtilitiesCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.TimezoneCloudServicesSample",
         "title": "Timezone",
-        "description":
-          "Learn how to use the TimezoneCloudClient to access the Timezone APIs available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/TimezoneCloudServicesSample"
+        "description": "Tap on the map to get the TimeZone from ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/TimezoneCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.ProjectionCloudServicesSample",
         "title": "Projection",
-        "description":
-          "Learn how to use the ProjectionCloudClient to access the Projection APIs available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/ProjectionCloudServicesSample"
+        "description": "Project features using ThinkGeo Cloud.",
+        "source": "Samples/UsingThinkGeoCloud/ProjectionCloudServicesSample"
       },
       {
         "id": "ThinkGeo.UI.XamarinForms.HowDoI.WorldMapsQueryCloudServicesSample",
         "title": "World Maps Query",
-        "description":
-          "Learn how to use the MapsQueryClient to query the WorldMaps dataset available from the ThinkGeo Cloud",
-        "source": "Samples/UsingCloudMapsServices/WorldMapsQueryCloudServicesSample"
+        "description": "Draw a polygon and get the intersecting buildings using ThinkGeo Cloud. Long press to end drawing.",
+        "source": "Samples/UsingThinkGeoCloud/WorldMapsQueryCloudServicesSample"
+      }
+    ]
+  },
+  {
+    "title": "About",
+    "children": [
+      {
+        "id": "ThinkGeo.UI.XamarinForms.HowDoI.MoreInformation",
+        "title": "More Information",
+        "description": "ThinkGeo is a GIS software company founded in 2004 and headquartered in Frisco, TX.  We have established ourselves as a leading provider of .NET-based GIS solutions.  Our client base encompasses a wide array of industries, ranging from agriculture, energy, and transportation to government, engineering, IT, and defense.",
+        "source": "Samples/About/MoreInformation"
       }
     ]
   }

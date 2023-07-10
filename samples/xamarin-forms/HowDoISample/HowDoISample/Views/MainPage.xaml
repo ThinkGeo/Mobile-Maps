@@ -7,9 +7,16 @@
             mc:Ignorable="d"
             xmlns:views="clr-namespace:ThinkGeo.UI.XamarinForms.HowDoI"
             xmlns:samples="clr-namespace:ThinkGeo.UI.XamarinForms.HowDoI"
+            xmlns:system="clr-namespace:System;assembly=netstandard"
             x:Class="ThinkGeo.UI.XamarinForms.HowDoI.MainPage"
-            FlyoutLayoutBehavior="Popover">
+            FlyoutLayoutBehavior="Popover" >
 
+    <FlyoutPage.IsGestureEnabled>
+        <OnPlatform x:TypeArguments="system:Boolean">
+            <On Platform="iOS" Value="False"></On>
+            <On Platform="Android" Value="True"></On>
+        </OnPlatform>
+    </FlyoutPage.IsGestureEnabled>
 
     <FlyoutPage.Flyout>
         <views:MenuPage />
@@ -18,13 +25,8 @@
     <FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <samples:BasicNavigationSample />
+                <samples:NavigationSample />
             </x:Arguments>
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png" />
-                </OnPlatform>
-            </NavigationPage.Icon>
         </NavigationPage>
     </FlyoutPage.Detail>
 
