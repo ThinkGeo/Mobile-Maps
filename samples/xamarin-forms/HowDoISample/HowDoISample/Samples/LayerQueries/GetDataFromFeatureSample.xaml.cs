@@ -95,8 +95,11 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             var parkInfoString = new StringBuilder();
 
             // Each column in a feature is a data attribute
-            // Add all attribute pairs to the info string
-            foreach (var column in feature.ColumnValues) parkInfoString.AppendLine($"{column.Key}: {column.Value}");
+            // Add attribute pairs to the info string
+            parkInfoString.AppendLine($"NAME: {feature.ColumnValues["NAME"]}");
+            parkInfoString.AppendLine($"ADDR: {feature.ColumnValues["ADDRESS"]}");
+            parkInfoString.AppendLine($"Type: {feature.ColumnValues["P_TYPE"]}");
+            parkInfoString.AppendLine($"ACRE: {feature.ColumnValues["ACRES"]}");
 
             //Create a new popup with the park info string
             var popupOverlay = (PopupOverlay) mapView.Overlays["Info Popup Overlay"];
