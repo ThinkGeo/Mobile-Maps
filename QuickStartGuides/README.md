@@ -73,7 +73,7 @@ You'll need to install the **ThinkGeo.UI.XamarinForms** and **ThinkGeo.UI.Xamari
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFormsApp.MapPage"
+             x:Class="XamarinFormsSample.MapPage"
              xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.XamarinForms;assembly=ThinkGeo.UI.XamarinForms"
              >
     <Grid>
@@ -96,20 +96,30 @@ using Xamarin.Forms;
 - Add the Map Background Overlay to `MapPage.xaml.cs` file:
 
 ```csharp
-protected override async void OnAppearing()
+namespace XamarinFormsSample
 {
-    base.OnAppearing();
-    mapView.MapUnit = GeographyUnit.Meter;
+    public partial class MapPage : ContentPage
+    {   
+        public MapPage()
+        {
+            InitializeComponent();            
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            mapView.MapUnit = GeographyUnit.Meter;
 
-    var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
-    mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
-    thinkGeoCloudVectorMapsOverlay.TileCache =
-    new FileRasterTileCache(Path.Combine(FileSystem.CacheDirectory, "ThinkGeoCloudMapsOverlay"), "clientId");
+            var thinkGeoCloudVectorMapsOverlay = new ThinkGeoCloudVectorMapsOverlay("9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~", "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~", ThinkGeoCloudVectorMapsMapType.Light);
+            mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+            thinkGeoCloudVectorMapsOverlay.TileCache =
+            new FileRasterTileCache(Path.Combine(FileSystem.CacheDirectory, "ThinkGeoCloudMapsOverlay"), "clientId");
 
-    mapView.RotationEnabled = true;
-    mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel02.Scale;
-    mapView.CenterPoint = new PointShape(0, 0);
-    await mapView.RefreshAsync();
+            mapView.RotationEnabled = true;
+            mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel02.Scale;
+            mapView.CenterPoint = new PointShape(0, 0);
+            await mapView.RefreshAsync();
+        }
+    }
 }
 ```
 ### Step 7: Set the MapPage to be the MainPage of the App
@@ -125,7 +135,7 @@ using Xamarin.Forms;
         public App()
         {
             InitializeComponent();
-            MainPage = new XamarinFormsApp.MapPage();
+            MainPage = new XamarinFormsSample.MapPage();
         }
 ```
 
