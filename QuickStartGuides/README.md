@@ -1,29 +1,16 @@
 # ThinkGeo Mobile Maps
 
-Welcome, we're glad you're here!  If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up.  After reviewing this, we strongly recommend that you check out our HowDoI samples for [Xamarin.Forms](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). It's packed with examples covering nearly everything you can do with our Mobile Maps control.
+Welcome, we're glad you're here! You can get ThinkGeo Mobile Maps from the Apple Store for iOS:  
 
-## Repository Layout
+<img src="./assets/Mobile_Maps_Apple_Store.jpg"  width="270" height="610">
 
-`/docs`: An offline version the API documentation HTML pages.
+You can also get ThinkGeo Mobile Maps from Google Play for Android:
 
-`/samples`: A collection of feature by feature samples.
+<img src="./assets/Mobile_Maps_Google_Play.jpg"  width="270" height="610">
 
-`/assets`: Any assets needed for the readme.md.
+If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up.  After reviewing this, we strongly recommend that you check out our HowDoI samples for [Xamarin.Forms](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). It's packed with examples covering nearly everything you can do with our Mobile Maps control.
 
-`README.md`: A quick start guide to show you how to quickly get up and running.
-
-## Samples
-
-We have a number of samples for both Android and iOS that show off ThinkGeo Mobile Maps' full capabilities. You can use these samples as a starting point for your own application, or simply reference them for how to use our controls using best practices.
-
-- [iOS samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios)
-- [Android samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android)
-
-## Quickstart Guides
-
-- [Android Quickstart Guide](#quick-start-display-a-simple-map-on-android)
-
-## Quick Start: Display a Simple Map on Android
+## Quick Start: Display a Simple Map on Android / iOS
 
 This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
@@ -31,7 +18,9 @@ This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up
 
 ### Step 1: Set Up Prerequisites
 
-In order to develop and debug Xamarin Android applications, you'll need to have a few prerequisites set up. These include:
+In order to develop and debug Xamarin Android / iOS applications, you'll need to have a few prerequisites set up. 
+
+#### Android Prerequisites
 
 * Xamarin
 * The Android SDK
@@ -45,15 +34,30 @@ Here a few handy links for installation and setup of these prerequisites using V
 
 [Android Emulator](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/device-manager)
 
+#### iOS Prerequisites
+To develop on Mac, you need:
+
+* XCode, which provides iOS emulator.
+* A development IDE, it could be Visual Studio for Mac, Xamarin Studio or others.
+* Xamarin.
+* A provisioning profile is needed if you want to test on an iOS device.
+
+To develop on Windows, you need:
+
+* A development IDE, such as Visual Studio or Xamarin Studio
+* Xamarin.
+* A Mac machine with XCode installed and on the same network as your Windows machine.
+
+
 ### Step 2: Set Up a New Project
 
-Once these prerequisites have been installed, you'll need to create a new **Xamarin Android** project.
+Once these prerequisites have been installed, you'll need to create a new **Xamarin Forms** project using Visual Studio.
 
 <img src="./assets/Create_XamarinForms_Project_ScreenShot.gif"  width="840" height="580">
 
 ### Step 3: Add NuGet Packages
 
-You'll need to install the **ThinkGeo.UI.XamarinForms** and **ThinkGeo.UI.XamarinForms.Android** NuGet package. We strongly suggest you use your editor's **Manage Nuget Package** if possible.  Before adding ThinkGeo Nuget packages, you need update the **Xamarin.Forms** Nuget Package to above the Version 5.0.0.2578.
+You'll need to install the **ThinkGeo.UI.XamarinForms**, **ThinkGeo.UI.XamarinForms.Android** and **ThinkGeo.UI.XamarinForms.iOS** NuGet package. We strongly suggest you use your editor's **Manage Nuget Package** if possible.  Before adding ThinkGeo Nuget packages, you need to update the **Xamarin.Forms** Nuget Package above Version 5.0.0.2578.
 
 <img src="./assets/Add_XamarinFourms_Nuget_Packages_ScreenShot.gif"  width="840" height="580">
 
@@ -63,7 +67,7 @@ You'll need to install the **ThinkGeo.UI.XamarinForms** and **ThinkGeo.UI.Xamari
 
 <img src="./assets/Add_MapPage_File_ScreenShot.gif"  width="840" height="580">
 
-- Delete the unneccessary folders and files to make the sample clean, after the cleaning the XamarinFormsSample project should be:
+- Delete the unnecessary folders and files to make the sample clean. After the cleaning, the XamarinFormsSample project should be:
 
 <img src="./assets/Create_App_Template.png"  width="840" height="580">
 
@@ -93,7 +97,7 @@ using ThinkGeo.UI.XamarinForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 ```
-- Add the Map Background Overlay to `MapPage.xaml.cs` file:
+- Add the Map Background Overlay to the `MapPage.xaml.cs` file:
 
 ```csharp
 namespace XamarinFormsSample
@@ -145,15 +149,17 @@ The first time you run the application, you will be presented with an error requ
 
 <img src="./assets/LicenseNotInstalledException.png"  width="840" height="580">
 
-In order to register and generate a license for this project, you'll need to perform the following steps:
+In order to register and generate a license for this project, you'll need to take the following steps:
 
-1. Open [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. From there, you can download and install the Product Center and manage licenses for ThinkGeo products. For more information, please refer to the [ThinkGeo Product Center QuickStart Guide](https://cloud.thinkgeo.com/clients.html). 
+1. Open [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. 
+2. From there, you can download and install the Product Center and manage licenses for ThinkGeo products. For more information, please refer to the [ThinkGeo Product Center QuickStart Guide](https://cloud.thinkgeo.com/clients.html). 
 
 <img src="./assets/Create_ThinkGeo_Account.png"  width="840" height="580">
 
-### Step 9: Creating and Activating an Android License
+### Step 9: Creating and Activating an Android / iOS License
 
-1. Click on the `ThinkGeo UI Mobile` for Android tab and activate an evaluation license.
+####  Android License
+1. Click on the `ThinkGeo UI Android` for Android tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`.
 2. To generate a runtime license for the sample app, you'll need to find the package name for your sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.Android` project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`
 3. Copy the Package Name to the Runtime License input box to the right of the Product Center and click Create. Save the newly created license to the Assets folder of the solution (`XamarinFormsSample.Android\Assets`).
 
@@ -164,15 +170,22 @@ In order to register and generate a license for this project, you'll need to per
 
 <img src="./assets/Activate_License_ScreenShot.gif"  width="840" height="580">
 
+####  iOS License
+1. Click the `ThinkGeo UI iOS` for iOS tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`. Now you can see a textbox with a text placeholder Bundle Identifier on the right.
+2. Get the project's bundle identifier in info.plist, copy and paste it to the 'bundle dentifier' textbox in the product center.
+3. Click 'Create' and save the license file (the file name would be <bundle-identifer>.mapsuitelicense) to the solution's `XamarinFormsSample.iOS` project root folder.
+4. Add the license to the project in the solution explorer by right-clicking the project and selecting `Add -> Existing Item...`
+5. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `BundleResource`.
+
 ### Step 10: Show the Map
 
 Once you activate the 'ThinkGeo UI Android' license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, and track zoom in by holding down the Ctrl key and tracking the map.
 
 <img src="./assets/Pinch_Map_ScreenShot.gif"  width="270" height="610">
 
-### Android Summary
+### Android / iOS Summary
 
-You now know the basics of using the ThinkGeo Map controls and are able to get started adding functionality into your own applications. Let's recap what we have learned about the object relationships and how the pieces of ThinkGeo UI work together:
+You now know the basics of using the ThinkGeo Map controls and are able to get started adding functionality to your own applications. Let's recap what we have learned about the object relationships and how the pieces of ThinkGeo UI work together:
 
 1. It is of the utmost importance that the units (feet, meters, decimal degrees, etc.) be set properly for the Map control based on the data.
 1. FeatureLayers provide the data used by a Map control to render a map.
