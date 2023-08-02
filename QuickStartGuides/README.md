@@ -2,12 +2,17 @@ If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps f
 
 <img src="./assets/Mobile_Maps_Apple_Store.jpg"  width="270" height="610">  <img src="./assets/Mobile_Maps_Google_Play.jpg"  width="270" height="610">
 
+App Store (For iOS)             |  Google Play (For Android)
+:-------------------------:|:-------------------------:
+![](./assets/Mobile_Maps_Apple_Store.jpg)  |  ![](./assets/Mobile_Maps_Google_Play.jpg)
+
+
 
 ## Quick Start: Display a Simple Map on Android / iOS
 
 This guide will introduce you to ThinkGeo Mobile Maps by helping you set up a nice-looking map. By the end of this guide, you will have a basic understanding of how to use the Mobile Maps controls.
 
-<img src="./assets/Android_QuickStart_Sample_Screenshot.png"  width="270" height="610">
+<img src="./assets/Pinch_Map_ScreenShot.gif"  width="270" height="610">
 
 ### Step 1: Set Up Prerequisites
 
