@@ -1,18 +1,11 @@
-# ThinkGeo Mobile Maps
+If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps from the App Store (for iOS) or Google Play (for Android). This app features approximately 100 'HowDoI' samples that demonstrate the capabilities of ThinkGeo's Xamarin Mapping Components. The source code of this app can be found [here](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). 
 
-Welcome, we're glad you're here! You can get ThinkGeo Mobile Maps from the Apple Store for iOS:  
+<img src="./assets/Mobile_Maps_Apple_Store.jpg"  width="270" height="610">  <img src="./assets/Mobile_Maps_Google_Play.jpg"  width="270" height="610">
 
-<img src="./assets/Mobile_Maps_Apple_Store.jpg"  width="270" height="610">
-
-You can also get ThinkGeo Mobile Maps from Google Play for Android:
-
-<img src="./assets/Mobile_Maps_Google_Play.jpg"  width="270" height="610">
-
-If you're new to ThinkGeo's Mobile Maps, we suggest that you start by taking a look at our quickstart guide below.  This will introduce you to getting a nice looking map up.  After reviewing this, we strongly recommend that you check out our HowDoI samples for [Xamarin.Forms](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). It's packed with examples covering nearly everything you can do with our Mobile Maps control.
 
 ## Quick Start: Display a Simple Map on Android / iOS
 
-This will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
+This guide will introduce you to ThinkGeo Mobile Maps by helping you set up a nice-looking map. By the end of this guide, you will have a basic understanding of how to use the Mobile Maps controls.
 
 <img src="./assets/Android_QuickStart_Sample_Screenshot.png"  width="270" height="610">
 
