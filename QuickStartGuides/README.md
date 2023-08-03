@@ -31,15 +31,12 @@ Here a few handy links for installation and setup of these prerequisites using V
 To develop on Mac, you need:
 
 * XCode, which provides iOS emulator.
-* A development IDE, it could be Visual Studio for Mac, Xamarin Studio or others.
-* Xamarin.
-* A provisioning profile is needed if you want to test on an iOS device.
+* A development IDE, it could be Visual Studio for Mac, JetBrains Rider or others.
 
 To develop on Windows, you need:
 
-* A development IDE, such as Visual Studio or Xamarin Studio
-* Xamarin.
-* A Mac machine with XCode installed and on the same network as your Windows machine.
+* A development IDE, such as Visual Studio or JetBrains Rider
+* A Mac machine with XCode installed on the same network as your Windows machine.
 
 
 ### Step 2: Set Up a New Project
