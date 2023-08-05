@@ -19,7 +19,7 @@ In order to develop and debug Xamarin Android / iOS applications, you'll need to
 * The Android SDK
 * An Android emulator
 
-Here a few handy links for installation and setup of these prerequisites using Visual Studio:
+Here are a few handy links for installation and setup of these prerequisites using Visual Studio:
 
 [Xamarin for Visual Studio](https://docs.microsoft.com/en-us/xamarin/get-started/installation)
 
@@ -47,24 +47,23 @@ Once these prerequisites have been installed, you'll need to create a new **Xama
 
 ### Step 3: Add NuGet Packages
 
-You'll need to install the **ThinkGeo.UI.XamarinForms**, **ThinkGeo.UI.XamarinForms.Android** and **ThinkGeo.UI.XamarinForms.iOS** NuGet package. We strongly suggest you use your editor's **Manage Nuget Package** if possible.  Before adding ThinkGeo Nuget packages, you need to update the **Xamarin.Forms** Nuget Package above Version 5.0.0.2578.
+You'll need to install the **ThinkGeo.UI.XamarinForms** NuGet package to **XamarinFormsSample** project, **ThinkGeo.UI.XamarinForms.Android** NuGet package to **XamarinFormsSample.Android** project, **ThinkGeo.UI.XamarinForms.iOS** NuGet package to **XamarinFormsSample.iOS** project. We strongly suggest you use your editor's **Manage Nuget Package** if possible.  Before adding ThinkGeo Nuget packages, you need to update the **Xamarin.Forms** Nuget Package above Version 5.0.0.2578.
 
 <img src="./assets/Add_XamarinFourms_Nuget_Packages_ScreenShot.gif"  width="840" height="580">
 
 ### Step 4: Set up the App Template 
 
-- Rename the **Views -> NewItemPage** to **MapPage** and move it to **XamarinFormsSample** folder
-
-<img src="./assets/Add_MapPage_File_ScreenShot.gif"  width="840" height="580">
-
 - Delete the unnecessary folders and files to make the sample clean. After the cleaning, the XamarinFormsSample project should be:
 
 <img src="./assets/Create_App_Template.png"  width="840" height="580">
 
+- Add a **MapPage** to the **XamarinFormsSample** project:
+
+<img src="./assets/Add_MapPage_File_ScreenShot.gif"  width="840" height="580">
+
 ### Step 5: Add the Map Control to `MapPage.xaml`
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsSample.MapPage"
@@ -78,7 +77,7 @@ You'll need to install the **ThinkGeo.UI.XamarinForms**, **ThinkGeo.UI.XamarinFo
 
 ### Step 6: Add Namespaces and Map Background Overlay to `MapPage.xaml.cs`
 
-- Add the required usings to the `MapPage.xaml.cs` file:
+- Add the required usings and the Map Background Overlay to the `MapPage.xaml.cs` file:
 
 ```csharp
 using System.IO;
@@ -86,10 +85,7 @@ using ThinkGeo.Core;
 using ThinkGeo.UI.XamarinForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-```
-- Add the Map Background Overlay to the `MapPage.xaml.cs` file:
 
-```csharp
 namespace XamarinFormsSample
 {
     public partial class MapPage : ContentPage
@@ -118,19 +114,34 @@ namespace XamarinFormsSample
 ```
 ### Step 7: Set the MapPage to be the MainPage of the App
 
-- Add the required usings to the `App.xaml.cs` file:
+- Add the required usings and set the MapPage to be the MainPage of the App in the `App.xaml.cs` file:
 
 ```csharp
 using Xamarin.Forms;
-```
-- Set the MapPage to be the MainPage of the App:
 
-```csharp
+namespace XamarinFormsSample
+{
+    public partial class App : Application
+    {
         public App()
         {
             InitializeComponent();
             MainPage = new XamarinFormsSample.MapPage();
         }
+
+        protected override void OnStart()
+        {
+        }
+
+        protected override void OnSleep()
+        {
+        }
+
+        protected override void OnResume()
+        {
+        }
+    }
+}
 ```
 
 ### Step 8: Run the Sample & Register For Your Free Evaluation
@@ -142,7 +153,7 @@ The first time you run the application, you will be presented with an error requ
 In order to register and generate a license for this project, you'll need to take the following steps:
 
 1. Open [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. 
-2. From there, you can download and install the Product Center and manage licenses for ThinkGeo products. For more information, please refer to the [ThinkGeo Product Center QuickStart Guide](https://cloud.thinkgeo.com/clients.html). 
+2. From there, you can download and install the Product Center and manage licenses for ThinkGeo products.
 
 <img src="./assets/Create_ThinkGeo_Account.png"  width="840" height="580">
 
@@ -150,43 +161,47 @@ In order to register and generate a license for this project, you'll need to tak
 
 ####  Android License
 1. Click on the `ThinkGeo UI Android` for Android tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`.
-2. To generate a runtime license for the sample app, you'll need to find the package name for your sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.Android` project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`
-3. Copy the Package Name to the Runtime License input box to the right of the Product Center and click Create. Save the newly created license to the Assets folder of the solution (`XamarinFormsSample.Android\Assets`).
+2. To generate a runtime license for the sample app, you'll need to set the package name as **com.thinkgeo.xamarinforms.android** for your Android sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.Android` project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`.
+3. Copy the Package Name to the Runtime License input box to the right of the Product Center and click `Create`. Save the newly created license to the Assets folder of the solution (`XamarinFormsSample.Android\Assets`).
 
-<img src="./assets/Create_License_ScreenShot.gif"  width="840" height="580">
+<img src="./assets/Create_License_ScreenShot_Android.gif"  width="840" height="580">
 
 4. Add the license to the project in the solution explorer by right-clicking on the `Assets` folder and selecting `Add -> Existing Item`.
 5. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `AndroidAsset`
 
-<img src="./assets/Activate_License_ScreenShot.gif"  width="840" height="580">
+<img src="./assets/Activate_License_ScreenShot_Android.gif"  width="840" height="580">
 
 ####  iOS License
-1. Click the `ThinkGeo UI iOS` for iOS tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`. Now you can see a textbox with a text placeholder Bundle Identifier on the right.
-2. Get the project's bundle identifier in info.plist, copy and paste it to the 'bundle dentifier' textbox in the product center.
-3. Click 'Create' and save the license file (the file name would be <bundle-identifer>.mapsuitelicense) to the solution's `XamarinFormsSample.iOS` project root folder.
+1. Click the `ThinkGeo UI iOS` for iOS tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`. Now you can see a textbox with a text placeholder `Bundle Identifier` on the right.
+2. To generate a runtime license for the sample app, you'll need to set the Bundle Identifier name as **com.thinkgeo.xamarinforms.ios** for your iOS sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.iOS` project in the solution explorer and navigating to `Properties -> iOS Manifest -> info.plist -> Bundle Identifier`. 
+3. Copy the Bundle Identifier Name to the Runtime License input box to the right of the Product Center and click `Create`. Save the newly created license to the solution's `XamarinFormsSample.iOS` project root folder.
+
+<img src="./assets/Create_License_ScreenShot_iOS.gif"  width="840" height="580">
+
 4. Add the license to the project in the solution explorer by right-clicking the project and selecting `Add -> Existing Item...`
 5. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `BundleResource`.
+6. Register `ThinkGeo.UI.XamarinForms.iOS` service by adding the following code in the `FinishedLaunching` method of the `AppDelegate.cs` file
+
+```csharp
+Xamarin.Forms.DependencyService.Register<ThinkGeo.UI.XamarinForms.iOS.iOSMapViewAdapter>();
+```
+
+<img src="./assets/Activate_License_ScreenShot_iOS.gif"  width="840" height="580">
 
 ### Step 10: Show the Map
 
-Once you activate the 'ThinkGeo UI Android' license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, and track zoom in by holding down the Ctrl key and tracking the map.
+Once you activate the `ThinkGeo UI Android` or `ThinkGeo UI iOS` license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, and track zoom in by holding down the Ctrl key and tracking the map.
 
-<img src="./assets/Pinch_Map_ScreenShot.gif"  width="270" height="610">
+iOS Map             |   Android Map
+:-------------------------:|:-------------------------:
+<img src="./assets/Pinch_Map_ScreenShot_iOS.gif"  width="270" height="610">|<img src="./assets/Pinch_Map_ScreenShot_Android.gif"  width="270" height="610">
 
-### Android / iOS Summary
+### Summary
 
-You now know the basics of using the ThinkGeo Map controls and are able to get started adding functionality to your own applications. Let's recap what we have learned about the object relationships and how the pieces of ThinkGeo UI work together:
+You now have a basic understanding of how to use the ThinkGeo Map controls and can begin adding functionality to your own applications. Let's review what we've learned about the object relationships and how the pieces of ThinkGeo UI work together:
 
-1. It is of the utmost importance that the units (feet, meters, decimal degrees, etc.) be set properly for the Map control based on the data.
-1. FeatureLayers provide the data used by a Map control to render a map.
-1. A Map is the basic control that contains all of the other objects that are used to tell how the map is to be rendered.
-1. A Map has many layers. A Layer correlates one-to-one with a single data source and typically of one type (point, polygon, line etc).
-1. A FeatureLayer can have several ZoomLevels. ZoomLevels help to define ranges (upper and lower) of when a Layer should be shown or hidden.
+1. A `MapView` is the fundamental control that contains all the other objects used to determine how the map is rendered.
+1. A `MapView` has multiple Overlays, and each Overlay corresponds to a tier of images displayed on the map control.
+1. The `MapUnit` (feet, meters, decimal degrees, etc.) and `CurrentExtent` need to be correctly set for the Map control.
 
-You are now in a great position to look over the [other samples available](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/android) and explore our other features.
-
-## Need Help?
-
-If you run into any issues with running the samples, please let us know in the [Community Forums](https://community.thinkgeo.com).
-
-If you have any questions about the product or sales, please contact us at [sales@thinkgeo.com](mailto:sales@thinkgeo.com).
+Congratulations, you are now in an excellent position to review the [How Do I Sample](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample) and explore other features.

@@ -67,7 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\com.thinkgeo.xamarinformssample.mapsuitelicense" />
+    <AndroidAsset Include="Assets\com.thinkgeo.xamarinforms.android.mapsuitelicense" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
