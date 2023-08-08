@@ -15,13 +15,13 @@ If you're new to ThinkGeo's Mobile Edition, we suggest you download ThinkGeo Map
 ## Quick Start Guide
 Quick Start Guide will introduce you to ThinkGeo Mobile Maps by getting a nice looking map up and running on a Xamarin.Forms application. By the end of this guide, you should have a basic understanding of how to use the Mobile Maps controls.
 
-- [ThinkGeo Mobile Quickstart Guide](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/develop/QuickStartGuides?ref_type=heads)
+- [ThinkGeo Mobile Quickstart Guide](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/develop/quickstartguide)
 
 ## HowDoI Samples
 
 ThinkGeo HowDoI Samples features approximately 100 simple samples that demonstrats the capabilities of ThinkGeo's .NET Xamarin Mapping Components. You can use these samples as a starting point for your own application, or simply reference them for how to use our controls using best practices.
 
-- [Thinkgeo Xamarin.Forms Samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/ios)
+- [Thinkgeo Xamarin.Forms Samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/develop/samples/xamarin-forms/HowDoISample?ref_type=heads)
 
 
 
