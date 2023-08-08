@@ -6,11 +6,11 @@ If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps f
 
 ## Repository Layout
 
-`/quick-start-guide`: A guide to quickly get started.
+- `/quick-start-guide`: A guide to quickly get started.
 
-`/samples`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
+- `/samples`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
 
-`/docs`: Offline API documentation in Markdown format.
+- `/docs`: Offline API documentation in Markdown format.
 
 ## Quick Start Guide
 The Quick Start Guide shows you how to create a map in a Xamarin.Forms app using ThinkGeo Mobile Maps. By the end, you'll grasp the basics of Mobile Maps controls.
@@ -25,8 +25,8 @@ The ThinkGeo HowDoI Samples feature approximately 100 straightforward examples t
 
 
 ## More Resources:
-1. [ThinkGeo Mobile Edition Online Docs](https://docs.thinkgeo.com/products/mobile-maps/quickstart/) 
+- [ThinkGeo Mobile Edition Online Docs](https://docs.thinkgeo.com/products/mobile-maps/quickstart/) 
     
-2. [ThinkGeo Forum](https://community.thinkgeo.com/c/thinkgeo-ui-for-mobile/)
+- [ThinkGeo Forum](https://community.thinkgeo.com/c/thinkgeo-ui-for-mobile/)
         
-3. [ThinkGeo Blog](https://www.thinkgeo.com/blog/) 
+- [ThinkGeo Blog](https://www.thinkgeo.com/blog/) 
