@@ -152,7 +152,7 @@ In order to register and generate a license for this project, you'll need to tak
 1. Open [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. 
 2. From there, you can download and install the Product Center and manage licenses for ThinkGeo products.
 
-<img src="./assets/Create_ThinkGeo_Account.png"  width="840" height="580">
+<img src="./assets/Create_ThinkGeo_Account.png"  width="840" height="620">
 
 ### Step 9: Creating and Activating an Android / iOS License
 
