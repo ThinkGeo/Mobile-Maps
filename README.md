@@ -2,7 +2,7 @@
 
 If you're new to ThinkGeo's Mobile Edition, we suggest you download ThinkGeo Maps from the App Store (for iOS) or Google Play (for Android). This app features approximately 100 'HowDoI' samples that demonstrate the capabilities of ThinkGeo's Xamarin Mapping Components. The source code of this app can be found [here](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). 
 
-[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/QuickStartGuides/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900)|[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/QuickStartGuides/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
+[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quickstartguide/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900)|[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quickstartguide/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
 
 ## Repository Layout
 
