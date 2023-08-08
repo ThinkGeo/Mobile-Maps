@@ -6,11 +6,11 @@ If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps f
 
 ## Repository Layout
 
-`/docs`: Offline API documentation in Markdown format.
+`/quick-start-guide`: A guide to quickly get started.
 
 `/samples`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
 
-`/quick-start-guide`: A guide to quickly get started.
+`/docs`: Offline API documentation in Markdown format.
 
 ## Quick Start Guide
 The Quick Start Guide shows you how to create a map in a Xamarin.Forms app using ThinkGeo Mobile Maps. By the end, you'll grasp the basics of Mobile Maps controls.
