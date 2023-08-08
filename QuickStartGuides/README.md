@@ -189,7 +189,7 @@ Xamarin.Forms.DependencyService.Register<ThinkGeo.UI.XamarinForms.iOS.iOSMapView
 
 Once you activate the `ThinkGeo UI Android` or `ThinkGeo UI iOS` license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, and track zoom in by holding down the Ctrl key and tracking the map.
 
-iOS Map             |   Android Map
+Running on iOS              |   Running on Android
 :-------------------------:|:-------------------------:
 <img src="./assets/Pinch_Map_ScreenShot_iOS.gif"  width="270" height="610">|<img src="./assets/Pinch_Map_ScreenShot_Android.gif"  width="270" height="610">
 
