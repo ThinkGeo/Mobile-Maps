@@ -1,6 +1,6 @@
 If you're new to ThinkGeo's Mobile Edition, we suggest you download ThinkGeo Maps from the App Store (for iOS) or Google Play (for Android). This app features approximately 100 'HowDoI' samples that demonstrate the capabilities of ThinkGeo's Xamarin Mapping Components. The source code of this app can be found [here](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). 
 
-[<img src="./assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900)|[<img src="./assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
+[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900)|[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
 
 ## Quick Start: Display a Simple Map on Android / iOS
 
@@ -40,23 +40,23 @@ To develop on Windows, you need:
 
 Once these prerequisites have been installed, you'll need to create a new **Xamarin Forms** project using Visual Studio.
 
-<img src="./assets/Create_XamarinForms_Project_ScreenShot.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Create_XamarinForms_Project_ScreenShot.gif"  width="840" height="580">
 
 ### Step 3: Add NuGet Packages
 
 You'll need to install the **ThinkGeo.UI.XamarinForms** NuGet package to **XamarinFormsSample** project, **ThinkGeo.UI.XamarinForms.Android** NuGet package to **XamarinFormsSample.Android** project, **ThinkGeo.UI.XamarinForms.iOS** NuGet package to **XamarinFormsSample.iOS** project. We strongly suggest you use your editor's **Manage Nuget Package** if possible.  Before adding ThinkGeo Nuget packages, you need to update the **Xamarin.Forms** Nuget Package above Version 5.0.0.2578.
 
-<img src="./assets/Add_XamarinFourms_Nuget_Packages_ScreenShot.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Add_XamarinFourms_Nuget_Packages_ScreenShot.gif"  width="840" height="580">
 
 ### Step 4: Set up the App Template 
 
 - Delete the unnecessary folders and files to make the sample clean. After the cleaning, the XamarinFormsSample project should be:
 
-<img src="./assets/Create_App_Template.png"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Create_App_Template.png"  width="840" height="580">
 
 - Add a **MapPage** to the **XamarinFormsSample** project:
 
-<img src="./assets/Add_MapPage_File_ScreenShot.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Add_MapPage_File_ScreenShot.gif"  width="840" height="580">
 
 ### Step 5: Add the Map Control to `MapPage.xaml`
 
@@ -145,14 +145,14 @@ namespace XamarinFormsSample
 
 The first time you run the application, you will be presented with an error requiring a ThinkGeo license to proceed with running the app. 
 
-<img src="./assets/LicenseNotInstalledException.png"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/LicenseNotInstalledException.png"  width="840" height="580">
 
 In order to register and generate a license for this project, you'll need to take the following steps:
 
 1. Open [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. 
 2. From there, you can download and install the Product Center and manage licenses for ThinkGeo products.
 
-<img src="./assets/Create_ThinkGeo_Account.png"  width="840" height="620">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Create_ThinkGeo_Account.png"  width="840" height="620">
 
 ### Step 9: Creating and Activating an Android / iOS License
 
@@ -161,19 +161,19 @@ In order to register and generate a license for this project, you'll need to tak
 2. To generate a runtime license for the sample app, you'll need to set the package name as **com.thinkgeo.xamarinforms.android** for your Android sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.Android` project in the solution explorer and navigating to `Properties -> Android Manifest -> Package Name`.
 3. Copy the Package Name to the Runtime License input box to the right of the Product Center and click `Create`. Save the newly created license to the Assets folder of the solution (`XamarinFormsSample.Android\Assets`).
 
-<img src="./assets/Create_License_ScreenShot_Android.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Create_License_ScreenShot_Android.gif"  width="840" height="580">
 
 4. Add the license to the project in the solution explorer by right-clicking on the `Assets` folder and selecting `Add -> Existing Item`.
 5. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `AndroidAsset`
 
-<img src="./assets/Activate_License_ScreenShot_Android.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Activate_License_ScreenShot_Android.gif"  width="840" height="580">
 
 ####  iOS License
 1. Click the `ThinkGeo UI iOS` for iOS tab and activate an evaluation license(or Activate License if you have already purchased a full license) in `ThinkGeo Product Center`. Now you can see a textbox with a text placeholder `Bundle Identifier` on the right.
 2. To generate a runtime license for the sample app, you'll need to set the Bundle Identifier name as **com.thinkgeo.xamarinforms.ios** for your iOS sample project. In Visual Studio, this can be found by right-clicking on the `XamarinFormsSample.iOS` project in the solution explorer and navigating to `Properties -> iOS Manifest -> info.plist -> Bundle Identifier`. 
 3. Copy the Bundle Identifier Name to the Runtime License input box to the right of the Product Center and click `Create`. Save the newly created license to the solution's `XamarinFormsSample.iOS` project root folder.
 
-<img src="./assets/Create_License_ScreenShot_iOS.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Create_License_ScreenShot_iOS.gif"  width="840" height="580">
 
 4. Add the license to the project in the solution explorer by right-clicking the project and selecting `Add -> Existing Item...`
 5. Right-click on the license and select `Properties`. Ensure that the `Build Action` is set to `BundleResource`.
@@ -183,7 +183,7 @@ In order to register and generate a license for this project, you'll need to tak
 Xamarin.Forms.DependencyService.Register<ThinkGeo.UI.XamarinForms.iOS.iOSMapViewAdapter>();
 ```
 
-<img src="./assets/Activate_License_ScreenShot_iOS.gif"  width="840" height="580">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Activate_License_ScreenShot_iOS.gif"  width="840" height="580">
 
 ### Step 10: Show the Map
 
@@ -191,7 +191,7 @@ Once you activate the `ThinkGeo UI Android` or `ThinkGeo UI iOS` license to star
 
 Running on iOS              |   Running on Android
 :-------------------------:|:-------------------------:
-<img src="./assets/Pinch_Map_ScreenShot_iOS.gif"  width="270" height="610">|<img src="./assets/Pinch_Map_ScreenShot_Android.gif"  width="270" height="610">
+<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Pinch_Map_ScreenShot_iOS.gif"  width="270" height="610">|<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quickstartguide/assets/Pinch_Map_ScreenShot_Android.gif"  width="270" height="610">
 
 ### Summary
 
