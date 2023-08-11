@@ -8,7 +8,7 @@ If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps f
 
 - `/quick-start-guide`: A guide to quickly get started.
 
-- `/samples`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
+- `/samples/xamarin-forms`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
 
 - `/docs`: Offline API documentation in Markdown format.
 
