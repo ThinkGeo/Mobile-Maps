@@ -2,13 +2,13 @@
 
 If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps from the App Store (iOS) or Google Play (Android). This app offers around 100 'HowDoI' samples showcasing ThinkGeo's Xamarin Mapping Components. The source code of this app can be found [here](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). 
 
-[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quick-start-guide/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900)|[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quick-start-guide/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
+[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quick-start-guide/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900) [<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/develop/quick-start-guide/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
 
 ## Repository Layout
 
 - `/quick-start-guide`: A guide to quickly get started.
 
-- `/samples`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
+- `/samples/xamarin-forms`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
 
 - `/docs`: Offline API documentation in Markdown format.
 
