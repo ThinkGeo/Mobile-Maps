@@ -1,0 +1,66 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.ColorUtilitiesCloudServices">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Grid Grid.Row="2" VerticalOptions="End" Padding="5" Margin="0,0,0,10" 
+                  BackgroundColor="Gray" HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition  Height="45"/>
+                    <RowDefinition  Height="45"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="370"/>
+                    <ColumnDefinition Width="50"/>                   
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" x:Name="TxtColorCategoryDescription" 
+                       WidthRequest="200" HorizontalOptions="Start" FontSize="15"
+                       FontAttributes="Bold, Italic" Text="Get a  Color Family" />
+
+                <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Grid.Column="0" FontAttributes="Bold" Text="Base Color:" VerticalTextAlignment="Center"/>
+                    <RadioButton Grid.Column="1" x:Name="RdoBlueColor" Content="Blue" IsChecked="True" />
+                    <RadioButton Grid.Column="2" x:Name="RdoRedColor" Content="Red" />
+                    <RadioButton Grid.Column="3" x:Name="RdoGreenColor" Content="Green" />
+                    <RadioButton Grid.Column="4" x:Name="RdoRandomColor" Content="Random" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Category:" FontAttributes="Bold" VerticalOptions="Center" />
+                    <RadioButton x:Name="RdoHue" Content="Hue" IsChecked="True" />
+                    <RadioButton x:Name="RdoContrasting" Content="Contrasting" />
+                    <RadioButton x:Name="RdoQuality" Content="Quality" />
+                </StackLayout>
+                
+                <Button Grid.Column="1" Grid.Row="2" Text="Generate" Clicked="GenerateColors_Click"
+                        BackgroundColor="DarkGrey" TextColor="White" FontAttributes="Bold"
+                        VerticalOptions="Center" FontSize="14" HeightRequest="30" 
+                        Margin="-70,0,0,0" Padding="10,0,10, 0" HorizontalOptions="Center"/>
+
+            </Grid>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

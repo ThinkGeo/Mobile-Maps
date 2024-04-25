@@ -1,0 +1,12 @@
+﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HowDoISample.DescriptionView"
+             x:Name="ThisPage">
+
+    <StackLayout Orientation="Horizontal" Padding="4" BackgroundColor="Black">
+        <Label Text="{Binding Source={x:Reference ThisPage}, Path= Description}"
+               FontSize="14"
+               VerticalOptions="Center"
+               HorizontalOptions="StartAndExpand" TextColor="White"/>
+    </StackLayout>
+</ContentView>

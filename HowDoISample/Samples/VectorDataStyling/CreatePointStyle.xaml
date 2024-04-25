@@ -1,0 +1,33 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataStyling.CreatePointStyle">
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView"
+                              SizeChanged="CreatePointStyle_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <StackLayout Grid.Row="1" 
+             Margin="20" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="LightGrey" >
+                <RadioButton Content="Predefined Style" CheckedChanged="PredefinedStyle_OnChecked" IsChecked="True" BackgroundColor="Transparent"/>
+                <RadioButton Content="Image Style" CheckedChanged="ImageStyle_OnChecked" BackgroundColor="Transparent"/>
+                <RadioButton Content="Font Style" CheckedChanged="FontStyle_Checked" BackgroundColor="Transparent"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

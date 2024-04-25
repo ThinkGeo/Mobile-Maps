@@ -1,0 +1,62 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataGeometricOperation.TranslateShape">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="140"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="2"
+                    MapUnit="Meter" MapRotation="0" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool />
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Grid Grid.Row="2" Margin="10,-25,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>                    
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="10,0,0,20" BackgroundColor="Gray">
+                    <Label Text="Delta X(m):" FontAttributes="Bold" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                    <Entry x:Name="TranslateX" Text="1000" Keyboard="Numeric" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1"  Grid.Column="0"  Orientation="Horizontal" Margin="10,0,0,20" BackgroundColor="Gray">
+                    <Label Text="Delta Y(m):" FontAttributes="Bold" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                    <Entry x:Name="TranslateY" Text="1000" Keyboard="Numeric" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                </StackLayout>
+                <Button Grid.Row="2"  Grid.Column="0" Text="Translate" TextColor="White" FontAttributes="Bold"
+                      Clicked="OffsetTranslateShape_OnClick" Margin="10,-10,0,10" BackgroundColor="Gray" VerticalOptions="Center"/>
+
+                <StackLayout Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" Margin="10,0,0,20" BackgroundColor="Gray" >
+                    <Label Text="Distance(m):" FontAttributes="Bold" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                    <Entry x:Name="TranslateDistance" Text="1000" Keyboard="Numeric" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1"  Grid.Column="1"  Orientation="Horizontal" Margin="10,0,0,20" BackgroundColor="Gray" >
+                    <Label Text="Angle:" FontAttributes="Bold" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                    <Entry x:Name="TranslateAngle" Text="120" Keyboard="Numeric" VerticalOptions="Center" FontSize="15" TextColor="White"/>
+                </StackLayout>
+                <Button Grid.Row="2"  Grid.Column="1" Text="Translate" TextColor="White" FontAttributes="Bold"
+                      Clicked="DegreeTranslateShape_OnClick" Margin="10,-10,0,10" BackgroundColor="Gray" VerticalOptions="Center"/>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

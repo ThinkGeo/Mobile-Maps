@@ -1,0 +1,616 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-maccatalyst;net8.0-ios;net8.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>HowDoISample</RootNamespace>
+		<UseMaui>true</UseMaui>
+    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+    <SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>HowDoISample</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.howdoisample</ApplicationId>
+		<ApplicationIdGuid>573baa8c-7d15-4f04-8983-1832da7ba729</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Data\Csv\Frisco_Mosquitoes.csv" />
+	  <None Remove="Data\GeoTiff\World.tfw" />
+	  <None Remove="Data\GeoTiff\World.tif" />
+	  <None Remove="Data\Gpx\Hike_Bike.gpx" />
+	  <None Remove="Data\GridFile\Mosquitoes.grd" />
+	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
+	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+	  <None Remove="Data\Json\mutedblue.json" />
+	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
+	  <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
+	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
+	  <None Remove="Data\Mbtiles\Frisco.mbtiles" />
+	  <None Remove="Data\Railroad\Railroad.dbf" />
+	  <None Remove="Data\Railroad\Railroad.ids" />
+	  <None Remove="Data\Railroad\Railroad.idx" />
+	  <None Remove="Data\Railroad\Railroad.prj" />
+	  <None Remove="Data\Railroad\Railroad.shp" />
+	  <None Remove="Data\Railroad\Railroad.shx" />
+	  <None Remove="Data\Shapefile\Countries02.dbf" />
+	  <None Remove="Data\Shapefile\Countries02.ids" />
+	  <None Remove="Data\Shapefile\Countries02.idx" />
+	  <None Remove="Data\Shapefile\Countries02.shp" />
+	  <None Remove="Data\Shapefile\Countries02.shx" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.dbf" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.ids" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.idx" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.prj" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.shp" />
+	  <None Remove="Data\Shapefile\Frisco 2010 Census Housing Units.shx" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.cpg" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.dbf" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.ids" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.idx" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.prj" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.shp" />
+	  <None Remove="Data\Shapefile\FriscoCityLimits.shx" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.cpg" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.dbf" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.ids" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.idx" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.shp" />
+	  <None Remove="Data\Shapefile\FriscoCityLimitsDivided.shx" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.cpg" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.dbf" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.ids" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.idx" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.prj" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.shp" />
+	  <None Remove="Data\Shapefile\Frisco_Coyote_Sightings.shx" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.cpg" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.dbf" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.ids" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.idx" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.prj" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.shp" />
+	  <None Remove="Data\Shapefile\Frisco_Crime.shx" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.cpg" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.dbf" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.ids" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.idx" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.prj" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.shp" />
+	  <None Remove="Data\Shapefile\Frisco_Mosquitoes.shx" />
+	  <None Remove="Data\Shapefile\Hike_Bike.dbf" />
+	  <None Remove="Data\Shapefile\Hike_Bike.gpx" />
+	  <None Remove="Data\Shapefile\Hike_Bike.ids" />
+	  <None Remove="Data\Shapefile\Hike_Bike.idx" />
+	  <None Remove="Data\Shapefile\Hike_Bike.prj" />
+	  <None Remove="Data\Shapefile\Hike_Bike.shp" />
+	  <None Remove="Data\Shapefile\Hike_Bike.shx" />
+	  <None Remove="Data\Shapefile\Hotels.dbf" />
+	  <None Remove="Data\Shapefile\Hotels.ids" />
+	  <None Remove="Data\Shapefile\Hotels.idx" />
+	  <None Remove="Data\Shapefile\Hotels.prj" />
+	  <None Remove="Data\Shapefile\Hotels.shp" />
+	  <None Remove="Data\Shapefile\Hotels.shx" />
+	  <None Remove="Data\Shapefile\Parks.dbf" />
+	  <None Remove="Data\Shapefile\Parks.ids" />
+	  <None Remove="Data\Shapefile\Parks.idx" />
+	  <None Remove="Data\Shapefile\Parks.prj" />
+	  <None Remove="Data\Shapefile\Parks.shp" />
+	  <None Remove="Data\Shapefile\Parks.shx" />
+	  <None Remove="Data\Shapefile\Schools.dbf" />
+	  <None Remove="Data\Shapefile\Schools.ids" />
+	  <None Remove="Data\Shapefile\Schools.idx" />
+	  <None Remove="Data\Shapefile\Schools.prj" />
+	  <None Remove="Data\Shapefile\Schools.shp" />
+	  <None Remove="Data\Shapefile\Schools.shx" />
+	  <None Remove="Data\Shapefile\Zoning.dbf" />
+	  <None Remove="Data\Shapefile\Zoning.ids" />
+	  <None Remove="Data\Shapefile\Zoning.idx" />
+	  <None Remove="Data\Shapefile\Zoning.prj" />
+	  <None Remove="Data\Shapefile\Zoning.shp" />
+	  <None Remove="Data\Shapefile\Zoning.shx" />
+	  <None Remove="Data\SQLite\frisco-restaurants.sqlite" />
+	  <None Remove="Data\Tab\City_ETJ.dat" />
+	  <None Remove="Data\Tab\City_ETJ.id" />
+	  <None Remove="Data\Tab\City_ETJ.ids" />
+	  <None Remove="Data\Tab\City_ETJ.idx" />
+	  <None Remove="Data\Tab\City_ETJ.map" />
+	  <None Remove="Data\Tab\City_ETJ.tab" />
+	  <None Remove="Data\TinyGeo\Zoning.tgeo" />
+	  <None Remove="Resources\Raw\coyote_paw.png" />
+	  <None Remove="Resources\Raw\hotel_icon.png" />
+	  <None Remove="Resources\Raw\vandalism_icon.png" />
+	  <None Remove="Resources\Raw\weapon_icon.png" />
+	  <None Remove="thinkgeo.howdoi.maui.android.mapsuitelicense" />
+	  <None Remove="thinkgeo.howdoi.maui.ios.mapsuitelicense" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Data\Csv\Frisco_Mosquitoes.csv" />
+	  <EmbeddedResource Include="Data\Csv\vehicle-route.csv" />
+	  <EmbeddedResource Include="Data\GeoTiff\World.tfw" />
+	  <EmbeddedResource Include="Data\GeoTiff\World.tif" />
+	  <EmbeddedResource Include="Data\Gpx\Hike_Bike.gpx" />
+	  <EmbeddedResource Include="Data\GridFile\Mosquitoes.grd" />
+	  <EmbeddedResource Include="Data\Jpg\frisco.jgw" />
+	  <EmbeddedResource Include="Data\Jpg\frisco.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_0.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_1.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_2.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_3.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_4.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_5.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_6.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_7.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_8.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m87_9.jpg" />
+	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
+	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
+	  <EmbeddedResource Include="Data\Json\mutedblue.json" />
+	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
+	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
+	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
+	  <EmbeddedResource Include="Data\Mbtiles\Frisco.mbtiles" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.prj" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.shp" />
+	  <EmbeddedResource Include="Data\Railroad\Railroad.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Countries02.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Countries02.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Countries02.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Countries02.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Countries02.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco 2010 Census Housing Units.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.cpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.dbf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.ids">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.idx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.prj">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.shp">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimits.shx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.cpg" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\FriscoCityLimitsDivided.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.cpg" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Coyote_Sightings.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.cpg" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Crime.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.cpg" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Frisco_Mosquitoes.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.gpx" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Hike_Bike.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.dbf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.ids">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.idx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.prj">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.shp">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Hotels.shx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.dbf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.ids">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.idx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.prj">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.shp">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Parks.shx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.dbf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.ids">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.idx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.prj">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.shp">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Schools.shx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\Shapefile\Streets.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Streets.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Streets.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Streets.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Streets.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Streets.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Subdivisions.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\WorldCapitals.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\WorldCapitals.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\WorldCapitals.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\WorldCapitals.shx" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.dbf" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.ids" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.idx" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.prj" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.shp" />
+	  <EmbeddedResource Include="Data\Shapefile\Zoning.shx" />
+	  <EmbeddedResource Include="Data\SQLite\frisco-restaurants.sqlite" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.dat" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.id" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.ids" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.idx" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.map" />
+	  <EmbeddedResource Include="Data\Tab\City_ETJ.tab" />
+	  <EmbeddedResource Include="Data\TinyGeo\Zoning.tgeo" />
+	  <EmbeddedResource Include="Samples\samples.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="thinkgeo.howdoi.maui.android.mapsuitelicense" />
+	  <EmbeddedResource Include="thinkgeo.howdoi.maui.ios.mapsuitelicense" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta004" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Samples\MapOfflineData\SQLiteLayer.xaml.cs">
+	    <DependentUpon>SqLiteLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOfflineData\ESRIGridLayer.xaml.cs">
+	    <DependentUpon>EsriGridLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOfflineData\GPXLayer.xaml.cs">
+	    <DependentUpon>GPXLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataStyling\ISOLineLayer.xaml.cs">
+	    <DependentUpon>IsoLineLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOfflineData\TABLayer.xaml.cs">
+	    <DependentUpon>TABLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\NOAAWeatherStationLayer.xaml.cs">
+	    <DependentUpon>NOAAWeatherStationLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\NOAAWeatherWarningLayer.xaml.cs">
+	    <DependentUpon>NOAAWeatherWarningLayer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Within.xaml.cs">
+	    <DependentUpon>Within.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Touches.xaml.cs">
+	    <DependentUpon>Touches.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Overlaps.xaml.cs">
+	    <DependentUpon>Overlaps.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Intersects.xaml.cs">
+	    <DependentUpon>Intersects.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\GetFeaturesWithinDistance.xaml.cs">
+	    <DependentUpon>GetFeaturesWithinDistance.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\GetDataFromFeature.xaml.cs">
+	    <DependentUpon>GetDataFromFeature.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Equals.xaml.cs">
+	    <DependentUpon>Equals.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Disjoint.xaml.cs">
+	    <DependentUpon>Disjoint.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Crosses.xaml.cs">
+	    <DependentUpon>Crosses.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataSpatialQuery\Contains.xaml.cs">
+	    <DependentUpon>Contains.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapNavigation\Navigation.xaml.cs">
+	    <DependentUpon>Navigation.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\OtherOnlineData.xaml.cs">
+	    <DependentUpon>OtherOnlineData.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MarkersAndPopups\UsingMarkers.xaml.cs">
+	    <DependentUpon>UsingMarkers.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\RollingTextMarker.xaml.cs">
+	    <DependentUpon>RollingTextMarker.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\Miscellaneous\SetupEverythingInXaml.xaml.cs">
+	    <DependentUpon>SetupEverythingInXaml.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapNavigation\VehicleNavigation.xaml.cs">
+	    <DependentUpon>VehicleNavigation.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapNavigation\ZoomToBlackHole.xaml.cs">
+	    <DependentUpon>ZoomToBlackHole.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapNavigation\ZoomToExtent.xaml.cs">
+	    <DependentUpon>ZoomToExtent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\DisplayWMSOverlay.xaml.cs">
+	    <DependentUpon>DisplayWmsOverlay.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\ThinkGeoBackgroundOverlays.xaml.cs">
+	    <DependentUpon>ThinkGeoBackgroundOverlays.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MarkersAndPopups\CreatingMarkers.xaml.cs">
+	    <DependentUpon>CreatingMarkers.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MarkersAndPopups\UsingPopups.xaml.cs">
+	    <DependentUpon>UsingPopups.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\Miscellaneous\WorldProjection.xaml.cs">
+	    <DependentUpon>WorldProjection.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\VectorDataGeometricOperation\UnionShapes.xaml.cs">
+	    <DependentUpon>UnionShapes.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\ThinkGeoCloudIntegration\RoutingTSPCloudServices.xaml.cs">
+	    <DependentUpon>RoutingTspCloudServices.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AppShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\DescriptionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Within.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Touches.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Overlaps.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Intersects.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\GetFeaturesWithinDistance.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\GetDataFromFeature.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Equals.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Disjoint.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Crosses.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Contains.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapNavigation\ZoomToBlackHoleSample.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapNavigation\SetupEverythingInXamlSample.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapNavigation\ZoomToExtentSample.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapNavigation\UpdateVehicleLocationSample.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\OtherOnlineData.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayWMSOverlay.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\ThinkGeoBackgroundOverlays.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MarkersAndPopups\UsingMarkers.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MarkersAndPopups\CreatingMarkers.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MarkersAndPopups\UsingPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\Miscellaneous\WorldProjection.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\SamplePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\BufferShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\CalculateArea.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\CalculateCenterPoint.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\CalculateLength.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\CalculateShortestLineBetweenShapes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\ClipShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\DifferenceShapes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\GetConvexHull.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\GetEnvelope.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\GetLineOnALine.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\RotateShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\ScaleShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\SimplifyShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\TranslateShape.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataGeometricOperation\UnionShapes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataTopologicalValidation\LineValidation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataTopologicalValidation\PointValidation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\VectorDataTopologicalValidation\PolygonValidation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\ColorUtilitiesCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\ElevationCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\GeocodingCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\ProjectionCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\ReverseGeocodingCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\RoutingCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\RoutingServiceAreaCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\RoutingTSPCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\TimezoneCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+</Project>

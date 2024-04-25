@@ -1,0 +1,65 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.MapOnlineData.ThinkGeoBackgroundOverlays">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Padding="8">
+                <howDoI:DescriptionView 
+                        Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+                <Label FontAttributes="Italic" TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged" >
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool />
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+            
+            <Frame Grid.Row="2" InputTransparent="False" Margin="10,0,0,10" WidthRequest="330" HeightRequest="250" 
+                   HorizontalOptions="Start" BackgroundColor="#80888888">
+                <Grid InputTransparent="True" CascadeInputTransparent="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>                    
+                        <ColumnDefinition Width="150"/>                    
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row ="0"  Content="Vector Light" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="VectorLight" BorderWidth="5"  IsChecked="True"/>
+                    <RadioButton Grid.Column="0" Grid.Row ="1"  Content="Raster Light V1" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="RasterLightV1" />
+                    <RadioButton Grid.Column="0" Grid.Row ="2"  Content="Raster Light V2" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="RasterLightV2" />
+                    <RadioButton Grid.Column="0" Grid.Row ="3"  Content="Aerial" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="Aerial" />
+                    <RadioButton Grid.Column="0" Grid.Row ="4"  Content="Hybrid" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="Hybrid" />
+
+                    <RadioButton Grid.Column="1" Grid.Row ="0"  Content="Vector Dark" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="VectorDark" />
+                    <RadioButton Grid.Column="1" Grid.Row ="1"  Content="Raster Dark V1" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="RasterDarkV1" />
+                    <RadioButton Grid.Column="1" Grid.Row ="2"  Content="Raster Dark V2" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="RasterDarkV2" />
+                    <RadioButton Grid.Column="1" Grid.Row ="3"  Content="Transparent Bg" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="TransparentBg" />
+                    <RadioButton Grid.Column="1" Grid.Row ="4"  Content="Vector Custom" CheckedChanged="Radial_Checked" WidthRequest="150" x:Name="VectorCustom" />
+
+                </Grid>
+            </Frame>
+        </Grid>
+            
+    </ContentPage.Content>
+</howDoI:SamplePage>

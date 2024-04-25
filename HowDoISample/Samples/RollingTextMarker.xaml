@@ -1,0 +1,27 @@
+﻿<thinkgeo:Marker xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                x:Class="HowDoISample.RollingTextMarker"
+                WidthRequest ="100"
+                HeightRequest="100" TranslationY="-40"
+                x:Name="This">
+
+    <Grid InputTransparent="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="65" />
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0" CornerRadius="4" BorderColor="LightGray" BackgroundColor="Black"
+               HeightRequest="25" VerticalOptions="Start" HorizontalOptions="Fill"
+               Padding="0" Margin="0" WidthRequest="150" IsClippedToBounds="True">
+            <Label x:Name="RollingTextLabel" FontSize="14" FontAttributes="Bold"
+                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="NoWrap"
+                   Text="{Binding Source={x:Reference This}, Path=Text}" TextColor="White" />
+        </Frame>
+
+        <Image Grid.Row="1" Source="{Binding Source={x:Reference This}, Path=ImagePath}" Margin="5"/>
+    </Grid>
+
+
+</thinkgeo:Marker>

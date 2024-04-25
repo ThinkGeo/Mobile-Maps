@@ -1,0 +1,42 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataGeometricOperation.SimplifyShape">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="2"
+                    MapUnit="Meter" MapRotation="0" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool />
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="190"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,5, 0, 10" BackgroundColor="Gray">
+                    <Label Text="Tolerance (m):" FontAttributes="Bold" VerticalOptions="Center" TextColor="White"/>
+                    <Entry x:Name="Tolerance" Text="500" Keyboard="Numeric" WidthRequest="60" TextColor="White"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <Button Grid.Column="1" Text="Simplify" Clicked="SimplifyShape_OnClick"
+                        BackgroundColor="Gray" Margin="10,5, 0, 10" TextColor="White" FontAttributes="Bold"/>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

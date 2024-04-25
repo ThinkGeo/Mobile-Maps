@@ -1,0 +1,34 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataStyling.ExtendingStyles">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="50"/>
+                <RowDefinition />
+                <RowDefinition Height ="50"/>
+                <RowDefinition Height ="50"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0" 
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="3"
+                              SizeChanged="ExtendingStyles_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool />
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Button Grid.Row="2" Margin="5" BackgroundColor="Gray" TextColor="White"
+                    Text="Show Capital Day/Night Style" Clicked="TimeBasedPointStyle_Click" WidthRequest="230" HorizontalOptions="Start"/>
+            <Button Grid.Row="3" Margin="5" BackgroundColor="Gray" TextColor="White"
+                    Text="Show Capital Population Style" Clicked="SizedBasedPointStyle_Click" WidthRequest="230" HorizontalOptions="Start"/>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

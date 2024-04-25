@@ -1,0 +1,63 @@
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataEditing.TrackEditDelete"
+                   x:Name="ThisPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="280"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{Binding Description, Source={x:Reference BasePage}}"/>
+
+            <Label Grid.Row="1" FontAttributes="Italic" BackgroundColor="Black" TextColor="Yellow" FontSize="12"
+                   Text="{Binding Instruction, Source={x:Reference ThisPage}}"/>
+
+            <thinkgeo:MapView Grid.Row="2" Grid.RowSpan="2" 
+                    x:Name="MapView" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <ImageButton x:Name="CompassButton" Grid.Row="2" 
+                         VerticalOptions="Start" HorizontalOptions="End"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_north_arrow.png" 
+                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+
+            <Frame Grid.Row="3" InputTransparent="False" Margin="10" WidthRequest="200" HorizontalOptions="Start" BackgroundColor="#80888888">
+                <Grid InputTransparent="True" CascadeInputTransparent="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Row="0" Content="Navigation Mode" CheckedChanged="NavMode_Click"/>
+                    <RadioButton Grid.Row="1" Content="Draw Point"      CheckedChanged="DrawPoint_Click"  IsChecked="True"  />
+                    <RadioButton Grid.Row="2" Content="Draw Line"       CheckedChanged="DrawLine_Click" />
+                    <RadioButton Grid.Row="3" Content="Draw Ellipse"    CheckedChanged="DrawEllipse_Click" />
+                    <RadioButton Grid.Row="4" Content="Draw Polygon"    CheckedChanged="DrawPolygon_Click" />
+                    <RadioButton Grid.Row="5" Content="Edit Shape"      CheckedChanged="EditShape_Click" />
+                    <RadioButton Grid.Row="6" Content="Delete Shape"    CheckedChanged="DeleteShape_Click"  x:Name="DeleteShapeRadioButton"/>
+                </Grid>
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

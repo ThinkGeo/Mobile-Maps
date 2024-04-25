@@ -1,0 +1,40 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.Miscellaneous.WorldProjection">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0" 
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" BackgroundColor="LightSkyBlue"
+                              MapUnit="DecimalDegree" SizeChanged="WorldProjection_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <ImageButton x:Name="CompassButton" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_north_arrow.png" 
+                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+
+            <StackLayout Grid.Row="1" WidthRequest="200"
+                 Margin="20" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="#80888888">
+                <RadioButton StyleId="SphericalMercator" Content="Spherical Mercator" CheckedChanged="RadioButton_CheckedChanged"  IsChecked="True"/>
+                <RadioButton StyleId="DecimalDegrees" Content="Decimal Degrees" CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton StyleId="PolarStereographic" Content="Polar Stereographic" CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton StyleId="AlbersEqualAreaConic" Content="Albers Equal Area Conic" CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton StyleId="EqualAreaCylindrical" Content="Equal Area Cylindrical" CheckedChanged="RadioButton_CheckedChanged"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>
