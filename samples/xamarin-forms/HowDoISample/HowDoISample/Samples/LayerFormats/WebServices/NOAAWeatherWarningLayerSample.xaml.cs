@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkGeo.Core;
@@ -49,6 +48,9 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Add the new layer to the overlay we created earlier
             noaaWeatherWarningsOverlay.Layers.Add("Noaa Weather Warning", noaaWeatherWarningsFeatureLayer);
 
+            // Get the layers feature source and setup an event that will refresh the map when the data refreshes
+            var featureSource = (NoaaWeatherWarningsFeatureSource)noaaWeatherWarningsFeatureLayer.FeatureSource;
+
             // Create the weather warnings style and add it on zoom level 1 and then apply it to all zoom levels up to 20.
             noaaWeatherWarningsFeatureLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new NoaaWeatherWarningsStyle());
             noaaWeatherWarningsFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
@@ -64,16 +66,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             // Refresh the map.
             await mapView.RefreshAsync();
         }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            var overlay = mapView.Overlays["Noaa Weather Warning"] as LayerOverlay;
-            var layer = overlay.Layers["Noaa Weather Warning"] as FeatureLayer;
-            layer?.Close();
-        }
-
 
         private async void mapView_MapClick(object sender, TouchMapViewEventArgs e)
         {
@@ -113,7 +105,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
             }
         }
 
-
         public static string ToMultiline(string str)
         {
             StringBuilder sb = new StringBuilder();
@@ -137,7 +128,5 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             return sb.ToString();
         }
-
-
     }
 }

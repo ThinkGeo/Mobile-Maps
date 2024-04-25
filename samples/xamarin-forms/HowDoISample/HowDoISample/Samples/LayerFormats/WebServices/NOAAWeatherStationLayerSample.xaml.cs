@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
 using ThinkGeo.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -46,14 +44,7 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Add the new layer to the overlay we created earlier
             weatherOverlay.Layers.Add("Noaa Weather Stations", noaaWeatherStationLayer);
-
-            // Get the layers feature source and setup an event that will refresh the map when the data refreshes
-            var featureSource = (NoaaWeatherStationFeatureSource) noaaWeatherStationLayer.FeatureSource;
-            loadingIndicator.IsRunning = true;
-            loadingLayout.IsVisible = true;
-            featureSource.StationsUpdated -= FeatureSource_StationsUpdated;
-            featureSource.StationsUpdated += FeatureSource_StationsUpdated;
-
+                        
             // Create the weather stations style and add it on zoom level 1 and then apply it to all zoom levels up to 20.
             noaaWeatherStationLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(new NoaaWeatherStationStyle());
             noaaWeatherStationLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
@@ -64,33 +55,6 @@ namespace ThinkGeo.UI.XamarinForms.HowDoI
 
             // Refresh the map.
             await mapView.RefreshAsync();
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            var weatherStations =
-                (NoaaWeatherStationFeatureSource) mapView.FindFeatureLayer("Noaa Weather Stations").FeatureSource;
-            weatherStations.StationsUpdated -= FeatureSource_StationsUpdated;
-        }
-
-        private void FeatureSource_StationsUpdated(object sender,
-            StationsUpdatedNoaaWeatherStationFeatureSourceEventArgs e)
-        {
-            // This event fires when the the feature source has new data.  We need to make sure we refresh the map
-            // on the UI threat so we use the Invoke method on the map using the delegate we created at the top.
-            mapView.Dispatcher.BeginInvokeOnMainThread(UpdateWeatherStations);
-        }
-
-        private async void UpdateWeatherStations()
-        {
-            // Here we fresh the map based on the delegate that fires when the feature source has new data.
-            var weatherOverlay = mapView.Overlays["Weather"];
-            await weatherOverlay.RefreshAsync();
-
-            loadingIndicator.IsRunning = false;
-            loadingLayout.IsVisible = false;
         }
     }
 }
