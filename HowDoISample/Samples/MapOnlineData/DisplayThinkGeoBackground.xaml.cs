@@ -3,14 +3,14 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
 
-public partial class ThinkGeoBackgroundOverlays
+public partial class DisplayThinkGeoBackground
 {
     private bool _initialized;
     private ThinkGeoVectorOverlay _thinkGeoVectorsOverlay;
     private ThinkGeoRasterOverlay _thinkGeoRasterOverlay;
     private CancellationTokenSource _cancellationTokenSource = new();
 
-    public ThinkGeoBackgroundOverlays()
+    public DisplayThinkGeoBackground()
     {
         InitializeComponent();
     }

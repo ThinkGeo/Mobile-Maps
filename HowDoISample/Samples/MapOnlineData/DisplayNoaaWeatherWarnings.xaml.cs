@@ -6,11 +6,11 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISample.MapOnlineData;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class NoaaWeatherWarningLayer
+public partial class DisplayNoaaWeatherWarnings
 {
     private bool _initialized;
     private FeatureLayer _noaaWeatherWarningsFeatureLayer;
-    public NoaaWeatherWarningLayer()
+    public DisplayNoaaWeatherWarnings()
     {
         InitializeComponent();
 

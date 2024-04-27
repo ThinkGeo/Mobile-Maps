@@ -14,6 +14,5 @@ public partial class OtherOnlineData
         //var layer3 = new ThinkGeo.Core.Async.GoogleMapsLayer();
         //var layer4 = new ThinkGeo.Core.Async.HereMapsRasterTileLayer();
         //var layer5 = new ThinkGeo.Core.Async.MapBoxStaticTilesLayer();
-        //var layer6 = new ThinkGeo.Core.Async.WmtsLayer();
     }
 }

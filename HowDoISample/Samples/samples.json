@@ -28,34 +28,49 @@
     "title": "Map Online Data",
     "children": [
       {
-        "id": "HowDoISample.MapOnlineData.ThinkGeoBackgroundOverlays",
+        "id": "HowDoISample.MapOnlineData.DisplayThinkGeoBackground",
         "title": "ThinkGeo Background",
-        "description": "Display ThinkGeo background overlays."
+        "description": "Display ThinkGeo background."
       },
       {
-        "id": "HowDoISample.MapOnlineData.OpenStreetMapLayer",
+        "id": "HowDoISample.MapOnlineData.DisplayOpenStreetMap",
         "title": "Open Street Map",
-        "description": "Display an OpenStreetMap layer."
+        "description": "Display OpenStreetMap."
       },
       {
-        "id": "HowDoISample.MapOnlineData.DisplayWmsOverlay",
+        "id": "HowDoISample.MapOnlineData.DisplayWms",
         "title": "WMS",
-        "description": "Fetch map tiles from a WMS. Note that it's a third-party server and may have slow performance."
+        "description": "Fetch tiles from a WMS Server."
       },
       {
-        "id": "HowDoISample.MapOnlineData.NoaaWeatherStationLayer",
+        "id": "HowDoISample.MapOnlineData.DisplayWmts",
+        "title": "WMTS",
+        "description": "Fetch tiles from a WMTS Server."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWfs",
+        "title": "WFS",
+        "description": "Fetch and display features from a WFS V2 Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayOgcApiFeatures",
+        "title": "Ogc API Feature Server",
+        "description": "Fetch and display features from a OGC API - Features Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherStation",
         "title": "NOAA Weather Stations",
-        "description": "Display a NOAA Weather Station layer."
+        "description": "Display NOAA Weather Stations."
       },
       {
-        "id": "HowDoISample.MapOnlineData.NoaaWeatherWarningLayer",
+        "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherWarnings",
         "title": "NOAA Weather Warnings",
-        "description": "Display a NOAA Weather Warning layer."
+        "description": "Display NOAA Weather Warnings. Click on a weather polygon to get detail."
       },
       {
         "id": "HowDoISample.MapOnlineData.OtherOnlineData",
-        "title": "Other Online Data",
-        "description": "More data format we support"
+        "title": "Other Online Data Servers",
+        "description": "More data servers we support."
       }
     ]
   },
@@ -92,7 +107,6 @@
         "title": "Display a GPX File",
         "description": "Display a GPX layer."
       },
-
       {
         "id": "HowDoISample.MapOfflineData.TabLayer",
         "title": "Display a TAB File",

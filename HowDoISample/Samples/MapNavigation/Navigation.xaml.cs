@@ -9,6 +9,10 @@ public partial class Navigation
     public Navigation()
     {
         InitializeComponent();
+
+        ThinkGeoDebugger.LogLevel = ThinkGeoLogLevel.All;
+        ThinkGeoDebugger.LogType = ThinkGeoLogType.All;
+
     }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
@@ -16,9 +20,6 @@ public partial class Navigation
         if (_initialized)
             return;
         _initialized = true;
-
-        ThinkGeoDebugger.LogLevel = ThinkGeoLogLevel.All;
-        ThinkGeoDebugger.LogType = ThinkGeoLogType.Licensing;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
         MapView.MapUnit = GeographyUnit.Meter;

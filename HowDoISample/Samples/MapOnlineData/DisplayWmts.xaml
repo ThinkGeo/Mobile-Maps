@@ -2,7 +2,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
-                   x:Class="HowDoISample.MapOnlineData.DisplayWmsOverlay">
+                   x:Class="HowDoISample.MapOnlineData.DisplayWmts">
 
     <ContentPage.Content>
         <Grid>

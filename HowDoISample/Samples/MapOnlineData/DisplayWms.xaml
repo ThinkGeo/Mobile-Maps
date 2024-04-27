@@ -2,7 +2,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
-                   x:Class="HowDoISample.MapOnlineData.NoaaWeatherStationLayer">
+                   x:Class="HowDoISample.MapOnlineData.DisplayWms">
 
     <ContentPage.Content>
         <Grid>
@@ -14,15 +14,12 @@
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" IsRotationEnabled="True"
-                              SizeChanged="NOAAWeatherStationLayer_OnSizeChanged">
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" 
+                    MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
-                    <thinkgeo:ZoomMapTool/>
+                    <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
-
-            <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center" 
-                               Grid.Row="1" x:Name="LoadingLayout"/>
 
         </Grid>
     </ContentPage.Content>

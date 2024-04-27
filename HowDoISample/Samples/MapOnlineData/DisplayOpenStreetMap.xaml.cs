@@ -4,10 +4,10 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISample.MapOnlineData;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class OpenStreetMapLayer
+public partial class DisplayOpenStreetMap
 {
     private bool _initialized;
-    public OpenStreetMapLayer()
+    public DisplayOpenStreetMap()
     {
         InitializeComponent();
     }

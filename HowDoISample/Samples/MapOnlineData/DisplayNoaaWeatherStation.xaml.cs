@@ -4,11 +4,11 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISample.MapOnlineData;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class NoaaWeatherStationLayer
+public partial class DisplayNoaaWeatherStation
 {
     private bool _initialized;
     private NoaaWeatherStationFeatureLayer _noaaWeatherStationLayer;
-    public NoaaWeatherStationLayer()
+    public DisplayNoaaWeatherStation()
     {
         InitializeComponent();
     }

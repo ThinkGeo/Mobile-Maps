@@ -3,10 +3,10 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
 
-public partial class DisplayWmsOverlay
+public partial class DisplayWms
 {
     private bool _initialized;
-    public DisplayWmsOverlay()
+    public DisplayWms()
     {
         InitializeComponent();
     }
@@ -33,6 +33,7 @@ public partial class DisplayWmsOverlay
         wmsOverlay.Parameters.Add("LAYERS", "OSM-WMS");
         wmsOverlay.Parameters.Add("STYLES", "default");
         wmsOverlay.Parameters.Add("CRS", "EPSG:3857");  // Make sure to match the WMS CRS to the Map's projection
+
         MapView.Overlays.Add(wmsOverlay);
 
 

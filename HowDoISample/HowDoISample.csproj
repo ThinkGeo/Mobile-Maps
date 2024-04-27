@@ -352,7 +352,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta004" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta009" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -365,17 +365,29 @@
 	  <Compile Update="Samples\MapOfflineData\GPXLayer.xaml.cs">
 	    <DependentUpon>GPXLayer.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\DisplayWmts.xaml.cs">
+	    <DependentUpon>DisplayWmts.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\DisplayOgcApiFeatures.xaml.cs">
+	    <DependentUpon>DisplayOgcApiFeatures.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\DisplayWfs.xaml.cs">
+	    <DependentUpon>DisplayWfs.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\MapOnlineData\DisplayOpenStreetMap.xaml.cs">
+	    <DependentUpon>DisplayOpenStreetMap.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Samples\VectorDataStyling\ISOLineLayer.xaml.cs">
 	    <DependentUpon>IsoLineLayer.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\TABLayer.xaml.cs">
 	    <DependentUpon>TABLayer.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MapOnlineData\NOAAWeatherStationLayer.xaml.cs">
-	    <DependentUpon>NOAAWeatherStationLayer.xaml</DependentUpon>
+	  <Compile Update="Samples\MapOnlineData\DisplayNoaaWeatherStation.xaml.cs">
+	    <DependentUpon>DisplayNoaaWeatherStation.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MapOnlineData\NOAAWeatherWarningLayer.xaml.cs">
-	    <DependentUpon>NOAAWeatherWarningLayer.xaml</DependentUpon>
+	  <Compile Update="Samples\MapOnlineData\DisplayNoaaWeatherWarnings.xaml.cs">
+	    <DependentUpon>DisplayNoaaWeatherWarnings.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\VectorDataSpatialQuery\Within.xaml.cs">
 	    <DependentUpon>Within.xaml</DependentUpon>
@@ -431,11 +443,11 @@
 	  <Compile Update="Samples\MapNavigation\ZoomToExtent.xaml.cs">
 	    <DependentUpon>ZoomToExtent.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MapOnlineData\DisplayWMSOverlay.xaml.cs">
-	    <DependentUpon>DisplayWmsOverlay.xaml</DependentUpon>
+	  <Compile Update="Samples\MapOnlineData\DisplayWms.xaml.cs">
+	    <DependentUpon>DisplayWms.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MapOnlineData\ThinkGeoBackgroundOverlays.xaml.cs">
-	    <DependentUpon>ThinkGeoBackgroundOverlays.xaml</DependentUpon>
+	  <Compile Update="Samples\MapOnlineData\DisplayThinkGeoBackground.xaml.cs">
+	    <DependentUpon>DisplayThinkGeoBackground.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MarkersAndPopups\CreatingMarkers.xaml.cs">
 	    <DependentUpon>CreatingMarkers.xaml</DependentUpon>
@@ -459,6 +471,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\DescriptionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayWmts.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayOgcApiFeatures.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayWfs.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Within.xaml">
@@ -506,10 +527,10 @@
 	  <MauiXaml Update="Samples\MapOnlineData\OtherOnlineData.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\MapOnlineData\DisplayWMSOverlay.xaml">
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayWms.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\MapOnlineData\ThinkGeoBackgroundOverlays.xaml">
+	  <MauiXaml Update="Samples\MapOnlineData\DisplayThinkGeoBackground.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MarkersAndPopups\UsingMarkers.xaml">

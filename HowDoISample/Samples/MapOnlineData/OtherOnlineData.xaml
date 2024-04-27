@@ -17,16 +17,14 @@
             <Label Grid.Row="1" 
                    VerticalTextAlignment="Center"  
                    HorizontalOptions="Center"
-                   Text="The following Map Providers are supported with the right key: &#x0a;
+                   Text="The following Map Providers are supported as well with the right key: &#x0a;
                     &#x0a;
                    ArcGisServerRest &#x0a;
                    BingMaps &#x0a;
                    GoogleMaps &#x0a;
                    HereMapsRaster &#x0a;
                    MapBoxStaticTiles &#x0a;
-                   WMTS &#x0a;
-                   WFS &#x0a;
-                   OGC API Features &#x0a;
+                   More through Customized Layer
                    "
                    LineBreakMode="WordWrap"  FontSize="20"/>
         </Grid>
