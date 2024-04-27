@@ -6,6 +6,8 @@ namespace HowDoISample.VectorDataGeometricOperation;
 public partial class ScaleShape 
 {
     private bool _initialized;
+    private double _scaleFactor = 1;
+
     public ScaleShape()
 	{
 		InitializeComponent();
@@ -82,8 +84,9 @@ public partial class ScaleShape
         var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
         cityLimits.Close();
 
-        // Scale the first feature by the scaleFactor TextBox on the UI
-        var scale = BaseShape.ScaleTo(features[0].GetShape(), Convert.ToSingle(ScaleFactor.Text));
+        // Scale the feature by 1.1
+        _scaleFactor *= 1.1;
+        var scale = BaseShape.ScaleTo(features[0].GetShape(), _scaleFactor);
 
         // Add the scaled shape into scaledLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the

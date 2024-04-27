@@ -9,13 +9,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="2"
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="3"
                     MapUnit="Meter" MapRotation="0" SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
@@ -23,9 +24,8 @@
             </thinkgeo:MapView>
 
             <Button  Grid.Row="2" Text="Clip" Clicked="ClipShape_OnClick" 
-                     TextColor="White" FontAttributes="Bold" Margin="10" BackgroundColor="Gray"
-                     WidthRequest="200" HorizontalOptions="Start"/>
-
+                     TextColor="White" FontAttributes="Bold" BackgroundColor="Gray"
+                     WidthRequest="200" HorizontalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

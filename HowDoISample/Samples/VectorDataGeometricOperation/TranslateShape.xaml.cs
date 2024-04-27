@@ -6,6 +6,8 @@ namespace HowDoISample.VectorDataGeometricOperation;
 public partial class TranslateShape
 {
     private bool _initialized;
+    private Feature _feature;
+
     public TranslateShape()
 	{
 		InitializeComponent();
@@ -77,20 +79,22 @@ public partial class TranslateShape
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var translatedLayer = (InMemoryFeatureLayer)layerOverlay.Layers["translatedLayer"];
 
-        // Query the cityLimits layer to get all the features
-        cityLimits.Open();
-        var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
-        cityLimits.Close();
+        if (_feature == null)
+        {
+            cityLimits.Open();
+            _feature = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns)[0];
+            cityLimits.Close();
+        }
 
-        // Translate the first feature's shape by the X and Y values on the UI in meters
-        var translate = BaseShape.TranslateByOffset(features[0].GetShape(), Convert.ToDouble(TranslateX.Text),
-            Convert.ToDouble(TranslateY.Text), GeographyUnit.Meter, DistanceUnit.Meter);
+        // Translate the feature by 1000 meters on X and Y directions
+        _feature = BaseShape.TranslateByOffset(_feature, 1000,
+            1000, GeographyUnit.Meter, DistanceUnit.Meter);
 
         // Add the translated shape into translatedLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the
         // underlying data using BeginTransaction and CommitTransaction instead.
         translatedLayer.InternalFeatures.Clear();
-        translatedLayer.InternalFeatures.Add(new Feature(translate));
+        translatedLayer.InternalFeatures.Add(_feature);
 
         // Redraw the layerOverlay to see the translated feature on the map
         await layerOverlay.RefreshAsync();
@@ -103,21 +107,24 @@ public partial class TranslateShape
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var translatedLayer = (InMemoryFeatureLayer)layerOverlay.Layers["translatedLayer"];
 
-        // Query the cityLimits layer to get all the features
-        cityLimits.Open();
-        var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
-        cityLimits.Close();
+        if (_feature == null)
+        {
+            cityLimits.Open();
+            _feature = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns)[0];
+            cityLimits.Close();
+        }
 
-        // Translate the first feature's shape by the X and Y values on the UI in meters
-        var translate = BaseShape.TranslateByDegree(features[0].GetShape(),
-            Convert.ToDouble(TranslateDistance.Text), Convert.ToDouble(TranslateAngle.Text), GeographyUnit.Meter,
+        // Translate the feature by 1000 meters and 120 degrees. 
+        var shape = BaseShape.TranslateByDegree(_feature,
+            1000, 120, GeographyUnit.Meter,
             DistanceUnit.Meter);
+        _feature = new Feature(shape);
 
         // Add the translated shape into translatedLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the
         // underlying data using BeginTransaction and CommitTransaction instead.
         translatedLayer.InternalFeatures.Clear();
-        translatedLayer.InternalFeatures.Add(new Feature(translate));
+        translatedLayer.InternalFeatures.Add(_feature);
 
         // Redraw the layerOverlay to see the translated feature on the map
         await layerOverlay.RefreshAsync();

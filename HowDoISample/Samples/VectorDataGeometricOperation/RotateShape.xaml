@@ -22,21 +22,9 @@
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="190"/>
-                    <ColumnDefinition Width="190"/>
-                </Grid.ColumnDefinitions>
-
-                <StackLayout Grid.Column="0"  Orientation="Horizontal"  Margin="10,0, 0, 20"  BackgroundColor="Gray">
-                    <Label Text="Rotation Degree:" FontAttributes="Bold" TextColor="White"
-                           VerticalOptions="Center" />
-                    <Entry x:Name="RotateDegree" Text="90" Keyboard="Numeric"  WidthRequest="40" TextColor="White"/>
-                </StackLayout>
-                <Button Grid.Column="1" Text="Rotate" Clicked="RotateShape_OnClick" BackgroundColor="Gray"
-                       Margin="10,0, 0, 20" TextColor="White" FontAttributes="Bold"/>
-            </Grid>
-
+            <Button Grid.Row="2" Text="Rotate 45 degrees " Clicked="RotateShape_OnClick" 
+                    HorizontalOptions="Center" WidthRequest="180" Margin="10" 
+                    BackgroundColor="Gray" TextColor="White" FontAttributes="Bold"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

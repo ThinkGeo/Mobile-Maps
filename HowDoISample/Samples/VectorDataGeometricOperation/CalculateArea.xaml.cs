@@ -92,6 +92,6 @@ public partial class CalculateArea
         var area = ((AreaBaseShape)feature.GetShape()).GetArea(GeographyUnit.Meter, AreaUnit.SquareKilometers);
 
         // Display the selectedArea's area in the areaResult TextBox
-        AreaResult.Text = $"{area:f3} sq km";
+        AreaResult.Text = $"Area: {area:f3} sq km";
     }
 }

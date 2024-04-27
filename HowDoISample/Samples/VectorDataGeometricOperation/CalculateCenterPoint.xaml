@@ -10,24 +10,25 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
                 <RowDefinition Height="80"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="2"
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="3"
                               SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <Grid Grid.Row="2" WidthRequest="250" HorizontalOptions="Start" Margin="10,0,20,5">
+            <Grid Grid.Row="2" WidthRequest="250" HorizontalOptions="Center" Margin="10,0,20,5">
                 <StackLayout BackgroundColor="Gray">
                     <RadioButton x:Name="CentroidCenter" Content="Show Centroid Center" IsChecked="True" TextColor="White"
                          CheckedChanged="RadioButton_Checked" Margin="10,0,0,0" BackgroundColor="Transparent" FontAttributes="Bold"/>
                     <RadioButton Content="Show Bounding Box Center" TextColor="White" FontAttributes="Bold"
-                                 CheckedChanged="RadioButton_Checked" Margin="10,0,0,10" BackgroundColor="Transparent" />
+                                 CheckedChanged="RadioButton_Checked" Margin="10,0,0,0" BackgroundColor="Transparent" />
                 </StackLayout>
             </Grid>
         </Grid>

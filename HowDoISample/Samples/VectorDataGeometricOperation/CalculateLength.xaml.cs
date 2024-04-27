@@ -90,6 +90,6 @@ public partial class CalculateLength
         var length = ((LineBaseShape)feature.GetShape()).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
 
         // Display the selectedLine's length in the lengthResult TextBox
-        LengthResult.Text = $"{length:f3} km";
+        LengthResult.Text = $"Length: {length:f3} km";
     }
 }

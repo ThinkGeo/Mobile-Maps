@@ -113,6 +113,6 @@ public partial class CalculateShortestLineBetweenShapes
         var length = shortestLine.GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer);
 
         // Display the shortestLine's length in the distanceResult TextBox
-        DistanceResult.Text = $"{length:f3} km";
+        DistanceResult.Text = $"Distance: {length:f3} km";
     }
 }

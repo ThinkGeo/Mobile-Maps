@@ -33,7 +33,7 @@ public partial class GetLineOnALine
         // Add the rail line feature to the railway layer
         var railway = new InMemoryFeatureLayer();
         railway.InternalFeatures.Add(new Feature(
-            "LineString (-10776730.91861553490161896 3925750.69222266925498843, -10778989.31895966082811356 3915278.00731692276895046, -10781766.12723691388964653 3909228.15506267035380006, -10782065.98029803484678268 3907458.59967381786555052, -10781867.48601813986897469 3905465.21030976390466094)"));
+            "LineString (-10776730 3925750, -10778989 3915278, -10781766 3909228, -10782065 3907458, -10781867 3905465)"));
 
         // Style railway layer
         railway.ZoomLevelSet.ZoomLevel01.DefaultLineStyle =
@@ -48,7 +48,7 @@ public partial class GetLineOnALine
         // Style the subLineLayer
         var subLineLayer = new InMemoryFeatureLayer();
         subLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle =
-            LineStyle.CreateSimpleLineStyle(GeoColors.Green, 2, false);
+            LineStyle.CreateSimpleLineStyle(GeoColors.Green, 4, false);
         subLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Add subLineLayer to the layerOverlay
@@ -80,9 +80,9 @@ public partial class GetLineOnALine
         var feature = railway.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns).First();
         railway.Close();
 
-        // Get the subLine from the railway line shape
+        // Get the subLine, starting from 1000-meter point,and the length is 10000 meters 
         var subLine = ((LineShape)feature.GetShape()).GetLineOnALine(StartingPoint.FirstPoint,
-            Convert.ToDouble(StartingOffset.Text), Convert.ToDouble(Distance.Text), GeographyUnit.Meter,
+            1000, 10000, GeographyUnit.Meter,
             DistanceUnit.Meter);
 
         // Add the subLine into an InMemoryFeatureLayer to display the result.

@@ -6,6 +6,8 @@ namespace HowDoISample.VectorDataGeometricOperation;
 public partial class RotateShape
 {
     private bool _initialized;
+    private float _degrees;
+
     public RotateShape()
 	{
 		InitializeComponent();
@@ -79,9 +81,9 @@ public partial class RotateShape
         var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
         cityLimits.Close();
 
-        // Rotate the first feature using its center point as the anchor
-        var rotate = BaseShape.Rotate(features[0], features[0].GetShape().GetCenterPoint(),
-            Convert.ToSingle(RotateDegree.Text));
+        // Rotate the feature by 45 degrees
+        _degrees += 45;
+        var rotate = BaseShape.Rotate(features[0], features[0].GetShape().GetCenterPoint(), _degrees);
 
         // Add the rotated shape into rotatedLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.

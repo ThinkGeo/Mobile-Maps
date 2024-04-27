@@ -7,22 +7,21 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>                
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <StackLayout  Grid.Row="0" Orientation="Vertical" Padding="8">
-                <howDoI:DescriptionView
-                    Description="{Binding Description, Source={x:Reference BasePage}}" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Area (sq km):" FontAttributes="Bold" VerticalOptions="Center" />
-                    <Label x:Name="AreaResult" FontAttributes="Bold" VerticalOptions="Center"
-                           Margin="15,0,0,0" />
-                </StackLayout>
-            </StackLayout>
-            
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" 
+            <howDoI:DescriptionView Grid.Row="0"
+                                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="3"
                               SizeChanged="MapView_OnSizeChanged" />
+
+            <Label Grid.Row="2" x:Name="AreaResult" FontAttributes="Bold" VerticalOptions="Center"  
+                   WidthRequest="200" HorizontalTextAlignment="Center"
+                   TextColor="White" Margin="10" BackgroundColor="Grey"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

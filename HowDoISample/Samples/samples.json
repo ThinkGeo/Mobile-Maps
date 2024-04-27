@@ -145,7 +145,7 @@
       {
         "id": "HowDoISample.MarkersAndPopups.CreatingMarkers",
         "title": "Creating Markers",
-        "description": "Tap anywhere on the map to place a marker."
+        "description": "Tap on the map to place a marker."
       },
       {
         "id": "HowDoISample.MarkersAndPopups.UsingMarkers",
@@ -336,7 +336,7 @@
       {
         "id": "HowDoISample.VectorDataGeometricOperation.TranslateShape",
         "title": "Translate a Shape",
-        "description": "Translate a shape by x/y or by distance/angle."
+        "description": "Move a shape by x/y or by distance/angle."
       },
       {
         "id": "HowDoISample.VectorDataGeometricOperation.CalculateCenterPoint",

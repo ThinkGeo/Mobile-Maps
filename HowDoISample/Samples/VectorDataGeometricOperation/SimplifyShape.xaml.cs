@@ -79,9 +79,9 @@ public partial class SimplifyShape
         var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
         cityLimits.Close();
 
-        // Simplify the first feature using the Douglas Peucker method
+        // Simplify the feature using Douglas Peucker and 500 tolerance
         var simplify = AreaBaseShape.Simplify(features[0].GetShape() as AreaBaseShape,
-            Convert.ToInt32(Tolerance.Text), SimplificationType.DouglasPeucker);
+            500, SimplificationType.DouglasPeucker);
 
         // Add the simplified shape into simplifyLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.

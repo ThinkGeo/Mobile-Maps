@@ -79,9 +79,9 @@ public partial class BufferShape
         var features = cityLimits.QueryTools.GetAllFeatures(ReturningColumnsType.NoColumns);
         cityLimits.Close();
 
-        // Buffer the first feature by the amount of the bufferDistance TextBox
+        // Buffer the first feature by 1000 meters
         var buffer = features[0]
-            .Buffer(Convert.ToInt32(BufferDistance.Text), GeographyUnit.Meter, DistanceUnit.Meter);
+            .Buffer(1000, GeographyUnit.Meter, DistanceUnit.Meter);
 
         // Add the buffer shape into an InMemoryFeatureLayer to display the result.
         // If this were to be a permanent change to the cityLimits FeatureSource, you would modify the underlying data using BeginTransaction and CommitTransaction instead.

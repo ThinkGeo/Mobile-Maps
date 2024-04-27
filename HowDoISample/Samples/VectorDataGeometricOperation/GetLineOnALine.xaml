@@ -9,42 +9,23 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="4"
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="3"
                     MapUnit="Meter" MapRotation="0" SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
-               
-                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="30,-120,0,5" Background="Gray" 
-                             WidthRequest="190" HorizontalOptions="Start" VerticalOptions="Center">
-                    <Label Text="Starting Offset (m):" FontAttributes="Bold"
-                          VerticalOptions="Center" TextColor="White" />
-                    <Entry x:Name="StartingOffset" Text="5000" TextColor="White"
-                          VerticalOptions="Center" Keyboard="Numeric" FontAttributes="Bold"/>
-                </StackLayout>
 
-                <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="30,-90,0,-10" Background="Gray" Spacing="30"
-                             WidthRequest="190" HorizontalOptions="Start" VerticalOptions="Center">
-                    <Label Text="Distance (m):" FontAttributes="Bold" VerticalOptions="Center" 
-                           TextColor="White" />
-                    <Entry x:Name="Distance" Text="10000" VerticalOptions="Center" Keyboard="Numeric" 
-                           TextColor="White" FontAttributes="Bold"/>
-                </StackLayout>
-
-            <Button Grid.Row="4" Text="Get the line segment" 
-                        TextColor="White" FontAttributes="Bold" Clicked="GetSubLine_OnClick"  Margin="30,-30,0,5" 
-                        BackgroundColor="Gray" WidthRequest="190" HorizontalOptions="Start" VerticalOptions="Center"/>
-
-
+            <Button Grid.Row="2" Text="Get a segment of a line" TextColor="White" 
+                    FontAttributes="Bold" Clicked="GetSubLine_OnClick" BackgroundColor="Gray" 
+                    WidthRequest="190" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

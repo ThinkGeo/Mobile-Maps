@@ -10,7 +10,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
-            </Grid.RowDefinitions>            
+            </Grid.RowDefinitions>
 
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
@@ -22,20 +22,9 @@
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="190"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <StackLayout Grid.Column="0"  Orientation="Horizontal" WidthRequest="180" Margin="10,0, 0, 20"  BackgroundColor="Gray" HorizontalOptions="Start">
-                    <Label Text="Buffer Distance(m):" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"/>
-                    <Entry x:Name="BufferDistance" Text="1000" Keyboard="Numeric"  WidthRequest="60" TextColor="White"/>
-                </StackLayout>
-                <Button Grid.Column="1" Text="Buffer" Clicked="BufferShape_OnClick" HorizontalOptions="Start" WidthRequest="180" 
-                        TextColor="White" FontAttributes="Bold" BackgroundColor="Gray" Margin="10,0, 0, 20"/>
-            </Grid>
-
-            </Grid>
+            <Button Grid.Row="2" Text="Buffer 1000 Meters" Clicked="BufferShape_OnClick" 
+                    HorizontalOptions="Center" WidthRequest="180" Margin="10" 
+                    BackgroundColor="Gray" TextColor="White" FontAttributes="Bold"/>
+        </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

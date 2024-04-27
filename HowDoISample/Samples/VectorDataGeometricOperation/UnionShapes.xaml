@@ -24,8 +24,7 @@
 
             <Button Grid.Row="2" Text="Union" TextColor="White" FontAttributes="Bold" 
                     Clicked="UnionShapes_OnClick" BackgroundColor="Gray" Margin="5,0,0,5"
-                    WidthRequest="200" HorizontalOptions="Start"/>
-            
+                    WidthRequest="200" HorizontalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>
