@@ -31,6 +31,8 @@ public partial class CalculateShortestLineBetweenShapes
         };
         MapView.Overlays.Add(backgroundOverlay);
 
+        MapView.MapTools.Add(new ZoomMapTool());
+
         var friscoParks = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"));
         var stadiumLayer = new InMemoryFeatureLayer();
