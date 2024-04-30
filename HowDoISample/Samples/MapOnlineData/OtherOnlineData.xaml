@@ -24,7 +24,8 @@
                    GoogleMaps &#x0a;
                    HereMapsRaster &#x0a;
                    MapBoxStaticTiles &#x0a;
-                   More through Customized Layer
+                   Extensible XyzLayer to support any XYZ format &#x0a;
+                   More through Customized Layers
                    "
                    LineBreakMode="WordWrap"  FontSize="20"/>
         </Grid>
