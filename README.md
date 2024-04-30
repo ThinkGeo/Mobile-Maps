@@ -1,8 +1,8 @@
 # ThinkGeo Maui Maps
 
-This repository is dedicated to providing samples and documentation for ThinkGeo's MAUI Components. As of now, ThinkGeo MAUI is in its Beta phase and is not recommended for production use. The official release is scheduled for May 1st, 2024, coinciding with the end of Microsoft's support for Xamarin.
+This repository is dedicated to providing samples and documentation for ThinkGeo's MAUI Components. ThinkGeo MAUI's official release date was May 1st, 2024, coinciding with the end of Microsoft's support for Xamarin.
 
-We are continuously making improvements to the SDK / adding more samples, so what you see today could not be the same as in the final release. 
+We are continuously making improvements to the SDK / adding more samples. 
 
 ## ThinkGeo Maui HowDoI Sample:
 #### Design Philosophy: Streamlined for Simplicity
