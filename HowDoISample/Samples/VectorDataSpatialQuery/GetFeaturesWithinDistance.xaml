@@ -22,9 +22,9 @@
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,20" VerticalOptions="End"  BackgroundColor="#80777777">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,20" VerticalOptions="End" BackgroundColor="#80777777">
                 <Slider x:Name="SearchRadius" Maximum="1600" Minimum="100" Value="400" HorizontalOptions="FillAndExpand"/>
-                <Label BindingContext="{x:Reference Name=SearchRadius}" Text="{Binding Path=Value, StringFormat='{0} m'}"  />
+                <Label TextColor="Black" Margin="20,0,20,0" Text="{Binding Path=Value, Source={x:Reference SearchRadius}, StringFormat='{0} m'}"/>
             </StackLayout>
 
         </Grid>

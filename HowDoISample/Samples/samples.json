@@ -275,7 +275,7 @@
       },
       {
         "id": "HowDoISample.VectorDataSpatialQuery.GetFeaturesWithinDistance",
-        "title": "Get Features Within a Distance",
+        "title": "Get Features Within Distance",
         "description": "Tap a point on the map and find the features within a given distance."
       },
       {

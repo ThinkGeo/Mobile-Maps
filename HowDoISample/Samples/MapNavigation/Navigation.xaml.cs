@@ -9,10 +9,6 @@ public partial class Navigation
     public Navigation()
     {
         InitializeComponent();
-
-        ThinkGeoDebugger.LogLevel = ThinkGeoLogLevel.All;
-        ThinkGeoDebugger.LogType = ThinkGeoLogType.All;
-
     }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
@@ -39,7 +35,7 @@ public partial class Navigation
             ProjectionConverter.Convert(4326, 3857, new PointShape(-73.985665442769, 40.7484366107232));
 
         var marker = new RollingTextMarker
-        { 
+        {
             Position = empireStateBuilding,
             Text = "Empire State Building",
             ImagePath = "empire_state_building.png"
