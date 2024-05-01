@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HowDoISample.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:howDoISample="clr-namespace:HowDoISample"
+    xmlns:mapNavigation="clr-namespace:HowDoISample.MapNavigation"
+    FlyoutBehavior="Disabled">
+
+    <!-- Flyout menu definition -->
+    <FlyoutItem Title="Menu" >
+        <ShellContent ContentTemplate="{DataTemplate howDoISample:MenuPage}" />
+    </FlyoutItem>
+
+    <!-- Main content -->
+    <TabBar>
+        <ShellContent
+            Title="Title"
+            ContentTemplate="{DataTemplate mapNavigation:Navigation}" 
+            Route="MainPage" />
+    </TabBar>
+</Shell>

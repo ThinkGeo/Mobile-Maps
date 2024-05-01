@@ -1,32 +1,97 @@
-# ThinkGeo Mobile Maps
+# ThinkGeo Maui Maps
 
-If you're new to ThinkGeo's Mobile Maps, we suggest you download ThinkGeo Maps from the App Store (iOS) or Google Play (Android). This app offers around 100 'HowDoI' samples showcasing ThinkGeo's Xamarin Mapping Components. The source code of this app can be found [here](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample). 
+This repository is dedicated to providing samples and documentation for ThinkGeo's MAUI Components. ThinkGeo MAUI's official release date was May 1st, 2024, coinciding with the end of Microsoft's support for Xamarin.
 
-[<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quick-start-guide/assets/Apple_Store_Badge.png"  width="180" height="60">](https://apps.apple.com/us/app/igis/id1559817900) [<img src="https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/raw/master/quick-start-guide/assets/Google_Play_Badge.png"  width="180" height="60">](https://play.google.com/store/apps/details?id=com.thinkgeo.androidhowdoi)
+We are continuously making improvements to the SDK / adding more samples. 
 
-## Repository Layout
-
-- `/quick-start-guide`: A guide to quickly get started.
-
-- `/samples/xamarin-forms`: A collection of "How Do I" samples, showcasing around 100 features in a user-friendly application.
-
-- `/docs`: Offline API documentation in Markdown format.
-
-## Quick Start Guide
-The Quick Start Guide shows you how to create a map in a Xamarin.Forms app using ThinkGeo Mobile Maps. By the end, you'll grasp the basics of Mobile Maps controls.
-
-- [ThinkGeo Mobile Quickstart Guide](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/quick-start-guide?ref_type=heads)
-
-## HowDoI Samples
-
-The ThinkGeo HowDoI Samples feature approximately 100 straightforward examples that demonstrate the capabilities of ThinkGeo's .NET Xamarin Mapping Components. You can use these samples as a foundation for your own application or refer to them to understand how to use our controls following best practices.
-
-- [ThinkGeo Xamarin.Forms Samples](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/samples/xamarin-forms/HowDoISample?ref_type=heads)
+## ThinkGeo Maui HowDoI Sample:
+#### Design Philosophy: Streamlined for Simplicity
+1. Avoids the use of MVVM patterns
+2. Excludes third-party NuGet packages
+3. Initializes by copying sample data to the AppData folder on first run
+    - Ensures data consistency across platforms
+    - Optimizes compatibility with ThinkGeo APIs
+4. Implementation Notes:
+    - No modifications needed in the Platforms folder; stick to default settings.
+    - Retain default settings in MauiProgram.cs.
+    - Contains comments to suppress Resharper warnings.
 
 
-## More Resources:
-- [ThinkGeo Mobile Edition Online Docs](https://docs.thinkgeo.com/products/mobile-maps/quickstart/) 
-    
-- [ThinkGeo Forum](https://community.thinkgeo.com/c/thinkgeo-ui-for-mobile/)
-        
-- [ThinkGeo Blog](https://www.thinkgeo.com/blog/) 
+### Development Environment Compatibility
+- **Visual Studio on Windows**: Target options include Windows, Android, and iOS (via a connected Mac machine).
+- **Rider on MacOS**: Supports targeting iOS, Android, and MacCatalyst.
+
+## ThinkGeo.UI.Maui Key Features 
+
+### 1. Comprehensive Support for Multiple Platforms
+
+1. Requires .Net 8.0
+2. Supports iOS, Android, Windows, and MacCatalyst platforms
+3. Relies on the same ThinkGeo.Core as other ThinkGeo products
+4. Easy to use, no need to write platform specific code. 
+5. Currently in beta. Version 13.3 will be aligned with other ThinkGeo products by May 1st, 2024.
+
+### 2. Live XAML Updates (Visual Studio)
+Observe real-time changes in XAML during development.
+
+### 3. Enhanced Animation Capabilities
+
+Each zooming function is awaitable and supports various AnimationSettings, including:
+- **AnimationLength**: Defaults to 150 milliseconds.
+- **EasingType**: Set to CubicInOut by default.
+- **AnimationType**: Enum with two options—DrawAfterAnimation (default) and DrawWithAnimation. Below is a diagram illustrating the difference between these two options.
+
+```mermaid
+graph TD;
+    A[Zoom to Extent] --> B[Zooming Animation on UI Thread];
+    B --> C[Draw on Background Thread];
+    C --> D[Post the new tiles on the map];
+
+    A1[Zoom to Extent] --> B1[Zooming Animation on UI Thread];
+    A1 --> C1[Draw on Background Thread];
+    B1 --> D1[Post the new tiles on the map];
+    C1 --> D1;
+
+```
+Customize default AnimationSettings or apply specific settings to individual methods.
+
+## 4. Responsive and Flexible APIs
+- Awaitable Methods: Every zooming method is awaitable and supports CancellationToken for operation cancellation. This responsiveness extends to system operations like map double-tapping.
+- Debugging Tools: Access internal information for debugging purposes.
+- Enhanced Control: Utilize the OverlaysRenderSequenceType enum to control whether overlays are rendered sequentially or concurrently.
+
+
+## Transition Guidance for Existing ThinkGeo Users
+
+- Seamless transition with the same ThinkGeo.Core.
+- From CurrentExtent to CenterPoint, Scale, and RotationAngle.
+- Transition from MapView.ZoomLevelSet to TileOverlay.ZoomLevelSet.
+- Increased reliance on XAML and data binding for map configurations.
+
+
+## Overlays
+
+```mermaid
+graph TD;
+    O1[Microsoft.Maui.Controls.AbsoluteLayout]-->A1
+    A1[Overlay] --> B11[GeoContentViewOverlay : INonRotatable];
+    A1[Overlay] --> B12[GraphicsViewOverlay];
+    A1[Overlay] --> B13[TileOverlay];
+    B11-->C111[PopupOverlay];
+    B11-->C112[PopupOverlay];
+    B12-->C121[LayerGraphicsViewOverlay];
+    B12-->C122[LayerNonRotationGraphicsViewOverlay:INonRotatable];
+    B12-->C123[InteractiveOverlay];
+    B13-->C131[ProgressiveTileOverlay];
+    B13-->C132[WebBasedTileOverlay];
+    B13-->C133[LayerOverlay];
+    C123-->D1211[TrackInteractiveOverlay]
+    C123-->D1212[EditInteractiveOverlay]
+    C132-->D1321[WmsOverlay]
+    C132-->D1322[XyzTileOverly]
+    C132-->D1323[ThinkGeoCloudVectorMapsOverlay]
+    D1322-->E13221[ThinkGeoCloudRasterMapsOverlay]
+
+    style A1 fill:#f9f,stroke:#333,stroke-width:4px
+
+```

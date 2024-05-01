@@ -1,0 +1,70 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HowDoISample.MenuPage"
+             x:Name="MyPage"
+             xmlns:local="clr-namespace:HowDoISample"
+             Title="Menu">
+
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="Black">
+        <!-- Logo -->
+        <Frame BackgroundColor="Black" >
+            <Image Source="thinkgeo_logo.png" MaximumWidthRequest="200" BackgroundColor="Black"/>
+        </Frame>
+
+        <ListView x:Name="CollectionViewMenu" IsGroupingEnabled="True" 
+             ItemsSource="{Binding Source={x:Reference MyPage}, Path=CurrentSampleGroups}"
+             ItemSelected="CollectionViewMenu_OnItemSelected" BackgroundColor="Black">
+
+            <!-- Sample Category -->
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate >
+                    <ViewCell x:DataType="local:GroupInfo" >
+                        <Label Text="{Binding Title}"
+                              FontSize="Subtitle"
+                              VerticalOptions="Fill"
+                              TextColor="White" 
+                              HorizontalOptions="Fill" BackgroundColor="Black"
+                              Margin="{OnPlatform iOS={OnIdiom Default=0}, Android={OnIdiom Default=4}, Default=0}"  >
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsExpanded}" Value="True">
+                                    <Setter Property="TextColor" Value="#61b7e1" />
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsExpanded}" Value="False">
+                                </DataTrigger>
+                            </Label.Triggers>
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                                                          CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            <!-- Sample Item -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell x:DataType="local:SampleInfo" >
+                        <Label Text="{Binding Title}" 
+                                   Padding="30, 2, 0, 2"  BackgroundColor="Black">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="TextColor" Value="#61b7e1" />
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                                    <Setter Property="TextColor"  Value="Gray" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

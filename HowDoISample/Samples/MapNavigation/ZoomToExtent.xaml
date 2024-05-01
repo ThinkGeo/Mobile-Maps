@@ -1,0 +1,62 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="clr-namespace:HowDoISample"
+                   x:Class="HowDoISample.MapNavigation.ZoomToExtent">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height ="50"/>
+                <RowDefinition Height ="50"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" 
+                                  x:Name="MapView" SizeChanged="MapView_SizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool />
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <ImageButton x:Name="CompassButton" Grid.Column="1" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_north_arrow.png" 
+                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+
+            <ImageButton x:Name="DefaultExtentButton" Grid.Column="1" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_globe_black.png"/>
+
+            <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" CascadeInputTransparent="False" 
+                         Margin="10" HorizontalOptions="Start" VerticalOptions="End">
+                <StackLayout Orientation="Horizontal" HeightRequest="20"  BackgroundColor="Grey">
+                    <CheckBox x:Name="SimultaneouslyDrawingCheckBox"></CheckBox>
+                    <Label>Draw during the Animation</Label>
+                </StackLayout>
+            </StackLayout>
+
+            <Button Grid.Row="2" Grid.Column="0" Margin="5" BackgroundColor="Gray" TextColor="White" 
+                    x:Name="ZoomToScaleButton" Text="Zoom To Scale 20000" />
+            <Button Grid.Row="2" Grid.Column="1" Margin="5" BackgroundColor="Gray" TextColor="White" 
+                    x:Name="ZoomToLayerButton" Text="Zoom to Layer BBox" />
+            <Button Grid.Row="3" Grid.Column="0" Margin="5" BackgroundColor="Gray" TextColor="White" 
+                    x:Name="ZoomToFeatureButton" Text="Zoom to a Feature"/>
+            <Button Grid.Row="3" Grid.Column="1" Margin="5" BackgroundColor="Gray" TextColor="White" 
+                    x:Name="CenterAtPointButton" Text="Center at (33.15, -96.82)"/>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>
+    

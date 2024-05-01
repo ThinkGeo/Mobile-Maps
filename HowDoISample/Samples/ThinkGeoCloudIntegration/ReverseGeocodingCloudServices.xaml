@@ -1,0 +1,50 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   xmlns:core="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.ReverseGeocodingCloudServices"
+                   x:Name="ThisPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged" SingleTap="MapView_OnSingleTap">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <ListView x:Name="ResultView"
+                SeparatorVisibility="Default"
+                Header="Found results: " 
+                      ItemSelected="lsbSearchResults_SelectionChanged"
+                      IsVisible="True" BackgroundColor="Grey" 
+                      HeightRequest="240" Grid.Row="2" WidthRequest="390" 
+                      HorizontalOptions="Center" VerticalOptions="End" 
+                      ItemsSource="{Binding Source={x:Reference ThisPage}, Path=NearByLocations}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="core:CloudReverseGeocodingLocation">
+                        <ViewCell Height="100">
+                            <StackLayout BindingContext="{Binding .}">
+                                <Label Text="{Binding Path=Address}" FontSize="13" Padding="3"/>
+                                <!-- Address List Item Layout -->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

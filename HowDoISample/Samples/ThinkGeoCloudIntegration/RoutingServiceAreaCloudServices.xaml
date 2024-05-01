@@ -1,0 +1,40 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.RoutingServiceAreaCloudServices">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>                
+            </Grid.RowDefinitions>
+            
+            <howDoI:DescriptionView Grid.Row="0"
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <StackLayout Grid.Row="1" x:Name="LoadingLayout"
+                         IsVisible="True"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="White"
+                         Opacity="0.5">
+                <ActivityIndicator x:Name="LoadingIndicator"
+                                   IsRunning="True"
+                                   Color="Grey"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

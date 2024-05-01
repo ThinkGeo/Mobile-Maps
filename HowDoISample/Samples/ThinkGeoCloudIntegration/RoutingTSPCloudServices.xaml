@@ -1,0 +1,63 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   xmlns:core="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.RoutingTspCloudServices">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                 Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Grid Grid.Row="2" HeightRequest="220"  BackgroundColor="Gray" 
+                  WidthRequest="340" HorizontalOptions="Start" Margin="10,-20,0,0">
+                <ListView Grid.Column="1" x:Name="LsbRouteSegments" HeightRequest="220"
+                              ItemSelected="lsbRouteSegments_SelectionChanged"  BackgroundColor="#80777777">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell x:DataType="core:CloudRoutingSegment" Text="{Binding Path=Instruction}"
+                                          Detail="{Binding Path=Distance, StringFormat='Distance: {0:0.00} meters'}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+            </Grid>
+
+            <StackLayout Grid.Row="0" x:Name="LoadingLayout"
+                         IsVisible="False"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="White"
+                         Opacity="0.5">
+                <ActivityIndicator x:Name="LoadingIndicator"
+                                   IsRunning="False"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

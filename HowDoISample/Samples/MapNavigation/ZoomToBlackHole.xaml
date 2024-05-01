@@ -1,0 +1,108 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+             xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+             xmlns:howDoI="using:HowDoISample"
+             x:Class="HowDoISample.MapNavigation.ZoomToBlackHole">
+
+    <ContentPage.Content>
+        <Grid  VerticalOptions="Fill" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <howDoI:DescriptionView Grid.Row="0" 
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+            <tgMaui:MapView x:Name="MapView" Grid.Row="1" Grid.RowSpan="2" 
+                            VerticalOptions="Fill" 
+                            CenterPoint="POINT (0 0)" MapScale="50000" 
+                            BackgroundColor="#06070c" 
+                            IsRotationEnabled="True" MinScale="0" 
+                            DefaultOverlaysRenderSequenceType="Concurrent"
+                            SizeChanged="MapView_OnSizeChanged">
+                <tgMaui:MapView.Overlays>
+
+                    <tgMaui:LayerOverlay TileType="SingleTile">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_0.jpg}" 
+                                                           CenterPoint="POINT (0 0)" UpperThreshold="200000"  Scale="50000" LowerThreshold="6000"/>
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_1.jpg}" 
+                                                 CenterPoint="POINT (960 3140)" Scale="5000" UpperThreshold="20000"  LowerThreshold="3000"/>
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_2.jpg}" 
+                                                 CenterPoint="POINT (1026 3138)" Scale="5000" UpperThreshold="7000"  LowerThreshold="200"/>
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_3.jpg}" 
+                                                 CenterPoint="POINT (1008 3140)" Scale="650" UpperThreshold="1000"   LowerThreshold="40" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_4.jpg}" 
+                                                 CenterPoint="POINT (1019 3159)" Scale="234" UpperThreshold="400" LowerThreshold="20" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_5.jpg}" 
+                                                 CenterPoint="POINT (1005.1 3152.5)" Scale="48" UpperThreshold="100" LowerThreshold="3" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_6.jpg}" 
+                                                 CenterPoint="POINT (1002.3 3151.8)" Scale="20" UpperThreshold="40"  LowerThreshold="1" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_7.jpg}" 
+                                                 CenterPoint="POINT (1001.05 3151.15)" Scale="2.2" UpperThreshold="8" LowerThreshold="0.5" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_8.jpg}" 
+                                                 CenterPoint="POINT (1000.775 3151.0768)" Scale="1.34" UpperThreshold="2" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                    <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_9.jpg}" 
+                                                 CenterPoint="POINT (1000.698 3151.046)" Scale="0.03" UpperThreshold="0.7" />
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                </tgMaui:MapView.Overlays>
+
+                <tgMaui:MapView.Behaviors>
+                    <tgMaui:AutoLoadMapViewBehavior/>
+                </tgMaui:MapView.Behaviors>
+
+                <tgMaui:MapView.MapTools>
+                    <tgMaui:ZoomMapTool x:Name="ZoomMapTool"/>
+                </tgMaui:MapView.MapTools>
+            </tgMaui:MapView>
+
+            <ImageButton  Grid.Row="1" Margin="10" VerticalOptions="Start"  HorizontalOptions="End"
+                x:Name="DefaultExtentButton" WidthRequest="40" HeightRequest="40"
+                Source="icon_globe_black.png"/>
+
+            <Button x:Name="ZoomToBlackHoleButton" Grid.Row="2" HorizontalOptions="Center" 
+                    BackgroundColor="Gray" TextColor="White" Text="Zoom To M87 Black Hole"/>
+            <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" 
+                   Text="{Binding Source={x:Reference MapView}, Path=MapScale,StringFormat='Scale: {0:N2}'}" 
+                   TextColor="White"/>
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

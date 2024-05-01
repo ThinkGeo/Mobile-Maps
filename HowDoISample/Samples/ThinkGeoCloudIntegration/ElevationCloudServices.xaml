@@ -1,0 +1,57 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   xmlns:core="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.ElevationCloudServices">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                 Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Grid Grid.Row="2" HeightRequest="220"  BackgroundColor="Gray" WidthRequest="220" 
+                  HorizontalOptions="Start" Margin="10,-30,0,0">
+                <ScrollView HeightRequest="220" Margin="5"  BackgroundColor="Gray">
+                    <StackLayout>
+                        <Label Text="Elevation Points" FontSize="20" FontAttributes="Bold"/>
+                        <ListView x:Name="LsbElevations" BackgroundColor="Transparent">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell x:DataType="core:CloudElevationPointResult">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                                                <Label Text="{Binding Path=Point.Y, StringFormat='Lat: {0:0.0000} '}" FontAttributes="Bold" />
+                                                <Label Text="{Binding Path=Point.X, StringFormat=' Lon: {0:0.0000} '}" FontAttributes="Bold" />
+                                            </StackLayout>
+                                            <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>  
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

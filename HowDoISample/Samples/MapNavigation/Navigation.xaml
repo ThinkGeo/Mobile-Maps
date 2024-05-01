@@ -1,0 +1,47 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.MapNavigation.Navigation">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{OnIdiom 
+                Phone=Double-tap to zoom in; Pinch to zoom/rotate , 
+                Desktop=Alt+Drag to rotate; Shift+Drag to track-zoom-in}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" 
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <ImageButton x:Name="CompassButton" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_north_arrow.png" 
+                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+
+            <ImageButton x:Name="DefaultExtentButton" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_globe_black.png"/>
+
+            <StackLayout Grid.Row="1" CascadeInputTransparent="False" 
+                         Margin="10" HorizontalOptions="Start" VerticalOptions="End">
+                <StackLayout Orientation="Horizontal" HeightRequest="20"  BackgroundColor="Grey">
+                    <CheckBox x:Name="ThemeCheckBox"></CheckBox>
+                    <Label>Dark Theme</Label>
+                </StackLayout>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

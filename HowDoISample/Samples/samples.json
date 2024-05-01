@@ -1,0 +1,483 @@
+[
+  {
+    "title": "Map Navigation",
+    "children": [
+      {
+        "id": "HowDoISample.MapNavigation.Navigation",
+        "title": "Navigate the Map",
+        "description": "Double-tap to zoom in, pinch to zoom/rotate. On Windows: Alt+Drag to rotate, Shift+Drag to track-zoom-in"
+      },
+      {
+        "id": "HowDoISample.MapNavigation.VehicleNavigation",
+        "title": "Vehicle Navigation",
+        "description": "Navigate to the Empire State Building using GPS points."
+      },
+      {
+        "id": "HowDoISample.MapNavigation.ZoomToExtent",
+        "title": "Zoom to Extents",
+        "description": "Zoom to extents using different methods."
+      },
+      {
+        "id": "HowDoISample.MapNavigation.ZoomToBlackHole",
+        "title": "Zoom to the Black Hole",
+        "description": "Zoom into images by giving them scales and center points."
+      }
+    ]
+  },
+  {
+    "title": "Map Online Data",
+    "children": [
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayThinkGeoBackground",
+        "title": "ThinkGeo Background",
+        "description": "Display ThinkGeo background."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayOpenStreetMap",
+        "title": "Open Street Map",
+        "description": "Display OpenStreetMap."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWms",
+        "title": "WMS",
+        "description": "Fetch tiles from a WMS Server."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWmts",
+        "title": "WMTS",
+        "description": "Fetch tiles from a WMTS Server."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWfs",
+        "title": "WFS",
+        "description": "Fetch and display features from a WFS V2 Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayOgcApiFeatures",
+        "title": "Ogc API Feature Server",
+        "description": "Fetch and display features from an OGC API - Features Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherStation",
+        "title": "NOAA Weather Stations",
+        "description": "Display NOAA Weather Stations."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherWarnings",
+        "title": "NOAA Weather Warnings",
+        "description": "Display NOAA Weather Warnings. Click on a weather polygon to get detail."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.OtherOnlineData",
+        "title": "Other Online Data Servers",
+        "description": "More data servers we support."
+      }
+    ]
+  },
+  {
+    "title": "Map Offline Data",
+    "children": [
+      {
+        "id": "HowDoISample.MapOfflineData.OfflineCloudMapsVectorLayer",
+        "title": "Display a ThinkGeo MBTiles File",
+        "description": "Show ThinkGeo Background Map Offline."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.ShapefileLayer",
+        "title": "Display a Shapefile",
+        "description": "Display a shapefile layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.SqLiteLayer",
+        "title": "Display a SQLite File",
+        "description": "Display a SQLite layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.CommonRasterLayers",
+        "title": "Display an image File",
+        "description": "This sample displays a JPEG image, but you can use the same code to display common image types such as PNG and BMP."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.EsriGridLayer",
+        "title": "Display a Grid File",
+        "description": "Display a grid layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.GpxLayer",
+        "title": "Display a GPX File",
+        "description": "Display a GPX layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.TabLayer",
+        "title": "Display a TAB File",
+        "description": "Display a TAB layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.TinyGeoLayer",
+        "title": "Display a TinyGeo File",
+        "description": "Display a TinyGeo layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.GeoTiffLayer",
+        "title": "Display a GeoTiff File",
+        "description": "Display a GeoTiff layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.InMemoryLayer",
+        "title": "Display Data from Memory",
+        "description": "Display an InMemory layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.ExtendingFeatureSources",
+        "title": "Display Custom Data",
+        "description": "Read GPS Points from a CSV file."
+      }
+    ]
+  },
+  {
+    "title": "Markers and Popups",
+    "children": [
+      {
+        "id": "HowDoISample.MarkersAndPopups.CreatingMarkers",
+        "title": "Creating Markers",
+        "description": "Tap on the map to place a marker."
+      },
+      {
+        "id": "HowDoISample.MarkersAndPopups.UsingMarkers",
+        "title": "Using Markers",
+        "description": "Check the code to see how to add markers."
+      },
+      {
+        "id": "HowDoISample.MarkersAndPopups.UsingPopups",
+        "title": "Using Popups",
+        "description": "Check the code to see how to add popups."
+      }
+    ]
+  },
+  {
+    "title": "Vector Data Styling",
+    "children": [
+      {
+        "id": "HowDoISample.VectorDataStyling.CreatePointStyle",
+        "title": "Render Points",
+        "description": "Render points using a PointStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateLineStyle",
+        "title": "Render Lines",
+        "description": "Render lines using a LineStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateAreaStyle",
+        "title": "Render Areas",
+        "description": "Render polygons using an AreaStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateTextStyle",
+        "title": "Render Labels",
+        "description": "Render labels using a TextStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateFilterStyle",
+        "title": "Render Based on Filters",
+        "description": "Render certain features using a FilterStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateRegexStyle",
+        "title": "Render Based on Regex",
+        "description": "Render certain features using regular expressions."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.StylingAcrossMultipleScales",
+        "title": "Render Based on Scales",
+        "description": "Render the data based on zoom levels. Zoom in and out to see the style difference."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateValueStyle",
+        "title": "Render Based on Values",
+        "description": "Render points based on their values using a ValueStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateClassBreakStyle",
+        "title": "Render Based on ClassBreaks",
+        "description": "Render polygons based on their values using a ClassBreakStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateClusterPointStyle",
+        "title": "Display Cluster Points",
+        "description": "Cluster points using a ClusterPointStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateDotDensityStyle",
+        "title": "Display Dot Density",
+        "description": "Render polygons with dot densities based on their values."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.CreateHeatStyle",
+        "title": "Display HeatMap",
+        "description": "Render a heatmap using a HeatStyle."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.IsoLineLayer",
+        "title": "Display ISOLine",
+        "description": "This sample shows how to display an ISOLine layer."
+      },
+      {
+        "id": "HowDoISample.VectorDataStyling.ExtendingStyles",
+        "title": "Custom Styles",
+        "description": "Render capitals using custom styles."
+      }
+    ]
+  },
+  {
+    "title": "Vector Data Editing",
+    "children": [
+      {
+        "id": "HowDoISample.VectorDataEditing.TrackEditDelete",
+        "title": "Edit Features",
+        "description": "Draw, edit, or delete shapes."
+      },
+      {
+        "id": "HowDoISample.VectorDataEditing.EditWithSnapping",
+        "title": "Edit Features with Snapping",
+        "description": "Drag a vertex into a circle, and it will snap to its center."
+
+      }
+    ]
+  },
+  {
+    "title": "Vector Data Spatial Query",
+    "children": [
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Contains",
+        "title": "Find Containing Features",
+        "description": "Tap a point on the map and see which feature contains it."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Crosses",
+        "title": "Find Crossing Features",
+        "description": "Draw a line and find out the crossing features. Long press to end drawing."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Disjoint",
+        "title": "Find Disjoint Features",
+        "description": "Draw a polygon and find out the disjoint features. Long press to end drawing."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Equals",
+        "title": "Check if Features are Equal",
+        "description": "Check out the code and see how to find out if two shapes are topologically equal."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.GetDataFromFeature",
+        "title": "Get Data from a Feature",
+        "description": "Tap on a feature to view its information."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.GetFeaturesWithinDistance",
+        "title": "Get Features Within Distance",
+        "description": "Tap a point on the map and find the features within a given distance."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Intersects",
+        "title": "Find Intersecting Features",
+        "description": "Draw a polygon and find out the intersecting features. Long press to end drawing."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Overlaps",
+        "title": "Find Overlapping Features",
+        "description": "Draw a polygon and find out the overlapping features. Long press to end drawing."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Touches",
+        "title": "Find Touching Features",
+        "description": "Check out the code and see how to get the features touching a given shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataSpatialQuery.Within",
+        "title": "Find Features within a Feature",
+        "description": "Draw a polygon and find out the features within. Long press to end drawing."
+      }
+    ]
+  },
+  {
+    "title": "Vector Data Geometric Operation",
+    "children": [
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.UnionShapes",
+        "title": "Union Shapes",
+        "description": "Combine two shapes into one."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.BufferShape",
+        "title": "Buffer a Shape",
+        "description": "Input the distance and buffer a shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.SimplifyShape",
+        "title": "Simplify a Shape",
+        "description": "Simplify a shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.RotateShape",
+        "title": "Rotate a Shape",
+        "description": "Rotate a shape by a given angle."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.ScaleShape",
+        "title": "Scale a Shape",
+        "description": "Scale a shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.TranslateShape",
+        "title": "Translate a Shape",
+        "description": "Move a shape by x/y or by distance/angle."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.CalculateCenterPoint",
+        "title": "Calculate the Center Point",
+        "description": "Tap on a feature to display its center point based on the selected algorithm."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.CalculateArea",
+        "title": "Calculate Area",
+        "description": "Tap on a feature to get its area."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.CalculateLength",
+        "title": "Calculate Length",
+        "description": "Tap on a feature to get its length."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.CalculateShortestLineBetweenShapes",
+        "title": "Get Shortest Line",
+        "description": "Tap on a park (green) to get the shortest line to the Frisco Stadium (blue point)."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.GetLineOnALine",
+        "title": "Get Line on a Line",
+        "description": "Get part of a line from an existing line."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.ClipShape",
+        "title": "Clip Shape",
+        "description": "Clip a shape from another shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.DifferenceShapes",
+        "title": "Get Shape Differences",
+        "description": "Get the difference of two shapes."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.GetConvexHull",
+        "title": "Get Convex Hull",
+        "description": "Get the convex hull of a shape."
+      },
+      {
+        "id": "HowDoISample.VectorDataGeometricOperation.GetEnvelope",
+        "title": "Get Envelope",
+        "description": "Get the envelope of a shape."
+      }
+    ]
+  },
+  {
+    "title": "Vector Data Topological Validation",
+    "children": [
+      {
+        "id": "HowDoISample.VectorDataTopologicalValidation.PointValidation",
+        "title": "Validate Point Topology",
+        "description": "Perform validation on points."
+      },
+      {
+        "id": "HowDoISample.VectorDataTopologicalValidation.LineValidation",
+        "title": "Validate Line Topology",
+        "description": "Perform validation on lines."
+      },
+      {
+        "id": "HowDoISample.VectorDataTopologicalValidation.PolygonValidation",
+        "title": "Validate Polygon Topology",
+        "description": "Perform validation on polygons."
+      }
+    ]
+  },
+  {
+    "title": "ThinkGeo Cloud Integration",
+    "children": [
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.RoutingCloudServices",
+        "title": "Routing",
+        "description": "Route through a set of waypoints with ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.RoutingServiceAreaCloudServices",
+        "title": "Routing - Service Area",
+        "description": "Find the service area of a location with ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.RoutingTspCloudServices",
+        "title": "Routing - Travelling Salesman",
+        "description": "Find an optimized route of the Travelling Salesman (TSP) problem with ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.ElevationCloudServices",
+        "title": "Elevation",
+        "description": "Draw a line on the map and get the elevations along the line. Long press to end drawing."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.GeocodingCloudServices",
+        "title": "Geocoding",
+        "description": "Type in an address and get its location/other information using ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.ReverseGeocodingCloudServices",
+        "title": "Reverse Geocoding",
+        "description": "Tap on the Map to get 20 nearby entities using ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.ColorUtilitiesCloudServices",
+        "title": "Color Utilities",
+        "description": "Generate color families using ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.TimezoneCloudServices",
+        "title": "Timezone",
+        "description": "Tap on the map to get the TimeZone from ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.ProjectionCloudServices",
+        "title": "Projection",
+        "description": "Project features using ThinkGeo Cloud."
+      },
+      {
+        "id": "HowDoISample.ThinkGeoCloudIntegration.WorldMapsQueryCloudServices",
+        "title": "World Maps Query",
+        "description": "Draw a polygon and get the intersecting buildings using ThinkGeo Cloud. Long press to end drawing."
+      }
+    ]
+  },
+  {
+    "title": "Miscellaneous",
+    "children": [
+      {
+        "id": "HowDoISample.Miscellaneous.SetupEverythingInXaml",
+        "title": "Set up the map only in Xaml",
+        "description": "Super Xaml Fan! Set up the map only in Xaml."
+      },
+      {
+        "id": "HowDoISample.Miscellaneous.WorldProjection",
+        "title": "World Projection",
+        "description": "Set the map to different projections. A projection may work well for a specific area, but it may distort other places."
+      },
+      {
+        "id": "HowDoISample.Miscellaneous.GenerateMapImage",
+        "title": "Generate Image from the Map",
+        "description": "This sample shows how to draw your map onto an image."
+      },
+      {
+        "id": "HowDoISample.Miscellaneous.ShowFeaturesProgressively",
+        "title": "Show Features Progressively",
+        "description": "Show features one by one on the map."
+      }
+    ]
+  }
+]

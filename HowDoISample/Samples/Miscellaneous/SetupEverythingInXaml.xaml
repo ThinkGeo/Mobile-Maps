@@ -1,0 +1,106 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+             xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+             xmlns:howDoI="using:HowDoISample"
+             x:Class="HowDoISample.Miscellaneous.SetupEverythingInXaml">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <howDoI:DescriptionView Grid.Row="0" 
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <tgMaui:MapView Grid.Row="1" MapUnit="Meter" 
+                            CenterPoint="POINT (-10780600 3916260)" MapScale="100000">
+                <tgMaui:MapView.Overlays>
+
+                    <!--Background Overlay -->
+                    <!-- ReSharper disable once MarkupAttributeTypo -->
+                    <tgMaui:ThinkGeoVectorOverlay
+                            ClientId="9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~" 
+                            ClientSecret="vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~" 
+                            MapType="Light"/>
+
+                    <!--Raster Image-->
+                    <tgMaui:LayerOverlay Opacity="0.7" TileType="SingleTile">
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:NativeImageRasterLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/frisco.jpg}"/>
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+
+                    <!--ShapeFile Area Layer for Frisco-->
+                    <tgMaui:LayerOverlay Opacity="0.7" TileType="SingleTile" >
+                        <tgMaui:LayerOverlay.Layers>
+                            <tgCore:ShapeFileFeatureLayer>
+
+                                <!--Set up the data path and projection-->
+                                <tgCore:ShapeFileFeatureLayer.FeatureSource>
+                                    <tgCore:ShapeFileFeatureSource ShapePathFilename="{tgMaui:AppDataFolder Path=Data/Shapefile/Subdivisions.shp}" >
+                                        <tgCore:ShapeFileFeatureSource.ProjectionConverter>
+                                            <tgCore:ProjectionConverter>
+                                                <tgCore:ProjectionConverter.InternalProjection>
+                                                    <tgCore:Projection Srid="2276"/>
+                                                </tgCore:ProjectionConverter.InternalProjection>
+                                                <tgCore:ProjectionConverter.ExternalProjection>
+                                                    <tgCore:Projection Srid="3857"/>
+                                                </tgCore:ProjectionConverter.ExternalProjection>
+                                            </tgCore:ProjectionConverter>
+                                        </tgCore:ShapeFileFeatureSource.ProjectionConverter>
+                                    </tgCore:ShapeFileFeatureSource>
+                                </tgCore:ShapeFileFeatureLayer.FeatureSource>
+
+                                <!--Set up the zoomlevel and style-->
+                                <tgCore:ShapeFileFeatureLayer.ZoomLevelSet>
+                                    <tgCore:ZoomLevelSet>
+                                        <tgCore:ZoomLevelSet.CustomZoomLevels>
+                                            <!--If we only add one zoomlevel in CustomZoomLevels collection, this zoomlevel will apply across all the scales
+                                                if we add multiple zoomlevels, the layer will use the style set in the nearest zoomlevel-->
+                                            <tgCore:ZoomLevel Scale="50000">
+                                                <tgCore:ZoomLevel.DefaultAreaStyle>
+                                                    <tgCore:AreaStyle>
+                                                        <tgCore:AreaStyle.OutlinePen>
+                                                            <tgCore:GeoPen Width="2">
+                                                                <tgCore:GeoPen.Color>
+                                                                    <tgCore:GeoColor R="100" G="0" B="255"/>
+                                                                </tgCore:GeoPen.Color>
+                                                            </tgCore:GeoPen>
+                                                        </tgCore:AreaStyle.OutlinePen>
+                                                    </tgCore:AreaStyle>
+                                                </tgCore:ZoomLevel.DefaultAreaStyle>
+                                            </tgCore:ZoomLevel>
+                                        </tgCore:ZoomLevelSet.CustomZoomLevels>
+                                    </tgCore:ZoomLevelSet>
+                                </tgCore:ShapeFileFeatureLayer.ZoomLevelSet>
+
+                            </tgCore:ShapeFileFeatureLayer>
+                        </tgMaui:LayerOverlay.Layers>
+                    </tgMaui:LayerOverlay>
+                </tgMaui:MapView.Overlays>
+
+                <tgMaui:MapView.Behaviors>
+                    <tgMaui:AutoLoadMapViewBehavior/>
+                </tgMaui:MapView.Behaviors>
+
+                <tgMaui:MapView.MapTools>
+                    <tgMaui:ZoomMapTool/>
+                    <tgMaui:CoordinateMapTool DisplayTextFormat="Lat:{1:N4}, Lon:{0:N4}" TextColor="White" BackgroundColor="Grey" Scale ="2" TranslationY="-20">
+                        <tgMaui:CoordinateMapTool.ProjectionConverter>
+                            <tgCore:ProjectionConverter>
+                                <tgCore:ProjectionConverter.InternalProjection>
+                                    <tgCore:Projection Srid="3857"/>
+                                </tgCore:ProjectionConverter.InternalProjection>
+                                <tgCore:ProjectionConverter.ExternalProjection>
+                                    <tgCore:Projection Srid="4326"/>
+                                </tgCore:ProjectionConverter.ExternalProjection>
+                            </tgCore:ProjectionConverter>
+                        </tgMaui:CoordinateMapTool.ProjectionConverter>
+                    </tgMaui:CoordinateMapTool>
+                </tgMaui:MapView.MapTools>
+            </tgMaui:MapView>
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

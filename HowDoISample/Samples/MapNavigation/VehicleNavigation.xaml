@@ -1,0 +1,40 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkGeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.MapNavigation.VehicleNavigation" >
+
+    <ContentPage.Content>
+
+        <Grid VerticalOptions="Fill">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0" 
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkGeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" 
+                              SizeChanged="MapView_OnSizeChanged" 
+                              IsRotationEnabled="True">
+                <thinkGeo:MapView.MapTools>
+                    <thinkGeo:ZoomMapTool/>
+                </thinkGeo:MapView.MapTools>
+            </thinkGeo:MapView>
+
+            <ImageButton Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End"
+                         WidthRequest="40" HeightRequest="40" Margin="5"
+                         Source="icon_north_arrow.png" 
+                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}" />
+
+            <StackLayout Grid.Row="1" BackgroundColor="Grey" 
+                         HorizontalOptions="Start" VerticalOptions="End" Margin="10">
+                <StackLayout Orientation="Horizontal" HeightRequest="20">
+                    <CheckBox x:Name="AerialBackgroundCheckBox"/>
+                    <Label>Aerial Background</Label>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

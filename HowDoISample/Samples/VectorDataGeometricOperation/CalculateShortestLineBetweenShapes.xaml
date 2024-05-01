@@ -1,0 +1,28 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.VectorDataGeometricOperation.CalculateShortestLineBetweenShapes">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="3"
+                              SizeChanged="MapView_OnSizeChanged" />
+
+            <Label Grid.Row="2" x:Name="DistanceResult" FontAttributes="Bold" VerticalOptions="Center"  
+                   WidthRequest="200" HorizontalTextAlignment="Center"
+                   TextColor="White" Margin="10" BackgroundColor="Grey"/>
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>

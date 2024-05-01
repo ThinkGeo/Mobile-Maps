@@ -1,0 +1,41 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.ThinkGeoCloudIntegration.GeocodingCloudServices">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <Button Grid.Row="1"  Clicked="Search_Click" BackgroundColor="Blue" TextColor="White"
+                        Text="Locate: 6101 Frisco Square Blvd, Frisco, TX 75034" Margin="0,0,0,10"
+                        VerticalOptions="End"  HorizontalOptions="CenterAndExpand" HeightRequest="40"/>
+
+            <ActivityIndicator
+                       IsRunning="True"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand" Grid.Row="1" x:Name="LoadingLayout"
+                       IsVisible="False"
+                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                       AbsoluteLayout.LayoutFlags="All"
+                       BackgroundColor="White"
+                       Opacity="0.5"/>
+
+        </Grid>
+
+    </ContentPage.Content>
+</howDoI:SamplePage>
