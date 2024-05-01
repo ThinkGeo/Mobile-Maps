@@ -346,13 +346,11 @@
 	  <EmbeddedResource Include="Samples\samples.json">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </EmbeddedResource>
-	  <EmbeddedResource Include="thinkgeo.howdoi.maui.android.mapsuitelicense" />
-	  <EmbeddedResource Include="thinkgeo.howdoi.maui.ios.mapsuitelicense" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta011" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta012" />
 	</ItemGroup>
 
 	<ItemGroup>
