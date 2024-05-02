@@ -35,8 +35,8 @@ namespace MauiSample
             MapView.IsRotationEnabled = true;
 
             // set up the map extent and refresh
-            MapView.CenterPoint = new PointShape(-10777932, 3912260);
-            MapView.MapScale = 100000;
+            MapView.CenterPoint = new PointShape(450061, 1074668);
+            MapView.MapScale = 74000000;
 
             await MapView.RefreshAsync();
         }
