@@ -8,12 +8,12 @@ In this section, we'll show you how to create a visually appealing map with Thin
 
 First, to begin working on the map, you'll need to create a .NET Maui project using Visual Studio 2022. Once that's done, we'll guide you through the process of adding the required packages and getting the map set up on the default form. Next, we'll show you how to add a background to the map.
 
-### Step 1: Create a Maui Project
+## Step 1: Create a Maui Project
 Create a C# Maui project with .NET 8.0. 
 
 <img src="./assets/create_maui_project_screen_shot.gif">
 
-### Step 2: Add Nuget Packages: 
+## Step 2: Add Nuget Packages: 
 
 Install the **ThinkGeo.UI.Maui** NuGet package through NuGet package manager.
 
@@ -21,7 +21,7 @@ You can switch between the Beta Branch and Release Branch by checking/unchecking
 
 <img src="./assets/add_nuget_packages_screen_shot.gif">
 
-### Step 3: Add the Map Control to `MainPage.xaml`
+## Step 3: Add the Map Control to `MainPage.xaml`
 
 Add ThinkGeo.UI.Maui namespace to `MainPage.xaml` 
 
@@ -46,7 +46,7 @@ Add the map control within `Grid` element in `MainPage.xaml` file.
 
 <img src="./assets/add_map_control_screen_shot.png">
 
-### Step 4: Add the ThinkGeo Background
+## Step 4: Add the ThinkGeo Background
 Import the namespace at the top of 'MainPage.xaml.cs` file.
 
 ```csharp
@@ -59,36 +59,36 @@ Add the following code to the MapView_OnSizeChanged event, which is triggered wh
 We have set up a tile cache for the base overlay to improve performance. The cache retrieves tiles from the local disk instead of downloading them from the internet each time they are needed.
 
 ```csharp
- private async void MapView_OnSizeChanged(object sender, EventArgs e)
- {
-     if (_initialized)
-         return;
-     _initialized = true;
+private async void MapView_OnSizeChanged(object sender, EventArgs e)
+{
+    if (_initialized)
+        return;
+    _initialized = true;
 
-     // Set the map's unit of measurement to meters(Spherical Mercator)
-     MapView.MapUnit = GeographyUnit.Meter;
+    // Set the map's unit of measurement to meters(Spherical Mercator)
+    MapView.MapUnit = GeographyUnit.Meter;
 
-     // Add ThinkGeo Cloud Maps as the background 
-     var backgroundOverlay = new ThinkGeoVectorOverlay
-     {
-         ClientId = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-         ClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~",
-         MapType = ThinkGeoCloudVectorMapsMapType.Light,
-         TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
-     };
-     MapView.Overlays.Add(backgroundOverlay);
+    // Add ThinkGeo Cloud Maps as the background 
+    var backgroundOverlay = new ThinkGeoVectorOverlay
+    {
+        ClientId = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
+        ClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~",
+        MapType = ThinkGeoCloudVectorMapsMapType.Light,
+        TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+    };
+    MapView.Overlays.Add(backgroundOverlay);
 
-     MapView.IsRotationEnabled = true;
+    MapView.IsRotationEnabled = true;
 
-     // set up the map extent and refresh
-     MapView.CenterPoint = new PointShape(-10777932, 3912260);
-     MapView.MapScale = 100000;
+    // set up the map extent and refresh
+    MapView.CenterPoint = new PointShape(450061, 1074668);
+    MapView.MapScale = 74000000;
 
-     await MapView.RefreshAsync();
- }
+    await MapView.RefreshAsync();
+}
 ```
 
-### Step 5: Run the Sample & Register for Your Free Evaluation
+## Step 5: Run the Sample & Register for Your Free Evaluation
 
 The first time you run your application, if you have not installed a license, you may encounter a 'licenses not installed' exception. 
 
