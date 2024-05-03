@@ -4,7 +4,7 @@ The project created in this guide is developed in .NET 8, and you can build the 
 
 # Maui Maps Quick Start: Display a Simple Map using Maui
 
-In this section, we'll show you how to create a visually appealing map with ThinkGeo Cloud Maps as the background. We highly recommend that you also take a look at the [How Do I Sample](https://gitlab.com/thinkgeo/public/thinkgeo-maui-maps/-/tree/main/HowDoISample?ref_type=heads), which contains numerous examples that cover virtually everything you can do with the control.
+In this section, we'll show you how to create a visually appealing map with ThinkGeo Cloud Maps as the background. We highly recommend that you also take a look at the [How Do I Sample](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/master/HowDoISample?ref_type=heads) on Gitlab, which contains numerous examples that cover virtually everything you can do with the control.
 
 First, to begin working on the map, you'll need to create a .NET Maui project using Visual Studio 2022. Once that's done, we'll guide you through the process of adding the required packages and getting the map set up on the default form. Next, we'll show you how to add a background to the map.
 
@@ -15,7 +15,7 @@ Create a C# Maui project with .NET 8.0.
 
 ### Step 2: Add Nuget Packages: 
 
-Install **ThinkGeo.UI.Maui** NuGet package through NuGet package manager.
+Install the **ThinkGeo.UI.Maui** NuGet package through NuGet package manager.
 
 You can switch between the Beta Branch and Release Branch by checking/unchecking the "Include prerelease" checkbox. The Beta Branch contains the latest features/bug fixes, while the Release Branch is more stable and better tested.
 
@@ -87,6 +87,7 @@ We have set up a tile cache for the base overlay to improve performance. The cac
      await MapView.RefreshAsync();
  }
 ```
+
 ### Step 5: Run the Sample & Register for Your Free Evaluation
 
 The first time you run your application, if you have not installed a license, you may encounter a 'licenses not installed' exception. 
