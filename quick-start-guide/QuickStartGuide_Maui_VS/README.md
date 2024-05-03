@@ -15,7 +15,7 @@ Create a C# Maui project with .NET 8.0.
 
 ### Step 2: Add Nuget Packages: 
 
-Install **ThinkGeo.UI.Wpf** NuGet package through NuGet package manager.
+Install **ThinkGeo.UI.Maui** NuGet package through NuGet package manager.
 
 You can switch between the Beta Branch and Release Branch by checking/unchecking the "Include prerelease" checkbox. The Beta Branch contains the latest features/bug fixes, while the Release Branch is more stable and better tested.
 
@@ -54,7 +54,7 @@ using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 ```
 
-Add the following code to the MapView_OnSizeChanged event, which is triggered when the map view is fully loaded and ready to use. (The key passed in ThinkGeoCloudVectorMapsOverlay is for test only, you can apply for your own key from [ThinkGeo Cloud](https://cloud.thinkgeo.com/clients.html))
+Add the following code to the MapView_OnSizeChanged event, which is triggered when the map view is fully loaded and ready to use. (The key passed in ThinkGeoVectorOverlay is for test only, you can apply for your own key from [ThinkGeo Cloud](https://cloud.thinkgeo.com/clients.html))
 
 We have set up a tile cache for the base overlay to improve performance. The cache retrieves tiles from the local disk instead of downloading them from the internet each time they are needed.
 
@@ -93,13 +93,17 @@ The first time you run your application, if you have not installed a license, yo
 
 ![Registration Exception](./assets/license_not_installed_exception_screen_shot.png "Registration Exception")
 
-Also you will be directed to [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. From there, you can download and install the Product Center and manage licenses for ThinkGeo products.  
+You can open the [ThinkGeo's Registration Website](https://helpdesk.thinkgeo.com/register), where you can create an account to begin a 30-day free evaluation. From there, you can download and install the Product Center and manage licenses for ThinkGeo products, please refer to the [ThinkGeo UI Maui License Guide](https://docs.thinkgeo.com/products/mobile-maps/license-guide/).  
 
 <img src="./assets/create_thinkgeo_account_screen_shot.png">
 
-Once you activate the 'ThinkGeo UI Maui' license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, use the mouse wheel to zoom in/out, and track zoom in by holding down the Shift key and tracking the map. Additionally, you can rotate the map by holding down the Alt key and dragging the map.
+Once you activate the 'ThinkGeo UI Maui' license to start your evaluation, you should be able to see the map with our Cloud Maps layer! You can double-click to zoom in, use the "Zoom Map Tool" to zoom in/out, and track zoom in by holding down the Shift key and tracking the map. Additionally, you can rotate the map by holding down the Alt key and dragging the map in Windows.
 
-<img src="./assets/cloud_maps_layer_screen_shot.gif">
+<img src="./assets/windows_cloud_maps_layer_screen_shot.gif">
+
+You can also double-click to zoom in, use the 'Zoom Map Tool' to zoom in/out, and rotate the map by holding down the Ctrl key and dragging it within the Android Emulator, or by pinching on the Android device.
+
+<img src="./assets/android_cloud_maps_layer_screen_shot.gif">
 
 ## Summary
 
