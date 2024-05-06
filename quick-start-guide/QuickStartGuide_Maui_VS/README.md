@@ -106,6 +106,10 @@ You can also double-click to zoom in, use the 'Zoom Map Tool' to zoom in/out, an
 
 <img src="./assets/android_cloud_maps_layer_screen_shot.gif">
 
+You can double-click to zoom in, use the 'Zoom Map Tool' to zoom in/out, and rotate the map by holding down the Alt key and dragging it within the iOS Emulator, or by pinching on the iOS device as well.
+
+<img src="./assets/ios_cloud_maps_layer_screen_shot.gif">
+
 ## Summary
 
 You now have a basic understanding of how to use the ThinkGeo UI Maui controls and can begin adding functionality to your own applications. Let's review what we've learned about the object relationships and how the pieces of ThinkGeo UI Maui work together:
