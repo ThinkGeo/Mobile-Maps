@@ -25,7 +25,7 @@
 
             <Button Grid.Row="2" Text="Get a segment of a line" TextColor="White" 
                     FontAttributes="Bold" Clicked="GetSubLine_OnClick" BackgroundColor="Gray" 
-                    WidthRequest="190" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

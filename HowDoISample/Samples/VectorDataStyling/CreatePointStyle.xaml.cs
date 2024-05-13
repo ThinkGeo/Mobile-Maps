@@ -51,7 +51,6 @@ public partial class CreatePointStyle
         _predefinedStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue, new GeoPen(GeoBrushes.White, 2));
 
         // Create an image point style
-        //_imageStyle = new PointStyle(new GeoImage(Path.Combine(FileSystem.Current.AppDataDirectory, "Resources", "Images", "hotel_icon.png")))
         _imageStyle = new PointStyle(new GeoImage(await FileSystem.OpenAppPackageFileAsync("hotel_icon.png")))
             {
                 SymbolSize = 40,

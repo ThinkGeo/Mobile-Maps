@@ -97,7 +97,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nPolygons being validated are shown in green. \nNon-overlapping polygon boundaries are shown in red.";
+            "Features being validated against are shown in blue. Polygons being validated are shown in green. Non-overlapping polygon boundaries are shown in red.";
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nPolygons being validated are shown in green. \nNon-overlapping polygon boundaries are shown in red.";
+            "Features being validated against are shown in blue. Polygons being validated are shown in green. Non-overlapping polygon boundaries are shown in red.";
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nOverlapping regions are shown in green. \nNon-overlapping regions are shown in red.";
+            "Features being validated against are shown in blue. Overlapping regions are shown in green. Non-overlapping regions are shown in red.";
     }
 
     /// <summary>
@@ -198,7 +198,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nPolygons fully within polygons are shown in green. \nPolygons not within polygons are shown in red.";
+            "Features being validated against are shown in blue. Polygons fully within polygons are shown in green. Polygons not within polygons are shown in red.";
     }
 
     /// <summary>
@@ -231,7 +231,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nPolygons containing points are shown in green. \nPolygons not containing points are shown in red.";
+            "Features being validated against are shown in blue. Polygons containing points are shown in green. Polygons not containing points are shown in red.";
     }
 
     /// <summary>
@@ -263,7 +263,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "All non-overlapping regions from two different sets of polygons are shown in red. \nOverlapping regions are shown in green";
+            "All non-overlapping regions from two different sets of polygons are shown in red. Overlapping regions are shown in green";
     }
 
     /// <summary>
@@ -296,7 +296,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated are shown in green. \nGaps (Inner rings) within the union of the polygons are shown in red.";
+            "Features being validated are shown in green. Gaps (Inner rings) within the union of the polygons are shown in red.";
     }
 
     /// <summary>
@@ -328,7 +328,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated are shown in green. \nOverlapping polygon regions are shown in red.";
+            "Features being validated are shown in green. Overlapping polygon regions are shown in red.";
     }
 
     /// <summary>
@@ -362,7 +362,7 @@ public partial class PolygonValidation
 
         // Update the help text
         TxtValidationInfo.Text =
-            "Features being validated against are shown in blue. \nNon-overlapping polygon regions are shown in green. \nOverlapping polygon regions are shown in red.";
+            "Features being validated against are shown in blue. Non-overlapping polygon regions are shown in green. Overlapping polygon regions are shown in red.";
     }
 
     /// <summary>

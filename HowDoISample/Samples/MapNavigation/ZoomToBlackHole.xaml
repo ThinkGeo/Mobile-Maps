@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <Grid  VerticalOptions="Fill" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
