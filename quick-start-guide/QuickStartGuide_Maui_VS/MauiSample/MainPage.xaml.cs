@@ -8,13 +8,13 @@ namespace MauiSample
         private bool _initialized;
         public MainPage()
         {
-            ThinkGeoDebugger.LogLevel = ThinkGeoLogLevel.All;
-            ThinkGeoDebugger.LogType = ThinkGeoLogType.Licensing;
             InitializeComponent();
         }
 
-        private async void MapView_OnSizeChanged(object sender, EventArgs e)
+        protected override async void OnSizeAllocated(double width, double height)
         {
+            base.OnSizeAllocated(width, height);
+        
             if (_initialized)
                 return;
             _initialized = true;
@@ -33,6 +33,7 @@ namespace MauiSample
             MapView.Overlays.Add(backgroundOverlay);
 
             MapView.IsRotationEnabled = true;
+            MapView.MapTools.Add(new ZoomMapTool());
 
             // set up the map extent and refresh
             MapView.CenterPoint = new PointShape(450061, 1074668);

@@ -7,9 +7,7 @@
     Shell.FlyoutBehavior="Disabled"
     Title="MauiSample">
 
-    <ShellContent
-        Title="Home"
+    <ShellContent        
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
 </Shell>
