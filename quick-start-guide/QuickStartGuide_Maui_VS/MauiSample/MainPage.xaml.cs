@@ -32,6 +32,7 @@ namespace MauiSample
             };
             MapView.Overlays.Add(backgroundOverlay);
 
+            // set up the map rotation and map tools
             MapView.IsRotationEnabled = true;
             MapView.MapTools.Add(new ZoomMapTool());
 
