@@ -12,8 +12,10 @@ public partial class ShapefileLayer
         InitializeComponent();
     }
 
-    private async void ShapefileLayer_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -37,12 +39,12 @@ public partial class ShapefileLayer
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
         var parksLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add the layer to the overlay we created earlier.
         parksOverlay.Layers.Add("Frisco Parks", parksLayer);

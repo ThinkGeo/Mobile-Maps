@@ -12,8 +12,10 @@ public partial class DisplayOpenStreetMap
         InitializeComponent();
     }
 
-    private async void OpenStreetMapLayer_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;

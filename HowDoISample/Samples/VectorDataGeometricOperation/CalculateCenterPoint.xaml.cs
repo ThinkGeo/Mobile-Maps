@@ -7,13 +7,15 @@ public partial class CalculateCenterPoint
 {
     private bool _initialized;
     public CalculateCenterPoint()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -64,7 +66,7 @@ public partial class CalculateCenterPoint
 
         // Set the map extent to the censusHousing layer bounding box
         MapView.CenterPoint = new PointShape(-10777600, 3920260);
-        MapView.MapScale = 800000;              
+        MapView.MapScale = 800000;
 
         await MapView.RefreshAsync();
     }
@@ -79,7 +81,7 @@ public partial class CalculateCenterPoint
         var centerPointLayer = (InMemoryFeatureLayer)centerPointOverlay.Layers["CenterPointLayer"];
 
         // Get the CenterPoint of the selected feature
-        var centerPoint = CentroidCenter.IsChecked 
+        var centerPoint = CentroidCenter.IsChecked
             ? feature.GetShape().GetCenterPoint() // Accurate, but can be relatively slower on extremely complex shapes
             : feature.GetBoundingBox().GetCenterPoint(); // BoundingBox method. Less accurate, but much faster
 
@@ -100,8 +102,8 @@ public partial class CalculateCenterPoint
         var pointInWorldCoordinate = MapView.ToWorldCoordinate(e.X, e.Y);
 
         // Query the censusHousing layer to get the first feature closest to the map tap event
-        var feature = censusHousingLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, 
-            GeographyUnit.Meter,1,ReturningColumnsType.NoColumns).First();
+        var feature = censusHousingLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate,
+            GeographyUnit.Meter, 1, ReturningColumnsType.NoColumns).First();
 
         await CalculateCenterPointFunction(feature);
     }

@@ -12,8 +12,10 @@ public partial class DisplayWfs
         InitializeComponent();
     }
 
-    private async void OpenStreetMapLayer_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -28,10 +30,10 @@ public partial class DisplayWfs
             ClientSecret = SampleKeys.ClientSecret,
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,  "thinkgeo_vector_light")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
         };
         MapView.Overlays.Add(thinkGeoVectorOverlay);
-                                       
+
         var helsinkiParcelsLayer = new WfsV2ProgressiveFeatureLayer("https://inspire-wfs.maanmittauslaitos.fi/inspire-wfs/cp/ows", "cp:CadastralParcel")
         {
             TimeoutInSeconds = 500,

@@ -12,8 +12,10 @@ public partial class SqLiteLayer
         InitializeComponent();
     }
 
-    private async void SQLiteLayer_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -37,7 +39,7 @@ public partial class SqLiteLayer
 
         // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
         var restaurantPath = Path.Combine(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "SQLite", "frisco-restaurants.sqlite"));
-        
+
         //var restaurantsLayer = new SqliteFeatureLayer($"Data Source={restaurantPath};", "restaurants", "id", "geometry");
         var restaurantsLayer = new SqliteFeatureLayer
         {

@@ -7,12 +7,14 @@ public partial class GetLineOnALine
 {
     private bool _initialized;
     public GetLineOnALine()
-	{
-		InitializeComponent();
-	}
-
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
+        InitializeComponent();
+    }
+
+    protected override async void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;

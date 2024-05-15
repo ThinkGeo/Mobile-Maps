@@ -8,12 +8,14 @@ public partial class PolygonValidation
 {
     private bool _initialized;
     public PolygonValidation()
-	{
-		InitializeComponent();
-	}
-
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
+        InitializeComponent();
+    }
+
+    protected override async void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -90,7 +92,7 @@ public partial class PolygonValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [coveredPolygonFeature], 
+            [coveredPolygonFeature],
             invalidResultFeatures,
             [coveringPolygonFeature]
             );
@@ -123,7 +125,7 @@ public partial class PolygonValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [polygonFeature], 
+            [polygonFeature],
             invalidResultFeatures,
             [lineFeature]
             );
@@ -158,7 +160,7 @@ public partial class PolygonValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [coveringPolygonFeature]
             );
 
@@ -192,7 +194,7 @@ public partial class PolygonValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [coveringPolygonFeature]
             );
 
@@ -210,7 +212,7 @@ public partial class PolygonValidation
             return;
 
         // Create a sample set of points and polygon features to use for the validation
-        var pointFeature = new Feature("POINT(40 40)");        
+        var pointFeature = new Feature("POINT(40 40)");
         var polygonWithPointFeature = new Feature("POLYGON((0 0,80 0,80 80,0 80,0 0))");
         var polygonFeature = new Feature("POLYGON((0 100,80 100,80 180,0 180,0 100))");
 
@@ -225,7 +227,7 @@ public partial class PolygonValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature, polygonWithPointFeature],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [pointFeature]
             );
 
@@ -257,7 +259,7 @@ public partial class PolygonValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [polygonFeature1, polygonFeature2], 
+            [polygonFeature1, polygonFeature2],
             invalidResultFeatures
             );
 
@@ -356,7 +358,7 @@ public partial class PolygonValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [coveringPolygonFeature]
             );
 
@@ -403,7 +405,7 @@ public partial class PolygonValidation
         var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
         centerPoint.Y -= 50;
         MapView.CenterPoint = centerPoint;
-        MapView.MapScale = 200000000;        
+        MapView.MapScale = 200000000;
         await MapView.RefreshAsync();
 
         validatedFeaturesLayer.Close();

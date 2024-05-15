@@ -14,13 +14,16 @@
             </Grid.RowDefinitions>
             <howDoI:DescriptionView Grid.Row="0" 
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
-            <tgMaui:MapView x:Name="MapView" Grid.Row="1" Grid.RowSpan="2" 
-                            VerticalOptions="Fill" 
-                            CenterPoint="POINT (0 0)" MapScale="50000" 
-                            BackgroundColor="#06070c" 
-                            IsRotationEnabled="True" MinScale="0" 
-                            DefaultOverlaysRenderSequenceType="Concurrent"
-                            SizeChanged="MapView_OnSizeChanged">
+            <tgMaui:MapView x:Name="MapView"
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            CenterPoint="POINT (0 0)"
+                            MapScale="50000"
+                            BackgroundColor="#06070c"
+                            IsRotationEnabled="True"
+                            MinScale="0"
+                            DefaultOverlaysRenderSequenceType="Concurrent">
                 <tgMaui:MapView.Overlays>
 
                     <tgMaui:LayerOverlay TileType="SingleTile">

@@ -11,8 +11,10 @@ public partial class DisplayWmts
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -34,7 +36,7 @@ public partial class DisplayWmts
         wmtsLayer.ActiveStyleName = "default";
         wmtsLayer.OutputFormat = "image/png";
         wmtsLayer.TileMatrixSetName = "21781_26";
-        wmtsLayer.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,  "WmtsTmpTileCache");
+        wmtsLayer.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "WmtsTmpTileCache");
 
         //Add the new WMTS Layer to our LayerOverlay
         var layerOverlay = new LayerOverlay();

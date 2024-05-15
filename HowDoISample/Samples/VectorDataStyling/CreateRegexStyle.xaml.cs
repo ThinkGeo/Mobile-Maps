@@ -12,8 +12,10 @@ public partial class CreateRegexStyle
         InitializeComponent();
     }
 
-    private async void CreateRegexStyle_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -32,13 +34,13 @@ public partial class CreateRegexStyle
         MapView.Overlays.Add(backgroundOverlay);
 
         var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Coyote_Sightings.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // Project the layer's data to match the projection of the map
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add the layer to a layer overlay
         var layerOverlay = new LayerOverlay();

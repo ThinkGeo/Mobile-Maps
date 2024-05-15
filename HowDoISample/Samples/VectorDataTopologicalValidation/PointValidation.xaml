@@ -18,8 +18,7 @@
                 <Label x:Name="TxtValidationInfo" FontAttributes="Italic" />
             </StackLayout>
 
-            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" MapUnit="Meter">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>

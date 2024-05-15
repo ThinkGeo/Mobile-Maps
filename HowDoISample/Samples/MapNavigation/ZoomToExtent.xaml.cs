@@ -15,8 +15,10 @@ public partial class ZoomToExtent
         InitializeComponent();
     }
 
-    private async void MapView_SizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -70,7 +72,7 @@ public partial class ZoomToExtent
                 ? MapAnimationType.DrawWithAnimation
                 : MapAnimationType.DrawAfterAnimation;
 
-        CompassButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () => 
+        CompassButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
             await MapView.ZoomToExtentAsync(MapView.CenterPoint, MapView.MapScale, 0, _animationSettings));
 
         DefaultExtentButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>

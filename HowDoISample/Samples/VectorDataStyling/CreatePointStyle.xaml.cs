@@ -16,8 +16,10 @@ public partial class CreatePointStyle
         InitializeComponent();
     }
 
-    private async void CreatePointStyle_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -52,18 +54,18 @@ public partial class CreatePointStyle
 
         // Create an image point style
         _imageStyle = new PointStyle(new GeoImage(await FileSystem.OpenAppPackageFileAsync("hotel_icon.png")))
-            {
-                SymbolSize = 40,
-                IsActive = false
-            };
+        {
+            SymbolSize = 40,
+            IsActive = false
+        };
 
         // Create a font point style
         _fontStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
-            {
-                Mask = new AreaStyle(GeoBrushes.White),
-                MaskType = MaskType.Circle,
-                IsActive = false
-            };
+        {
+            Mask = new AreaStyle(GeoBrushes.White),
+            MaskType = MaskType.Circle,
+            IsActive = false
+        };
 
         // Add the point style to the collection of custom styles for ZoomLevel 1.
         hotelsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(_predefinedStyle);

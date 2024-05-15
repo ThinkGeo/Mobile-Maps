@@ -13,8 +13,10 @@ public partial class Contains
         InitializeComponent();
     }
 
-    private async void Contains_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -69,7 +71,7 @@ public partial class Contains
 
         // Set the map extent to Frisco, TX
         MapView.MapScale = 25_000;
-        MapView.CenterPoint=new PointShape(-10779558, 3914201);
+        MapView.CenterPoint = new PointShape(-10779558, 3914201);
         await MapView.RefreshAsync();
     }
 
@@ -80,7 +82,7 @@ public partial class Contains
     {
         var queryFeatureMarkerOverlay = (SimpleMarkerOverlay)MapView.Overlays["MarkerOverlay"];
         queryFeatureMarkerOverlay.Children.Clear();
-       
+
         var marker = new ImageMarker
         {
             Position = point,

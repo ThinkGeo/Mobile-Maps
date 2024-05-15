@@ -17,8 +17,10 @@ public partial class EditWithSnapping
     private const float Tolerance = 25;
     private ShapeFileFeatureLayer _parksLayer;
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -26,7 +28,7 @@ public partial class EditWithSnapping
         MapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret,  ThinkGeoCloudVectorMapsMapType.Light);
+        var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret, ThinkGeoCloudVectorMapsMapType.Light);
         backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache");
         MapView.Overlays.Add("Background Maps", backgroundOverlay);
 

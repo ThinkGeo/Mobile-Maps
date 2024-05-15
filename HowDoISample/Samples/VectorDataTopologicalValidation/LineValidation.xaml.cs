@@ -8,12 +8,14 @@ public partial class LineValidation
 {
     private bool _initialized;
     public LineValidation()
-	{
-		InitializeComponent();
-	}
-
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
+        InitializeComponent();
+    }
+
+    protected override async void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -89,7 +91,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [lineFeature], 
+            [lineFeature],
             invalidResultFeatures,
             [pointOnEndpointFeature]
             );
@@ -122,7 +124,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [lineFeature, lineOnBoundaryFeature], 
+            [lineFeature, lineOnBoundaryFeature],
             invalidResultFeatures,
             [polygonFeature]
             );
@@ -155,7 +157,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [lineFeature], 
+            [lineFeature],
             invalidResultFeatures,
             [coveringLineFeature]
             );
@@ -370,7 +372,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [overlappedLineFeature], 
+            [overlappedLineFeature],
             invalidResultFeatures,
             [overlappingLineFeature]
             );
@@ -400,7 +402,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [selfIntersectingLine], 
+            [selfIntersectingLine],
             invalidResultFeatures
             );
 
@@ -429,7 +431,7 @@ public partial class LineValidation
 
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
-            [selfOverlappingLine], 
+            [selfOverlappingLine],
             invalidResultFeatures
             );
 
@@ -445,7 +447,7 @@ public partial class LineValidation
         Collection<Feature> filterFeatures = null)
     {
         // Get the InMemoryFeatureLayers from the MapView
-        var validatedFeaturesOverLay = (LayerOverlay)MapView.Overlays["Features Overlay"];        
+        var validatedFeaturesOverLay = (LayerOverlay)MapView.Overlays["Features Overlay"];
         var validatedFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Validated Features"];
         var filterFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Filter Features"];
         var resultFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Result Features"];
@@ -476,7 +478,7 @@ public partial class LineValidation
         var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
         centerPoint.Y -= 50;
         MapView.CenterPoint = centerPoint;
-        MapView.MapScale = 200000000;        
+        MapView.MapScale = 200000000;
         await MapView.RefreshAsync();
 
         validatedFeaturesLayer.Close();

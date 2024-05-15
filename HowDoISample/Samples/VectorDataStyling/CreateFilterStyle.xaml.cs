@@ -11,9 +11,11 @@ public partial class CreateFilterStyle
     {
         InitializeComponent();
     }
-   
-    private async void CreateFilterStyle_OnSizeChanged(object sender, EventArgs e)
+
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -32,13 +34,13 @@ public partial class CreateFilterStyle
         MapView.Overlays.Add(backgroundOverlay);
 
         var friscoCrimeLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Crime.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // Project the layer's data to match the projection of the map
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add friscoCrimeLayer to a LayerOverlay
         var layerOverlay = new LayerOverlay();

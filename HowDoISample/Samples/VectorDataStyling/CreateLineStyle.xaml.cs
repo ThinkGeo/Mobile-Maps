@@ -12,8 +12,10 @@ public partial class CreateLineStyle
         InitializeComponent();
     }
 
-    private async void CreateLineStyle_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;

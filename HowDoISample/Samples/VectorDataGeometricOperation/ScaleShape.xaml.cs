@@ -3,18 +3,20 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
 
-public partial class ScaleShape 
+public partial class ScaleShape
 {
     private bool _initialized;
     private double _scaleFactor = 1;
 
     public ScaleShape()
-	{
-		InitializeComponent();
-	}
-
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
+        InitializeComponent();
+    }
+
+    protected override async void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;

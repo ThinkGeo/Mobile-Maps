@@ -12,8 +12,10 @@ public partial class InMemoryLayer
         InitializeComponent();
     }
 
-    private async void InMemoryLayer_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -37,12 +39,12 @@ public partial class InMemoryLayer
 
         // Create a new layer that we will pull features from to populate the in memory layer.
         var shapeFileLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Mosquitoes.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         shapeFileLayer.Open();
 

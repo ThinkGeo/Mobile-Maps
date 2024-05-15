@@ -11,8 +11,10 @@ public partial class UsingMarkers
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -48,13 +50,13 @@ public partial class UsingMarkers
         var markerOverlay = new SimpleMarkerOverlay();
 
         var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Hotels.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // Project the data to match the map's projection
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Open the layer so that we can begin querying
         hotelsLayer.Open();

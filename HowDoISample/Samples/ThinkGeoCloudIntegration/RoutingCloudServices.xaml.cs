@@ -8,12 +8,14 @@ public partial class RoutingCloudServices
     private bool _initialized;
     private RoutingCloudClient _routingCloudClient;
     public RoutingCloudServices()
-	{
-		InitializeComponent();
-	}
-
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
+        InitializeComponent();
+    }
+
+    protected override async void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -66,7 +68,7 @@ public partial class RoutingCloudServices
         // Set the map extent to Frisco, TX
         MapView.CenterPoint = new PointShape(-10777600, 3915260);
         MapView.MapScale = 240000;
-        
+
         // Initialize the RoutingCloudClient with our ThinkGeo Cloud Client credentials
         _routingCloudClient = new RoutingCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
 
@@ -140,7 +142,7 @@ public partial class RoutingCloudServices
         routingLayer.Open();
         await MapView.ZoomToExtentAsync(AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetCenterPoint(),
             50000, 0, new AnimationSettings());
-        routingLayer.Close();        
+        routingLayer.Close();
 
         await routingOverlay.RefreshAsync();
     }

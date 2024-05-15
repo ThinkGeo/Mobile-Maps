@@ -28,8 +28,10 @@ public partial class TrackEditDelete
         set => SetValue(InstructionProperty, value);
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -164,7 +166,7 @@ public partial class TrackEditDelete
         MapView.TrackOverlay.TrackMode = TrackMode.Line;
 
         // Update instructions
-        Instruction  =
+        Instruction =
             "Draw Line Mode - Tap the map to add a vertex, tap-move to relocate the vertex, long press to finish.";
     }
 

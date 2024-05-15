@@ -17,8 +17,7 @@
             <howDoI:DescriptionView Grid.Row="0"
                                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="3"
-                              SizeChanged="MapView_OnSizeChanged" />
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" Grid.RowSpan="3"/>
 
             <Label Grid.Row="2" x:Name="LengthResult" FontAttributes="Bold" VerticalOptions="Center"  
                    WidthRequest="200" HorizontalTextAlignment="Center"

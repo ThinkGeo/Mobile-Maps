@@ -7,13 +7,15 @@ public partial class CreatingMarkers
 {
     private bool _initialized;
     public CreatingMarkers()
-	{
+    {
         InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -34,7 +36,7 @@ public partial class CreatingMarkers
         MapView.MapTools.Add(new ZoomMapTool());
 
         // Set the map extent        
-        MapView.CenterPoint = new PointShape(-10777132, 3908560);        
+        MapView.CenterPoint = new PointShape(-10777132, 3908560);
         MapView.MapScale = 12000;
 
         var simpleMarkerOverlay = new SimpleMarkerOverlay();
@@ -55,16 +57,16 @@ public partial class CreatingMarkers
         // Create a marker at the position the mouse was tapped
         var marker = new ImageMarker
         {
-            Position = pointInWorldCoordinate, 
-            ImagePath = "marker.png",            
+            Position = pointInWorldCoordinate,
+            ImagePath = "marker.png",
             TranslationY = -17,
-            WidthRequest =20,
+            WidthRequest = 20,
             HeightRequest = 34
         };
 
         // Add the marker to the simpleMarkerOverlay and refresh the map        
         simpleMarkerOverlay.Children.Add(marker);
-                
-        await simpleMarkerOverlay.RefreshAsync();        
+
+        await simpleMarkerOverlay.RefreshAsync();
     }
 }

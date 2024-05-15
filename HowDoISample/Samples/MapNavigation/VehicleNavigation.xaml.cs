@@ -29,8 +29,10 @@ public partial class VehicleNavigation
         _disposed = true;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -180,7 +182,7 @@ public partial class VehicleNavigation
         var centerPoint = new PointShape(currentLocation);
 
         // Recenter the map to display the GPS location towards the bottom for improved visibility.
-        centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200,  angle, MapView.MapScale, MapView.MapUnit);
+        centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, MapView.MapScale, MapView.MapUnit);
 
         await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Default, cancellationToken);
         UpdateVisitedRoutes(_gpsPoints[gpsPointIndex]);

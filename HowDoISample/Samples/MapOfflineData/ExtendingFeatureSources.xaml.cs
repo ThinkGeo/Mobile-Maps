@@ -13,8 +13,10 @@ public partial class ExtendingFeatureSources
         InitializeComponent();
     }
 
-    private async void ExtendingFeatureSources_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -34,13 +36,13 @@ public partial class ExtendingFeatureSources
 
         // See the implementation of the new layer and feature source below.
         var csvLayer = new SimpleCsvFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Csv", "vehicle-route.csv"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // this converter convert Decimal Degrees GPS points(epsg:4326) to the projection of ThinkGeo Background map (epsg:3857).
                     ProjectionConverter = new ProjectionConverter(4326, 3857)
                 }
-            };
+        };
 
         // Set the points image to a car icon and then apply it to all zoomlevels
         var vehiclePointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 8, GeoColors.Black);

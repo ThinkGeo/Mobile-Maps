@@ -12,8 +12,10 @@ public partial class CreateAreaStyle
         InitializeComponent();
     }
 
-    private async void CreateAreaStyle_OnSizeChanged(object sender, EventArgs e)
+    protected override async void OnSizeAllocated(double width, double height)
     {
+        base.OnSizeAllocated(width, height);
+
         if (_initialized)
             return;
         _initialized = true;
@@ -32,13 +34,13 @@ public partial class CreateAreaStyle
         MapView.Overlays.Add(backgroundOverlay);
 
         var friscoSubdivisions = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // Project the layer's data to match the projection of the map
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add the layer to a layer overlay
         var layerOverlay = new LayerOverlay();
