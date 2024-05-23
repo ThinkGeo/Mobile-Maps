@@ -17,10 +17,8 @@ public partial class EditWithSnapping
     private const float Tolerance = 25;
     private ShapeFileFeatureLayer _parksLayer;
 
-    protected override async void OnSizeAllocated(double width, double height)
+    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        base.OnSizeAllocated(width, height);
-
         if (_initialized)
             return;
         _initialized = true;

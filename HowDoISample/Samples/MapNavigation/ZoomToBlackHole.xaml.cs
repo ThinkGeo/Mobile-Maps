@@ -15,10 +15,8 @@ public partial class ZoomToBlackHole
     {
         InitializeComponent();
     }
-    protected override void OnSizeAllocated(double width, double height)
+    private void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        base.OnSizeAllocated(width, height);
-
         if (_initialized)
             return;
         _initialized = true;

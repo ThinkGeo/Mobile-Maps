@@ -20,7 +20,8 @@
             <Label Grid.Row="1" FontAttributes="Italic" BackgroundColor="Black" TextColor="Yellow" FontSize="12"
                    Text="{Binding Instruction, Source={x:Reference ThisPage}}"/>
 
-            <thinkgeo:MapView Grid.Row="2" Grid.RowSpan="2" x:Name="MapView">
+            <thinkgeo:MapView Grid.Row="2" Grid.RowSpan="2" x:Name="MapView"
+                              SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>

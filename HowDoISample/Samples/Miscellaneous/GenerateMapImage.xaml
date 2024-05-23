@@ -12,7 +12,7 @@
 
             <howDoI:DescriptionView Grid.Row="0" Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <Image Grid.Row="1" x:Name="MapImage"/>
+            <Image Grid.Row="1" x:Name="MapImage" SizeChanged="GenerateMapImage_OnSizeChanged"/>
 
             <StackLayout Grid.Row="1" x:Name="LoadingLayout" IsVisible="False" AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All" BackgroundColor="White" Opacity="0.5">

@@ -23,7 +23,8 @@
                             BackgroundColor="#06070c"
                             IsRotationEnabled="True"
                             MinScale="0"
-                            DefaultOverlaysRenderSequenceType="Concurrent">
+                            DefaultOverlaysRenderSequenceType="Concurrent"
+                            SizeChanged="MapView_OnSizeChanged">
                 <tgMaui:MapView.Overlays>
 
                     <tgMaui:LayerOverlay TileType="SingleTile">

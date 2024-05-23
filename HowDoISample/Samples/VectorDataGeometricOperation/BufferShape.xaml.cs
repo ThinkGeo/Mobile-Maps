@@ -11,10 +11,8 @@ public partial class BufferShape
         InitializeComponent();
     }
 
-    protected override async void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-
+    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    {       
         if (_initialized)
             return;
         _initialized = true;

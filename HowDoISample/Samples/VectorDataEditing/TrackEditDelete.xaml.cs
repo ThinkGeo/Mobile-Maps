@@ -28,10 +28,8 @@ public partial class TrackEditDelete
         set => SetValue(InstructionProperty, value);
     }
 
-    protected override async void OnSizeAllocated(double width, double height)
+    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        base.OnSizeAllocated(width, height);
-
         if (_initialized)
             return;
         _initialized = true;

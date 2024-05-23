@@ -18,10 +18,8 @@ public partial class ReverseGeocodingCloudServices
         ResultView.IsVisible = false;
     }
 
-    protected override async void OnSizeAllocated(double width, double height)
+    private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        base.OnSizeAllocated(width, height);
-
         if (_initialized)
             return;
         _initialized = true;

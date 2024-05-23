@@ -13,10 +13,8 @@ public partial class GenerateMapImage
         InitializeComponent();
     }
 
-    protected override async void OnSizeAllocated(double width, double height)
+    private async void GenerateMapImage_OnSizeChanged(object sender, EventArgs e)
     {
-        base.OnSizeAllocated(width, height);
-
         if (_initialized)
             return;
         _initialized = true;
