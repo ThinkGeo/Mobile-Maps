@@ -16,7 +16,7 @@
                 Phone=Double-tap to zoom in; Pinch to zoom/rotate , 
                 Desktop=Alt+Drag to rotate; Shift+Drag to track-zoom-in}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" >
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" SizeChanged="MapView_OnSizeChanged" >
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>

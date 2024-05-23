@@ -12,7 +12,7 @@
             </Grid.RowDefinitions>
 
             <howDoI:DescriptionView Grid.Row="0"
-                                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+                                    Description="{Binding Description, Source={x:Reference BasePage}}"/>
 
             <thinkgeo:MapView Grid.Row="1" x:Name="MapView"/>
 

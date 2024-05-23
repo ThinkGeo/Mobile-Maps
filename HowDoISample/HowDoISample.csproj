@@ -153,7 +153,6 @@
 	  <None Remove="Data\Tab\City_ETJ.tab" />
 	  <None Remove="Data\TinyGeo\Zoning.tgeo" />
 	  <None Remove="Resources\Raw\coyote_paw.png" />
-	  <None Remove="Resources\Raw\hotel_icon.png" />
 	  <None Remove="Resources\Raw\vandalism_icon.png" />
 	  <None Remove="Resources\Raw\weapon_icon.png" />
 	  <None Remove="thinkgeo.howdoi.maui.android.mapsuitelicense" />
@@ -350,7 +349,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0-beta005" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0-beta022" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -450,8 +449,8 @@
 	  <Compile Update="Samples\MapOnlineData\DisplayThinkGeoBackground.xaml.cs">
 	    <DependentUpon>DisplayThinkGeoBackground.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MarkersAndPopups\CreatingMarkers.xaml.cs">
-	    <DependentUpon>CreatingMarkers.xaml</DependentUpon>
+	  <Compile Update="Samples\MarkersAndPopups\HotelMarker.xaml.cs">
+	    <DependentUpon>HotelMarker.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MarkersAndPopups\UsingPopups.xaml.cs">
 	    <DependentUpon>UsingPopups.xaml</DependentUpon>
@@ -540,7 +539,7 @@
 	  <MauiXaml Update="Samples\MarkersAndPopups\UsingMarkers.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\MarkersAndPopups\CreatingMarkers.xaml">
+	  <MauiXaml Update="Samples\MarkersAndPopups\HotelMarker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MarkersAndPopups\UsingPopups.xaml">
@@ -639,8 +638,8 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
   </ItemGroup>
   
 </Project>

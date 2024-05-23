@@ -1,0 +1,45 @@
+<maui:Marker xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="HowDoISample.MarkersAndPopups.HotelMarker"
+                xmlns:maui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                x:Name="This"
+                WidthRequest="50" HeightRequest="50">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column ="0" Grid.ColumnSpan="3"
+               x:Name="ImgMachine" Margin="4" Source="pin.png">
+        </Image>
+
+        <Grid HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="1" Grid.Column="1">
+            <Ellipse x:Name="Status">
+                <Ellipse.Style>
+                    <Style TargetType="Ellipse">
+                        <Setter Property="Fill" Value="Red" />
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Ellipse" Binding="{Binding Source={x:Reference Name=This}, Path=StatusCode}" Value="1">
+                                <Setter Property="Fill" Value="Yellow" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Ellipse" Binding="{Binding Source={x:Reference Name=This}, Path=StatusCode}" Value="2">
+                                <Setter Property="Fill" Value="Blue" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Ellipse" Binding="{Binding Source={x:Reference Name=This}, Path=StatusCode}" Value="3">
+                                <Setter Property="Fill" Value="Green" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Ellipse.Style>
+            </Ellipse>
+        </Grid>
+    </Grid>
+
+</maui:Marker>
