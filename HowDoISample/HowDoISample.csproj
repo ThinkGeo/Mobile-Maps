@@ -61,7 +61,8 @@
 	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
 	  <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
 	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
-	  <None Remove="Data\Mbtiles\Frisco.mbtiles" />
+	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
+	  <None Remove="Data\Mbtiles\style.json" />
 	  <None Remove="Data\Railroad\Railroad.dbf" />
 	  <None Remove="Data\Railroad\Railroad.ids" />
 	  <None Remove="Data\Railroad\Railroad.idx" />
@@ -184,7 +185,8 @@
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
-	  <EmbeddedResource Include="Data\Mbtiles\Frisco.mbtiles" />
+	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
+	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
@@ -349,10 +351,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0-beta024" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0-beta026" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Samples\MapOfflineData\MbTilesFile.xaml.cs">
+	    <DependentUpon>MbTilesFile.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\SQLiteLayer.xaml.cs">
 	    <DependentUpon>SqLiteLayer.xaml</DependentUpon>
 	  </Compile>
@@ -471,6 +476,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\DescriptionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOfflineData\MbTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOnlineData\DisplayWmts.xaml">
