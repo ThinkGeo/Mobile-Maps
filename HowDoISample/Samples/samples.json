@@ -55,7 +55,7 @@
       {
         "id": "HowDoISample.MapOnlineData.DisplayOgcApiFeatures",
         "title": "Ogc API Feature Server",
-        "description": "Fetch and display features from a OGC API - Features Server"
+        "description": "Fetch and display features from an OGC API - Features Server"
       },
       {
         "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherStation",
@@ -126,11 +126,6 @@
         "id": "HowDoISample.MapOfflineData.InMemoryLayer",
         "title": "Display Data from Memory",
         "description": "Display an InMemory layer."
-      },
-      {
-        "id": "HowDoISample.MapOfflineData.GraticuleLayer",
-        "title": "Display Graticule Lines",
-        "description": "Display a Graticule layer."
       },
       {
         "id": "HowDoISample.MapOfflineData.ExtendingFeatureSources",
@@ -477,6 +472,11 @@
         "id": "HowDoISample.Miscellaneous.GenerateMapImage",
         "title": "Generate Image from the Map",
         "description": "This sample shows how to draw your map onto an image."
+      },
+      {
+        "id": "HowDoISample.Miscellaneous.ShowFeaturesProgressively",
+        "title": "Show Features Progressively",
+        "description": "Show features one by one on the map."
       }
     ]
   }

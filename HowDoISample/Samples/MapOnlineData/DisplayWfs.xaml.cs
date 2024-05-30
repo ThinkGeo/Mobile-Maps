@@ -40,7 +40,7 @@ public partial class DisplayWfs
         helsinkiParcelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         helsinkiParcelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(3067, 3857);
 
-        var overlay = new ProgressiveFeaturesOverlay()
+        var overlay = new ProgressiveFeaturesTileOverlay()
         {
             FeatureLayer = helsinkiParcelsLayer,
             DrawingBulkCount = 200

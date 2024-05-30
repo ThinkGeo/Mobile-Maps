@@ -39,7 +39,7 @@ public partial class DisplayOgcApiFeatures
         ignLayer.ZoomLevelSet.ZoomLevel13.DefaultPointStyle = PointStyle.CreateSimplePointStyle(PointSymbolType.Circle, GeoColors.Black, 10);
         ignLayer.ZoomLevelSet.ZoomLevel13.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-        var overlay = new ProgressiveFeaturesOverlay()
+        var overlay = new ProgressiveFeaturesTileOverlay()
         {
             FeatureLayer = ignLayer,
             DrawingBulkCount = 100

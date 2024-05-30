@@ -352,7 +352,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta010" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0-beta011" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -376,6 +376,9 @@
 	  </Compile>
 	  <Compile Update="Samples\MapOnlineData\DisplayOpenStreetMap.xaml.cs">
 	    <DependentUpon>DisplayOpenStreetMap.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Samples\Miscellaneous\ShowFeaturesProgressively.xaml.cs">
+	    <DependentUpon>ShowFeaturesProgressively.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\VectorDataStyling\ISOLineLayer.xaml.cs">
 	    <DependentUpon>IsoLineLayer.xaml</DependentUpon>
@@ -480,6 +483,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOnlineData\DisplayWfs.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\Miscellaneous\ShowFeaturesProgressively.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\VectorDataSpatialQuery\Within.xaml">

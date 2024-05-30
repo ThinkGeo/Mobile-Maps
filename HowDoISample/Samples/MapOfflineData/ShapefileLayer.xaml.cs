@@ -32,7 +32,7 @@ public partial class ShapefileLayer
         MapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
-        var parksOverlay = new ProgressiveTileOverlay();
+        var parksOverlay = new LayerOverlay();
         MapView.Overlays.Add(parksOverlay);
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
@@ -45,9 +45,7 @@ public partial class ShapefileLayer
             };
 
         // Add the layer to the overlay we created earlier.
-        //parksOverlay.Layers.Add("Frisco Parks", parksLayer);
-        parksOverlay.FeatureLayer = parksLayer;
-        parksOverlay.DrawingBulkCount = 1;
+        parksOverlay.Layers.Add("Frisco Parks", parksLayer);
 
         // Create a dashed pen that we will use below.
         var dashedPen = new GeoPen(GeoColors.Green, 5);
