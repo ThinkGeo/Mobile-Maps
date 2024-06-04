@@ -32,8 +32,9 @@ public partial class MbTilesFile
         MapView.CenterPoint = new PointShape(0, 0);
         MapView.MapScale = 100000000;
 
-        var backgroundColor = MbStyle.ParseBackgroundColor(jsonFilePath);
-        MapView.BackgroundColor = new Color(backgroundColor.R, backgroundColor.G, backgroundColor.B, backgroundColor.A);
+        await openstackMbtiles.OpenAsync();
+        var bgColor = openstackMbtiles.BackgroundColor;
+        MapView.BackgroundColor = new Color(bgColor.R, bgColor.G, bgColor.B, bgColor.A);
 
         MapView.IsRotationEnabled = true;
         await MapView.RefreshAsync();
@@ -65,7 +66,7 @@ public partial class MbTilesFile
 
         if (layerOverlay.Layers[0] is MbTilesLayer mbTilesLayer)
         {
-            mbTilesLayer.ReloadZoomLevelSet(new SphericalMercatorZoomLevelSet(tileSize, MaxExtents.SphericalMercator));
+            mbTilesLayer.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize, MaxExtents.SphericalMercator);
         }
 
         await MapView.RefreshAsync();
