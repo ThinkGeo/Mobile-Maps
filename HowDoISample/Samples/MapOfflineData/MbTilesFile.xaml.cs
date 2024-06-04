@@ -71,4 +71,10 @@ public partial class MbTilesFile
 
         await MapView.RefreshAsync();
     }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        ThinkGeoDebugger.DisplayTileId = false;
+    }
 }
