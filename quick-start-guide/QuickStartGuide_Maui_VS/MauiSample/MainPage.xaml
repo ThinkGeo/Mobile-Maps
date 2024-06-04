@@ -6,7 +6,9 @@
 
     <ContentPage.Content>
         <Grid>
-            <thinkgeo:MapView x:Name="MapView"/>
+            <thinkgeo:MapView x:Name="MapView"
+                              SizeChanged="MapView_OnSizeChanged">
+            </thinkgeo:MapView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
