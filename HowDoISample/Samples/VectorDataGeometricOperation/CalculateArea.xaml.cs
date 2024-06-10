@@ -7,8 +7,8 @@ public partial class CalculateArea
 {
     private bool _initialized;
     public CalculateArea()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 

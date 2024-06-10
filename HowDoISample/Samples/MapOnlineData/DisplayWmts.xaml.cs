@@ -34,7 +34,7 @@ public partial class DisplayWmts
         wmtsLayer.ActiveStyleName = "default";
         wmtsLayer.OutputFormat = "image/png";
         wmtsLayer.TileMatrixSetName = "21781_26";
-        wmtsLayer.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,  "WmtsTmpTileCache");
+        wmtsLayer.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "WmtsTmpTileCache");
 
         //Add the new WMTS Layer to our LayerOverlay
         var layerOverlay = new LayerOverlay();

@@ -9,9 +9,9 @@ public partial class ColorUtilitiesCloudServices
     private bool _initialized;
     private ColorCloudClient _colorCloudClient;
     public ColorUtilitiesCloudServices()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
@@ -60,11 +60,10 @@ public partial class ColorUtilitiesCloudServices
         MapView.AdornmentOverlay.Layers.Add("Legend", legend);
 
         // Get the extent of the features from the housing units shapefile, and set the map extent.
-        MapView.CenterPoint = new PointShape(-10779600, 3915260);
-        MapView.MapScale = 500000;
-
+        MapView.CenterPoint = new PointShape(-10774523, 3909181);
+        MapView.MapScale = 800_000;
         // Initialize the ColorCloudClient using our ThinkGeo Cloud credentials
-        _colorCloudClient = new ColorCloudClient(SampleKeys.ClientId2,SampleKeys.ClientSecret2);
+        _colorCloudClient = new ColorCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
 
         // Set the initial color scheme for the housing units layer
         var colors = await GetColorsFromCloud();
@@ -86,23 +85,23 @@ public partial class ColorUtilitiesCloudServices
         var colors = new Collection<GeoColor>();
 
         // Generate colors based on the selected 'color type'
-        if (RdoHue.IsChecked == true)
+        if (RdoHue.IsChecked)
         {
             // Get a family of colors with the same hue and sequential variances in lightness and saturation
             colors = await GetColorsByHue(numberOfColors);
         }
-        else if (RdoQuality.IsChecked == true)
+        else if (RdoQuality.IsChecked)
         {
             // Get a family of colors based on analogous hues
             colors = await GetQualityColors(numberOfColors);
         }
-        else if (RdoContrasting.IsChecked == true)
+        else if (RdoContrasting.IsChecked)
         {
             // Get a family of colors based on complementary hues
             colors = await GetContrastingColors(numberOfColors);
         }
         // Add more conditions for other radio buttons as needed
-               
+
         return colors;
     }
 
@@ -186,10 +185,10 @@ public partial class ColorUtilitiesCloudServices
         if (RdoRandomColor.IsChecked)
             // Use a random base color
             return await _colorCloudClient.GetColorsInHueFamilyAsync(numberOfColors);
-        else 
+        else
             // Use a default color for the base color
             return await _colorCloudClient.GetColorsInHueFamilyAsync(GetGeoColorFromDefaultColors(),
-                numberOfColors);     
+                numberOfColors);
     }
 
     /// <summary>
@@ -203,7 +202,7 @@ public partial class ColorUtilitiesCloudServices
         else
             // Use a default color for the base color
             return await _colorCloudClient.GetColorsInQualityFamilyAsync(GetGeoColorFromDefaultColors(),
-                numberOfColors);        
+                numberOfColors);
     }
 
     /// <summary>
@@ -212,7 +211,7 @@ public partial class ColorUtilitiesCloudServices
     private async Task<Collection<GeoColor>> GetContrastingColors(int numberOfColors)
     {
         var contrastingColors = new Collection<GeoColor>();
-        var colorsDictionary = new Dictionary<GeoColor, Collection<GeoColor>>();
+        Dictionary<GeoColor, Collection<GeoColor>> colorsDictionary;
 
         // Generate colors based on the parameters selected in the UI
         if (RdoRandomColor.IsChecked)
@@ -239,19 +238,19 @@ public partial class ColorUtilitiesCloudServices
     {
         var color = GeoColors.White;
 
-        if (RdoRedColor.IsChecked == true)
+        if (RdoRedColor.IsChecked)
         {
             color = GeoColors.Red;
-        }       
-        else if (RdoGreenColor.IsChecked == true)
+        }
+        else if (RdoGreenColor.IsChecked)
         {
             color = GeoColors.Green;
         }
-        else if (RdoBlueColor.IsChecked == true)
+        else if (RdoBlueColor.IsChecked)
         {
             color = GeoColors.Blue;
         }
-       
+
         return color;
     }
 

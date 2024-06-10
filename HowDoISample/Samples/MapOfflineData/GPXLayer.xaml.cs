@@ -37,12 +37,12 @@ public partial class GpxLayer
 
         // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
         var gpxLayer = new GpxFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Gpx", "Hike_Bike.gpx"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     ProjectionConverter = new ProjectionConverter(4326, 3857)
                 }
-            };
+        };
 
         // Add the layer to the overlay we created earlier.
         gpxOverlay.Layers.Add("Hike Bike Trails", gpxLayer);

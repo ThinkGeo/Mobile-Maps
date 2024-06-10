@@ -32,13 +32,13 @@ public partial class CreateAreaStyle
         MapView.Overlays.Add(backgroundOverlay);
 
         var friscoSubdivisions = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     // Project the layer's data to match the projection of the map
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add the layer to a layer overlay
         var layerOverlay = new LayerOverlay();

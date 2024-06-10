@@ -1,6 +1,5 @@
 <howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
                    x:Class="HowDoISample.MapOnlineData.OtherOnlineData">
 
@@ -14,20 +13,24 @@
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}"  />
 
-            <Label Grid.Row="1" 
-                   VerticalTextAlignment="Center"  
+            <Label Grid.Row="1"
+                   VerticalTextAlignment="Center"
                    HorizontalOptions="Center"
-                   Text="The following Map Providers are supported as well with the right key: &#x0a;
-                    &#x0a;
-                   - ArcGisServerRest &#x0a;
-                   - BingMaps &#x0a;
-                   - GoogleMaps &#x0a;
-                   - HereMapsRaster &#x0a;
-                   - MapBoxStaticTiles &#x0a;
-                   - Extensible XyzLayer to support any XYZ format &#x0a;
-                   - More through Customized Layers
-                   "
-                   LineBreakMode="WordWrap"  FontSize="20"/>
+                   FontSize="20" Margin ="10,0,0,0"
+                   LineBreakMode="WordWrap">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="The following Map Providers are supported as well with the right key:&#x0a;&#x0a;" />
+                        <Span Text="- ArcGisServerRest&#x0a;" />
+                        <Span Text="- BingMaps&#x0a;" />
+                        <Span Text="- GoogleMaps&#x0a;" />
+                        <Span Text="- HereMapsRaster&#x0a;" />
+                        <Span Text="- MapBoxStaticTiles&#x0a;" />
+                        <Span Text="- Extensible XyzLayer to support any XYZ format&#x0a;" />
+                        <Span Text="- More through Customized Layers&#x0a;" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </Grid>
     </ContentPage.Content>
 </howDoI:SamplePage>

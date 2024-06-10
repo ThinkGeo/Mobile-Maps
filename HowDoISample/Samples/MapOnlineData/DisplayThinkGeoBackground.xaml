@@ -16,15 +16,16 @@
                 <howDoI:DescriptionView 
                         Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-                <Label FontAttributes="Italic" TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!">
+                <Label FontAttributes="Italic" TextColor="Blue" Text="Sign up for your own ThinkGeo Cloud API Key here!" TextDecorations="Underline">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
 
-            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged" >
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" 
+                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>

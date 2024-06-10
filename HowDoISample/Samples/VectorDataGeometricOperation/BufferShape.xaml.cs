@@ -7,12 +7,12 @@ public partial class BufferShape
 {
     private bool _initialized;
     public BufferShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
-    {
+    {       
         if (_initialized)
             return;
         _initialized = true;
@@ -29,9 +29,9 @@ public partial class BufferShape
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
         MapView.Overlays.Add(backgroundOverlay);
-        
+
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
-            FileSystem.Current.AppDataDirectory, "Data", "Shapefile","FriscoCityLimits.shp"));
+            FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
         var bufferLayer = new InMemoryFeatureLayer();
         var layerOverlay = new LayerOverlay();
 

@@ -61,7 +61,8 @@
 	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
 	  <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
 	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
-	  <None Remove="Data\Mbtiles\Frisco.mbtiles" />
+	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
+	  <None Remove="Data\Mbtiles\style.json" />
 	  <None Remove="Data\Railroad\Railroad.dbf" />
 	  <None Remove="Data\Railroad\Railroad.ids" />
 	  <None Remove="Data\Railroad\Railroad.idx" />
@@ -153,7 +154,6 @@
 	  <None Remove="Data\Tab\City_ETJ.tab" />
 	  <None Remove="Data\TinyGeo\Zoning.tgeo" />
 	  <None Remove="Resources\Raw\coyote_paw.png" />
-	  <None Remove="Resources\Raw\hotel_icon.png" />
 	  <None Remove="Resources\Raw\vandalism_icon.png" />
 	  <None Remove="Resources\Raw\weapon_icon.png" />
 	  <None Remove="thinkgeo.howdoi.maui.android.mapsuitelicense" />
@@ -185,7 +185,8 @@
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
-	  <EmbeddedResource Include="Data\Mbtiles\Frisco.mbtiles" />
+	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
+	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
@@ -350,10 +351,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Samples\MapOfflineData\MbTilesFile.xaml.cs">
+	    <DependentUpon>MbTilesFile.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\SQLiteLayer.xaml.cs">
 	    <DependentUpon>SqLiteLayer.xaml</DependentUpon>
 	  </Compile>
@@ -450,8 +454,8 @@
 	  <Compile Update="Samples\MapOnlineData\DisplayThinkGeoBackground.xaml.cs">
 	    <DependentUpon>DisplayThinkGeoBackground.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Samples\MarkersAndPopups\CreatingMarkers.xaml.cs">
-	    <DependentUpon>CreatingMarkers.xaml</DependentUpon>
+	  <Compile Update="Samples\MarkersAndPopups\HotelMarker.xaml.cs">
+	    <DependentUpon>HotelMarker.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MarkersAndPopups\UsingPopups.xaml.cs">
 	    <DependentUpon>UsingPopups.xaml</DependentUpon>
@@ -472,6 +476,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\DescriptionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOfflineData\MbTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOnlineData\DisplayWmts.xaml">
@@ -540,7 +547,7 @@
 	  <MauiXaml Update="Samples\MarkersAndPopups\UsingMarkers.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\MarkersAndPopups\CreatingMarkers.xaml">
+	  <MauiXaml Update="Samples\MarkersAndPopups\HotelMarker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MarkersAndPopups\UsingPopups.xaml">
@@ -638,4 +645,9 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+  </ItemGroup>
+  
 </Project>

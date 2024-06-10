@@ -9,9 +9,9 @@ public partial class TranslateShape
     private Feature _feature;
 
     public TranslateShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

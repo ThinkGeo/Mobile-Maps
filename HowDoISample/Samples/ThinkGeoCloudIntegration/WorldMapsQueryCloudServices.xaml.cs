@@ -8,9 +8,9 @@ public partial class WorldMapsQueryCloudServices
     private bool _initialized;
     private MapsQueryCloudClient _mapsQueryCloudClient;
     public WorldMapsQueryCloudServices()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

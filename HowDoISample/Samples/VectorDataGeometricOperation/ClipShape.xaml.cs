@@ -7,9 +7,9 @@ public partial class ClipShape
 {
     private bool _initialized;
     public ClipShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

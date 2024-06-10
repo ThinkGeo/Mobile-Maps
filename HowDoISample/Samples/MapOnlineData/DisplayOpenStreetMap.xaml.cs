@@ -21,8 +21,8 @@ public partial class DisplayOpenStreetMap
         // It is important to set the map unit first to either feet, meters or decimal degrees.
         MapView.MapUnit = GeographyUnit.Meter;
 
-        var layerOverlay = new OpenStreetMapsOverlay("ThinkGeo Samples");
-        MapView.Overlays.Add(layerOverlay);
+        var osmOverlay = new OpenStreetMapsOverlay("ThinkGeo Samples");
+        MapView.Overlays.Add(osmOverlay);
 
         // Set the map scale and center point
         MapView.MapScale = 35_000;

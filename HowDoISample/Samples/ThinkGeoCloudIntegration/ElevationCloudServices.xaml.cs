@@ -8,9 +8,9 @@ public partial class ElevationCloudServices
     private bool _initialized;
     private ElevationCloudClient _elevationCloudClient;
     public ElevationCloudServices()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

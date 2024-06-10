@@ -164,7 +164,7 @@ public partial class TrackEditDelete
         MapView.TrackOverlay.TrackMode = TrackMode.Line;
 
         // Update instructions
-        Instruction  =
+        Instruction =
             "Draw Line Mode - Tap the map to add a vertex, tap-move to relocate the vertex, long press to finish.";
     }
 

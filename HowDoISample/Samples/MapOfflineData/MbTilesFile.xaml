@@ -1,0 +1,37 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.MapOfflineData.MbTilesFile">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                    Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView"
+                              SizeChanged="MbTilesFile_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <StackLayout Grid.Row="1" CascadeInputTransparent="False" 
+                         Margin="4" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="Grey">
+
+                <StackLayout Orientation="Horizontal"  HeightRequest="20"  Margin="5">
+                    <CheckBox CheckedChanged ="ShowDebugInfo_OnCheckedChanged" Margin="-10" IsChecked="True"/>
+                    <Label Text ="Show Tile ID"/>
+                </StackLayout>
+                <RadioButton Content="256 * 256" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15"/>
+                <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,0" IsChecked="True"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

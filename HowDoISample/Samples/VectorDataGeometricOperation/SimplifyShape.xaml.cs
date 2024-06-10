@@ -3,13 +3,13 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
 
-public partial class SimplifyShape 
+public partial class SimplifyShape
 {
     private bool _initialized;
     public SimplifyShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
@@ -31,7 +31,7 @@ public partial class SimplifyShape
         MapView.Overlays.Add(backgroundOverlay);
 
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
-            FileSystem.Current.AppDataDirectory, "Data", "Shapefile","FriscoCityLimits.shp"));
+            FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
         var simplifyLayer = new InMemoryFeatureLayer();
         var layerOverlay = new LayerOverlay();
 

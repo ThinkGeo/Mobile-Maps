@@ -7,9 +7,9 @@ public partial class GetConvexHull
 {
     private bool _initialized;
     public GetConvexHull()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
