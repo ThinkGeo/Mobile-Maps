@@ -30,38 +30,30 @@ namespace MauiSample
             foreach (var resourceName in assembly.GetManifestResourceNames())
             {
                 var parts = resourceName.Replace("MauiSample.", "").Split('.');
-
                 var localPath = parts[0];
                 for (var i = 1; i < parts.Length; i++)
                 {
                     // Default delimiter to '/' for the directory structure
-                    var delimiter = "/";
-                    if (i == parts.Length - 1)
-                        delimiter = ".";
+                    var delimiter = (i == parts.Length - 1) ? "." : "/";
                     // Don't use a delimiter for the first part
                     localPath += $"{delimiter}{parts[i]}";
                 }
 
                 var targetFilePath = Path.Combine(targetFolder, localPath);
                 if (File.Exists(targetFilePath)) continue;
-
+                
                 var targetDir = Path.GetDirectoryName(targetFilePath);
-
-                if (targetDir == null)
-                    return;
-
+                if (targetDir == null) continue;
                 if (!Directory.Exists(targetDir))
                     Directory.CreateDirectory(targetDir);
 
                 await using (var targetStream = File.Create(targetFilePath))
                 {
                     var sourceStream = assembly.GetManifestResourceStream(resourceName);
-                    if (sourceStream == null)
-                        continue;
+                    if (sourceStream == null) continue;
                     await sourceStream.CopyToAsync(targetStream);
                     sourceStream.Close();
                 }
-
                 Debug.WriteLine($"<<<<< Copying embedded resource to {targetFilePath} >>>>>");
             }
         }
