@@ -22,40 +22,33 @@ namespace MauiSample
 
         private static async Task CopySampleData(string targetFolder)
         {
-            // Option 1(Current Way): Add the data files as embed resources, and copy them to App's Data Directory when first time running it. 
-            //      Con: The data exists in two places
-            //      Pro: Use the File based APIs, reference the files in xaml, make everything more straightforward with full optimization. 
-
             var assembly = Assembly.GetExecutingAssembly();
-            foreach (var resourceName in assembly.GetManifestResourceNames())
+            List<string> dataFiles = new List<string>
             {
-                var parts = resourceName.Replace("MauiSample.", "").Split('.');
-                var localPath = parts[0];
-                for (var i = 1; i < parts.Length; i++)
-                {
-                    // Default delimiter to '/' for the directory structure
-                    var delimiter = (i == parts.Length - 1) ? "." : "/";
-                    // Don't use a delimiter for the first part
-                    localPath += $"{delimiter}{parts[i]}";
-                }
-
+                @"WorldCapitals.dbf",
+                @"WorldCapitals.ids",
+                @"WorldCapitals.idx",
+                @"WorldCapitals.shp",
+                @"WorldCapitals.shx"
+            };
+            foreach (var dataFile in dataFiles)
+            {
+                var localPath = @"AppData/" + dataFile;
                 var targetFilePath = Path.Combine(targetFolder, localPath);
                 if (File.Exists(targetFilePath)) continue;
-                
+
                 var targetDir = Path.GetDirectoryName(targetFilePath);
-                if (targetDir == null) continue;
                 if (!Directory.Exists(targetDir))
                     Directory.CreateDirectory(targetDir);
 
                 await using (var targetStream = File.Create(targetFilePath))
                 {
-                    var sourceStream = assembly.GetManifestResourceStream(resourceName);
-                    if (sourceStream == null) continue;
+                    var sourceStream = assembly.GetManifestResourceStream(@"MauiSample.AppData." + dataFile);
                     await sourceStream.CopyToAsync(targetStream);
                     sourceStream.Close();
                 }
-                Debug.WriteLine($"<<<<< Copying embedded resource to {targetFilePath} >>>>>");
             }
         }
+
     }
 }
