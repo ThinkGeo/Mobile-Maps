@@ -19,6 +19,7 @@ public partial class MbTilesFile
         _initialized = true;
 
         MapView.MapUnit = GeographyUnit.Meter;
+
         var layerOverlay = new LayerOverlay();
         layerOverlay.TileType = TileType.MultiTile;
         MapView.Overlays.Add(layerOverlay);
@@ -29,10 +30,14 @@ public partial class MbTilesFile
         var openstackMbtiles = new MbTilesLayer(dataFilePath, jsonFilePath);
         layerOverlay.Layers.Add(openstackMbtiles);
 
-        MapView.CenterPoint = new PointShape(0, 0);
-        MapView.MapScale = 100000000;
 
         await openstackMbtiles.OpenAsync();
+        // set up the MapScale of Center Point
+        var bbox = openstackMbtiles.GetBoundingBox();
+        MapView.MapScale = MapUtil.GetScale(bbox, MapView.CanvasWidth, GeographyUnit.Meter);
+        MapView.CenterPoint = bbox.GetCenterPoint();
+
+        // Set up the background Color
         var bgColor = openstackMbtiles.BackgroundColor;
         MapView.BackgroundColor = new Color(bgColor.R, bgColor.G, bgColor.B, bgColor.A);
 
