@@ -2,7 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
-                   x:Class="HowDoISample.MapNavigation.Navigation">
+                   x:Class="HowDoISample.MapNavigation.Navigation"
+                   x:Name="This">
 
     <ContentPage.Content>
         <Grid>
@@ -41,6 +42,21 @@
                     <Label>Dark Theme</Label>
                 </StackLayout>
             </StackLayout>
+
+            <ImageButton Grid.Row="1" WidthRequest="50" HeightRequest="50" VerticalOptions="End"
+                         HorizontalOptions="End" Margin="10" BackgroundColor="Transparent" BorderWidth="0"
+                         Source="icon_gps_disabled" Clicked="ImageButton_OnClicked">
+                <ImageButton.Triggers>
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference This}, Path=GpsEnabled}" Value="True">
+                        <Setter Property="Source" Value="icon_gps_enabled.png" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference This}, Path=GpsEnabled}" Value="False">
+                        <Setter Property="Source" Value="icon_gps_disabled.png" />
+                    </DataTrigger>
+                </ImageButton.Triggers>
+            </ImageButton>
+
+            <Label x:Name="WarningLabel"  Grid.Row="1" VerticalOptions="End" BackgroundColor="Red" IsVisible="False"/>
 
         </Grid>
     </ContentPage.Content>

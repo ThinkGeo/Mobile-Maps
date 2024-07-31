@@ -6,9 +6,24 @@ namespace HowDoISample.MapNavigation;
 public partial class Navigation
 {
     private bool _initialized;
+    private GpsMarker _gpsMarker;
+    private bool _gpsEnabled;
+    private readonly System.Timers.Timer _gpsTimer = new();
+
     public Navigation()
     {
         InitializeComponent();
+    }
+
+    public bool GpsEnabled
+    {
+        get => _gpsEnabled;
+        set
+        {
+            if (_gpsEnabled == value) return;
+            _gpsEnabled = value;
+            OnPropertyChanged();
+        }
     }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
@@ -45,6 +60,14 @@ public partial class Navigation
         MapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
         simpleMarkerOverlay.Children.Add(marker);
 
+        // Add the GPS Marker
+        _gpsMarker = new GpsMarker();
+        _gpsMarker.IsVisible = false;
+        simpleMarkerOverlay.Children.Add(_gpsMarker);
+        // Update GPS position every 20s.
+        _gpsTimer.Interval = 20000;
+        _gpsTimer.Elapsed += _gpsTimer_Elapsed;
+
         MapView.IsRotationEnabled = true;
 
         // events
@@ -64,6 +87,79 @@ public partial class Navigation
         MapView.MapRotation = -30;
         MapView.MapScale = 100000;
         MapView.CenterPoint = empireStateBuilding;
+
         await MapView.RefreshAsync();
+    }
+
+
+    private async Task<PointShape> GetGpsPointAsync()
+    {
+        try
+        {
+            var location = await Geolocation.GetLocationAsync(new GeolocationRequest
+            {
+                DesiredAccuracy = GeolocationAccuracy.Medium,
+                Timeout = TimeSpan.FromSeconds(15)
+            });
+
+            if (location == null)
+            {
+                throw new Exception("Unable to retrieve GPS Point");
+            }
+
+            var newCenter = ProjectionConverter.Convert(4326, 3857, location.Longitude, location.Latitude);
+            return new PointShape(newCenter.X, newCenter.Y);
+
+        }
+        catch (Exception e)
+        {
+            WarningLabel.Text = e.Message;
+            WarningLabel.IsVisible = true;
+
+            // wait for 5s
+            await Task.Delay(5 * 1000);
+            WarningLabel.IsVisible = false;
+            return null;
+        }
+    }
+
+    private async void ImageButton_OnClicked(object sender, EventArgs e)
+    {
+        if (GpsEnabled)
+        {
+            GpsEnabled = false;
+            _gpsMarker.IsVisible = false;
+            _gpsTimer.Stop();
+            return;
+        }
+
+        var gps = await GetGpsPointAsync();
+        if (gps == null)
+            return;
+
+        _gpsMarker.Position = gps;
+        _gpsMarker.IsVisible = true;
+
+        GpsEnabled = true;
+
+        await MapView.CenterAtAsync(gps);
+
+        _gpsTimer.Start();
+    }
+
+    private async void _gpsTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        if (!GpsEnabled)
+        {
+            _gpsTimer.Stop();
+            return;
+        }
+
+        var gps = await GetGpsPointAsync();
+        if (gps == null)
+            return;
+
+        _gpsMarker.Position = gps;
+        await MapView.Overlays["simpleMarkerOverlay"].RefreshAsync();
     }
 }
