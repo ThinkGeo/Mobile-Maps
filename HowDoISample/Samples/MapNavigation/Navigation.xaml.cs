@@ -155,11 +155,11 @@ public partial class Navigation
             return;
         }
 
-        var gps = await GetGpsPointAsync();
+        var gps = await Dispatcher.DispatchAsync(GetGpsPointAsync);
         if (gps == null)
             return;
 
         _gpsMarker.Position = gps;
-        await MapView.Overlays["simpleMarkerOverlay"].RefreshAsync();
+        await Dispatcher.DispatchAsync(async () => await MapView.Overlays["simpleMarkerOverlay"].RefreshAsync());
     }
 }
