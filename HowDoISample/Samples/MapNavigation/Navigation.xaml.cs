@@ -47,7 +47,7 @@ public partial class Navigation
 
         // create a point for empire state building, convert the Lat/Lon (srid:4326) to Spherical Mercator(srid:3857), which is the projection of the background
         var empireStateBuilding =
-            ProjectionConverter.Convert(4326, 3857, new PointShape(-73.985665442769, 40.7484366107232));
+            ProjectionConverter.Convert(4326, 3857, new PointShape(-73.9856654, 40.74843661));
 
         var marker = new RollingTextMarker
         {
@@ -55,6 +55,7 @@ public partial class Navigation
             Text = "Empire State Building",
             ImagePath = "empire_state_building.png"
         };
+        marker.IsVisible = false;
 
         var simpleMarkerOverlay = new SimpleMarkerOverlay();
         MapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
@@ -89,6 +90,7 @@ public partial class Navigation
         MapView.CenterPoint = empireStateBuilding;
 
         await MapView.RefreshAsync();
+        marker.IsVisible = true;
     }
 
 
