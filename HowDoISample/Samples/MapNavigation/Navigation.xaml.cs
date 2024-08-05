@@ -1,4 +1,5 @@
-﻿using ThinkGeo.Core;
+﻿using System.Threading;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapNavigation;
@@ -9,6 +10,7 @@ public partial class Navigation
     private GpsMarker _gpsMarker;
     private bool _gpsEnabled;
     private readonly System.Timers.Timer _gpsTimer = new();
+    private CancellationTokenSource _cancellationTokenSource = new();
 
     public Navigation()
     {
@@ -81,7 +83,10 @@ public partial class Navigation
             backgroundOverlay.MapType = args.Value
                 ? ThinkGeoCloudRasterMapsMapType.Dark_V2_X2
                 : ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
-            await backgroundOverlay.RefreshAsync();
+
+            await UpdateCancellationToken();
+            // if we don't pass in _cancellationTokenSource.Token, the tiles could be messed up when checking/unchecking the Dark Theme checkbox quickly. 
+            await backgroundOverlay.RefreshAsync(_cancellationTokenSource.Token);
         };
 
         // set up the map extent and refresh
@@ -163,5 +168,12 @@ public partial class Navigation
 
         _gpsMarker.Position = gps;
         await Dispatcher.DispatchAsync(async () => await MapView.Overlays["simpleMarkerOverlay"].RefreshAsync());
+    }
+
+    private async Task UpdateCancellationToken()
+    {
+        await _cancellationTokenSource.CancelAsync();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
     }
 }
