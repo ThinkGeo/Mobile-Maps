@@ -12,7 +12,7 @@ public partial class GenerateMapImage
         InitializeComponent();
     }
 
-    private async void GenerateMapImage_OnSizeChanged(object sender, EventArgs e)
+    private void GenerateMapImage_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;

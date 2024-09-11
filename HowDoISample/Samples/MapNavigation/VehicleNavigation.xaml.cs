@@ -54,7 +54,7 @@ public partial class VehicleNavigation
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 6, true);
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-        var layerOverlay = new LayerNonRotationGraphicsViewOverlay();
+        var layerOverlay = new LayerGraphicsViewOverlay();
         layerOverlay.UpdateDataWhileTransforming = true;
         layerOverlay.Layers.Add(routeLayer);
         layerOverlay.Layers.Add(_visitedRoutesLayer);
