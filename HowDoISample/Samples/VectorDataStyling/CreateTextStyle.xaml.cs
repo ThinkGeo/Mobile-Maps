@@ -15,7 +15,7 @@ public partial class CreateTextStyle
     private ShapeFileFeatureLayer _hotelsLabelLayer;
     private ShapeFileFeatureLayer _streetsLabelLayer;
     private ShapeFileFeatureLayer _parksLabelLayer;
-    private LayerNonRotationGraphicsViewOverlay _dynamicLabelOverlay;
+    private LayerGraphicsViewOverlay _dynamicLabelOverlay;
 
     private async void CreateTextStyle_OnSizeChanged(object sender, EventArgs e)
     {
@@ -99,7 +99,7 @@ public partial class CreateTextStyle
         // Add overlay to map
         MapView.Overlays.Add(layerOverlay);
 
-        _dynamicLabelOverlay = new LayerNonRotationGraphicsViewOverlay();
+        _dynamicLabelOverlay = new LayerGraphicsViewOverlay();
         await _dynamicLabelOverlay.OpenAsync(MapView);
         LoadLayers(_dynamicLabelOverlay);
         // Add overlay to map
@@ -135,7 +135,7 @@ public partial class CreateTextStyle
         layerOverlay.Layers.Add(hotelsLayer);
     }
 
-    private void LoadLayers(LayerNonRotationGraphicsViewOverlay labelOverlay)
+    private void LoadLayers(LayerGraphicsViewOverlay labelOverlay)
     {
         _hotelsLabelLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Hotels.shp"));
         _streetsLabelLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Streets.shp"));
