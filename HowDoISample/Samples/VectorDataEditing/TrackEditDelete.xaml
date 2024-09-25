@@ -31,6 +31,7 @@
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
+                         BackgroundColor="Transparent"
                          Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
 
             <Frame Grid.Row="3" InputTransparent="False" Margin="10" WidthRequest="200" HorizontalOptions="Start" BackgroundColor="#80888888">

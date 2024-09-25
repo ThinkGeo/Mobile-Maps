@@ -25,7 +25,7 @@ public partial class DisplayWmts
         var wmtsOverlay = new WmtsOverlay
         {
             DrawingExceptionMode = DrawingExceptionMode.DrawException,
-            WmtsSeverEncodingType = WmtsSeverEncodingType.Restful
+            WmtsSeverEncodingType = WmtsServerEncodingType.Restful
         };
 
         wmtsOverlay.ServerUris.Add(new Uri("https://wmts.geo.admin.ch/1.0.0"));

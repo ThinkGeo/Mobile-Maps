@@ -100,7 +100,7 @@
 
             <ImageButton  Grid.Row="1" Margin="10" VerticalOptions="Start"  HorizontalOptions="End"
                 x:Name="DefaultExtentButton" WidthRequest="40" HeightRequest="40"
-                Source="icon_globe_black.png"/>
+                BackgroundColor="Transparent" Source="icon_globe_black.png"/>
 
             <Button x:Name="ZoomToBlackHoleButton" Grid.Row="2" HorizontalOptions="Center" 
                     BackgroundColor="Gray" TextColor="White" Text="Zoom To M87 Black Hole"/>
