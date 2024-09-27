@@ -1,0 +1,119 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-ios</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>true</ImplicitUsings>
+        <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <CodesignKey>iPhone Developer</CodesignKey>
+    </PropertyGroup>
+    <ItemGroup>
+      <None Remove="AppData\SampleList-iOS.xml" />
+      <Content Include="AppData\SampleList-iOS.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="AppData\Frisco\TXlkaA20.idx" />
+      <BundleResource Include="AppData\Frisco\TXlkaA20.idx" />
+      <None Remove="AppData\Frisco\Frisco.tgeo" />
+      <BundleResource Include="AppData\Frisco\Frisco.tgeo" />
+      <None Remove="AppData\Frisco\TXlkaA20.dbf" />
+      <BundleResource Include="AppData\Frisco\TXlkaA20.dbf" />
+      <None Remove="AppData\Frisco\TXlkaA20.ids" />
+      <BundleResource Include="AppData\Frisco\TXlkaA20.ids" />
+      <None Remove="AppData\Frisco\TXlkaA20.shp" />
+      <BundleResource Include="AppData\Frisco\TXlkaA20.shp" />
+      <None Remove="AppData\Frisco\TXlkaA20.shx" />
+      <BundleResource Include="AppData\Frisco\TXlkaA20.shx" />
+      <None Remove="AppData\Frisco\TXlkaA40.dbf" />
+      <BundleResource Include="AppData\Frisco\TXlkaA40.dbf" />
+      <None Remove="AppData\Frisco\TXlkaA40.ids" />
+      <BundleResource Include="AppData\Frisco\TXlkaA40.ids" />
+      <None Remove="AppData\Frisco\TXlkaA40.idx" />
+      <BundleResource Include="AppData\Frisco\TXlkaA40.idx" />
+      <None Remove="AppData\Frisco\TXlkaA40.shp" />
+      <BundleResource Include="AppData\Frisco\TXlkaA40.shp" />
+      <None Remove="AppData\Frisco\TXlkaA40.shx" />
+      <BundleResource Include="AppData\Frisco\TXlkaA40.shx" />
+      <None Remove="AppData\Frisco\TXwat.dbf" />
+      <BundleResource Include="AppData\Frisco\TXwat.dbf" />
+      <None Remove="AppData\Frisco\TXwat.ids" />
+      <BundleResource Include="AppData\Frisco\TXwat.ids" />
+      <None Remove="AppData\Frisco\TXwat.idx" />
+      <BundleResource Include="AppData\Frisco\TXwat.idx" />
+      <None Remove="AppData\Frisco\TXwat.prj" />
+      <BundleResource Include="AppData\Frisco\TXwat.prj" />
+      <None Remove="AppData\Frisco\TXwat.shp" />
+      <BundleResource Include="AppData\Frisco\TXwat.shp" />
+      <None Remove="AppData\Frisco\TXwat.shx" />
+      <BundleResource Include="AppData\Frisco\TXwat.shx" />
+      <None Remove="AppData\Gpx\fells_loop.gpx" />
+      <BundleResource Include="AppData\Gpx\fells_loop.gpx" />
+      <None Remove="AppData\SampleData\cities_e.ids" />
+      <BundleResource Include="AppData\SampleData\cities_e.ids" />
+      <None Remove="AppData\SampleData\states.ids" />
+      <BundleResource Include="AppData\SampleData\states.ids" />
+      <None Remove="AppData\SampleData\states.shx" />
+      <BundleResource Include="AppData\SampleData\states.shx" />
+      <None Remove="AppData\SampleData\cities_e.shx" />
+      <BundleResource Include="AppData\SampleData\cities_e.shx" />
+      <None Remove="AppData\SampleData\cities_e.dbf" />
+      <BundleResource Include="AppData\SampleData\cities_e.dbf" />
+      <None Remove="AppData\SampleData\Countries02.shx" />
+      <BundleResource Include="AppData\SampleData\Countries02.shx" />
+      <None Remove="AppData\Gif\EWX_N0R_0.gfw" />
+      <BundleResource Include="AppData\Gif\EWX_N0R_0.gfw" />
+      <None Remove="AppData\Gpx\afoxboro.gpx" />
+      <BundleResource Include="AppData\Gpx\afoxboro.gpx" />
+      <None Remove="AppData\SampleData\Countries02.shp" />
+      <BundleResource Include="AppData\SampleData\Countries02.shp" />
+      <None Remove="AppData\Gpx\mystic_basin_trail.gpx" />
+      <BundleResource Include="AppData\Gpx\mystic_basin_trail.gpx" />
+      <None Remove="AppData\SampleData\states.shp" />
+      <BundleResource Include="AppData\SampleData\states.shp" />
+      <None Remove="AppData\SampleData\cities_e.idx" />
+      <BundleResource Include="AppData\SampleData\cities_e.idx" />
+      <None Remove="AppData\SampleData\Countries02.ids" />
+      <BundleResource Include="AppData\SampleData\Countries02.ids" />
+      <None Remove="AppData\SampleData\Countries02.idx" />
+      <BundleResource Include="AppData\SampleData\Countries02.idx" />
+      <None Remove="AppData\SampleData\states.idx" />
+      <BundleResource Include="AppData\SampleData\states.idx" />
+      <None Remove="AppData\SampleData\states.dbf" />
+      <BundleResource Include="AppData\SampleData\states.dbf" />
+      <None Remove="AppData\Gpx\ashland.gpx" />
+      <BundleResource Include="AppData\Gpx\ashland.gpx" />
+      <None Remove="AppData\Gif\EWX_N0R_0.gif" />
+      <BundleResource Include="AppData\Gif\EWX_N0R_0.gif" />
+      <None Remove="AppData\SampleData\Countries02.dbf" />
+      <BundleResource Include="AppData\SampleData\Countries02.dbf" />
+      <None Remove="AppData\SampleData\cities_e.shp" />
+      <BundleResource Include="AppData\SampleData\cities_e.shp" />
+      <None Remove="AppData\Gpx\blue_hills.gpx" />
+      <BundleResource Include="AppData\Gpx\blue_hills.gpx" />
+      <None Remove="AppData\Tiff\World.tfw" />
+      <BundleResource Include="AppData\Tiff\World.tfw" />
+      <None Remove="AppData\Tiff\World.tif" />
+      <BundleResource Include="AppData\Tiff\World.tif" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.TAB" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.TAB" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.MAP" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.MAP" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.IND" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.IND" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.idx" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.idx" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.ids" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.ids" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.ID" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.ID" />
+      <None Remove="AppData\Tab\HoustonMuniBdySamp_Boundary.DAT" />
+      <BundleResource Include="AppData\Tab\HoustonMuniBdySamp_Boundary.DAT" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="ThinkGeo.UI.iOS" Version="14.2.0-beta002" />
+    </ItemGroup>
+</Project>
