@@ -41,13 +41,7 @@ namespace ThinkGeo.UI.iOS.HowDoI
         {
             if (node.Disabled) return;
 
-            UIBarButtonItem sampleSourceItem = new UIBarButtonItem("View Source", UIBarButtonItemStyle.Plain, (s, e) =>
-            {
-                webViewController.SampleName = node.ClassName;
-                NavigationController.PushViewController(webViewController, true);
-            });
-
-            if (currentViewController != null)
+          if (currentViewController != null)
             {
                 foreach (UIView sampleView in currentViewController.View.Subviews)
                 {
@@ -58,7 +52,6 @@ namespace ThinkGeo.UI.iOS.HowDoI
             }
 
             UIViewController viewController = node.ClassInstance;
-            viewController.NavigationItem.SetRightBarButtonItem(sampleSourceItem, true);
             viewController.Title = node.Name;
             currentViewController = viewController;
             NavigationController.PushViewController(currentViewController, true);

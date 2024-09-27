@@ -20,12 +20,14 @@
     </Sample>
   </Category>
   <Category Name="Overlay">
+    <!--
     <Sample Name="Use BingMaps Overlay" Class="UseBingMapsOverlay" >
       <Description>This sample shows how use bing map overlay.</Description>
     </Sample>
     <Sample Name="Use GoogleMaps Overlay" Class="UseGoogleMapsOverlay"  DisplayPicture="true" >
       <Description>This sample shows how use google map overlay.</Description>
     </Sample>
+    -->
     <Sample Name="Use WMS overlay" Class="UseWMSOverlay" >
       <Description>This sample shows how to use wms overlay.</Description>
     </Sample>
@@ -58,6 +60,7 @@
       <Description>Load a map from Streams.</Description>
     </Sample>
   </Category>
+  <!--
   <Category Name="Web Based Layers">
     <Sample Name="Load ThinkGeoCloudVectorMapsLayer" Class="LoadThinkGeoCloudVectorMapsLayer">
       <Description>This sample shows how to load ThinkGeoCloudVectorMapsLayer.</Description>
@@ -77,6 +80,7 @@
       <Description>This sample shows how to load SqliteFeatureLayer.</Description>
     </Sample>
   </Category>
+   -->
   <Category Name="Other Layers">
     <Sample Name="Load A HeatMapLayer" Class="LoadAHeatMapLayer" >
       <Description>This sample shows how to load a heat map layer.</Description>
@@ -174,9 +178,11 @@
       <Description>Add label on markers.</Description>
     </Sample>
   </Category>
+  <!--
   <Category Name="Map Tools">
     <Sample Name="Add Various Map Tools" Class="AddVariousMapTools" >
       <Description>This sample shows how to add various map tools.</Description>
     </Sample>
   </Category>
+  -->
 </SampleList>
