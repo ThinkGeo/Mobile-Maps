@@ -37,10 +37,6 @@ public partial class MbTilesFile
         MapView.MapScale = MapUtil.GetScale(bbox, MapView.CanvasWidth, GeographyUnit.Meter);
         MapView.CenterPoint = bbox.GetCenterPoint();
 
-        // Set up the background Color
-        var bgColor = openstackMbtiles.BackgroundColor;
-        MapView.BackgroundColor = new Color(bgColor.R, bgColor.G, bgColor.B, bgColor.A);
-
         MapView.IsRotationEnabled = true;
         await MapView.RefreshAsync();
     }

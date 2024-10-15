@@ -182,7 +182,7 @@ public partial class VehicleNavigation
         // Recenter the map to display the GPS location towards the bottom for improved visibility.
         centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, MapView.MapScale, MapView.MapUnit);
 
-        await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Default, cancellationToken);
+        await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
         UpdateVisitedRoutes(_gpsPoints[gpsPointIndex]);
 
         _vehicleMarker.Position = new PointShape(currentLocation.X, currentLocation.Y);
