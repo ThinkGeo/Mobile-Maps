@@ -9,9 +9,9 @@ public partial class RotateShape
     private float _degrees;
 
     public RotateShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

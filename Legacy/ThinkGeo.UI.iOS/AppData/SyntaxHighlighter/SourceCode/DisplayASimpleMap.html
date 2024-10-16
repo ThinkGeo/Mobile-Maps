@@ -1,0 +1,42 @@
+<body oncontextmenu='return false;'>
+<div class='divbody'><pre name='code' class='c-sharp:nocontrols'>
+using System.Drawing;\r\n
+using MonoTouch.UIKit;\r\n
+using ThinkGeo.MapSuite.Core;\r\n
+using ThinkGeo.MapSuite.iOSEdition;\r\n\r\n
+
+namespace CSHowDoISamples\r\n
+{\r\n    
+public class DisplayASimpleMap :UIViewController\r\n   
+{\r\n        
+private MapView iOSMap;\r\n\r\n       
+public DisplayASimpleMap()\r\n       
+ : base()\r\n       
+ {\r\n           
+ base.ViewDidLoad();\r\n\r\n    
+ View.Frame = UIScreen.MainScreen.Bounds;\r\n           
+ View.BackgroundColor = UIColor.White;\r\n           
+ View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;\r\n\r\n            
+ iOSMap = new MapView(View.Frame);\r\n            iOSMap.MapUnit = GeographyUnit.DecimalDegree;\r\n            
+ iOSMap.CurrentExtent = new RectangleShape(-133.2515625, 89.2484375, 126.9046875, -88.290625);\r\n            
+ iOSMap.BackgroundColor = UIColor.FromRGB(153, 179, 204);\r\n            
+ View.AddSubview(iOSMap);\r\n\r\n            
+ LayerOverlay layerOverlay = new LayerOverlay();\r\n            
+ iOSMap.Overlays.Add(layerOverlay);\r\n\r\n            
+ ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(\"AppData/SampleData/Countries02.shp\");\r\n           
+ worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));\r\n           
+ worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;\r\n            
+ layerOverlay.Layers.Add(worldLayer);\r\n\r\n            
+ iOSMap.Refresh();\r\n           
+ InitializeInstruction();\r\n        
+ }\r\n\r\n        
+ private void InitializeInstruction()\r\n       
+ {\r\n            
+ SampleUIHelper.InitializeInstruction(View, GetType(), isIphone => isIphone ? 100 : 80);\r\n        
+ }\r\n    
+}\r\n}
+ </pre></div><link type='text/css' rel='stylesheet' href='../SyntaxHighlighter.css'></link>
+ <script language='javascript' src='../shCore.js'></script>
+ <script language='javascript' src='../shBrushCSharp.js'>
+ </script><script language='javascript' src='../shBrushXml.js'></script>
+ <script language='javascript'>dp.SyntaxHighlighter.HighlightAll('code');</script></body>

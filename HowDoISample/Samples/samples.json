@@ -78,9 +78,9 @@
     "title": "Map Offline Data",
     "children": [
       {
-        "id": "HowDoISample.MapOfflineData.OfflineCloudMapsVectorLayer",
-        "title": "Display a ThinkGeo MBTiles File",
-        "description": "Show ThinkGeo Background Map Offline."
+        "id": "HowDoISample.MapOfflineData.MbTilesFile",
+        "title": "Display a MBTiles File",
+        "description": "Show the Standard MBTiles File (v1.3)"
       },
       {
         "id": "HowDoISample.MapOfflineData.ShapefileLayer",

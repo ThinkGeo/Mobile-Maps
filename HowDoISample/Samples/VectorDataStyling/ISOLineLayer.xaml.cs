@@ -46,7 +46,7 @@ public partial class IsoLineLayer
         //  We then set the drawing quality high, so we get a crisp rendering.
         var isoLineLayer = GetDynamicIsoLineLayer(csvPointData);
         isoLineOverlay.Layers.Add("IsoLineLayer", isoLineLayer);
-        
+
         // Set the map scale and center point
         MapView.MapScale = 140_000;
         MapView.CenterPoint = new PointShape(-10778478, 3914602);

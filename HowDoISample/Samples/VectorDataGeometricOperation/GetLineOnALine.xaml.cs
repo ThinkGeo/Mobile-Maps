@@ -7,9 +7,9 @@ public partial class GetLineOnALine
 {
     private bool _initialized;
     public GetLineOnALine()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

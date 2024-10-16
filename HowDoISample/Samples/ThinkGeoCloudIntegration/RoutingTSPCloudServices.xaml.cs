@@ -80,7 +80,7 @@ public partial class RoutingTspCloudServices
 
         // Set the map extent to Frisco, TX
         MapView.CenterPoint = new PointShape(-10777600, 3915260);
-        MapView.MapScale = 500000;        
+        MapView.MapScale = 500000;
 
         // Initialize the RoutingCloudClient with our ThinkGeo Cloud Client credentials
         _routingCloudClient = new RoutingCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
@@ -125,7 +125,7 @@ public partial class RoutingTspCloudServices
     {
         // Get the routing feature layer from the MapView
         var routingOverlay = (LayerOverlay)MapView.Overlays["Routing Overlay"];
-        var routingLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Routing Layer"];        
+        var routingLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Routing Layer"];
 
         // Clear the previous features from the routing layer
         routingLayer.InternalFeatures.Clear();
@@ -173,7 +173,7 @@ public partial class RoutingTspCloudServices
         //// Set the map extent to the newly displayed route
         routingLayer.Open();
         await MapView.ZoomToExtentAsync(AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetCenterPoint(),
-            80000, 0, new AnimationSettings());        
+            80000, 0, new AnimationSettings());
         routingLayer.Close();
 
         await routingOverlay.RefreshAsync();
@@ -216,7 +216,7 @@ public partial class RoutingTspCloudServices
         var routeSegments = (ListView)sender;
         if (routeSegments.SelectedItem == null) return;
         var routingOverlay = (LayerOverlay)MapView.Overlays["Routing Overlay"];
-        var highlightLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Highlight Layer"];            
+        var highlightLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Highlight Layer"];
         highlightLayer.InternalFeatures.Clear();
 
         // Highlight the selected route segment

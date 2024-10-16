@@ -7,8 +7,8 @@ public partial class CalculateLength
 {
     private bool _initialized;
     public CalculateLength()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 

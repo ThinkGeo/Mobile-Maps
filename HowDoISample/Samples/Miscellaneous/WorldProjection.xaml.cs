@@ -88,7 +88,7 @@ public partial class WorldProjection
                 MapView.CenterPoint = new PointShape(-1202852, 6853983);
                 break;
             case "AlbersEqualAreaConic":
-                _worldLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 
+                _worldLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326,
                     "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m no_defs");
                 MapView.MapUnit = GeographyUnit.Meter;
                 MapView.MapRotation = 0;
@@ -97,7 +97,7 @@ public partial class WorldProjection
                 break;
             case "EqualAreaCylindrical":
                 // Set the new projection converter and open it.  Next set the map to the correct map unit and new extent
-                _worldLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326, 
+                _worldLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(4326,
                     "+proj=cea +lon_0=0 +x_0=0 +y_0=0 +lat_ts=45 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
                 MapView.MapUnit = GeographyUnit.Meter;
                 MapView.MapRotation = 0;

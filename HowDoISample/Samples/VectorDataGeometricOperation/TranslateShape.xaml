@@ -17,19 +17,19 @@
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="4"
-                    MapUnit="Meter" MapRotation="0" SizeChanged="MapView_OnSizeChanged">
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" Grid.RowSpan="4" 
+                              MapRotation="0" SizeChanged="MapView_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
             <Button Grid.Row="2" Text="Move: X:1000m, Y:1000m" Clicked="OffsetTranslateShape_OnClick" 
-                    HorizontalOptions="Center" WidthRequest="280" Margin="0" 
+                    HorizontalOptions="Center" WidthRequest="280" Margin="0,0,0,2" 
                     BackgroundColor="Gray" TextColor="White" FontAttributes="Bold"/>
 
             <Button Grid.Row="3" Text="Move: 1000m and 120 degrees " Clicked="DegreeTranslateShape_OnClick" 
-                    HorizontalOptions="Center" WidthRequest="280" Margin="0" 
+                    HorizontalOptions="Center" WidthRequest="280" Margin="0,2,0,0" 
                     BackgroundColor="Gray" TextColor="White" FontAttributes="Bold"/>
 
         </Grid>

@@ -9,8 +9,8 @@ public partial class TimezoneCloudServices
     private bool _initialized;
     private TimeZoneCloudClient _timeZoneCloudClient;
     public TimezoneCloudServices()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 
@@ -122,9 +122,9 @@ public partial class TimezoneCloudServices
         converter.Open();
 
         // Add the new timezone polygon to the map
-        var convertedShape = converter.ConvertToInternalProjection(result.Shape);        
-        timezonesFeatureLayer.InternalFeatures.Add(new Feature(convertedShape));        
-                
+        var convertedShape = converter.ConvertToInternalProjection(result.Shape);
+        timezonesFeatureLayer.InternalFeatures.Add(new Feature(convertedShape));
+
         converter.Close();
         timezonesFeatureLayer.Close();
 

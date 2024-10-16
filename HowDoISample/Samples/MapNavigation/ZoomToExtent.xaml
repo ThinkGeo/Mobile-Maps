@@ -21,7 +21,7 @@
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
             <thinkgeo:MapView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" 
-                                  x:Name="MapView" SizeChanged="MapView_SizeChanged">
+                              x:Name="MapView" SizeChanged="MapView_SizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>
@@ -31,11 +31,13 @@
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
+                         BackgroundColor="Transparent"
                          Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
 
             <ImageButton x:Name="DefaultExtentButton" Grid.Column="1" Grid.Row="1" 
                          VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"
                          WidthRequest="40" HeightRequest="40" Margin="5"
+                         BackgroundColor="Transparent"
                          Source="icon_globe_black.png"/>
 
             <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" CascadeInputTransparent="False" 

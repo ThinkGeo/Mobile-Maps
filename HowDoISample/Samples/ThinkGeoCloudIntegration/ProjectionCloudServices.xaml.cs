@@ -9,9 +9,9 @@ public partial class ProjectionCloudServices
     private bool _initialized;
     private ProjectionCloudClient _projectionCloudClient;
     public ProjectionCloudServices()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

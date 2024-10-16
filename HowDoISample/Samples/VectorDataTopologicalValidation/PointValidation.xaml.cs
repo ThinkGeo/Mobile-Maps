@@ -8,9 +8,9 @@ public partial class PointValidation
 {
     private bool _initialized;
     public PointValidation()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
@@ -87,7 +87,7 @@ public partial class PointValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [uncoveredPointFeature1, uncoveredPointFeature2, coveredPointFeature],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [lineFeature]
             );
 
@@ -120,7 +120,7 @@ public partial class PointValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureOnEndpoint],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [lineFeature]
             );
 
@@ -153,7 +153,7 @@ public partial class PointValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureOnBoundary],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [polygonFeature]
             );
 
@@ -186,7 +186,7 @@ public partial class PointValidation
         // Clear the MapView and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureInsidePolygon],
-            invalidResultFeatures, 
+            invalidResultFeatures,
             [polygonFeature]
             );
 
@@ -230,9 +230,9 @@ public partial class PointValidation
 
         // Refresh/redraw the layers and reset the map extent
         var featureOverlay = (LayerOverlay)MapView.Overlays["Features Overlay"];
-        var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();        
+        var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
         MapView.CenterPoint = centerPoint;
-        MapView.MapScale = 200000000;        
+        MapView.MapScale = 200000000;
         await MapView.RefreshAsync();
 
         validatedFeaturesLayer.Close();

@@ -11,8 +11,8 @@ public partial class RoutingServiceAreaCloudServices
     private RoutingCloudClient _routingCloudClient;
     private Collection<TimeSpan> _serviceAreaIntervals;
     public RoutingServiceAreaCloudServices()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 
@@ -71,7 +71,7 @@ public partial class RoutingServiceAreaCloudServices
 
         MapView.CenterPoint = new PointShape(-10777600, 3915260);
         MapView.MapScale = 1500000;
-        
+
         // Create a new set of time spans for 15, 30, 45, 60 minutes. These will be used to create the class breaks for the routing service area request
         _serviceAreaIntervals =
             [

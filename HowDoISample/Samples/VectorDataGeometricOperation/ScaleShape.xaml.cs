@@ -3,15 +3,15 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
 
-public partial class ScaleShape 
+public partial class ScaleShape
 {
     private bool _initialized;
     private double _scaleFactor = 1;
 
     public ScaleShape()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

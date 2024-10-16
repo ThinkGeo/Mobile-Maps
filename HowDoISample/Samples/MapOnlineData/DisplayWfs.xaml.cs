@@ -28,10 +28,10 @@ public partial class DisplayWfs
             ClientSecret = SampleKeys.ClientSecret,
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,  "thinkgeo_vector_light")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
         };
         MapView.Overlays.Add(thinkGeoVectorOverlay);
-                                       
+
         var helsinkiParcelsLayer = new WfsV2ProgressiveFeatureLayer("https://inspire-wfs.maanmittauslaitos.fi/inspire-wfs/cp/ows", "cp:CadastralParcel")
         {
             TimeoutInSeconds = 500,

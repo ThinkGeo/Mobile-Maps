@@ -27,7 +27,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/appicon.appiconset</string>
+	<string>Assets.xcassets/appicon.appiconset</string>	
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to your location for providing current coordinates.</string>
 	<key>CFBundleIdentifier</key>
 	<string>thinkgeo.howdoi.maui.ios</string>
 </dict>

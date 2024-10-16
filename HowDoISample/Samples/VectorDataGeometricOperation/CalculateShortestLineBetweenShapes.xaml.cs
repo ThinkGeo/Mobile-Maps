@@ -7,8 +7,8 @@ public partial class CalculateShortestLineBetweenShapes
 {
     private bool _initialized;
     public CalculateShortestLineBetweenShapes()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         MapView.SingleTap += MapView_SingleTap;
     }
 

@@ -7,9 +7,9 @@ public partial class UnionShapes
 {
     private bool _initialized;
     public UnionShapes()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

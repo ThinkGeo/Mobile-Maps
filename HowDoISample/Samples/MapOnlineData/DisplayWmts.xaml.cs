@@ -22,27 +22,22 @@ public partial class DisplayWmts
 
         // Create a WMTS overlay using the WMS parameters below.
         // This is a public service and performance may be slow.
-        var wmtsLayer = new ThinkGeo.Core.Async.WmtsLayer
+        var wmtsOverlay = new WmtsOverlay
         {
             DrawingExceptionMode = DrawingExceptionMode.DrawException,
-            WmtsSeverEncodingType = WmtsSeverEncodingType.Restful
+            WmtsSeverEncodingType = WmtsServerEncodingType.Restful
         };
 
-        wmtsLayer.ServerUris.Add(new Uri("https://wmts.geo.admin.ch/1.0.0"));
-        wmtsLayer.CapabilitesCacheTimeout = new TimeSpan(0, 0, 0, 1);
-        wmtsLayer.ActiveLayerName = "ch.swisstopo.pixelkarte-farbe-pk25.noscale";
-        wmtsLayer.ActiveStyleName = "default";
-        wmtsLayer.OutputFormat = "image/png";
-        wmtsLayer.TileMatrixSetName = "21781_26";
-        wmtsLayer.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,  "WmtsTmpTileCache");
-
-        //Add the new WMTS Layer to our LayerOverlay
-        var layerOverlay = new LayerOverlay();
-        layerOverlay.TileType = TileType.MultiTile;
-        layerOverlay.Layers.Add(wmtsLayer);
+        wmtsOverlay.ServerUri = new Uri("https://wmts.geo.admin.ch/1.0.0");
+        wmtsOverlay.CapabilitiesCacheTimeout = new TimeSpan(0, 0, 0, 1);
+        wmtsOverlay.ActiveLayerName = "ch.swisstopo.pixelkarte-farbe-pk25.noscale";
+        wmtsOverlay.ActiveStyleName = "default";
+        wmtsOverlay.OutputFormat = "image/png";
+        wmtsOverlay.TileMatrixSetName = "21781_26";
+        wmtsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "WmtsTmpTileCache");
 
         //Add the overlay to the mapView's Overlay collection.
-        MapView.Overlays.Add(layerOverlay);
+        MapView.Overlays.Add(wmtsOverlay);
 
         // Set the extent to the Eiger - a famous peak in Switzerland.
         MapView.CenterPoint = new PointShape(643000, 158000);

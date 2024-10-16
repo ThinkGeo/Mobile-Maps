@@ -37,12 +37,12 @@ public partial class TinyGeoLayer
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
         var tinyGeoLayer = new TinyGeoFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "TinyGeo", "Zoning.tgeo"))
-            {
-                FeatureSource =
+        {
+            FeatureSource =
                 {
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
-            };
+        };
 
         // Add the layer to the overlay we created earlier.
         tinyGeoOverlay.Layers.Add("Zoning", tinyGeoLayer);

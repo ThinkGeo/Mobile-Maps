@@ -7,9 +7,9 @@ public partial class GetEnvelope
 {
     private bool _initialized;
     public GetEnvelope()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {

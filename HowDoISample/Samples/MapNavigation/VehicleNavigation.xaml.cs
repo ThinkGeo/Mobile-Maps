@@ -54,7 +54,7 @@ public partial class VehicleNavigation
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 6, true);
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-        var layerOverlay = new LayerNonRotationGraphicsViewOverlay();
+        var layerOverlay = new LayerGraphicsViewOverlay();
         layerOverlay.UpdateDataWhileTransforming = true;
         layerOverlay.Layers.Add(routeLayer);
         layerOverlay.Layers.Add(_visitedRoutesLayer);
@@ -180,9 +180,9 @@ public partial class VehicleNavigation
         var centerPoint = new PointShape(currentLocation);
 
         // Recenter the map to display the GPS location towards the bottom for improved visibility.
-        centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200,  angle, MapView.MapScale, MapView.MapUnit);
+        centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, MapView.MapScale, MapView.MapUnit);
 
-        await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Default, cancellationToken);
+        await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
         UpdateVisitedRoutes(_gpsPoints[gpsPointIndex]);
 
         _vehicleMarker.Position = new PointShape(currentLocation.X, currentLocation.Y);
