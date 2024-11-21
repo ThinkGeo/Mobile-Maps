@@ -25,10 +25,10 @@ public partial class DisplayWmts
         var wmtsOverlay = new WmtsOverlay
         {
             DrawingExceptionMode = DrawingExceptionMode.DrawException,
-            WmtsSeverEncodingType = WmtsSeverEncodingType.Restful
+            WmtsSeverEncodingType = WmtsServerEncodingType.Restful
         };
 
-        wmtsOverlay.ServerUris.Add(new Uri("https://wmts.geo.admin.ch/1.0.0"));
+        wmtsOverlay.ServerUri = new Uri("https://wmts.geo.admin.ch/1.0.0");
         wmtsOverlay.CapabilitiesCacheTimeout = new TimeSpan(0, 0, 0, 1);
         wmtsOverlay.ActiveLayerName = "ch.swisstopo.pixelkarte-farbe-pk25.noscale";
         wmtsOverlay.ActiveStyleName = "default";
