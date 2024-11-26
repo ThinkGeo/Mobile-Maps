@@ -14,10 +14,12 @@ public partial class VehicleNavigation
     private readonly List<Vertex> _visitedVertices = [];
     private InMemoryFeatureLayer _visitedRoutesLayer;
     private bool _disposed;
+    private bool _busy; // mark if the map is busy redrawing
 
     private bool _initialized;
     private CancellationTokenSource _cancellationTokenSource;
-
+    private ThinkGeoRasterOverlay _backgroundOverlay;
+        
     public VehicleNavigation()
     {
         InitializeComponent();
@@ -37,15 +39,15 @@ public partial class VehicleNavigation
 
         _cancellationTokenSource = new CancellationTokenSource();
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoRasterOverlay
+        _backgroundOverlay = new ThinkGeoRasterOverlay
         {
             ClientId = SampleKeys.ClientId,
             ClientSecret = SampleKeys.ClientSecret,
             MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
-        MapView.Overlays.Add("Background Maps", backgroundOverlay);
-
+        MapView.Overlays.Add(_backgroundOverlay);
+        MapView.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
         _gpsPoints = await InitGpsData();
 
         // Create the Layer for the Route
@@ -75,19 +77,7 @@ public partial class VehicleNavigation
 
         MapView.CurrentExtentChangedInAnimation += MapViewOnCurrentExtentChangedInAnimation;
 
-        AerialBackgroundCheckBox.CheckedChanged += async (_, args) =>
-        {
-            // cancel the map refreshing in ZoomToGpsPoints
-            await _cancellationTokenSource.CancelAsync();
-
-            backgroundOverlay.MapType = args.Value
-                ? ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2
-                : ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
-            await MapView.RefreshAsync(new[] { backgroundOverlay });
-
-            // create a new tokenSource here, so ZoomToGpsPoints can keep running
-            _cancellationTokenSource = new CancellationTokenSource();
-        };
+        AerialBackgroundCheckBox.CheckedChanged += AerialBackgroundCheckBoxOnCheckedChanged; 
 
         MapView.CenterPoint = new PointShape(_gpsPoints[0]);
         MapView.MapScale = 5000;
@@ -100,26 +90,15 @@ public partial class VehicleNavigation
     {
         for (_currentGpsPointIndex = 0; _currentGpsPointIndex < _gpsPoints.Count; _currentGpsPointIndex++)
         {
-            try
-            {
-                await ZoomToGpsPointAsync(_currentGpsPointIndex, _cancellationTokenSource.Token);
-            }
-            catch (TaskCanceledException)
-            {
-                // Delay 0.5s if ZoomToGpsPoint is canceled, for example panning around the map will cancel this method
-                await Task.Delay(500);
-                // i-- to redraw the current segment in the next loop
-                _currentGpsPointIndex--;
-            }
-
-            while (_cancellationTokenSource.IsCancellationRequested)
+            while (_busy || _cancellationTokenSource.IsCancellationRequested)
                 await Task.Delay(500); // delay zooming to GPS Points if the map is refreshing
 
+            await ZoomToGpsPointAsync(_currentGpsPointIndex, _cancellationTokenSource.Token);
+      
             if (_disposed)
                 break;
         }
     }
-
 
     private void MapViewOnCurrentExtentChangedInAnimation(object sender, CurrentExtentChangedInAnimationMapViewEventArgs e)
     {
@@ -265,4 +244,84 @@ public partial class VehicleNavigation
         }
         return angle;
     }
+    
+    private async void AerialBackgroundCheckBoxOnCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        while (_busy)
+            await Task.Delay(500); // delay the operation is it's rendering 
+        _busy = true;
+        await RefreshCancellationTokenAsync();
+        
+        _backgroundOverlay.MapType = e.Value
+            ? ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2
+            : ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
+        await _backgroundOverlay.RefreshAsync();
+        
+        _busy = false;
+    }
+    
+    private async void Button_OnClicked(object sender, EventArgs e)
+    {
+        while (_busy)
+            await Task.Delay(500); // delay the operation is it's rendering 
+        _busy = true;
+        await RefreshCancellationTokenAsync();
+
+        if (MapView.TiltAngle > 40)
+            await MapView.TiltAsync(0, 1000, Easing.Default);
+        else
+            await MapView.TiltAsync(MapView.TiltAngle + 15, 1000, Easing.Default);
+        _busy = false;
+    }
+
+    private async void ZoomInButton_OnClicked(object sender, EventArgs e)
+    {
+        while (_busy)
+            await Task.Delay(500); // delay the operation is it's rendering 
+        _busy = true;
+        await RefreshCancellationTokenAsync();
+
+        await MapView.ZoomInAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+        _busy = false;
+    }
+    
+    private async void ZoomOutButton_OnClicked(object sender, EventArgs e)
+    {
+        while (_busy)
+            await Task.Delay(500); // delay the operation is it's rendering 
+        _busy = true;
+        await RefreshCancellationTokenAsync();
+            
+        await MapView.ZoomOutAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+        _busy = false;
+    }
+
+    private async Task RefreshCancellationTokenAsync()
+    {
+        await _cancellationTokenSource.CancelAsync();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
+    }
+}
+
+
+/// <summary>
+/// This customized class disables all the Touch events.
+/// </summary>
+class CustomEventView : EventView
+{
+    protected override TransformArguments TouchDownCore(TouchDownMapViewEventArgs e, IMapView mapView)
+        => new TransformArguments();
+
+    protected override TransformArguments TouchMoveCore(TouchMoveMapViewEventArgs e, IMapView mapView)
+        => new TransformArguments();
+
+    protected override TransformArguments TouchRotateCore(TouchRotateMapViewEventArgs e, IMapView mapView)
+        => new TransformArguments();
+
+    protected override TransformArguments TouchPointerDownCore(Pointer1DownMapViewEventArgs e, IMapView mapView)
+        => new TransformArguments();
+
+    protected override TransformArguments TouchPointerUpCore(Pointer1UpMapViewEventArgs e, IMapView mapView)
+        => new TransformArguments();
 }

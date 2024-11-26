@@ -19,9 +19,6 @@
 
             <thinkgeo:MapView Grid.Row="1" x:Name="MapView" 
                               SizeChanged="MapView_OnSizeChanged" >
-                <thinkgeo:MapView.MapTools>
-                    <thinkgeo:ZoomMapTool/>
-                </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
             <ImageButton x:Name="CompassButton" Grid.Row="1" 
