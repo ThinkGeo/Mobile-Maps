@@ -141,6 +141,11 @@
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
         "title": "Display Vector from MBTiles",
         "description": "Display a vector map using data from an MBTiles file."
+      },
+      {
+        "id": "HowDoISample.XYZBasedLayers.MVT",
+        "title": "Display Vector from MVT Server",
+        "description": "Display a vector map using data from an MVT Server."
       }
     ]
   },
