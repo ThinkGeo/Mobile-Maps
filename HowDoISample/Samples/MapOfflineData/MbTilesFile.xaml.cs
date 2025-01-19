@@ -27,7 +27,7 @@ public partial class MbTilesFile
         var dataFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "maplibre.mbtiles");
         var jsonFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "style.json");
 
-        var openstackMbtiles = new MbTilesLayer(dataFilePath, jsonFilePath);
+        var openstackMbtiles = new VectorMbTilesAsyncLayer(dataFilePath, jsonFilePath);
         layerOverlay.Layers.Add(openstackMbtiles);
 
 
