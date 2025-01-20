@@ -138,6 +138,11 @@
     "title": "XYZ Based Layers",
     "children": [
       {
+        "id": "HowDoISample.XYZBasedLayers.DisplayRasterMBTilesFile",
+        "title": "Display Raster from MBTiles",
+        "description": "Display a raster map using data from an MBTiles file."
+      },
+      {
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
         "title": "Display Vector from MBTiles",
         "description": "Display a vector map using data from an MBTiles file."

@@ -63,6 +63,7 @@
 	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
 	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
 	  <None Remove="Data\Mbtiles\style.json" />
+	  <None Remove="Data\Mbtiles\test.mbtiles" />
 	  <None Remove="Data\Railroad\Railroad.dbf" />
 	  <None Remove="Data\Railroad\Railroad.ids" />
 	  <None Remove="Data\Railroad\Railroad.idx" />
@@ -187,6 +188,7 @@
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
 	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
+	  <EmbeddedResource Include="Data\Mbtiles\test.mbtiles" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
@@ -641,6 +643,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\XYZBasedLayers\DisplayRasterMBTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\XYZBasedLayers\MVT.xaml">
