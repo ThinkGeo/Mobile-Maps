@@ -138,9 +138,14 @@
     "title": "XYZ Based Layers",
     "children": [
       {
-        "id": "HowDoISample.XYZBasedLayers.DisplayRasterMBTilesFile",
+        "id": "HowDoISample.MapOfflineData.DisplayRasterMBTilesFile",
         "title": "Display Raster from MBTiles",
         "description": "Display a raster map using data from an MBTiles file."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.DisplayRasterFileTiles",
+        "title": "Display Raster from File Tiles",
+        "description": "Display a raster tiles created by QGIS. The demo tiles cover zoom0 to zoom5."
       },
       {
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
@@ -148,7 +153,7 @@
         "description": "Display a vector map using data from an MBTiles file."
       },
       {
-        "id": "HowDoISample.XYZBasedLayers.MVT",
+        "id": "HowDoISample.MapOnlineData.MVT",
         "title": "Display Vector from MVT Server",
         "description": "Display a vector map using data from an MVT Server."
       }

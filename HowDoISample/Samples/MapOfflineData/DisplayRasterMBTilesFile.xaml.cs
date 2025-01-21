@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
-namespace HowDoISample.XYZBasedLayers;
+namespace HowDoISample.MapOfflineData;
 
 //[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class DisplayRasterMBTilesFile

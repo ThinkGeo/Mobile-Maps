@@ -1,7 +1,7 @@
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
-namespace HowDoISample.XYZBasedLayers;
+namespace HowDoISample.MapOnlineData;
 
 public partial class MVT
 {

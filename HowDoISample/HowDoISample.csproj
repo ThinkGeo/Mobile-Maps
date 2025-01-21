@@ -64,6 +64,7 @@
 	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
 	  <None Remove="Data\Mbtiles\style.json" />
 	  <None Remove="Data\Mbtiles\test.mbtiles" />
+	  <None Remove="Data\OSM_Tiles_z0-z5_Created_By_QGIS.zip" />
 	  <None Remove="Data\Railroad\Railroad.dbf" />
 	  <None Remove="Data\Railroad\Railroad.ids" />
 	  <None Remove="Data\Railroad\Railroad.idx" />
@@ -189,6 +190,9 @@
 	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
 	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\test.mbtiles" />
+	  <EmbeddedResource Include="Data\OSM_Tiles_z0-z5_Created_By_QGIS.zip">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
@@ -480,6 +484,9 @@
 	  <MauiXaml Update="Samples\DescriptionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterFileTiles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOfflineData\MbTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -645,10 +652,10 @@
 	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\XYZBasedLayers\DisplayRasterMBTilesFile.xaml">
+	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\XYZBasedLayers\MVT.xaml">
+	  <MauiXaml Update="Samples\MapOnlineData\MVT.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
