@@ -490,6 +490,9 @@
 	  <MauiXaml Update="Samples\MapOfflineData\MbTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\RasterXyzServer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOnlineData\DisplayWmts.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

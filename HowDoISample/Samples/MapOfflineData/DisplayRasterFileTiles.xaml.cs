@@ -1,17 +1,12 @@
-using System.Collections.ObjectModel;
 using System.IO.Compression;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
-using Microsoft.Maui.Storage;
 
 namespace HowDoISample.MapOfflineData;
 
-//[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class DisplayRasterFileTiles
 {
-    public ObservableCollection<string> LogMessages { get; } = new ObservableCollection<string>();
     private XyzFileTilesAsyncLayer fileTilesAsyncLayer;
-    private int _logIndex = 0;
     public DisplayRasterFileTiles()
     {
         InitializeComponent();
@@ -45,11 +40,6 @@ public partial class DisplayRasterFileTiles
         }
 
         fileTilesAsyncLayer.TileCache = new FileRasterTileCache(cachePath, "raw");
-        fileTilesAsyncLayer.ProjectedTileCache = new FileRasterTileCache(cachePath, "projected")
-        { EnableDebugInfo = true };
-
-        fileTilesAsyncLayer.TileCache.GottenCacheTile += TileCache_GottenCacheTile;
-        fileTilesAsyncLayer.ProjectedTileCache.GottenCacheTile += ProjectedTileCache_GottenCacheTile;
 
         await fileTilesAsyncLayer.CloseAsync();
         await fileTilesAsyncLayer.OpenAsync();
@@ -57,28 +47,6 @@ public partial class DisplayRasterFileTiles
         await MapView.ZoomToAsync(boundingBox);
 
         await MapView.RefreshAsync();
-    }
-
-    private void ProjectedTileCache_GottenCacheTile(object sender, GottenCacheImageBitmapTileCacheEventArgs e)
-    {
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            var message = e.Tile.Content == null ? "Projection Cache Not Hit:" : "Projection Cache Hit:";
-            message += $"{e.Tile.ZoomIndex}-{e.Tile.Column}-{e.Tile.Row}";
-
-            AppendLog(message);
-        });
-    }
-
-    private void TileCache_GottenCacheTile(object sender, GottenCacheImageBitmapTileCacheEventArgs e)
-    {
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            var message = e.Tile.Content == null ? "Cache Not Hit:" : "Cache Hit:";
-            message += $"{e.Tile.ZoomIndex}-{e.Tile.Column}-{e.Tile.Row}";
-
-            AppendLog(message);
-        });
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -96,43 +64,6 @@ public partial class DisplayRasterFileTiles
         {
             await MapView.RefreshAsync();
         }
-    }
-
-    private async void Projection_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        if (fileTilesAsyncLayer == null) return;
-
-        var radioButton = sender as RadioButton;
-        if (radioButton?.Content == null) return;
-
-        switch (radioButton.Content.ToString())
-        {
-            case "EPSG 3857":
-                MapView.MapUnit = GeographyUnit.Meter;
-                fileTilesAsyncLayer.ProjectionConverter = null;
-                break;
-
-            case "EPSG 4326":
-                MapView.MapUnit = GeographyUnit.DecimalDegree;
-                fileTilesAsyncLayer.ProjectionConverter = new ProjectionConverter(3857, 4326);
-                break;
-
-            default:
-                return;
-        }
-
-        await fileTilesAsyncLayer.CloseAsync();
-        await fileTilesAsyncLayer.OpenAsync();
-        var boundingBox = fileTilesAsyncLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
-        await MapView.RefreshAsync();
-    }
-
-    public void AppendLog(string message)
-    {
-        // Add log message to the observable collection
-        LogMessages.Add($"{_logIndex++}: {message}");
-        LogCollectionView.ScrollTo(LogMessages[LogMessages.Count - 1], animate: true);
     }
 
     public void Dispose()

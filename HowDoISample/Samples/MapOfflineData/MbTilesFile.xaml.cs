@@ -22,6 +22,7 @@ public partial class MbTilesFile
 
         var layerOverlay = new LayerOverlay();
         layerOverlay.TileType = TileType.MultiTile;
+        layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(256);
         MapView.Overlays.Add(layerOverlay);
 
         var dataFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "maplibre.mbtiles");
@@ -29,7 +30,6 @@ public partial class MbTilesFile
 
         var openstackMbtiles = new VectorMbTilesAsyncLayer(dataFilePath, jsonFilePath);
         layerOverlay.Layers.Add(openstackMbtiles);
-
 
         await openstackMbtiles.OpenAsync();
         // set up the MapScale of Center Point
@@ -50,24 +50,37 @@ public partial class MbTilesFile
 
     private async void SwitchTileSize_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (MapView == null)
-            return;
+        if (MapView == null) return;
+        if (sender is not RadioButton radioButton) return;
+        if (!e.Value) return;
+        if (MapView.Overlays[0] is not LayerOverlay layerOverlay) return;
 
-        if (sender is not RadioButton radioButton)
-            return;
-
-        if (!e.Value)
-            return;
-
-        if (MapView.Overlays[0] is not LayerOverlay layerOverlay)
-            return;
-
-        var tileSize = (string)radioButton.Content == "512 * 512" ? 512 : 256;
-        layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize);
-
-        if (layerOverlay.Layers[0] is MbTilesLayer mbTilesLayer)
+        int tileSize=0;
+        string content = radioButton.Content.ToString();
+        switch (content)
         {
-            mbTilesLayer.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize, MaxExtents.SphericalMercator);
+            case "256 * 256":
+                tileSize = 256;
+                layerOverlay.TileType = TileType.MultiTile;
+                break;
+            case "512 * 512":
+                tileSize = 512;
+                layerOverlay.TileType = TileType.MultiTile;
+                break;
+            case "Single Tile":
+                layerOverlay.TileType = TileType.SingleTile;
+                break;
+            default:
+                break;
+        }
+        
+        if (tileSize > 0)
+        {
+            layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize);
+            if (layerOverlay.Layers[0] is MbTilesLayer mbTilesLayer)
+            {
+                mbTilesLayer.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize, MaxExtents.SphericalMercator);
+            }
         }
 
         await MapView.RefreshAsync();

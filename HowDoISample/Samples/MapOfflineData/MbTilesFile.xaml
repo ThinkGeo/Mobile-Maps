@@ -28,8 +28,9 @@
                     <CheckBox CheckedChanged ="ShowDebugInfo_OnCheckedChanged" Margin="-10" IsChecked="True"/>
                     <Label Text ="Show Tile ID"/>
                 </StackLayout>
-                <RadioButton Content="256 * 256" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15"/>
-                <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,0" IsChecked="True"/>
+                <RadioButton Content="256 * 256" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15" IsChecked="True"/>
+                <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15"/>
+                <RadioButton Content="Single Tile" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15" />
             </StackLayout>
 
         </Grid>
