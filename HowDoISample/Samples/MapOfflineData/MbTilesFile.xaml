@@ -22,15 +22,21 @@
             </thinkgeo:MapView>
 
             <StackLayout Grid.Row="1" CascadeInputTransparent="False" 
-                         Margin="4" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="Grey">
+                         Margin="10" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="Grey">
 
-                <StackLayout Orientation="Horizontal"  HeightRequest="20"  Margin="5">
+                <StackLayout Orientation="Horizontal"  HeightRequest="40" VerticalOptions="Center" Margin="5">
                     <CheckBox CheckedChanged ="ShowDebugInfo_OnCheckedChanged" Margin="-10" IsChecked="True"/>
-                    <Label Text ="Show Tile ID"/>
+                    <Label Text ="Show Tile ID" FontAttributes="Bold" FontSize="18" VerticalOptions="Center"/>
                 </StackLayout>
-                <RadioButton Content="256 * 256" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15" IsChecked="True"/>
-                <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15"/>
-                <RadioButton Content="Single Tile" CheckedChanged="SwitchTileSize_OnCheckedChanged" Margin="10,0,0,-15" />
+
+                <StackLayout Orientation="Vertical" Spacing="5">
+                    <RadioButton Content="256 * 256" CheckedChanged="SwitchTileSize_OnCheckedChanged" 
+                                 FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0" IsChecked="True"/>
+                    <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" 
+                                 FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0"/>
+                    <RadioButton Content="Single Tile" CheckedChanged="SwitchTileSize_OnCheckedChanged" 
+                                 FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0" />
+                </StackLayout>
             </StackLayout>
 
         </Grid>
