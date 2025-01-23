@@ -1,3 +1,4 @@
+using System.IO;
 using System.IO.Compression;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
@@ -84,7 +85,7 @@ class XyzFileTilesAsyncLayer : RasterXyzTileAsyncLayer
 
     protected override Task<RasterTile> GetTileAsyncCore(int zoomLevel, long x, long y, float resolutionFactor, CancellationToken cancellationToken)
     {
-        var path = $"{_root}\\{zoomLevel}\\{x}\\{y}.jpg";
+        var path = Path.Combine(_root, zoomLevel.ToString(), x.ToString(), $"{y}.jpg");
         if (!File.Exists(path))
             return Task.FromResult(new RasterTile(null, zoomLevel, x, y));
 
