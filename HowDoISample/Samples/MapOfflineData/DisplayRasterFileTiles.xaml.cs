@@ -28,7 +28,7 @@ public partial class DisplayRasterFileTiles
         var layerOverlay = new LayerOverlay();
         MapView.Overlays.Add(layerOverlay);
         fileTilesAsyncLayer = new XyzFileTilesAsyncLayer(targetFileDirectory);
-        fileTilesAsyncLayer.MaxZoom = 5; // The MaxZoom with data
+        fileTilesAsyncLayer.MaxZoomOfTheData = 5; // The MaxZoom with data
 
         layerOverlay.TileType = TileType.SingleTile;
         layerOverlay.Layers.Add(fileTilesAsyncLayer);
