@@ -58,11 +58,6 @@
         "description": "Display OpenStreetMap."
       },
       {
-        "id": "HowDoISample.MapOnlineData.MVT",
-        "title": "MVT",
-        "description": "Display a vector map using data from an MVT Server."
-      },
-      {
         "id": "HowDoISample.MapOnlineData.DisplayWfs",
         "title": "WFS",
         "description": "Fetch and display features from a WFS V2 Server"
@@ -176,11 +171,6 @@
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
         "title": "Display Vector from MBTiles",
         "description": "Display a vector map using data from an MBTiles file."
-      },
-      {
-        "id": "HowDoISample.MapOnlineData.MVT",
-        "title": "Display Vector from MVT Server",
-        "description": "Display a vector map using data from an MVT Server."
       }
     ]
   },

@@ -357,7 +357,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.3.0-beta066" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.3.0-beta067" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -656,9 +656,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Samples\MapOnlineData\MVT.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
