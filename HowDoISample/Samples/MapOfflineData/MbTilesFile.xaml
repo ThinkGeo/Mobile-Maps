@@ -34,8 +34,6 @@
                                  FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0" IsChecked="True"/>
                     <RadioButton Content="512 * 512" CheckedChanged="SwitchTileSize_OnCheckedChanged" 
                                  FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0"/>
-                    <RadioButton Content="Single Tile" CheckedChanged="SwitchTileSize_OnCheckedChanged" 
-                                 FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HeightRequest="40" Margin="10,0,0,0" />
                 </StackLayout>
             </StackLayout>
 
