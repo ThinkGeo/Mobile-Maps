@@ -68,19 +68,19 @@ public partial class ZoomToBlackHole
                 continue;
             if (layerOverlay.Layers[0] is not GeoImageLayer geoImageLayer)
                 continue;
-            if (MapView.MapScale < geoImageLayer.LowerThreshold)
+            if (MapView.MapScale < geoImageLayer.LowerScale)
             {
                 layerOverlay.Opacity = 0;
                 continue;
             }
-            if (MapView.MapScale > geoImageLayer.UpperThreshold)
+            if (MapView.MapScale > geoImageLayer.UpperScale)
             {
                 layerOverlay.Opacity = 0;
                 continue;
             }
 
-            var upperRatio = 1 - MapView.MapScale / geoImageLayer.UpperThreshold;
-            var lowerRatio = MapView.MapScale / geoImageLayer.LowerThreshold;
+            var upperRatio = 1 - MapView.MapScale / geoImageLayer.UpperScale;
+            var lowerRatio = MapView.MapScale / geoImageLayer.LowerScale;
 
             if (upperRatio < 0.4)
                 layerOverlay.Opacity = upperRatio * 2.5;
@@ -126,7 +126,7 @@ public partial class ZoomToBlackHole
             var geoImageLayer = (GeoImageLayer)layerOverlay.Layers[0];
             if (geoImageLayer == null)
                 continue;
-            zoomingExtents.Add((geoImageLayer.CenterPoint, geoImageLayer.UpperThreshold));
+            zoomingExtents.Add((geoImageLayer.CenterPoint, geoImageLayer.UpperScale));
         }
 
         var lastLayer = (GeoImageLayer)((LayerOverlay)MapView.Overlays[^1]).Layers[0];
