@@ -33,29 +33,9 @@
         "description": "Display ThinkGeo background."
       },
       {
-        "id": "HowDoISample.MapOnlineData.DisplayOpenStreetMap",
-        "title": "Open Street Map",
-        "description": "Display OpenStreetMap."
-      },
-      {
-        "id": "HowDoISample.MapOnlineData.DisplayWms",
-        "title": "WMS",
-        "description": "Fetch tiles from a WMS Server."
-      },
-      {
-        "id": "HowDoISample.MapOnlineData.DisplayWmts",
-        "title": "WMTS",
-        "description": "Fetch tiles from a WMTS Server."
-      },
-      {
-        "id": "HowDoISample.MapOnlineData.DisplayWfs",
-        "title": "WFS",
-        "description": "Fetch and display features from a WFS V2 Server"
-      },
-      {
-        "id": "HowDoISample.MapOnlineData.DisplayOgcApiFeatures",
-        "title": "Ogc API Feature Server",
-        "description": "Fetch and display features from an OGC API - Features Server"
+        "id": "HowDoISample.MapOnlineData.RasterXyzServer",
+        "title": "Display Raster from XYZ Server",
+        "description": "Display the tiles from a raster XYZ server."
       },
       {
         "id": "HowDoISample.MapOnlineData.DisplayNoaaWeatherStation",
@@ -68,6 +48,31 @@
         "description": "Display NOAA Weather Warnings. Click on a weather polygon to get detail."
       },
       {
+        "id": "HowDoISample.MapOnlineData.DisplayOgcApiFeatures",
+        "title": "Ogc API Feature Server",
+        "description": "Fetch and display features from an OGC API - Features Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayOpenStreetMap",
+        "title": "Open Street Map",
+        "description": "Display OpenStreetMap."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWfs",
+        "title": "WFS",
+        "description": "Fetch and display features from a WFS V2 Server"
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWms",
+        "title": "WMS",
+        "description": "Fetch tiles from a WMS Server."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.DisplayWmts",
+        "title": "WMTS",
+        "description": "Fetch tiles from a WMTS Server."
+      },
+      {
         "id": "HowDoISample.MapOnlineData.OtherOnlineData",
         "title": "Other Online Data Servers",
         "description": "More data servers we support."
@@ -77,6 +82,16 @@
   {
     "title": "Map Offline Data",
     "children": [
+      {
+        "id": "HowDoISample.MapOfflineData.DisplayRasterMBTilesFile",
+        "title": "Display Raster from MBTiles",
+        "description": "Display a raster map using data from an MBTiles file."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.DisplayRasterFileTiles",
+        "title": "Display Raster from File Tiles",
+        "description": "Display a raster tiles created by QGIS. The demo tiles cover zoom0 to zoom5."
+      },
       {
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
         "title": "Display a MBTiles File",
@@ -151,6 +166,31 @@
         "id": "HowDoISample.MarkersAndPopups.UsingPopups",
         "title": "Using Popups",
         "description": "Check the code to see how to add popups."
+      }
+    ]
+  },
+  {
+    "title": "XYZ Based Layers",
+    "children": [
+      {
+        "id": "HowDoISample.MapOfflineData.DisplayRasterMBTilesFile",
+        "title": "Display Raster from MBTiles",
+        "description": "Display a raster map using data from an MBTiles file."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.DisplayRasterFileTiles",
+        "title": "Display Raster from File Tiles",
+        "description": "Display a raster tiles created by QGIS. The demo tiles cover zoom0 to zoom5."
+      },
+      {
+        "id": "HowDoISample.MapOnlineData.RasterXyzServer",
+        "title": "Display Raster from XYZ Server",
+        "description": "Display the tiles from a raster XYZ server."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.MbTilesFile",
+        "title": "Display Vector from MBTiles",
+        "description": "Display a vector map using data from an MBTiles file."
       }
     ]
   },

@@ -63,6 +63,8 @@
 	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
 	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
 	  <None Remove="Data\Mbtiles\style.json" />
+	  <None Remove="Data\Mbtiles\test.mbtiles" />
+	  <None Remove="Data\OSM_Tiles_z0-z5_Created_By_QGIS.zip" />
 	  <None Remove="Data\Railroad\Railroad.dbf" />
 	  <None Remove="Data\Railroad\Railroad.ids" />
 	  <None Remove="Data\Railroad\Railroad.idx" />
@@ -187,6 +189,10 @@
 	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
 	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
+	  <EmbeddedResource Include="Data\Mbtiles\test.mbtiles" />
+	  <EmbeddedResource Include="Data\OSM_Tiles_z0-z5_Created_By_QGIS.zip">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	  <EmbeddedResource Include="Data\Railroad\Railroad.dbf" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.ids" />
 	  <EmbeddedResource Include="Data\Railroad\Railroad.idx" />
@@ -351,7 +357,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.1.0" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -478,7 +484,13 @@
 	  <MauiXaml Update="Samples\DescriptionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterFileTiles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOfflineData\MbTilesFile.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOnlineData\RasterXyzServer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOnlineData\DisplayWmts.xaml">
@@ -643,11 +655,14 @@
 	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.71" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.71" />
   </ItemGroup>
   
 </Project>

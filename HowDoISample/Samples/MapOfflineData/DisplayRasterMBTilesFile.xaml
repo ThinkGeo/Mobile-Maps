@@ -1,0 +1,34 @@
+<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
+                   xmlns:howDoI="using:HowDoISample"
+                   x:Class="HowDoISample.MapOfflineData.DisplayRasterMBTilesFile">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <howDoI:DescriptionView Grid.Row="0"
+                Description="{Binding Description, Source={x:Reference BasePage}}" />
+
+            <thinkgeo:MapView Grid.Row="1" x:Name="MapView"
+                          SizeChanged="MapView_OnSizeChanged">
+                <thinkgeo:MapView.MapTools>
+                    <thinkgeo:ZoomMapTool/>
+                </thinkgeo:MapView.MapTools>
+            </thinkgeo:MapView>
+
+            <StackLayout Grid.Row="1" CascadeInputTransparent="False" WidthRequest="250" 
+                     Margin="0,10,0,10" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Grey">
+                <StackLayout Orientation="Horizontal"  HeightRequest="20"  Margin="5">
+                    <CheckBox CheckedChanged ="RenderBeyondMaxZoom_OnCheckedChanged" />
+                    <Label Text ="Render Beyond Max Zoom" FontAttributes="Bold" />
+                </StackLayout>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</howDoI:SamplePage>

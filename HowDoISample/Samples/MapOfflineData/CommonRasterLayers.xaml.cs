@@ -36,7 +36,7 @@ public partial class CommonRasterLayers
         MapView.Overlays.Add(layerOverlay);
 
         // Create the new layer and dd the layer to the overlay we created earlier.
-        var commonRasterLayer = new NativeImageRasterLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Jpg", "m_3309650_sw_14_1_20160911_20161121.jpg"));
+        var commonRasterLayer = new SkiaRasterLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Jpg", "m_3309650_sw_14_1_20160911_20161121.jpg"));
         layerOverlay.Layers.Add(commonRasterLayer);
 
         // Set the map scale and center point

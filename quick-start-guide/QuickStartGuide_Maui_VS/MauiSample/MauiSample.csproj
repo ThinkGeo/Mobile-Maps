@@ -57,10 +57,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="AppData\WorldCapitals.dbf" />
+	  <None Remove="AppData\WorldCapitals.ids" />
+	  <None Remove="AppData\WorldCapitals.idx" />
+	  <None Remove="AppData\WorldCapitals.shp" />
+	  <None Remove="AppData\WorldCapitals.shx" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="AppData\WorldCapitals.dbf" />
+	  <EmbeddedResource Include="AppData\WorldCapitals.ids" />
+	  <EmbeddedResource Include="AppData\WorldCapitals.idx" />
+	  <EmbeddedResource Include="AppData\WorldCapitals.shp" />
+	  <EmbeddedResource Include="AppData\WorldCapitals.shx" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.0.0" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.2.1" />
 	</ItemGroup>
 
 </Project>

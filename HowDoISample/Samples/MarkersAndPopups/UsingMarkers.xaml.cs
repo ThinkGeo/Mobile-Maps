@@ -108,7 +108,7 @@ public partial class UsingMarkers
         hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         hotelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
 
-        var layerOverlay = new LayerNonRotationGraphicsViewOverlay();
+        var layerOverlay = new LayerGraphicsViewOverlay();
         layerOverlay.Layers.Add(hotelsLayer);
         MapView.Overlays.Add(layerOverlay);
 

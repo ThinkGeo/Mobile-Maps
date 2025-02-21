@@ -7,6 +7,8 @@ namespace HowDoISample.MapOfflineData;
 public partial class MbTilesFile
 {
     private bool _initialized;
+    LayerOverlay _layerOverlay;
+
     public MbTilesFile()
     {
         InitializeComponent();
@@ -19,22 +21,23 @@ public partial class MbTilesFile
         _initialized = true;
 
         MapView.MapUnit = GeographyUnit.Meter;
-        var layerOverlay = new LayerOverlay();
-        layerOverlay.TileType = TileType.MultiTile;
-        MapView.Overlays.Add(layerOverlay);
+
+        _layerOverlay = new LayerOverlay();
+        _layerOverlay.TileType = TileType.MultiTile;
+        _layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(256);
+        MapView.Overlays.Add(_layerOverlay);
 
         var dataFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "maplibre.mbtiles");
         var jsonFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "style.json");
 
-        var openstackMbtiles = new MbTilesLayer(dataFilePath, jsonFilePath);
-        layerOverlay.Layers.Add(openstackMbtiles);
-
-        MapView.CenterPoint = new PointShape(0, 0);
-        MapView.MapScale = 100000000;
+        var openstackMbtiles = new VectorMbTilesAsyncLayer(dataFilePath, jsonFilePath);
+        _layerOverlay.Layers.Add(openstackMbtiles);
 
         await openstackMbtiles.OpenAsync();
-        var bgColor = openstackMbtiles.BackgroundColor;
-        MapView.BackgroundColor = new Color(bgColor.R, bgColor.G, bgColor.B, bgColor.A);
+        // set up the MapScale of Center Point
+        var bbox = openstackMbtiles.GetBoundingBox();
+        MapView.MapScale = MapUtil.GetScale(bbox, MapView.CanvasWidth, GeographyUnit.Meter);
+        MapView.CenterPoint = bbox.GetCenterPoint();
 
         MapView.IsRotationEnabled = true;
         await MapView.RefreshAsync();
@@ -49,26 +52,31 @@ public partial class MbTilesFile
 
     private async void SwitchTileSize_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (MapView == null)
+        if (MapView == null) return;
+        if (sender is not RadioButton radioButton) return;
+        if (!e.Value) return;
+        if (MapView.Overlays.Count <= 0) return;
+
+        if (!(_layerOverlay.Layers[0] is VectorMbTilesAsyncLayer mbTilesLayer))
             return;
 
-        if (sender is not RadioButton radioButton)
-            return;
-
-        if (!e.Value)
-            return;
-
-        if (MapView.Overlays[0] is not LayerOverlay layerOverlay)
-            return;
-
-        var tileSize = (string)radioButton.Content == "512 * 512" ? 512 : 256;
-        layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize);
-
-        if (layerOverlay.Layers[0] is MbTilesLayer mbTilesLayer)
+        int tileSize=0;
+        string content = radioButton.Content.ToString();
+        switch (content)
         {
-            mbTilesLayer.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize, MaxExtents.SphericalMercator);
+            case "256 * 256":
+                tileSize = 256;
+                break;
+            case "512 * 512":
+                tileSize = 512;
+                break;
         }
 
+        _layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize);
+        await mbTilesLayer.CloseAsync();
+        mbTilesLayer.TileWidth = tileSize;
+        mbTilesLayer.TileHeight = tileSize;
+        await mbTilesLayer.OpenAsync();
         await MapView.RefreshAsync();
     }
 

@@ -25,6 +25,7 @@
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
+                         BackgroundColor="Transparent"
                          Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
 
             <StackLayout Grid.Row="1" CascadeInputTransparent="True" 
