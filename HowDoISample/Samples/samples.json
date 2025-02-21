@@ -150,6 +150,26 @@
     ]
   },
   {
+    "title": "Markers and Popups",
+    "children": [
+      {
+        "id": "HowDoISample.MarkersAndPopups.CreatingMarkers",
+        "title": "Creating Markers",
+        "description": "Tap on the map to place a marker."
+      },
+      {
+        "id": "HowDoISample.MarkersAndPopups.UsingMarkers",
+        "title": "Using Markers",
+        "description": "Check the code to see how to add markers."
+      },
+      {
+        "id": "HowDoISample.MarkersAndPopups.UsingPopups",
+        "title": "Using Popups",
+        "description": "Check the code to see how to add popups."
+      }
+    ]
+  },
+  {
     "title": "XYZ Based Layers",
     "children": [
       {
@@ -171,26 +191,6 @@
         "id": "HowDoISample.MapOfflineData.MbTilesFile",
         "title": "Display Vector from MBTiles",
         "description": "Display a vector map using data from an MBTiles file."
-      }
-    ]
-  },
-  {
-    "title": "Markers and Popups",
-    "children": [
-      {
-        "id": "HowDoISample.MarkersAndPopups.CreatingMarkers",
-        "title": "Creating Markers",
-        "description": "Tap on the map to place a marker."
-      },
-      {
-        "id": "HowDoISample.MarkersAndPopups.UsingMarkers",
-        "title": "Using Markers",
-        "description": "Check the code to see how to add markers."
-      },
-      {
-        "id": "HowDoISample.MarkersAndPopups.UsingPopups",
-        "title": "Using Popups",
-        "description": "Check the code to see how to add popups."
       }
     ]
   },
