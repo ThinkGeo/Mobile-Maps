@@ -357,7 +357,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.2.2" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>
