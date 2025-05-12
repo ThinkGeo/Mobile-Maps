@@ -29,7 +29,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-	</PropertyGroup>
+    <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
@@ -357,7 +358,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.2.4" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="14.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -661,8 +662,8 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.71" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.71" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
   </ItemGroup>
   
 </Project>

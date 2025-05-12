@@ -36,8 +36,8 @@ public partial class DisplayWfs
         {
             TimeoutInSeconds = 500,
         };
-        helsinkiParcelsLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Transparent, GeoColors.OrangeRed, 4);
-        helsinkiParcelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+        helsinkiParcelsLayer.ZoomLevelSet.ZoomLevel13.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Transparent, GeoColors.OrangeRed, 4);
+        helsinkiParcelsLayer.ZoomLevelSet.ZoomLevel13.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
         helsinkiParcelsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(3067, 3857);
 
         var overlay = new ProgressiveFeaturesTileOverlay()
