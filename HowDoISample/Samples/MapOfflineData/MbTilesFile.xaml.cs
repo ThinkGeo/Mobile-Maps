@@ -22,9 +22,11 @@ public partial class MbTilesFile
 
         MapView.MapUnit = GeographyUnit.Meter;
 
-        _layerOverlay = new LayerOverlay();
-        _layerOverlay.TileType = TileType.MultiTile;
-        _layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(256);
+        _layerOverlay = new LayerOverlay
+        {
+            TileType = TileType.MultiTile,
+            ZoomLevelSet = new SphericalMercatorZoomLevelSet(256)
+        };
         MapView.Overlays.Add(_layerOverlay);
 
         var dataFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "maplibre.mbtiles");
@@ -57,7 +59,7 @@ public partial class MbTilesFile
         if (!e.Value) return;
         if (MapView.Overlays.Count <= 0) return;
 
-        if (!(_layerOverlay.Layers[0] is VectorMbTilesAsyncLayer mbTilesLayer))
+        if (_layerOverlay.Layers[0] is not VectorMbTilesAsyncLayer mbTilesLayer)
             return;
 
         int tileSize=0;
@@ -72,11 +74,33 @@ public partial class MbTilesFile
                 break;
         }
 
+        // Open if not already opened
+        if (!mbTilesLayer.IsOpen)
+            await mbTilesLayer.OpenAsync();
+
+        // Get the bounding box from the MBTiles file
+        var bbox = mbTilesLayer.GetBoundingBox();
+
+        // Determine zoom count from existing TileMatrixSet (fallback to 20 if null)
+        int zoomCount = mbTilesLayer.TileMatrixSet?.TileMatrices.Count ?? 20;
+
+        // Create a new TileMatrixSet based on the MBTiles bounding box
+        mbTilesLayer.TileMatrixSet = TileMatrixSet.CreateTileMatrixSet(
+            tileSize,
+            bbox,
+            MapView.MapUnit, // Uses the map's current unit
+            zoomCount
+        );
+
         _layerOverlay.ZoomLevelSet = new SphericalMercatorZoomLevelSet(tileSize);
+
+        // Clear any cached tiles from the overlay
+        _layerOverlay.TileCache?.ClearCache();
+
+        // Force ThinkGeo to reload tile layout
         await mbTilesLayer.CloseAsync();
-        mbTilesLayer.TileWidth = tileSize;
-        mbTilesLayer.TileHeight = tileSize;
         await mbTilesLayer.OpenAsync();
+        
         await MapView.RefreshAsync();
     }
 

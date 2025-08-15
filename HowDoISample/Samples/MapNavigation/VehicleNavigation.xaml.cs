@@ -56,8 +56,10 @@ public partial class VehicleNavigation
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Green, 6, true);
         _visitedRoutesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-        var layerOverlay = new LayerGraphicsViewOverlay();
-        layerOverlay.UpdateDataWhileTransforming = true;
+        var layerOverlay = new LayerGraphicsViewOverlay
+        {
+            UpdateDataWhileTransforming = true
+        };
         layerOverlay.Layers.Add(routeLayer);
         layerOverlay.Layers.Add(_visitedRoutesLayer);
         MapView.Overlays.Add(layerOverlay);
@@ -147,12 +149,12 @@ public partial class VehicleNavigation
             return;
 
         var currentLocation = _gpsPoints[gpsPointIndex];
-        var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
+        double angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
         var animationSettings = new AnimationSettings
         {
             Type = MapAnimationType.DrawWithAnimation,
-            Length = 1000,
+            Duration = 1000,
             Easing = Easing.Linear
         };
 
@@ -174,7 +176,10 @@ public partial class VehicleNavigation
         // read the csv file from the embed resource. 
         var assembly = Assembly.GetExecutingAssembly();
         await using var stream = assembly.GetManifestResourceStream("HowDoISample.Data.Csv.vehicle-route.csv");
-        if (stream == null) return null;
+        if (stream == null)
+        {
+            return null;
+        }
 
         // Convert GPS Points from Lat/Lon (srid:4326) to Spherical Mercator (Srid:3857), which is the projection of the base map
         var converter = new ProjectionConverter(4326, 3857);
@@ -311,17 +316,17 @@ public partial class VehicleNavigation
 class CustomEventView : EventView
 {
     protected override TransformArguments TouchDownCore(TouchDownMapViewEventArgs e, IMapView mapView)
-        => new TransformArguments();
+        => new();
 
     protected override TransformArguments TouchMoveCore(TouchMoveMapViewEventArgs e, IMapView mapView)
-        => new TransformArguments();
+        => new();
 
     protected override TransformArguments TouchRotateCore(TouchRotateMapViewEventArgs e, IMapView mapView)
-        => new TransformArguments();
+        => new();
 
     protected override TransformArguments TouchPointerDownCore(Pointer1DownMapViewEventArgs e, IMapView mapView)
-        => new TransformArguments();
+        => new();
 
     protected override TransformArguments TouchPointerUpCore(Pointer1UpMapViewEventArgs e, IMapView mapView)
-        => new TransformArguments();
+        => new();
 }

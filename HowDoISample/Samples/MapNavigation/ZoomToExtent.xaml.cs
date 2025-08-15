@@ -21,7 +21,7 @@ public partial class ZoomToExtent
             return;
         _initialized = true;
 
-        _animationSettings = new AnimationSettings { Length = 1000 };
+        _animationSettings = new AnimationSettings { Duration = 1000 };
         // Set the map's unit to meter (the unit for Spherical Mercator)
         MapView.MapUnit = GeographyUnit.Meter;
 
