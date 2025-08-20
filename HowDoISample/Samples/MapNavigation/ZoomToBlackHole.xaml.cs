@@ -23,7 +23,7 @@ public partial class ZoomToBlackHole
 
         _cancellationTokenSource = new CancellationTokenSource();
         // The DefaultAnimationSettings affects the animation in all operations such as double click
-        MapView.DefaultAnimationSettings.Length = 2000;
+        MapView.DefaultAnimationSettings.Duration = 2000;
 
         ZoomToBlackHoleButton.Clicked += async (_, _) =>
         {
@@ -96,7 +96,7 @@ public partial class ZoomToBlackHole
         for (_currentPointIndex = 1; _currentPointIndex < _zoomingExtents.Count; _currentPointIndex++)
         {
             var (centerPoint, scale) = _zoomingExtents[_currentPointIndex];
-            var animationSettings = new AnimationSettings { Length = 3000, Type = MapAnimationType.DrawWithAnimation };
+            var animationSettings = new AnimationSettings { Duration = 3000, Type = MapAnimationType.DrawWithAnimation };
 
             try
             {

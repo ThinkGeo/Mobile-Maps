@@ -3,6 +3,9 @@ using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
 
+/// <summary>
+/// Demonstrates how to cluster points using a ClusterPointStyle.
+/// </summary>
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class CreateClusterPointStyle
 {
@@ -12,6 +15,10 @@ public partial class CreateClusterPointStyle
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Initializes the map and overlays when the MapView control is first sized.
+    /// This ensures the map is fully ready before layers and styles are applied.
+    /// </summary>
     private async void CreateClusterPointStyle_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
@@ -21,7 +28,7 @@ public partial class CreateClusterPointStyle
         // Set the map's unit of measurement to meters(Spherical Mercator)
         MapView.MapUnit = GeographyUnit.Meter;
 
-        // Add Cloud Maps as a background overlay
+        // Add ThinkGeo Vector Maps as the background overlay.
         var backgroundOverlay = new ThinkGeoVectorOverlay
         {
             ClientId = SampleKeys.ClientId,
@@ -31,37 +38,37 @@ public partial class CreateClusterPointStyle
         };
         MapView.Overlays.Add(backgroundOverlay);
 
+        // Load coyote sightings shapefile (projected to match the map projection).
         var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Coyote_Sightings.shp"))
         {
             FeatureSource =
                 {
-                    // Project the layer's data to match the projection of the map
                     ProjectionConverter = new ProjectionConverter(2276, 3857)
                 }
         };
 
-        // Add the layer to a layer overlay
-        var layerOverlay = new LayerOverlay();
+        var layerOverlay = new LayerOverlay { TileType = TileType.SingleTile };
         layerOverlay.Layers.Add(coyoteSightings);
-
-        // Add the overlay to the map
         MapView.Overlays.Add(layerOverlay);
 
-        // Apply HeatStyle
+        // Apply Cluster Point Style
         await AddClusterPointStyle(coyoteSightings);
 
-        // Set the map scale and center point
-        MapView.MapScale = 800000;
+        // Set the map extent
         MapView.CenterPoint = new PointShape(-10778209, 3914820);
+        MapView.MapScale = 800000;
+
         await MapView.RefreshAsync();
     }
 
     private static async Task AddClusterPointStyle(FeatureLayer layer)
     {
-        var stream = await FileSystem.OpenAppPackageFileAsync("coyote_paw.png");
+        // Setup the un-clustered point style 
+        var unclusteredPointStyle = PointStyle.CreateSimplePointStyle(PointSymbolType.Circle, GeoColors.Orange, 10);
 
-        // Create the point style that will serve as the basis of the cluster style
-        var pointStyle = new PointStyle(new GeoImage(stream))
+        // Setup the clustered point style (paw icon).
+        var stream = await FileSystem.OpenAppPackageFileAsync("coyote_paw.png");
+        var clusteredPointStyle = new PointStyle(new GeoImage(stream))
         {
             ImageScale = .4,
             Mask = new AreaStyle(GeoPens.Black, GeoBrushes.White),
@@ -73,19 +80,18 @@ public partial class CreateClusterPointStyle
             GeoBrushes.DimGray)
         {
             HaloPen = new GeoPen(GeoBrushes.White, 2),
-            YOffsetInPixel = 1
+            YOffsetInPixel = 16
         };
 
-        // Create the cluster point style
-        var clusterPointStyle = new ClusterPointStyle(pointStyle, textStyle)
+        // Cluster style definition.
+        var clusterPointStyle = new ClusterPointStyle(unclusteredPointStyle, textStyle)
         {
-            MinimumFeaturesPerCellToCluster = 1
+            MinimumFeaturesPerCellToCluster = 2,
+            ClusteredPointStyle = clusteredPointStyle
         };
 
-        // Add the point style to the collection of custom styles for ZoomLevel 1.
+        // Apply cluster style across all zoom levels.
         layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(clusterPointStyle);
-
-        // Apply the styles for ZoomLevel 1 down to ZoomLevel 20. This effectively applies the point style on every zoom level on the map.
         layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
     }
 }
