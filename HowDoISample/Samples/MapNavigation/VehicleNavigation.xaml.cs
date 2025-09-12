@@ -258,7 +258,7 @@ public partial class VehicleNavigation
         await RefreshCancellationTokenAsync();
         
         _backgroundOverlay.MapType = e.Value
-            ? ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2
+            ? ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X2
             : ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
         await _backgroundOverlay.RefreshAsync();
         
