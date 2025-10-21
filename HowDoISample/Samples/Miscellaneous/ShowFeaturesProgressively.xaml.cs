@@ -63,15 +63,26 @@ public partial class ShowFeaturesProgressively
     {
         public ShapefileProgressiveFeatureLayer(string shapeFilePath)
         {
-            FeatureSource = new ShapeFileFeatureSource(shapeFilePath);
+            FeatureSource = new ProgressiveShapeFileFeatureSource(shapeFilePath);
         }
-        protected override async IAsyncEnumerable<Collection<Feature>> GetProgressiveFeaturesCore(RectangleShape boundingBox, int bulkSize)
+        protected override IAsyncEnumerable<Collection<Feature>> GetProgressiveFeaturesCore(RectangleShape boundingBox, int bulkSize)
         {
-            var projectedBoundingBox = boundingBox;
-            if (FeatureSource.ProjectionConverter != null)
-                projectedBoundingBox = FeatureSource.ProjectionConverter.ConvertToExternalProjection(boundingBox);
+            var progressiveFeatureSourcee = (ProgressiveShapeFileFeatureSource)FeatureSource;
+            return progressiveFeatureSourcee.GetProgressiveFeatures(boundingBox, bulkSize);
+        }
+    }
 
-            var featureIds = FeatureSource.GetFeatureIdsInsideBoundingBox(projectedBoundingBox).ToArray();
+    class ProgressiveShapeFileFeatureSource : ShapeFileFeatureSource
+    {
+        public ProgressiveShapeFileFeatureSource(string shapeFilePath)
+            : base(shapeFilePath)
+        { }
+
+        public async IAsyncEnumerable<Collection<Feature>> GetProgressiveFeatures(RectangleShape boundingBox, int bulkSize)
+        {
+            var externalBoundingBox = boundingBox;
+
+            var featureIds = GetFeatureIdsInsideBoundingBoxCore(externalBoundingBox).ToArray();
             int currentIndex = 0;
 
             while (currentIndex < featureIds.Length)
@@ -81,7 +92,7 @@ public partial class ShowFeaturesProgressively
 
                 Array.Copy(featureIds, currentIndex, renderFeatures, 0, renderFeatures.Length);
                 var features = new Collection<Feature>();
-                await Task.Run(() => features = FeatureSource.GetFeaturesByIds(renderFeatures, ReturningColumnsType.NoColumns));
+                await Task.Run(() => features = GetFeaturesByIdsCore(renderFeatures, new string[] { }));
                 currentIndex += renderIFeatureIds;
 
                 yield return features;

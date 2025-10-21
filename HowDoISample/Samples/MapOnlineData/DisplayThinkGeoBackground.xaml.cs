@@ -99,7 +99,7 @@ public partial class DisplayThinkGeoBackground
             case "Aerial":
                 _thinkGeoVectorsOverlay.IsVisible = false;
                 _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2;
+                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X2;
 
                 await UpdateCancellationToken();
                 await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
@@ -107,7 +107,7 @@ public partial class DisplayThinkGeoBackground
             case "Hybrid":
                 _thinkGeoVectorsOverlay.IsVisible = false;
                 _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Hybrid_V2_X2;
+                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Hybrid2_V2_X2;
 
                 await UpdateCancellationToken();
                 await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);

@@ -26,7 +26,7 @@ public partial class CreateLineStyle
         {
             ClientId = SampleKeys.ClientId,
             ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudRasterMapsMapType.Aerial_V2_X1,
+            MapType = ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X1,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
         MapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
