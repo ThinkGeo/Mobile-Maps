@@ -2,8 +2,10 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:vm="clr-namespace:HowDoISample"
                    x:Class="HowDoISample.MapNavigation.Navigation"
-                   x:Name="This">
+                   x:Name="This"
+                   x:DataType="vm:MapViewModel">
 
     <ContentPage.Content>
         <Grid>
@@ -26,7 +28,7 @@
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
                          BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+                         Rotation="{Binding MapRotation}"/>
 
             <ImageButton x:Name="DefaultExtentButton" Grid.Row="1" 
                          VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"
@@ -46,10 +48,10 @@
                          HorizontalOptions="End" Margin="10" BackgroundColor="Transparent" BorderWidth="0"
                          Source="icon_gps_disabled" Clicked="ImageButton_OnClicked">
                 <ImageButton.Triggers>
-                    <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference This}, Path=GpsEnabled}" Value="True">
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding GpsEnabled}" Value="True">
                         <Setter Property="Source" Value="icon_gps_enabled.png" />
                     </DataTrigger>
-                    <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference This}, Path=GpsEnabled}" Value="False">
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding GpsEnabled}" Value="False">
                         <Setter Property="Source" Value="icon_gps_disabled.png" />
                     </DataTrigger>
                 </ImageButton.Triggers>
