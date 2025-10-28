@@ -7,8 +7,8 @@ namespace HowDoISample.MapNavigation;
 public partial class Navigation
 {
     private bool _initialized;
+    private GpsMarker _gpsMarker;
     private bool _gpsEnabled;
-    private GpsMarker _gpsMarker = new();
     private readonly System.Timers.Timer _gpsTimer = new();
     private CancellationTokenSource _cancellationTokenSource = new();
 
@@ -24,7 +24,7 @@ public partial class Navigation
         {
             if (_gpsEnabled == value) return;
             _gpsEnabled = value;
-            OnPropertyChanged(nameof(GpsEnabled));
+            OnPropertyChanged();
         }
     }
 
@@ -99,7 +99,7 @@ public partial class Navigation
     }
 
 
-    private async Task<PointShape?> GetGpsPointAsync()
+    private async Task<PointShape> GetGpsPointAsync()
     {
         try
         {
@@ -135,12 +135,7 @@ public partial class Navigation
         if (GpsEnabled)
         {
             GpsEnabled = false;
-            
-            if (_gpsMarker != null)
-            {
-                _gpsMarker.IsVisible = false;
-            }
-
+            _gpsMarker.IsVisible = false;
             _gpsTimer.Stop();
             return;
         }
@@ -159,7 +154,7 @@ public partial class Navigation
         _gpsTimer.Start();
     }
 
-    private async void _gpsTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    private async void _gpsTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
         if (!GpsEnabled)
         {
@@ -171,11 +166,7 @@ public partial class Navigation
         if (gps == null)
             return;
 
-        if (_gpsMarker != null)
-        {
-            _gpsMarker.Position = gps;
-        }
-
+        _gpsMarker.Position = gps;
         await Dispatcher.DispatchAsync(async () => await MapView.Overlays["simpleMarkerOverlay"].RefreshAsync());
     }
 

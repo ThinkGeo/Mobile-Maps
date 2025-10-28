@@ -1,14 +1,11 @@
 <thinkgeo:Marker xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 xmlns:vm="clr-namespace:HowDoISample"
-                 xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                  x:Class="HowDoISample.GpsMarker"
-                 x:DataType="vm:MapViewModel"
+                 xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                  WidthRequest="20" HeightRequest="20">
 
     <Grid>
-        <Image x:Name="GpsImage" 
-               IsAnimationPlaying="True" 
-               Source="{Binding GpsEnabled, Converter={StaticResource GpsEnabledToImageConverter}}" />
+        <Image IsAnimationPlaying="True" Source="icon_gps_point.gif" />
     </Grid>
+
 </thinkgeo:Marker>

@@ -1,9 +1,7 @@
-﻿using ThinkGeo.UI.Maui;
-
-namespace HowDoISample;
+﻿namespace HowDoISample;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class GpsMarker : Marker
+public partial class GpsMarker
 {
     public GpsMarker()
     {
