@@ -2,6 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:vectorDataStyling="clr-namespace:HowDoISample.VectorDataStyling"
+                   x:DataType="vectorDataStyling:CreateTextStyle"
                    x:Class="HowDoISample.VectorDataStyling.CreateTextStyle">
 
     <ContentPage.Content>
