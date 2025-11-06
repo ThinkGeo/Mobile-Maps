@@ -2,6 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.ThinkGeoCloudIntegration"
+                   x:DataType="codeBehind:ProjectionCloudServices"
                    x:Class="HowDoISample.ThinkGeoCloudIntegration.ProjectionCloudServices">
 
     <ContentPage.Content>

@@ -3,6 +3,8 @@
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
                    xmlns:core="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.ThinkGeoCloudIntegration"
+                   x:DataType="codeBehind:ElevationCloudServices"
                    x:Class="HowDoISample.ThinkGeoCloudIntegration.ElevationCloudServices">
 
     <ContentPage.Content>

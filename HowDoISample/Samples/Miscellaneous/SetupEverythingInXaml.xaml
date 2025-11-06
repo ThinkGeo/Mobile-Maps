@@ -3,6 +3,8 @@
              xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
              xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
              xmlns:howDoI="using:HowDoISample"
+             xmlns:codeBehind="clr-namespace:HowDoISample.Miscellaneous"
+             x:DataType="codeBehind:SetupEverythingInXaml"
              x:Class="HowDoISample.Miscellaneous.SetupEverythingInXaml">
 
     <ContentPage.Content>
