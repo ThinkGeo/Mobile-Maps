@@ -655,6 +655,9 @@
 	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Samples\XYZBasedLayers\MVT.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
   <ItemGroup>
