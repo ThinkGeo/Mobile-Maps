@@ -193,6 +193,11 @@
         "description": "Display the tiles from a raster XYZ server."
       },
       {
+        "id": "HowDoISample.XYZBasedLayers.WMTSAsXYZLayer",
+        "title": "Display Raster from WMTS Server",
+        "description": "Display the tiles from a WMTS server. This demo server has 27 zoom levels (zoom 0~26)."
+      },
+      {
         "id": "HowDoISample.XYZBasedLayers.MVT",
         "title": "Display Vector from MVT Server",
         "description": "Display a vector map from an MVT server."
