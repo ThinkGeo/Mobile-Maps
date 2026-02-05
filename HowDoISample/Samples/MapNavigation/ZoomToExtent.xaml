@@ -33,8 +33,7 @@
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+                         BackgroundColor="Transparent"/>
 
             <ImageButton x:Name="DefaultExtentButton" Grid.Column="1" Grid.Row="1" 
                          VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"

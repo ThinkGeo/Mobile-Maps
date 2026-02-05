@@ -13,6 +13,12 @@ public partial class ZoomToExtent
     public ZoomToExtent()
     {
         InitializeComponent();
+        MapView.MapRotationChanged += MapView_MapRotationChanged;
+    }
+
+    private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+    {
+        CompassButton.Rotation = (float)(MapView.MapRotation);
     }
 
     private async void MapView_SizeChanged(object sender, EventArgs e)

@@ -24,6 +24,12 @@ public partial class VehicleNavigation
     {
         InitializeComponent();
         Disappearing += UpdateVehicleLocation_Disappearing;
+        MapView.MapRotationChanged += MapView_MapRotationChanged;
+    }
+
+    private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+    {
+        CompassButton.Rotation = (float)(MapView.MapRotation);
     }
 
     private void UpdateVehicleLocation_Disappearing(object sender, EventArgs e)

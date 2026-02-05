@@ -15,6 +15,12 @@ public partial class Navigation
     public Navigation()
     {
         InitializeComponent();
+        MapView.MapRotationChanged += MapView_MapRotationChanged;
+    }
+
+    private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+    {
+        CompassButton.Rotation = (float)(MapView.MapRotation);
     }
 
     public bool GpsEnabled

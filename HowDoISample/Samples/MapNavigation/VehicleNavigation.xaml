@@ -32,11 +32,11 @@
                         BorderColor="Black" BorderWidth="2"
                         FontSize="30" Clicked="ZoomOutButton_OnClicked"/>
             </StackLayout>
-            <ImageButton Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End"
+            <ImageButton x:Name="CompassButton" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}" />
+                         BackgroundColor="Transparent"/>
 
             <Button Grid.Row="1" VerticalOptions="End" HorizontalOptions="End"
                     WidthRequest="120" HeightRequest="50" Margin="5"
