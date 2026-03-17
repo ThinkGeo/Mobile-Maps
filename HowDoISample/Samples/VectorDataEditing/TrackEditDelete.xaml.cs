@@ -11,9 +11,16 @@ public partial class TrackEditDelete
     public TrackEditDelete()
     {
         InitializeComponent();
+        MapView.MapRotationChanged += MapView_MapRotationChanged;
         MapView.SingleTap += MapView_SingleTap;
         CompassButton.Clicked += async (_, _) =>
             await MapView.ZoomToExtentAsync(MapView.CenterPoint, MapView.MapScale, 0);
+    }
+
+    private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+    {
+        // Keep the compass aligned with the map's current rotation.
+        CompassButton.Rotation = (float)MapView.MapRotation;
     }
 
     public static readonly BindableProperty InstructionProperty = BindableProperty.Create(

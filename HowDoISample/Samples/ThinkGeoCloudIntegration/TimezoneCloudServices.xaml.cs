@@ -62,10 +62,11 @@ public partial class TimezoneCloudServices
         MapView.CenterPoint = new PointShape(-10777600, 3915260);
         MapView.MapScale = 30000000;
 
+        // Draw the map before showing popups so they appear in the correct location on first load
+        await MapView.RefreshAsync();
+
         // Get Timezone info for Frisco, TX
         await GetTimeZoneInfo(-10779572.80, 3915268.68);
-
-        await MapView.RefreshAsync();
     }
 
     private async void MapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
