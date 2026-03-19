@@ -49,10 +49,11 @@ public partial class UsingMarkers
         MapView.MapScale = 10000;
         _baseScale = 10000;
 
-        await AddHotelMarkersAsync();
-
-        MapView.IsRotationEnabled = true;
         await MapView.RefreshAsync();
+
+        await AddHotelMarkersAsync();
+        MapView.IsRotationEnabled = true;
+        
         _timer.Start();
     }
 
