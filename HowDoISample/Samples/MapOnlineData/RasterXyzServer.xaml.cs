@@ -7,6 +7,8 @@ namespace HowDoISample.MapOnlineData;
 public partial class RasterXyzServer
 {
     private ThinkGeoRasterMapsAsyncLayer thinkGeoRasterMapsAsyncLayer;
+    private LayerOverlay layerOverlay;
+
     public RasterXyzServer()
     {
         InitializeComponent();
@@ -14,8 +16,8 @@ public partial class RasterXyzServer
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        var layerOverlay = new LayerOverlay();
-        layerOverlay.TileType = TileType.SingleTile;
+        layerOverlay = new LayerOverlay();
+        layerOverlay.TileType = TileType.MultiTile;
         MapView.Overlays.Add(layerOverlay);
 
         // Add Cloud Maps as a background overlay
@@ -44,19 +46,14 @@ public partial class RasterXyzServer
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (!(sender is CheckBox checkBox)) return;
-        if (e == null) return;
         if (thinkGeoRasterMapsAsyncLayer == null) return;
 
-        if (e.Value)
-        {
-            thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom = e.Value;
-        }
+        if (thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom == e.Value)
+            return;
 
-        if (MapView != null)
-        {
-            await MapView.RefreshAsync();
-        }
+        thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom = e.Value;
+
+        await layerOverlay.RefreshAsync();
     }
 
     public void Dispose()

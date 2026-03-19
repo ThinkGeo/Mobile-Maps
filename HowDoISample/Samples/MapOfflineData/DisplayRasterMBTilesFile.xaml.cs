@@ -8,6 +8,8 @@ namespace HowDoISample.MapOfflineData;
 public partial class DisplayRasterMBTilesFile
 {
     private RasterMbTilesAsyncLayer rasterMbTilesLayer;
+    private LayerOverlay layerOverlay;
+
     public DisplayRasterMBTilesFile()
     {
         InitializeComponent();
@@ -15,11 +17,11 @@ public partial class DisplayRasterMBTilesFile
 
     private async void MapView_OnSizeChanged(object sender, EventArgs e)
     {
-        var layerOverlay = new LayerOverlay();
+        layerOverlay = new LayerOverlay();
         MapView.Overlays.Add(layerOverlay);
         string filePath = Path.Combine(FileSystem.AppDataDirectory, "Data", "Mbtiles", "test.mbtiles");
         rasterMbTilesLayer = new RasterMbTilesAsyncLayer(filePath);
-        layerOverlay.TileType = TileType.SingleTile;
+        layerOverlay.TileType = TileType.MultiTile;
         layerOverlay.Layers.Add(rasterMbTilesLayer);
 
         string cachePath = Path.Combine(FileSystem.AppDataDirectory, "rasterMbTilesLayerCache");
@@ -41,19 +43,14 @@ public partial class DisplayRasterMBTilesFile
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (!(sender is CheckBox checkBox)) return;
-        if (e == null) return;
         if (rasterMbTilesLayer == null) return;
-        
-        if (e.Value)
-        {
-            rasterMbTilesLayer.RenderBeyondMaxZoom = e.Value;
-        }
 
-        if (MapView != null)
-        {
-            await MapView.RefreshAsync();
-        }
+        if (rasterMbTilesLayer.RenderBeyondMaxZoom == e.Value)
+            return;
+
+        rasterMbTilesLayer.RenderBeyondMaxZoom = e.Value;
+
+        await layerOverlay.RefreshAsync();
     }
 
     public void Dispose()

@@ -8,6 +8,8 @@ namespace HowDoISample.MapOfflineData;
 public partial class DisplayRasterFileTiles
 {
     private XyzFileTilesAsyncLayer fileTilesAsyncLayer;
+    private LayerOverlay layerOverlay;
+
     public DisplayRasterFileTiles()
     {
         InitializeComponent();
@@ -25,12 +27,12 @@ public partial class DisplayRasterFileTiles
             ZipFile.ExtractToDirectory(zipFilePath, targetFileDirectory);
         }
 
-        var layerOverlay = new LayerOverlay();
+        layerOverlay = new LayerOverlay();
         MapView.Overlays.Add(layerOverlay);
         fileTilesAsyncLayer = new XyzFileTilesAsyncLayer(targetFileDirectory);
         fileTilesAsyncLayer.MaxZoomOfTheData = 5; // The MaxZoom with data
 
-        layerOverlay.TileType = TileType.SingleTile;
+        layerOverlay.TileType = TileType.MultiTile;
         layerOverlay.Layers.Add(fileTilesAsyncLayer);
 
         var cachePath = Path.Combine(appDataDirectory, "FileTilesLayerCache");
@@ -52,19 +54,14 @@ public partial class DisplayRasterFileTiles
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (!(sender is CheckBox checkBox)) return;
-        if (e == null) return;
         if (fileTilesAsyncLayer == null) return;
 
-        if (e.Value)
-        {
-            fileTilesAsyncLayer.RenderBeyondMaxZoom = e.Value;
-        }
+        if (fileTilesAsyncLayer.RenderBeyondMaxZoom == e.Value)
+            return;
 
-        if (MapView != null)
-        {
-            await MapView.RefreshAsync();
-        }
+        fileTilesAsyncLayer.RenderBeyondMaxZoom = e.Value;
+
+        await layerOverlay.RefreshAsync();
     }
 
     public void Dispose()
