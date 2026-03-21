@@ -6,6 +6,7 @@ namespace HowDoISample.XYZBasedLayers;
 public partial class WMTSAsXYZLayer : IDisposable
 {
     private WmtsAsyncLayer _wmtsAsyncLayer;
+    private LayerOverlay _layerOverlay;
     private bool _initialized;
 
     public WMTSAsXYZLayer()
@@ -18,12 +19,12 @@ public partial class WMTSAsXYZLayer : IDisposable
         if (_initialized) return;
         _initialized = true;
 
-        var overlay = new LayerOverlay
+        _layerOverlay = new LayerOverlay
         {
             TileType = TileType.SingleTile
         };
 
-        MapView.Overlays.Add(overlay);
+        MapView.Overlays.Add(_layerOverlay);
 
         _wmtsAsyncLayer = new WmtsAsyncLayer(new Uri("https://wmts.geo.admin.ch/1.0.0"))
         {
@@ -34,7 +35,7 @@ public partial class WMTSAsXYZLayer : IDisposable
             TileMatrixSetName = "21781_26"
         };
 
-        overlay.Layers.Add(_wmtsAsyncLayer);
+        _layerOverlay.Layers.Add(_wmtsAsyncLayer);
 
         var cachePath = Path.Combine(FileSystem.AppDataDirectory, "wmtsAsyncLayerCache");
 
@@ -58,8 +59,12 @@ public partial class WMTSAsXYZLayer : IDisposable
         if (!_initialized || _wmtsAsyncLayer == null)
             return;
 
+        if (_wmtsAsyncLayer.RenderBeyondMaxZoom == e.Value)
+            return;
+
         _wmtsAsyncLayer.RenderBeyondMaxZoom = e.Value;
-        await MapView.RefreshAsync();
+
+        await _layerOverlay.RefreshAsync();
     }
 
     public void Dispose()
