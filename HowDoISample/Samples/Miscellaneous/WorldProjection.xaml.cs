@@ -12,6 +12,7 @@ public partial class WorldProjection
     public WorldProjection()
     {
         InitializeComponent();
+        MapView.MapRotationChanged += MapView_MapRotationChanged;
     }
 
     private async void WorldProjection_OnSizeChanged(object sender, EventArgs e)
@@ -107,5 +108,10 @@ public partial class WorldProjection
         }
         _worldLayer.FeatureSource.ProjectionConverter?.Open();
         await MapView.RefreshAsync();
+    }
+
+    private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+    {
+        CompassButton.Rotation = (float)MapView.MapRotation;
     }
 }
