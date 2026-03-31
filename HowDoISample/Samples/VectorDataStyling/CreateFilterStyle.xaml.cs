@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -19,7 +19,7 @@ public partial class CreateFilterStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateFilterStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         var friscoCrimeLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Crime.shp"))
         {
@@ -46,13 +46,13 @@ public partial class CreateFilterStyle
 
         await AddFilterStyle(friscoCrimeLayer);
 
-        // Add layerOverlay to the mapView
-        MapView.Overlays.Add(layerOverlay);
+        // Add layerOverlay to the Map
+        Map.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        MapView.MapScale = 70000;
-        MapView.CenterPoint = new PointShape(-10778209, 3914820);
-        await MapView.RefreshAsync();
+        Map.MapScale = 70000;
+        Map.CenterPoint = new PointShape(-10778209, 3914820);
+        await Map.RefreshAsync();
     }
 
     private static async Task AddFilterStyle(FeatureLayer layer)

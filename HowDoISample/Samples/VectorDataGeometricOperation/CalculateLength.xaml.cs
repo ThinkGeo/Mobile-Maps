@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
@@ -9,10 +9,10 @@ public partial class CalculateLength
     public CalculateLength()
     {
         InitializeComponent();
-        MapView.SingleTap += MapView_SingleTap;
+        Map.SingleTap += Map_SingleTap;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -26,9 +26,9 @@ public partial class CalculateLength
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
-        MapView.MapTools.Add(new ZoomMapTool());
+        Map.MapTools.Add(new ZoomMapTool());
 
         var friscoTrailsLayer = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Hike_Bike.shp"));
@@ -44,7 +44,7 @@ public partial class CalculateLength
 
         var friscoTrailsOverlay = new LayerOverlay();
         friscoTrailsOverlay.Layers.Add("FriscoTrailsLayer", friscoTrailsLayer);
-        MapView.Overlays.Add("FriscoTrailsOverlay", friscoTrailsOverlay);
+        Map.Overlays.Add("FriscoTrailsOverlay", friscoTrailsOverlay);
 
         // Create a layer to hold the selectedLineLayer found by the spatial query
         var selectedLineLayer = new InMemoryFeatureLayer();
@@ -54,30 +54,30 @@ public partial class CalculateLength
 
         var selectedLineOverlay = new LayerOverlay();
         selectedLineOverlay.Layers.Add("SelectedLineLayer", selectedLineLayer);
-        MapView.Overlays.Add("SelectedLineOverlay", selectedLineOverlay);
+        Map.Overlays.Add("SelectedLineOverlay", selectedLineOverlay);
 
         // Set the map extent
-        MapView.CenterPoint = new PointShape(-10777600, 3915260);
-        MapView.MapScale = 200000;
+        Map.CenterPoint = new PointShape(-10777600, 3915260);
+        Map.MapScale = 200000;
 
         // Add LayerOverlay to Map
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     /// <summary>
     ///     Calculates the length of a line selected on the map and displays it in the lengthResult TextBox
     /// </summary>
-    private async void MapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
+    private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var friscoTrailsOverlay = (LayerOverlay)MapView.Overlays["FriscoTrailsOverlay"];
+        var friscoTrailsOverlay = (LayerOverlay)Map.Overlays["FriscoTrailsOverlay"];
         var friscoTrailsLayer = (ShapeFileFeatureLayer)friscoTrailsOverlay.Layers["FriscoTrailsLayer"];
 
-        var selectedLineOverlay = (LayerOverlay)MapView.Overlays["SelectedLineOverlay"];
+        var selectedLineOverlay = (LayerOverlay)Map.Overlays["SelectedLineOverlay"];
         var selectedLineLayer = (InMemoryFeatureLayer)selectedLineOverlay.Layers["SelectedLineLayer"];
 
         // Query the friscoTrails layer to get the first feature closest to the map tap event
-        var pointInWorldCoordinate = MapView.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
         var feature = friscoTrailsLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, GeographyUnit.Meter, 1,
             ReturningColumnsType.NoColumns).First();
 

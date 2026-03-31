@@ -1,4 +1,4 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
@@ -19,8 +19,8 @@
                 Phone=Double-tap to zoom in; Pinch to zoom/rotate , 
                 Desktop=Alt+Drag to rotate; Shift+Drag to track-zoom-in}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" 
-                              SizeChanged="MapView_OnSizeChanged" >
+            <thinkgeo:MapView Grid.Row="1" x:Name="Map" 
+                              SizeChanged="Map_OnSizeChanged" >
             </thinkgeo:MapView>
 
             <ImageButton x:Name="CompassButton" Grid.Row="1" 

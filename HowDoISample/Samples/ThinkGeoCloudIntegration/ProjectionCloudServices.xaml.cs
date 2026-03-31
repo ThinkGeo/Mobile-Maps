@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -13,7 +13,7 @@ public partial class ProjectionCloudServices
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -27,10 +27,10 @@ public partial class ProjectionCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the shapes we will be reprojected
         var reprojectedFeaturesLayer = new InMemoryFeatureLayer();
@@ -52,16 +52,16 @@ public partial class ProjectionCloudServices
         reprojectedFeaturesOverlay.Layers.Add("Reprojected Features Layer", reprojectedFeaturesLayer);
 
         // Add the overlay to the map
-        MapView.Overlays.Add("Reprojected Features Overlay", reprojectedFeaturesOverlay);
+        Map.Overlays.Add("Reprojected Features Overlay", reprojectedFeaturesOverlay);
 
         // Set the map extent        
-        MapView.CenterPoint = new PointShape(-10779600, 3915260);
-        MapView.MapScale = 4000;
+        Map.CenterPoint = new PointShape(-10779600, 3915260);
+        Map.MapScale = 4000;
 
         // Initialize the ProjectionCloudClient with our ThinkGeo Cloud credentials
         _projectionCloudClient = new ProjectionCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ public partial class ProjectionCloudServices
     /// </summary>
     private async Task ClearMapAndAddFeatures(Collection<Feature> features)
     {
-        // Get the layer we prepared from the MapView
-        var reprojectedFeaturesOverlay = (LayerOverlay)MapView.Overlays["Reprojected Features Overlay"];
+        // Get the layer we prepared from the Map
+        var reprojectedFeaturesOverlay = (LayerOverlay)Map.Overlays["Reprojected Features Overlay"];
         var reprojectedFeatureLayer = (InMemoryFeatureLayer)reprojectedFeaturesOverlay.Layers["Reprojected Features Layer"];
 
         // Clear old features from the feature layer and add the newly reprojected features
@@ -81,8 +81,8 @@ public partial class ProjectionCloudServices
 
         // Set the map extent to zoom into the feature and refresh the map
         reprojectedFeatureLayer.Open();
-        //mapView.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
-        await MapView.ZoomToExtentAsync(reprojectedFeatureLayer.GetBoundingBox().GetCenterPoint(),
+        //Map.CurrentExtent = reprojectedFeatureLayer.GetBoundingBox();
+        await Map.ZoomToExtentAsync(reprojectedFeatureLayer.GetBoundingBox().GetCenterPoint(),
             4000, 0, new AnimationSettings());
         await reprojectedFeaturesOverlay.RefreshAsync();
     }

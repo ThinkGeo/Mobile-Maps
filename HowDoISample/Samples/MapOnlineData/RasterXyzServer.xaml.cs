@@ -1,4 +1,4 @@
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -14,11 +14,11 @@ public partial class RasterXyzServer
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         layerOverlay = new LayerOverlay();
         layerOverlay.TileType = TileType.MultiTile;
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
 
         // Add Cloud Maps as a background overlay
         thinkGeoRasterMapsAsyncLayer = new ThinkGeoRasterMapsAsyncLayer
@@ -39,9 +39,9 @@ public partial class RasterXyzServer
         await thinkGeoRasterMapsAsyncLayer.CloseAsync();
         await thinkGeoRasterMapsAsyncLayer.OpenAsync();
         var boundingBox = thinkGeoRasterMapsAsyncLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await Map.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -58,7 +58,7 @@ public partial class RasterXyzServer
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        Map?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

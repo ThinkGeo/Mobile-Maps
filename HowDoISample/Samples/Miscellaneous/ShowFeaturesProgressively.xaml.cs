@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -20,7 +20,7 @@ public partial class ShowFeaturesProgressively
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,11 +30,11 @@ public partial class ShowFeaturesProgressively
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var parksOverlay = new ProgressiveFeaturesTileOverlay();
-        MapView.Overlays.Add(parksOverlay);
+        Map.Overlays.Add(parksOverlay);
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
         var parksLayer = new ShapefileProgressiveFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"))
@@ -54,9 +54,9 @@ public partial class ShowFeaturesProgressively
         parksLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 35_000;
-        MapView.CenterPoint = new PointShape(-10778209, 3914820);
-        await MapView.RefreshAsync();
+        Map.MapScale = 35_000;
+        Map.CenterPoint = new PointShape(-10778209, 3914820);
+        await Map.RefreshAsync();
     }
 
     class ShapefileProgressiveFeatureLayer : ProgressiveFeatureLayer

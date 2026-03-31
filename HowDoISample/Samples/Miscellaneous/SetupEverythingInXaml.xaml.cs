@@ -1,4 +1,4 @@
-﻿namespace HowDoISample.Miscellaneous;
+namespace HowDoISample.Miscellaneous;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class SetupEverythingInXaml

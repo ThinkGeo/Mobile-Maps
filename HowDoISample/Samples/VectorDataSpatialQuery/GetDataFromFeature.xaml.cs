@@ -13,7 +13,7 @@ public partial class GetDataFromFeature
     {
         InitializeComponent();
 
-        MapView.SingleTap += MapView_SingleTap;
+        Map.SingleTap += Map_SingleTap;
     }
 
     private async void GetDataFromFeature_OnSizeChanged(object sender, EventArgs e)
@@ -30,10 +30,10 @@ public partial class GetDataFromFeature
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create a feature layer to hold the Frisco parks data
         _parksLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"));
@@ -49,19 +49,19 @@ public partial class GetDataFromFeature
         // Add the feature layer to an overlay, and add the overlay to the map
         var parksOverlay = new LayerOverlay();
         parksOverlay.Layers.Add("Frisco Parks", _parksLayer);
-        MapView.Overlays.Add(parksOverlay);
+        Map.Overlays.Add(parksOverlay);
 
         // Add a PopupOverlay to the map, to display feature information
         var popupOverlay = new PopupOverlay();
-        MapView.Overlays.Add("Info Popup Overlay", popupOverlay);
+        Map.Overlays.Add("Info Popup Overlay", popupOverlay);
 
         // Set the map extent to the bounding box of the parks
         _parksLayer.Open();
-        MapView.MapScale = 70_000;
-        MapView.CenterPoint = new PointShape(-10778098, 3915623);
+        Map.MapScale = 70_000;
+        Map.CenterPoint = new PointShape(-10778098, 3915623);
         _parksLayer.Close();
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     /// <summary>
@@ -93,7 +93,7 @@ public partial class GetDataFromFeature
         parkInfoString.Append($"ACRE: {feature.ColumnValues["ACRES"]}");
 
         //Create a new popup with the park info string
-        var popupOverlay = (PopupOverlay)MapView.Overlays["Info Popup Overlay"];
+        var popupOverlay = (PopupOverlay)Map.Overlays["Info Popup Overlay"];
         var popup = new Popup
         {
             Position = feature.GetShape().GetCenterPoint(),
@@ -108,10 +108,10 @@ public partial class GetDataFromFeature
     /// <summary>
     ///     Pull data from the selected feature and display it when tapped
     /// </summary>
-    private void MapView_SingleTap(object _, SingleTapMapViewEventArgs e)
+    private void Map_SingleTap(object _, SingleTapMapViewEventArgs e)
     {
         // Get the selected feature based on the map tap location
-        var pointInWorldCoordinate = MapView.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
         var selectedFeature = GetFeatureFromLocation(pointInWorldCoordinate);
 
         // If a feature was selected, get the data from it and display it

@@ -1,4 +1,4 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
              xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <howDoI:DescriptionView Grid.Row="0" 
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
-            <tgMaui:MapView x:Name="MapView"
+            <tgMaui:MapView x:Name="Map"
                             Grid.Row="1"
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
@@ -27,7 +27,7 @@
                             IsRotationEnabled="True"
                             MinScale="0"
                             DefaultOverlaysRenderSequenceType="Concurrent"
-                            SizeChanged="MapView_OnSizeChanged">
+                            SizeChanged="Map_OnSizeChanged">
                 <tgMaui:MapView.Overlays>
 
                     <tgMaui:LayerOverlay TileType="SingleTile">

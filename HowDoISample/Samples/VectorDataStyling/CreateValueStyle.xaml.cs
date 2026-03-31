@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -20,7 +20,7 @@ public partial class CreateValueStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,7 +30,7 @@ public partial class CreateValueStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         var friscoCrime = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Crime.shp"));
 
@@ -50,17 +50,17 @@ public partial class CreateValueStyle
                 GeoBrushes.Black)
         };
         legend.Location = AdornmentLocation.LowerRight;
-        MapView.AdornmentOverlay.Layers.Add(legend);
+        Map.AdornmentOverlay.Layers.Add(legend);
 
         AddValueStyle(friscoCrime, legend);
 
-        // Add layerOverlay to the mapView
-        MapView.Overlays.Add(layerOverlay);
+        // Add layerOverlay to the Map
+        Map.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        MapView.MapScale = 40000;
-        MapView.CenterPoint = new PointShape(-10777932, 3912260);
-        await MapView.RefreshAsync();
+        Map.MapScale = 40000;
+        Map.CenterPoint = new PointShape(-10777932, 3912260);
+        await Map.RefreshAsync();
     }
 
     private static void AddValueStyle(FeatureLayer friscoCrime, LegendAdornmentLayer legend)

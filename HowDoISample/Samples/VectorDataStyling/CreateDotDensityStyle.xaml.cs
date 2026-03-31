@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -19,7 +19,7 @@ public partial class CreateDotDensityStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateDotDensityStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         var housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco 2010 Census Housing Units.shp"))
         {
@@ -48,12 +48,12 @@ public partial class CreateDotDensityStyle
         var layerOverlay = new LayerOverlay();
         layerOverlay.Layers.Add(housingUnitsLayer);
 
-        // Add layerOverlay to the mapView
-        MapView.Overlays.Add(layerOverlay);
+        // Add layerOverlay to the Map
+        Map.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        MapView.MapScale = 280000;
-        MapView.CenterPoint = new PointShape(-10778209, 3914820);
-        await MapView.RefreshAsync();
+        Map.MapScale = 280000;
+        Map.CenterPoint = new PointShape(-10778209, 3914820);
+        await Map.RefreshAsync();
     }
 }

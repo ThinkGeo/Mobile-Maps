@@ -1,4 +1,4 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
@@ -19,9 +19,9 @@
             <howDoI:DescriptionView Grid.Row="0"
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="MapView" 
+            <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="Map" 
                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                              SingleTap="MapView_OnSingleTap" SizeChanged="MapView_OnSizeChanged">
+                              SingleTap="Map_OnSingleTap" SizeChanged="Map_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>

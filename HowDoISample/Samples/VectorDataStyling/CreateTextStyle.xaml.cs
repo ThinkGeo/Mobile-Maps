@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -24,17 +24,17 @@ public partial class CreateTextStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
-        MapView.IsRotationEnabled = true;
+        Map.MapUnit = GeographyUnit.Meter;
+        Map.IsRotationEnabled = true;
 
         // Set the map scale and center point
-        MapView.MapScale = 9000;
-        MapView.CenterPoint = new PointShape(-10777289.95123455, 3908744.4225903796);
+        Map.MapScale = 9000;
+        Map.CenterPoint = new PointShape(-10777289.95123455, 3908744.4225903796);
 
-        MapView.Overlays.Clear();
+        Map.Overlays.Clear();
 
         await LoadDynamicLabels();
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
 
         SetupEvents();
     }
@@ -44,7 +44,7 @@ public partial class CreateTextStyle
         DynamicLabelCheckBox.CheckedChanged += async (_, args) =>
         {
             LabelOptionsCheckBox.IsVisible = args.Value;
-            MapView.Overlays.Clear();
+            Map.Overlays.Clear();
 
             if (!args.Value)
             {
@@ -59,7 +59,7 @@ public partial class CreateTextStyle
                 _streetsLabelLayer.IsVisible = LabelStreetsCheckBox.IsChecked;
 
             }
-            await MapView.RefreshAsync();
+            await Map.RefreshAsync();
         };
 
         LabelHotelsCheckBox.CheckedChanged += async (_, args) =>
@@ -79,7 +79,7 @@ public partial class CreateTextStyle
         };
 
         CompassButton.Clicked += async (_, _) =>
-            await MapView.ZoomToExtentAsync(MapView.CenterPoint, MapView.MapScale, 0);
+            await Map.ZoomToExtentAsync(Map.CenterPoint, Map.MapScale, 0);
     }
 
     private void LoadStaticLabels()
@@ -88,7 +88,7 @@ public partial class CreateTextStyle
         var layerOverlay = new LayerOverlay();
         LoadLayers(layerOverlay, false);
         // Add overlay to map
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
     }
 
     private async Task LoadDynamicLabels()
@@ -97,13 +97,13 @@ public partial class CreateTextStyle
         var layerOverlay = new LayerOverlay();
         LoadLayers(layerOverlay, true);
         // Add overlay to map
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
 
         _dynamicLabelOverlay = new LayerGraphicsViewOverlay();
-        await _dynamicLabelOverlay.OpenAsync(MapView);
+        await _dynamicLabelOverlay.OpenAsync(Map);
         LoadLayers(_dynamicLabelOverlay);
         // Add overlay to map
-        MapView.Overlays.Add(_dynamicLabelOverlay);
+        Map.Overlays.Add(_dynamicLabelOverlay);
     }
 
     private static void LoadLayers(LayerOverlay layerOverlay, bool shapeOnly)

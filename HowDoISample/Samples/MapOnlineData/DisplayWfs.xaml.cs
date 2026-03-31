@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -19,7 +19,7 @@ public partial class DisplayWfs
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var thinkGeoVectorOverlay = new ThinkGeoVectorOverlay
@@ -30,7 +30,7 @@ public partial class DisplayWfs
             // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
         };
-        MapView.Overlays.Add(thinkGeoVectorOverlay);
+        Map.Overlays.Add(thinkGeoVectorOverlay);
 
         var helsinkiParcelsLayer = new WfsV2ProgressiveFeatureLayer("https://inspire-wfs.maanmittauslaitos.fi/inspire-wfs/cp/ows", "cp:CadastralParcel")
         {
@@ -46,10 +46,10 @@ public partial class DisplayWfs
             DrawingBulkCount = 200
         };
 
-        MapView.CenterPoint = new PointShape(2778000, 8435000);
-        MapView.MapScale = 20000;
+        Map.CenterPoint = new PointShape(2778000, 8435000);
+        Map.MapScale = 20000;
 
-        MapView.Overlays.Add("LayerOverlay", overlay);
-        await MapView.RefreshAsync();
+        Map.Overlays.Add("LayerOverlay", overlay);
+        await Map.RefreshAsync();
     }
 }

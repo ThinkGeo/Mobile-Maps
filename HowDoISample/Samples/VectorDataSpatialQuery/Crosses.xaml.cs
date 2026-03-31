@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataSpatialQuery;
@@ -19,7 +19,7 @@ public partial class Crosses
         _initialized = true;
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class Crosses
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Create a feature layer to hold the Frisco zoning data
         var friscoLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Zoning.shp"));
@@ -49,15 +49,15 @@ public partial class Crosses
         highlightLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         var friscoOverlay = new LayerOverlay();
-        MapView.Overlays.Add("FriscoOverlay", friscoOverlay);
+        Map.Overlays.Add("FriscoOverlay", friscoOverlay);
         friscoOverlay.Layers.Add("FriscoLayer", friscoLayer);
 
         var highlightOverlay = new LayerOverlay();
-        MapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+        Map.Overlays.Add("HighlightOverlay", highlightOverlay);
         highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
 
         // Add an event to handle new shapes that are drawn on the map
-        MapView.TrackOverlay.TrackEnded += OnLineDrawn;
+        Map.TrackOverlay.TrackEnded += OnLineDrawn;
 
         // Add a sample shape to the map for the initial query
         var sampleShape = new LineShape("LINESTRING(-10774628 3914024,-10776902 3915582,-10778030 3914368,-10778708 3914445)");
@@ -65,10 +65,10 @@ public partial class Crosses
         await GetFeaturesCrossingAsync(sampleShape);
 
         // Set the map extent to the sample shapes
-        MapView.MapScale = 60_000;
-        MapView.CenterPoint = new PointShape(-10776668, 3914803);
-        MapView.TrackOverlay.TrackMode = TrackMode.Line;
-        await MapView.RefreshAsync();
+        Map.MapScale = 60_000;
+        Map.CenterPoint = new PointShape(-10776668, 3914803);
+        Map.TrackOverlay.TrackMode = TrackMode.Line;
+        await Map.RefreshAsync();
     }
 
     /// <summary>
@@ -76,11 +76,11 @@ public partial class Crosses
     /// </summary>
     private async Task GetFeaturesCrossingAsync(BaseShape shape)
     {
-        // Find the layers we will be modifying in the MapView
-        var highlightOverlay = (LayerOverlay)MapView.Overlays["HighlightOverlay"];
+        // Find the layers we will be modifying in the Map
+        var highlightOverlay = (LayerOverlay)Map.Overlays["HighlightOverlay"];
         var highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
-        var friscoOverlay = (LayerOverlay)MapView.Overlays["FriscoOverlay"];
+        var friscoOverlay = (LayerOverlay)Map.Overlays["FriscoOverlay"];
         var friscoLayer = (FeatureLayer)friscoOverlay.Layers["FriscoLayer"];
 
         // Clear the query shape layer and add the newly drawn shape
@@ -98,8 +98,8 @@ public partial class Crosses
         await highlightOverlay.RefreshAsync();
 
         // Disable map drawing and clear the drawn shape
-        MapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
-        await MapView.TrackOverlay.RefreshAsync();
+        Map.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        await Map.TrackOverlay.RefreshAsync();
     }
 
     /// <summary>

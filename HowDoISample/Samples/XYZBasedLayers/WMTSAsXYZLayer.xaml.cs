@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.XYZBasedLayers;
@@ -14,7 +14,7 @@ public partial class WMTSAsXYZLayer : IDisposable
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized) return;
         _initialized = true;
@@ -24,7 +24,7 @@ public partial class WMTSAsXYZLayer : IDisposable
             TileType = TileType.SingleTile
         };
 
-        MapView.Overlays.Add(_layerOverlay);
+        Map.Overlays.Add(_layerOverlay);
 
         _wmtsAsyncLayer = new WmtsAsyncLayer(new Uri("https://wmts.geo.admin.ch/1.0.0"))
         {
@@ -49,9 +49,9 @@ public partial class WMTSAsXYZLayer : IDisposable
         await _wmtsAsyncLayer.CloseAsync();
         await _wmtsAsyncLayer.OpenAsync();
         var boundingBox = _wmtsAsyncLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await Map.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -69,7 +69,7 @@ public partial class WMTSAsXYZLayer : IDisposable
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        Map?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

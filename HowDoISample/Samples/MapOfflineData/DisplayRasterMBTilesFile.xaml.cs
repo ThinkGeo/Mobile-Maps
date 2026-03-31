@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -15,10 +15,10 @@ public partial class DisplayRasterMBTilesFile
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         layerOverlay = new LayerOverlay();
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
         string filePath = Path.Combine(FileSystem.AppDataDirectory, "Data", "Mbtiles", "test.mbtiles");
         rasterMbTilesLayer = new RasterMbTilesAsyncLayer(filePath);
         layerOverlay.TileType = TileType.MultiTile;
@@ -36,9 +36,9 @@ public partial class DisplayRasterMBTilesFile
         await rasterMbTilesLayer.CloseAsync();
         await rasterMbTilesLayer.OpenAsync();
         var boundingBox = rasterMbTilesLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await Map.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -55,7 +55,7 @@ public partial class DisplayRasterMBTilesFile
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        Map?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

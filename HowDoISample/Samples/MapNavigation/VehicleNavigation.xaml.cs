@@ -25,12 +25,12 @@ public partial class VehicleNavigation
 	{
 		InitializeComponent();
 		Disappearing += UpdateVehicleLocation_Disappearing;
-		MapView.MapRotationChanged += MapView_MapRotationChanged;
+		Map.MapRotationChanged += Map_MapRotationChanged;
 	}
 
-	private void MapView_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
+	private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
 	{
-		CompassButton.Rotation = (float)(MapView.MapRotation);
+		CompassButton.Rotation = (float)(Map.MapRotation);
 	}
 
 	private void UpdateVehicleLocation_Disappearing(object sender, EventArgs e)
@@ -38,7 +38,7 @@ public partial class VehicleNavigation
 		_disposed = true;
 	}
 
-	private async void MapView_OnSizeChanged(object sender, EventArgs e)
+	private async void Map_OnSizeChanged(object sender, EventArgs e)
 	{
 		if (_initialized)
 			return;
@@ -53,8 +53,8 @@ public partial class VehicleNavigation
 			MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2,
 			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
 		};
-		MapView.Overlays.Add(_backgroundOverlay);
-		MapView.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
+		Map.Overlays.Add(_backgroundOverlay);
+		Map.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
 		_gpsPoints = await InitGpsData();
 
 		// Create the Layer for the Route
@@ -66,7 +66,7 @@ public partial class VehicleNavigation
 		_routeOverlay = new LayerGraphicsViewOverlay();
 		_routeOverlay.Layers.Add(routeLayer);
 		_routeOverlay.Layers.Add(_visitedRoutesLayer);
-		MapView.Overlays.Add(_routeOverlay);
+		Map.Overlays.Add(_routeOverlay);
 
 		// Create a marker overlay to show where the vehicle is
 		var vehicleMarkerOverlay = new SimpleMarkerOverlay();
@@ -79,15 +79,15 @@ public partial class VehicleNavigation
 			HeightRequest = 24
 		};
 		vehicleMarkerOverlay.Children.Add(_vehicleMarker);
-		MapView.Overlays.Add(vehicleMarkerOverlay);
+		Map.Overlays.Add(vehicleMarkerOverlay);
 
-		MapView.CurrentExtentChangedInAnimation += MapViewOnCurrentExtentChangedInAnimation;
+		Map.CurrentExtentChangedInAnimation += MapOnCurrentExtentChangedInAnimation;
 
 		AerialBackgroundCheckBox.CheckedChanged += AerialBackgroundCheckBoxOnCheckedChanged;
 
-		MapView.CenterPoint = new PointShape(_gpsPoints[0]);
-		MapView.MapScale = 5000;
-		await MapView.RefreshAsync();
+		Map.CenterPoint = new PointShape(_gpsPoints[0]);
+		Map.MapScale = 5000;
+		await Map.RefreshAsync();
 
 		await ZoomToGpsPointsAsync();
 	}
@@ -106,7 +106,7 @@ public partial class VehicleNavigation
 		}
 	}
 
-	private void MapViewOnCurrentExtentChangedInAnimation(object sender, CurrentExtentChangedInAnimationMapViewEventArgs e)
+	private void MapOnCurrentExtentChangedInAnimation(object sender, CurrentExtentChangedInAnimationMapViewEventArgs e)
 	{
 		if (_currentGpsPointIndex == 0)
 			return;
@@ -166,9 +166,9 @@ public partial class VehicleNavigation
 		var centerPoint = new PointShape(currentLocation);
 
 		// Recenter the map to display the GPS location towards the bottom for improved visibility.
-		centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, MapView.MapScale, MapView.MapUnit);
+		centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, Map.MapScale, Map.MapUnit);
 
-		await MapView.ZoomToExtentAsync(centerPoint, MapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
+		await Map.ZoomToExtentAsync(centerPoint, Map.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
 		UpdateVisitedRoutes(_gpsPoints[gpsPointIndex]);
 
 		_vehicleMarker.Position = new PointShape(currentLocation.X, currentLocation.Y);
@@ -279,10 +279,10 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		if (MapView.TiltAngle > 40)
-			await MapView.TiltAsync(0, 1000, Easing.Default);
+		if (Map.TiltAngle > 40)
+			await Map.TiltAsync(0, 1000, Easing.Default);
 		else
-			await MapView.TiltAsync(MapView.TiltAngle + 15, 1000, Easing.Default);
+			await Map.TiltAsync(Map.TiltAngle + 15, 1000, Easing.Default);
 		_busy = false;
 	}
 
@@ -293,7 +293,7 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		await MapView.ZoomInAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+		await Map.ZoomInAsync(); // No cancellationToken passed in meaning this method cannot be canceled
 		_busy = false;
 	}
 
@@ -304,7 +304,7 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		await MapView.ZoomOutAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+		await Map.ZoomOutAsync(); // No cancellationToken passed in meaning this method cannot be canceled
 		_busy = false;
 	}
 
@@ -322,18 +322,18 @@ public partial class VehicleNavigation
 /// </summary>
 class CustomEventView : EventView
 {
-	protected override TransformArguments TouchDownCore(TouchDownMapViewEventArgs e, IMapView mapView)
+	protected override TransformArguments TouchDownCore(TouchDownMapViewEventArgs e, IMapView Map)
 		=> new();
 
-	protected override TransformArguments TouchMoveCore(TouchMoveMapViewEventArgs e, IMapView mapView)
+	protected override TransformArguments TouchMoveCore(TouchMoveMapViewEventArgs e, IMapView Map)
 		=> new();
 
-	protected override TransformArguments TouchRotateCore(TouchRotateMapViewEventArgs e, IMapView mapView)
+	protected override TransformArguments TouchRotateCore(TouchRotateMapViewEventArgs e, IMapView Map)
 		=> new();
 
-	protected override TransformArguments TouchPointerDownCore(Pointer1DownMapViewEventArgs e, IMapView mapView)
+	protected override TransformArguments TouchPointerDownCore(Pointer1DownMapViewEventArgs e, IMapView Map)
 		=> new();
 
-	protected override TransformArguments TouchPointerUpCore(Pointer1UpMapViewEventArgs e, IMapView mapView)
+	protected override TransformArguments TouchPointerUpCore(Pointer1UpMapViewEventArgs e, IMapView Map)
 		=> new();
 }

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ThinkGeo.Core;
@@ -44,12 +44,12 @@ public partial class MVT
         SelectedStyleIndex = 0;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized) return;
         _initialized = true;
 
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         var layerOverlay = new LayerOverlay
         {
@@ -67,14 +67,14 @@ public partial class MVT
         _mvtLayer.VectorTileCache = new FileTileCache(cachePath);
 
         layerOverlay.Layers.Add(_mvtLayer);
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
 
         await _mvtLayer.OpenAsync();
 
         var boundingBox = _mvtLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await Map.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void StylePicker_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -90,12 +90,12 @@ public partial class MVT
 
         await _mvtLayer.CloseAsync();
         await _mvtLayer.OpenAsync();
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        Map?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

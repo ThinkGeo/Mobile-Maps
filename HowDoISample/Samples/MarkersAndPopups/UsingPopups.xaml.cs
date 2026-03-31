@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MarkersAndPopups;
@@ -15,14 +15,14 @@ public partial class UsingPopups
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -32,7 +32,7 @@ public partial class UsingPopups
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Initialize hotels layer
         _hotelsLayer = new ShapeFileFeatureLayer(
@@ -46,20 +46,20 @@ public partial class UsingPopups
         // Add LayerOverlay
         _layerOverlay = new LayerGraphicsViewOverlay();
         _layerOverlay.Layers.Add(_hotelsLayer);
-        MapView.Overlays.Add(_layerOverlay);
+        Map.Overlays.Add(_layerOverlay);
 
         // Add PopupOverlay
         _popupOverlay = new PopupOverlay();
-        MapView.Overlays.Add(_popupOverlay);
+        Map.Overlays.Add(_popupOverlay);
 
         // Set the map extent        
-        MapView.CenterPoint = new PointShape(-10777800, 3908700);
-        MapView.MapScale = 10000;
+        Map.CenterPoint = new PointShape(-10777800, 3908700);
+        Map.MapScale = 10000;
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
 
         AddHotelPopups();
-        MapView.IsRotationEnabled = true;
+        Map.IsRotationEnabled = true;
     }
 
     private void AddHotelPopups()

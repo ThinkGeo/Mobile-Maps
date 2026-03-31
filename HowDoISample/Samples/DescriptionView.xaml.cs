@@ -1,4 +1,4 @@
-﻿namespace HowDoISample;
+namespace HowDoISample;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class DescriptionView

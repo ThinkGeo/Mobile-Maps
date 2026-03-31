@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -19,7 +19,7 @@ public partial class DisplayOgcApiFeatures
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var thinkGeoVectorOverlay = new ThinkGeoVectorOverlay()
@@ -30,7 +30,7 @@ public partial class DisplayOgcApiFeatures
             // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
         };
-        MapView.Overlays.Add(thinkGeoVectorOverlay);
+        Map.Overlays.Add(thinkGeoVectorOverlay);
 
         // Create a new text style and set various settings to make it look good.
         var ignNamedPlacesTextStyle = new TextStyle("etiqueta", new GeoFont("Arial", 14), GeoBrushes.DarkRed)
@@ -56,10 +56,10 @@ public partial class DisplayOgcApiFeatures
             DrawingBulkCount = 100
         };
 
-        MapView.CenterPoint = new PointShape(242000, 5065000);
-        MapView.MapScale = 100000;
-        MapView.Overlays.Add("LayerOverlay", overlay);
+        Map.CenterPoint = new PointShape(242000, 5065000);
+        Map.MapScale = 100000;
+        Map.Overlays.Add("LayerOverlay", overlay);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 }

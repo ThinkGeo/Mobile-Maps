@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -11,19 +11,19 @@ public partial class DisplayWms
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Set the map extent
-        MapView.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
-        MapView.MapScale = MapUtil.GetScale(new RectangleShape(-10786436, 3918518, -10769429, 3906002),
-            MapView.MapWidth, MapView.MapUnit);
+        Map.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
+        Map.MapScale = MapUtil.GetScale(new RectangleShape(-10786436, 3918518, -10769429, 3906002),
+            Map.MapWidth, Map.MapUnit);
 
         // Create a WmsOverlay and add it to the map.
         var wmsOverlay = new WmsOverlay();
@@ -34,7 +34,7 @@ public partial class DisplayWms
         wmsOverlay.Parameters.Add("STYLES", "default");
         wmsOverlay.Parameters.Add("CRS", "EPSG:3857");  // Make sure to match the WMS CRS to the Map's projection
 
-        MapView.Overlays.Add(wmsOverlay);
+        Map.Overlays.Add(wmsOverlay);
 
 
         // ScaleFactor determines the ratio of physical pixels to virtual pixels. For instance,
@@ -44,8 +44,8 @@ public partial class DisplayWms
         // images on servers that support them appear sharper when displayed this way. However, if the server
         // does not support high-resolution images, as is the case here, features like roads may appear too small.
         // As a result, here we set the ScaleFactor to 1, we request an image that matches the map's resolution (100x100), ensuring road sizes are more visible, albeit at the cost of image sharpness. Uncomment the following line to observe the effect on the map's appearance.
-        MapView.ScaleFactor = 1;
+        Map.ScaleFactor = 1;
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 }

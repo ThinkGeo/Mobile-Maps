@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -21,7 +21,7 @@ public partial class ExtendingStyles
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -31,7 +31,7 @@ public partial class ExtendingStyles
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         _worldCapitalsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "WorldCapitals.shp"));
 
@@ -41,13 +41,13 @@ public partial class ExtendingStyles
         var worldOverlay = new LayerOverlay();
         worldOverlay.Layers.Add("WorldCapitals", _worldCapitalsLayer);
 
-        MapView.Overlays.Add("Overlay", worldOverlay);
+        Map.Overlays.Add("Overlay", worldOverlay);
 
         // Set the map scale and center point
-        MapView.MapScale = 74000000;
-        MapView.CenterPoint = new PointShape(450061, 1074668);
+        Map.MapScale = 74000000;
+        Map.CenterPoint = new PointShape(450061, 1074668);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void TimeBasedPointStyle_Click(object sender, EventArgs e)
@@ -62,7 +62,7 @@ public partial class ExtendingStyles
         _worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
         _worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(timeBasedPointStyle);
 
-        var worldOverlay = (LayerOverlay)MapView.Overlays["Overlay"];
+        var worldOverlay = (LayerOverlay)Map.Overlays["Overlay"];
         await worldOverlay.RefreshAsync();
     }
 
@@ -74,7 +74,7 @@ public partial class ExtendingStyles
         _worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Clear();
         _worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(sizedPointStyle);
 
-        var worldOverlay = (LayerOverlay)MapView.Overlays["Overlay"];
+        var worldOverlay = (LayerOverlay)Map.Overlays["Overlay"];
         await worldOverlay.RefreshAsync();
     }
 

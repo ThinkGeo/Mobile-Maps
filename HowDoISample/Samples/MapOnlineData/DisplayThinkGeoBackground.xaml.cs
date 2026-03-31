@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -15,14 +15,14 @@ public partial class DisplayThinkGeoBackground
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         _thinkGeoVectorsOverlay = new ThinkGeoVectorOverlay(
@@ -32,7 +32,7 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
 
-        MapView.Overlays.Add(_thinkGeoVectorsOverlay);
+        Map.Overlays.Add(_thinkGeoVectorsOverlay);
 
         _thinkGeoRasterOverlay = new ThinkGeoRasterOverlay(
                 SampleKeys.ClientId,
@@ -42,16 +42,16 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
 
-        MapView.Overlays.Add(_thinkGeoRasterOverlay);
+        Map.Overlays.Add(_thinkGeoRasterOverlay);
 
         // Setup Maps Extent and Rotation
-        MapView.CenterPoint = new PointShape(1180600, 3916260);
-        MapView.MapScale = 100000000;
+        Map.CenterPoint = new PointShape(1180600, 3916260);
+        Map.MapScale = 100000000;
 
-        MapView.MapRotation = 0;
-        MapView.IsRotationEnabled = true;
+        Map.MapRotation = 0;
+        Map.IsRotationEnabled = true;
 
-        await MapView.RefreshAsync(_cancellationTokenSource.Token);
+        await Map.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void Radial_Checked(object sender, CheckedChangedEventArgs e)
@@ -157,7 +157,7 @@ public partial class DisplayThinkGeoBackground
     private async Task RefreshMapAsync()
     {
         await UpdateCancellationToken();
-        await MapView.RefreshAsync(_cancellationTokenSource.Token);
+        await Map.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)

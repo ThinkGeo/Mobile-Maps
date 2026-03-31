@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOfflineData;
@@ -20,14 +20,14 @@ public partial class MbTilesFile
             return;
         _initialized = true;
 
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         _layerOverlay = new LayerOverlay
         {
             TileType = TileType.MultiTile,
             ZoomLevelSet = new SphericalMercatorZoomLevelSet(256)
         };
-        MapView.Overlays.Add(_layerOverlay);
+        Map.Overlays.Add(_layerOverlay);
 
         var dataFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "maplibre.mbtiles");
         var jsonFilePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Mbtiles", "style.json");
@@ -38,26 +38,26 @@ public partial class MbTilesFile
         await openstackMbtiles.OpenAsync();
         // set up the MapScale of Center Point
         var bbox = openstackMbtiles.GetBoundingBox();
-        MapView.MapScale = MapUtil.GetScale(bbox, MapView.CanvasWidth, GeographyUnit.Meter);
-        MapView.CenterPoint = bbox.GetCenterPoint();
+        Map.MapScale = MapUtil.GetScale(bbox, Map.CanvasWidth, GeographyUnit.Meter);
+        Map.CenterPoint = bbox.GetCenterPoint();
 
-        MapView.IsRotationEnabled = true;
-        await MapView.RefreshAsync();
+        Map.IsRotationEnabled = true;
+        await Map.RefreshAsync();
     }
 
     private async void ShowDebugInfo_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         ThinkGeoDebugger.DisplayTileId = e.Value;
-        if (MapView != null)
-           await MapView.RefreshAsync();
+        if (Map != null)
+           await Map.RefreshAsync();
     }
 
     private async void SwitchTileSize_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (MapView == null) return;
+        if (Map == null) return;
         if (sender is not RadioButton radioButton) return;
         if (!e.Value) return;
-        if (MapView.Overlays.Count <= 0) return;
+        if (Map.Overlays.Count <= 0) return;
 
         if (_layerOverlay.Layers[0] is not VectorMbTilesAsyncLayer mbTilesLayer)
             return;
@@ -88,7 +88,7 @@ public partial class MbTilesFile
         mbTilesLayer.TileMatrixSet = TileMatrixSet.CreateTileMatrixSet(
             tileSize,
             bbox,
-            MapView.MapUnit, // Uses the map's current unit
+            Map.MapUnit, // Uses the map's current unit
             zoomCount
         );
 
@@ -101,7 +101,7 @@ public partial class MbTilesFile
         await mbTilesLayer.CloseAsync();
         await mbTilesLayer.OpenAsync();
         
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     protected override void OnDisappearing()

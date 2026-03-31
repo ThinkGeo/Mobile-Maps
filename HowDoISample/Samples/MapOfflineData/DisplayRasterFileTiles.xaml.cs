@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
@@ -17,7 +17,7 @@ public partial class DisplayRasterFileTiles
         BindingContext = this;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         var appDataDirectory = FileSystem.AppDataDirectory;
         var targetFileDirectory = Path.Combine(appDataDirectory, "Data", "OSM_Tiles_z0-z5_Created_By_QGIS");
@@ -28,7 +28,7 @@ public partial class DisplayRasterFileTiles
         }
 
         layerOverlay = new LayerOverlay();
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
         fileTilesAsyncLayer = new XyzFileTilesAsyncLayer(targetFileDirectory);
         fileTilesAsyncLayer.MaxZoomOfTheData = 5; // The MaxZoom with data
 
@@ -47,9 +47,9 @@ public partial class DisplayRasterFileTiles
         await fileTilesAsyncLayer.CloseAsync();
         await fileTilesAsyncLayer.OpenAsync();
         var boundingBox = fileTilesAsyncLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await Map.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -66,7 +66,7 @@ public partial class DisplayRasterFileTiles
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        Map?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

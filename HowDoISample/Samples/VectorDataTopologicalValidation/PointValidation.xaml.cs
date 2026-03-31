@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -12,14 +12,14 @@ public partial class PointValidation
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to Decimal Degree
-        MapView.MapUnit = GeographyUnit.DecimalDegree;
+        Map.MapUnit = GeographyUnit.DecimalDegree;
 
         // Create an InMemoryFeatureLayer to hold the shapes to be validated
         // Add styles to display points, lines, and polygons on this layer in green
@@ -59,10 +59,10 @@ public partial class PointValidation
         featuresOverlay.Layers.Add("Filter Features", filterFeaturesLayer);
         featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
         featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
-        MapView.Overlays.Add("Features Overlay", featuresOverlay);
+        Map.Overlays.Add("Features Overlay", featuresOverlay);
         RdoCheckIfPointsAreTouchingLines.IsChecked = true;
 
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     private async void CheckIfPointsAreTouchingLines(object sender, CheckedChangedEventArgs e)
@@ -84,7 +84,7 @@ public partial class PointValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [uncoveredPointFeature1, uncoveredPointFeature2, coveredPointFeature],
             invalidResultFeatures,
@@ -117,7 +117,7 @@ public partial class PointValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureOnEndpoint],
             invalidResultFeatures,
@@ -150,7 +150,7 @@ public partial class PointValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureOnBoundary],
             invalidResultFeatures,
@@ -183,7 +183,7 @@ public partial class PointValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [pointFeature1, pointFeature2, pointFeatureInsidePolygon],
             invalidResultFeatures,
@@ -201,8 +201,8 @@ public partial class PointValidation
     private async Task ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
         Collection<Feature> filterFeatures = null)
     {
-        // Get the InMemoryFeatureLayers from the MapView                
-        var validatedFeaturesOverLay = (LayerOverlay)MapView.Overlays["Features Overlay"];
+        // Get the InMemoryFeatureLayers from the Map                
+        var validatedFeaturesOverLay = (LayerOverlay)Map.Overlays["Features Overlay"];
         var validatedFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Validated Features"];
         var filterFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Filter Features"];
         var resultFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Result Features"];
@@ -229,11 +229,11 @@ public partial class PointValidation
         foreach (var resultFeature in resultFeatures) resultFeaturesLayer.InternalFeatures.Add(resultFeature);
 
         // Refresh/redraw the layers and reset the map extent
-        var featureOverlay = (LayerOverlay)MapView.Overlays["Features Overlay"];
+        var featureOverlay = (LayerOverlay)Map.Overlays["Features Overlay"];
         var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
-        MapView.CenterPoint = centerPoint;
-        MapView.MapScale = 200000000;
-        await MapView.RefreshAsync();
+        Map.CenterPoint = centerPoint;
+        Map.MapScale = 200000000;
+        await Map.RefreshAsync();
 
         validatedFeaturesLayer.Close();
         filterFeaturesLayer.Close();

@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
@@ -11,14 +11,14 @@ public partial class GetLineOnALine
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -28,7 +28,7 @@ public partial class GetLineOnALine
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Add the rail line feature to the railway layer
         var railway = new InMemoryFeatureLayer();
@@ -43,7 +43,7 @@ public partial class GetLineOnALine
         // Add railway to the layerOverlay
         var layerOverlay = new LayerOverlay();
         layerOverlay.Layers.Add("railway", railway);
-        MapView.Overlays.Add("layerOverlay", layerOverlay);
+        Map.Overlays.Add("layerOverlay", layerOverlay);
 
         // Style the subLineLayer
         var subLineLayer = new InMemoryFeatureLayer();
@@ -54,14 +54,14 @@ public partial class GetLineOnALine
         // Add subLineLayer to the layerOverlay
         var subLineOverlay = new LayerOverlay();
         subLineOverlay.Layers.Add("subLineLayer", subLineLayer);
-        MapView.Overlays.Add("subLineOverlay", subLineOverlay);
+        Map.Overlays.Add("subLineOverlay", subLineOverlay);
 
         // Set the map extent
-        MapView.CenterPoint = new PointShape(-10777600, 3915260);
-        MapView.MapScale = 140000;
+        Map.CenterPoint = new PointShape(-10777600, 3915260);
+        Map.MapScale = 140000;
 
         // Add LayerOverlay to Map
-        await MapView.RefreshAsync();
+        await Map.RefreshAsync();
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ public partial class GetLineOnALine
     /// </summary>
     private async void GetSubLine_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)MapView.Overlays["layerOverlay"];
-        var subLineOverlay = (LayerOverlay)MapView.Overlays["subLineOverlay"];
+        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var subLineOverlay = (LayerOverlay)Map.Overlays["subLineOverlay"];
 
         var railway = (InMemoryFeatureLayer)layerOverlay.Layers["railway"];
         var subLineLayer = (InMemoryFeatureLayer)subLineOverlay.Layers["subLineLayer"];

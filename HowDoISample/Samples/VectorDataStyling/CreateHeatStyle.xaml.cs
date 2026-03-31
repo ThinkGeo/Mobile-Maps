@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -19,7 +19,7 @@ public partial class CreateHeatStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateHeatStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Coyote_Sightings.shp"))
         {
@@ -45,15 +45,15 @@ public partial class CreateHeatStyle
         layerOverlay.Layers.Add(coyoteSightings);
 
         // Add the overlay to the map
-        MapView.Overlays.Add(layerOverlay);
+        Map.Overlays.Add(layerOverlay);
 
         // Apply HeatStyle
         AddHeatStyle(coyoteSightings);
 
         // Set the map scale and center point
-        MapView.MapScale = 200000;
-        MapView.CenterPoint = new PointShape(-10778209, 3914820);
-        await MapView.RefreshAsync();
+        Map.MapScale = 200000;
+        Map.CenterPoint = new PointShape(-10778209, 3914820);
+        await Map.RefreshAsync();
     }
 
     private static void AddHeatStyle(FeatureLayer layer)

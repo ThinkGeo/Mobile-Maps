@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOfflineData;
@@ -19,7 +19,7 @@ public partial class TinyGeoLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        Map.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class TinyGeoLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        Map.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var tinyGeoOverlay = new LayerOverlay();
-        MapView.Overlays.Add(tinyGeoOverlay);
+        Map.Overlays.Add(tinyGeoOverlay);
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
         var tinyGeoLayer = new TinyGeoFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "TinyGeo", "Zoning.tgeo"))
@@ -53,8 +53,8 @@ public partial class TinyGeoLayer
         tinyGeoLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 250_000;
-        MapView.CenterPoint = new PointShape(-10778772, 3915250);
-        await MapView.RefreshAsync();
+        Map.MapScale = 250_000;
+        Map.CenterPoint = new PointShape(-10778772, 3915250);
+        await Map.RefreshAsync();
     }
 }

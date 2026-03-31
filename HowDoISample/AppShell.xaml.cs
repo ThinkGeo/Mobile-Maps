@@ -1,4 +1,4 @@
-﻿namespace HowDoISample;
+namespace HowDoISample;
 
 public partial class AppShell
 {
