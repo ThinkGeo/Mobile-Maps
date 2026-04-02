@@ -668,7 +668,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.4" />
-    <PackageReference Include="ThinkGeo.UI.Maui" Version="14.5.0-beta131" />
+    <PackageReference Include="ThinkGeo.UI.Maui" Version="14.5.0" />
   </ItemGroup>
   
 </Project>
