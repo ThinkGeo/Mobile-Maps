@@ -19,7 +19,7 @@ public partial class GraticuleLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class GraticuleLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var layerOverlay = new LayerOverlay();
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
         var graticuleFeatureLayer = new GraticuleFeatureLayer
@@ -51,8 +51,8 @@ public partial class GraticuleLayer
         layerOverlay.Layers.Add("graticule", graticuleFeatureLayer);
 
         // Set the map scale and center point
-        Map.MapScale = 35_000;
-        Map.CenterPoint = new PointShape(-10777884, 3914992);
-        await Map.RefreshAsync();
+        mapView.MapScale = 35_000;
+        mapView.CenterPoint = new PointShape(-10777884, 3914992);
+        await mapView.RefreshAsync();
     }
 }

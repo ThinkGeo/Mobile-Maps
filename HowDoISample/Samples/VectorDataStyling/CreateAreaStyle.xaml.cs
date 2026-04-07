@@ -19,7 +19,7 @@ public partial class CreateAreaStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateAreaStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var friscoSubdivisions = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"))
         {
@@ -45,15 +45,15 @@ public partial class CreateAreaStyle
         layerOverlay.Layers.Add(friscoSubdivisions);
 
         // Add the overlay to the map
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Add the area style to the historicSites layer
         AddAreaStyle(friscoSubdivisions);
 
         // Set the map scale and center point
-        Map.MapScale = 40000;
-        Map.CenterPoint = new PointShape(-10778209, 3914820);
-        await Map.RefreshAsync();
+        mapView.MapScale = 40000;
+        mapView.CenterPoint = new PointShape(-10778209, 3914820);
+        await mapView.RefreshAsync();
     }
 
     private static void AddAreaStyle(FeatureLayer layer)

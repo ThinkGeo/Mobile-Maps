@@ -9,7 +9,7 @@ public partial class CalculateShortestLineBetweenShapes
     public CalculateShortestLineBetweenShapes()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -19,7 +19,7 @@ public partial class CalculateShortestLineBetweenShapes
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,9 +29,9 @@ public partial class CalculateShortestLineBetweenShapes
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         var friscoParks = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Parks.shp"));
@@ -66,20 +66,20 @@ public partial class CalculateShortestLineBetweenShapes
         // Add shortestLineLayer to the layerOverlay
         var shortestLineOverlay = new LayerOverlay();
         shortestLineOverlay.Layers.Add("shortestLineLayer", shortestLineLayer);
-        Map.Overlays.Add("shortestLineOverlay", shortestLineOverlay);
+        mapView.Overlays.Add("shortestLineOverlay", shortestLineOverlay);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10778600, 3915260);
-        Map.MapScale = 50000;
+        mapView.CenterPoint = new PointShape(-10778600, 3915260);
+        mapView.MapScale = 50000;
 
         // Add LayerOverlay to Map
-        Map.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
 
         // Add Toyota Stadium feature to stadiumLayer
         var stadium = new Feature(new PointShape(-10779651.500992451, 3915933.0023557912));
         stadiumLayer.InternalFeatures.Add(stadium);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -88,15 +88,15 @@ public partial class CalculateShortestLineBetweenShapes
     /// </summary>
     private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
-        var shortestLineOverlay = (LayerOverlay)Map.Overlays["shortestLineOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+        var shortestLineOverlay = (LayerOverlay)mapView.Overlays["shortestLineOverlay"];
 
         var friscoParks = (ShapeFileFeatureLayer)layerOverlay.Layers["friscoParks"];
         var stadiumLayer = (InMemoryFeatureLayer)layerOverlay.Layers["stadiumLayer"];
         var shortestLineLayer = (InMemoryFeatureLayer)shortestLineOverlay.Layers["shortestLineLayer"];
 
         // Query the friscoParks layer to get the first feature closest to the map tap event
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         var park = friscoParks.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, GeographyUnit.Meter, 1,
             ReturningColumnsType.NoColumns).First();
 

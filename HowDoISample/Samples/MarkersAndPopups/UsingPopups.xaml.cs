@@ -22,7 +22,7 @@ public partial class UsingPopups
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -32,7 +32,7 @@ public partial class UsingPopups
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Initialize hotels layer
         _hotelsLayer = new ShapeFileFeatureLayer(
@@ -46,20 +46,20 @@ public partial class UsingPopups
         // Add LayerOverlay
         _layerOverlay = new LayerGraphicsViewOverlay();
         _layerOverlay.Layers.Add(_hotelsLayer);
-        Map.Overlays.Add(_layerOverlay);
+        mapView.Overlays.Add(_layerOverlay);
 
         // Add PopupOverlay
         _popupOverlay = new PopupOverlay();
-        Map.Overlays.Add(_popupOverlay);
+        mapView.Overlays.Add(_popupOverlay);
 
         // Set the map extent        
-        Map.CenterPoint = new PointShape(-10777800, 3908700);
-        Map.MapScale = 10000;
+        mapView.CenterPoint = new PointShape(-10777800, 3908700);
+        mapView.MapScale = 10000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
 
         AddHotelPopups();
-        Map.IsRotationEnabled = true;
+        mapView.IsRotationEnabled = true;
     }
 
     private void AddHotelPopups()

@@ -11,16 +11,16 @@ public partial class TrackEditDelete
     public TrackEditDelete()
     {
         InitializeComponent();
-        Map.MapRotationChanged += Map_MapRotationChanged;
-        Map.SingleTap += Map_SingleTap;
+        mapView.MapRotationChanged += Map_MapRotationChanged;
+        mapView.SingleTap += Map_SingleTap;
         CompassButton.Clicked += async (_, _) =>
-            await Map.ZoomToExtentAsync(Map.CenterPoint, Map.MapScale, 0);
+            await mapView.ZoomToExtentAsync(mapView.CenterPoint, mapView.MapScale, 0);
     }
 
     private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
     {
         // Keep the compass aligned with the map's current rotation.
-        CompassButton.Rotation = (float)Map.MapRotation;
+        CompassButton.Rotation = (float)mapView.MapRotation;
     }
 
     public static readonly BindableProperty InstructionProperty = BindableProperty.Create(
@@ -42,7 +42,7 @@ public partial class TrackEditDelete
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret,
@@ -50,11 +50,11 @@ public partial class TrackEditDelete
         {
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map extent
-        Map.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
-        Map.MapScale = 200000;
+        mapView.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
+        mapView.MapScale = 200000;
 
         // Create the layer that will store the drawn shapes
         var featureLayer = new InMemoryFeatureLayer();
@@ -73,14 +73,14 @@ public partial class TrackEditDelete
         layerOverlay.Layers.Add("featureLayer", featureLayer);
 
         // Add the LayerOverlay to the map
-        Map.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
 
         // Update instructions
         Instruction = "Draw Point Mode - Tap the map to add a point.";
-        Map.TrackOverlay.TrackMode = TrackMode.Point;
+        mapView.TrackOverlay.TrackMode = TrackMode.Point;
 
-        Map.IsRotationEnabled = true;
-        await Map.RefreshAsync();
+        mapView.IsRotationEnabled = true;
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -88,27 +88,27 @@ public partial class TrackEditDelete
     /// </summary>
     private async Task UpdateLayerFeaturesAsync()
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
         var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
         // If the user switched away from a Drawing Mode, add all the newly drawn shapes in the TrackOverlay into the featureLayer
-        foreach (var feature in Map.TrackOverlay.TrackShapeLayer.InternalFeatures)
+        foreach (var feature in mapView.TrackOverlay.TrackShapeLayer.InternalFeatures)
             featureLayer.InternalFeatures.Add(feature.Id, feature);
 
         // Clear out all the TrackOverlay's features
-        Map.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
         // If the user switched away from Edit Mode, add all the shapes that were in the EditOverlay back into the featureLayer
-        foreach (var feature in Map.EditOverlay.EditShapesLayer.InternalFeatures)
+        foreach (var feature in mapView.EditOverlay.EditShapesLayer.InternalFeatures)
             featureLayer.InternalFeatures.Add(feature.Id, feature);
 
         // Clear out all the EditOverlay's features
-        Map.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
-        Map.EditOverlay.ClearAllControlPoints();
+        mapView.EditOverlay.EditShapesLayer.InternalFeatures.Clear();
+        mapView.EditOverlay.ClearAllControlPoints();
 
         // Refresh the overlays to show latest results
-        await Map.TrackOverlay.RefreshAsync();
-        await Map.EditOverlay.RefreshAsync();
+        await mapView.TrackOverlay.RefreshAsync();
+        await mapView.EditOverlay.RefreshAsync();
         await layerOverlay.RefreshAsync();
     }
 
@@ -118,16 +118,16 @@ public partial class TrackEditDelete
             return;
         if (!radioButton.IsChecked)
             return;
-        if (Map == null)
+        if (mapView == null)
             return;
-        if (!Map.Overlays.Contains("layerOverlay"))
+        if (!mapView.Overlays.Contains("layerOverlay"))
             return;
 
         // Update the layer's features from any previous mode
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to None, so that the user will no longer draw shapes and will be able to navigate the map normally
-        Map.TrackOverlay.TrackMode = TrackMode.None;
+        mapView.TrackOverlay.TrackMode = TrackMode.None;
 
         // Update instructions
         Instruction = "Navigation Mode - The default map state. Allows you to pan and zoom the map.";
@@ -142,14 +142,14 @@ public partial class TrackEditDelete
             return;
         if (!radioButton.IsChecked)
             return;
-        if (Map == null)
+        if (mapView == null)
             return;
 
         // Update the layer's features from any previous mode
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to Point, which draws a new point on the map on mouse tap
-        Map.TrackOverlay.TrackMode = TrackMode.Point;
+        mapView.TrackOverlay.TrackMode = TrackMode.Point;
         // Update instructions
         Instruction = "Draw Point Mode - Tap the map to add a point.";
     }
@@ -168,7 +168,7 @@ public partial class TrackEditDelete
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to Line, which draws a new line on the map on mouse tap. Double taps to finish drawing the line.
-        Map.TrackOverlay.TrackMode = TrackMode.Line;
+        mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
         // Update instructions
         Instruction =
@@ -189,7 +189,7 @@ public partial class TrackEditDelete
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to Line, which draws a new line on the map on mouse tap. Double taps to finish drawing the line.
-        Map.TrackOverlay.TrackMode = TrackMode.Ellipse;
+        mapView.TrackOverlay.TrackMode = TrackMode.Ellipse;
 
         // Update instructions
         Instruction = "Draw Ellipse Mode - Tap-move on the map to draw an ellipse.";
@@ -209,7 +209,7 @@ public partial class TrackEditDelete
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to Polygon, which draws a new polygon on the map on touch. Double taps to finish drawing the polygon.
-        Map.TrackOverlay.TrackMode = TrackMode.Polygon;
+        mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
 
         // Update instructions
         Instruction =
@@ -228,29 +228,29 @@ public partial class TrackEditDelete
 
         // Update the layer's features from any previous mode
 
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
         var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
         // If the user switched away from a Drawing Mode, add all the newly drawn shapes in the TrackOverlay into the featureLayer
-        foreach (var feature in Map.TrackOverlay.TrackShapeLayer.InternalFeatures)
-            Map.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
-        Map.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        foreach (var feature in mapView.TrackOverlay.TrackShapeLayer.InternalFeatures)
+            mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
         // Put all features in the featureLayer into the EditOverlay
         foreach (var feature in featureLayer.InternalFeatures)
-            Map.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
+            mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(feature.Id, feature);
         featureLayer.InternalFeatures.Clear();
 
         // This method draws all the handles and manipulation points on the map to edit. 
-        Map.EditOverlay.CalculateAllControlPoints();
+        mapView.EditOverlay.CalculateAllControlPoints();
 
         // Refresh the overlays to show latest results
-        await Map.TrackOverlay.RefreshAsync();
-        await Map.EditOverlay.RefreshAsync();
+        await mapView.TrackOverlay.RefreshAsync();
+        await mapView.EditOverlay.RefreshAsync();
         await layerOverlay.RefreshAsync();
 
         // Set TrackMode to None, so that the user will no longer draw shapes
-        Map.TrackOverlay.TrackMode = TrackMode.None;
+        mapView.TrackOverlay.TrackMode = TrackMode.None;
 
         // Update instructions
         Instruction =
@@ -271,7 +271,7 @@ public partial class TrackEditDelete
         await UpdateLayerFeaturesAsync();
 
         // Set TrackMode to None, so that the user will no longer draw shapes
-        Map.TrackOverlay.TrackMode = TrackMode.None;
+        mapView.TrackOverlay.TrackMode = TrackMode.None;
 
         // Update instructions
         Instruction = "Delete Shape Mode - Tap a shape to delete it.";
@@ -285,10 +285,10 @@ public partial class TrackEditDelete
         if (!DeleteShapeRadioButton.IsChecked)
             return;
 
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
         var featureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["featureLayer"];
 
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
 
         // Query the layer for the closest feature within 100 meters
         var closestFeatures = featureLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, GeographyUnit.Meter, 1, new Collection<string>(), 100, DistanceUnit.Meter);

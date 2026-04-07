@@ -25,12 +25,12 @@ public partial class VehicleNavigation
 	{
 		InitializeComponent();
 		Disappearing += UpdateVehicleLocation_Disappearing;
-		Map.MapRotationChanged += Map_MapRotationChanged;
+		mapView.MapRotationChanged += Map_MapRotationChanged;
 	}
 
 	private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
 	{
-		CompassButton.Rotation = (float)(Map.MapRotation);
+		CompassButton.Rotation = (float)(mapView.MapRotation);
 	}
 
 	private void UpdateVehicleLocation_Disappearing(object sender, EventArgs e)
@@ -53,8 +53,8 @@ public partial class VehicleNavigation
 			MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2,
 			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
 		};
-		Map.Overlays.Add(_backgroundOverlay);
-		Map.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
+		mapView.Overlays.Add(_backgroundOverlay);
+		mapView.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
 		_gpsPoints = await InitGpsData();
 
 		// Create the Layer for the Route
@@ -66,7 +66,7 @@ public partial class VehicleNavigation
 		_routeOverlay = new LayerGraphicsViewOverlay();
 		_routeOverlay.Layers.Add(routeLayer);
 		_routeOverlay.Layers.Add(_visitedRoutesLayer);
-		Map.Overlays.Add(_routeOverlay);
+		mapView.Overlays.Add(_routeOverlay);
 
 		// Create a marker overlay to show where the vehicle is
 		var vehicleMarkerOverlay = new SimpleMarkerOverlay();
@@ -79,15 +79,15 @@ public partial class VehicleNavigation
 			HeightRequest = 24
 		};
 		vehicleMarkerOverlay.Children.Add(_vehicleMarker);
-		Map.Overlays.Add(vehicleMarkerOverlay);
+		mapView.Overlays.Add(vehicleMarkerOverlay);
 
-		Map.CurrentExtentChangedInAnimation += MapOnCurrentExtentChangedInAnimation;
+		mapView.CurrentExtentChangedInAnimation += MapOnCurrentExtentChangedInAnimation;
 
 		AerialBackgroundCheckBox.CheckedChanged += AerialBackgroundCheckBoxOnCheckedChanged;
 
-		Map.CenterPoint = new PointShape(_gpsPoints[0]);
-		Map.MapScale = 5000;
-		await Map.RefreshAsync();
+		mapView.CenterPoint = new PointShape(_gpsPoints[0]);
+		mapView.MapScale = 5000;
+		await mapView.RefreshAsync();
 
 		await ZoomToGpsPointsAsync();
 	}
@@ -166,9 +166,9 @@ public partial class VehicleNavigation
 		var centerPoint = new PointShape(currentLocation);
 
 		// Recenter the map to display the GPS location towards the bottom for improved visibility.
-		centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, Map.MapScale, Map.MapUnit);
+		centerPoint = MapUtil.OffsetPointWithScreenOffset(centerPoint, 0, 200, angle, mapView.MapScale, mapView.MapUnit);
 
-		await Map.ZoomToExtentAsync(centerPoint, Map.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
+		await mapView.ZoomToExtentAsync(centerPoint, mapView.MapScale, angle, animationSettings, OverlaysRenderSequenceType.Sequential, cancellationToken);
 		UpdateVisitedRoutes(_gpsPoints[gpsPointIndex]);
 
 		_vehicleMarker.Position = new PointShape(currentLocation.X, currentLocation.Y);
@@ -279,10 +279,10 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		if (Map.TiltAngle > 40)
-			await Map.TiltAsync(0, 1000, Easing.Default);
+		if (mapView.TiltAngle > 40)
+			await mapView.TiltAsync(0, 1000, Easing.Default);
 		else
-			await Map.TiltAsync(Map.TiltAngle + 15, 1000, Easing.Default);
+			await mapView.TiltAsync(mapView.TiltAngle + 15, 1000, Easing.Default);
 		_busy = false;
 	}
 
@@ -293,7 +293,7 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		await Map.ZoomInAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+		await mapView.ZoomInAsync(); // No cancellationToken passed in meaning this method cannot be canceled
 		_busy = false;
 	}
 
@@ -304,7 +304,7 @@ public partial class VehicleNavigation
 		_busy = true;
 		await RefreshCancellationTokenAsync();
 
-		await Map.ZoomOutAsync(); // No cancellationToken passed in meaning this method cannot be canceled
+		await mapView.ZoomOutAsync(); // No cancellationToken passed in meaning this method cannot be canceled
 		_busy = false;
 	}
 

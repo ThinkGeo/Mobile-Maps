@@ -49,7 +49,7 @@ public partial class MVT
         if (_initialized) return;
         _initialized = true;
 
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         var layerOverlay = new LayerOverlay
         {
@@ -67,14 +67,14 @@ public partial class MVT
         _mvtLayer.VectorTileCache = new FileTileCache(cachePath);
 
         layerOverlay.Layers.Add(_mvtLayer);
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         await _mvtLayer.OpenAsync();
 
         var boundingBox = _mvtLayer.GetBoundingBox();
-        await Map.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void StylePicker_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -90,12 +90,12 @@ public partial class MVT
 
         await _mvtLayer.CloseAsync();
         await _mvtLayer.OpenAsync();
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     public void Dispose()
     {
-        Map?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

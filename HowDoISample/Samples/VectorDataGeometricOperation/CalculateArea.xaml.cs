@@ -9,7 +9,7 @@ public partial class CalculateArea
     public CalculateArea()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -19,7 +19,7 @@ public partial class CalculateArea
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,9 +29,9 @@ public partial class CalculateArea
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Create a feature layer to hold the Frisco Parks data
         var friscoParksLayer = new ShapeFileFeatureLayer(Path.Combine(
@@ -48,7 +48,7 @@ public partial class CalculateArea
 
         var friscoParkOverlay = new LayerOverlay();
         friscoParkOverlay.Layers.Add("FriscoParksLayer", friscoParksLayer);
-        Map.Overlays.Add("FriscoParksOverlay", friscoParkOverlay);
+        mapView.Overlays.Add("FriscoParksOverlay", friscoParkOverlay);
 
         // Create a layer to hold features found by the selected area query
         var selectedAreaLayer = new InMemoryFeatureLayer();
@@ -58,13 +58,13 @@ public partial class CalculateArea
 
         var selectedAreaOverlay = new LayerOverlay();
         selectedAreaOverlay.Layers.Add("SelectedAreaLayer", selectedAreaLayer);
-        Map.Overlays.Add("SelectedAreaOverlay", selectedAreaOverlay);
+        mapView.Overlays.Add("SelectedAreaOverlay", selectedAreaOverlay);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10777600, 3915260);
-        Map.MapScale = 40000;
+        mapView.CenterPoint = new PointShape(-10777600, 3915260);
+        mapView.MapScale = 40000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -72,14 +72,14 @@ public partial class CalculateArea
     /// </summary>
     private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var friscoParkOverlay = (LayerOverlay)Map.Overlays["FriscoParksOverlay"];
+        var friscoParkOverlay = (LayerOverlay)mapView.Overlays["FriscoParksOverlay"];
         var friscoParksLayer = (ShapeFileFeatureLayer)friscoParkOverlay.Layers["FriscoParksLayer"];
 
-        var selectedAreaOverlay = (LayerOverlay)Map.Overlays["SelectedAreaOverlay"];
+        var selectedAreaOverlay = (LayerOverlay)mapView.Overlays["SelectedAreaOverlay"];
         var selectedAreaLayer = (InMemoryFeatureLayer)selectedAreaOverlay.Layers["SelectedAreaLayer"];
 
         // Query the friscoParks layer to get the first feature closest to the map tap event
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         var feature = friscoParksLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, GeographyUnit.Meter, 1,
             ReturningColumnsType.NoColumns).First();
 

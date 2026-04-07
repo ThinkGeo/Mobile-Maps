@@ -24,7 +24,7 @@ public partial class WMTSAsXYZLayer : IDisposable
             TileType = TileType.SingleTile
         };
 
-        Map.Overlays.Add(_layerOverlay);
+        mapView.Overlays.Add(_layerOverlay);
 
         _wmtsAsyncLayer = new WmtsAsyncLayer(new Uri("https://wmts.geo.admin.ch/1.0.0"))
         {
@@ -49,9 +49,9 @@ public partial class WMTSAsXYZLayer : IDisposable
         await _wmtsAsyncLayer.CloseAsync();
         await _wmtsAsyncLayer.OpenAsync();
         var boundingBox = _wmtsAsyncLayer.GetBoundingBox();
-        await Map.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -69,7 +69,7 @@ public partial class WMTSAsXYZLayer : IDisposable
 
     public void Dispose()
     {
-        Map?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

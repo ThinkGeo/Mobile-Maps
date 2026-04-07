@@ -13,12 +13,12 @@ public partial class ZoomToExtent
     public ZoomToExtent()
     {
         InitializeComponent();
-        Map.MapRotationChanged += Map_MapRotationChanged;
+        mapView.MapRotationChanged += Map_MapRotationChanged;
     }
 
     private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
     {
-        CompassButton.Rotation = (float)(Map.MapRotation);
+        CompassButton.Rotation = (float)(mapView.MapRotation);
     }
 
     private async void Map_SizeChanged(object sender, EventArgs e)
@@ -29,7 +29,7 @@ public partial class ZoomToExtent
 
         _animationSettings = new AnimationSettings { Duration = 1000 };
         // Set the map's unit to meter (the unit for Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add ThinkGeo Cloud Maps as the background
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -40,7 +40,7 @@ public partial class ZoomToExtent
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
 
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Load the Frisco data to a layer
         var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Subdivisions.shp");
@@ -57,16 +57,16 @@ public partial class ZoomToExtent
         // Add Frisco data to a LayerOverlay and add it to the map
         var layerOverlay = new LayerOverlay();
         layerOverlay.Layers.Add(_friscoBoundary);
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
-        Map.IsRotationEnabled = true;
+        mapView.IsRotationEnabled = true;
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10777932, 3912260);
-        Map.MapScale = 100000;
+        mapView.CenterPoint = new PointShape(-10777932, 3912260);
+        mapView.MapScale = 100000;
 
         SetupButtonEvents();
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private void SetupButtonEvents()
@@ -77,27 +77,27 @@ public partial class ZoomToExtent
                 : MapAnimationType.DrawAfterAnimation;
 
         CompassButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
-            await Map.ZoomToExtentAsync(Map.CenterPoint, Map.MapScale, 0, _animationSettings));
+            await mapView.ZoomToExtentAsync(mapView.CenterPoint, mapView.MapScale, 0, _animationSettings));
 
         DefaultExtentButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
-            await Map.ZoomToExtentAsync(new PointShape(-10777932, 3912260), 100000, 0, _animationSettings));
+            await mapView.ZoomToExtentAsync(new PointShape(-10777932, 3912260), 100000, 0, _animationSettings));
 
         ZoomToScaleButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
-            await Map.ZoomToAsync(20000, _animationSettings));
+            await mapView.ZoomToAsync(20000, _animationSettings));
 
         ZoomToLayerButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
-            await Map.ZoomToAsync(_friscoBoundary.GetBoundingBox(), _animationSettings));
+            await mapView.ZoomToAsync(_friscoBoundary.GetBoundingBox(), _animationSettings));
 
         ZoomToFeatureButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
         {
             var feature = _friscoBoundary.FeatureSource.GetFeatureById("1", ReturningColumnsType.NoColumns);
-            await Map.ZoomToAsync(feature, _animationSettings);
+            await mapView.ZoomToAsync(feature, _animationSettings);
         });
 
         CenterAtPointButton.Clicked += async (_, _) => await ExecuteWithoutCancellationException(async () =>
         {
             var pointInMercator = ProjectionConverter.Convert(4326, 3857, new PointShape(-96.82, 33.15));
-            await Map.CenterAtAsync(pointInMercator, _animationSettings);
+            await mapView.CenterAtAsync(pointInMercator, _animationSettings);
         });
     }
 

@@ -9,7 +9,7 @@ public partial class CreatingMarkers
     public CreatingMarkers()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -19,7 +19,7 @@ public partial class CreatingMarkers
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,19 +29,19 @@ public partial class CreatingMarkers
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Set the map extent        
-        Map.CenterPoint = new PointShape(-10777132, 3908560);
-        Map.MapScale = 12000;
+        mapView.CenterPoint = new PointShape(-10777132, 3908560);
+        mapView.MapScale = 12000;
 
         var simpleMarkerOverlay = new SimpleMarkerOverlay();
-        Map.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
+        mapView.Overlays.Add("simpleMarkerOverlay", simpleMarkerOverlay);
 
-        Map.IsRotationEnabled = true;
-        await Map.RefreshAsync();
+        mapView.IsRotationEnabled = true;
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -49,8 +49,8 @@ public partial class CreatingMarkers
     /// </summary>
     private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var simpleMarkerOverlay = (SimpleMarkerOverlay)Map.Overlays["simpleMarkerOverlay"];
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var simpleMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["simpleMarkerOverlay"];
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
 
         // Create a marker at the position the mouse was tapped
         var marker = new ImageMarker

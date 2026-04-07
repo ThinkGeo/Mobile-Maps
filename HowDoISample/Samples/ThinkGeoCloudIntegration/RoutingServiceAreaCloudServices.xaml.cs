@@ -13,7 +13,7 @@ public partial class RoutingServiceAreaCloudServices
     public RoutingServiceAreaCloudServices()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -30,10 +30,10 @@ public partial class RoutingServiceAreaCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the service areas
         var serviceAreasLayer = new InMemoryFeatureLayer();
@@ -63,14 +63,14 @@ public partial class RoutingServiceAreaCloudServices
         // Add the layer to an overlay, and add the overlay to the Map
         var serviceAreaOverlay = new LayerOverlay();
         serviceAreaOverlay.Layers.Add("Service Area Layer", serviceAreasLayer);
-        Map.Overlays.Add("Service Area Overlay", serviceAreaOverlay);
+        mapView.Overlays.Add("Service Area Overlay", serviceAreaOverlay);
 
         // Add a simple marker overlay to display the center point of the service area
         var serviceAreaMarkerOverlay = new SimpleMarkerOverlay();
-        Map.Overlays.Add("Service Area Marker Overlay", serviceAreaMarkerOverlay);
+        mapView.Overlays.Add("Service Area Marker Overlay", serviceAreaMarkerOverlay);
 
-        Map.CenterPoint = new PointShape(-10777600, 3915260);
-        Map.MapScale = 1500000;
+        mapView.CenterPoint = new PointShape(-10777600, 3915260);
+        mapView.MapScale = 1500000;
 
         // Create a new set of time spans for 15, 30, 45, 60 minutes. These will be used to create the class breaks for the routing service area request
         _serviceAreaIntervals =
@@ -88,7 +88,7 @@ public partial class RoutingServiceAreaCloudServices
         var samplePoint = new PointShape(-10777600, 3915260);
         GetAndDrawServiceArea(samplePoint);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public partial class RoutingServiceAreaCloudServices
         var serviceAreaResult = result.ServiceAreaResult;
 
         // Get the simple marker overlay from the map
-        var serviceAreaMarkerOverlay = (SimpleMarkerOverlay)Map.Overlays["Service Area Marker Overlay"];
+        var serviceAreaMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["Service Area Marker Overlay"];
 
         // Clear the previous markers
         serviceAreaMarkerOverlay.Children.Clear();
@@ -131,7 +131,7 @@ public partial class RoutingServiceAreaCloudServices
             CreateNewMarker(new PointShape(serviceAreaResult.Waypoint.Coordinate)));
 
         // Get the service area polygons layer from the map
-        var serviceAreaOverlay = (LayerOverlay)Map.Overlays["Service Area Overlay"];
+        var serviceAreaOverlay = (LayerOverlay)mapView.Overlays["Service Area Overlay"];
         var serviceAreaLayer = (InMemoryFeatureLayer)serviceAreaOverlay.Layers["Service Area Layer"];
 
         // Clear the previous polygons
@@ -195,7 +195,7 @@ public partial class RoutingServiceAreaCloudServices
             },
             Location = AdornmentLocation.LowerRight
         };
-        Map.AdornmentOverlay.Layers.Add(legend);
+        mapView.AdornmentOverlay.Layers.Add(legend);
 
         // Add a LegendItems to the legend adornment for each ClassBreak
         foreach (var classBreak in classBreaks)
@@ -215,7 +215,7 @@ public partial class RoutingServiceAreaCloudServices
     /// </summary>
     private void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         GetAndDrawServiceArea(pointInWorldCoordinate);
     }
 

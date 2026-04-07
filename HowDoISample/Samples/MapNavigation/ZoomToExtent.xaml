@@ -23,7 +23,7 @@
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
             <thinkgeo:MapView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" 
-                              x:Name="Map" SizeChanged="Map_SizeChanged">
+                              x:Name="mapView" SizeChanged="Map_SizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />
                 </thinkgeo:MapView.MapTools>

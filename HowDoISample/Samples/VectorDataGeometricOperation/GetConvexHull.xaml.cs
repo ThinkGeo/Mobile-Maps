@@ -18,7 +18,7 @@ public partial class GetConvexHull
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -28,7 +28,7 @@ public partial class GetConvexHull
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"))
@@ -60,14 +60,14 @@ public partial class GetConvexHull
         convexHullOverlay.Layers.Add("convexHullLayer", convexHullLayer);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10778600, 3915260);
-        Map.MapScale = 240000;
+        mapView.CenterPoint = new PointShape(-10778600, 3915260);
+        mapView.MapScale = 240000;
 
         // Add LayerOverlay to Map
-        Map.Overlays.Add("layerOverlay", layerOverlay);
-        Map.Overlays.Add("convexHullOverlay", convexHullOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("convexHullOverlay", convexHullOverlay);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -76,8 +76,8 @@ public partial class GetConvexHull
     /// </summary>
     private async void ShapeConvexHull_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
-        var convexHullOverlay = (LayerOverlay)Map.Overlays["convexHullOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
+        var convexHullOverlay = (LayerOverlay)mapView.Overlays["convexHullOverlay"];
 
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var convexHullLayer = (InMemoryFeatureLayer)convexHullOverlay.Layers["convexHullLayer"];

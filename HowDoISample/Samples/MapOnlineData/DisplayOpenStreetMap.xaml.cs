@@ -19,14 +19,14 @@ public partial class DisplayOpenStreetMap
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         var osmOverlay = new OpenStreetMapsOverlay("ThinkGeo Samples");
-        Map.Overlays.Add(osmOverlay);
+        mapView.Overlays.Add(osmOverlay);
 
         // Set the map scale and center point
-        Map.MapScale = 35_000;
-        Map.CenterPoint = new PointShape(-10777932, 3912260);
-        await Map.RefreshAsync();
+        mapView.MapScale = 35_000;
+        mapView.CenterPoint = new PointShape(-10777932, 3912260);
+        await mapView.RefreshAsync();
     }
 }

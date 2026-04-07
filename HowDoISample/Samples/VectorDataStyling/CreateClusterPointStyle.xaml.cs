@@ -26,7 +26,7 @@ public partial class CreateClusterPointStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add ThinkGeo Vector Maps as the background overlay.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -36,7 +36,7 @@ public partial class CreateClusterPointStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Load coyote sightings shapefile (projected to match the map projection).
         var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Coyote_Sightings.shp"))
@@ -49,16 +49,16 @@ public partial class CreateClusterPointStyle
 
         var layerOverlay = new LayerOverlay { TileType = TileType.SingleTile };
         layerOverlay.Layers.Add(coyoteSightings);
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Apply Cluster Point Style
         await AddClusterPointStyle(coyoteSightings);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10778209, 3914820);
-        Map.MapScale = 800000;
+        mapView.CenterPoint = new PointShape(-10778209, 3914820);
+        mapView.MapScale = 800000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private static async Task AddClusterPointStyle(FeatureLayer layer)

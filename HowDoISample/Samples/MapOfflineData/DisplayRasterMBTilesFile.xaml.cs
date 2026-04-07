@@ -18,7 +18,7 @@ public partial class DisplayRasterMBTilesFile
     private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         layerOverlay = new LayerOverlay();
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
         string filePath = Path.Combine(FileSystem.AppDataDirectory, "Data", "Mbtiles", "test.mbtiles");
         rasterMbTilesLayer = new RasterMbTilesAsyncLayer(filePath);
         layerOverlay.TileType = TileType.MultiTile;
@@ -36,9 +36,9 @@ public partial class DisplayRasterMBTilesFile
         await rasterMbTilesLayer.CloseAsync();
         await rasterMbTilesLayer.OpenAsync();
         var boundingBox = rasterMbTilesLayer.GetBoundingBox();
-        await Map.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -55,7 +55,7 @@ public partial class DisplayRasterMBTilesFile
 
     public void Dispose()
     {
-        Map?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

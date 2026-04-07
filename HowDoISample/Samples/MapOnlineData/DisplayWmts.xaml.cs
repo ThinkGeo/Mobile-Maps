@@ -18,7 +18,7 @@ public partial class DisplayWmts
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a WMTS overlay using the WMS parameters below.
         // This is a public service and performance may be slow.
@@ -37,12 +37,12 @@ public partial class DisplayWmts
         wmtsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "WmtsTmpTileCache");
 
         //Add the overlay to the Map's Overlay collection.
-        Map.Overlays.Add(wmtsOverlay);
+        mapView.Overlays.Add(wmtsOverlay);
 
         // Set the extent to the Eiger - a famous peak in Switzerland.
-        Map.CenterPoint = new PointShape(643000, 158000);
-        Map.MapScale = 20000;
+        mapView.CenterPoint = new PointShape(643000, 158000);
+        mapView.MapScale = 20000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 }

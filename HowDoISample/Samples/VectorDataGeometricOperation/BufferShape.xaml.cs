@@ -18,7 +18,7 @@ public partial class BufferShape
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -28,7 +28,7 @@ public partial class BufferShape
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
@@ -55,13 +55,13 @@ public partial class BufferShape
         layerOverlay.Layers.Add("bufferLayer", bufferLayer);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10778600, 3915260);
-        Map.MapScale = 240000;
+        mapView.CenterPoint = new PointShape(-10778600, 3915260);
+        mapView.MapScale = 240000;
 
         // Add LayerOverlay to Map
-        Map.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public partial class BufferShape
     /// </summary>
     private async void BufferShape_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var bufferLayer = (InMemoryFeatureLayer)layerOverlay.Layers["bufferLayer"];

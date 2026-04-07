@@ -20,7 +20,7 @@ public partial class UsingMarkers
         _timer = new Timer();
         _timer.Interval = 1000;
         _timer.Elapsed += (sender, args) => UpdateMarkerStatus();
-        Map.CurrentExtentChanged += Map_CurrentExtentChanged;
+        mapView.CurrentExtentChanged += Map_CurrentExtentChanged;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -30,7 +30,7 @@ public partial class UsingMarkers
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -40,19 +40,19 @@ public partial class UsingMarkers
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Set the map extent        
-        Map.CenterPoint = new PointShape(-10777032, 3908560);
-        Map.MapScale = 10000;
+        mapView.CenterPoint = new PointShape(-10777032, 3908560);
+        mapView.MapScale = 10000;
         _baseScale = 10000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
 
         await AddHotelMarkersAsync();
-        Map.IsRotationEnabled = true;
+        mapView.IsRotationEnabled = true;
         
         _timer.Start();
     }
@@ -111,7 +111,7 @@ public partial class UsingMarkers
 
         var layerOverlay = new LayerGraphicsViewOverlay();
         layerOverlay.Layers.Add(hotelsLayer);
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         _markerOverlay = new SimpleMarkerOverlay();
         _popupOverlay = new PopupOverlay();
@@ -146,9 +146,9 @@ public partial class UsingMarkers
         hotelsLayer.Close();
 
         // Add the popupOverlay to the map and refresh
-        Map.Overlays.Add(_markerOverlay);
-        Map.Overlays.Add(_popupOverlay);
+        mapView.Overlays.Add(_markerOverlay);
+        mapView.Overlays.Add(_popupOverlay);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 }

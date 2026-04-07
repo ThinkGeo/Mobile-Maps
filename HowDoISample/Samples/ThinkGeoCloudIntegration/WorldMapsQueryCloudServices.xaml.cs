@@ -26,10 +26,10 @@ public partial class WorldMapsQueryCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the query shape used to perform the query
         var queryShapeFeatureLayer = new InMemoryFeatureLayer();
@@ -59,15 +59,15 @@ public partial class WorldMapsQueryCloudServices
         var queriedFeaturesOverlay = new LayerOverlay();
         queriedFeaturesOverlay.Layers.Add("Queried Features Layer", queriedFeaturesLayer);
         queriedFeaturesOverlay.Layers.Add("Query Shape Layer", queryShapeFeatureLayer);
-        Map.Overlays.Add("Queried Features Overlay", queriedFeaturesOverlay);
+        mapView.Overlays.Add("Queried Features Overlay", queriedFeaturesOverlay);
 
         // Set the map extent to Frisco, TX
-        Map.CenterPoint = new PointShape(-10779600, 3915260);
-        Map.MapScale = 8000;
+        mapView.CenterPoint = new PointShape(-10779600, 3915260);
+        mapView.MapScale = 8000;
 
         // Add an event to handle new shapes that are drawn on the map
-        //Map.TrackOverlay.TrackEnded += OnShapeDrawn;
-        Map.TrackOverlay.TrackEnded += (_, args) =>
+        //mapView.TrackOverlay.TrackEnded += OnShapeDrawn;
+        mapView.TrackOverlay.TrackEnded += (_, args) =>
         {
             OnShapeDrawn(args.TrackShape);
         };
@@ -80,10 +80,10 @@ public partial class WorldMapsQueryCloudServices
         queryShapeFeatureLayer.InternalFeatures.Add(new Feature(sampleShape));
         // Run the world maps query
 
-        Map.TrackOverlay.TrackMode = TrackMode.Polygon;
+        mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
         await PerformWorldMapsQuery();
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public partial class WorldMapsQueryCloudServices
     private async Task PerformWorldMapsQuery()
     {
         // Get the feature layers from the Map
-        var queriedFeaturesOverlay = (LayerOverlay)Map.Overlays["Queried Features Overlay"];
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
         var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 
@@ -147,11 +147,11 @@ public partial class WorldMapsQueryCloudServices
     private async void OnShapeDrawn(BaseShape drawnShape)
     {
         // Disable drawing mode and clear the drawing layer
-        Map.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
         ClearQueryShapes();
 
         // Get the query shape layer from the Map
-        var queriedFeaturesOverlay = (LayerOverlay)Map.Overlays["Queried Features Overlay"];
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
 
         // Add the newly drawn shape, then redraw the overlay
@@ -167,7 +167,7 @@ public partial class WorldMapsQueryCloudServices
     private void ClearQueryShapes()
     {
         // Get the query shape layer from the Map
-        var queriedFeaturesOverlay = (LayerOverlay)Map.Overlays["Queried Features Overlay"];
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
         var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 

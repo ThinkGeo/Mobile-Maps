@@ -19,7 +19,7 @@ public partial class SqLiteLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class SqLiteLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var restaurantsOverlay = new LayerOverlay();
-        Map.Overlays.Add(restaurantsOverlay);
+        mapView.Overlays.Add(restaurantsOverlay);
 
         // Create the new layer and set the projection as the data is in srid 2276 as our background is srid 3857 (spherical mercator).
         var restaurantPath = Path.Combine(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "SQLite", "frisco-restaurants.sqlite"));
@@ -73,8 +73,8 @@ public partial class SqLiteLayer
         restaurantsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map view current extent to a bounding box that shows just a few restaurants.
-        Map.MapScale = 10_000;
-        Map.CenterPoint = new PointShape(-10776468, 3915061);
-        await Map.RefreshAsync();
+        mapView.MapScale = 10_000;
+        mapView.CenterPoint = new PointShape(-10776468, 3915061);
+        await mapView.RefreshAsync();
     }
 }

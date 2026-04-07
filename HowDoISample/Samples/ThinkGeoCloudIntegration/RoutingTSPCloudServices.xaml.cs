@@ -28,10 +28,10 @@ public partial class RoutingTspCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the route
         var routingLayer = new InMemoryFeatureLayer();
@@ -62,7 +62,7 @@ public partial class RoutingTspCloudServices
         var routingOverlay = new LayerOverlay();
         routingOverlay.Layers.Add("Routing Layer", routingLayer);
         routingOverlay.Layers.Add("Highlight Layer", highlightLayer);
-        Map.Overlays.Add("Routing Overlay", routingOverlay);
+        mapView.Overlays.Add("Routing Overlay", routingOverlay);
 
         // Create a set of preset waypoints to route through
         _routingWaypoints =
@@ -79,8 +79,8 @@ public partial class RoutingTspCloudServices
             routingLayer.InternalFeatures.Add(new Feature(routingWaypoint));
 
         // Set the map extent to Frisco, TX
-        Map.CenterPoint = new PointShape(-10777600, 3915260);
-        Map.MapScale = 500000;
+        mapView.CenterPoint = new PointShape(-10777600, 3915260);
+        mapView.MapScale = 500000;
 
         // Initialize the RoutingCloudClient with our ThinkGeo Cloud Client credentials
         _routingCloudClient = new RoutingCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
@@ -88,7 +88,7 @@ public partial class RoutingTspCloudServices
         // Run the routing request
         RouteWaypoints();
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public partial class RoutingTspCloudServices
     private async Task DrawOptimizedRoute(CloudRoutingOptimizationResult optimizedRoutingResult)
     {
         // Get the routing feature layer from the Map
-        var routingOverlay = (LayerOverlay)Map.Overlays["Routing Overlay"];
+        var routingOverlay = (LayerOverlay)mapView.Overlays["Routing Overlay"];
         var routingLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Routing Layer"];
 
         // Clear the previous features from the routing layer
@@ -172,7 +172,7 @@ public partial class RoutingTspCloudServices
 
         //// Set the map extent to the newly displayed route
         routingLayer.Open();
-        await Map.ZoomToExtentAsync(AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetCenterPoint(),
+        await mapView.ZoomToExtentAsync(AreaBaseShape.ScaleUp(routingLayer.GetBoundingBox(), 20).GetCenterPoint(),
             80000, 0, new AnimationSettings());
         routingLayer.Close();
 
@@ -215,7 +215,7 @@ public partial class RoutingTspCloudServices
     {
         var routeSegments = (ListView)sender;
         if (routeSegments.SelectedItem == null) return;
-        var routingOverlay = (LayerOverlay)Map.Overlays["Routing Overlay"];
+        var routingOverlay = (LayerOverlay)mapView.Overlays["Routing Overlay"];
         var highlightLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Highlight Layer"];
         highlightLayer.InternalFeatures.Clear();
 
@@ -224,7 +224,7 @@ public partial class RoutingTspCloudServices
             new Feature(((CloudRoutingSegment)routeSegments.SelectedItem).Shape));
 
         // Zoom to the selected feature and zoom out to an appropriate level
-        await Map.ZoomToExtentAsync(((CloudRoutingSegment)routeSegments.SelectedItem).Shape.GetBoundingBox().GetCenterPoint(),
+        await mapView.ZoomToExtentAsync(((CloudRoutingSegment)routeSegments.SelectedItem).Shape.GetBoundingBox().GetCenterPoint(),
             10000, 0, new AnimationSettings());
 
         await routingOverlay.RefreshAsync();

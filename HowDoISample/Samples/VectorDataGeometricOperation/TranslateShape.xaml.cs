@@ -20,7 +20,7 @@ public partial class TranslateShape
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         ShapeFileFeatureLayer.BuildIndexFile(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
@@ -33,7 +33,7 @@ public partial class TranslateShape
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
@@ -60,13 +60,13 @@ public partial class TranslateShape
         layerOverlay.Layers.Add("translatedLayer", translatedLayer);
 
         // Set the map extent
-        Map.CenterPoint = new PointShape(-10778600, 3915260);
-        Map.MapScale = 240000;
+        mapView.CenterPoint = new PointShape(-10778600, 3915260);
+        mapView.MapScale = 240000;
 
         // Add LayerOverlay to Map
-        Map.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public partial class TranslateShape
     /// </summary>
     private async void OffsetTranslateShape_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var translatedLayer = (InMemoryFeatureLayer)layerOverlay.Layers["translatedLayer"];
@@ -102,7 +102,7 @@ public partial class TranslateShape
 
     private async void DegreeTranslateShape_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)Map.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var translatedLayer = (InMemoryFeatureLayer)layerOverlay.Layers["translatedLayer"];

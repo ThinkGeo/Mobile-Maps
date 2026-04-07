@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <howDoI:DescriptionView Grid.Row="0" 
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
-            <tgMaui:MapView x:Name="Map"
+            <tgMaui:MapView x:Name="mapView"
                             Grid.Row="1"
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
@@ -108,7 +108,7 @@
             <Button x:Name="ZoomToBlackHoleButton" Grid.Row="2" HorizontalOptions="Center" 
                     BackgroundColor="Gray" TextColor="White" Text="Zoom To M87 Black Hole"/>
             <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" 
-                   Text="{Binding Source={x:Reference MapView}, Path=MapScale,StringFormat='Scale: {0:N2}'}" 
+                   Text="{Binding Source={x:Reference mapView}, Path=MapScale,StringFormat='Scale: {0:N2}'}" 
                    TextColor="White"/>
         </Grid>
     </ContentPage.Content>

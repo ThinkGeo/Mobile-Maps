@@ -11,7 +11,7 @@ public partial class TimezoneCloudServices
     public TimezoneCloudServices()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -28,18 +28,18 @@ public partial class TimezoneCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a PopupOverlay to display time zone information based on locations input by the user
         var timezoneInfoPopupOverlay = new PopupOverlay();
 
         // Add the overlay to the map
-        Map.Overlays.Add("Timezone Info Popup Overlay", timezoneInfoPopupOverlay);
+        mapView.Overlays.Add("Timezone Info Popup Overlay", timezoneInfoPopupOverlay);
 
         // Add a new InMemoryFeatureLayer to hold the timezone shapes
         var timezonesFeatureLayer = new InMemoryFeatureLayer();
@@ -53,17 +53,17 @@ public partial class TimezoneCloudServices
         // Add the layer to an overlay, and add it to the map
         var timezonesLayerOverlay = new LayerOverlay();
         timezonesLayerOverlay.Layers.Add("Timezone Feature Layer", timezonesFeatureLayer);
-        Map.Overlays.Add("Timezone Layer Overlay", timezonesLayerOverlay);
+        mapView.Overlays.Add("Timezone Layer Overlay", timezonesLayerOverlay);
 
         // Initialize the TimezoneCloudClient with our ThinkGeo Cloud credentials
         _timeZoneCloudClient = new TimeZoneCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
 
         // Set the Map Extent
-        Map.CenterPoint = new PointShape(-10777600, 3915260);
-        Map.MapScale = 30000000;
+        mapView.CenterPoint = new PointShape(-10777600, 3915260);
+        mapView.MapScale = 30000000;
 
         // Draw the map before showing popups so they appear in the correct location on first load
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
 
         // Get Timezone info for Frisco, TX
         await GetTimeZoneInfo(-10779572.80, 3915268.68);
@@ -72,7 +72,7 @@ public partial class TimezoneCloudServices
     private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
         //Run the timezone info query
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         await GetTimeZoneInfo(pointInWorldCoordinate.X, pointInWorldCoordinate.Y);
     }
 
@@ -95,7 +95,7 @@ public partial class TimezoneCloudServices
 
 
         // Get the timezone info popup overlay from the Map
-        var timezoneInfoPopupOverlay = (PopupOverlay)Map.Overlays["Timezone Info Popup Overlay"];
+        var timezoneInfoPopupOverlay = (PopupOverlay)mapView.Overlays["Timezone Info Popup Overlay"];
 
         // Clear the existing info popups from the map
         timezoneInfoPopupOverlay.Children.Clear();
@@ -113,7 +113,7 @@ public partial class TimezoneCloudServices
         timezoneInfoPopupOverlay.Children.Add(popup);
 
         // Clear the timezone feature layer of previous features        
-        var timezonesLayerOverlay = (LayerOverlay)Map.Overlays["Timezone Layer Overlay"];
+        var timezonesLayerOverlay = (LayerOverlay)mapView.Overlays["Timezone Layer Overlay"];
         var timezonesFeatureLayer = (InMemoryFeatureLayer)timezonesLayerOverlay.Layers["Timezone Feature Layer"];
         timezonesFeatureLayer.Open();
         timezonesFeatureLayer.InternalFeatures.Clear();

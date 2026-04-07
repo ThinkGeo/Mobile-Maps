@@ -22,7 +22,7 @@ public partial class DisplayThinkGeoBackground
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         _thinkGeoVectorsOverlay = new ThinkGeoVectorOverlay(
@@ -32,7 +32,7 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
 
-        Map.Overlays.Add(_thinkGeoVectorsOverlay);
+        mapView.Overlays.Add(_thinkGeoVectorsOverlay);
 
         _thinkGeoRasterOverlay = new ThinkGeoRasterOverlay(
                 SampleKeys.ClientId,
@@ -42,16 +42,16 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
 
-        Map.Overlays.Add(_thinkGeoRasterOverlay);
+        mapView.Overlays.Add(_thinkGeoRasterOverlay);
 
         // Setup Maps Extent and Rotation
-        Map.CenterPoint = new PointShape(1180600, 3916260);
-        Map.MapScale = 100000000;
+        mapView.CenterPoint = new PointShape(1180600, 3916260);
+        mapView.MapScale = 100000000;
 
-        Map.MapRotation = 0;
-        Map.IsRotationEnabled = true;
+        mapView.MapRotation = 0;
+        mapView.IsRotationEnabled = true;
 
-        await Map.RefreshAsync(_cancellationTokenSource.Token);
+        await mapView.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void Radial_Checked(object sender, CheckedChangedEventArgs e)
@@ -157,7 +157,7 @@ public partial class DisplayThinkGeoBackground
     private async Task RefreshMapAsync()
     {
         await UpdateCancellationToken();
-        await Map.RefreshAsync(_cancellationTokenSource.Token);
+        await mapView.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)

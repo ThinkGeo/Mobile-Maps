@@ -20,7 +20,7 @@ public partial class IsoLineLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create background world map with vector tile requested from ThinkGeo Cloud Service.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,14 +30,14 @@ public partial class IsoLineLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var isoLineOverlay = new LayerOverlay
         {
             BackgroundColor = Colors.Transparent
         };
-        Map.Overlays.Add("isoLineOverlay", isoLineOverlay);
+        mapView.Overlays.Add("isoLineOverlay", isoLineOverlay);
 
         // Load a csv file with the mosquito data that we will use for the iso line.
         var csvPointData = GetDataFromCsv(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Csv", "Frisco_Mosquitoes.csv"));
@@ -48,9 +48,9 @@ public partial class IsoLineLayer
         isoLineOverlay.Layers.Add("IsoLineLayer", isoLineLayer);
 
         // Set the map scale and center point
-        Map.MapScale = 140_000;
-        Map.CenterPoint = new PointShape(-10778478, 3914602);
-        await Map.RefreshAsync();
+        mapView.MapScale = 140_000;
+        mapView.CenterPoint = new PointShape(-10778478, 3914602);
+        await mapView.RefreshAsync();
     }
 
     private static Dictionary<PointShape, double> GetDataFromCsv(string csvFilePath)
@@ -90,8 +90,8 @@ public partial class IsoLineLayer
             new InverseDistanceWeightedGridInterpolationModel(), IsoLineType.LinesOnly)
         {
             // Set the cell height and width dynamically based on the map view size
-            CellHeightInPixel = (int)(Map.Height / 80),
-            CellWidthInPixel = (int)(Map.Width / 80)
+            CellHeightInPixel = (int)(mapView.Height / 80),
+            CellWidthInPixel = (int)(mapView.Width / 80)
         };
 
         //Create a series of colors from blue to red that we will use for the breaks based on the number of iso line levels we want.

@@ -26,10 +26,10 @@ public partial class ElevationCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new InMemoryFeatureLayer to hold the shape drawn for the elevation query
         var drawnShapeLayer = new InMemoryFeatureLayer();
@@ -54,10 +54,10 @@ public partial class ElevationCloudServices
         var elevationFeaturesOverlay = new LayerOverlay();
         elevationFeaturesOverlay.Layers.Add("Elevation Points Layer", elevationPointsLayer);
         elevationFeaturesOverlay.Layers.Add("Drawn Shape Layer", drawnShapeLayer);
-        Map.Overlays.Add("Elevation Features Overlay", elevationFeaturesOverlay);
+        mapView.Overlays.Add("Elevation Features Overlay", elevationFeaturesOverlay);
 
         // Add an event to trigger the elevation query when a new shape is drawn
-        Map.TrackOverlay.TrackEnded += OnShapeDrawn;
+        mapView.TrackOverlay.TrackEnded += OnShapeDrawn;
 
         // Initialize the ElevationCloudClient with our ThinkGeo Cloud credentials
         _elevationCloudClient = new ElevationCloudClient(SampleKeys.ClientId, SampleKeys.ClientSecret);
@@ -67,15 +67,15 @@ public partial class ElevationCloudServices
             "LINESTRING(-10776298.0601626 3912306.29684573,-10776496.3187036 3912399.45447343,-10776675.4679876 3912478.28015841,-10776890.4471285 3912516.49867234,-10777189.0292686 3912509.33270098,-10777329.9600387 3912442.4503016,-10777664.3720356 3912174.92070409)");
 
         // Set the map extent to Frisco, TX
-        Map.CenterPoint = new PointShape(-10777000, 3912260);
-        Map.MapScale = 10000;
-        //Map.CurrentExtent = sampleShape.GetBoundingBox();
+        mapView.CenterPoint = new PointShape(-10777000, 3912260);
+        mapView.MapScale = 10000;
+        //mapView.CurrentExtent = sampleShape.GetBoundingBox();
 
         await PerformElevationQuery(sampleShape);
 
-        Map.TrackOverlay.TrackMode = TrackMode.Line;
+        mapView.TrackOverlay.TrackMode = TrackMode.Line;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ public partial class ElevationCloudServices
     private async Task PerformElevationQuery(BaseShape queryShape)
     {
         // Get feature layers from the Map
-        var elevationPointsOverlay = (LayerOverlay)Map.Overlays["Elevation Features Overlay"];
+        var elevationPointsOverlay = (LayerOverlay)mapView.Overlays["Elevation Features Overlay"];
         var drawnShapesLayer = (InMemoryFeatureLayer)elevationPointsOverlay.Layers["Drawn Shape Layer"];
         var elevationPointsLayer = (InMemoryFeatureLayer)elevationPointsOverlay.Layers["Elevation Points Layer"];
 
@@ -130,7 +130,7 @@ public partial class ElevationCloudServices
     private async void OnShapeDrawn(object sender, TrackEndedTrackInteractiveOverlayEventArgs e)
     {
         // Disable drawing mode and clear the drawing layer
-        Map.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
 
         // Validate shape size to avoid queries that are too large
         // Maximum length of a line is 10km

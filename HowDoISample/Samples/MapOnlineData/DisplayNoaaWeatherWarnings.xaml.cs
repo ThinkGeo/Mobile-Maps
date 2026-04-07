@@ -14,7 +14,7 @@ public partial class DisplayNoaaWeatherWarnings
     {
         InitializeComponent();
 
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void NOAAWeatherWarningLayer_OnSizeChanged(object sender, EventArgs e)
@@ -24,7 +24,7 @@ public partial class DisplayNoaaWeatherWarnings
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create background world map with vector tile requested from ThinkGeo Cloud Service.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -34,11 +34,11 @@ public partial class DisplayNoaaWeatherWarnings
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var noaaWeatherWarningsOverlay = new LayerOverlay();
-        Map.Overlays.Add("Noaa Weather Warning", noaaWeatherWarningsOverlay);
+        mapView.Overlays.Add("Noaa Weather Warning", noaaWeatherWarningsOverlay);
 
         // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
         _noaaWeatherWarningsFeatureLayer = new NoaaWeatherWarningsFeatureLayer();
@@ -52,15 +52,15 @@ public partial class DisplayNoaaWeatherWarnings
         _noaaWeatherWarningsFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        Map.MapScale = 20_000_000;
-        Map.CenterPoint = new PointShape(-10807059, 5045074);
+        mapView.MapScale = 20_000_000;
+        mapView.CenterPoint = new PointShape(-10807059, 5045074);
 
         // Add a PopupOverlay to the map, to display feature information
         var popupOverlay = new PopupOverlay();
-        Map.Overlays.Add("Info Popup Overlay", popupOverlay);
+        mapView.Overlays.Add("Info Popup Overlay", popupOverlay);
 
         // Refresh the map.
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
 
         LoadingLayout.IsVisible = false;
     }
@@ -69,7 +69,7 @@ public partial class DisplayNoaaWeatherWarnings
     {
         base.OnDisappearing();
 
-        if (Map.Overlays["Noaa Weather Warning"] is not LayerOverlay overlay) return;
+        if (mapView.Overlays["Noaa Weather Warning"] is not LayerOverlay overlay) return;
         var layer = overlay.Layers["Noaa Weather Warning"] as FeatureLayer;
         layer?.Close();
     }
@@ -86,7 +86,7 @@ public partial class DisplayNoaaWeatherWarnings
                 weatherWarningString.AppendLine($"{feature.ColumnValues["TITLE"]}");
 
             // Create a new popup with the park info string
-            var popupOverlay = (PopupOverlay)Map.Overlays["Info Popup Overlay"];
+            var popupOverlay = (PopupOverlay)mapView.Overlays["Info Popup Overlay"];
             var popup = new Popup()
             {
                 Position = features[0].GetShape().GetCenterPoint(),
@@ -130,7 +130,7 @@ public partial class DisplayNoaaWeatherWarnings
     {
         // Find the feature that was tapped on by querying the layer for features containing the tapped coordinates
 
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
 
         var selectedFeatures =
             _noaaWeatherWarningsFeatureLayer.QueryTools.GetFeaturesContaining(pointInWorldCoordinate, ReturningColumnsType.AllColumns);

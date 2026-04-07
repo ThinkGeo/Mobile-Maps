@@ -28,7 +28,7 @@ public partial class DisplayRasterFileTiles
         }
 
         layerOverlay = new LayerOverlay();
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
         fileTilesAsyncLayer = new XyzFileTilesAsyncLayer(targetFileDirectory);
         fileTilesAsyncLayer.MaxZoomOfTheData = 5; // The MaxZoom with data
 
@@ -47,9 +47,9 @@ public partial class DisplayRasterFileTiles
         await fileTilesAsyncLayer.CloseAsync();
         await fileTilesAsyncLayer.OpenAsync();
         var boundingBox = fileTilesAsyncLayer.GetBoundingBox();
-        await Map.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -66,7 +66,7 @@ public partial class DisplayRasterFileTiles
 
     public void Dispose()
     {
-        Map?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

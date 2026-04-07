@@ -20,7 +20,7 @@ public partial class Contains
         _initialized = true;
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,7 +30,7 @@ public partial class Contains
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a feature layer to hold the Frisco zoning data
         var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Zoning.shp");
@@ -47,7 +47,7 @@ public partial class Contains
 
         var friscoOverlay = new LayerOverlay();
         friscoOverlay.Layers.Add("FriscoLayer", _friscoLayer);
-        Map.Overlays.Add("FriscoOverlay", friscoOverlay);
+        mapView.Overlays.Add("FriscoOverlay", friscoOverlay);
 
         // Create a layer to hold features found by the spatial query
         var highlightedFeaturesLayer = new InMemoryFeatureLayer();
@@ -57,20 +57,20 @@ public partial class Contains
 
         var highlightOverlay = new LayerOverlay();
         highlightOverlay.Layers.Add("HighlightLayer", highlightedFeaturesLayer);
-        Map.Overlays.Add("HighlightOverlay", highlightOverlay);
+        mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
 
         // Add a MarkerOverlay to the map to display the selected point for the query
         var markerOverlay = new SimpleMarkerOverlay();
-        Map.Overlays.Add("MarkerOverlay", markerOverlay);
+        mapView.Overlays.Add("MarkerOverlay", markerOverlay);
 
         // Add a sample point to the map for the initial query
         var sampleShape = new PointShape(-10779425, 3914970);
         await GetFeaturesContaining(sampleShape);
 
         // Set the map extent to Frisco, TX
-        Map.MapScale = 25_000;
-        Map.CenterPoint = new PointShape(-10779558, 3914201);
-        await Map.RefreshAsync();
+        mapView.MapScale = 25_000;
+        mapView.CenterPoint = new PointShape(-10779558, 3914201);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public partial class Contains
     /// </summary>
     private async Task GetFeaturesContaining(PointShape point)
     {
-        var queryFeatureMarkerOverlay = (SimpleMarkerOverlay)Map.Overlays["MarkerOverlay"];
+        var queryFeatureMarkerOverlay = (SimpleMarkerOverlay)mapView.Overlays["MarkerOverlay"];
         queryFeatureMarkerOverlay.Children.Clear();
 
         var marker = new ImageMarker
@@ -108,7 +108,7 @@ public partial class Contains
     private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
     {
         // Find the layers we will be modifying in the Map dictionary
-        var highlightOverlay = (LayerOverlay)Map.Overlays["HighlightOverlay"];
+        var highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
         var highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
         // Clear the currently highlighted features
@@ -127,7 +127,7 @@ public partial class Contains
     /// </summary>
     private async void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         await GetFeaturesContaining(pointInWorldCoordinate);
     }
 }

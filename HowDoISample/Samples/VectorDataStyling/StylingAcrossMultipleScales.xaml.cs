@@ -19,7 +19,7 @@ public partial class StylingAcrossMultipleScales
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Hotels.shp"));
         var streetsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Streets.shp"));
@@ -43,12 +43,12 @@ public partial class StylingAcrossMultipleScales
         layerOverlay.Layers.Add(hotelsLayer);
 
         // Add overlay to map
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        Map.MapScale = 9000;
-        Map.CenterPoint = new PointShape(-10777473, 3909015);
-        await Map.RefreshAsync();
+        mapView.MapScale = 9000;
+        mapView.CenterPoint = new PointShape(-10777473, 3909015);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>

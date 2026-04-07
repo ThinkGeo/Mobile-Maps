@@ -19,7 +19,7 @@ public partial class PointValidation
         _initialized = true;
 
         // Set the map's unit of measurement to Decimal Degree
-        Map.MapUnit = GeographyUnit.DecimalDegree;
+        mapView.MapUnit = GeographyUnit.DecimalDegree;
 
         // Create an InMemoryFeatureLayer to hold the shapes to be validated
         // Add styles to display points, lines, and polygons on this layer in green
@@ -59,10 +59,10 @@ public partial class PointValidation
         featuresOverlay.Layers.Add("Filter Features", filterFeaturesLayer);
         featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
         featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
-        Map.Overlays.Add("Features Overlay", featuresOverlay);
+        mapView.Overlays.Add("Features Overlay", featuresOverlay);
         RdoCheckIfPointsAreTouchingLines.IsChecked = true;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void CheckIfPointsAreTouchingLines(object sender, CheckedChangedEventArgs e)
@@ -202,7 +202,7 @@ public partial class PointValidation
         Collection<Feature> filterFeatures = null)
     {
         // Get the InMemoryFeatureLayers from the Map                
-        var validatedFeaturesOverLay = (LayerOverlay)Map.Overlays["Features Overlay"];
+        var validatedFeaturesOverLay = (LayerOverlay)mapView.Overlays["Features Overlay"];
         var validatedFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Validated Features"];
         var filterFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Filter Features"];
         var resultFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Result Features"];
@@ -229,11 +229,11 @@ public partial class PointValidation
         foreach (var resultFeature in resultFeatures) resultFeaturesLayer.InternalFeatures.Add(resultFeature);
 
         // Refresh/redraw the layers and reset the map extent
-        var featureOverlay = (LayerOverlay)Map.Overlays["Features Overlay"];
+        var featureOverlay = (LayerOverlay)mapView.Overlays["Features Overlay"];
         var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
-        Map.CenterPoint = centerPoint;
-        Map.MapScale = 200000000;
-        await Map.RefreshAsync();
+        mapView.CenterPoint = centerPoint;
+        mapView.MapScale = 200000000;
+        await mapView.RefreshAsync();
 
         validatedFeaturesLayer.Close();
         filterFeaturesLayer.Close();

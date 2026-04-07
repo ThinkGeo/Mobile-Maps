@@ -23,7 +23,7 @@ public partial class CreatePointStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -33,7 +33,7 @@ public partial class CreatePointStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var hotelsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Hotels.shp"));
 
@@ -45,7 +45,7 @@ public partial class CreatePointStyle
         _layerOverlay.Layers.Add(hotelsLayer);
 
         // Add the overlay to the map
-        Map.Overlays.Add(_layerOverlay);
+        mapView.Overlays.Add(_layerOverlay);
 
         // Create a predefined point style
         _predefinedStyle = new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Blue, new GeoPen(GeoBrushes.White, 2));
@@ -72,9 +72,9 @@ public partial class CreatePointStyle
         hotelsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        Map.MapScale = 9000;
-        Map.CenterPoint = new PointShape(-10777289, 3908744);
-        await Map.RefreshAsync();
+        mapView.MapScale = 9000;
+        mapView.CenterPoint = new PointShape(-10777289, 3908744);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>

@@ -19,7 +19,7 @@ public partial class GpxLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class GpxLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var gpxOverlay = new LayerOverlay();
-        Map.Overlays.Add(gpxOverlay);
+        mapView.Overlays.Add(gpxOverlay);
 
         // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
         var gpxLayer = new GpxFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Gpx", "Hike_Bike.gpx"))
@@ -52,8 +52,8 @@ public partial class GpxLayer
         gpxLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        Map.MapScale = 150_000;
-        Map.CenterPoint = new PointShape(-10778823, 3915273);
-        await Map.RefreshAsync();
+        mapView.MapScale = 150_000;
+        mapView.CenterPoint = new PointShape(-10778823, 3915273);
+        await mapView.RefreshAsync();
     }
 }

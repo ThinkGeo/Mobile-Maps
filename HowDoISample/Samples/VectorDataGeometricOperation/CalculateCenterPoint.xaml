@@ -18,7 +18,7 @@
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="Map" MapUnit="Meter" Grid.RowSpan="3"
+            <thinkgeo:MapView Grid.Row="1" x:Name="mapView" MapUnit="Meter" Grid.RowSpan="3"
                               SizeChanged="Map_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool />

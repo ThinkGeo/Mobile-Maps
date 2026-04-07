@@ -19,7 +19,7 @@ public partial class CreateClassBreakStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateClassBreakStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco 2010 Census Housing Units.shp"));
         var legend = new LegendAdornmentLayer
@@ -43,7 +43,7 @@ public partial class CreateClassBreakStyle
             Location = AdornmentLocation.LowerRight
         };
 
-        Map.AdornmentOverlay.Layers.Add(legend);
+        mapView.AdornmentOverlay.Layers.Add(legend);
 
         // Project the layer's data to match the projection of the map
         housingUnitsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
@@ -55,12 +55,12 @@ public partial class CreateClassBreakStyle
         layerOverlay.Layers.Add(housingUnitsLayer);
 
         // Add layerOverlay to the Map
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        Map.MapScale = 800000;
-        Map.CenterPoint = new PointShape(-10778209, 3914820);
-        await Map.RefreshAsync();
+        mapView.MapScale = 800000;
+        mapView.CenterPoint = new PointShape(-10778209, 3914820);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>

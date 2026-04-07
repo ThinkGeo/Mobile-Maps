@@ -9,7 +9,7 @@ public partial class CalculateCenterPoint
     public CalculateCenterPoint()
     {
         InitializeComponent();
-        Map.SingleTap += Map_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
@@ -19,7 +19,7 @@ public partial class CalculateCenterPoint
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,9 +29,9 @@ public partial class CalculateCenterPoint
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        Map.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Create a feature layer to hold the Census Housing data
         var censusHousingLayer = new ShapeFileFeatureLayer(Path.Combine(
@@ -48,7 +48,7 @@ public partial class CalculateCenterPoint
 
         var censusHousingOverlay = new LayerOverlay();
         censusHousingOverlay.Layers.Add("CensusHousingLayer", censusHousingLayer);
-        Map.Overlays.Add("CensusHousingOverlay", censusHousingOverlay);
+        mapView.Overlays.Add("CensusHousingOverlay", censusHousingOverlay);
 
         // Create a layer to hold the centerPointLayer and Style it
         var centerPointLayer = new InMemoryFeatureLayer();
@@ -60,13 +60,13 @@ public partial class CalculateCenterPoint
 
         var centerPointOverlay = new LayerOverlay();
         centerPointOverlay.Layers.Add("CenterPointLayer", centerPointLayer);
-        Map.Overlays.Add("CenterPointOverlay", centerPointOverlay);
+        mapView.Overlays.Add("CenterPointOverlay", centerPointOverlay);
 
         // Set the map extent to the censusHousing layer bounding box
-        Map.CenterPoint = new PointShape(-10777600, 3920260);
-        Map.MapScale = 800000;
+        mapView.CenterPoint = new PointShape(-10777600, 3920260);
+        mapView.MapScale = 800000;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public partial class CalculateCenterPoint
     /// <param name="feature"> The target feature to calculate its center point</param>
     private async Task CalculateCenterPointFunction(Feature feature)
     {
-        var centerPointOverlay = (LayerOverlay)Map.Overlays["CenterPointOverlay"];
+        var centerPointOverlay = (LayerOverlay)mapView.Overlays["CenterPointOverlay"];
         var centerPointLayer = (InMemoryFeatureLayer)centerPointOverlay.Layers["CenterPointLayer"];
 
         // Get the CenterPoint of the selected feature
@@ -95,9 +95,9 @@ public partial class CalculateCenterPoint
     // Gets the closest feature from the tap event and calculates the center point
     private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var censusHousingOverlay = (LayerOverlay)Map.Overlays["CensusHousingOverlay"];
+        var censusHousingOverlay = (LayerOverlay)mapView.Overlays["CensusHousingOverlay"];
         var censusHousingLayer = (ShapeFileFeatureLayer)censusHousingOverlay.Layers["CensusHousingLayer"];
-        var pointInWorldCoordinate = Map.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
 
         // Query the censusHousing layer to get the first feature closest to the map tap event
         var feature = censusHousingLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate,
@@ -109,7 +109,7 @@ public partial class CalculateCenterPoint
     // RadioButton checked event that will recalculate the center point so long as a feature was already selected
     private async void RadioButton_Checked(object sender, EventArgs e)
     {
-        var centerPointOverlay = (LayerOverlay)Map.Overlays["CenterPointOverlay"];
+        var centerPointOverlay = (LayerOverlay)mapView.Overlays["CenterPointOverlay"];
         var centerPointLayer = (InMemoryFeatureLayer)centerPointOverlay.Layers["CenterPointLayer"];
 
         // Recalculate the center point if a feature has already been selected

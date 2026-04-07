@@ -27,10 +27,10 @@ public partial class ColorUtilitiesCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        Map.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new ShapeFileFeatureLayer using a shapefile containing Frisco Census data
         var housingUnitsLayer = new ShapeFileFeatureLayer(Path.Combine(
@@ -44,7 +44,7 @@ public partial class ColorUtilitiesCloudServices
         // Create a new overlay and add the census feature layer
         var housingUnitsOverlay = new LayerOverlay();
         housingUnitsOverlay.Layers.Add("Frisco Housing Units", housingUnitsLayer);
-        Map.Overlays.Add("Frisco Housing Units Overlay", housingUnitsOverlay);
+        mapView.Overlays.Add("Frisco Housing Units Overlay", housingUnitsOverlay);
 
         // Create a legend adornment to display class breaks
         var legend = new LegendAdornmentLayer
@@ -57,11 +57,11 @@ public partial class ColorUtilitiesCloudServices
             },
             Location = AdornmentLocation.LowerRight
         };
-        Map.AdornmentOverlay.Layers.Add("Legend", legend);
+        mapView.AdornmentOverlay.Layers.Add("Legend", legend);
 
         // Get the extent of the features from the housing units shapefile, and set the map extent.
-        Map.CenterPoint = new PointShape(-10774523, 3909181);
-        Map.MapScale = 800_000;
+        mapView.CenterPoint = new PointShape(-10774523, 3909181);
+        mapView.MapScale = 800_000;
         // Initialize the ColorCloudClient using our ThinkGeo Cloud credentials
         _colorCloudClient = new ColorCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
 
@@ -70,7 +70,7 @@ public partial class ColorUtilitiesCloudServices
         // If colors were successfully generated, update the map
         if (colors.Count > 0) await UpdateHousingUnitsLayerColors(colors);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ public partial class ColorUtilitiesCloudServices
     private async Task UpdateHousingUnitsLayerColors(IReadOnlyList<GeoColor> colors)
     {
         // Get the housing units layer from the Map
-        var housingUnitsOverlay = (LayerOverlay)Map.Overlays["Frisco Housing Units Overlay"];
+        var housingUnitsOverlay = (LayerOverlay)mapView.Overlays["Frisco Housing Units Overlay"];
         var housingUnitsLayer = (ShapeFileFeatureLayer)housingUnitsOverlay.Layers["Frisco Housing Units"];
 
         // Clear the previous style from the housing units layer
@@ -145,7 +145,7 @@ public partial class ColorUtilitiesCloudServices
     private async Task GenerateNewLegendItems(Collection<ClassBreak> classBreaks)
     {
         //// Clear the previous legend adornment
-        var legend = (LegendAdornmentLayer)Map.AdornmentOverlay.Layers["Legend"];
+        var legend = (LegendAdornmentLayer)mapView.AdornmentOverlay.Layers["Legend"];
 
         legend.LegendItems.Clear();
         // Add a LegendItems to the legend adornment for each ClassBreak
@@ -160,7 +160,7 @@ public partial class ColorUtilitiesCloudServices
             legend.LegendItems.Add(legendItem);
         }
 
-        await Map.AdornmentOverlay.RefreshAsync();
+        await mapView.AdornmentOverlay.RefreshAsync();
     }
 
     /// <summary>

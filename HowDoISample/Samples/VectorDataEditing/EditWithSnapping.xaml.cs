@@ -23,15 +23,15 @@ public partial class EditWithSnapping
             return;
         _initialized = true;
 
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret, ThinkGeoCloudVectorMapsMapType.Light);
         backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache");
-        Map.Overlays.Add("Background Maps", backgroundOverlay);
+        mapView.Overlays.Add("Background Maps", backgroundOverlay);
 
-        Map.CenterPoint = new RectangleShape(-10783147, 3917677, -10782596, 3917271).GetCenterPoint();
-        Map.MapScale = 30000;
+        mapView.CenterPoint = new RectangleShape(-10783147, 3917677, -10782596, 3917271).GetCenterPoint();
+        mapView.MapScale = 30000;
 
         // Load the Frisco data to a layer
         var parksFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Schools.shp");
@@ -44,19 +44,19 @@ public partial class EditWithSnapping
 
         var inMemoryOverlay = new LayerOverlay();
         inMemoryOverlay.Layers.Add(_parksLayer);
-        Map.Overlays.Add(inMemoryOverlay);
+        mapView.Overlays.Add(inMemoryOverlay);
 
-        Map.EditOverlay.VertexMoving += SnapToLayerEditInteractiveOverlay_VertexMoving;
+        mapView.EditOverlay.VertexMoving += SnapToLayerEditInteractiveOverlay_VertexMoving;
 
         var lineShape = new LineShape();
         lineShape.Vertices.Add(new Vertex(-10783003, 3918370));
         lineShape.Vertices.Add(new Vertex(-10783070, 3917335));
         lineShape.Vertices.Add(new Vertex(-10781292, 3916438));
-        Map.EditOverlay.EditShapesLayer.InternalFeatures.Add(new Feature(lineShape));
+        mapView.EditOverlay.EditShapesLayer.InternalFeatures.Add(new Feature(lineShape));
 
-        Map.EditOverlay.CalculateAllControlPoints();
+        mapView.EditOverlay.CalculateAllControlPoints();
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private void SnapToLayerEditInteractiveOverlay_VertexMoving(object sender, VertexMovingEditInteractiveOverlayEventArgs e)
@@ -67,7 +67,7 @@ public partial class EditWithSnapping
             return;
 
         var toSnapPointShape = toSnapInMemoryFeatures[0].GetShape() as PointShape;
-        var screenDistance = MapUtil.GetScreenDistanceBetweenTwoWorldPoints(Map.CurrentExtent, toSnapPointShape, e.TargetVertex, (float)Map.Width, (float)Map.Height);
+        var screenDistance = MapUtil.GetScreenDistanceBetweenTwoWorldPoints(mapView.CurrentExtent, toSnapPointShape, e.TargetVertex, (float)mapView.Width, (float)mapView.Height);
 
         if (screenDistance >= Tolerance) return;
         if (toSnapPointShape == null) return;

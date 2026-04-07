@@ -18,12 +18,12 @@ public partial class DisplayWms
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        Map.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Set the map extent
-        Map.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
-        Map.MapScale = MapUtil.GetScale(new RectangleShape(-10786436, 3918518, -10769429, 3906002),
-            Map.MapWidth, Map.MapUnit);
+        mapView.CenterPoint = new RectangleShape(-10786436, 3918518, -10769429, 3906002).GetCenterPoint();
+        mapView.MapScale = MapUtil.GetScale(new RectangleShape(-10786436, 3918518, -10769429, 3906002),
+            mapView.MapWidth, mapView.MapUnit);
 
         // Create a WmsOverlay and add it to the map.
         var wmsOverlay = new WmsOverlay();
@@ -34,7 +34,7 @@ public partial class DisplayWms
         wmsOverlay.Parameters.Add("STYLES", "default");
         wmsOverlay.Parameters.Add("CRS", "EPSG:3857");  // Make sure to match the WMS CRS to the Map's projection
 
-        Map.Overlays.Add(wmsOverlay);
+        mapView.Overlays.Add(wmsOverlay);
 
 
         // ScaleFactor determines the ratio of physical pixels to virtual pixels. For instance,
@@ -44,8 +44,8 @@ public partial class DisplayWms
         // images on servers that support them appear sharper when displayed this way. However, if the server
         // does not support high-resolution images, as is the case here, features like roads may appear too small.
         // As a result, here we set the ScaleFactor to 1, we request an image that matches the map's resolution (100x100), ensuring road sizes are more visible, albeit at the cost of image sharpness. Uncomment the following line to observe the effect on the map's appearance.
-        Map.ScaleFactor = 1;
+        mapView.ScaleFactor = 1;
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 }

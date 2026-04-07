@@ -18,7 +18,7 @@ public partial class RasterXyzServer
     {
         layerOverlay = new LayerOverlay();
         layerOverlay.TileType = TileType.MultiTile;
-        Map.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Add Cloud Maps as a background overlay
         thinkGeoRasterMapsAsyncLayer = new ThinkGeoRasterMapsAsyncLayer
@@ -39,9 +39,9 @@ public partial class RasterXyzServer
         await thinkGeoRasterMapsAsyncLayer.CloseAsync();
         await thinkGeoRasterMapsAsyncLayer.OpenAsync();
         var boundingBox = thinkGeoRasterMapsAsyncLayer.GetBoundingBox();
-        await Map.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await Map.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -58,7 +58,7 @@ public partial class RasterXyzServer
 
     public void Dispose()
     {
-        Map?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }
