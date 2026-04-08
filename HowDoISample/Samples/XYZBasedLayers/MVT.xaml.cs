@@ -57,7 +57,7 @@ public partial class MVT
         };
 
         _mvtLayer = new MvtTilesAsyncLayer("https://demotiles.maplibre.org/style.json");
-        string cachePath = Path.Combine(FileSystem.AppDataDirectory, "rasterMbTilesLayerCache");
+        string cachePath = Path.Combine(FileSystem.AppDataDirectory, "mvtVectorTileCache");
 
         if (!Directory.Exists(cachePath))
         {
