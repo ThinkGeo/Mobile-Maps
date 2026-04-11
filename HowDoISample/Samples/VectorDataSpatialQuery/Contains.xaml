@@ -2,6 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.VectorDataSpatialQuery"
+                   x:DataType="codeBehind:Contains"
                    x:Class="HowDoISample.VectorDataSpatialQuery.Contains">
     
     <ContentPage.Content>
@@ -14,7 +16,7 @@
             <howDoI:DescriptionView Grid.Row="0"
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" SingleTap="mapView_SingleTap"
+            <thinkgeo:MapView Grid.Row="1" x:Name="mapView" SingleTap="mapView_SingleTap"
                               SizeChanged="Contains_OnSizeChanged">
                 <thinkgeo:MapView.MapTools> 
                     <thinkgeo:ZoomMapTool/>

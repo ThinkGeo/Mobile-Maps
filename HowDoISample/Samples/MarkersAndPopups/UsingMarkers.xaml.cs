@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 using Timer = System.Timers.Timer;
 
@@ -20,17 +20,17 @@ public partial class UsingMarkers
         _timer = new Timer();
         _timer.Interval = 1000;
         _timer.Elapsed += (sender, args) => UpdateMarkerStatus();
-        MapView.CurrentExtentChanged += MapView_CurrentExtentChanged;
+        mapView.CurrentExtentChanged += Map_CurrentExtentChanged;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -40,19 +40,20 @@ public partial class UsingMarkers
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        MapView.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Set the map extent        
-        MapView.CenterPoint = new PointShape(-10777032, 3908560);
-        MapView.MapScale = 10000;
+        mapView.CenterPoint = new PointShape(-10777032, 3908560);
+        mapView.MapScale = 10000;
         _baseScale = 10000;
 
-        await AddHotelMarkersAsync();
+        await mapView.RefreshAsync();
 
-        MapView.IsRotationEnabled = true;
-        await MapView.RefreshAsync();
+        await AddHotelMarkersAsync();
+        mapView.IsRotationEnabled = true;
+        
         _timer.Start();
     }
 
@@ -67,7 +68,7 @@ public partial class UsingMarkers
         }
     }
 
-    private void MapView_CurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
+    private void Map_CurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
     {
         if (!e.IsMapScaleChanged)
             return;
@@ -110,7 +111,7 @@ public partial class UsingMarkers
 
         var layerOverlay = new LayerGraphicsViewOverlay();
         layerOverlay.Layers.Add(hotelsLayer);
-        MapView.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         _markerOverlay = new SimpleMarkerOverlay();
         _popupOverlay = new PopupOverlay();
@@ -145,9 +146,9 @@ public partial class UsingMarkers
         hotelsLayer.Close();
 
         // Add the popupOverlay to the map and refresh
-        MapView.Overlays.Add(_markerOverlay);
-        MapView.Overlays.Add(_popupOverlay);
+        mapView.Overlays.Add(_markerOverlay);
+        mapView.Overlays.Add(_popupOverlay);
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 }

@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -20,7 +20,7 @@ public partial class DisplayNoaaWeatherStation
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create background world map with vector tile requested from ThinkGeo Cloud Service.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,11 +30,11 @@ public partial class DisplayNoaaWeatherStation
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var weatherOverlay = new LayerOverlay();
-        MapView.Overlays.Add("Weather", weatherOverlay);
+        mapView.Overlays.Add("Weather", weatherOverlay);
 
         // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
         _noaaWeatherStationLayer = new NoaaWeatherStationFeatureLayer
@@ -53,9 +53,9 @@ public partial class DisplayNoaaWeatherStation
         _noaaWeatherStationLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 20_000_000;
-        MapView.CenterPoint = new PointShape(-10807059, 5045074);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 20_000_000;
+        mapView.CenterPoint = new PointShape(-10807059, 5045074);
+        await mapView.RefreshAsync();
 
         LoadingLayout.IsVisible = false;
     }

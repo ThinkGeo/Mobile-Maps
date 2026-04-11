@@ -1,7 +1,9 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.MarkersAndPopups"
+                   x:DataType="codeBehind:UsingMarkers"
                    x:Class="HowDoISample.MarkersAndPopups.UsingMarkers">
 
     <ContentPage.Content>
@@ -14,8 +16,8 @@
             <howDoI:DescriptionView Grid.Row="0"
                                     Description="{Binding Description, Source={x:Reference BasePage}}"/>
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView"
-                              MapUnit="Meter" SizeChanged="MapView_OnSizeChanged"/>
+            <thinkgeo:MapView Grid.Row="1" x:Name="mapView"
+                              MapUnit="Meter" SizeChanged="Map_OnSizeChanged"/>
 
         </Grid>
     </ContentPage.Content>

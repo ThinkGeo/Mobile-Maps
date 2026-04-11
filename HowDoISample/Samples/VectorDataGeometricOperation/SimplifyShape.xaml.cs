@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
@@ -11,14 +11,14 @@ public partial class SimplifyShape
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -28,7 +28,7 @@ public partial class SimplifyShape
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var cityLimits = new ShapeFileFeatureLayer(Path.Combine(
             FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "FriscoCityLimits.shp"));
@@ -55,13 +55,13 @@ public partial class SimplifyShape
         layerOverlay.Layers.Add("simplifyLayer", simplifyLayer);
 
         // Set the map extent
-        MapView.CenterPoint = new PointShape(-10778600, 3915260);
-        MapView.MapScale = 240000;
+        mapView.CenterPoint = new PointShape(-10778600, 3915260);
+        mapView.MapScale = 240000;
 
         // Add LayerOverlay to Map
-        MapView.Overlays.Add("layerOverlay", layerOverlay);
+        mapView.Overlays.Add("layerOverlay", layerOverlay);
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public partial class SimplifyShape
     /// </summary>
     private async void SimplifyShape_OnClick(object sender, EventArgs e)
     {
-        var layerOverlay = (LayerOverlay)MapView.Overlays["layerOverlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["layerOverlay"];
 
         var cityLimits = (ShapeFileFeatureLayer)layerOverlay.Layers["cityLimits"];
         var simplifyLayer = (InMemoryFeatureLayer)layerOverlay.Layers["simplifyLayer"];

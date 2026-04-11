@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataSpatialQuery;
@@ -19,7 +19,7 @@ public partial class Intersects
         _initialized = true;
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class Intersects
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a feature layer to hold the Frisco zoning data
         var friscoLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Zoning.shp"));
@@ -55,16 +55,16 @@ public partial class Intersects
         // Add each feature layer to its own overlay
         // We do this, so we can control and refresh/redraw each layer individually
         var friscoOverlay = new LayerOverlay();
-        MapView.Overlays.Add("FriscoOverlay", friscoOverlay);
+        mapView.Overlays.Add("FriscoOverlay", friscoOverlay);
         friscoOverlay.Layers.Add("FriscoLayer", friscoLayer);
 
         var highlightOverlay = new LayerOverlay();
-        MapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+        mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
         highlightOverlay.Layers.Add("HighlightLayer", highlightLayer);
         highlightOverlay.Layers.Add("QueryLayer", queryLayer);
 
         // Add an event to handle new shapes that are drawn on the map
-        MapView.TrackOverlay.TrackEnded += OnPolygonDrawn;
+        mapView.TrackOverlay.TrackEnded += OnPolygonDrawn;
 
         // Add a sample shape to the map for the initial query
         var sampleShape = new PolygonShape("POLYGON((-10778718 3914865,-10778746 3913709,-10777103 3913766,-10777179 3914942,-10778718 3914865))");
@@ -72,10 +72,10 @@ public partial class Intersects
         await GetFeaturesIntersects(sampleShape);
 
         // Set the map extent to the sample shapes
-        MapView.MapScale = 40000;
-        MapView.CenterPoint = new PointShape(-10777924, 3914325);
-        MapView.TrackOverlay.TrackMode = TrackMode.Polygon;
-        await MapView.RefreshAsync();
+        mapView.MapScale = 40000;
+        mapView.CenterPoint = new PointShape(-10777924, 3914325);
+        mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -83,12 +83,12 @@ public partial class Intersects
     /// </summary>
     private async Task GetFeaturesIntersects(BaseShape polygon)
     {
-        // Find the layers we will be modifying in the MapView
-        var highlightOverlay = (LayerOverlay)MapView.Overlays["HighlightOverlay"];
+        // Find the layers we will be modifying in the Map
+        var highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
         var highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
         var queryLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["QueryLayer"];
 
-        var friscoOverlay = (LayerOverlay)MapView.Overlays["FriscoOverlay"];
+        var friscoOverlay = (LayerOverlay)mapView.Overlays["FriscoOverlay"];
         var friscoLayer = (FeatureLayer)friscoOverlay.Layers["FriscoLayer"];
 
         // Clear the query shape layer and add the newly drawn shape
@@ -109,8 +109,8 @@ public partial class Intersects
         await highlightOverlay.RefreshAsync();
 
         // Clear the drawn shape            
-        MapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
-        await MapView.TrackOverlay.RefreshAsync();
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        await mapView.TrackOverlay.RefreshAsync();
     }
 
     /// <summary>

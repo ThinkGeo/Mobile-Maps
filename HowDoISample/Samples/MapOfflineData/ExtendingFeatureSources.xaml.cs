@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -20,7 +20,7 @@ public partial class ExtendingFeatureSources
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -30,7 +30,7 @@ public partial class ExtendingFeatureSources
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // See the implementation of the new layer and feature source below.
         var csvLayer = new SimpleCsvFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Csv", "vehicle-route.csv"))
@@ -49,12 +49,12 @@ public partial class ExtendingFeatureSources
 
         var layerOverlay = new LayerOverlay();
         layerOverlay.Layers.Add(csvLayer);
-        MapView.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         // Set the map scale and center point
-        MapView.MapScale = 50_000;
-        MapView.CenterPoint = new PointShape(-8236733, 4971880);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 50_000;
+        mapView.CenterPoint = new PointShape(-8236733, 4971880);
+        await mapView.RefreshAsync();
     }
 
     // Here we are creating a simple CVS feature source using the minimum set of overloads.

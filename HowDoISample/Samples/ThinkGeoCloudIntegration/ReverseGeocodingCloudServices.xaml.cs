@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -18,7 +18,7 @@ public partial class ReverseGeocodingCloudServices
         ResultView.IsVisible = false;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -32,10 +32,10 @@ public partial class ReverseGeocodingCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the search radius of the reverse geocode and create a style for it
         var searchRadiusFeatureLayer = new InMemoryFeatureLayer();
@@ -61,19 +61,19 @@ public partial class ReverseGeocodingCloudServices
         var searchFeaturesOverlay = new LayerOverlay();
         searchFeaturesOverlay.Layers.Add("Search Radius", searchRadiusFeatureLayer);
         searchFeaturesOverlay.Layers.Add("Result Feature Geometry", selectedResultItemFeatureLayer);
-        MapView.Overlays.Add("Search Features Overlay", searchFeaturesOverlay);
+        mapView.Overlays.Add("Search Features Overlay", searchFeaturesOverlay);
 
         // Create a popup overlay to display the best match
         var bestMatchPopupOverlay = new PopupOverlay();
-        MapView.Overlays.Add("Best Match Popup Overlay", bestMatchPopupOverlay);
+        mapView.Overlays.Add("Best Match Popup Overlay", bestMatchPopupOverlay);
 
         // Set the map extent to Frisco, TX
-        MapView.CenterPoint = new PointShape(-10779570, 3915041);
-        MapView.MapScale = 8000;
+        mapView.CenterPoint = new PointShape(-10779570, 3915041);
+        mapView.MapScale = 8000;
 
         // Initialize the ReverseGeocodingCloudClient with our ThinkGeo Cloud credentials
         _reverseGeocodingCloudClient = new ReverseGeocodingCloudClient(SampleKeys.ClientId2, SampleKeys.ClientSecret2);
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     public ObservableCollection<CloudReverseGeocodingLocation> NearByLocations
@@ -86,9 +86,9 @@ public partial class ReverseGeocodingCloudServices
         }
     }
 
-    private async void MapView_OnSingleTap(object sender, SingleTapMapViewEventArgs e)
+    private async void Map_OnSingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var searchPoint = MapView.ToWorldCoordinate(e.X, e.Y);
+        var searchPoint = mapView.ToWorldCoordinate(e.X, e.Y);
 
         var options = new CloudReverseGeocodingOptions
         {
@@ -120,8 +120,8 @@ public partial class ReverseGeocodingCloudServices
     {
         ResultView.IsVisible = true;
 
-        // Get the 'Search Radius' layer from the MapView        
-        var searchFeaturesOverlay = (LayerOverlay)MapView.Overlays["Search Features Overlay"];
+        // Get the 'Search Radius' layer from the Map        
+        var searchFeaturesOverlay = (LayerOverlay)mapView.Overlays["Search Features Overlay"];
         var searchRadiusFeatureLayer = (InMemoryFeatureLayer)searchFeaturesOverlay.Layers["Search Radius"];
         searchRadiusFeatureLayer.Open();
         // Clear the existing features and add new features showing the area that was searched by the reverse geocode
@@ -137,8 +137,8 @@ public partial class ReverseGeocodingCloudServices
         // If a match was found for the geocode, update the UI
         if (searchResult?.BestMatchLocation != null)
         {
-            // Get the 'Best Match' PopupOverlay from the MapView and clear it
-            var bestMatchPopupOverlay = (PopupOverlay)MapView.Overlays["Best Match Popup Overlay"];
+            // Get the 'Best Match' PopupOverlay from the Map and clear it
+            var bestMatchPopupOverlay = (PopupOverlay)mapView.Overlays["Best Match Popup Overlay"];
             bestMatchPopupOverlay.Children.Clear();
 
             // Get the location of the 'Best Match' found within the search radius
@@ -177,8 +177,8 @@ public partial class ReverseGeocodingCloudServices
         // Get the selected location
         var locationFeature = ((CloudReverseGeocodingLocation)selectedResultList.SelectedItem).LocationFeature;
 
-        // Get the 'Result Feature' layer from the MapView            
-        var searchFeaturesOverlay = (LayerOverlay)MapView.Overlays["Search Features Overlay"];
+        // Get the 'Result Feature' layer from the Map            
+        var searchFeaturesOverlay = (LayerOverlay)mapView.Overlays["Search Features Overlay"];
         var selectedResultItemFeatureLayer = (InMemoryFeatureLayer)searchFeaturesOverlay.Layers["Result Feature Geometry"];
 
         // Clear the existing features and add the geometry of the selected location

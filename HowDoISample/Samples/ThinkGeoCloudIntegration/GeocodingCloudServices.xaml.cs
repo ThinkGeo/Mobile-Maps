@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.ThinkGeoCloudIntegration;
@@ -11,7 +11,7 @@ public partial class GeocodingCloudServices
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -25,19 +25,19 @@ public partial class GeocodingCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
         var geocodedLocationsOverlay = new SimpleMarkerOverlay();
-        MapView.Overlays.Add("Geocoded Locations Overlay", geocodedLocationsOverlay);
+        mapView.Overlays.Add("Geocoded Locations Overlay", geocodedLocationsOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Set the map extent
-        MapView.CenterPoint = new PointShape(-10777932, 3912260);
-        MapView.MapScale = 100000;
-        await MapView.RefreshAsync();
+        mapView.CenterPoint = new PointShape(-10777932, 3912260);
+        mapView.MapScale = 100000;
+        await mapView.RefreshAsync();
     }
 
     // Search for an address using the GeocodingCloudClient and update the UI
@@ -81,8 +81,8 @@ public partial class GeocodingCloudServices
 
     private async void ZoomToLocation(CloudGeocodingLocation chosenLocation)
     {
-        // Get the MarkerOverlay from the MapView
-        var geocodedLocationOverlay = (SimpleMarkerOverlay)MapView.Overlays["Geocoded Locations Overlay"];
+        // Get the MarkerOverlay from the Map
+        var geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
 
         // Clear the existing markers and add a new marker at the chosen location
         geocodedLocationOverlay.Children.Clear();
@@ -97,7 +97,7 @@ public partial class GeocodingCloudServices
         geocodedLocationOverlay.Children.Add(newMarker);
 
         // Center the map on the chosen location
-        await MapView.ZoomToExtentAsync(chosenLocation.BoundingBox.GetCenterPoint(),
+        await mapView.ZoomToExtentAsync(chosenLocation.BoundingBox.GetCenterPoint(),
         2000, 0);
     }
 }

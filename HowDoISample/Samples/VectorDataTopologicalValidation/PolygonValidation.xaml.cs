@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -12,14 +12,14 @@ public partial class PolygonValidation
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to Decimal Degree
-        MapView.MapUnit = GeographyUnit.DecimalDegree;
+        mapView.MapUnit = GeographyUnit.DecimalDegree;
 
         // Create an InMemoryFeatureLayer to hold the shapes to be validated
         // Add styles to display points, lines, and polygons on this layer in green
@@ -59,11 +59,11 @@ public partial class PolygonValidation
         featuresOverlay.Layers.Add("Filter Features", filterFeaturesLayer);
         featuresOverlay.Layers.Add("Validated Features", validatedFeaturesLayer);
         featuresOverlay.Layers.Add("Result Features", resultFeaturesLayer);
-        MapView.Overlays.Add("Features Overlay", featuresOverlay);
+        mapView.Overlays.Add("Features Overlay", featuresOverlay);
 
         RdoCheckIfPolygonBoundariesOverlapPolygonBoundaries.IsChecked = true;
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [coveredPolygonFeature],
             invalidResultFeatures,
@@ -121,7 +121,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature],
             invalidResultFeatures,
@@ -155,7 +155,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
             invalidResultFeatures,
@@ -189,7 +189,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
             invalidResultFeatures,
@@ -222,7 +222,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature, polygonWithPointFeature],
             invalidResultFeatures,
@@ -255,7 +255,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2],
             invalidResultFeatures
@@ -288,7 +288,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3, polygonFeature4],
             invalidResultFeatures
@@ -320,7 +320,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3, polygonFeature4],
             invalidResultFeatures
@@ -353,7 +353,7 @@ public partial class PolygonValidation
         // Get the invalid features returned from the API
         var invalidResultFeatures = result.InvalidFeatures;
 
-        // Clear the MapView and add the new valid/invalid features to the map
+        // Clear the Map and add the new valid/invalid features to the map
         await ClearMapAndAddFeatures(
             [polygonFeature1, polygonFeature2, polygonFeature3],
             invalidResultFeatures,
@@ -371,8 +371,8 @@ public partial class PolygonValidation
     private async Task ClearMapAndAddFeatures(Collection<Feature> validatedFeatures, Collection<Feature> resultFeatures,
         Collection<Feature> filterFeatures = null)
     {
-        // Get the InMemoryFeatureLayers from the MapView
-        var validatedFeaturesOverLay = (LayerOverlay)MapView.Overlays["Features Overlay"];
+        // Get the InMemoryFeatureLayers from the Map
+        var validatedFeaturesOverLay = (LayerOverlay)mapView.Overlays["Features Overlay"];
         var validatedFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Validated Features"];
         var filterFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Filter Features"];
         var resultFeaturesLayer = (InMemoryFeatureLayer)validatedFeaturesOverLay.Layers["Result Features"];
@@ -399,12 +399,12 @@ public partial class PolygonValidation
         foreach (var resultFeature in resultFeatures) resultFeaturesLayer.InternalFeatures.Add(resultFeature);
 
         // Refresh/redraw the layers and reset the map extent
-        var featureOverlay = (LayerOverlay)MapView.Overlays["Features Overlay"];
+        var featureOverlay = (LayerOverlay)mapView.Overlays["Features Overlay"];
         var centerPoint = featureOverlay.GetBoundingBox().GetCenterPoint();
         centerPoint.Y -= 50;
-        MapView.CenterPoint = centerPoint;
-        MapView.MapScale = 200000000;
-        await MapView.RefreshAsync();
+        mapView.CenterPoint = centerPoint;
+        mapView.MapScale = 200000000;
+        await mapView.RefreshAsync();
 
         validatedFeaturesLayer.Close();
         filterFeaturesLayer.Close();

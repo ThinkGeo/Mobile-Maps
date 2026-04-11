@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -11,14 +11,14 @@ public partial class DisplayWmts
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a WMTS overlay using the WMS parameters below.
         // This is a public service and performance may be slow.
@@ -36,13 +36,13 @@ public partial class DisplayWmts
         wmtsOverlay.TileMatrixSetName = "21781_26";
         wmtsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "WmtsTmpTileCache");
 
-        //Add the overlay to the mapView's Overlay collection.
-        MapView.Overlays.Add(wmtsOverlay);
+        //Add the overlay to the Map's Overlay collection.
+        mapView.Overlays.Add(wmtsOverlay);
 
         // Set the extent to the Eiger - a famous peak in Switzerland.
-        MapView.CenterPoint = new PointShape(643000, 158000);
-        MapView.MapScale = 20000;
+        mapView.CenterPoint = new PointShape(643000, 158000);
+        mapView.MapScale = 20000;
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 }

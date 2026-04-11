@@ -1,8 +1,11 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
              xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
              xmlns:howDoI="using:HowDoISample"
+             xmlns:extensions="clr-namespace:HowDoISample.MarkupExtensions"
+             xmlns:codeBehind="clr-namespace:HowDoISample.MapNavigation"
+             x:DataType="codeBehind:ZoomToBlackHole"
              x:Class="HowDoISample.MapNavigation.ZoomToBlackHole">
 
     <ContentPage.Content>
@@ -14,7 +17,7 @@
             </Grid.RowDefinitions>
             <howDoI:DescriptionView Grid.Row="0" 
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
-            <tgMaui:MapView x:Name="MapView"
+            <tgMaui:MapView x:Name="mapView"
                             Grid.Row="1"
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
@@ -24,66 +27,66 @@
                             IsRotationEnabled="True"
                             MinScale="0"
                             DefaultOverlaysRenderSequenceType="Concurrent"
-                            SizeChanged="MapView_OnSizeChanged">
+                            SizeChanged="Map_OnSizeChanged">
                 <tgMaui:MapView.Overlays>
 
                     <tgMaui:LayerOverlay TileType="SingleTile">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_0.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_0.jpg}" 
                                                            CenterPoint="POINT (0 0)" UpperScale="200000"  Scale="50000" LowerScale="6000"/>
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_1.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_1.jpg}" 
                                                  CenterPoint="POINT (960 3140)" Scale="5000" UpperScale="20000"  LowerScale="3000"/>
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_2.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_2.jpg}" 
                                                  CenterPoint="POINT (1026 3138)" Scale="5000" UpperScale="7000"  LowerScale="200"/>
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_3.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_3.jpg}" 
                                                  CenterPoint="POINT (1008 3140)" Scale="650" UpperScale="1000"   LowerScale="40" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_4.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_4.jpg}" 
                                                  CenterPoint="POINT (1019 3159)" Scale="234" UpperScale="400" LowerScale="20" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_5.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_5.jpg}" 
                                                  CenterPoint="POINT (1005.1 3152.5)" Scale="48" UpperScale="100" LowerScale="3" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_6.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_6.jpg}" 
                                                  CenterPoint="POINT (1002.3 3151.8)" Scale="20" UpperScale="40"  LowerScale="1" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile" Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_7.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_7.jpg}" 
                                                  CenterPoint="POINT (1001.05 3151.15)" Scale="2.2" UpperScale="8" LowerScale="0.5" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_8.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_8.jpg}" 
                                                  CenterPoint="POINT (1000.775 3151.0768)" Scale="1.34" UpperScale="2" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
                     <tgMaui:LayerOverlay TileType="SingleTile"  Opacity="0">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:GeoImageLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/m87_9.jpg}" 
+                            <tgCore:GeoImageLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/m87_9.jpg}" 
                                                  CenterPoint="POINT (1000.698 3151.046)" Scale="0.03" UpperScale="0.7" />
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
@@ -105,7 +108,7 @@
             <Button x:Name="ZoomToBlackHoleButton" Grid.Row="2" HorizontalOptions="Center" 
                     BackgroundColor="Gray" TextColor="White" Text="Zoom To M87 Black Hole"/>
             <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" 
-                   Text="{Binding Source={x:Reference MapView}, Path=MapScale,StringFormat='Scale: {0:N2}'}" 
+                   Text="{Binding Source={x:Reference mapView}, Path=MapScale,StringFormat='Scale: {0:N2}'}" 
                    TextColor="White"/>
         </Grid>
     </ContentPage.Content>

@@ -3,6 +3,9 @@
              xmlns:tgMaui="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
              xmlns:tgCore="clr-namespace:ThinkGeo.Core;assembly=ThinkGeo.Core"
              xmlns:howDoI="using:HowDoISample"
+             xmlns:extensions="clr-namespace:HowDoISample.MarkupExtensions"
+             xmlns:codeBehind="clr-namespace:HowDoISample.Miscellaneous"
+             x:DataType="codeBehind:SetupEverythingInXaml"
              x:Class="HowDoISample.Miscellaneous.SetupEverythingInXaml">
 
     <ContentPage.Content>
@@ -28,7 +31,7 @@
                     <!--Raster Image-->
                     <tgMaui:LayerOverlay Opacity="0.7" TileType="SingleTile">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:NativeImageRasterLayer ImagePathFilename="{tgMaui:AppDataFolder Path=Data/Jpg/frisco.jpg}"/>
+                            <tgCore:NativeImageRasterLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/frisco.jpg}"/>
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
 
@@ -39,7 +42,7 @@
 
                                 <!--Set up the data path and projection-->
                                 <tgCore:ShapeFileFeatureLayer.FeatureSource>
-                                    <tgCore:ShapeFileFeatureSource ShapePathFilename="{tgMaui:AppDataFolder Path=Data/Shapefile/Subdivisions.shp}" >
+                                    <tgCore:ShapeFileFeatureSource ShapePathFilename="{extensions:SafeAppDataFolder Path=Data/Shapefile/Subdivisions.shp}" >
                                         <tgCore:ShapeFileFeatureSource.ProjectionConverter>
                                             <tgCore:ProjectionConverter>
                                                 <tgCore:ProjectionConverter.InternalProjection>

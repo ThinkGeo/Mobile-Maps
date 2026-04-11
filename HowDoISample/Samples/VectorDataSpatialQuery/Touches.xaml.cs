@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -28,10 +28,10 @@ public partial class Touches
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a feature layer to hold and display the zoning data
         _zoningLayer = new InMemoryFeatureLayer();
@@ -77,7 +77,7 @@ public partial class Touches
         layerOverlay.Layers.Add("Query Feature", queryFeatureLayer);
         layerOverlay.Layers.Add("Highlighted Features", highlightedFeaturesLayer);
 
-        MapView.Overlays.Add("Layer Overlay", layerOverlay);
+        mapView.Overlays.Add("Layer Overlay", layerOverlay);
 
         // Create a sample shape using vertices from an existing feature, to ensure that it is touching other features
         _zoningLayer.Open();
@@ -94,9 +94,9 @@ public partial class Touches
         await GetFeaturesTouching(sampleShape);
 
         // Set the map extent to the sample shape
-        MapView.MapScale = 50_000;
-        MapView.CenterPoint = new PointShape(-10776516, 3919244);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 50_000;
+        mapView.CenterPoint = new PointShape(-10776516, 3919244);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -117,8 +117,8 @@ public partial class Touches
     /// </summary>
     private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
     {
-        // Find the layers we will be modifying in the MapView dictionary
-        var layerOverlay = (LayerOverlay)MapView.Overlays["Layer Overlay"];
+        // Find the layers we will be modifying in the Map dictionary
+        var layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
         var highlightedFeaturesLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Highlighted Features"];
 
         // Clear the currently highlighted features
@@ -138,8 +138,8 @@ public partial class Touches
     /// </summary>
     private async Task GetFeaturesTouching(BaseShape shape)
     {
-        // Find the layers we will be modifying in the MapView
-        var layerOverlay = (LayerOverlay)MapView.Overlays["Layer Overlay"];
+        // Find the layers we will be modifying in the Map
+        var layerOverlay = (LayerOverlay)mapView.Overlays["Layer Overlay"];
         var queryFeatureLayer = (InMemoryFeatureLayer)layerOverlay.Layers["Query Feature"];
 
         // Clear the query shape layer and add the newly drawn shape
@@ -152,7 +152,7 @@ public partial class Touches
         await HighlightQueriedFeatures(queriedFeatures);
 
         // Disable map drawing and clear the drawn shape
-        MapView.TrackOverlay.TrackMode = TrackMode.None;
-        MapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackMode = TrackMode.None;
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
     }
 }

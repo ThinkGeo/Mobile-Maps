@@ -2,6 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.Miscellaneous"
+                   x:DataType="codeBehind:WorldProjection"
                    x:Class="HowDoISample.Miscellaneous.WorldProjection">
 
     <ContentPage.Content>
@@ -14,7 +16,7 @@
             <howDoI:DescriptionView Grid.Row="0" 
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkgeo:MapView Grid.Row="1" x:Name="MapView" BackgroundColor="LightSkyBlue" 
+            <thinkgeo:MapView Grid.Row="1" x:Name="mapView" BackgroundColor="LightSkyBlue" 
                               SizeChanged="WorldProjection_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
@@ -25,8 +27,7 @@
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+                         BackgroundColor="Transparent" />
 
             <StackLayout Grid.Row="1" WidthRequest="200"
                  Margin="20" HorizontalOptions="Start" VerticalOptions="End" BackgroundColor="#80888888">

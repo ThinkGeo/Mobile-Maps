@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOfflineData;
@@ -19,7 +19,7 @@ public partial class InMemoryLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class InMemoryLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var inMemoryOverlay = new LayerOverlay();
-        MapView.Overlays.Add(inMemoryOverlay);
+        mapView.Overlays.Add(inMemoryOverlay);
 
         // Create a new layer that we will pull features from to populate the in memory layer.
         var shapeFileLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Mosquitoes.shp"))
@@ -73,8 +73,8 @@ public partial class InMemoryLayer
         inMemoryFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 150_000;
-        MapView.CenterPoint = new PointShape(-10778469, 3914651);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 150_000;
+        mapView.CenterPoint = new PointShape(-10778469, 3914651);
+        await mapView.RefreshAsync();
     }
 }

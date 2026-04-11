@@ -1,7 +1,9 @@
-<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<howDoI:SamplePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkGeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.MapNavigation"
+                   x:DataType="codeBehind:VehicleNavigation"
                    x:Class="HowDoISample.MapNavigation.VehicleNavigation" >
 
     <ContentPage.Content>
@@ -15,8 +17,8 @@
             <howDoI:DescriptionView Grid.Row="0" 
                     Description="{Binding Description, Source={x:Reference BasePage}}" />
 
-            <thinkGeo:MapView Grid.Row="1" x:Name="MapView" MapUnit="Meter" 
-                              IsRotationEnabled="True" SizeChanged="MapView_OnSizeChanged">
+            <thinkGeo:MapView Grid.Row="1" x:Name="mapView" MapUnit="Meter" 
+                              IsRotationEnabled="True" SizeChanged="Map_OnSizeChanged">
             </thinkGeo:MapView>
 
             <StackLayout Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Start" 
@@ -30,11 +32,11 @@
                         BorderColor="Black" BorderWidth="2"
                         FontSize="30" Clicked="ZoomOutButton_OnClicked"/>
             </StackLayout>
-            <ImageButton Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End"
+            <ImageButton x:Name="CompassButton" Grid.Row="1" 
+                         VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}" />
+                         BackgroundColor="Transparent"/>
 
             <Button Grid.Row="1" VerticalOptions="End" HorizontalOptions="End"
                     WidthRequest="120" HeightRequest="50" Margin="5"

@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOnlineData;
@@ -15,14 +15,14 @@ public partial class DisplayThinkGeoBackground
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         _thinkGeoVectorsOverlay = new ThinkGeoVectorOverlay(
@@ -32,7 +32,7 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
 
-        MapView.Overlays.Add(_thinkGeoVectorsOverlay);
+        mapView.Overlays.Add(_thinkGeoVectorsOverlay);
 
         _thinkGeoRasterOverlay = new ThinkGeoRasterOverlay(
                 SampleKeys.ClientId,
@@ -42,16 +42,16 @@ public partial class DisplayThinkGeoBackground
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
 
-        MapView.Overlays.Add(_thinkGeoRasterOverlay);
+        mapView.Overlays.Add(_thinkGeoRasterOverlay);
 
         // Setup Maps Extent and Rotation
-        MapView.CenterPoint = new PointShape(1180600, 3916260);
-        MapView.MapScale = 100000000;
+        mapView.CenterPoint = new PointShape(1180600, 3916260);
+        mapView.MapScale = 100000000;
 
-        MapView.MapRotation = 0;
-        MapView.IsRotationEnabled = true;
+        mapView.MapRotation = 0;
+        mapView.IsRotationEnabled = true;
 
-        await MapView.RefreshAsync(_cancellationTokenSource.Token);
+        await mapView.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void Radial_Checked(object sender, CheckedChangedEventArgs e)
@@ -65,95 +65,46 @@ public partial class DisplayThinkGeoBackground
         switch (radioButton.StyleId)
         {
             case "RasterLightV1":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Light_V1_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Light_V1_X2);
                 break;
             case "RasterLightV2":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Light_V2_X2);
                 break;
             case "RasterDarkV1":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Dark_V1_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Dark_V1_X2);
                 break;
             case "RasterDarkV2":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Dark_V2_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Dark_V2_X2);
                 break;
             case "Aerial":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X2);
                 break;
             case "Hybrid":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.Hybrid2_V2_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.Hybrid2_V2_X2);
                 break;
             case "TransparentBg":
-                _thinkGeoVectorsOverlay.IsVisible = false;
-                _thinkGeoRasterOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.MapType = ThinkGeoCloudRasterMapsMapType.TransparentBackground_V2_X2;
-
-                await UpdateCancellationToken();
-                await _thinkGeoRasterOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType.TransparentBackground_V2_X2);
                 break;
             case "VectorLight":
-                _thinkGeoVectorsOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.IsVisible = false;
-                _thinkGeoVectorsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Light;
-
-                _thinkGeoVectorsOverlay.VectorTileCache = new FileVectorTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_VectorCache");
-                _thinkGeoVectorsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache");
-                await UpdateCancellationToken();
-                await _thinkGeoVectorsOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowVectorOverlay(
+                    ThinkGeoCloudVectorMapsMapType.Light,
+                    "ThinkGeoVectorLight_VectorCache",
+                    "ThinkGeoVectorLight_RasterCache");
                 break;
             case "VectorDark":
-                _thinkGeoVectorsOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.IsVisible = false;
-                _thinkGeoVectorsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.Dark;
-
-                _thinkGeoVectorsOverlay.VectorTileCache = new FileVectorTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_VectorCache");
-                _thinkGeoVectorsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_RasterCache");
-                await UpdateCancellationToken();
-                await _thinkGeoVectorsOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowVectorOverlay(
+                    ThinkGeoCloudVectorMapsMapType.Dark,
+                    "ThinkGeoVectorDark_VectorCache",
+                    "ThinkGeoVectorDark_RasterCache");
                 break;
             case "VectorCustom":
-                _thinkGeoVectorsOverlay.IsVisible = true;
-                _thinkGeoRasterOverlay.IsVisible = false;
-                _thinkGeoVectorsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.CustomizedByStyleJson;
-
-                var jsonPath = Path.Combine(FileSystem.Current.AppDataDirectory, "Data/Json/thinkgeo-world-streets-cobalt.json");
-                _thinkGeoVectorsOverlay.StyleJsonUri = new Uri(jsonPath, UriKind.Relative);
-
-                _thinkGeoVectorsOverlay.VectorTileCache = new FileVectorTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_VectorCache");
-                _thinkGeoVectorsOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorCobalt_RasterCache");
-                await UpdateCancellationToken();
-                await _thinkGeoVectorsOverlay.RefreshAsync(_cancellationTokenSource.Token);
+                ShowCustomVectorOverlay();
                 break;
+            default:
+                return;
         }
+
+        await RefreshMapAsync();
     }
 
     private async Task UpdateCancellationToken()
@@ -161,6 +112,52 @@ public partial class DisplayThinkGeoBackground
         await _cancellationTokenSource.CancelAsync();
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new CancellationTokenSource();
+    }
+
+    private void ShowRasterOverlay(ThinkGeoCloudRasterMapsMapType mapType)
+    {
+        _thinkGeoVectorsOverlay.IsVisible = false;
+        _thinkGeoRasterOverlay.IsVisible = true;
+        _thinkGeoRasterOverlay.MapType = mapType;
+    }
+
+    private void ShowVectorOverlay(
+        ThinkGeoCloudVectorMapsMapType mapType,
+        string vectorCacheId,
+        string rasterCacheId)
+    {
+        _thinkGeoVectorsOverlay.IsVisible = true;
+        _thinkGeoRasterOverlay.IsVisible = false;
+        _thinkGeoVectorsOverlay.MapType = mapType;
+        _thinkGeoVectorsOverlay.StyleJsonUri = null;
+        _thinkGeoVectorsOverlay.VectorTileCache =
+            new FileVectorTileCache(FileSystem.Current.CacheDirectory, vectorCacheId);
+        _thinkGeoVectorsOverlay.TileCache =
+            new FileRasterTileCache(FileSystem.Current.CacheDirectory, rasterCacheId);
+    }
+
+    private void ShowCustomVectorOverlay()
+    {
+        _thinkGeoVectorsOverlay.IsVisible = true;
+        _thinkGeoRasterOverlay.IsVisible = false;
+        _thinkGeoVectorsOverlay.MapType = ThinkGeoCloudVectorMapsMapType.CustomizedByStyleJson;
+
+        var jsonPath = Path.Combine(
+            FileSystem.Current.AppDataDirectory,
+            "Data",
+            "Json",
+            "thinkgeo-world-streets-cobalt.json");
+        _thinkGeoVectorsOverlay.StyleJsonUri = new Uri(jsonPath);
+        _thinkGeoVectorsOverlay.VectorTileCache =
+            new FileVectorTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_VectorCache");
+        _thinkGeoVectorsOverlay.TileCache =
+            new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorCobalt_RasterCache");
+    }
+
+    private async Task RefreshMapAsync()
+    {
+        await UpdateCancellationToken();
+        await mapView.RefreshAsync(_cancellationTokenSource.Token);
     }
 
     private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -19,7 +19,7 @@ public partial class CreateRegexStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class CreateRegexStyle
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         var coyoteSightings = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Frisco_Coyote_Sightings.shp"))
         {
@@ -45,7 +45,7 @@ public partial class CreateRegexStyle
         layerOverlay.Layers.Add("coyoteSightings", coyoteSightings);
 
         // Add the overlay to the map
-        MapView.Overlays.Add(layerOverlay);
+        mapView.Overlays.Add(layerOverlay);
 
         var regexStyle = new RegexStyle
         {
@@ -65,8 +65,8 @@ public partial class CreateRegexStyle
         coyoteSightings.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 70000;
-        MapView.CenterPoint = new PointShape(-10778209, 3914820);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 70000;
+        mapView.CenterPoint = new PointShape(-10778209, 3914820);
+        await mapView.RefreshAsync();
     }
 }

@@ -1,4 +1,4 @@
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
@@ -7,16 +7,18 @@ namespace HowDoISample.MapOnlineData;
 public partial class RasterXyzServer
 {
     private ThinkGeoRasterMapsAsyncLayer thinkGeoRasterMapsAsyncLayer;
+    private LayerOverlay layerOverlay;
+
     public RasterXyzServer()
     {
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
-        var layerOverlay = new LayerOverlay();
-        layerOverlay.TileType = TileType.SingleTile;
-        MapView.Overlays.Add(layerOverlay);
+        layerOverlay = new LayerOverlay();
+        layerOverlay.TileType = TileType.MultiTile;
+        mapView.Overlays.Add(layerOverlay);
 
         // Add Cloud Maps as a background overlay
         thinkGeoRasterMapsAsyncLayer = new ThinkGeoRasterMapsAsyncLayer
@@ -37,31 +39,26 @@ public partial class RasterXyzServer
         await thinkGeoRasterMapsAsyncLayer.CloseAsync();
         await thinkGeoRasterMapsAsyncLayer.OpenAsync();
         var boundingBox = thinkGeoRasterMapsAsyncLayer.GetBoundingBox();
-        await MapView.ZoomToAsync(boundingBox);
+        await mapView.ZoomToAsync(boundingBox);
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     private async void RenderBeyondMaxZoom_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (!(sender is CheckBox checkBox)) return;
-        if (e == null) return;
         if (thinkGeoRasterMapsAsyncLayer == null) return;
 
-        if (e.Value)
-        {
-            thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom = e.Value;
-        }
+        if (thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom == e.Value)
+            return;
 
-        if (MapView != null)
-        {
-            await MapView.RefreshAsync();
-        }
+        thinkGeoRasterMapsAsyncLayer.RenderBeyondMaxZoom = e.Value;
+
+        await layerOverlay.RefreshAsync();
     }
 
     public void Dispose()
     {
-        MapView?.Dispose();
+        mapView?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

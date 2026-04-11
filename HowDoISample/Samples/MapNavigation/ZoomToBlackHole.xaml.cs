@@ -15,7 +15,7 @@ public partial class ZoomToBlackHole
     {
         InitializeComponent();
     }
-    private void MapView_OnSizeChanged(object sender, EventArgs e)
+    private void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -23,7 +23,7 @@ public partial class ZoomToBlackHole
 
         _cancellationTokenSource = new CancellationTokenSource();
         // The DefaultAnimationSettings affects the animation in all operations such as double click
-        MapView.DefaultAnimationSettings.Duration = 2000;
+        mapView.DefaultAnimationSettings.Duration = 2000;
 
         ZoomToBlackHoleButton.Clicked += async (_, _) =>
         {
@@ -35,17 +35,17 @@ public partial class ZoomToBlackHole
         {
             await StopCurrentAnimationAsync();
 
-            try { await MapView.ZoomToExtentAsync(_zoomingExtents[0].centerPoint, _zoomingExtents[0].scale, 0, cancellationToken: _cancellationTokenSource.Token); }
+            try { await mapView.ZoomToExtentAsync(_zoomingExtents[0].centerPoint, _zoomingExtents[0].scale, 0, cancellationToken: _cancellationTokenSource.Token); }
             catch (TaskCanceledException) { }
         };
 
         // stop the auto zooming whenever touching the map
-        MapView.TouchDown += async (_, _) => await StopCurrentAnimationAsync();
+        mapView.TouchDown += async (_, _) => await StopCurrentAnimationAsync();
 
         ZoomMapTool.ZoomInButton.Clicked += async (_, _) => await StopCurrentAnimationAsync();
         ZoomMapTool.ZoomOutButton.Clicked += async (_, _) => await StopCurrentAnimationAsync();
 
-        MapView.CurrentExtentChanged += MapViewOnCurrentExtentChanged;
+        mapView.CurrentExtentChanged += MapOnCurrentExtentChanged;
         _zoomingExtents = GetZoomingExtents();
     }
 
@@ -57,30 +57,30 @@ public partial class ZoomToBlackHole
         _cancellationTokenSource = new CancellationTokenSource();
     }
 
-    private void MapViewOnCurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
+    private void MapOnCurrentExtentChanged(object sender, CurrentExtentChangedMapViewEventArgs e)
     {
         if (!e.IsMapScaleChanged)
             return;
 
-        foreach (var overlay in MapView.Overlays)
+        foreach (var overlay in mapView.Overlays)
         {
             if (overlay is not LayerOverlay layerOverlay)
                 continue;
             if (layerOverlay.Layers[0] is not GeoImageLayer geoImageLayer)
                 continue;
-            if (MapView.MapScale < geoImageLayer.LowerScale)
+            if (mapView.MapScale < geoImageLayer.LowerScale)
             {
                 layerOverlay.Opacity = 0;
                 continue;
             }
-            if (MapView.MapScale > geoImageLayer.UpperScale)
+            if (mapView.MapScale > geoImageLayer.UpperScale)
             {
                 layerOverlay.Opacity = 0;
                 continue;
             }
 
-            var upperRatio = 1 - MapView.MapScale / geoImageLayer.UpperScale;
-            var lowerRatio = MapView.MapScale / geoImageLayer.LowerScale;
+            var upperRatio = 1 - mapView.MapScale / geoImageLayer.UpperScale;
+            var lowerRatio = mapView.MapScale / geoImageLayer.LowerScale;
 
             if (upperRatio < 0.4)
                 layerOverlay.Opacity = upperRatio * 2.5;
@@ -100,7 +100,7 @@ public partial class ZoomToBlackHole
 
             try
             {
-                await MapView.ZoomToExtentAsync(centerPoint, scale, 0, animationSettings, cancellationToken: cancellationToken);
+                await mapView.ZoomToExtentAsync(centerPoint, scale, 0, animationSettings, cancellationToken: cancellationToken);
             }
             catch (TaskCanceledException)
             {
@@ -113,12 +113,12 @@ public partial class ZoomToBlackHole
     {
         var zoomingExtents = new List<(PointShape CenterPoint, double Scale)>();
 
-        var firstLayer = (GeoImageLayer)((LayerOverlay)MapView.Overlays[0]).Layers[0];
+        var firstLayer = (GeoImageLayer)((LayerOverlay)mapView.Overlays[0]).Layers[0];
         zoomingExtents.Add((firstLayer.CenterPoint, firstLayer.Scale));
 
-        for (var i = 1; i < MapView.Overlays.Count; i++)
+        for (var i = 1; i < mapView.Overlays.Count; i++)
         {
-            var overlay = MapView.Overlays[i];
+            var overlay = mapView.Overlays[i];
             if (overlay is not LayerOverlay layerOverlay)
                 continue;
             if (layerOverlay.Layers.Count < 0)
@@ -129,7 +129,7 @@ public partial class ZoomToBlackHole
             zoomingExtents.Add((geoImageLayer.CenterPoint, geoImageLayer.UpperScale));
         }
 
-        var lastLayer = (GeoImageLayer)((LayerOverlay)MapView.Overlays[^1]).Layers[0];
+        var lastLayer = (GeoImageLayer)((LayerOverlay)mapView.Overlays[^1]).Layers[0];
         zoomingExtents.Add((lastLayer.CenterPoint, lastLayer.Scale));
         return zoomingExtents;
     }

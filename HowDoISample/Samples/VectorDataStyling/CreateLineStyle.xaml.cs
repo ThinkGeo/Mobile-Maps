@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataStyling;
@@ -19,7 +19,7 @@ public partial class CreateLineStyle
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var thinkGeoCloudVectorMapsOverlay = new ThinkGeoRasterOverlay
@@ -29,7 +29,7 @@ public partial class CreateLineStyle
             MapType = ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X1,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
         };
-        MapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
+        mapView.Overlays.Add(thinkGeoCloudVectorMapsOverlay);
 
         // Create a layer with line data
         var friscoRailroad = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Railroad", "Railroad.shp"));
@@ -49,23 +49,23 @@ public partial class CreateLineStyle
         layerOverlay.Layers.Add("Railroad", friscoRailroad);
 
         // Add the overlay to the map
-        MapView.Overlays.Add("overlay", layerOverlay);
+        mapView.Overlays.Add("overlay", layerOverlay);
 
         // Set the map scale and center point
         //mapView.MapScale = mapView.ZoomLevelSet.ZoomLevel18.Scale;
-        MapView.MapScale = 2500;
-        MapView.CenterPoint = new PointShape(-10779392, 3914375);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 2500;
+        mapView.CenterPoint = new PointShape(-10779392, 3914375);
+        await mapView.RefreshAsync();
     }
 
     private async void rbLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (MapView == null || MapView.Overlays.Count <= 0) return;
+        if (mapView == null || mapView.Overlays.Count <= 0) return;
 
         if (sender is RadioButton { IsChecked: false })
             return;
 
-        var layerOverlay = (LayerOverlay)MapView.Overlays["overlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["overlay"];
         var friscoRailroad = (ShapeFileFeatureLayer)layerOverlay.Layers["Railroad"];
 
         // Create a line style
@@ -82,12 +82,12 @@ public partial class CreateLineStyle
 
     private async void rbDashedLineStyle_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (MapView.Overlays.Count <= 0) return;
+        if (mapView.Overlays.Count <= 0) return;
 
         if (sender is RadioButton { IsChecked: false })
             return;
 
-        var layerOverlay = (LayerOverlay)MapView.Overlays["overlay"];
+        var layerOverlay = (LayerOverlay)mapView.Overlays["overlay"];
         var friscoRailroad = (ShapeFileFeatureLayer)layerOverlay.Layers["Railroad"];
 
         var lineStyle = new LineStyle(

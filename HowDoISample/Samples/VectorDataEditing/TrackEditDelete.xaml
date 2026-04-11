@@ -2,6 +2,8 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:thinkgeo="clr-namespace:ThinkGeo.UI.Maui;assembly=ThinkGeo.UI.Maui"
                    xmlns:howDoI="using:HowDoISample"
+                   xmlns:codeBehind="clr-namespace:HowDoISample.VectorDataEditing"
+                   x:DataType="codeBehind:TrackEditDelete"
                    x:Class="HowDoISample.VectorDataEditing.TrackEditDelete"
                    x:Name="ThisPage">
 
@@ -20,8 +22,8 @@
             <Label Grid.Row="1" FontAttributes="Italic" BackgroundColor="Black" TextColor="Yellow" FontSize="12"
                    Text="{Binding Instruction, Source={x:Reference ThisPage}}"/>
 
-            <thinkgeo:MapView Grid.Row="2" Grid.RowSpan="2" x:Name="MapView"
-                              SizeChanged="MapView_OnSizeChanged">
+            <thinkgeo:MapView Grid.Row="2" Grid.RowSpan="2" x:Name="mapView"
+                              SizeChanged="Map_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>
@@ -32,7 +34,7 @@
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
                          BackgroundColor="Transparent"
-                         Rotation="{Binding Source={x:Reference MapView}, Path=MapRotation}"/>
+                         Rotation="{Binding Source={x:Reference mapView}, Path=MapRotation}"/>
 
             <Frame Grid.Row="3" InputTransparent="False" Margin="10" WidthRequest="200" HorizontalOptions="Start" BackgroundColor="#80888888">
                 <Grid InputTransparent="True" CascadeInputTransparent="False">

@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.VectorDataGeometricOperation;
@@ -9,17 +9,17 @@ public partial class CalculateArea
     public CalculateArea()
     {
         InitializeComponent();
-        MapView.SingleTap += MapView_SingleTap;
+        mapView.SingleTap += Map_SingleTap;
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
         _initialized = true;
 
         // Set the map's unit of measurement to meters(Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,9 +29,9 @@ public partial class CalculateArea
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
-        MapView.MapTools.Add(new ZoomMapTool());
+        mapView.MapTools.Add(new ZoomMapTool());
 
         // Create a feature layer to hold the Frisco Parks data
         var friscoParksLayer = new ShapeFileFeatureLayer(Path.Combine(
@@ -48,7 +48,7 @@ public partial class CalculateArea
 
         var friscoParkOverlay = new LayerOverlay();
         friscoParkOverlay.Layers.Add("FriscoParksLayer", friscoParksLayer);
-        MapView.Overlays.Add("FriscoParksOverlay", friscoParkOverlay);
+        mapView.Overlays.Add("FriscoParksOverlay", friscoParkOverlay);
 
         // Create a layer to hold features found by the selected area query
         var selectedAreaLayer = new InMemoryFeatureLayer();
@@ -58,28 +58,28 @@ public partial class CalculateArea
 
         var selectedAreaOverlay = new LayerOverlay();
         selectedAreaOverlay.Layers.Add("SelectedAreaLayer", selectedAreaLayer);
-        MapView.Overlays.Add("SelectedAreaOverlay", selectedAreaOverlay);
+        mapView.Overlays.Add("SelectedAreaOverlay", selectedAreaOverlay);
 
         // Set the map extent
-        MapView.CenterPoint = new PointShape(-10777600, 3915260);
-        MapView.MapScale = 40000;
+        mapView.CenterPoint = new PointShape(-10777600, 3915260);
+        mapView.MapScale = 40000;
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
     ///     Calculates the area of a feature selected on the map and displays it in the areaResult TextBox
     /// </summary>
-    private async void MapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
+    private async void Map_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
-        var friscoParkOverlay = (LayerOverlay)MapView.Overlays["FriscoParksOverlay"];
+        var friscoParkOverlay = (LayerOverlay)mapView.Overlays["FriscoParksOverlay"];
         var friscoParksLayer = (ShapeFileFeatureLayer)friscoParkOverlay.Layers["FriscoParksLayer"];
 
-        var selectedAreaOverlay = (LayerOverlay)MapView.Overlays["SelectedAreaOverlay"];
+        var selectedAreaOverlay = (LayerOverlay)mapView.Overlays["SelectedAreaOverlay"];
         var selectedAreaLayer = (InMemoryFeatureLayer)selectedAreaOverlay.Layers["SelectedAreaLayer"];
 
         // Query the friscoParks layer to get the first feature closest to the map tap event
-        var pointInWorldCoordinate = MapView.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         var feature = friscoParksLayer.QueryTools.GetFeaturesNearestTo(pointInWorldCoordinate, GeographyUnit.Meter, 1,
             ReturningColumnsType.NoColumns).First();
 

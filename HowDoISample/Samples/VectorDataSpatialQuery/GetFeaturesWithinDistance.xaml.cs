@@ -19,7 +19,7 @@ public partial class GetFeaturesWithinDistance
         _initialized = true;
 
         // Set the Map Unit to meters (used in Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service. 
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,7 +29,7 @@ public partial class GetFeaturesWithinDistance
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a feature layer to hold the Frisco zoning data
         var friscoLayer = new ShapeFileFeatureLayer(Path.Combine(FileSystem.Current.AppDataDirectory, "Data", "Shapefile", "Zoning.shp"));
@@ -44,7 +44,7 @@ public partial class GetFeaturesWithinDistance
 
         var friscoOverlay = new LayerOverlay();
         friscoOverlay.Layers.Add("FriscoLayer", friscoLayer);
-        MapView.Overlays.Add("FriscoOverlay", friscoOverlay);
+        mapView.Overlays.Add("FriscoOverlay", friscoOverlay);
 
         // Create a layer to hold features found by the spatial query
         var highlightedFeaturesLayer = new InMemoryFeatureLayer();
@@ -53,20 +53,20 @@ public partial class GetFeaturesWithinDistance
 
         var highlightOverlay = new LayerOverlay();
         highlightOverlay.Layers.Add("HighlightLayer", highlightedFeaturesLayer);
-        MapView.Overlays.Add("HighlightOverlay", highlightOverlay);
+        mapView.Overlays.Add("HighlightOverlay", highlightOverlay);
 
         // Add a MarkerOverlay to the map to display the selected point for the query
         var markerOverlay = new SimpleMarkerOverlay();
-        MapView.Overlays.Add("MarkerOverlay", markerOverlay);
+        mapView.Overlays.Add("MarkerOverlay", markerOverlay);
 
         // Add a sample point to the map for the initial query
         var sampleShape = new PointShape(-10779425, 3914970);
         await GetFeatures(sampleShape);
 
         // Set the map extent to the initial area
-        MapView.MapScale = 60_000;
-        MapView.CenterPoint = new PointShape(-10777932, 3912260);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 60_000;
+        mapView.CenterPoint = new PointShape(-10777932, 3912260);
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -74,9 +74,9 @@ public partial class GetFeaturesWithinDistance
     /// </summary>
     private async Task GetFeatures(PointShape point)
     {
-        // Find the layers we will be modifying in the MapView
-        var markerOverlay = (SimpleMarkerOverlay)MapView.Overlays["MarkerOverlay"];
-        var friscoOverlay = (LayerOverlay)MapView.Overlays["FriscoOverlay"];
+        // Find the layers we will be modifying in the Map
+        var markerOverlay = (SimpleMarkerOverlay)mapView.Overlays["MarkerOverlay"];
+        var friscoOverlay = (LayerOverlay)mapView.Overlays["FriscoOverlay"];
         var friscoLayer = (ShapeFileFeatureLayer)friscoOverlay.Layers["FriscoLayer"];
 
         // Clear the query point marker overlay and add a marker on the newly drawn point
@@ -91,8 +91,8 @@ public partial class GetFeaturesWithinDistance
         await HighlightQueriedFeatures(queriedFeatures);
 
         // Disable map drawing and clear the drawn point
-        MapView.TrackOverlay.TrackMode = TrackMode.None;
-        MapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackMode = TrackMode.None;
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
     }
 
     /// <summary>
@@ -100,8 +100,8 @@ public partial class GetFeaturesWithinDistance
     /// </summary>
     private async Task HighlightQueriedFeatures(IEnumerable<Feature> features)
     {
-        // Find the layers we will be modifying in the MapView dictionary
-        var highlightOverlay = (LayerOverlay)MapView.Overlays["HighlightOverlay"];
+        // Find the layers we will be modifying in the Map dictionary
+        var highlightOverlay = (LayerOverlay)mapView.Overlays["HighlightOverlay"];
         var highlightLayer = (InMemoryFeatureLayer)highlightOverlay.Layers["HighlightLayer"];
 
         // Clear the currently highlighted features
@@ -117,7 +117,7 @@ public partial class GetFeaturesWithinDistance
     /// <summary>
     ///     Perform the spatial query when a new point is drawn
     /// </summary>
-    private async void MapView_OnMapClick(object _, TouchMapViewEventArgs e)
+    private async void Map_OnMapClick(object _, TouchMapViewEventArgs e)
     {
         await GetFeatures(e.PointInWorldCoordinate);
     }
@@ -140,7 +140,7 @@ public partial class GetFeaturesWithinDistance
     private async void mapView_SingleTap(object sender, SingleTapMapViewEventArgs e)
     {
         // Get the selected feature based on the map tap location
-        var pointInWorldCoordinate = MapView.ToWorldCoordinate(e.X, e.Y);
+        var pointInWorldCoordinate = mapView.ToWorldCoordinate(e.X, e.Y);
         await GetFeatures(pointInWorldCoordinate);
     }
 }

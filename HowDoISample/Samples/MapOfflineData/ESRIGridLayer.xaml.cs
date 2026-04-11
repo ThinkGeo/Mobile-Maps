@@ -1,4 +1,4 @@
-﻿using ThinkGeo.Core;
+using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.MapOfflineData;
@@ -19,7 +19,7 @@ public partial class EsriGridLayer
         _initialized = true;
 
         // It is important to set the map unit first to either feet, meters or decimal degrees.
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create background world map with vector tile requested from ThinkGeo Cloud Service. 
         var backgroundOverlay = new ThinkGeoVectorOverlay
@@ -29,11 +29,11 @@ public partial class EsriGridLayer
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Create a new overlay that will hold our new layer and add it to the map.
         var staticOverlay = new LayerOverlay();
-        MapView.Overlays.Add(staticOverlay);
+        mapView.Overlays.Add(staticOverlay);
 
         // Create the new layer and set the projection as the data is in srid 2276 and our background is srid 3857 (spherical mercator).
         var gridFeatureLayer = new GridFeatureLayer
@@ -72,8 +72,8 @@ public partial class EsriGridLayer
         gridFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         // Set the map scale and center point
-        MapView.MapScale = 150_000;
-        MapView.CenterPoint = new PointShape(-10778441, 3914624);
-        await MapView.RefreshAsync();
+        mapView.MapScale = 150_000;
+        mapView.CenterPoint = new PointShape(-10778441, 3914624);
+        await mapView.RefreshAsync();
     }
 }

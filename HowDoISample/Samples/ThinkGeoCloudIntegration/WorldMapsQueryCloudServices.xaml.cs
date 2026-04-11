@@ -1,4 +1,4 @@
-using ThinkGeo.Core;
+﻿using ThinkGeo.Core;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISample.ThinkGeoCloudIntegration;
@@ -12,7 +12,7 @@ public partial class WorldMapsQueryCloudServices
         InitializeComponent();
     }
 
-    private async void MapView_OnSizeChanged(object sender, EventArgs e)
+    private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
         if (_initialized)
             return;
@@ -26,10 +26,10 @@ public partial class WorldMapsQueryCloudServices
             MapType = ThinkGeoCloudVectorMapsMapType.Light,
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
         };
-        MapView.Overlays.Add(backgroundOverlay);
+        mapView.Overlays.Add(backgroundOverlay);
 
         // Set the map's unit of measurement to meters (Spherical Mercator)
-        MapView.MapUnit = GeographyUnit.Meter;
+        mapView.MapUnit = GeographyUnit.Meter;
 
         // Create a new feature layer to display the query shape used to perform the query
         var queryShapeFeatureLayer = new InMemoryFeatureLayer();
@@ -59,15 +59,15 @@ public partial class WorldMapsQueryCloudServices
         var queriedFeaturesOverlay = new LayerOverlay();
         queriedFeaturesOverlay.Layers.Add("Queried Features Layer", queriedFeaturesLayer);
         queriedFeaturesOverlay.Layers.Add("Query Shape Layer", queryShapeFeatureLayer);
-        MapView.Overlays.Add("Queried Features Overlay", queriedFeaturesOverlay);
+        mapView.Overlays.Add("Queried Features Overlay", queriedFeaturesOverlay);
 
         // Set the map extent to Frisco, TX
-        MapView.CenterPoint = new PointShape(-10779600, 3915260);
-        MapView.MapScale = 8000;
+        mapView.CenterPoint = new PointShape(-10779600, 3915260);
+        mapView.MapScale = 8000;
 
         // Add an event to handle new shapes that are drawn on the map
-        //MapView.TrackOverlay.TrackEnded += OnShapeDrawn;
-        MapView.TrackOverlay.TrackEnded += (_, args) =>
+        //mapView.TrackOverlay.TrackEnded += OnShapeDrawn;
+        mapView.TrackOverlay.TrackEnded += (_, args) =>
         {
             OnShapeDrawn(args.TrackShape);
         };
@@ -80,10 +80,10 @@ public partial class WorldMapsQueryCloudServices
         queryShapeFeatureLayer.InternalFeatures.Add(new Feature(sampleShape));
         // Run the world maps query
 
-        MapView.TrackOverlay.TrackMode = TrackMode.Polygon;
+        mapView.TrackOverlay.TrackMode = TrackMode.Polygon;
         await PerformWorldMapsQuery();
 
-        await MapView.RefreshAsync();
+        await mapView.RefreshAsync();
     }
 
     /// <summary>
@@ -91,8 +91,8 @@ public partial class WorldMapsQueryCloudServices
     /// </summary>
     private async Task PerformWorldMapsQuery()
     {
-        // Get the feature layers from the MapView
-        var queriedFeaturesOverlay = (LayerOverlay)MapView.Overlays["Queried Features Overlay"];
+        // Get the feature layers from the Map
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
         var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 
@@ -147,11 +147,11 @@ public partial class WorldMapsQueryCloudServices
     private async void OnShapeDrawn(BaseShape drawnShape)
     {
         // Disable drawing mode and clear the drawing layer
-        MapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
+        mapView.TrackOverlay.TrackShapeLayer.InternalFeatures.Clear();
         ClearQueryShapes();
 
-        // Get the query shape layer from the MapView
-        var queriedFeaturesOverlay = (LayerOverlay)MapView.Overlays["Queried Features Overlay"];
+        // Get the query shape layer from the Map
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
 
         // Add the newly drawn shape, then redraw the overlay
@@ -166,8 +166,8 @@ public partial class WorldMapsQueryCloudServices
     /// </summary>
     private void ClearQueryShapes()
     {
-        // Get the query shape layer from the MapView
-        var queriedFeaturesOverlay = (LayerOverlay)MapView.Overlays["Queried Features Overlay"];
+        // Get the query shape layer from the Map
+        var queriedFeaturesOverlay = (LayerOverlay)mapView.Overlays["Queried Features Overlay"];
         var queryShapeFeatureLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Query Shape Layer"];
         var queriedFeaturesLayer = (InMemoryFeatureLayer)queriedFeaturesOverlay.Layers["Queried Features Layer"];
 
