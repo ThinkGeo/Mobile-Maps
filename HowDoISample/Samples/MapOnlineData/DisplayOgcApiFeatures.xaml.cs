@@ -56,10 +56,19 @@ public partial class DisplayOgcApiFeatures
             DrawingBulkCount = 100
         };
 
-        mapView.CenterPoint = new PointShape(242000, 5065000);
-        mapView.MapScale = 100000;
         mapView.Overlays.Add("LayerOverlay", overlay);
 
+        mapView.CenterPoint = new PointShape(242000, 5065000);
+        mapView.MapScale = 100000;
+
         await mapView.RefreshAsync();
+
+#if WINDOWS
+        await Dispatcher.DispatchAsync(async () =>
+        {
+            await Task.Delay(100);
+            await overlay.RefreshAsync();
+        });
+#endif
     }
 }
