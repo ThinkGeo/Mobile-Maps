@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0-maccatalyst26.0;net10.0-ios26.0;net10.0-android36.0</TargetFrameworks>
+		<TargetFrameworks>net10.0-maccatalyst26.2;net10.0-ios26.2;net10.0-android36.0</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -52,11 +52,11 @@
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-ios'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-ios26.2'">
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-maccatalyst'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-maccatalyst26.2'">
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" />
 	</ItemGroup>
 	
