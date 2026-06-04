@@ -42,10 +42,11 @@ public partial class DisplayOgcApiFeatures
             YOffsetInPixel = -12
         };
 
-        var ignLayer = new OgcApiProgressiveFeatureLayer("https://api-features.ign.es", "namedplace", 200)
-        {
-            FeatureSource = { ProjectionConverter = new ProjectionConverter(4326, 3857) }
-        };
+        var projectionConverter = new ProjectionConverter(4326, 3857);
+        projectionConverter.Open();
+
+        var ignLayer = new OgcApiProgressiveFeatureLayer("https://api-features.ign.es", "namedplace", 200);
+        ignLayer.FeatureSource.ProjectionConverter = projectionConverter;
         ignLayer.ZoomLevelSet.ZoomLevel13.DefaultPointStyle = PointStyle.CreateSimplePointStyle(PointSymbolType.Circle, GeoColors.DarkRed, 10);
         ignLayer.ZoomLevelSet.ZoomLevel13.DefaultTextStyle = ignNamedPlacesTextStyle;
         ignLayer.ZoomLevelSet.ZoomLevel13.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
