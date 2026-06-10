@@ -62,13 +62,5 @@ public partial class DisplayOgcApiFeatures
         mapView.MapScale = 100000;
 
         await mapView.RefreshAsync();
-
-#if WINDOWS
-        await Dispatcher.DispatchAsync(async () =>
-        {
-            await Task.Delay(100);
-            await overlay.RefreshAsync();
-        });
-#endif
     }
 }
