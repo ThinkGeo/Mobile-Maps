@@ -137,7 +137,7 @@ public partial class ElevationCloudServices
 
         if (((LineShape)e.TrackShape).GetLength(GeographyUnit.Meter, DistanceUnit.Kilometer) > 5)
         {
-            await DisplayAlert("Alert", "Please draw a shorter line (limit: 5km)", "OK");
+            await DisplayAlertAsync("Alert", "Please draw a shorter line (limit: 5km)", "OK");
             return;
         }
 

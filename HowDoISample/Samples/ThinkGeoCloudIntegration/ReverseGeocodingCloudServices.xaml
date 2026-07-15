@@ -20,32 +20,29 @@
                 Description="{Binding Description, Source={x:Reference BasePage}}" />
 
             <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="mapView" 
-                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                               SingleTap="Map_OnSingleTap" SizeChanged="Map_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <ListView x:Name="ResultView"
-                SeparatorVisibility="Default"
-                Header="Found results: " 
-                      ItemSelected="lsbSearchResults_SelectionChanged"
+            <CollectionView  x:Name="ResultView" Header="Found results: " SelectionMode="Single"
+                      SelectionChanged="lsbSearchResults_SelectionChanged"
                       IsVisible="True" BackgroundColor="Grey" 
                       HeightRequest="240" Grid.Row="2" WidthRequest="390" 
                       HorizontalOptions="Center" VerticalOptions="End" 
                       ItemsSource="{Binding Source={x:Reference ThisPage}, Path=NearByLocations}">
-                <ListView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="core:CloudReverseGeocodingLocation">
-                        <ViewCell Height="100">
+                        <Grid Height="100">
                             <StackLayout BindingContext="{Binding .}">
                                 <Label Text="{Binding Path=Address}" FontSize="13" Padding="3"/>
                                 <!-- Address List Item Layout -->
                             </StackLayout>
-                        </ViewCell>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </Grid>
 

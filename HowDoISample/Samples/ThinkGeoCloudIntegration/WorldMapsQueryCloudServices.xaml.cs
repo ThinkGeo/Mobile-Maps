@@ -99,7 +99,7 @@ public partial class WorldMapsQueryCloudServices
         // Show an error if trying to query with no query shape
         if (queryShapeFeatureLayer.InternalFeatures.Count == 0)
         {
-            await DisplayAlert("Alert", "Please draw a shape to use for the query", "OK");
+            await DisplayAlertAsync("Alert", "Please draw a shape to use for the query", "OK");
             return;
         }
 
@@ -121,11 +121,11 @@ public partial class WorldMapsQueryCloudServices
             // Handle any errors returned from the maps query service
             if (ex is ArgumentException)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlertAsync("Error", ex.Message, "OK");
                 return;
             }
 
-            await DisplayAlert("Alert", ex.Message, "OK");
+            await DisplayAlertAsync("Alert", ex.Message, "OK");
             return;
         }
 
@@ -137,7 +137,7 @@ public partial class WorldMapsQueryCloudServices
         }
         else
         {
-            await DisplayAlert("Alert", "No features found in the selected area", "OK");
+            await DisplayAlertAsync("Alert", "No features found in the selected area", "OK");
         }
     }
 

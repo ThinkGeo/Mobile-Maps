@@ -193,11 +193,9 @@ public partial class VehicleNavigation
 		converter.Open();
 
 		using var reader = new StreamReader(stream);
-		while (!reader.EndOfStream)
+        string location;
+        while ((location = await reader.ReadLineAsync()) != null)
 		{
-			var location = await reader.ReadLineAsync();
-			if (location == null)
-				continue;
 			var posItems = location.Split(',');
 			var lat = double.Parse(posItems[0]);
 			var lon = double.Parse(posItems[1]);

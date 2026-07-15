@@ -19,7 +19,6 @@
                  Description="{Binding Description, Source={x:Reference BasePage}}" />
 
             <thinkgeo:MapView Grid.Row="1" Grid.RowSpan="2" x:Name="mapView" 
-                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
                               MapUnit="Meter" SizeChanged="Map_OnSizeChanged">
                 <thinkgeo:MapView.MapTools>
                     <thinkgeo:ZoomMapTool/>
@@ -31,10 +30,9 @@
                 <ScrollView HeightRequest="220" Margin="5"  BackgroundColor="Gray">
                     <StackLayout>
                         <Label Text="Elevation Points" FontSize="20" FontAttributes="Bold"/>
-                        <ListView x:Name="LsbElevations" BackgroundColor="Transparent">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell x:DataType="core:CloudElevationPointResult">
+                        <CollectionView x:Name="LsbElevations" BackgroundColor="Transparent">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="core:CloudElevationPointResult">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
@@ -46,14 +44,12 @@
                                             </StackLayout>
                                             <Label Grid.Row="1" Text="{Binding Path=Elevation, StringFormat='Elevation: {0:0.00} feet'}" />
                                         </Grid>
-                                    </ViewCell>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </ScrollView>
             </Grid>  
-
         </Grid>
 
     </ContentPage.Content>

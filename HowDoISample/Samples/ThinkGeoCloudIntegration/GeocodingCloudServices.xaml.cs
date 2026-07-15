@@ -53,8 +53,6 @@ public partial class GeocodingCloudServices
         {
             // Set up the CloudGeocodingOptions object based on the parameters set in the UI
             MaxResults = 10,
-            SearchMode = CloudGeocodingSearchMode.FuzzyMatch,
-            LocationType = CloudGeocodingLocationType.Default,
             ResultProjectionInSrid = 3857
         };
 
@@ -68,7 +66,7 @@ public partial class GeocodingCloudServices
         // Handle an error returned from the geocoding service
         if (searchResult.Exception != null)
         {
-            await DisplayAlert("Error", searchResult.Exception.Message, "OK");
+            await DisplayAlertAsync("Error", searchResult.Exception.Message, "OK");
             return;
         }
 
@@ -86,9 +84,14 @@ public partial class GeocodingCloudServices
 
         // Clear the existing markers and add a new marker at the chosen location
         geocodedLocationOverlay.Children.Clear();
+
+        var projectionConverter = new ProjectionConverter(4326,3857);
+        projectionConverter.Open();
+        var mercatorPoint = (PointShape)projectionConverter.ConvertToExternalProjection(chosenLocation.LocationPoint);
+
         var newMarker = new ImageMarker
         {
-            Position = chosenLocation.LocationPoint,
+            Position = mercatorPoint,
             ImagePath = "marker.png",
             TranslationY = -17,
             WidthRequest = 20,

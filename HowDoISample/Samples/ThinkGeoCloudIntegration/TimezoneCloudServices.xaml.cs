@@ -89,7 +89,7 @@ public partial class TimezoneCloudServices
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlertAsync("Error", ex.Message, "OK");
             return;
         }
 

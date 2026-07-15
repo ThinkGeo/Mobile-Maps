@@ -174,7 +174,7 @@ public partial class RoutingServiceAreaCloudServices
         // Handle an exception returned from the service
         if (getServiceAreaResult.Exception != null)
         {
-            await DisplayAlert("Alert", getServiceAreaResult.Exception.Message, "Error");
+            await DisplayAlertAsync("Alert", getServiceAreaResult.Exception.Message, "Error");
             return;
         }
 
