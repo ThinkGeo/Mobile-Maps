@@ -199,7 +199,7 @@ public partial class RoutingTspCloudServices
         // Handle an exception returned from the service
         if (optimizedRoutingResult.Exception != null)
         {
-            await DisplayAlert("Alert", optimizedRoutingResult.Exception.Message, "OK");
+            await DisplayAlertAsync("Alert", optimizedRoutingResult.Exception.Message, "OK");
             return;
         }
 
@@ -211,20 +211,19 @@ public partial class RoutingTspCloudServices
     ///     When a route segment is selected in the UI, center the map on it
     /// </summary>
     private async void lsbRouteSegments_SelectionChanged(object sender,
-        SelectedItemChangedEventArgs selectedItemChangedEventArgs)
+        SelectionChangedEventArgs e)
     {
-        var routeSegments = (ListView)sender;
-        if (routeSegments.SelectedItem == null) return;
+        var routeSegment = e.CurrentSelection.FirstOrDefault() as CloudRoutingSegment;
+        if (routeSegment == null) return;
         var routingOverlay = (LayerOverlay)mapView.Overlays["Routing Overlay"];
         var highlightLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Highlight Layer"];
         highlightLayer.InternalFeatures.Clear();
 
         // Highlight the selected route segment
-        highlightLayer.InternalFeatures.Add(
-            new Feature(((CloudRoutingSegment)routeSegments.SelectedItem).Shape));
+        highlightLayer.InternalFeatures.Add(new Feature(routeSegment.Shape));
 
         // Zoom to the selected feature and zoom out to an appropriate level
-        await mapView.ZoomToExtentAsync(((CloudRoutingSegment)routeSegments.SelectedItem).Shape.GetBoundingBox().GetCenterPoint(),
+        await mapView.ZoomToExtentAsync(routeSegment.Shape.GetBoundingBox().GetCenterPoint(),
             10000, 0, new AnimationSettings());
 
         await routingOverlay.RefreshAsync();

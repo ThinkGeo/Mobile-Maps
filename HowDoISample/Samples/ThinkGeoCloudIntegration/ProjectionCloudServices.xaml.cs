@@ -109,7 +109,7 @@ public partial class ProjectionCloudServices
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlertAsync("Error", ex.Message, "OK");
             }
 
         // Use the ProjectionCloudClient to convert between Decimal Degrees (4326) and Spherical Mercator (3857)

@@ -79,7 +79,7 @@ public partial class GeocodingCloudServices
         // Handle an error returned from the geocoding service
         if (searchResult.Exception != null)
         {
-            await DisplayAlert("Error", searchResult.Exception.Message, "OK");
+            await DisplayAlertAsync("Error", searchResult.Exception.Message, "OK");
             return;
         }
 

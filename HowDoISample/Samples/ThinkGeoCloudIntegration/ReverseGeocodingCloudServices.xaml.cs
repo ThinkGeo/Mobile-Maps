@@ -103,7 +103,7 @@ public partial class ReverseGeocodingCloudServices
         // Handle an exception returned from the service
         if (searchResult.Exception != null)
         {
-            await DisplayAlert("Alert", searchResult.Exception.Message, "Error");
+            await DisplayAlertAsync("Alert", searchResult.Exception.Message, "Error");
             return;
         }
 
@@ -169,12 +169,12 @@ public partial class ReverseGeocodingCloudServices
     /// <summary>
     ///     When a location is selected in the UI, draw the matching feature found and center the map on it
     /// </summary>
-    private async void lsbSearchResults_SelectionChanged(object sender, EventArgs e)
+    private async void lsbSearchResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var selectedResultList = (ListView)sender;
-        if (selectedResultList.SelectedItem == null) return;
+        var selectedLocation = e.CurrentSelection.FirstOrDefault() as CloudReverseGeocodingLocation;
+        if (selectedLocation == null) return;
         // Get the selected location
-        var locationFeature = ((CloudReverseGeocodingLocation)selectedResultList.SelectedItem).LocationFeature;
+        var locationFeature = selectedLocation.LocationFeature;
 
         // Get the 'Result Feature' layer from the Map            
         var searchFeaturesOverlay = (LayerOverlay)mapView.Overlays["Search Features Overlay"];
@@ -185,5 +185,11 @@ public partial class ReverseGeocodingCloudServices
         selectedResultItemFeatureLayer.InternalFeatures.Add(new Feature(locationFeature.GetShape()));
 
         await searchFeaturesOverlay.RefreshAsync();
+
+        // Optional: clear selection to allow selecting the same item again
+        if (sender is CollectionView collectionView)
+        {
+            collectionView.SelectedItem = null;
+        }
     }
 }
