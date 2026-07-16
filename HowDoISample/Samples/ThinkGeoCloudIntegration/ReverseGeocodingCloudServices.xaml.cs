@@ -92,7 +92,7 @@ public partial class ReverseGeocodingCloudServices
 
         var options = new CloudReverseGeocodingOptions
         {
-            MaxResults = 20,
+            MaxResults = 20
         };
 
         // Run the reverse geocode
