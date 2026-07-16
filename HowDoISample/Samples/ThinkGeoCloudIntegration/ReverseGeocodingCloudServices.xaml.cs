@@ -92,8 +92,7 @@ public partial class ReverseGeocodingCloudServices
 
         var options = new CloudReverseGeocodingOptions
         {
-            MaxResults = 20,
-            LocationCategories = CloudLocationCategories.All
+            MaxResults = 20
         };
 
         // Run the reverse geocode

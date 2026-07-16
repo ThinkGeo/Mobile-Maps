@@ -27,12 +27,21 @@ public partial class GeocodingCloudServices
         };
         mapView.Overlays.Add(backgroundOverlay);
 
-        // Create a marker overlay to display the geocoded locations that will be generated, and add it to the map
-        var geocodedLocationsOverlay = new SimpleMarkerOverlay();
-        mapView.Overlays.Add("Geocoded Locations Overlay", geocodedLocationsOverlay);
-
         // Set the map's unit of measurement to meters (Spherical Mercator)
         mapView.MapUnit = GeographyUnit.Meter;
+
+        // Create a new feature layer to display selected locations returned from the geocode and create styles for it
+        var selectedResultItemFeatureLayer = new InMemoryFeatureLayer();
+        // Add a point, line, and polygon style to the layer. These styles control how the shapes will be drawn
+        selectedResultItemFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Star, 24, GeoBrushes.MediumPurple, GeoPens.Purple);
+        selectedResultItemFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.MediumPurple, 6, false);
+        selectedResultItemFeatureLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(80, GeoColors.MediumPurple), GeoColors.MediumPurple, 2);
+        selectedResultItemFeatureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+        // Create a new overlay to display the selected locations returned from the geocode and add it to the map
+        var searchFeaturesOverlay = new LayerOverlay();
+        searchFeaturesOverlay.Layers.Add("Result Feature Geometry", selectedResultItemFeatureLayer);
+        mapView.Overlays.Add("Search Features Overlay", searchFeaturesOverlay);
 
         // Set the map extent
         mapView.CenterPoint = new PointShape(-10777932, 3912260);
@@ -43,18 +52,20 @@ public partial class GeocodingCloudServices
     // Search for an address using the GeocodingCloudClient and update the UI
     private async void Search_Click(object sender, EventArgs e)
     {
-        // Run the Cloud Geocoding query
-        var searchString = "6101 Frisco Square Blvd, Frisco, TX 75034";
+        // Run the Cloud Geocoding query using the address entered in the UI
+        var searchString = SearchEntry.Text?.Trim();
+        if (string.IsNullOrEmpty(searchString))
+        {
+            await DisplayAlert("Error", "Please enter an address to search", "OK");
+            return;
+        }
 
         // Show a loading graphic to let users know the request is running
         LoadingLayout.IsVisible = true;
 
         var options = new CloudGeocodingOptions
         {
-            // Set up the CloudGeocodingOptions object based on the parameters set in the UI
             MaxResults = 10,
-            SearchMode = CloudGeocodingSearchMode.FuzzyMatch,
-            LocationType = CloudGeocodingLocationType.Default,
             ResultProjectionInSrid = 3857
         };
 
@@ -74,30 +85,24 @@ public partial class GeocodingCloudServices
 
         if (searchResult.Locations.Count > 0)
         {
-            //LsbLocations.IsVisible = true;
             ZoomToLocation(searchResult.Locations[0]);
         }
     }
 
     private async void ZoomToLocation(CloudGeocodingLocation chosenLocation)
     {
-        // Get the MarkerOverlay from the Map
-        var geocodedLocationOverlay = (SimpleMarkerOverlay)mapView.Overlays["Geocoded Locations Overlay"];
+        // Get the 'Result Feature' layer from the Map
+        var searchFeaturesOverlay = (LayerOverlay)mapView.Overlays["Search Features Overlay"];
+        var selectedResultItemFeatureLayer = (InMemoryFeatureLayer)searchFeaturesOverlay.Layers["Result Feature Geometry"];
 
-        // Clear the existing markers and add a new marker at the chosen location
-        geocodedLocationOverlay.Children.Clear();
-        var newMarker = new ImageMarker
-        {
-            Position = chosenLocation.LocationPoint,
-            ImagePath = "marker.png",
-            TranslationY = -17,
-            WidthRequest = 20,
-            HeightRequest = 34
-        };
-        geocodedLocationOverlay.Children.Add(newMarker);
+        // Clear the existing features and add a new feature at the chosen location
+        selectedResultItemFeatureLayer.Open();
+        selectedResultItemFeatureLayer.Clear();
+        selectedResultItemFeatureLayer.InternalFeatures.Add(new Feature(chosenLocation.Shape));
 
         // Center the map on the chosen location
         await mapView.ZoomToExtentAsync(chosenLocation.BoundingBox.GetCenterPoint(),
         2000, 0);
+        await searchFeaturesOverlay.RefreshAsync();
     }
 }

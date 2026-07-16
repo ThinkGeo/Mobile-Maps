@@ -31,7 +31,7 @@
                     <!--Raster Image-->
                     <tgMaui:LayerOverlay Opacity="0.7" TileType="SingleTile">
                         <tgMaui:LayerOverlay.Layers>
-                            <tgCore:NativeImageRasterLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/frisco.jpg}"/>
+                            <tgCore:SkiaRasterLayer ImagePathFilename="{extensions:SafeAppDataFolder Path=Data/Jpg/frisco.jpg}"/>
                         </tgMaui:LayerOverlay.Layers>
                     </tgMaui:LayerOverlay>
 
