@@ -31,24 +31,22 @@ public partial class GraticuleLayer
         };
         mapView.Overlays.Add(backgroundOverlay);
 
-        // Create a new overlay that will hold our new layer and add it to the map.
-        var layerOverlay = new LayerOverlay();
-        mapView.Overlays.Add(layerOverlay);
+        // Create adornment overlay
+        var adornmentOverlay = new AdornmentOverlay();
 
-        // Create the new layer and set the projection as the data is in srid 4326 and our background is srid 3857 (spherical mercator).
-        var graticuleFeatureLayer = new GraticuleFeatureLayer
+        mapView.Overlays.Add(adornmentOverlay);
+
+        // Create graticule adornment layer
+        var graticuleLayer = new GraticuleAdornmentLayer
         {
-            FeatureSource =
-            {
-                ProjectionConverter = new ProjectionConverter(4326, 3857)
-            }
+            Projection = new Projection(3857)
         };
 
-        // We set the pen color to the graticule layer.
-        graticuleFeatureLayer.GraticuleLineStyle.OuterPen.Color = GeoColor.FromArgb(125, GeoColors.Navy);
+        // Set style
+        graticuleLayer.GraticuleLineStyle.OuterPen.Color =GeoColor.FromArgb(125, GeoColors.Navy);
 
-        // Add the layer to the overlay we created earlier.
-        layerOverlay.Layers.Add("graticule", graticuleFeatureLayer);
+        // Add layer
+        adornmentOverlay.Layers.Add(graticuleLayer);
 
         // Set the map scale and center point
         mapView.MapScale = 35_000;

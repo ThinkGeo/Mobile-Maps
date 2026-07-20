@@ -128,6 +128,11 @@
         "description": "Display a GPX layer."
       },
       {
+        "id": "HowDoISample.MapOfflineData.GraticuleLayer",
+        "title": "Display Graticule Lines",
+        "description": "Display graticule lines."
+      },
+      {
         "id": "HowDoISample.MapOfflineData.TabLayer",
         "title": "Display a TAB File",
         "description": "Display a TAB layer."

@@ -56,7 +56,7 @@ public partial class GeocodingCloudServices
         var searchString = SearchEntry.Text?.Trim();
         if (string.IsNullOrEmpty(searchString))
         {
-            await DisplayAlert("Error", "Please enter an address to search", "OK");
+            await DisplayAlertAsync("Error", "Please enter an address to search", "OK");
             return;
         }
 
