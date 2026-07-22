@@ -507,11 +507,6 @@
         "id": "HowDoISample.ThinkGeoCloudIntegration.ProjectionCloudServices",
         "title": "Projection",
         "description": "Project features using ThinkGeo Cloud."
-      },
-      {
-        "id": "HowDoISample.ThinkGeoCloudIntegration.WorldMapsQueryCloudServices",
-        "title": "World Maps Query",
-        "description": "Draw a polygon and get the intersecting buildings using ThinkGeo Cloud. Long press to end drawing."
       }
     ]
   },

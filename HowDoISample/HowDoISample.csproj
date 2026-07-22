@@ -659,9 +659,6 @@
 	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\TimezoneCloudServices.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
