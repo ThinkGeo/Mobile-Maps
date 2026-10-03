@@ -9,6 +9,7 @@ public partial class DisplayRasterFileTiles
 {
     private XyzFileTilesAsyncLayer fileTilesAsyncLayer;
     private LayerOverlay layerOverlay;
+    private bool _initialized;
 
     public DisplayRasterFileTiles()
     {
@@ -19,6 +20,10 @@ public partial class DisplayRasterFileTiles
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
+        if (_initialized)
+            return;
+        _initialized = true;
+
         var appDataDirectory = FileSystem.AppDataDirectory;
         var targetFileDirectory = Path.Combine(appDataDirectory, "Data", "OSM_Tiles_z0-z5_Created_By_QGIS");
         if (!Directory.Exists(targetFileDirectory))
