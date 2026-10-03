@@ -69,10 +69,7 @@
 	  <None Remove="Data\GridFile\Mosquitoes.grd" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
-	  <None Remove="Data\Json\mutedblue.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
+	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt-gl.json" />
 	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
 	  <None Remove="Data\Mbtiles\style.json" />
 	  <None Remove="Data\Mbtiles\test.mbtiles" />
@@ -195,10 +192,7 @@
 	  <EmbeddedResource Include="Data\Jpg\m87_9.jpg" />
 	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
 	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
-	  <EmbeddedResource Include="Data\Json\mutedblue.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
+	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt-gl.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
 	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\test.mbtiles" />

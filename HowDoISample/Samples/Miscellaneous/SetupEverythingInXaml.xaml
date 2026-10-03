@@ -23,10 +23,8 @@
 
                     <!--Background Overlay -->
                     <!-- ReSharper disable once MarkupAttributeTypo -->
-                    <tgMaui:ThinkGeoVectorOverlay
-                            ClientId="9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~" 
-                            ClientSecret="vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~" 
-                            MapType="Light"/>
+                    <tgMaui:ThinkGeoVectorTileOverlay
+                            ApiKey="SGjwpxF60knqZi3R0A9RRE3GqiuRA1LsnxHMot7rJ58~"/>
 
                     <!--Raster Image-->
                     <tgMaui:LayerOverlay Opacity="0.7" TileType="SingleTile">

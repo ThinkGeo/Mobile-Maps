@@ -45,10 +45,9 @@ public partial class TrackEditDelete
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret,
-            ThinkGeoCloudVectorMapsMapType.Dark)
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey, ThinkGeoVectorStyles.Dark)
         {
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileDark_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 

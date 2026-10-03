@@ -43,12 +43,9 @@ public partial class Navigation
 		mapView.MapUnit = GeographyUnit.Meter;
 
 		// Add ThinkGeo Cloud Maps as the background 
-		var backgroundOverlay = new ThinkGeoVectorOverlay()
+		var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
 		{
-			ClientId = SampleKeys.ClientId,
-			ClientSecret = SampleKeys.ClientSecret,
-			MapType = ThinkGeoCloudVectorMapsMapType.Light,
-			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
 		};
 		mapView.Overlays.Add(backgroundOverlay);
 
@@ -85,9 +82,9 @@ public partial class Navigation
 			await mapView.ZoomToExtentAsync(mapView.CenterPoint, mapView.MapScale, 0);
 		ThemeCheckBox.CheckedChanged += async (_, args) =>
 		{
-			backgroundOverlay.MapType = args.Value
-					? ThinkGeoCloudVectorMapsMapType.Dark
-					: ThinkGeoCloudVectorMapsMapType.Light;
+			backgroundOverlay.StyleUri = args.Value
+					? ThinkGeoVectorStyles.Dark
+					: ThinkGeoVectorStyles.Light;
 
 			await UpdateCancellationToken();
 			// if we don't pass in _cancellationTokenSource.Token, the tiles could be messed up when checking/unchecking the Dark Theme checkbox quickly. 

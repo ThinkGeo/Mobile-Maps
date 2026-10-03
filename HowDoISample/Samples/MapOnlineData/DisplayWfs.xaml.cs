@@ -22,15 +22,12 @@ public partial class DisplayWfs
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
-        var thinkGeoVectorOverlay = new ThinkGeoVectorOverlay
+        var thinkGeoVectorTileOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
             // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
             TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
         };
-        mapView.Overlays.Add(thinkGeoVectorOverlay);
+        mapView.Overlays.Add(thinkGeoVectorTileOverlay);
 
         var helsinkiParcelsLayer = new WfsV2ProgressiveFeatureLayer("https://inspire-wfs.maanmittauslaitos.fi/inspire-wfs/cp/ows", "cp:CadastralParcel")
         {
