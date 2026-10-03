@@ -12,15 +12,13 @@ namespace ThinkGeo.UI.iOS.HowDoI
         {
             base.ViewDidLoad();
 
-            var thinkGeoCloudVectorMapsLayer = new ThinkGeoVectorMapsAsyncLayer(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret, ThinkGeoCloudVectorMapsMapType.Light);
-            thinkGeoCloudVectorMapsLayer.BitmapTileCache = null;
-            thinkGeoCloudVectorMapsLayer.VectorTileCache = null;
+            var thinkGeoVectorTileLayer = new ThinkGeoVectorTileAsyncLayer(SampleHelper.ThinkGeoApiKey);
 
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileWidth = 512;
             layerOverlay.TileHeight = 512;
             layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
-            layerOverlay.Layers.Add(thinkGeoCloudVectorMapsLayer);
+            layerOverlay.Layers.Add(thinkGeoVectorTileLayer);
 
             MapView.Overlays.Add(layerOverlay);
             MapView.MapUnit = GeographyUnit.Meter;
