@@ -190,7 +190,7 @@ public partial class RoutingServiceAreaCloudServices
             // Set up the legend adornment
             Title = new LegendItem
             {
-                TextStyle = new TextStyle("Travel Times", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+                TextStyle = new TextStyle("Travel Times", new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold),
                 GeoBrushes.Black)
             },
             Location = AdornmentLocation.LowerRight
@@ -203,7 +203,7 @@ public partial class RoutingServiceAreaCloudServices
             var legendItem = new LegendItem
             {
                 ImageStyle = classBreak.DefaultAreaStyle,
-                TextStyle = new TextStyle($"<{classBreak.Value} minutes", new GeoFont("Verdana", 10),
+                TextStyle = new TextStyle($"<{classBreak.Value} minutes", new GeoFont("Noto Sans", 10),
                     GeoBrushes.Black)
             };
             legend.LegendItems.Add(legendItem);

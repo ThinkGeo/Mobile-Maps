@@ -37,7 +37,7 @@ public partial class CreateClassBreakStyle
             // Set up the legend adornment
             Title = new LegendItem
             {
-                TextStyle = new TextStyle("Housing Units", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+                TextStyle = new TextStyle("Housing Units", new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold),
                     GeoBrushes.Black)
             },
             Location = AdornmentLocation.LowerRight
@@ -89,7 +89,7 @@ public partial class CreateClassBreakStyle
             var legendItem = new LegendItem
             {
                 ImageStyle = classBreak.DefaultAreaStyle,
-                TextStyle = new TextStyle($">{classBreak.Value} units", new GeoFont("Verdana", 10),
+                TextStyle = new TextStyle($">{classBreak.Value} units", new GeoFont("Noto Sans", 10),
                     GeoBrushes.Black)
             };
             legend.LegendItems.Add(legendItem);

@@ -58,7 +58,7 @@ public partial class CreatePointStyle
         };
 
         // Create a font point style
-        _fontStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
+        _fontStyle = new PointStyle(new GeoFont("Noto Sans", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
         {
             Mask = new AreaStyle(GeoBrushes.White),
             MaskType = MaskType.Circle,

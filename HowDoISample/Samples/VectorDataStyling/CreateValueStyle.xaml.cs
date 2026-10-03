@@ -46,7 +46,7 @@ public partial class CreateValueStyle
         // Set up the legend adornment
         legend.Title = new LegendItem
         {
-            TextStyle = new TextStyle("Crime Categories", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+            TextStyle = new TextStyle("Crime Categories", new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold),
                 GeoBrushes.Black)
         };
         legend.Location = AdornmentLocation.LowerRight;
@@ -88,7 +88,7 @@ public partial class CreateValueStyle
             var legendItem = new LegendItem
             {
                 ImageStyle = style,
-                TextStyle = new TextStyle(offenseGroup.ColumnValue, new GeoFont("Verdana", 10), GeoBrushes.Black)
+                TextStyle = new TextStyle(offenseGroup.ColumnValue, new GeoFont("Noto Sans", 10), GeoBrushes.Black)
             };
             legend.LegendItems.Add(legendItem);
         }

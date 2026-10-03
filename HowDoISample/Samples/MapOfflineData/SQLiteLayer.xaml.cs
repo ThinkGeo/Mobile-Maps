@@ -55,7 +55,7 @@ public partial class SqLiteLayer
         restaurantsOverlay.Layers.Add("Frisco Restaurants", restaurantsLayer);
 
         // Create a new text style and set various settings to make it look good.
-        var textStyle = new TextStyle("Name", new GeoFont("Arial", 10), GeoBrushes.Black)
+        var textStyle = new TextStyle("Name", new GeoFont("Noto Sans", 10), GeoBrushes.Black)
         {
             MaskType = MaskType.RoundedCorners,
             OverlappingRule = LabelOverlappingRule.NoOverlapping,

@@ -160,7 +160,7 @@ public partial class CreateTextStyle
     /// </summary>
     private static void StyleHotelsLayer(FeatureLayer hotelsLayer)
     {
-        var textStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold),
+        var textStyle = new TextStyle("NAME", new GeoFont("Noto Sans", 12, DrawingFontStyles.Bold),
             GeoBrushes.DarkRed)
         {
             TextPlacement = TextPlacement.Center,
@@ -187,7 +187,7 @@ public partial class CreateTextStyle
     }
     private static void StyleStreetsLayer_LabelOnly(FeatureLayer streetsLayer)
     {
-        var textStyle = new TextStyle("FULL_NAME", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold),
+        var textStyle = new TextStyle("FULL_NAME", new GeoFont("Noto Sans", 12, DrawingFontStyles.Bold),
             GeoBrushes.MidnightBlue)
         {
             SplineType = SplineType.StandardSplining,
@@ -224,7 +224,7 @@ public partial class CreateTextStyle
     }
     private static void StyleParksLayer_LabelOnly(FeatureLayer parksLayer)
     {
-        var textStyle = new TextStyle("NAME", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold),
+        var textStyle = new TextStyle("NAME", new GeoFont("Noto Sans", 12, DrawingFontStyles.Bold),
             GeoBrushes.DarkGreen)
         {
             FittingPolygon = false,

@@ -59,7 +59,7 @@ public partial class InMemoryLayer
         foreach (var feature in features) inMemoryFeatureLayer.InternalFeatures.Add(feature);
 
         // Create a text style for the label and give it a mask for use below.
-        var textStyle = new TextStyle("Trap: [TrapID]", new GeoFont("ariel", 14), GeoBrushes.Black)
+        var textStyle = new TextStyle("Trap: [TrapID]", new GeoFont("Noto Sans", 14), GeoBrushes.Black)
         {
             Mask = new AreaStyle(GeoPens.Black, GeoBrushes.White),
             MaskMargin = new DrawingMargin(2, 2, 2, 2),
