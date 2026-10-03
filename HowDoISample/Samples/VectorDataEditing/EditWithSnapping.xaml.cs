@@ -27,7 +27,7 @@ public partial class EditWithSnapping
 
         // Add Cloud Maps as a background overlay
         var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey);
-        backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache");
+        backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache");
         mapView.Overlays.Add("Background Maps", backgroundOverlay);
 
         mapView.CenterPoint = new RectangleShape(-10783147, 3917677, -10782596, 3917271).GetCenterPoint();
