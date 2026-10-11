@@ -31,6 +31,8 @@
 		<WindowsAppSDKSelfContained Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">true</WindowsAppSDKSelfContained>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
+		<!-- Mono's concurrent GC crashes Android Release builds under heavy allocation: https://github.com/dotnet/runtime/issues/123537 -->
+		<AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
   </PropertyGroup>
 
 	<ItemGroup>
