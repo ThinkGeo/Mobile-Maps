@@ -46,11 +46,11 @@ public partial class CreateRegexStyle
 
         var regexStyle = new RegexStyle
         {
-            ColumnName = "Comments"
+            ColumnName = "Behavior"
         };
 
-        var largeItem = new RegexItem("big|large|huge", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
-        regexStyle.RegexItems.Add(largeItem);
+        var injuredOrSickItem = new RegexItem("injured|sick", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
+        regexStyle.RegexItems.Add(injuredOrSickItem);
 
         var allSightingsStyle = new PointStyle(PointSymbolType.Circle, 5, GeoBrushes.Green);
 
