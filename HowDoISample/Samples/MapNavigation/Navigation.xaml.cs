@@ -19,7 +19,7 @@ public partial class Navigation
 
 	private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
 	{
-		CompassButton.Rotation = (float)(mapView.MapRotation);
+		CompassHolder.Rotation = mapView.MapRotation;
 	}
 
 	public bool GpsEnabled
