@@ -26,11 +26,11 @@
                 <Button WidthRequest="40" HeightRequest="40" CornerRadius="5"
                         Text="+" TextColor="Black" BackgroundColor="White"
                         BorderColor="Black" BorderWidth="2"
-                        FontSize="30" Clicked="ZoomInButton_OnClicked"/>
+                        FontSize="30" Padding="0" Clicked="ZoomInButton_OnClicked"/>
                 <Button WidthRequest="40" HeightRequest="40" CornerRadius="5"
                         Text="-" TextColor="Black" BackgroundColor="White"
                         BorderColor="Black" BorderWidth="2"
-                        FontSize="30" Clicked="ZoomOutButton_OnClicked"/>
+                        FontSize="30" Padding="0" Clicked="ZoomOutButton_OnClicked"/>
             </StackLayout>
             <!-- The compass turns with the map. It is the holder that turns: on Windows a rotated ImageButton
                  draws upright, a rotated layout does not. -->
