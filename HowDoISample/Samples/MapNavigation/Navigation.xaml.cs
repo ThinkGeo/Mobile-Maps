@@ -85,6 +85,9 @@ public partial class Navigation
 			backgroundOverlay.StyleUri = args.Value
 					? ThinkGeoVectorStyles.Dark
 					: ThinkGeoVectorStyles.Light;
+			// Each style keeps its tiles in a cache of its own.
+			backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,
+				args.Value ? "ThinkGeoVectorTileDark_RasterCache" : "ThinkGeoVectorTileLight_RasterCache");
 
 			await UpdateCancellationToken();
 			// if we don't pass in _cancellationTokenSource.Token, the tiles could be messed up when checking/unchecking the Dark Theme checkbox quickly. 
