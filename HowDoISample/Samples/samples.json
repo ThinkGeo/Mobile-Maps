@@ -275,7 +275,7 @@
       {
         "id": "HowDoISample.VectorDataStyling.CreateHeatStyle",
         "title": "Display HeatMap",
-        "description": "Render a heatmap using a HeatStyle."
+        "description": "Render a heatmap using a HeatmapStyle."
       },
       {
         "id": "HowDoISample.VectorDataStyling.IsoLineLayer",

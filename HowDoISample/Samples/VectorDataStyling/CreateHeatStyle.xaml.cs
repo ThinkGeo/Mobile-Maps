@@ -44,19 +44,26 @@ public partial class CreateHeatStyle
         // Add the overlay to the map
         mapView.Overlays.Add(layerOverlay);
 
-        // Apply HeatStyle
+        // Apply the heatmap style
         AddHeatStyle(coyoteSightings);
 
         // Set the map scale and center point
-        mapView.MapScale = 200000;
-        mapView.CenterPoint = new PointShape(-10778209, 3914820);
+        // The heatmap's radius is in screen pixels, so the scale decides how much the sightings overlap.
+        mapView.MapScale = 68000;
+        mapView.CenterPoint = new PointShape(-10778000, 3912500);
         await mapView.RefreshAsync();
     }
 
     private static void AddHeatStyle(FeatureLayer layer)
     {
-        // Create the heat style
-        var heatStyle = new HeatStyle(20, 1, DistanceUnit.Kilometer);
+        // Create the heatmap style: each sighting spreads a Gaussian of heat 22 pixels wide, and
+        // the heat adds up where sightings crowd together.
+        var heatStyle = new HeatmapStyle
+        {
+            Radius = 22,
+            Intensity = 0.55f,
+            Opacity = 0.85f
+        };
 
         // Add the point style to the collection of custom styles for ZoomLevel 1.
         layer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(heatStyle);
