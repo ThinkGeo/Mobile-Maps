@@ -169,8 +169,6 @@
 	  <None Remove="Resources\Raw\coyote_paw.png" />
 	  <None Remove="Resources\Raw\vandalism_icon.png" />
 	  <None Remove="Resources\Raw\weapon_icon.png" />
-	  <None Remove="thinkgeo.howdoi.maui.android.mapsuitelicense" />
-	  <None Remove="thinkgeo.howdoi.maui.ios.mapsuitelicense" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -665,7 +663,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-    <PackageReference Include="ThinkGeo.UI.Maui" Version="15.0.0-beta250" />
+    <PackageReference Include="ThinkGeo.UI.Maui" Version="15.0.0-beta263" />
   </ItemGroup>
 
   <ItemGroup>

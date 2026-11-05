@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Reflection;
-using ThinkGeo.UI.Maui;
 
 namespace HowDoISample;
 public partial class App
@@ -17,8 +16,6 @@ public partial class App
 
     protected override async void OnStart()
     {
-        await LicenseLoader.LoadLicense("thinkgeo.howdoi.maui.android.mapsuitelicense");
-        await LicenseLoader.LoadLicense("thinkgeo.howdoi.maui.ios.mapsuitelicense");
         await CopySampleData(FileSystem.Current.AppDataDirectory);
 
         if (Application.Current?.Windows.FirstOrDefault() is Window window)
