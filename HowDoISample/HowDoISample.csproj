@@ -68,7 +68,6 @@
 	  <None Remove="Data\GeoTiff\World.tfw" />
 	  <None Remove="Data\GeoTiff\World.tif" />
 	  <None Remove="Data\Gpx\Hike_Bike.gpx" />
-	  <None Remove="Data\GridFile\Mosquitoes.grd" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
 	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt-gl.json" />
@@ -177,7 +176,6 @@
 	  <EmbeddedResource Include="Data\GeoTiff\World.tfw" />
 	  <EmbeddedResource Include="Data\GeoTiff\World.tif" />
 	  <EmbeddedResource Include="Data\Gpx\Hike_Bike.gpx" />
-	  <EmbeddedResource Include="Data\GridFile\Mosquitoes.grd" />
 	  <EmbeddedResource Include="Data\Jpg\frisco.jgw" />
 	  <EmbeddedResource Include="Data\Jpg\frisco.jpg" />
 	  <EmbeddedResource Include="Data\Jpg\m87_0.jpg" />
@@ -367,9 +365,6 @@
 	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\SQLiteLayer.xaml.cs">
 	    <DependentUpon>SqLiteLayer.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Samples\MapOfflineData\ESRIGridLayer.xaml.cs">
-	    <DependentUpon>EsriGridLayer.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\GPXLayer.xaml.cs">
 	    <DependentUpon>GPXLayer.xaml</DependentUpon>

@@ -118,11 +118,6 @@
         "description": "This sample displays a JPEG image, but you can use the same code to display common image types such as PNG and BMP."
       },
       {
-        "id": "HowDoISample.MapOfflineData.EsriGridLayer",
-        "title": "Display a Grid File",
-        "description": "Display a grid layer."
-      },
-      {
         "id": "HowDoISample.MapOfflineData.GpxLayer",
         "title": "Display a GPX File",
         "description": "Display a GPX layer."
