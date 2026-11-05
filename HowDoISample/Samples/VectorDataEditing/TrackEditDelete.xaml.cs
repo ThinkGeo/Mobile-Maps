@@ -143,6 +143,10 @@ public partial class TrackEditDelete
             return;
         if (mapView == null)
             return;
+        // The box starts checked, so this also runs while the page loads, before the map has its
+        // overlays; the map then starts in Draw Point mode by itself.
+        if (!mapView.Overlays.Contains("layerOverlay"))
+            return;
 
         // Update the layer's features from any previous mode
         await UpdateLayerFeaturesAsync();
