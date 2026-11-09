@@ -29,12 +29,9 @@ public partial class CreateClusterPointStyle
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add ThinkGeo Vector Maps as the background overlay.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -76,7 +73,7 @@ public partial class CreateClusterPointStyle
         };
 
         // Create a text style that will display the number of features within a clustered point
-        var textStyle = new TextStyle("FeatureCount", new GeoFont("Segoe UI", 12, DrawingFontStyles.Bold),
+        var textStyle = new TextStyle("FeatureCount", new GeoFont("Noto Sans", 12, DrawingFontStyles.Bold),
             GeoBrushes.DimGray)
         {
             HaloPen = new GeoPen(GeoBrushes.White, 2),

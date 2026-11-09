@@ -26,12 +26,9 @@ public partial class CreatePointStyle
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -58,7 +55,7 @@ public partial class CreatePointStyle
         };
 
         // Create a font point style
-        _fontStyle = new PointStyle(new GeoFont("Verdana", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
+        _fontStyle = new PointStyle(new GeoFont("Noto Sans", 16, DrawingFontStyles.Bold), "@", GeoBrushes.Black)
         {
             Mask = new AreaStyle(GeoBrushes.White),
             MaskType = MaskType.Circle,

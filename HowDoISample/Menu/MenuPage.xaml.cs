@@ -98,30 +98,36 @@ public partial class MenuPage
         public List<SampleInfo> Children { get; set; }
     }
 
-    private async void CollectionViewMenu_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private async void CollectionViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (e.SelectedItem is not SampleInfo selectedSample)
+        var selectedSample = e.CurrentSelection.FirstOrDefault() as SampleInfo;
+
+        if (selectedSample == null)
+            return;
+      
+        if (sender is not CollectionView collectionView)
             return;
 
-        if (sender is not ListView listView)
+        if (collectionView.ItemsSource is not IEnumerable<GroupInfo> groups)
             return;
 
-        // deselect all the other menu items 
-        foreach (var item in listView.ItemsSource)
+        // Update selected state
+        foreach (var groupInfo in groups)
         {
-            var groupInfo = (GroupInfo)item;
             foreach (var sampleInfo in groupInfo)
-                sampleInfo.IsSelected = false;
+            {
+                sampleInfo.IsSelected = sampleInfo == selectedSample;
+            }
         }
 
-        selectedSample.IsSelected = true;
+        var shell = Application.Current?.Windows.FirstOrDefault()?.Page as AppShell;
 
-        // Navigate to the selected page
-        var targetType = Type.GetType(selectedSample.Id);
-        if (targetType == null) return;
+        if (shell == null)
+            return;
 
-        if (Application.Current?.MainPage is not AppShell shell) return;
         await shell.NavigateFromMenu(selectedSample);
+
+        collectionView.SelectedItem = null;
         Shell.Current.FlyoutIsPresented = false;
     }
 }

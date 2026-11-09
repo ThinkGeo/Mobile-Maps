@@ -23,12 +23,9 @@ public partial class CreateValueStyle
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -46,7 +43,7 @@ public partial class CreateValueStyle
         // Set up the legend adornment
         legend.Title = new LegendItem
         {
-            TextStyle = new TextStyle("Crime Categories", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+            TextStyle = new TextStyle("Crime Categories", new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold),
                 GeoBrushes.Black)
         };
         legend.Location = AdornmentLocation.LowerRight;
@@ -88,7 +85,7 @@ public partial class CreateValueStyle
             var legendItem = new LegendItem
             {
                 ImageStyle = style,
-                TextStyle = new TextStyle(offenseGroup.ColumnValue, new GeoFont("Verdana", 10), GeoBrushes.Black)
+                TextStyle = new TextStyle(offenseGroup.ColumnValue, new GeoFont("Noto Sans", 10), GeoBrushes.Black)
             };
             legend.LegendItems.Add(legendItem);
         }

@@ -30,13 +30,14 @@
             </thinkgeo:MapView>
 
             <ImageButton x:Name="CompassButton" Grid.Row="2" 
+                         x:DataType="thinkgeo:MapView"
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 
                          BackgroundColor="Transparent"
                          Rotation="{Binding Source={x:Reference mapView}, Path=MapRotation}"/>
 
-            <Frame Grid.Row="3" InputTransparent="False" Margin="10" WidthRequest="200" HorizontalOptions="Start" BackgroundColor="#80888888">
+            <Border Grid.Row="3" InputTransparent="False" Margin="10" WidthRequest="200" HorizontalOptions="Start" BackgroundColor="#80888888">
                 <Grid InputTransparent="True" CascadeInputTransparent="False">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -59,7 +60,7 @@
                     <RadioButton Grid.Row="5" Content="Edit Shape"      CheckedChanged="EditShape_Click" />
                     <RadioButton Grid.Row="6" Content="Delete Shape"    CheckedChanged="DeleteShape_Click"  x:Name="DeleteShapeRadioButton"/>
                 </Grid>
-            </Frame>
+            </Border>
 
         </Grid>
     </ContentPage.Content>

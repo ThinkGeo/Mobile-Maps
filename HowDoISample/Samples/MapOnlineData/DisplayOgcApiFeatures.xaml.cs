@@ -22,18 +22,15 @@ public partial class DisplayOgcApiFeatures
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
-        var thinkGeoVectorOverlay = new ThinkGeoVectorOverlay()
+        var thinkGeoVectorTileOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            // Set up the tile cache for the ThinkGeoCloudVectorMapsOverlay, passing in the location and an ID to distinguish the cache. 
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "thinkgeo_vector_light")
+            // Set up the tile cache for the ThinkGeoVectorTileOverlay, passing in the location and an ID to distinguish the cache.
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
-        mapView.Overlays.Add(thinkGeoVectorOverlay);
+        mapView.Overlays.Add(thinkGeoVectorTileOverlay);
 
         // Create a new text style and set various settings to make it look good.
-        var ignNamedPlacesTextStyle = new TextStyle("etiqueta", new GeoFont("Arial", 14), GeoBrushes.DarkRed)
+        var ignNamedPlacesTextStyle = new TextStyle("etiqueta", new GeoFont("Noto Sans", 14), GeoBrushes.DarkRed)
         {
             MaskType = MaskType.RoundedCorners,
             OverlappingRule = LabelOverlappingRule.NoOverlapping,
@@ -42,11 +39,10 @@ public partial class DisplayOgcApiFeatures
             YOffsetInPixel = -12
         };
 
-        var projectionConverter = new ProjectionConverter(4326, 3857);
-        projectionConverter.Open();
-
-        var ignLayer = new OgcApiProgressiveFeatureLayer("https://api-features.ign.es", "namedplace", 200);
-        ignLayer.FeatureSource.ProjectionConverter = projectionConverter;
+        var ignLayer = new OgcApiProgressiveFeatureLayer("https://api-features.ign.es", "namedplace", 200)
+        {
+            FeatureSource = { ProjectionConverter = new ProjectionConverter(4326, 3857) }
+        };
         ignLayer.ZoomLevelSet.ZoomLevel13.DefaultPointStyle = PointStyle.CreateSimplePointStyle(PointSymbolType.Circle, GeoColors.DarkRed, 10);
         ignLayer.ZoomLevelSet.ZoomLevel13.DefaultTextStyle = ignNamedPlacesTextStyle;
         ignLayer.ZoomLevelSet.ZoomLevel13.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
@@ -57,9 +53,10 @@ public partial class DisplayOgcApiFeatures
             DrawingBulkCount = 100
         };
 
+        mapView.Overlays.Add("LayerOverlay", overlay);
+
         mapView.CenterPoint = new PointShape(242000, 5065000);
         mapView.MapScale = 100000;
-        mapView.Overlays.Add("LayerOverlay", overlay);
 
         await mapView.RefreshAsync();
     }

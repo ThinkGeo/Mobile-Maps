@@ -9,6 +9,7 @@ public partial class DisplayRasterMBTilesFile
 {
     private RasterMbTilesAsyncLayer rasterMbTilesLayer;
     private LayerOverlay layerOverlay;
+    private bool _initialized;
 
     public DisplayRasterMBTilesFile()
     {
@@ -17,6 +18,10 @@ public partial class DisplayRasterMBTilesFile
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
+        if (_initialized)
+            return;
+        _initialized = true;
+
         layerOverlay = new LayerOverlay();
         mapView.Overlays.Add(layerOverlay);
         string filePath = Path.Combine(FileSystem.AppDataDirectory, "Data", "Mbtiles", "test.mbtiles");

@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using ThinkGeo.UI.Maui;
 
 namespace MauiSample
 {
@@ -14,8 +13,6 @@ namespace MauiSample
 
         protected override async void OnStart()
         {
-            await LicenseLoader.LoadLicense("mauidemo.thinkgeo.com.android.mapsuitelicense");
-            await LicenseLoader.LoadLicense("mauidemo.thinkgeo.com.ios.mapsuitelicense");
             await CopySampleData(FileSystem.Current.AppDataDirectory);
             MainPage = new AppShell();
         }

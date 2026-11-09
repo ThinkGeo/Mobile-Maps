@@ -204,3 +204,4 @@ FakesAssemblies/
 *.opt
 /ThinkGeo.UI/Desktop/DesktopSamples-HowDoI/SyntaxHighlighter/SourceCode/SimplyRotateMap.xaml.cs.html
 /ConsoleApp1
+*.idea

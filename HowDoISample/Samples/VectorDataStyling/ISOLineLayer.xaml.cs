@@ -23,12 +23,9 @@ public partial class IsoLineLayer
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create background world map with vector tile requested from ThinkGeo Cloud Service.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -127,7 +124,7 @@ public partial class IsoLineLayer
         }
 
         //Create the text styles to label the lines and add it to the iso line layer
-        var textStyle = TextStyle.CreateSimpleTextStyle(dynamicIsoLineLayer.DataValueColumnName, "Arial", 10,
+        var textStyle = TextStyle.CreateSimpleTextStyle(dynamicIsoLineLayer.DataValueColumnName, "Noto Sans", 10,
             DrawingFontStyles.Bold, GeoColors.Black, 0, 0);
         textStyle.HaloPen = new GeoPen(GeoColors.White, 2);
         textStyle.OverlappingRule = LabelOverlappingRule.NoOverlapping;

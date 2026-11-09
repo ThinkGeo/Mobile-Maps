@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-maccatalyst;net9.0-ios;net9.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net10.0-maccatalyst;net10.0-ios;net10.0-android36.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<UseMaui>true</UseMaui>
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
     <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
     <SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -30,6 +31,8 @@
 		<WindowsAppSDKSelfContained Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">true</WindowsAppSDKSelfContained>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
+		<!-- Mono's concurrent GC crashes Android Release builds under heavy allocation: https://github.com/dotnet/runtime/issues/123537 -->
+		<AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -48,7 +51,7 @@
 	</ItemGroup>
 
 	<!-- Splash Screen -->
-	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.19041.0'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-windows10.0.19041.0'">
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128" />
 	</ItemGroup>
 
@@ -65,13 +68,9 @@
 	  <None Remove="Data\GeoTiff\World.tfw" />
 	  <None Remove="Data\GeoTiff\World.tif" />
 	  <None Remove="Data\Gpx\Hike_Bike.gpx" />
-	  <None Remove="Data\GridFile\Mosquitoes.grd" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
 	  <None Remove="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
-	  <None Remove="Data\Json\mutedblue.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-dark.json" />
-	  <None Remove="Data\Json\thinkgeo-world-streets-light.json" />
+	  <None Remove="Data\Json\thinkgeo-world-streets-cobalt-gl.json" />
 	  <None Remove="Data\Mbtiles\maplibre.mbtiles" />
 	  <None Remove="Data\Mbtiles\style.json" />
 	  <None Remove="Data\Mbtiles\test.mbtiles" />
@@ -169,8 +168,6 @@
 	  <None Remove="Resources\Raw\coyote_paw.png" />
 	  <None Remove="Resources\Raw\vandalism_icon.png" />
 	  <None Remove="Resources\Raw\weapon_icon.png" />
-	  <None Remove="thinkgeo.howdoi.maui.android.mapsuitelicense" />
-	  <None Remove="thinkgeo.howdoi.maui.ios.mapsuitelicense" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -179,7 +176,6 @@
 	  <EmbeddedResource Include="Data\GeoTiff\World.tfw" />
 	  <EmbeddedResource Include="Data\GeoTiff\World.tif" />
 	  <EmbeddedResource Include="Data\Gpx\Hike_Bike.gpx" />
-	  <EmbeddedResource Include="Data\GridFile\Mosquitoes.grd" />
 	  <EmbeddedResource Include="Data\Jpg\frisco.jgw" />
 	  <EmbeddedResource Include="Data\Jpg\frisco.jpg" />
 	  <EmbeddedResource Include="Data\Jpg\m87_0.jpg" />
@@ -194,10 +190,7 @@
 	  <EmbeddedResource Include="Data\Jpg\m87_9.jpg" />
 	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jgw" />
 	  <EmbeddedResource Include="Data\Jpg\m_3309650_sw_14_1_20160911_20161121.jpg" />
-	  <EmbeddedResource Include="Data\Json\mutedblue.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-dark.json" />
-	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-light.json" />
+	  <EmbeddedResource Include="Data\Json\thinkgeo-world-streets-cobalt-gl.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\maplibre.mbtiles" />
 	  <EmbeddedResource Include="Data\Mbtiles\style.json" />
 	  <EmbeddedResource Include="Data\Mbtiles\test.mbtiles" />
@@ -372,9 +365,6 @@
 	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\SQLiteLayer.xaml.cs">
 	    <DependentUpon>SqLiteLayer.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Samples\MapOfflineData\ESRIGridLayer.xaml.cs">
-	    <DependentUpon>EsriGridLayer.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Samples\MapOfflineData\GPXLayer.xaml.cs">
 	    <DependentUpon>GPXLayer.xaml</DependentUpon>
@@ -658,9 +648,6 @@
 	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\TimezoneCloudServices.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Samples\ThinkGeoCloudIntegration\WorldMapsQueryCloudServices.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Samples\MapOfflineData\DisplayRasterMBTilesFile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -670,9 +657,12 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-    <PackageReference Include="ThinkGeo.UI.Maui" Version="14.5.3" />
+    <PackageReference Include="ThinkGeo.UI.Maui" Version="15.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Maui.Controls" Version="10.0.0" />
   </ItemGroup>
   
 </Project>

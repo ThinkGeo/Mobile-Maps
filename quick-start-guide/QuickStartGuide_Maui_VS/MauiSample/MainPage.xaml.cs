@@ -21,12 +21,9 @@ namespace MauiSample
             MapView.MapUnit = GeographyUnit.Meter;
 
             // Add ThinkGeo Cloud Maps as the background 
-            var backgroundOverlay = new ThinkGeoVectorOverlay
+            var backgroundOverlay = new ThinkGeoVectorTileOverlay("SGjwpxF60knqZi3R0A9RRE3GqiuRA1LsnxHMot7rJ58~")
             {
-                ClientId = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~",
-                ClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~",
-                MapType = ThinkGeoCloudVectorMapsMapType.Light,
-                TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+                TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
             };
             MapView.Overlays.Add(backgroundOverlay);
 

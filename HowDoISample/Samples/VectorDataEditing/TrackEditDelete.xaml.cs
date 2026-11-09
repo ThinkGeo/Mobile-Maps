@@ -45,10 +45,9 @@ public partial class TrackEditDelete
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay(SampleKeys.ClientId, SampleKeys.ClientSecret,
-            ThinkGeoCloudVectorMapsMapType.Dark)
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey, ThinkGeoVectorStyles.Dark)
         {
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorDark_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileDark_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -143,6 +142,10 @@ public partial class TrackEditDelete
         if (!radioButton.IsChecked)
             return;
         if (mapView == null)
+            return;
+        // The box starts checked, so this also runs while the page loads, before the map has its
+        // overlays; the map then starts in Draw Point mode by itself.
+        if (!mapView.Overlays.Contains("layerOverlay"))
             return;
 
         // Update the layer's features from any previous mode

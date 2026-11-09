@@ -12,8 +12,7 @@ namespace ThinkGeo.UI.iOS.HowDoI
         {
             base.ViewDidLoad();
 
-            var thinkGeoCloudRasterMapsLayer = new ThinkGeoVectorMapsAsyncLayer(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret);
-            thinkGeoCloudRasterMapsLayer.BitmapTileCache = null;
+            var thinkGeoCloudRasterMapsLayer = new ThinkGeoRasterMapsAsyncLayer(SampleHelper.ThinkGeoCloudId, SampleHelper.ThinkGeoCloudSecret, ThinkGeoCloudRasterMapsMapType.Light_V2_X2);
 
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileWidth = 512;

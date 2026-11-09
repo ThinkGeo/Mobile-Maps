@@ -10,20 +10,20 @@
              xmlns:local="clr-namespace:HowDoISample"
              Title="Menu">
 
-    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="Black">
+    <StackLayout VerticalOptions="Fill" BackgroundColor="Black">
         <!-- Logo -->
-        <Frame BackgroundColor="Black" >
+        <Border BackgroundColor="Black" >
             <Image Source="thinkgeo_logo.png" MaximumWidthRequest="200" BackgroundColor="Black"/>
-        </Frame>
+        </Border>
 
-        <ListView x:Name="CollectionViewMenu" IsGroupingEnabled="True" 
+        <CollectionView x:Name="CollectionViewMenu" IsGrouped="True" SelectionMode="Single"
              ItemsSource="{Binding Source={x:Reference MyPage}, Path=CurrentSampleGroups}"
-             ItemSelected="CollectionViewMenu_OnItemSelected" BackgroundColor="Black">
+             SelectionChanged="CollectionViewMenu_SelectionChanged" BackgroundColor="Black">
 
             <!-- Sample Category -->
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate >
-                    <ViewCell x:DataType="local:GroupInfo" >
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="local:GroupInfo">
+                    <Grid>
                         <Label Text="{Binding Title}"
                               FontSize="Subtitle"
                               VerticalOptions="Fill"
@@ -44,14 +44,14 @@
                                                           CommandParameter="{Binding .}" />
                             </Label.GestureRecognizers>
                         </Label>
-                    </ViewCell>
+                    </Grid>
                 </DataTemplate>
-            </ListView.GroupHeaderTemplate>
+            </CollectionView.GroupHeaderTemplate>
 
             <!-- Sample Item -->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell x:DataType="local:SampleInfo" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:SampleInfo">
+                    <Grid>
                         <Label Text="{Binding Title}" 
                                    Padding="30, 2, 0, 2"  BackgroundColor="Black">
                             <Label.Triggers>
@@ -64,9 +64,9 @@
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
-                    </ViewCell>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>

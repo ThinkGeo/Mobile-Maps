@@ -22,12 +22,9 @@ public partial class InMemoryLayer
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -59,7 +56,7 @@ public partial class InMemoryLayer
         foreach (var feature in features) inMemoryFeatureLayer.InternalFeatures.Add(feature);
 
         // Create a text style for the label and give it a mask for use below.
-        var textStyle = new TextStyle("Trap: [TrapID]", new GeoFont("ariel", 14), GeoBrushes.Black)
+        var textStyle = new TextStyle("Trap: [TrapID]", new GeoFont("Noto Sans", 14), GeoBrushes.Black)
         {
             Mask = new AreaStyle(GeoPens.Black, GeoBrushes.White),
             MaskMargin = new DrawingMargin(2, 2, 2, 2),

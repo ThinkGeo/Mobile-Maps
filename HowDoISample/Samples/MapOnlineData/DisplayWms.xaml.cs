@@ -46,6 +46,13 @@ public partial class DisplayWms
         // As a result, here we set the ScaleFactor to 1, we request an image that matches the map's resolution (100x100), ensuring road sizes are more visible, albeit at the cost of image sharpness. Uncomment the following line to observe the effect on the map's appearance.
         mapView.ScaleFactor = 1;
 
-        await mapView.RefreshAsync();
+        try
+        {
+            await mapView.RefreshAsync();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 }

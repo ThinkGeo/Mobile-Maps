@@ -30,7 +30,7 @@ public partial class VehicleNavigation
 
 	private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
 	{
-		CompassButton.Rotation = (float)(mapView.MapRotation);
+		CompassHolder.Rotation = mapView.MapRotation;
 	}
 
 	private void UpdateVehicleLocation_Disappearing(object sender, EventArgs e)
@@ -51,7 +51,8 @@ public partial class VehicleNavigation
 			ClientId = SampleKeys.ClientId,
 			ClientSecret = SampleKeys.ClientSecret,
 			MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2,
-			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
+			// The overlay's cache holds the drawn tiles of one map type, so each type gets its own.
+			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache_Light")
 		};
 		mapView.Overlays.Add(_backgroundOverlay);
 		mapView.EventView = new CustomEventView(); // Use the custom eventview which disables all the map events. 
@@ -193,11 +194,9 @@ public partial class VehicleNavigation
 		converter.Open();
 
 		using var reader = new StreamReader(stream);
-		while (!reader.EndOfStream)
+        string location;
+        while ((location = await reader.ReadLineAsync()) != null)
 		{
-			var location = await reader.ReadLineAsync();
-			if (location == null)
-				continue;
 			var posItems = location.Split(',');
 			var lat = double.Parse(posItems[0]);
 			var lon = double.Parse(posItems[1]);
@@ -259,17 +258,13 @@ public partial class VehicleNavigation
 
 	private async void AerialBackgroundCheckBoxOnCheckedChanged(object sender, CheckedChangedEventArgs e)
 	{
-		while (_busy)
-			await Task.Delay(500); // delay the operation is it's rendering 
-		_busy = true;
-		await RefreshCancellationTokenAsync();
-
+		// Only the background changes; the vehicle keeps moving, so nothing is cancelled or held.
 		_backgroundOverlay.MapType = e.Value
 			? ThinkGeoCloudRasterMapsMapType.Aerial2_V2_X2
 			: ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
+		_backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,
+			e.Value ? "ThinkGeoRasterCache_Aerial" : "ThinkGeoRasterCache_Light");
 		await _backgroundOverlay.RefreshAsync();
-
-		_busy = false;
 	}
 
 	private async void Button_OnClicked(object sender, EventArgs e)

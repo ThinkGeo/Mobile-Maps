@@ -19,7 +19,7 @@ public partial class Navigation
 
 	private void Map_MapRotationChanged(object sender, MapRotationChangedMapViewEventArgs e)
 	{
-		CompassButton.Rotation = (float)(mapView.MapRotation);
+		CompassHolder.Rotation = mapView.MapRotation;
 	}
 
 	public bool GpsEnabled
@@ -43,12 +43,9 @@ public partial class Navigation
 		mapView.MapUnit = GeographyUnit.Meter;
 
 		// Add ThinkGeo Cloud Maps as the background 
-		var backgroundOverlay = new ThinkGeoRasterOverlay
+		var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
 		{
-			ClientId = SampleKeys.ClientId,
-			ClientSecret = SampleKeys.ClientSecret,
-			MapType = ThinkGeoCloudRasterMapsMapType.Light_V2_X2,
-			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoRasterCache")
+			TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
 		};
 		mapView.Overlays.Add(backgroundOverlay);
 
@@ -85,9 +82,12 @@ public partial class Navigation
 			await mapView.ZoomToExtentAsync(mapView.CenterPoint, mapView.MapScale, 0);
 		ThemeCheckBox.CheckedChanged += async (_, args) =>
 		{
-			backgroundOverlay.MapType = args.Value
-				? ThinkGeoCloudRasterMapsMapType.Dark_V2_X2
-				: ThinkGeoCloudRasterMapsMapType.Light_V2_X2;
+			backgroundOverlay.StyleUri = args.Value
+					? ThinkGeoVectorStyles.Dark
+					: ThinkGeoVectorStyles.Light;
+			// Each style keeps its tiles in a cache of its own.
+			backgroundOverlay.TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory,
+				args.Value ? "ThinkGeoVectorTileDark_RasterCache" : "ThinkGeoVectorTileLight_RasterCache");
 
 			await UpdateCancellationToken();
 			// if we don't pass in _cancellationTokenSource.Token, the tiles could be messed up when checking/unchecking the Dark Theme checkbox quickly. 

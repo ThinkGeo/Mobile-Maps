@@ -78,7 +78,7 @@ public partial class StylingAcrossMultipleScales
         hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultPointStyle = new PointStyle(PointSymbolType.Circle, 10,
             GeoBrushes.DarkRed, new GeoPen(GeoBrushes.White, 2));
         hotelsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("NAME",
-            new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
+            new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold), GeoBrushes.DarkRed)
         {
             YOffsetInPixel = 1,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -114,7 +114,7 @@ public partial class StylingAcrossMultipleScales
             new GeoPen(GeoBrushes.LightGray, 4) { EndCap = DrawingLineCap.Round },
             new GeoPen(GeoBrushes.White, 2) { EndCap = DrawingLineCap.Round });
         streetsLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("FULL_NAME",
-            new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            new GeoFont("Noto Sans", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
         {
             SplineType = SplineType.StandardSplining,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -129,7 +129,7 @@ public partial class StylingAcrossMultipleScales
             new GeoPen(GeoBrushes.Gray, 5) { EndCap = DrawingLineCap.Round },
             new GeoPen(GeoBrushes.White, 4) { EndCap = DrawingLineCap.Round });
         streetsLayer.ZoomLevelSet.ZoomLevel16.DefaultTextStyle = new TextStyle("FULL_NAME",
-            new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            new GeoFont("Noto Sans", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
         {
             SplineType = SplineType.StandardSplining,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -144,7 +144,7 @@ public partial class StylingAcrossMultipleScales
             new GeoPen(GeoBrushes.Gray, 7) { EndCap = DrawingLineCap.Round },
             new GeoPen(GeoBrushes.White, 6) { EndCap = DrawingLineCap.Round });
         streetsLayer.ZoomLevelSet.ZoomLevel17.DefaultTextStyle = new TextStyle("FULL_NAME",
-            new GeoFont("Segoe UI", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
+            new GeoFont("Noto Sans", 9, DrawingFontStyles.Bold), GeoBrushes.Black)
         {
             SplineType = SplineType.StandardSplining,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -159,7 +159,7 @@ public partial class StylingAcrossMultipleScales
             new GeoPen(GeoBrushes.Gray, 9) { EndCap = DrawingLineCap.Round },
             new GeoPen(GeoBrushes.White, 8) { EndCap = DrawingLineCap.Round });
         streetsLayer.ZoomLevelSet.ZoomLevel18.DefaultTextStyle = new TextStyle("FULL_NAME",
-            new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
+            new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
         {
             SplineType = SplineType.StandardSplining,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -174,7 +174,7 @@ public partial class StylingAcrossMultipleScales
             new GeoPen(GeoBrushes.Gray, 13) { EndCap = DrawingLineCap.Round },
             new GeoPen(GeoBrushes.White, 12) { EndCap = DrawingLineCap.Round });
         streetsLayer.ZoomLevelSet.ZoomLevel19.DefaultTextStyle = new TextStyle("FULL_NAME",
-            new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
+            new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold), GeoBrushes.Black)
         {
             SplineType = SplineType.StandardSplining,
             HaloPen = new GeoPen(GeoBrushes.White, 2),
@@ -202,7 +202,7 @@ public partial class StylingAcrossMultipleScales
         // ********************/
         parksLayer.ZoomLevelSet.ZoomLevel15.DefaultAreaStyle = new AreaStyle(GeoBrushes.PastelGreen);
         parksLayer.ZoomLevelSet.ZoomLevel15.DefaultTextStyle = new TextStyle("NAME",
-            new GeoFont("Segoe UI", 10, DrawingFontStyles.Bold), GeoBrushes.DarkGreen)
+            new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold), GeoBrushes.DarkGreen)
         {
             FittingPolygon = false,
             HaloPen = new GeoPen(GeoBrushes.White, 2),

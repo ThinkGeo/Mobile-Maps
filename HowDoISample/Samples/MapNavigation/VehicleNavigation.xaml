@@ -26,17 +26,18 @@
                 <Button WidthRequest="40" HeightRequest="40" CornerRadius="5"
                         Text="+" TextColor="Black" BackgroundColor="White"
                         BorderColor="Black" BorderWidth="2"
-                        FontSize="30" Clicked="ZoomInButton_OnClicked"/>
+                        FontSize="30" Padding="0" Clicked="ZoomInButton_OnClicked"/>
                 <Button WidthRequest="40" HeightRequest="40" CornerRadius="5"
                         Text="-" TextColor="Black" BackgroundColor="White"
                         BorderColor="Black" BorderWidth="2"
-                        FontSize="30" Clicked="ZoomOutButton_OnClicked"/>
+                        FontSize="30" Padding="0" Clicked="ZoomOutButton_OnClicked"/>
             </StackLayout>
-            <ImageButton x:Name="CompassButton" Grid.Row="1" 
-                         VerticalOptions="Start" HorizontalOptions="End"
-                         WidthRequest="40" HeightRequest="40" Margin="5"
-                         Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"/>
+            <!-- The compass turns with the map. It is the holder that turns: on Windows a rotated ImageButton
+                 draws upright, a rotated layout does not. -->
+            <Grid x:Name="CompassHolder" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End" Margin="5">
+                <ImageButton x:Name="CompassButton" WidthRequest="40" HeightRequest="40"
+                             Source="icon_north_arrow.png" BackgroundColor="Transparent"/>
+            </Grid>
 
             <Button Grid.Row="1" VerticalOptions="End" HorizontalOptions="End"
                     WidthRequest="120" HeightRequest="50" Margin="5"

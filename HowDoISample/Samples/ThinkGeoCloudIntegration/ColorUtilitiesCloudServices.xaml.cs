@@ -20,12 +20,9 @@ public partial class ColorUtilitiesCloudServices
         _initialized = true;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -52,7 +49,7 @@ public partial class ColorUtilitiesCloudServices
             // Set up the legend adornment
             Title = new LegendItem
             {
-                TextStyle = new TextStyle("Housing Unit Counts", new GeoFont("Verdana", 10, DrawingFontStyles.Bold),
+                TextStyle = new TextStyle("Housing Unit Counts", new GeoFont("Noto Sans", 10, DrawingFontStyles.Bold),
                 GeoBrushes.Black)
             },
             Location = AdornmentLocation.LowerRight
@@ -154,7 +151,7 @@ public partial class ColorUtilitiesCloudServices
             var legendItem = new LegendItem
             {
                 ImageStyle = classBreak.DefaultAreaStyle,
-                TextStyle = new TextStyle($">{classBreak.Value} units", new GeoFont("Verdana", 10),
+                TextStyle = new TextStyle($">{classBreak.Value} units", new GeoFont("Noto Sans", 10),
                     GeoBrushes.Black)
             };
             legend.LegendItems.Add(legendItem);

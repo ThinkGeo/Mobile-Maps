@@ -22,12 +22,9 @@ public partial class CreateRegexStyle
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Add Cloud Maps as a background overlay
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -49,11 +46,11 @@ public partial class CreateRegexStyle
 
         var regexStyle = new RegexStyle
         {
-            ColumnName = "Comments"
+            ColumnName = "Behavior"
         };
 
-        var largeItem = new RegexItem("big|large|huge", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
-        regexStyle.RegexItems.Add(largeItem);
+        var injuredOrSickItem = new RegexItem("injured|sick", new PointStyle(PointSymbolType.Circle, 12, GeoBrushes.Red));
+        regexStyle.RegexItems.Add(injuredOrSickItem);
 
         var allSightingsStyle = new PointStyle(PointSymbolType.Circle, 5, GeoBrushes.Green);
 

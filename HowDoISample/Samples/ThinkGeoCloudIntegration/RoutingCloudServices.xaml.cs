@@ -22,12 +22,9 @@ public partial class RoutingCloudServices
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -41,7 +38,7 @@ public partial class RoutingCloudServices
         routingLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle =
             LineStyle.CreateSimpleLineStyle(GeoColors.MediumPurple, 3, false);
         routingLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyle.CreateMaskTextStyle("SequenceNumber",
-            new GeoFont("Verdana", 20), GeoBrushes.White,
+            new GeoFont("Noto Sans", 20), GeoBrushes.White,
             AreaStyle.CreateSimpleAreaStyle(GeoColor.FromArgb(90, GeoColors.Black), GeoColors.Black, 2), 0, 0);
         routingLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.TextPlacement = TextPlacement.Upper;
         routingLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.YOffsetInPixel = -8;
@@ -162,7 +159,7 @@ public partial class RoutingCloudServices
         // Handle an exception returned from the service
         if (routingResult.Exception != null)
         {
-            await DisplayAlert("Error", routingResult.Exception.Message, "OK");
+            await DisplayAlertAsync("Error", routingResult.Exception.Message, "OK");
             return;
         }
 
@@ -174,20 +171,19 @@ public partial class RoutingCloudServices
     ///     When a route segment is selected in the UI, highlight it
     /// </summary>
     private async void lsbRouteSegments_SelectionChanged(object sender,
-        SelectedItemChangedEventArgs selectedItemChangedEventArgs)
+        SelectionChangedEventArgs e)
     {
-        var routeSegments = (ListView)sender;
-        if (routeSegments.SelectedItem == null) return;
+        var routeSegment = e.CurrentSelection.FirstOrDefault() as CloudRoutingSegment;
+        if (routeSegment == null) return;
         var routingOverlay = (LayerOverlay)mapView.Overlays["Routing Overlay"];
         var highlightLayer = (InMemoryFeatureLayer)routingOverlay.Layers["Highlight Layer"];
         highlightLayer.InternalFeatures.Clear();
 
         // Highlight the selected route segment
-        highlightLayer.InternalFeatures.Add(
-            new Feature(((CloudRoutingSegment)routeSegments.SelectedItem).Shape));
+        highlightLayer.InternalFeatures.Add(new Feature(routeSegment.Shape));
 
         // Zoom to the selected feature and zoom out to an appropriate level 
-        await mapView.ZoomToExtentAsync(((CloudRoutingSegment)routeSegments.SelectedItem).Shape.GetBoundingBox().GetCenterPoint(),
+        await mapView.ZoomToExtentAsync(routeSegment.Shape.GetBoundingBox().GetCenterPoint(),
             10000, 0, new AnimationSettings());
 
         await routingOverlay.RefreshAsync();

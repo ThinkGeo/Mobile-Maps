@@ -24,6 +24,7 @@
             </thinkgeo:MapView>
 
             <ImageButton x:Name="CompassButton" Grid.Row="1" 
+                         x:DataType="thinkgeo:MapView"
                          VerticalOptions="Start" HorizontalOptions="End"
                          WidthRequest="40" HeightRequest="40" Margin="5"
                          Source="icon_north_arrow.png" 

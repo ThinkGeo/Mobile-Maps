@@ -118,14 +118,14 @@
         "description": "This sample displays a JPEG image, but you can use the same code to display common image types such as PNG and BMP."
       },
       {
-        "id": "HowDoISample.MapOfflineData.EsriGridLayer",
-        "title": "Display a Grid File",
-        "description": "Display a grid layer."
-      },
-      {
         "id": "HowDoISample.MapOfflineData.GpxLayer",
         "title": "Display a GPX File",
         "description": "Display a GPX layer."
+      },
+      {
+        "id": "HowDoISample.MapOfflineData.GraticuleLayer",
+        "title": "Display Graticule Lines",
+        "description": "Display graticule lines."
       },
       {
         "id": "HowDoISample.MapOfflineData.TabLayer",
@@ -270,7 +270,7 @@
       {
         "id": "HowDoISample.VectorDataStyling.CreateHeatStyle",
         "title": "Display HeatMap",
-        "description": "Render a heatmap using a HeatStyle."
+        "description": "Render a heatmap using a HeatmapStyle."
       },
       {
         "id": "HowDoISample.VectorDataStyling.IsoLineLayer",
@@ -502,11 +502,6 @@
         "id": "HowDoISample.ThinkGeoCloudIntegration.ProjectionCloudServices",
         "title": "Projection",
         "description": "Project features using ThinkGeo Cloud."
-      },
-      {
-        "id": "HowDoISample.ThinkGeoCloudIntegration.WorldMapsQueryCloudServices",
-        "title": "World Maps Query",
-        "description": "Draw a polygon and get the intersecting buildings using ThinkGeo Cloud. Long press to end drawing."
       }
     ]
   },

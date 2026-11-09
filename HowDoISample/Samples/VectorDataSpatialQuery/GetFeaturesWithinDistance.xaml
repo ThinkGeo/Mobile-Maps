@@ -24,10 +24,17 @@
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,20" VerticalOptions="End" BackgroundColor="#80777777">
-                <Slider x:Name="SearchRadius" Maximum="1600" Minimum="100" Value="400" HorizontalOptions="FillAndExpand"/>
-                <Label TextColor="Black" Margin="20,0,20,0" Text="{Binding Path=Value, Source={x:Reference SearchRadius}, StringFormat='{0:F0} m'}"/>
-            </StackLayout>
+            <Grid Grid.Row="1" ZIndex="10" Margin="10,0,10,20" VerticalOptions="End" BackgroundColor="#80777777">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Slider x:Name="SearchRadius" Grid.Column="0" Maximum="1600" Minimum="100" Value="400" VerticalOptions="Center"/>
+                <Label Grid.Column="1" x:DataType="Slider" TextColor="Black" Margin="20,0,20,0" 
+                       HorizontalOptions="Center" VerticalOptions="Center" LineBreakMode="NoWrap"
+                       Text="{Binding Path=Value, Source={x:Reference SearchRadius}, StringFormat='{0:F0} m'}"/>
+            </Grid>
 
         </Grid>
     </ContentPage.Content>

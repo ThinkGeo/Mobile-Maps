@@ -29,11 +29,12 @@
                 </thinkgeo:MapView.MapTools>
             </thinkgeo:MapView>
 
-            <ImageButton x:Name="CompassButton" Grid.Column="1" Grid.Row="1" 
-                         VerticalOptions="Start" HorizontalOptions="End"
-                         WidthRequest="40" HeightRequest="40" Margin="5"
-                         Source="icon_north_arrow.png" 
-                         BackgroundColor="Transparent"/>
+            <!-- The compass turns with the map. It is the holder that turns: on Windows a rotated ImageButton
+                 draws upright, a rotated layout does not. -->
+            <Grid x:Name="CompassHolder" Grid.Column="1" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End" Margin="5">
+                <ImageButton x:Name="CompassButton" WidthRequest="40" HeightRequest="40"
+                             Source="icon_north_arrow.png" BackgroundColor="Transparent"/>
+            </Grid>
 
             <ImageButton x:Name="DefaultExtentButton" Grid.Column="1" Grid.Row="1" 
                          VerticalOptions="Start" HorizontalOptions="End" TranslationY="50"

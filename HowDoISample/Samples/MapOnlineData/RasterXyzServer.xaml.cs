@@ -8,6 +8,7 @@ public partial class RasterXyzServer
 {
     private ThinkGeoRasterMapsAsyncLayer thinkGeoRasterMapsAsyncLayer;
     private LayerOverlay layerOverlay;
+    private bool _initialized;
 
     public RasterXyzServer()
     {
@@ -16,6 +17,10 @@ public partial class RasterXyzServer
 
     private async void Map_OnSizeChanged(object sender, EventArgs e)
     {
+        if (_initialized)
+            return;
+        _initialized = true;
+
         layerOverlay = new LayerOverlay();
         layerOverlay.TileType = TileType.MultiTile;
         mapView.Overlays.Add(layerOverlay);

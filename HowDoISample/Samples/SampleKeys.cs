@@ -4,6 +4,7 @@ internal static class SampleKeys
 {
     // ReSharper disable once StringLiteralTypo
     public static string ClientId = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
+    public static string ApiKey = "SGjwpxF60knqZi3R0A9RRE3GqiuRA1LsnxHMot7rJ58~";
     public static string ClientSecret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
 
     // ReSharper disable once StringLiteralTypo

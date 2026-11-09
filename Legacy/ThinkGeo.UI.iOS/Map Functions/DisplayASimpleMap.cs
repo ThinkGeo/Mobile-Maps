@@ -23,11 +23,9 @@ namespace ThinkGeo.UI.iOS.HowDoI
             //mapView.CurrentExtent = new RectangleShape(-13939426, 6701997, -7812401, 2626987);
             mapView.CurrentExtent = MaxExtents.ThinkGeoMaps;
 
-            // Create a new ThinkGeoCloud Overlay using Client ID / Client Secret, and add it the overlay to MapView.
-            string clientKey = "9ap16imkD_V7fsvDW9I8r8ULxgAB50BX_BnafMEBcKg~";
-            string secret = "vtVao9zAcOj00UlGcK7U-efLANfeJKzlPuDB9nw7Bp4K4UxU_PdRDg~~";
-            ThinkGeoCloudVectorMapsOverlay thinkGeoCloudMapsOverlay = new ThinkGeoCloudVectorMapsOverlay(clientKey, secret);
-            mapView.Overlays.Add(thinkGeoCloudMapsOverlay);
+            // Create a new ThinkGeo vector tile overlay using the apiKey, and add the overlay to MapView.
+            var thinkGeoVectorTileOverlay = new ThinkGeoVectorTileOverlay(SampleHelper.ThinkGeoApiKey);
+            mapView.Overlays.Add(thinkGeoVectorTileOverlay);
 
             mapView.RotationEnabled = true;
             //mapView.IsInertiallyPanEnabled = true;

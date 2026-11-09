@@ -22,12 +22,9 @@ public partial class SqLiteLayer
         mapView.MapUnit = GeographyUnit.Meter;
 
         // Create the background world maps using vector tiles requested from the ThinkGeo Cloud Service and add it to the map.
-        var backgroundOverlay = new ThinkGeoVectorOverlay
+        var backgroundOverlay = new ThinkGeoVectorTileOverlay(SampleKeys.ApiKey)
         {
-            ClientId = SampleKeys.ClientId,
-            ClientSecret = SampleKeys.ClientSecret,
-            MapType = ThinkGeoCloudVectorMapsMapType.Light,
-            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorLight_RasterCache")
+            TileCache = new FileRasterTileCache(FileSystem.Current.CacheDirectory, "ThinkGeoVectorTileLight_RasterCache")
         };
         mapView.Overlays.Add(backgroundOverlay);
 
@@ -55,7 +52,7 @@ public partial class SqLiteLayer
         restaurantsOverlay.Layers.Add("Frisco Restaurants", restaurantsLayer);
 
         // Create a new text style and set various settings to make it look good.
-        var textStyle = new TextStyle("Name", new GeoFont("Arial", 10), GeoBrushes.Black)
+        var textStyle = new TextStyle("Name", new GeoFont("Noto Sans", 10), GeoBrushes.Black)
         {
             MaskType = MaskType.RoundedCorners,
             OverlappingRule = LabelOverlappingRule.NoOverlapping,
