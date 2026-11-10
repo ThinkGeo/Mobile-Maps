@@ -39,13 +39,15 @@ namespace MauiSample
                 var targetFilePath = Path.Combine(targetFolder, localPath);
                 if (File.Exists(targetFilePath)) continue;
 
-                var targetDir = Path.GetDirectoryName(targetFilePath);
+                var targetDir = Path.Combine(targetFolder, "AppData");
                 if (!Directory.Exists(targetDir))
                     Directory.CreateDirectory(targetDir);
 
+                var resourceName = @"MauiSample.AppData." + dataFile;
+                var sourceStream = assembly.GetManifestResourceStream(resourceName)
+                    ?? throw new FileNotFoundException("Embedded resource not found: " + resourceName);
                 await using (var targetStream = File.Create(targetFilePath))
                 {
-                    var sourceStream = assembly.GetManifestResourceStream(@"MauiSample.AppData." + dataFile);
                     await sourceStream.CopyToAsync(targetStream);
                     sourceStream.Close();
                 }
