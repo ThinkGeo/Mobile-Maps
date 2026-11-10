@@ -8,13 +8,18 @@ namespace MauiSample
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+        }
+
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
         }
 
         protected override async void OnStart()
         {
             await CopySampleData(FileSystem.Current.AppDataDirectory);
-            MainPage = new AppShell();
+            if (Windows.FirstOrDefault() is Window window)
+                window.Page = new AppShell();
         }
 
         private static async Task CopySampleData(string targetFolder)
