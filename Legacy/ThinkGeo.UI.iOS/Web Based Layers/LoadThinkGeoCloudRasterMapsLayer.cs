@@ -17,7 +17,6 @@ namespace ThinkGeo.UI.iOS.HowDoI
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileWidth = 512;
             layerOverlay.TileHeight = 512;
-            layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
             layerOverlay.Layers.Add("ThinkGeoCloudRasterMapsLayer", thinkGeoCloudRasterMapsLayer);
 
             MapView.MapUnit = GeographyUnit.Meter;
