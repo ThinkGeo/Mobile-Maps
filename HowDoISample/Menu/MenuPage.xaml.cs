@@ -11,6 +11,7 @@ public partial class MenuPage
 {
     private readonly Collection<GroupInfo> _allSampleGroups;
     private ObservableCollection<GroupInfo> _currentSampleGroups;
+    private bool _firstSampleOpened;
 
     public ObservableCollection<GroupInfo> CurrentSampleGroups
     {
@@ -29,9 +30,17 @@ public partial class MenuPage
         _allSampleGroups = [];
         _currentSampleGroups = [];
         LoadMenu();
+    }
 
-        // Set the first item as the selected item
-        CollectionViewMenu.SelectedItem = CurrentSampleGroups[0][0];
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Open the first sample once the shell is on screen. Selecting it in the constructor navigated while
+        // the shell was still being built, and on iOS that navigation never finished.
+        if (_firstSampleOpened) return;
+        _firstSampleOpened = true;
+        Dispatcher.Dispatch(() => CollectionViewMenu.SelectedItem = CurrentSampleGroups[0][0]);
     }
 
     private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
