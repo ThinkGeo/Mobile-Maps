@@ -17,6 +17,9 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.howdoisample</ApplicationId>
+		<!-- The same ids as Platforms/iOS/Info.plist and Platforms/Android/AndroidManifest.xml, which are what those builds actually use -->
+		<ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">thinkgeo.howdoi.maui.ios</ApplicationId>
+		<ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">thinkgeo.howdoi.maui.android</ApplicationId>
 		<ApplicationIdGuid>573baa8c-7d15-4f04-8983-1832da7ba729</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -658,7 +661,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-    <PackageReference Include="ThinkGeo.UI.Maui" Version="15.0.0" />
+    <PackageReference Include="ThinkGeo.UI.Maui" Version="15.0.1" />
   </ItemGroup>
 
   <ItemGroup>

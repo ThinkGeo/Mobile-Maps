@@ -10,13 +10,13 @@
              xmlns:local="clr-namespace:HowDoISample"
              Title="Menu">
 
-    <StackLayout VerticalOptions="Fill" BackgroundColor="Black">
+    <Grid RowDefinitions="Auto,*" BackgroundColor="Black">
         <!-- Logo -->
         <Border BackgroundColor="Black" >
             <Image Source="thinkgeo_logo.png" MaximumWidthRequest="200" BackgroundColor="Black"/>
         </Border>
 
-        <CollectionView x:Name="CollectionViewMenu" IsGrouped="True" SelectionMode="Single"
+        <CollectionView Grid.Row="1" x:Name="CollectionViewMenu" IsGrouped="True" SelectionMode="Single"
              ItemsSource="{Binding Source={x:Reference MyPage}, Path=CurrentSampleGroups}"
              SelectionChanged="CollectionViewMenu_SelectionChanged" BackgroundColor="Black">
 
@@ -68,5 +68,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </StackLayout>
+    </Grid>
 </ContentPage>

@@ -22,13 +22,11 @@ namespace ThinkGeo.UI.iOS.HowDoI
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileWidth = 512;
             layerOverlay.TileHeight = 512;
-            layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
             MapView.Overlays.Add("WorldOverlay", layerOverlay);
 
             LayerOverlay highlightOverlay = new LayerOverlay();
             highlightOverlay.TileWidth = 512;
             highlightOverlay.TileHeight = 512;
-            highlightOverlay.TileSnappingMode = TileSnappingMode.Snapping;
             MapView.Overlays.Add("HighlightOverlay", highlightOverlay);
 
             ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer("AppData/SampleData/Countries02.shp");

@@ -21,7 +21,6 @@ namespace ThinkGeo.UI.iOS.HowDoI
             LayerOverlay layerOverlay = new LayerOverlay();
             layerOverlay.TileWidth = 256;
             layerOverlay.TileHeight = 256;
-            layerOverlay.TileSnappingMode = TileSnappingMode.Snapping;
             layerOverlay.Layers.Add(bingMapsLayer);
 
             MapView.Overlays.Add(layerOverlay);

@@ -21,8 +21,8 @@ namespace ThinkGeo.UI.iOS.HowDoI
 
             string targetDirectory = "AppData/Tiff";
             GeoTiffRasterLayer geoTiffRasterLayer = new GeoTiffRasterLayer(Path.Combine(targetDirectory, "World.tif"));
-            geoTiffRasterLayer.UpperThreshold = double.MaxValue;
-            geoTiffRasterLayer.LowerThreshold = 0;
+            geoTiffRasterLayer.UpperScale = double.MaxValue;
+            geoTiffRasterLayer.LowerScale = 0;
             geoTiffRasterLayer.IsGrayscale = false;
             layerOverlay.Layers.Add(geoTiffRasterLayer);
 
