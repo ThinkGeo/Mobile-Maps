@@ -225,6 +225,11 @@ public static class SampleCatalog
             "DisplayProjection.FromProjString", SampleDraws.Gpu, () => new AnyProjection(),
             aliases: "proj4, proj string, Robinson, Mollweide, Eckert, sinusoidal, Bonne, Albers, UTM, equal area"),
 
+        new("Projections", "Measure in the Right Projection",
+            "Why a measurement needs the right projection - Greenland carried away from its own latitude swells in Web Mercator while the ground it covers never changes",
+            "ProjectionConverter", SampleDraws.Gpu, () => new MeasureInTheRightProjection(),
+            aliases: "area, measure, equal area, laea, Web Mercator, distortion, Greenland, latitude"),
+
         new("Projections", "Project Features",
             "Three ways a feature gets from one projection to another - the source converting as it reads, a converter run by hand, and the ThinkGeo Cloud",
             "ProjectionConverter", SampleDraws.Gpu, () => new ProjectFeatures(),
