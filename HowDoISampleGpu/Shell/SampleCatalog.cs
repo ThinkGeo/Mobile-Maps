@@ -25,6 +25,11 @@ public static class SampleCatalog
     public static readonly IReadOnlyList<SampleEntry> All = new SampleEntry[]
     {
         // ---- Start Here ----
+        new("Start Here", "Migrate a Classic Layer",
+            "The same five classic layers drawn twice - above by the GPU after their styles are translated into a style document, below by the pipeline that has always drawn them",
+            "FeatureLayerTranslator", SampleDraws.SideBySide, () => new MigrateAClassicLayer(),
+            aliases: "migrate, translate, classic, ValueStyle, TextStyle, hatch, side by side, warnings"),
+
         new("Start Here", "First Light",
             "The smallest GPU map there is: a style.json URI on a MapView, and nothing else",
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
