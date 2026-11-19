@@ -50,32 +50,46 @@ public class DisplayDotDensity : SamplePage
     {
         map.MapUnit = GeographyUnit.Meter;
 
-        // USStates_3857.shp is already in the map's projection - no converter needed.
-        var states = new ShapeFileFeatureSource(SampleShared.Shapefile("USStates_3857.shp"));
-        states.Open();
-        var features = states.GetAllFeatures(new[] { "OWNER_OCC", "RENTER_OCC" });
-        states.Close();
-
-        // Every restyle passes this same source: a document on its own has no data to
-        // draw.
-        var tiles = new FeatureSourceVectorTileSource();
-        tiles.FeatureSources.Add(states);
-        tiles.FeatureSources.Add("owner", Scatter(features, "OWNER_OCC", seed: 1));
-        tiles.FeatureSources.Add("renter", Scatter(features, "RENTER_OCC", seed: 2));
-
-        map.Basemap = new GpuBasemap(new MapStyle(StyleJson, tiles));
-
         // Frame the lower 48; Alaska would stretch the box to the Aleutians.
         map.CurrentExtent = new RectangleShape(-13_900_000, 6_400_000, -7_400_000, 2_800_000);
 
-        AddToPanel(new Label
+        var status = AddStatusLabel();
+        status.Text = "Scattering the dots…";
+
+        _ = BuildAsync(map, status);
+    }
+
+    /// <summary>
+    /// The scatter is rejection sampling - a point in the state's bounding box, kept
+    /// only if the state contains it - so it is thousands of point-in-polygon tests,
+    /// and it runs off the UI thread. Doing it inline leaves the page blank and frozen
+    /// while it works: fast enough not to notice on an iPhone, half a minute of empty
+    /// screen on an Android emulator.
+    /// </summary>
+    private async Task BuildAsync(MapView map, Label status)
+    {
+        var tiles = await Task.Run(() =>
         {
-            Text = FormattableString.Invariant($"One dot = {UnitsPerDot:N0} housing units · blue owner-occupied · orange renter-occupied"),
-            FontSize = 11,
-            TextColor = Colors.DimGray,
+            // USStates_3857.shp is already in the map's projection - no converter needed.
+            var states = new ShapeFileFeatureSource(SampleShared.Shapefile("USStates_3857.shp"));
+            states.Open();
+            var features = states.GetAllFeatures(new[] { "OWNER_OCC", "RENTER_OCC" });
+            states.Close();
+
+            // Every restyle passes this same source: a document on its own has no data
+            // to draw.
+            var source = new FeatureSourceVectorTileSource();
+            source.FeatureSources.Add(states);
+            source.FeatureSources.Add("owner", Scatter(features, "OWNER_OCC", seed: 1));
+            source.FeatureSources.Add("renter", Scatter(features, "RENTER_OCC", seed: 2));
+            return source;
         });
 
-        _ = map.RefreshAsync();
+        map.Basemap = new GpuBasemap(new MapStyle(StyleJson, tiles));
+        status.Text = FormattableString.Invariant(
+            $"One dot = {UnitsPerDot:N0} housing units · blue owner-occupied · orange renter-occupied");
+
+        await map.RefreshAsync();
     }
 
     /// <summary>
