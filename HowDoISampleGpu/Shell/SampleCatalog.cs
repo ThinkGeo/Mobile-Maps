@@ -156,6 +156,11 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Draw and Edit", "Edit with Snapping",
+            "Dragging a vertex that snaps - drag a control point near a school and it jumps onto it, inside the tolerance circle drawn around it",
+            "EditOverlay.VertexMoving", SampleDraws.GpuAndOverlays, () => new EditWithSnapping(),
+            aliases: "edit, snap, vertex, control point, tolerance, drag, custom style"),
+
         new("Extending the SDK", "Custom Adornment Layer",
             "An adornment layer of your own: range rings around the centre of the view, drawn over the GPU basemap",
             "AdornmentLayer.DrawCore", SampleDraws.GpuAndOverlays, () => new CustomAdornmentLayer(),
