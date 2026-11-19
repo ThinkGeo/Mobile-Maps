@@ -65,6 +65,13 @@ public abstract class SamplePage : ContentPage
     protected MapView Map { get; }
 
     /// <summary>
+    /// Moves the control card to the top of the map. The default is the bottom, which
+    /// is where a thumb reaches; a sample whose own output lives down there - a scale
+    /// line, a scale bar, an attribution - moves it out of the way instead.
+    /// </summary>
+    protected void PutPanelAtTop() => _panel.VerticalOptions = LayoutOptions.Start;
+
+    /// <summary>
     /// Adds a control to the card over the bottom of the map. The card appears with
     /// its first control, so a sample with none has a map and nothing else.
     /// </summary>

@@ -30,6 +30,17 @@ public static class SampleCatalog
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
+        // ---- Map Tools and Adornments ----
+        new("Map Tools and Adornments", "Display Graticule Lines",
+            "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",
+            "GraticuleAdornmentLayer", SampleDraws.GpuAndOverlays, () => new DisplayGraticuleLines(),
+            aliases: "graticule, grid, lat lon, degrees, AdornmentOverlay, adornment"),
+
+        new("Map Tools and Adornments", "Scale Line and Scale Bar",
+            "The two scale adornments drawn over the GPU basemap, in imperial, metric or both",
+            "ScaleLineAdornmentLayer", SampleDraws.GpuAndOverlays, () => new ScaleLineScaleBar(),
+            aliases: "scale bar, scale line, ScaleBarAdornmentLayer, UnitSystem, miles, kilometres"),
+
         // ---- Extending the SDK ----
         new("Extending the SDK", "Handle Tile Failures",
             "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
