@@ -138,6 +138,11 @@ public static class SampleCatalog
             "MapStyle", SampleDraws.Gpu, () => new RenderPointsLinesAndPolygons(),
             aliases: "fill, line, circle, symbol, style.json, shapefile, labels, source-layer"),
 
+        new("Styling", "Insert a Layer Under the Labels",
+            "A layer slipped into the middle of someone else's style - aerial imagery, a white wash over it, and the street style's lines and labels on top",
+            "StyleLayerSlot.UnderLabels", SampleDraws.Gpu, () => new InsertALayerUnderTheLabels(),
+            aliases: "slot, UnderLabels, AboveFills, wash, compose, insert, layer order"),
+
         new("Styling", "Hatch Styles",
             "A hatch brush as a fill pattern: the style names an image, and the image is a GeoHatchBrush the application supplies",
             "GeoHatchBrush", SampleDraws.Gpu, () => new HatchStyles(),
