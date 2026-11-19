@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Shapes and Spatial Queries ----
+        new("Shapes and Spatial Queries", "Get Data from Features",
+            "What a feature carries besides its shape: tap a park and its columns are listed",
+            "Feature.ColumnValues", SampleDraws.Gpu, () => new GetDataFromFeatures(),
+            aliases: "attributes, columns, ColumnValues, ReturningColumnsType, identify, tap"),
+
         new("Shapes and Spatial Queries", "Find Features by Spatial Relation",
             "The spatial relations asked of Frisco's zoning polygons - containing, intersecting, within a distance of, disjoint from a tapped point",
             "QueryTools", SampleDraws.Gpu, () => new FindFeaturesBySpatialRelation(),
