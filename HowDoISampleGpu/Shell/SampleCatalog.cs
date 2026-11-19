@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Shapes and Spatial Queries ----
+        new("Shapes and Spatial Queries", "Shape Measurements",
+            "What a shape can be asked about itself - its area, its length, its centre, and the shortest line from it to somewhere else",
+            "AreaBaseShape.GetArea", SampleDraws.Gpu, () => new ShapeMeasurements(),
+            aliases: "area, length, centre, centroid, shortest line, GetLength, GetShortestLineTo, measure"),
+
         new("Shapes and Spatial Queries", "Validate Topology",
             "The topology rules, each with data made to both pass and fail it - what the rule checks in green, what it checks against in blue, what breaks it in red",
             "TopologyValidator", SampleDraws.Gpu, () => new ValidateTopology(),

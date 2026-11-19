@@ -51,6 +51,13 @@ Shapefile/FriscoCityLimitsDivided.ids
 Shapefile/FriscoCityLimitsDivided.idx
 Shapefile/FriscoCityLimitsDivided.shp
 Shapefile/FriscoCityLimitsDivided.shx
+Shapefile/Hike_Bike.dbf
+Shapefile/Hike_Bike.gpx
+Shapefile/Hike_Bike.ids
+Shapefile/Hike_Bike.idx
+Shapefile/Hike_Bike.prj
+Shapefile/Hike_Bike.shp
+Shapefile/Hike_Bike.shx
 Shapefile/Hotels.dbf
 Shapefile/Hotels.ids
 Shapefile/Hotels.idx

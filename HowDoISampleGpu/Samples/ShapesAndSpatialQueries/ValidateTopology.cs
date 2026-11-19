@@ -7,8 +7,9 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The topology rules, each with data made to both pass and fail it: what the rule
-/// checks in green, what it checks against in blue, and what breaks it in red.
+/// All twenty-five topology rules, each with data made to both pass and fail it:
+/// what the rule checks in green, what it checks against in blue, and what breaks
+/// it in red.
 /// </summary>
 public class ValidateTopology : SamplePage
 {
@@ -123,6 +124,120 @@ public class ValidateTopology : SamplePage
             null,
             (s, _) => TopologyValidator.LinesMustNotSelfOverlap(s).InvalidFeatures,
             "One line, doubling back along itself."),
+
+        new("Lines must not overlap lines",
+            new[] { "LINESTRING(150 0,100 30,100 60,150 100)" },
+            new[] { "LINESTRING(0 0,100 0,100 100,0 100)" },
+            (s, a) => TopologyValidator.LinesMustNotOverlapLines(a, s).InvalidFeatures,
+            "The stretch lying on the blue line is red."),
+
+        new("Lines must be covered by lines",
+            new[] { "LINESTRING(0 0,100 0,100 100,0 100)" },
+            new[] { "LINESTRING(0 -50,50 0,100 0,100 150)" },
+            (s, a) => TopologyValidator.LinesMustBeCoveredByLines(a, s).InvalidFeatures,
+            "The parts with nothing under them are red."),
+
+        new("Lines must not self-intersect or touch",
+            new[]
+            {
+                "LINESTRING(0 0,100 0,100 100)",
+                "LINESTRING(0 -50,30 0,60 0,100 50)",
+                "LINESTRING(20 50,20 -50)",
+            },
+            null,
+            (s, _) => TopologyValidator.LinesMustNotSelfIntersectOrTouch(s).InvalidFeatures,
+            "Crossings and shared stretches both count."),
+
+        new("Polygon boundaries must overlap boundaries",
+            new[] { "POLYGON((0 0,50 0,50 50,0 50,0 0))" },
+            new[] { "POLYGON((0 0,100 0,100 100,0 100,0 0))" },
+            (s, a) => TopologyValidator.PolygonBoundariesMustOverlapPolygonBoundaries(a, s).InvalidFeatures,
+            "Two corners are shared; the rest of the boundary is not."),
+
+        new("Polygon boundaries must overlap lines",
+            new[] { "POLYGON((0 0,100 0,100 100,0 100,0 0))" },
+            new[] { "LINESTRING(-50 0,100 0,100 150)" },
+            (s, a) => TopologyValidator.PolygonBoundariesMustOverlapLines(s, a).InvalidFeatures,
+            "The line covers two sides; the other two are red."),
+
+        new("Polygons must overlap polygons",
+            new[]
+            {
+                "POLYGON((25 25,50 25,50 50,25 50,25 25))",
+                "POLYGON((75 25,125 25,125 75,75 75,75 25))",
+                "POLYGON((150 25,200 25,200 75,150 75,150 25))",
+            },
+            new[] { "POLYGON((0 0,100 0,100 100,0 100,0 0))" },
+            (s, a) => TopologyValidator.PolygonsMustOverlapPolygons(a, s).InvalidFeatures,
+            "The one that never meets the blue square is red."),
+
+        new("Polygons must be within polygons",
+            new[]
+            {
+                "POLYGON((25 25,50 25,50 50,25 50,25 25))",
+                "POLYGON((75 25,125 25,125 75,75 75,75 25))",
+                "POLYGON((150 25,200 25,200 75,150 75,150 25))",
+            },
+            new[] { "POLYGON((0 0,100 0,100 100,0 100,0 0))" },
+            (s, a) => TopologyValidator.PolygonsMustBeWithinPolygons(a, s).InvalidFeatures,
+            "Overlapping is not enough - it has to be all the way inside."),
+
+        new("Polygons must contain a point",
+            new[]
+            {
+                "POLYGON((150 0,250 0,250 100,150 100,150 0))",
+                "POLYGON((0 0,100 0,100 100,0 100,0 0))",
+            },
+            new[] { "POINT(50 50)" },
+            (s, a) => TopologyValidator.PolygonsMustContainPoint(s, a).InvalidFeatures,
+            "The empty polygon is red."),
+
+        new("Polygons must overlap each other",
+            new[]
+            {
+                "POLYGON((0 0,100 0,100 100,0 100,0 0))",
+                "POLYGON((-50 -50,50 -50,50 50,-50 50,-50 -50))",
+            },
+            null,
+            (s, _) => TopologyValidator.PolygonsMustOverlapEachOther(
+                Wkt("POLYGON((0 0,100 0,100 100,0 100,0 0))"),
+                Wkt("POLYGON((-50 -50,50 -50,50 50,-50 50,-50 -50))")).InvalidFeatures,
+            "This one reports from both sets: everything outside the shared corner."),
+
+        new("Polygons must not have gaps",
+            new[]
+            {
+                "POLYGON((0 0,40 0,40 40,0 40,0 0))",
+                "POLYGON((30 30,70 30,70 70,30 70,30 30))",
+                "POLYGON((60 0,100 0,100 40,60 40,60 0))",
+                "POLYGON((30 10,70 10,70 -30,30 -30,30 10))",
+            },
+            null,
+            (s, _) => TopologyValidator.PolygonsMustNotHaveGaps(s).InvalidFeatures,
+            "The hole left between them comes back as its own shape."),
+
+        new("Polygons must not overlap",
+            new[]
+            {
+                "POLYGON((25 25,50 25,50 50,25 50,25 25))",
+                "POLYGON((75 25,125 25,125 75,75 75,75 25))",
+                "POLYGON((150 25,200 25,200 75,150 75,150 25))",
+                "POLYGON((0 0,100 0,100 100,0 100,0 0))",
+            },
+            null,
+            (s, _) => TopologyValidator.PolygonsMustNotOverlap(s).InvalidFeatures,
+            "Red is the overlap itself, not the polygons that made it."),
+
+        new("Polygons must not overlap polygons",
+            new[]
+            {
+                "POLYGON((25 25,50 25,50 50,25 50,25 25))",
+                "POLYGON((75 25,125 25,125 75,75 75,75 25))",
+                "POLYGON((150 25,200 25,200 75,150 75,150 25))",
+            },
+            new[] { "POLYGON((0 0,100 0,100 100,0 100,0 0))" },
+            (s, a) => TopologyValidator.PolygonsMustNotOverlapPolygons(a, s).InvalidFeatures,
+            "The reverse of the rule above: overlapping is the fault."),
     };
 
     // Three sets of shapes that change with every rule, so they are geometry rather
