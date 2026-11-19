@@ -36,6 +36,11 @@ public static class SampleCatalog
             "ElevationCloudClient", SampleDraws.Gpu, () => new Elevation(),
             aliases: "elevation, height, terrain, profile, GetElevationOfLineAsync, cloud"),
 
+        new("Cloud Services", "Geocoding",
+            "Addresses to places and back - search for a place by name, or tap the map and ask what is there",
+            "GeocodingCloudClient", SampleDraws.Gpu, () => new Geocoding(),
+            aliases: "geocode, reverse geocode, address, search, place, ReverseGeocodingCloudClient"),
+
         new("Cloud Services", "Routing",
             "Driving directions from the ThinkGeo Cloud - through five stops in order, the same five in the shortest order, and how far one can drive in 15 to 60 minutes",
             "RoutingCloudClient", SampleDraws.Gpu, () => new Routing(),
