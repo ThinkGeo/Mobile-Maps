@@ -153,6 +153,11 @@ public static class SampleCatalog
             aliases: "spatial query, contains, intersects, disjoint, within distance, QueryTools, zoning"),
 
         // ---- Styling ----
+        new("Styling", "Isolines",
+            "Contours drawn from scattered measurements - mosquito counts turned into isolines, with the level count, line width, interpolation power and search radius all live",
+            "MapStyle.AddIsolines", SampleDraws.Gpu, () => new Isolines(),
+            aliases: "isoline, contour, interpolation, IDW, PointValueSource, IsolineStyle, levels"),
+
         new("Styling", "Render Based on Code",
             "Layers whose paint and filter are code rather than a document - a density ramp over the American states, and the world's capitals lit as day or night by a clock",
             "StyleLayer.CreateFill", SampleDraws.Gpu, () => new RenderBasedOnCode(),
