@@ -115,6 +115,11 @@ public static class SampleCatalog
             "DynamicSource", SampleDraws.Gpu, () => new LiveFlights(),
             aliases: "OpenSky, flights, aircraft, live, dead reckoning, markers, animation, heading"),
 
+        new("Dynamic Data", "Vehicle Navigation",
+            "A drive along a recorded GPS track - the camera flies to each point, the vehicle rides the flight's progress, and the road behind turns green",
+            "DynamicSource", SampleDraws.Gpu, () => new VehicleNavigation(),
+            aliases: "navigation, GPS, track, vehicle, follow camera, route, theme, tilt"),
+
         new("Dynamic Data", "NDFD Sky Grid Animation",
             "Forty-four forecast hours of sky cover played as an animation over a grid fill, with five palettes and a slider that scrubs the hours",
             "MapStyle.AddGridFill", SampleDraws.Gpu, () => new NdfdSkyGridAnimation(),
