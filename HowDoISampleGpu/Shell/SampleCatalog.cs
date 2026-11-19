@@ -158,6 +158,11 @@ public static class SampleCatalog
             "MapStyle.AddIsolines", SampleDraws.Gpu, () => new Isolines(),
             aliases: "isoline, contour, interpolation, IDW, PointValueSource, IsolineStyle, levels"),
 
+        new("Styling", "Local Fonts",
+            "Labelling without a glyph server - city names in six scripts drawn from SDF glyph files shipped with the app",
+            "MapStyle glyphs", SampleDraws.Gpu, () => new LocalFonts(),
+            aliases: "font, glyph, pbf, SDF, CJK, Cyrillic, Greek, Inuktitut, offline labels, text-font"),
+
         new("Styling", "Render Based on Code",
             "Layers whose paint and filter are code rather than a document - a density ramp over the American states, and the world's capitals lit as day or night by a clock",
             "StyleLayer.CreateFill", SampleDraws.Gpu, () => new RenderBasedOnCode(),
@@ -177,6 +182,11 @@ public static class SampleCatalog
             "A layer slipped into the middle of someone else's style - aerial imagery, a white wash over it, and the street style's lines and labels on top",
             "StyleLayerSlot.UnderLabels", SampleDraws.Gpu, () => new InsertALayerUnderTheLabels(),
             aliases: "slot, UnderLabels, AboveFills, wash, compose, insert, layer order"),
+
+        new("Styling", "Advanced Labels",
+            "Seven lessons in labelling, each a style document you can edit on the spot - curves, anchors, priority, wrapping, text-optional, CJK and several columns",
+            "symbol layout", SampleDraws.Gpu, () => new AdvancedLabels(),
+            aliases: "label, text, symbol, anchor, halo, wrap, text-optional, symbol-sort-key, curved text, CJK"),
 
         new("Styling", "Display Dot Density",
             "A dot map: one dot for every twenty-five thousand housing units, scattered inside the state that owns them",
