@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Styling ----
+        new("Styling", "Heatmap",
+            "Coyote sightings as a heatmap, with the ramp, radius, intensity and opacity changed at run time - a paint change, not a restyle",
+            "MapStyle.SetHeatmapPaint", SampleDraws.Gpu, () => new Heatmap(),
+            aliases: "heatmap, density, ColorStop, ramp, Viridis, heatmap-radius, shapefile"),
+
         new("Styling", "Style Layer Toggles",
             "Every layer a style declares, listed in style order and each one switchable - turning a layer off is a renderer decision, not a restyle",
             "MapStyle.SetLayerVisibility", SampleDraws.Gpu, () => new StyleLayerToggles(),
