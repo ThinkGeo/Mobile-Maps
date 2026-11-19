@@ -42,6 +42,11 @@ public static class SampleCatalog
             "CurrentExtentChanged", SampleDraws.Gpu, () => new MapNavigation(),
             aliases: "events, pan, zoom, rotate, tilt, SingleTap, DoubleTap, RotationAngle, log"),
 
+        new("Map Navigation", "Zoom to Extents",
+            "Zoom in and out, to a scale, and to a layer's extent, reading where the camera ended up",
+            "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToExtents(),
+            aliases: "zoom, scale, extent, GetBoundingBox, ZoomInAsync, ZoomOutAsync, shapefile"),
+
         // ---- Map Tools and Adornments ----
         new("Map Tools and Adornments", "Display Graticule Lines",
             "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",

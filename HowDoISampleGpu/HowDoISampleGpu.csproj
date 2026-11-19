@@ -64,6 +64,24 @@
   </ItemGroup>
 
   <!--
+    The sample data, shipped in the package and copied into the app's own data
+    directory on first run, so every sample afterwards speaks in plain file paths
+    exactly as the desktop gallery does.
+
+    Only the files the samples actually open are here - about 40 MB of the desktop
+    gallery's 169 MB. The rest belongs to samples this gallery does not have yet, or
+    cannot have; adding a sample means adding its data, not shipping everything
+    against the day it might be wanted.
+
+    LogicalName keeps the path, because a flat bag of names could not tell
+    Shapefile/Parks.shp from TinyGeo/Parks.tgeo. manifest.txt lists them, since an
+    app package cannot be enumerated at runtime.
+  -->
+  <ItemGroup>
+    <MauiAsset Include="Data\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!--
     Not decoration. Without a launch screen iOS runs the app in its 320x480
     compatibility box and scales the result up: every page reports 320x480
     however large the device is, so a map sizes its camera from 320x480 and

@@ -9,6 +9,19 @@ public partial class App
 
     protected override Window CreateWindow(IActivationState activationState)
     {
+        // Before any page: a sample's constructor may open a shapefile, and the
+        // samples are written in plain file paths like the desktop gallery's.
+        //
+        // Through Task.Run, not awaited inline. CreateWindow runs on the UI thread,
+        // whose synchronization context posts every continuation back to that same
+        // thread - so blocking on the copy there deadlocks it, and the app comes up
+        // with a window and no content, no exception and nothing in the log.
+        var copied = Task.Run(SampleData.EnsureCopiedAsync).GetAwaiter().GetResult();
+        if (copied > 0)
+        {
+            Console.WriteLine($"[HowDoI] copied {copied} sample data files into the app's data directory");
+        }
+
         var navigation = new NavigationPage(new MenuPage());
 
         // Opening one sample straight away, for a run that is driven rather than
