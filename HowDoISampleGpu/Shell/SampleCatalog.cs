@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Styling ----
+        new("Styling", "Render Based on Rules",
+            "The style document's own decision-making - match, step, filter, case and zoom interpolation - colouring countries from their attributes rather than from code",
+            "StyleLayer filter", SampleDraws.Gpu, () => new RenderBasedOnRules(),
+            aliases: "match, step, filter, case, interpolate, expression, data-driven, attributes"),
+
         new("Styling", "Render Points, Lines and Polygons",
             "The three shapes of vector data, each with its own style - parks as fills, streets as lines, hotels as circles, and a label layer over each",
             "MapStyle", SampleDraws.Gpu, () => new RenderPointsLinesAndPolygons(),
