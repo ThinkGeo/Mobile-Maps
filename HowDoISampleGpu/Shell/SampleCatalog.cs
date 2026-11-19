@@ -36,6 +36,11 @@ public static class SampleCatalog
             "ElevationCloudClient", SampleDraws.Gpu, () => new Elevation(),
             aliases: "elevation, height, terrain, profile, GetElevationOfLineAsync, cloud"),
 
+        new("Cloud Services", "Routing",
+            "Driving directions from the ThinkGeo Cloud - through five stops in order, the same five in the shortest order, and how far one can drive in 15 to 60 minutes",
+            "RoutingCloudClient", SampleDraws.Gpu, () => new Routing(),
+            aliases: "routing, directions, TSP, optimized, service area, isochrone, drive time"),
+
         new("Cloud Services", "Timezone",
             "The time zone under a point, from the ThinkGeo Cloud, with the zone's own area drawn on the map",
             "TimeZoneCloudClient", SampleDraws.Gpu, () => new Timezone(),
