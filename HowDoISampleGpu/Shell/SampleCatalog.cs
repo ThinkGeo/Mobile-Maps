@@ -65,6 +65,11 @@ public static class SampleCatalog
             aliases: "offline, mbtiles, pmtiles, archive, no network, PmTilesRasterTileSource, Stamen"),
 
         // ---- Dynamic Data ----
+        new("Dynamic Data", "NEXRAD Radar",
+            "The last half hour of American weather radar, looping - six images fetched once and switched by visibility, so nothing is re-fetched between frames",
+            "GeoImageRasterTileSource", SampleDraws.Gpu, () => new NexradRadar(),
+            aliases: "radar, NEXRAD, weather, Mesonet, animation, TransparentColor, SetLayerVisibility"),
+
         new("Dynamic Data", "Dynamic Rendering",
             "Two centuries of American state populations as circles that grow and change colour - geometry rewritten on every frame, with no tile cut",
             "DynamicSource", SampleDraws.Gpu, () => new DynamicRendering(),
