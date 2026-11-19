@@ -30,6 +30,18 @@ public static class SampleCatalog
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
+        // ---- 3D and the Camera ----
+        new("3D and the Camera", "Perspective Tilt",
+            "The camera tilted off straight-down, over a vector basemap whose buildings stand up and a raster one where the same tilt is a flat sheet in perspective",
+            "TiltAngle", SampleDraws.Gpu, () => new PerspectiveTilt(),
+            aliases: "tilt, pitch, 3D buildings, fill-extrusion, IsExtrusionDrawingEnabled, perspective"),
+
+        // ---- Projections ----
+        new("Projections", "The Globe",
+            "The world as a globe, as web mercator and as Robinson - the same map morphing between the shapes it can be drawn in",
+            "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
+            aliases: "globe, sphere, Robinson, proj string, AnimateDisplayProjectionAsync, morph"),
+
         // ---- Maps from a Service - Raster ----
         new("Maps from a Service - Vector", "Vector Map Providers",
             "The same map from several vector tile providers - a new provider is a new style over the same map, and the camera holds",
