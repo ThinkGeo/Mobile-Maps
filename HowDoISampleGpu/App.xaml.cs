@@ -8,5 +8,5 @@ public partial class App
     }
 
     protected override Window CreateWindow(IActivationState activationState)
-        => new Window(new AppShell());
+        => new Window(new NavigationPage(new MenuPage()));
 }
