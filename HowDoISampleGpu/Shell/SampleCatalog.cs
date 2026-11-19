@@ -36,6 +36,12 @@ public static class SampleCatalog
             "TimeZoneCloudClient", SampleDraws.Gpu, () => new Timezone(),
             aliases: "time zone, UTC, daylight saving, DynamicSource, cloud, tap"),
 
+        // ---- Map Navigation ----
+        new("Map Navigation", "Map Navigation",
+            "The map's own events as they happen - the extent changing, the scale changing, taps - while you pan, pinch, turn and tilt",
+            "CurrentExtentChanged", SampleDraws.Gpu, () => new MapNavigation(),
+            aliases: "events, pan, zoom, rotate, tilt, SingleTap, DoubleTap, RotationAngle, log"),
+
         // ---- Map Tools and Adornments ----
         new("Map Tools and Adornments", "Display Graticule Lines",
             "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",
@@ -66,6 +72,11 @@ public static class SampleCatalog
             aliases: "tilt, pitch, 3D buildings, fill-extrusion, IsExtrusionDrawingEnabled, perspective"),
 
         // ---- Projections ----
+        new("Projections", "Any Projection",
+            "The world drawn in any projection a proj string can describe - Robinson, Mollweide, Eckert, Albers, a UTM zone - morphing from one to the next",
+            "DisplayProjection.FromProjString", SampleDraws.Gpu, () => new AnyProjection(),
+            aliases: "proj4, proj string, Robinson, Mollweide, Eckert, sinusoidal, Bonne, Albers, UTM, equal area"),
+
         new("Projections", "The Globe",
             "The world as a globe, as web mercator and as Robinson - the same map morphing between the shapes it can be drawn in",
             "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
