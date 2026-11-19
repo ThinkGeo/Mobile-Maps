@@ -98,6 +98,11 @@ public static class SampleCatalog
             "GraticuleAdornmentLayer", SampleDraws.GpuAndOverlays, () => new DisplayGraticuleLines(),
             aliases: "graticule, grid, lat lon, degrees, AdornmentOverlay, adornment"),
 
+        new("Map Tools and Adornments", "Map Tool Controls",
+            "The controls the map itself offers - a coordinate readout that follows the finger, zoom buttons, and a logo in the corner",
+            "MapTools", SampleDraws.GpuAndOverlays, () => new MapToolControls(),
+            aliases: "map tools, coordinate, readout, zoom buttons, logo, adornment, IMapTool"),
+
         new("Map Tools and Adornments", "Legend",
             "A legend that cannot lie - the swatch in each row and the style that paints the state are the same object",
             "LegendAdornmentLayer", SampleDraws.GpuAndOverlays, () => new Legend(),
@@ -398,6 +403,12 @@ public static class SampleCatalog
     public static readonly IReadOnlyList<(string Title, string Reason)> NotOnMobile = new[]
     {
         ("Print the Map", "The WPF printing stack has no mobile counterpart."),
+        ("Map Tools and Adornments - Drag and Resize Adornments",
+            "AdornmentLayer.DragMode and ResizeMode are Core properties and compile everywhere, but only the "
+            + "desktop acts on them: ThinkGeo.UI.Desktop has an AdornmentResizeHandler that moves and resizes "
+            + "adornments from mouse events, and MAUI's AdornmentOverlay only draws. The adornments the sample "
+            + "shows - legend, scale line, scale bar, logo, magnetic declination - all draw on mobile; dragging "
+            + "and resizing them is what does not exist."),
         ("Your Data - Nautical Charts",
             "S-57 charts are read through GDAL - ThinkGeo.NauticalCharts references ThinkGeo.Gdal - "
             + "and GDAL's natives are not published for iOS or Android."),
