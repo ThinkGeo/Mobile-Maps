@@ -67,6 +67,16 @@ public static class SampleCatalog
             "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToBlackHole(),
             aliases: "M87, black hole, powers of ten, zoom, crossfade, raster-opacity, TileMatrixSet, EHT"),
 
+        new("Map Navigation", "Resize the Map",
+            "What a map should keep when its view changes size - the scale, the scale and the centre, or the whole extent",
+            "SizeChanged", SampleDraws.Gpu, () => new ResizeTheMap(),
+            aliases: "resize, rotate, orientation, split screen, MapResizeMode, preserve scale, preserve extent"),
+
+        new("Map Navigation", "Restrict Map Extent",
+            "Keeping the map inside a box and between two scales - the three restrictions, each switchable, with the box drawn in red",
+            "CurrentExtentChanging", SampleDraws.Gpu, () => new RestrictMapExtent(),
+            aliases: "restrict, bounds, clamp, MinScale, MaxScale, limit, pan, zoom"),
+
         new("Map Navigation", "Zoom to Extents",
             "Zoom in and out, to a scale, and to a layer's extent, reading where the camera ended up",
             "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToExtents(),
