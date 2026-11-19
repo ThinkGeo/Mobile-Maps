@@ -1,6 +1,7 @@
 Csv/Frisco_Mosquitos.csv
 Csv/vehicle-route.csv
 GeoJson/pittsburghpacity-designated-historic-districts.geojson
+historical_state_population_by_year.csv
 Mbtiles/maplibre.mbtiles
 Mbtiles/style.json
 Mbtiles/test.mbtiles

@@ -64,6 +64,12 @@ public static class SampleCatalog
             "MbTilesVectorTileSource", SampleDraws.Gpu, () => new OfflineTiles(),
             aliases: "offline, mbtiles, pmtiles, archive, no network, PmTilesRasterTileSource, Stamen"),
 
+        // ---- Dynamic Data ----
+        new("Dynamic Data", "Dynamic Rendering",
+            "Two centuries of American state populations as circles that grow and change colour - geometry rewritten on every frame, with no tile cut",
+            "DynamicSource", SampleDraws.Gpu, () => new DynamicRendering(),
+            aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
+
         // ---- Extending the SDK ----
         new("Extending the SDK", "Handle Tile Failures",
             "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
