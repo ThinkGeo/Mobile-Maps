@@ -115,6 +115,11 @@ public static class SampleCatalog
             "DynamicSource", SampleDraws.Gpu, () => new LiveFlights(),
             aliases: "OpenSky, flights, aircraft, live, dead reckoning, markers, animation, heading"),
 
+        new("Dynamic Data", "NDFD Wind Field",
+            "The forecast surface wind drawn two ways from one field - sixty-five thousand particles advected along it, and the same field as magnitude-scaled arrows",
+            "MapStyle.AddParticleFlow", SampleDraws.Gpu, () => new NdfdWindField(),
+            aliases: "wind, NDFD, forecast, particle, flow, vector field, arrows, advection, weather"),
+
         new("Dynamic Data", "NEXRAD Radar",
             "The last half hour of American weather radar, looping - six images fetched once and switched by visibility, so nothing is re-fetched between frames",
             "GeoImageRasterTileSource", SampleDraws.Gpu, () => new NexradRadar(),

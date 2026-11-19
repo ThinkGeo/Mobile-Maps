@@ -19,6 +19,7 @@ Jpg/m87_9.jpg
 Mbtiles/maplibre.mbtiles
 Mbtiles/style.json
 Mbtiles/test.mbtiles
+Ndfd/ndfd-wind.bin
 OpenDrive/LICENSE-Wolfsburg-CC-BY-4.0.txt
 OpenDrive/XodrWolfsburgLanes.geojson
 OpenDrive/XodrWolfsburgRoute.json
