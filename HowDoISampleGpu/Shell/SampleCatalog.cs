@@ -67,6 +67,11 @@ public static class SampleCatalog
             "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToBlackHole(),
             aliases: "M87, black hole, powers of ten, zoom, crossfade, raster-opacity, TileMatrixSet, EHT"),
 
+        new("Map Navigation", "Overview Map",
+            "A small map in the corner showing where the big one is looking - a red frame over the ground the main view covers, and a tap to go there",
+            "DynamicSource", SampleDraws.SideBySide, () => new OverviewMap(),
+            aliases: "overview, inset, locator, mini map, frame, ToWorldCoordinate, tilt"),
+
         new("Map Navigation", "Resize the Map",
             "What a map should keep when its view changes size - the scale, the scale and the centre, or the whole extent",
             "SizeChanged", SampleDraws.Gpu, () => new ResizeTheMap(),
