@@ -57,6 +57,11 @@ public static class SampleCatalog
             "CurrentExtentChanged", SampleDraws.Gpu, () => new MapNavigation(),
             aliases: "events, pan, zoom, rotate, tilt, SingleTap, DoubleTap, RotationAngle, log"),
 
+        new("Map Navigation", "Zoom to a Black Hole",
+            "Ten real telescope pictures of M87, each inside the one before it, crossfaded by zoom - a powers-of-ten dive from the galaxy to its black hole",
+            "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToBlackHole(),
+            aliases: "M87, black hole, powers of ten, zoom, crossfade, raster-opacity, TileMatrixSet, EHT"),
+
         new("Map Navigation", "Zoom to Extents",
             "Zoom in and out, to a scale, and to a layer's extent, reading where the camera ended up",
             "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToExtents(),
