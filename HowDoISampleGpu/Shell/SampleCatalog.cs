@@ -156,6 +156,11 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Printing and Export", "Export an Image",
+            "Drawing the map into a PNG rather than onto the screen, with the world file and .prj beside it so it opens in place in any GIS",
+            "GeoCanvas", SampleDraws.GpuAndOverlays, () => new ExportAnImage(),
+            aliases: "export, image, PNG, GeoCanvas, GeoImage, world file, pgw, prj, offscreen"),
+
         new("Markers and Popups", "Cluster Markers",
             "Coyote sightings clustered into tappable discs, rebuilt for the view each time it settles, with a tap zooming to what is inside",
             "SimpleMarkerOverlay", SampleDraws.GpuAndOverlays, () => new ClusterMarkers(),
