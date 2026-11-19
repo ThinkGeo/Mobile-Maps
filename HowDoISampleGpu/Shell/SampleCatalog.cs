@@ -31,6 +31,11 @@ public static class SampleCatalog
             aliases: "hello, smoke test, style.json, getting started"),
 
         // ---- Cloud Services ----
+        new("Cloud Services", "Elevation",
+            "The ground's height from the ThinkGeo Cloud - under one point, or sampled along a line at a chosen interval",
+            "ElevationCloudClient", SampleDraws.Gpu, () => new Elevation(),
+            aliases: "elevation, height, terrain, profile, GetElevationOfLineAsync, cloud"),
+
         new("Cloud Services", "Timezone",
             "The time zone under a point, from the ThinkGeo Cloud, with the zone's own area drawn on the map",
             "TimeZoneCloudClient", SampleDraws.Gpu, () => new Timezone(),
