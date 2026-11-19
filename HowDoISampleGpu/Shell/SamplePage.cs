@@ -40,7 +40,15 @@ public abstract class SamplePage : ContentPage
         {
             // Scrolled and capped: a sample whose controls are a list - every layer of
             // a style, say - would otherwise grow the card over the whole map.
-            Content = new ScrollView { Content = _panelContent, MaximumHeightRequest = 260 },
+            //
+            // The cap is on the card and the ScrollView is told to wrap. A ScrollView
+            // left to itself asks for all the height there is on Android, so the card
+            // stood at the full 260 whatever it held - a third of a phone screen of
+            // white. iOS wrapped it and hid the difference. VerticalOptions.Start makes
+            // the ScrollView ask for its content instead, and the cap on the card still
+            // takes over when the content is taller than that.
+            Content = new ScrollView { Content = _panelContent, VerticalOptions = LayoutOptions.Start },
+            MaximumHeightRequest = 260,
             BackgroundColor = Color.FromRgba(255, 255, 255, 235),
             StrokeThickness = 0,
             Padding = new Thickness(12, 10),
