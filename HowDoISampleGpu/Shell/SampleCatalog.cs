@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Shapes and Spatial Queries ----
+        new("Shapes and Spatial Queries", "Validate Topology",
+            "The topology rules, each with data made to both pass and fail it - what the rule checks in green, what it checks against in blue, what breaks it in red",
+            "TopologyValidator", SampleDraws.Gpu, () => new ValidateTopology(),
+            aliases: "topology, validate, pseudonode, self-intersect, overlap, gaps, rules"),
+
         new("Shapes and Spatial Queries", "Shape Operations",
             "What a shape can be asked to become - buffered, simplified, rotated, scaled, translated, hulled, enveloped, intersected, differenced, unioned",
             "AreaBaseShape", SampleDraws.Gpu, () => new ShapeOperations(),
