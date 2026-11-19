@@ -156,6 +156,16 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Markers and Popups", "Markers",
+            "Markers are views on the map, not drawings in it - a pin whose tip points at its ground point, an animated one, and tap to add or remove",
+            "SimpleMarkerOverlay", SampleDraws.GpuAndOverlays, () => new Markers(),
+            aliases: "marker, pin, icon, animated, tap, add, remove, ground point, tilt"),
+
+        new("Markers and Popups", "Popups",
+            "A popup for every hotel, each one holding its ground point as the map is panned, zoomed and tilted",
+            "PopupOverlay", SampleDraws.GpuAndOverlays, () => new Popups(),
+            aliases: "popup, callout, label, hotel, overlay, tilt, ground point"),
+
         new("Draw and Edit", "Edit with Constraints",
             "Editing under rules - a minimum spacing between vertices, a rectangle that stays a rectangle, and a corner placed exactly by typing its coordinates",
             "VertexAdding, VertexMoved", SampleDraws.GpuAndOverlays, () => new EditWithConstraints(),
