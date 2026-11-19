@@ -156,6 +156,11 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Markers and Popups", "Cluster Markers",
+            "Coyote sightings clustered into tappable discs, rebuilt for the view each time it settles, with a tap zooming to what is inside",
+            "SimpleMarkerOverlay", SampleDraws.GpuAndOverlays, () => new ClusterMarkers(),
+            aliases: "cluster, marker, bucket, grid, zoom, sightings, aggregate"),
+
         new("Markers and Popups", "Markers",
             "Markers are views on the map, not drawings in it - a pin whose tip points at its ground point, an animated one, and tap to add or remove",
             "SimpleMarkerOverlay", SampleDraws.GpuAndOverlays, () => new Markers(),
