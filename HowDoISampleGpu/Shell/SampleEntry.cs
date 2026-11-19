@@ -8,6 +8,10 @@ public enum SampleDraws
     /// <summary>A GPU basemap, drawn from a style document.</summary>
     Gpu,
 
+    /// <summary>The classic overlay pipeline only - no GPU basemap. A few samples
+    /// are about that pipeline itself: reprojecting a raster as it draws, say.</summary>
+    Classic,
+
     /// <summary>A GPU basemap with classic overlays above it.</summary>
     GpuAndOverlays,
 

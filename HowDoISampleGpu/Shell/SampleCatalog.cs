@@ -293,6 +293,11 @@ public static class SampleCatalog
     public static readonly IReadOnlyList<(string Title, string Reason)> NotOnMobile = new[]
     {
         ("Print the Map", "The WPF printing stack has no mobile counterpart."),
+        ("Projections - Reproject a Raster",
+            "Warping a raster into another projection is GdalProjectionConverter's job, and GDAL's natives "
+            + "are not published for iOS or Android. The Proj-backed ProjectionConverter converts coordinates "
+            + "but does not warp pixels: the same OpenStreetMap layer draws correctly with no converter and "
+            + "draws nothing with one."),
         ("Markdown Document Viewer", "Built on AvalonEdit and WebView2, both Windows-only."),
         ("Databases - Oracle", "No OCI client ships for iOS or Android; the other databases are included."),
         ("Vector File Formats - KML, CAD, GeoPDF", "Read through GDAL, whose natives ship for Windows and Linux but not for iOS or Android. The other five formats are included."),
