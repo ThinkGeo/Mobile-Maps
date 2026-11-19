@@ -81,6 +81,11 @@ public static class SampleCatalog
             "MapStyle", SampleDraws.Gpu, () => new RenderPointsLinesAndPolygons(),
             aliases: "fill, line, circle, symbol, style.json, shapefile, labels, source-layer"),
 
+        new("Styling", "Hatch Styles",
+            "A hatch brush as a fill pattern: the style names an image, and the image is a GeoHatchBrush the application supplies",
+            "GeoHatchBrush", SampleDraws.Gpu, () => new HatchStyles(),
+            aliases: "hatch, fill-pattern, GeoHatchStyle, pattern, brush, Images"),
+
         new("Styling", "Heatmap",
             "Coyote sightings as a heatmap, with the ramp, radius, intensity and opacity changed at run time - a paint change, not a restyle",
             "MapStyle.SetHeatmapPaint", SampleDraws.Gpu, () => new Heatmap(),
