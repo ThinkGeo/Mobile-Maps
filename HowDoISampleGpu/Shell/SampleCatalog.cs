@@ -230,6 +230,11 @@ public static class SampleCatalog
             "DisplayProjection.FromProjString", SampleDraws.SideBySide, () => new CpuVsGpuProjection(),
             aliases: "projection, Robinson, Mollweide, Eckert, shader, proj string, datum, NAD27, compare"),
 
+        new("Projections", "Cross the Dateline",
+            "A flight from Los Angeles to Shanghai across the 180th meridian - one line stored with longitudes past -180, folded back into the world at the tile cut",
+            "DisplayProjection.Globe", SampleDraws.Gpu, () => new CrossTheDateline(),
+            aliases: "dateline, antimeridian, 180, seam, globe, great circle, flight, corridor, wrap"),
+
         new("Projections", "Measure in the Right Projection",
             "Why a measurement needs the right projection - Greenland carried away from its own latitude swells in Web Mercator while the ground it covers never changes",
             "ProjectionConverter", SampleDraws.Gpu, () => new MeasureInTheRightProjection(),
