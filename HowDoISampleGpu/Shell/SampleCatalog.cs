@@ -31,6 +31,26 @@ public static class SampleCatalog
             aliases: "hello, smoke test, style.json, getting started"),
 
         // ---- Maps from a Service - Raster ----
+        new("Maps from a Service - Vector", "Vector Map Providers",
+            "The same map from several vector tile providers - a new provider is a new style over the same map, and the camera holds",
+            "ThinkGeoVectorTileSource", SampleDraws.Gpu, () => new VectorMapProviders(),
+            aliases: "OpenFreeMap, Liberty, Positron, style.json, SetStyleAsync, restyle"),
+
+        new("Maps from a Service - Vector", "WFS",
+            "A WFS V2 service merged into the basemap's style and drawn by the renderer - the Dutch national cadastral parcels, from PDOK",
+            "WfsV2AsyncFeatureSource", SampleDraws.Gpu, () => new WFS(),
+            aliases: "PDOK, kadaster, parcels, OGC, MinDataZoom, Crs"),
+
+        new("Maps from a Service - Raster", "Raster Map Providers",
+            "The same map from several raster tile providers - the raster registration is swapped in place and the camera holds",
+            "RasterTileSource", SampleDraws.Gpu, () => new RasterMapProviders(),
+            aliases: "OpenStreetMap, XYZ, aerial, hybrid, ThinkGeoRasterTileSource"),
+
+        new("Maps from a Service - Raster", "WMS",
+            "NASA's near-real-time satellite imagery from a WMS server, laid into the basemap's own layers rather than over them",
+            "WmsRasterTileSource", SampleDraws.Gpu, () => new WMS(),
+            aliases: "GIBS, VIIRS, earthdata, StyleLayerSlot, AboveFills, imagery"),
+
         new("Maps from a Service - Raster", "WMTS",
             "The Swiss national map from swisstopo's WMTS server as the basemap, read through the server's web-mercator tile matrix set",
             "WmtsRasterTileSource", SampleDraws.Gpu, () => new WMTS(),
