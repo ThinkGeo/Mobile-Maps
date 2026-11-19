@@ -154,6 +154,11 @@ public static class SampleCatalog
             aliases: "StyleLayers, visibility, layer list, toggle, show, hide"),
 
         // ---- 3D and the Camera ----
+        new("3D and the Camera", "Terrain in 3D",
+            "The ground with its real shape: satellite imagery draped over a terrain source, hill-shaded and tilted, over the Grand Canyon",
+            "MapStyle.SetTerrain", SampleDraws.Gpu, () => new Terrain3D(),
+            aliases: "terrain, DEM, hillshade, terrarium, elevation, drape, Grand Canyon, 3D"),
+
         new("3D and the Camera", "Perspective Tilt",
             "The camera tilted off straight-down, over a vector basemap whose buildings stand up and a raster one where the same tilt is a flat sheet in perspective",
             "TiltAngle", SampleDraws.Gpu, () => new PerspectiveTilt(),
