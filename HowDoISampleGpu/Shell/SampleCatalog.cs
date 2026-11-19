@@ -115,6 +115,11 @@ public static class SampleCatalog
             "DynamicSource", SampleDraws.Gpu, () => new LiveFlights(),
             aliases: "OpenSky, flights, aircraft, live, dead reckoning, markers, animation, heading"),
 
+        new("Dynamic Data", "NDFD Sky Grid Animation",
+            "Forty-four forecast hours of sky cover played as an animation over a grid fill, with five palettes and a slider that scrubs the hours",
+            "MapStyle.AddGridFill", SampleDraws.Gpu, () => new NdfdSkyGridAnimation(),
+            aliases: "sky, cloud, NDFD, GRIB, forecast, animation, grid fill, palette, colour stops"),
+
         new("Dynamic Data", "NDFD Wind Field",
             "The forecast surface wind drawn two ways from one field - sixty-five thousand particles advected along it, and the same field as magnitude-scaled arrows",
             "MapStyle.AddParticleFlow", SampleDraws.Gpu, () => new NdfdWindField(),
