@@ -225,6 +225,11 @@ public static class SampleCatalog
             "DisplayProjection.FromProjString", SampleDraws.Gpu, () => new AnyProjection(),
             aliases: "proj4, proj string, Robinson, Mollweide, Eckert, sinusoidal, Bonne, Albers, UTM, equal area"),
 
+        new("Projections", "CPU vs GPU Projection",
+            "The same six projections asked of both sides at once - the classic pipeline reprojecting the data on the way in, the GPU basemap reprojecting the picture on the way out",
+            "DisplayProjection.FromProjString", SampleDraws.SideBySide, () => new CpuVsGpuProjection(),
+            aliases: "projection, Robinson, Mollweide, Eckert, shader, proj string, datum, NAD27, compare"),
+
         new("Projections", "Measure in the Right Projection",
             "Why a measurement needs the right projection - Greenland carried away from its own latitude swells in Web Mercator while the ground it covers never changes",
             "ProjectionConverter", SampleDraws.Gpu, () => new MeasureInTheRightProjection(),
