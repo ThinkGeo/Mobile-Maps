@@ -1,6 +1,12 @@
 Csv/Frisco_Mosquitos.csv
 Csv/vehicle-route.csv
 GeoJson/pittsburghpacity-designated-historic-districts.geojson
+Mbtiles/maplibre.mbtiles
+Mbtiles/style.json
+Mbtiles/test.mbtiles
+Pmtiles/frisco.pmtiles
+Pmtiles/stamen_toner.pmtiles
+Pmtiles/style.json
 Shapefile/City_ETJ.dbf
 Shapefile/City_ETJ.ids
 Shapefile/City_ETJ.idx

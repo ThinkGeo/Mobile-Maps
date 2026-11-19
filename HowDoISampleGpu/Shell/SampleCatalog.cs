@@ -58,6 +58,12 @@ public static class SampleCatalog
             "ScaleLineAdornmentLayer", SampleDraws.GpuAndOverlays, () => new ScaleLineScaleBar(),
             aliases: "scale bar, scale line, ScaleBarAdornmentLayer, UnitSystem, miles, kilometres"),
 
+        // ---- Your Data ----
+        new("Your Data", "Offline Tiles",
+            "A map with no network at all: tiles read from an MBTiles or PMTiles archive on the device, vector or raster",
+            "MbTilesVectorTileSource", SampleDraws.Gpu, () => new OfflineTiles(),
+            aliases: "offline, mbtiles, pmtiles, archive, no network, PmTilesRasterTileSource, Stamen"),
+
         // ---- Extending the SDK ----
         new("Extending the SDK", "Handle Tile Failures",
             "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
