@@ -185,6 +185,11 @@ public static class SampleCatalog
             "DisplayProjection.FromProjString", SampleDraws.Gpu, () => new AnyProjection(),
             aliases: "proj4, proj string, Robinson, Mollweide, Eckert, sinusoidal, Bonne, Albers, UTM, equal area"),
 
+        new("Projections", "Project Features",
+            "Three ways a feature gets from one projection to another - the source converting as it reads, a converter run by hand, and the ThinkGeo Cloud",
+            "ProjectionConverter", SampleDraws.Gpu, () => new ProjectFeatures(),
+            aliases: "projection, convert, EPSG, 2276, 4326, 3857, ProjectionCloudClient, reproject"),
+
         new("Projections", "The Globe",
             "The world as a globe, as web mercator and as Robinson - the same map morphing between the shapes it can be drawn in",
             "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
