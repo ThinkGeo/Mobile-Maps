@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Shapes and Spatial Queries ----
+        new("Shapes and Spatial Queries", "Shape Operations",
+            "What a shape can be asked to become - buffered, simplified, rotated, scaled, translated, hulled, enveloped, intersected, differenced, unioned",
+            "AreaBaseShape", SampleDraws.Gpu, () => new ShapeOperations(),
+            aliases: "buffer, simplify, rotate, scale, translate, convex hull, envelope, intersection, difference, union"),
+
         new("Shapes and Spatial Queries", "Get Data from Features",
             "What a feature carries besides its shape: tap a park and its columns are listed",
             "Feature.ColumnValues", SampleDraws.Gpu, () => new GetDataFromFeatures(),
