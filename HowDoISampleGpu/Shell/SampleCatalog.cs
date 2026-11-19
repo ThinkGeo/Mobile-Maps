@@ -104,6 +104,11 @@ public static class SampleCatalog
             "FeatureSource", SampleDraws.Gpu, () => new VectorFileFormats(),
             aliases: "shapefile, GeoJSON, KML, GPX, TAB, MapInfo, TinyGeo, formats, read"),
 
+        new("Your Data", "Databases",
+            "The same map over three databases - a SQLite file carried with the app and two servers reached over the network - with the style never learning which it was",
+            "FeatureSource", SampleDraws.Gpu, () => new Databases(),
+            aliases: "database, SQLite, PostgreSQL, PostGIS, SQL Server, spatial, table, connection string"),
+
         new("Your Data", "Offline Tiles",
             "A map with no network at all: tiles read from an MBTiles or PMTiles archive on the device, vector or raster",
             "MbTilesVectorTileSource", SampleDraws.Gpu, () => new OfflineTiles(),
@@ -343,6 +348,9 @@ public static class SampleCatalog
     public static readonly IReadOnlyList<(string Title, string Reason)> NotOnMobile = new[]
     {
         ("Print the Map", "The WPF printing stack has no mobile counterpart."),
+        ("Your Data - Nautical Charts",
+            "S-57 charts are read through GDAL - ThinkGeo.NauticalCharts references ThinkGeo.Gdal - "
+            + "and GDAL's natives are not published for iOS or Android."),
         ("Projections - Reproject a Raster",
             "Warping a raster into another projection is GdalProjectionConverter's job, and GDAL's natives "
             + "are not published for iOS or Android. The Proj-backed ProjectionConverter converts coordinates "

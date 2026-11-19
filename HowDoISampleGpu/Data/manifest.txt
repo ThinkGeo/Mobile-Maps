@@ -127,6 +127,7 @@ Shapefile/Zoning.idx
 Shapefile/Zoning.prj
 Shapefile/Zoning.shp
 Shapefile/Zoning.shx
+SQLite/frisco-restaurants.sqlite
 Tab/City_ETJ.dat
 Tab/City_ETJ.id
 Tab/City_ETJ.ids

@@ -94,6 +94,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.UI\Maui\ThinkGeo.UI.Maui\ThinkGeo.UI.Maui.csproj" />
+
+    <!-- The database providers the Databases sample offers. They are separate packages
+         on the desktop too; both target netstandard2.1, which a mobile head consumes. -->
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Core\Extensions\PostgreSql\ThinkGeo.PostgreSql.csproj" />
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Core\Extensions\SqlServer\ThinkGeo.SqlServer.csproj" />
+
+    <!-- Microsoft.Data.SqlClient drags in MSAL's broker for Entra sign-in, whose native
+         runtime ships as a macOS dylib; the iOS linker refuses it. The sample signs in
+         with a SQL login, so the broker is never reached - taking its native asset out
+         is what lets the managed driver link for a device. -->
+    <PackageReference Include="Microsoft.Identity.Client.NativeInterop" Version="0.20.6" ExcludeAssets="all" />
+    <PackageReference Include="Microsoft.Identity.Client.Broker" Version="4.84.2" ExcludeAssets="all" />
   </ItemGroup>
 
   <!-- The engine is named directly, not left to arrive behind ThinkGeo.UI.Maui: the
