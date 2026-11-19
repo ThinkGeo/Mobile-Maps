@@ -41,8 +41,12 @@ public class EditWithSnapping : SamplePage
         lineShape.Vertices.Add(new Vertex(-10783003, 3918370));
         lineShape.Vertices.Add(new Vertex(-10783070, 3917335));
         lineShape.Vertices.Add(new Vertex(-10781292, 3916438));
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(new Feature(lineShape));
-        map.EditOverlay.CalculateAllControlPoints();
+        WhenFirstDrawn(map, () =>
+        {
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(new Feature(lineShape));
+            map.EditOverlay.CalculateAllControlPoints();
+            _ = map.RefreshAsync(new Overlay[] { map.EditOverlay });
+        });
 
         map.CenterPoint = new PointShape(-10782870, 3917470);
         map.MapScale = 30000;

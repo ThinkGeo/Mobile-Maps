@@ -74,6 +74,24 @@ public abstract class SamplePage : ContentPage
         };
     }
 
+    /// <summary>
+    /// Runs something once the map has drawn for the first time. An interactive
+    /// overlay given its content before that first draw stops the GPU basemap from
+    /// starting at all - no error, no crash, just a page with no map on it - so a
+    /// sample that wants shapes on screen from the start puts them there once the
+    /// ground beneath them exists.
+    /// </summary>
+    protected static void WhenFirstDrawn(MapView map, Action action)
+    {
+        void Handler(object sender, OverlaysDrawnMapViewEventArgs e)
+        {
+            map.OverlayDrawn -= Handler;
+            action();
+        }
+
+        map.OverlayDrawn += Handler;
+    }
+
     /// <summary>The map this page draws into.</summary>
     protected MapView Map { get; }
 

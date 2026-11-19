@@ -38,10 +38,14 @@ public class EditFeatures : SamplePage
         var demoPoint = new Feature("POINT(-10773220 3913230)");
         var demoLine = new Feature("LINESTRING(-10780700 3916500, -10780700 3910040)");
 
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPoint);
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoLine);
-        map.EditOverlay.CalculateAllControlPoints();
+        WhenFirstDrawn(map, () =>
+        {
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPoint);
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoLine);
+            map.EditOverlay.CalculateAllControlPoints();
+            _ = map.RefreshAsync(new Overlay[] { map.EditOverlay });
+        });
 
         // The layer that keeps the shapes once they are no longer being drawn or edited.
         var featureLayer = new InMemoryFeatureLayer();

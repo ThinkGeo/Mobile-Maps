@@ -42,9 +42,13 @@ public class EditWithConstraints : SamplePage
         rectangle.ColumnValues["constraint"] = "rectangle";
         var polygon = new Feature("POLYGON((-10778300 3911600,-10775300 3911800,-10774100 3909900,-10776900 3909200,-10778300 3911600))");
 
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(rectangle.Id, rectangle);
-        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(polygon.Id, polygon);
-        map.EditOverlay.CalculateAllControlPoints();
+        WhenFirstDrawn(map, () =>
+        {
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(rectangle.Id, rectangle);
+            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(polygon.Id, polygon);
+            map.EditOverlay.CalculateAllControlPoints();
+            _ = map.RefreshAsync(new Overlay[] { map.EditOverlay });
+        });
 
         map.EditOverlay.VertexAdding += EditOverlay_VertexAdding;
         map.EditOverlay.VertexMoved += EditOverlay_VertexMoved;
