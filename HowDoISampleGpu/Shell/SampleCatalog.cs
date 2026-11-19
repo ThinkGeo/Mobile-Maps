@@ -196,6 +196,11 @@ public static class SampleCatalog
             "ThinkGeoVectorTileSource", SampleDraws.Gpu, () => new VectorMapProviders(),
             aliases: "OpenFreeMap, Liberty, Positron, style.json, SetStyleAsync, restyle"),
 
+        new("Maps from a Service - Vector", "NOAA Weather",
+            "Live American weather from NOAA - every reporting station's temperature, and the warnings in force, coloured by severity",
+            "NoaaWeatherStationFeatureSource", SampleDraws.Gpu, () => new NOAAWeather(),
+            aliases: "NOAA, weather, stations, temperature, warnings, severity, live, step, match"),
+
         new("Maps from a Service - Vector", "OGC API - Features",
             "An OGC API - Features service merged into the basemap's style and drawn by the renderer - Spain's national named places, from IGN",
             "OgcApiAsyncFeatureSource", SampleDraws.Gpu, () => new OGCAPIFeatureServer(),
@@ -246,6 +251,7 @@ public static class SampleCatalog
         ("Markdown Document Viewer", "Built on AvalonEdit and WebView2, both Windows-only."),
         ("Databases - Oracle", "No OCI client ships for iOS or Android; the other databases are included."),
         ("Vector File Formats - KML, CAD, GeoPDF", "Read through GDAL, whose natives ship for Windows and Linux but not for iOS or Android. The other five formats are included."),
+        ("Raster File Formats", "Every format it shows - GeoTIFF, JPEG 2000, world-filed JPEG, MrSID, ECW - is read through GDAL, so the whole sample is a Windows and Linux one. Raster data still reaches a mobile map through the tile sources, which Offline Tiles and the service samples cover."),
     };
 }
 
