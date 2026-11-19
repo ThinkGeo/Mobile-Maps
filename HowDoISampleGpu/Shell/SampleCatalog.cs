@@ -30,6 +30,12 @@ public static class SampleCatalog
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
+        // ---- Cloud Services ----
+        new("Cloud Services", "Timezone",
+            "The time zone under a point, from the ThinkGeo Cloud, with the zone's own area drawn on the map",
+            "TimeZoneCloudClient", SampleDraws.Gpu, () => new Timezone(),
+            aliases: "time zone, UTC, daylight saving, DynamicSource, cloud, tap"),
+
         // ---- Map Tools and Adornments ----
         new("Map Tools and Adornments", "Display Graticule Lines",
             "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",
