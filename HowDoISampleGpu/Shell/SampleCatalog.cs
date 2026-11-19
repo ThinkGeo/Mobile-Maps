@@ -153,6 +153,11 @@ public static class SampleCatalog
             aliases: "spatial query, contains, intersects, disjoint, within distance, QueryTools, zoning"),
 
         // ---- Styling ----
+        new("Styling", "Render Based on Code",
+            "Layers whose paint and filter are code rather than a document - a density ramp over the American states, and the world's capitals lit as day or night by a clock",
+            "StyleLayer.CreateFill", SampleDraws.Gpu, () => new RenderBasedOnCode(),
+            aliases: "code, paint delegate, filter, CirclePaint, FillPaint, LinePaint, day night, density"),
+
         new("Styling", "Render Based on Rules",
             "The style document's own decision-making - match, step, filter, case and zoom interpolation - colouring countries from their attributes rather than from code",
             "StyleLayer filter", SampleDraws.Gpu, () => new RenderBasedOnRules(),
