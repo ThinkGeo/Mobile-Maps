@@ -111,6 +111,11 @@ public static class SampleCatalog
             "AdornmentLayer.DrawCore", SampleDraws.GpuAndOverlays, () => new CustomAdornmentLayer(),
             aliases: "adornment, DrawCore, GeoCanvas, range rings, custom layer, extend"),
 
+        new("Extending the SDK", "Custom Feature Sources",
+            "A feature source of your own - here over a CSV file of points - drawn by the style document like any other",
+            "FeatureSource.OpenCore", SampleDraws.Gpu, () => new CustomFeatureSources(),
+            aliases: "FeatureSource, custom, CSV, OpenCore, GetAllFeaturesCore, extend"),
+
         new("Extending the SDK", "Handle Tile Failures",
             "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
             "TileLoadFailed", SampleDraws.Gpu, () => new HandleTileFailures(),
