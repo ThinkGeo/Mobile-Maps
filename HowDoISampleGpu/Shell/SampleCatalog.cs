@@ -70,6 +70,12 @@ public static class SampleCatalog
             "TileLoadFailed", SampleDraws.Gpu, () => new HandleTileFailures(),
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
+        // ---- Shapes and Spatial Queries ----
+        new("Shapes and Spatial Queries", "Find Features by Spatial Relation",
+            "The spatial relations asked of Frisco's zoning polygons - containing, intersecting, within a distance of, disjoint from a tapped point",
+            "QueryTools", SampleDraws.Gpu, () => new FindFeaturesBySpatialRelation(),
+            aliases: "spatial query, contains, intersects, disjoint, within distance, QueryTools, zoning"),
+
         // ---- Styling ----
         new("Styling", "Render Based on Rules",
             "The style document's own decision-making - match, step, filter, case and zoom interpolation - colouring countries from their attributes rather than from code",
