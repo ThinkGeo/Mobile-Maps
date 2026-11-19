@@ -57,14 +57,10 @@ public class EditFeatures : SamplePage
         // The rule below acts on whatever carries this; the other shapes are free.
         demoPolygon.ColumnValues["constraint"] = "rectangle";
 
-        WhenFirstDrawn(map, () =>
-        {
-            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
-            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPoint);
-            map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoLine);
-            map.EditOverlay.CalculateAllControlPoints();
-            _ = map.RefreshAsync(new Overlay[] { map.EditOverlay });
-        });
+        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
+        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPoint);
+        map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoLine);
+        map.EditOverlay.CalculateAllControlPoints();
 
         // The layer that keeps the shapes once they are no longer being drawn or edited.
         var featureLayer = new InMemoryFeatureLayer();

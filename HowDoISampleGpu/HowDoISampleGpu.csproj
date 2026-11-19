@@ -139,28 +139,7 @@
     <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.Android\ThinkGeo.Gpu.Android.csproj" />
   </ItemGroup>
 
-  <!--
-    .NET iOS does not flow a NativeReference from a referenced library into the app,
-    so ANGLE's framework is embedded here as well as in ThinkGeo.Gpu.iOS. Without
-    this the app builds and then shows a black map, because the GL entry points
-    resolve against nothing. Build it first with NativeLibs/build-angle.sh.
-  -->
-  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And Exists('$(MSBuildProjectDirectory)/../../thinkgeosdk/ThinkGeo.Gpu/ThinkGeo.Gpu.iOS/NativeLibs/libGLESv2.xcframework')">
-    <DefineConstants>$(DefineConstants);THINKGEO_GPU_ANGLE</DefineConstants>
-  </PropertyGroup>
-  <!--
-    The condition has to name the platform as well as the file. An unguarded
-    NativeReference is still an item on an Android build, and MSBuild stops on
-    ResolveNativeReference, which only the .NET Framework MSBuild implements.
-  -->
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And Exists('$(MSBuildProjectDirectory)/../../thinkgeosdk/ThinkGeo.Gpu/ThinkGeo.Gpu.iOS/NativeLibs/libGLESv2.xcframework')">
-    <NativeReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\NativeLibs\libGLESv2.xcframework">
-      <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
-    </NativeReference>
-  </ItemGroup>
-
-  <!-- Keeps the deprecated OpenGLES.framework out of the link. -->
+  <!-- Embeds ANGLE and keeps the deprecated OpenGLES.framework out of the link. -->
   <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\IosHead.targets"
           Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
 

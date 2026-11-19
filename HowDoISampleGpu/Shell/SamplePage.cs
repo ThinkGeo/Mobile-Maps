@@ -40,6 +40,13 @@ public abstract class SamplePage : ContentPage
         // asked to draw, and the page comes up empty with nothing in the log.
         Map.Behaviors.Add(new AutoLoadMapViewBehavior());
 
+        // A map that fails to draw says nothing by default - the debug log starts at
+        // LogLevel.None, so the only way an application hears about it is these two
+        // events. A gallery is exactly where a silent blank page costs the most time,
+        // so it listens and prints.
+        Map.OverlayDrawFailed += (_, e) =>
+            Console.WriteLine($"[Sample] {e.Overlay?.GetType().Name} failed to draw: {e.Error}");
+
         _panelContent = new VerticalStackLayout { Spacing = 6 };
         _panel = new Border
         {
@@ -72,24 +79,6 @@ public abstract class SamplePage : ContentPage
             built = true;
             BuildMap(Map);
         };
-    }
-
-    /// <summary>
-    /// Runs something once the map has drawn for the first time. An interactive
-    /// overlay given its content before that first draw stops the GPU basemap from
-    /// starting at all - no error, no crash, just a page with no map on it - so a
-    /// sample that wants shapes on screen from the start puts them there once the
-    /// ground beneath them exists.
-    /// </summary>
-    protected static void WhenFirstDrawn(MapView map, Action action)
-    {
-        void Handler(object sender, OverlaysDrawnMapViewEventArgs e)
-        {
-            map.OverlayDrawn -= Handler;
-            action();
-        }
-
-        map.OverlayDrawn += Handler;
     }
 
     /// <summary>The map this page draws into.</summary>
