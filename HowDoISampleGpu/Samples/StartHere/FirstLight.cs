@@ -5,8 +5,8 @@ namespace HowDoISampleGpu.Samples;
 
 /// <summary>
 /// The smallest thing that proves the chain: a MAUI MapView whose basemap is drawn
-/// by the GPU pipeline. Everything specific to that is the one overlay added below -
-/// the map view, the camera and the gestures are the ordinary MAUI ones.
+/// by the GPU pipeline. Everything specific to that is the one line that assigns the
+/// basemap - the map view, the camera and the gestures are the ordinary MAUI ones.
 /// </summary>
 public class FirstLight : ContentPage
 {
@@ -29,7 +29,10 @@ public class FirstLight : ContentPage
             VerticalOptions = LayoutOptions.Fill,
         };
 
-        map.Overlays.Add("Basemap", new GpuStyleOverlay(StyleUri));
+        // A style.json URI and nothing else. GpuBasemap is the whole public surface
+        // of the GPU story on MAUI as it is on the desktop, and a basemap is not one
+        // of the Overlays - it is the ground they sit on.
+        map.Basemap = new GpuBasemap(StyleUri);
 
         // The map draws itself once it first has a size. Without this nothing is
         // ever asked to draw, and the page comes up empty with nothing in the log.

@@ -32,7 +32,7 @@ public static class SampleCatalog
 
         new("Start Here", "First Light",
             "The smallest GPU map there is: a style.json URI on a MapView, and nothing else",
-            "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
+            "GpuBasemap", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
         // ---- Cloud Services ----
