@@ -285,8 +285,41 @@ public class ValidateTopology : SamplePage
         // Every rule uses its own shapes, at its own size, so the view follows them.
         var bounds = Bounds(against, subject, broken);
         bounds.ScaleUp(50);
-        _map.CurrentExtent = bounds;
+
+        // A rule whose shapes are a horizontal line and the points on it has a
+        // bounding box of no height at all, and scaling nothing up leaves nothing:
+        // the fit then spreads that flat box across the screen and the sample reads
+        // as one line with a speck on it. Give a degenerate box the shape of the
+        // screen before fitting to it.
+        _map.CurrentExtent = Undegenerate(bounds);
         _ = _map.RefreshAsync();
+    }
+
+
+    /// <summary>
+    /// A box with no width or no height, squared off around its own centre. The ratio
+    /// is the screen's, so the shapes land in the middle of it rather than against an
+    /// edge.
+    /// </summary>
+    private RectangleShape Undegenerate(RectangleShape bounds)
+    {
+        var width = bounds.Width;
+        var height = bounds.Height;
+
+        if (width > 0 && height > 0 && Math.Max(width, height) / Math.Min(width, height) < 20)
+        {
+            return bounds;
+        }
+
+        var centre = bounds.GetCenterPoint();
+        var size = Math.Max(Math.Max(width, height), 1) / 2;
+        var tall = _map.MapHeight <= 0 || _map.MapWidth <= 0 ? 2 : _map.MapHeight / _map.MapWidth;
+
+        return new RectangleShape(
+            centre.X - size,
+            centre.Y + (size * tall),
+            centre.X + size,
+            centre.Y - (size * tall));
     }
 
     private static Collection<Feature> Wkt(params string[] wellKnownText)

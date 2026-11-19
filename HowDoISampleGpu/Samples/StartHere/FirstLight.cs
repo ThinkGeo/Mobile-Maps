@@ -62,7 +62,8 @@ public class FirstLight : ContentPage
             },
         });
 
-        map.Basemap = new GpuBasemap(style);
+        var basemap = new GpuBasemap(style);
+        map.Basemap = basemap;
 
         // Flat, the extrusions are just roofs. The map opens already leaning so the
         // first thing it shows is the thing worth showing.
@@ -72,6 +73,50 @@ public class FirstLight : ContentPage
         // ever asked to draw, and the page comes up empty with nothing in the log.
         map.Behaviors.Add(new AutoLoadMapViewBehavior());
 
-        Content = map;
+        // Off and on again without rebuilding a tile: extrusion is a decision the
+        // renderer makes while drawing, so the city stands up and lies down with the
+        // geometry already uploaded. Worth having here, on the first sample, because
+        // seeing it go flat is what shows that the 3D is the renderer's doing and not
+        // a different map.
+        Content = new Grid
+        {
+            Children =
+            {
+                map,
+                BuildBuildingsToggle(map, basemap),
+            },
+        };
+    }
+
+    /// <summary>A small card over the map, out of the way of the gestures.</summary>
+    private static View BuildBuildingsToggle(MapView map, GpuBasemap basemap)
+    {
+        var toggle = new Switch { IsToggled = true, VerticalOptions = LayoutOptions.Center };
+        toggle.Toggled += (_, _) =>
+        {
+            // A renderer switch, not a restyle: no tile is rebuilt.
+            basemap.IsExtrusionDrawingEnabled = toggle.IsToggled;
+            _ = map.RefreshAsync();
+        };
+
+        var card = new HorizontalStackLayout
+        {
+            Spacing = 8,
+            Padding = new Thickness(12, 6),
+            HorizontalOptions = LayoutOptions.Start,
+            VerticalOptions = LayoutOptions.End,
+            Margin = new Thickness(16, 0, 0, 28),
+            Children =
+            {
+                new Label { Text = "Buildings", FontSize = 13, VerticalOptions = LayoutOptions.Center },
+                toggle,
+            },
+        };
+
+        // Readable in both themes: the card sits on whatever the map is drawing.
+        card.SetAppThemeColor(VisualElement.BackgroundColorProperty, Color.FromArgb("#F2FFFFFF"), Color.FromArgb("#F2202124"));
+        ((Label)card.Children[0]).SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#1F2328"), Color.FromArgb("#E6E6E6"));
+
+        return card;
     }
 }

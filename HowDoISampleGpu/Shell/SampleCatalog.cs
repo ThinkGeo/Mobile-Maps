@@ -51,11 +51,6 @@ public static class SampleCatalog
             "CurrentExtentChanging", SampleDraws.Gpu, () => new RestrictMapExtent(),
             aliases: "restrict, bounds, clamp, MinScale, MaxScale, limit, pan, zoom"),
 
-        new("Map Navigation", "Zoom to Extents",
-            "Zoom in and out, to a scale, and to a layer's extent, reading where the camera ended up",
-            "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToExtents(),
-            aliases: "zoom, scale, extent, GetBoundingBox, ZoomInAsync, ZoomOutAsync, shapefile"),
-
         // ---- Map Tools and Adornments ----
         new("Map Tools and Adornments", "Display Graticule Lines",
             "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",
@@ -125,10 +120,6 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
-        new("Printing and Export", "Export an Image",
-            "Drawing the map into a PNG rather than onto the screen, with the world file and .prj beside it so it opens in place in any GIS",
-            "GeoCanvas", SampleDraws.GpuAndOverlays, () => new ExportAnImage(),
-            aliases: "export, image, PNG, GeoCanvas, GeoImage, world file, pgw, prj, offscreen"),
 
         new("Markers and Popups", "Cluster Markers",
             "Coyote sightings clustered into tappable discs, rebuilt for the view each time it settles, with a tap zooming to what is inside",
@@ -145,20 +136,10 @@ public static class SampleCatalog
             "PopupOverlay", SampleDraws.GpuAndOverlays, () => new Popups(),
             aliases: "popup, callout, label, hotel, overlay, tilt, ground point"),
 
-        new("Draw and Edit", "Edit with Constraints",
-            "Editing under rules - a minimum spacing between vertices, a rectangle that stays a rectangle, and a corner placed exactly by typing its coordinates",
-            "VertexAdding, VertexMoved", SampleDraws.GpuAndOverlays, () => new EditWithConstraints(),
-            aliases: "constraint, snap, spacing, rectangle, survey, vertex, cancel, edit"),
-
         new("Draw and Edit", "Edit Features",
             "Drawing and editing by hand - draw points, lines and polygons or drag, resize, rotate and reshape what is there, with every overlay event logged",
             "TrackOverlay, EditOverlay", SampleDraws.GpuAndOverlays, () => new EditFeatures(),
             aliases: "draw, edit, track, vertex, drag, resize, rotate, polygon, line, point, measure"),
-
-        new("Draw and Edit", "Edit with Snapping",
-            "Dragging a vertex that snaps - drag a control point near a school and it jumps onto it, inside the tolerance circle drawn around it",
-            "EditOverlay.VertexMoving", SampleDraws.GpuAndOverlays, () => new EditWithSnapping(),
-            aliases: "edit, snap, vertex, control point, tolerance, drag, custom style"),
 
         new("Extending the SDK", "Custom Adornment Layer",
             "An adornment layer of your own: range rings around the centre of the view, drawn over the GPU basemap",
@@ -268,21 +249,11 @@ public static class SampleCatalog
             "DynamicSource", SampleDraws.Gpu, () => new LaneLevelNavigation(),
             aliases: "navigation, lane, OpenDRIVE, HD map, follow camera, tilt, 3D buildings, route, turn by turn"),
 
-        new("3D and the Camera", "Perspective Tilt",
-            "The camera tilted off straight-down, over a vector basemap whose buildings stand up and a raster one where the same tilt is a flat sheet in perspective",
-            "TiltAngle", SampleDraws.Gpu, () => new PerspectiveTilt(),
-            aliases: "tilt, pitch, 3D buildings, fill-extrusion, IsExtrusionDrawingEnabled, perspective"),
-
         // ---- Projections ----
         new("Projections", "Any Projection",
             "The world drawn in any projection a proj string can describe - Robinson, Mollweide, Eckert, Albers, a UTM zone - morphing from one to the next",
             "DisplayProjection.FromProjString", SampleDraws.Gpu, () => new AnyProjection(),
             aliases: "proj4, proj string, Robinson, Mollweide, Eckert, sinusoidal, Bonne, Albers, UTM, equal area"),
-
-        new("Projections", "CPU vs GPU Projection",
-            "The same six projections asked of both sides at once - the classic pipeline reprojecting the data on the way in, the GPU basemap reprojecting the picture on the way out",
-            "DisplayProjection.FromProjString", SampleDraws.SideBySide, () => new CpuVsGpuProjection(),
-            aliases: "projection, Robinson, Mollweide, Eckert, shader, proj string, datum, NAD27, compare"),
 
         new("Projections", "Cross the Dateline",
             "A flight from Los Angeles to Shanghai across the 180th meridian - one line stored with longitudes past -180, folded back into the world at the tile cut",
@@ -315,30 +286,11 @@ public static class SampleCatalog
             "NoaaWeatherStationFeatureSource", SampleDraws.Gpu, () => new NOAAWeather(),
             aliases: "NOAA, weather, stations, temperature, warnings, severity, live, step, match"),
 
-        new("Maps from a Service - Vector", "OGC API - Features",
-            "An OGC API - Features service merged into the basemap's style and drawn by the renderer - Spain's national named places, from IGN",
-            "OgcApiAsyncFeatureSource", SampleDraws.Gpu, () => new OGCAPIFeatureServer(),
-            aliases: "IGN, namedplace, OGC API, features, MinDataZoom"),
-
-        new("Maps from a Service - Vector", "WFS",
-            "A WFS V2 service merged into the basemap's style and drawn by the renderer - the Dutch national cadastral parcels, from PDOK",
-            "WfsV2AsyncFeatureSource", SampleDraws.Gpu, () => new WFS(),
-            aliases: "PDOK, kadaster, parcels, OGC, MinDataZoom, Crs"),
-
         new("Maps from a Service - Raster", "Raster Map Providers",
             "The same map from several raster tile providers - the raster registration is swapped in place and the camera holds",
             "RasterTileSource", SampleDraws.Gpu, () => new RasterMapProviders(),
             aliases: "OpenStreetMap, XYZ, aerial, hybrid, ThinkGeoRasterTileSource"),
 
-        new("Maps from a Service - Raster", "WMS",
-            "NASA's near-real-time satellite imagery from a WMS server, laid into the basemap's own layers rather than over them",
-            "WmsRasterTileSource", SampleDraws.Gpu, () => new WMS(),
-            aliases: "GIBS, VIIRS, earthdata, StyleLayerSlot, AboveFills, imagery"),
-
-        new("Maps from a Service - Raster", "WMTS",
-            "The Swiss national map from swisstopo's WMTS server as the basemap, read through the server's web-mercator tile matrix set",
-            "WmtsRasterTileSource", SampleDraws.Gpu, () => new WMTS(),
-            aliases: "swisstopo, TileMatrixSet, raster service, OGC"),
     };
 
     /// <summary>

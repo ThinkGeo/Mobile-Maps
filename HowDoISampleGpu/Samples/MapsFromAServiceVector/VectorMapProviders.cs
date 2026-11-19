@@ -5,11 +5,34 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The same map from several vector tile providers. A new provider is a new style
-/// over the same map: the basemap is restyled in place and the camera holds.
+/// Vector data from a service. The first entries are whole basemaps from a tile
+/// provider; the last two are feature services - WFS and OGC API - Features - whose
+/// features are merged into the basemap's style and drawn by the same renderer. Both
+/// arrive as a source plus a style, which is why they are one sample: the question is
+/// "how do I put a vector service on the map".
 /// </summary>
 public class VectorMapProviders : SamplePage
 {
+    private const string ParcelStyle = """
+    {
+      "layers": [
+        { "type": "line",
+          "source-layer": "parcels",
+          "paint": { "line-color": "#E05C2B", "line-width": 1.2 } }
+      ]
+    }
+    """;
+
+    private const string PlacesStyle = """
+    {
+      "layers": [
+        { "type": "circle",
+          "source-layer": "places",
+          "paint": { "circle-radius": 4, "circle-color": "#FFC857", "circle-stroke-width": 1, "circle-stroke-color": "#4A3A12" } }
+      ]
+    }
+    """;
+
     private static readonly (string Name, string StyleUri)[] Providers =
     {
         ("ThinkGeo Cloud - Light", null),
@@ -17,7 +40,12 @@ public class VectorMapProviders : SamplePage
         ("OpenFreeMap - Liberty", "https://tiles.openfreemap.org/styles/liberty"),
         ("OpenFreeMap - Positron", "https://tiles.openfreemap.org/styles/positron"),
         ("OpenFreeMap - Dark", "https://tiles.openfreemap.org/styles/dark"),
+        ("WFS - Dutch cadastral parcels", null),
+        ("OGC API - Spanish named places", null),
     };
+
+    private const int WfsIndex = 5;
+    private const int OgcApiIndex = 6;
 
     private readonly ThinkGeoVectorTileSource _thinkGeo = new(SampleShared.CloudApiKey)
     {
@@ -45,9 +73,18 @@ public class VectorMapProviders : SamplePage
         try
         {
             var provider = Providers[index];
-            var style = provider.StyleUri == null
-                ? new MapStyle(index == 0 ? ThinkGeoVectorStyles.Light : ThinkGeoVectorStyles.Dark, _thinkGeo)
-                : new MapStyle(provider.StyleUri);
+            MapStyle style;
+
+            if (index is WfsIndex or OgcApiIndex)
+            {
+                style = BuildFeatureServiceStyle(index);
+            }
+            else
+            {
+                style = provider.StyleUri == null
+                    ? new MapStyle(index == 0 ? ThinkGeoVectorStyles.Light : ThinkGeoVectorStyles.Dark, _thinkGeo)
+                    : new MapStyle(provider.StyleUri);
+            }
 
             if (_map.Basemap == null)
             {
@@ -58,7 +95,8 @@ public class VectorMapProviders : SamplePage
                 await _map.Basemap.SetStyleAsync(style);
             }
 
-            _status.Text = provider.StyleUri ?? nameof(ThinkGeoVectorTileSource);
+            Arrive(index);
+            _status.Text = provider.StyleUri ?? DescribeSource(index);
         }
         catch (Exception exception)
         {
@@ -67,4 +105,77 @@ public class VectorMapProviders : SamplePage
 
         await _map.RefreshAsync();
     }
+
+    /// <summary>
+    /// A feature service, laid over the basemap's own layers. Its features are tiled on
+    /// the way in, so the renderer draws them as it draws everything else.
+    /// </summary>
+    private MapStyle BuildFeatureServiceStyle(int index)
+    {
+        var basemapTiles = new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
+        {
+            VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
+        };
+
+        var style = new MapStyle();
+        style.AddStyle(ThinkGeoVectorStyles.Dark, basemapTiles);
+
+        if (index == WfsIndex)
+        {
+            // Below zoom 15 no tile asks the service: a tile there would be a bounding-box
+            // query for tens of thousands of parcels.
+            var parcels = new FeatureSourceVectorTileSource { MinDataZoom = 15 };
+
+            // The service's own CRS is EPSG:28992, but it also publishes EPSG:3857 - ask it
+            // for web mercator rather than converting afterwards: the server holds the datum
+            // transformation for its national grid, and a generic client-side conversion
+            // lands the parcels about 170 m off the basemap.
+            parcels.FeatureSources.Add("parcels", new WfsV2AsyncFeatureSource(
+                "https://service.pdok.nl/kadaster/kadastralekaart/wfs/v5_0",
+                "kadastralekaart:Perceel")
+            {
+                TimeoutInSeconds = 120,
+                Crs = "urn:ogc:def:crs:EPSG::3857",
+            });
+
+            style.AddStyle(ParcelStyle, parcels);
+            return style;
+        }
+
+        // Below zoom 12 no tile asks the service: a tile there would be a bounding-box
+        // query for the places of a whole province.
+        var places = new FeatureSourceVectorTileSource { MinDataZoom = 12 };
+        places.FeatureSources.Add("places", new OgcApiAsyncFeatureSource(
+            "https://api-features.ign.es", "namedplace")
+        {
+            ProjectionConverter = new ProjectionConverter(4326, 3857),
+        });
+
+        style.AddStyle(PlacesStyle, places);
+        return style;
+    }
+
+    /// <summary>The basemaps share a view; each feature service has its own country.</summary>
+    private void Arrive(int index)
+    {
+        switch (index)
+        {
+            case WfsIndex:
+                _map.CenterPoint = new PointShape(544950, 6867650);
+                _map.MapScale = 4000;
+                break;
+
+            case OgcApiIndex:
+                _map.CenterPoint = new PointShape(235690, 5057360);
+                _map.MapScale = 36200;
+                break;
+        }
+    }
+
+    private static string DescribeSource(int index) => index switch
+    {
+        WfsIndex => nameof(WfsV2AsyncFeatureSource),
+        OgcApiIndex => nameof(OgcApiAsyncFeatureSource),
+        _ => nameof(ThinkGeoVectorTileSource),
+    };
 }
