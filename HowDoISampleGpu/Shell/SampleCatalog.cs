@@ -30,6 +30,12 @@ public static class SampleCatalog
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
+        // ---- Extending the SDK ----
+        new("Extending the SDK", "Handle Tile Failures",
+            "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
+            "TileLoadFailed", SampleDraws.Gpu, () => new HandleTileFailures(),
+            aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
+
         // ---- Styling ----
         new("Styling", "Style Layer Toggles",
             "Every layer a style declares, listed in style order and each one switchable - turning a layer off is a renderer decision, not a restyle",
@@ -53,6 +59,11 @@ public static class SampleCatalog
             "The same map from several vector tile providers - a new provider is a new style over the same map, and the camera holds",
             "ThinkGeoVectorTileSource", SampleDraws.Gpu, () => new VectorMapProviders(),
             aliases: "OpenFreeMap, Liberty, Positron, style.json, SetStyleAsync, restyle"),
+
+        new("Maps from a Service - Vector", "OGC API - Features",
+            "An OGC API - Features service merged into the basemap's style and drawn by the renderer - Spain's national named places, from IGN",
+            "OgcApiAsyncFeatureSource", SampleDraws.Gpu, () => new OGCAPIFeatureServer(),
+            aliases: "IGN, namedplace, OGC API, features, MinDataZoom"),
 
         new("Maps from a Service - Vector", "WFS",
             "A WFS V2 service merged into the basemap's style and drawn by the renderer - the Dutch national cadastral parcels, from PDOK",
