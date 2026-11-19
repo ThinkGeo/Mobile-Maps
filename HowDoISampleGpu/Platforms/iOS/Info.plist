@@ -30,8 +30,6 @@
 	<string>Assets.xcassets/appicon.appiconset</string>	
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need access to your location for providing current coordinates.</string>
-	<key>CFBundleIdentifier</key>
-	<string>thinkgeo.howdoi.gpu.maui</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

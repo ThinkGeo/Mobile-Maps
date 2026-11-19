@@ -25,7 +25,11 @@
     <RootNamespace>HowDoISampleGpu</RootNamespace>
 
     <ApplicationTitle>ThinkGeo GPU</ApplicationTitle>
-    <ApplicationId>thinkgeo.howdoi.gpu.maui</ApplicationId>
+    <!-- Reuses the bundle id already registered to ThinkGeo LLC, so TestFlight needs
+         no new App Store Connect record. The ThinkGeo licence is validated against
+         CFBundleIdentifier, so a licence issued for this id is what keeps the
+         watermark off a device build. -->
+    <ApplicationId>com.thinkgeo.mauihowdoi</ApplicationId>
     <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
@@ -54,6 +58,17 @@
     instead of aborting the process at load. Device Release still goes through full
     AOT. This is the same opt-in PreludeMvtIos carries.
   -->
+  <!--
+    Signing for a device build. The simulator needs none of this, so it is scoped to
+    the device runtime identifier. Automatic:AppStore asks Xcode's account for a
+    matching App Store profile rather than naming a file that expires.
+  -->
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64'">
+    <CodesignKey>Apple Distribution: ThinkGeo LLC (LDJ2EKQRTJ)</CodesignKey>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <ArchiveOnBuild Condition="'$(Configuration)' == 'Release'">true</ArchiveOnBuild>
+  </PropertyGroup>
+
   <PropertyGroup Condition="$(RuntimeIdentifier.Contains('simulator'))">
     <UseInterpreter>true</UseInterpreter>
   </PropertyGroup>
