@@ -93,6 +93,16 @@ public static class SampleCatalog
             "GraticuleAdornmentLayer", SampleDraws.GpuAndOverlays, () => new DisplayGraticuleLines(),
             aliases: "graticule, grid, lat lon, degrees, AdornmentOverlay, adornment"),
 
+        new("Map Tools and Adornments", "Legend",
+            "A legend that cannot lie - the swatch in each row and the style that paints the state are the same object",
+            "LegendAdornmentLayer", SampleDraws.GpuAndOverlays, () => new Legend(),
+            aliases: "legend, swatch, class break, adornment, key, population"),
+
+        new("Map Tools and Adornments", "Measure Distance and Area",
+            "Measuring what a finger draws - a line's length or a polygon's area, taken on the ground rather than on the web-mercator plane",
+            "TrackInteractiveOverlay", SampleDraws.GpuAndOverlays, () => new MeasureDistanceAndArea(),
+            aliases: "measure, distance, area, ruler, track, draw, polygon, line, projection"),
+
         new("Map Tools and Adornments", "Scale Line and Scale Bar",
             "The two scale adornments drawn over the GPU basemap, in imperial, metric or both",
             "ScaleLineAdornmentLayer", SampleDraws.GpuAndOverlays, () => new ScaleLineScaleBar(),
