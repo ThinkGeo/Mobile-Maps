@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The GPU gallery for MAUI: the counterpart of samples/wpf/HowDoISample, whose
+    every sample draws through GpuBasemap. It sits beside HowDoISample rather than
+    replacing it, exactly as the WPF repository keeps HowDoISample.Classic beside
+    the GPU one - the two galleries answer different questions and a customer on
+    the classic renderer still needs theirs.
+
+    Unlike HowDoISample this project builds against the SDK *sources*, not the
+    published packages: the MAUI GPU surface is newer than any package, so a
+    ProjectReference is the only way to run it. Switch to PackageReferences once
+    ThinkGeo.UI.Maui ships its GPU API.
+  -->
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-ios;net10.0-android36.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UseMaui>true</UseMaui>
+    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>HowDoISampleGpu</RootNamespace>
+
+    <ApplicationTitle>ThinkGeo GPU</ApplicationTitle>
+    <ApplicationId>thinkgeo.howdoi.gpu.maui</ApplicationId>
+    <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- The GPU engine needs GLES 3.0: iOS 13 and Android 5 both carry it, but the
+         MAUI floor is what the referenced ThinkGeo.UI.Maui asks for. -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+
+    <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
+    <!-- ThinkGeo.UI.Maui multi-targets a windows head, and NuGet restores every
+         target framework of a referenced project even when only one is built. On a
+         Mac that head has no reference assemblies, so restore stops with NETSDK1100
+         unless it is told to tolerate the windows target. Nothing windows is built
+         here; this only lets its restore resolve. -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- Mono's concurrent GC crashes Android Release builds under heavy allocation:
+         https://github.com/dotnet/runtime/issues/123537 -->
+    <AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
+  </PropertyGroup>
+
+  <!--
+    The iOS simulator on Apple Silicon runs AOT-only (no JIT), and not every
+    dependency the map pipeline pulls in - NetTopologySuite among them - has an AOT
+    image that matches. The interpreter lets those fall back to interpretation
+    instead of aborting the process at load. Device Release still goes through full
+    AOT. This is the same opt-in PreludeMvtIos carries.
+  -->
+  <PropertyGroup Condition="$(RuntimeIdentifier.Contains('simulator'))">
+    <UseInterpreter>true</UseInterpreter>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiFont Include="Resources\Fonts\*" />
+  </ItemGroup>
+
+  <!--
+    Not decoration. Without a launch screen iOS runs the app in its 320x480
+    compatibility box and scales the result up: every page reports 320x480
+    however large the device is, so a map sizes its camera from 320x480 and
+    draws that extent into a surface three times the size. The symptom is a map
+    that looks stretched and whose scale is wrong, with nothing in any log.
+  -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.UI\Maui\ThinkGeo.UI.Maui\ThinkGeo.UI.Maui.csproj" />
+  </ItemGroup>
+
+  <!-- The engine is named directly, not left to arrive behind ThinkGeo.UI.Maui: the
+       samples name GpuBasemap, MapStyle and the tile sources themselves. -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\ThinkGeo.Gpu.iOS.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
+    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.Android\ThinkGeo.Gpu.Android.csproj" />
+  </ItemGroup>
+
+  <!--
+    .NET iOS does not flow a NativeReference from a referenced library into the app,
+    so ANGLE's framework is embedded here as well as in ThinkGeo.Gpu.iOS. Without
+    this the app builds and then shows a black map, because the GL entry points
+    resolve against nothing. Build it first with NativeLibs/build-angle.sh.
+  -->
+  <PropertyGroup Condition="Exists('$(MSBuildProjectDirectory)/../../thinkgeosdk/ThinkGeo.Gpu/ThinkGeo.Gpu.iOS/NativeLibs/libGLESv2.xcframework')">
+    <DefineConstants>$(DefineConstants);THINKGEO_GPU_ANGLE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)/../../thinkgeosdk/ThinkGeo.Gpu/ThinkGeo.Gpu.iOS/NativeLibs/libGLESv2.xcframework')">
+    <NativeReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\NativeLibs\libGLESv2.xcframework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+
+  <!-- Keeps the deprecated OpenGLES.framework out of the link. -->
+  <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\IosHead.targets"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
+
+</Project>
