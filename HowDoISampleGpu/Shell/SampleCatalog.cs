@@ -106,6 +106,11 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Extending the SDK", "Custom Adornment Layer",
+            "An adornment layer of your own: range rings around the centre of the view, drawn over the GPU basemap",
+            "AdornmentLayer.DrawCore", SampleDraws.GpuAndOverlays, () => new CustomAdornmentLayer(),
+            aliases: "adornment, DrawCore, GeoCanvas, range rings, custom layer, extend"),
+
         new("Extending the SDK", "Handle Tile Failures",
             "What a map does when a tile cannot be loaded - the default picture, nothing at all, or nothing and ask again",
             "TileLoadFailed", SampleDraws.Gpu, () => new HandleTileFailures(),
