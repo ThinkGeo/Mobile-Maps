@@ -8,6 +8,13 @@ public partial class App
     /// Gives back what a finished sample was holding. A MapView keeps GL textures and
     /// a tile cache, which are native memory the collector does not account for, so
     /// an unreferenced map is not a freed one - it has to be told.
+    /// <para>
+    /// Disposing is all of it. This used to walk the whole visual tree disconnecting
+    /// every handler, because without that a popped page measured as still alive -
+    /// but that was the SDK not releasing its own native surface, fixed now, and an
+    /// application should not have to know to do it. What is left here is what any
+    /// application would write.
+    /// </para>
     /// </summary>
     private static void ReleaseMaps(Page page)
     {
@@ -17,36 +24,12 @@ public partial class App
 
         foreach (var map in maps)
         {
-            try
-            {
-                map.Basemap?.Dispose();
-                map.Basemap = null;
-                map.Dispose();
-            }
-            catch (Exception ex)
-            {
-            }
+            map.Basemap?.Dispose();
+            map.Basemap = null;
+            map.Dispose();
         }
 
         (page as IDisposable)?.Dispose();
-
-        // MAUI does not take a handler apart when its page goes away - the native
-        // view keeps pointing back at the managed one, and the page stays alive with
-        // everything it holds. Disconnecting is the documented way to let go, and
-        // without it a popped page measured as STILL ALIVE after a full collection.
-        foreach (var element in page.GetVisualTreeDescendants().OfType<VisualElement>().Reverse())
-        {
-            try
-            {
-                element.Handler?.DisconnectHandler();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        page.Handler?.DisconnectHandler();
-
     }
 
 
