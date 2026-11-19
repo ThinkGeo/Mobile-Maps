@@ -38,7 +38,9 @@ public abstract class SamplePage : ContentPage
         _panelContent = new VerticalStackLayout { Spacing = 6 };
         _panel = new Border
         {
-            Content = _panelContent,
+            // Scrolled and capped: a sample whose controls are a list - every layer of
+            // a style, say - would otherwise grow the card over the whole map.
+            Content = new ScrollView { Content = _panelContent, MaximumHeightRequest = 260 },
             BackgroundColor = Color.FromRgba(255, 255, 255, 235),
             StrokeThickness = 0,
             Padding = new Thickness(12, 10),

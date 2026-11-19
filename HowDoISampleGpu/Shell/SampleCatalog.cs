@@ -30,6 +30,12 @@ public static class SampleCatalog
             "GpuStyleOverlay", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
+        // ---- Styling ----
+        new("Styling", "Style Layer Toggles",
+            "Every layer a style declares, listed in style order and each one switchable - turning a layer off is a renderer decision, not a restyle",
+            "MapStyle.SetLayerVisibility", SampleDraws.Gpu, () => new StyleLayerToggles(),
+            aliases: "StyleLayers, visibility, layer list, toggle, show, hide"),
+
         // ---- 3D and the Camera ----
         new("3D and the Camera", "Perspective Tilt",
             "The camera tilted off straight-down, over a vector basemap whose buildings stand up and a raster one where the same tilt is a flat sheet in perspective",
