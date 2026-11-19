@@ -65,6 +65,11 @@ public static class SampleCatalog
             aliases: "offline, mbtiles, pmtiles, archive, no network, PmTilesRasterTileSource, Stamen"),
 
         // ---- Dynamic Data ----
+        new("Dynamic Data", "Live Flights",
+            "Every aircraft airborne right now, from OpenSky, each dead-reckoned forward from its last report at fifty frames a second",
+            "DynamicSource", SampleDraws.Gpu, () => new LiveFlights(),
+            aliases: "OpenSky, flights, aircraft, live, dead reckoning, markers, animation, heading"),
+
         new("Dynamic Data", "NEXRAD Radar",
             "The last half hour of American weather radar, looping - six images fetched once and switched by visibility, so nothing is re-fetched between frames",
             "GeoImageRasterTileSource", SampleDraws.Gpu, () => new NexradRadar(),
