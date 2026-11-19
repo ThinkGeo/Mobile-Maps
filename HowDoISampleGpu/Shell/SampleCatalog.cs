@@ -156,6 +156,11 @@ public static class SampleCatalog
             aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Extending the SDK ----
+        new("Draw and Edit", "Edit with Constraints",
+            "Editing under rules - a minimum spacing between vertices, a rectangle that stays a rectangle, and a corner placed exactly by typing its coordinates",
+            "VertexAdding, VertexMoved", SampleDraws.GpuAndOverlays, () => new EditWithConstraints(),
+            aliases: "constraint, snap, spacing, rectangle, survey, vertex, cancel, edit"),
+
         new("Draw and Edit", "Edit Features",
             "Drawing and editing by hand - draw points, lines and polygons or drag, resize, rotate and reshape what is there, with every overlay event logged",
             "TrackOverlay, EditOverlay", SampleDraws.GpuAndOverlays, () => new EditFeatures(),
