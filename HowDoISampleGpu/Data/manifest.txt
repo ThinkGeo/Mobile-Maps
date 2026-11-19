@@ -19,6 +19,9 @@ Jpg/m87_9.jpg
 Mbtiles/maplibre.mbtiles
 Mbtiles/style.json
 Mbtiles/test.mbtiles
+OpenDrive/LICENSE-Wolfsburg-CC-BY-4.0.txt
+OpenDrive/XodrWolfsburgLanes.geojson
+OpenDrive/XodrWolfsburgRoute.json
 Pmtiles/frisco.pmtiles
 Pmtiles/stamen_toner.pmtiles
 Pmtiles/style.json

@@ -229,6 +229,11 @@ public static class SampleCatalog
             "MapStyle.SetTerrain", SampleDraws.Gpu, () => new Terrain3D(),
             aliases: "terrain, DEM, hillshade, terrarium, elevation, drape, Grand Canyon, 3D"),
 
+        new("3D and the Camera", "Lane Level Navigation",
+            "A drive through Wolfsburg at lane level - an OpenDRIVE HD map cut into vector tiles, a follow camera, and the city's buildings standing around it",
+            "DynamicSource", SampleDraws.Gpu, () => new LaneLevelNavigation(),
+            aliases: "navigation, lane, OpenDRIVE, HD map, follow camera, tilt, 3D buildings, route, turn by turn"),
+
         new("3D and the Camera", "Perspective Tilt",
             "The camera tilted off straight-down, over a vector basemap whose buildings stand up and a raster one where the same tilt is a flat sheet in perspective",
             "TiltAngle", SampleDraws.Gpu, () => new PerspectiveTilt(),
