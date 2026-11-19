@@ -143,6 +143,11 @@ public static class SampleCatalog
             "StyleLayerSlot.UnderLabels", SampleDraws.Gpu, () => new InsertALayerUnderTheLabels(),
             aliases: "slot, UnderLabels, AboveFills, wash, compose, insert, layer order"),
 
+        new("Styling", "Display Dot Density",
+            "A dot map: one dot for every twenty-five thousand housing units, scattered inside the state that owns them",
+            "InMemoryFeatureSource", SampleDraws.Gpu, () => new DisplayDotDensity(),
+            aliases: "dot density, scatter, census, housing, circle, thematic"),
+
         new("Styling", "Hatch Styles",
             "A hatch brush as a fill pattern: the style names an image, and the image is a GeoHatchBrush the application supplies",
             "GeoHatchBrush", SampleDraws.Gpu, () => new HatchStyles(),
