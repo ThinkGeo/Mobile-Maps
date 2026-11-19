@@ -71,6 +71,11 @@ public static class SampleCatalog
             aliases: "401, error tile, DrawException, Retry, ShowOnMap, failure"),
 
         // ---- Styling ----
+        new("Styling", "Render Points, Lines and Polygons",
+            "The three shapes of vector data, each with its own style - parks as fills, streets as lines, hotels as circles, and a label layer over each",
+            "MapStyle", SampleDraws.Gpu, () => new RenderPointsLinesAndPolygons(),
+            aliases: "fill, line, circle, symbol, style.json, shapefile, labels, source-layer"),
+
         new("Styling", "Heatmap",
             "Coyote sightings as a heatmap, with the ramp, radius, intensity and opacity changed at run time - a paint change, not a restyle",
             "MapStyle.SetHeatmapPaint", SampleDraws.Gpu, () => new Heatmap(),
