@@ -129,6 +129,7 @@ public class CpuVsGpuProjection : ContentPage
     private static MapView NewMap() => new()
     {
         MapUnit = GeographyUnit.Meter,
+        IsRotationEnabled = true,
         HorizontalOptions = LayoutOptions.Fill,
         VerticalOptions = LayoutOptions.Fill,
         Behaviors = { new AutoLoadMapViewBehavior() },

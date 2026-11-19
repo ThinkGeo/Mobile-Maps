@@ -63,10 +63,15 @@
     the device runtime identifier. Automatic:AppStore asks Xcode's account for a
     matching App Store profile rather than naming a file that expires.
   -->
-  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64'">
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64' and '$(Configuration)' == 'Debug'">
+    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
+    <CodesignProvision>Automatic</CodesignProvision>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64' and '$(Configuration)' == 'Release'">
     <CodesignKey>Apple Distribution: ThinkGeo LLC (LDJ2EKQRTJ)</CodesignKey>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <ArchiveOnBuild Condition="'$(Configuration)' == 'Release'">true</ArchiveOnBuild>
+    <ArchiveOnBuild>true</ArchiveOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(RuntimeIdentifier.Contains('simulator'))">

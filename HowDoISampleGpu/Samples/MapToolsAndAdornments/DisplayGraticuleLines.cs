@@ -14,6 +14,15 @@ public class DisplayGraticuleLines : SamplePage
     {
         map.MapUnit = GeographyUnit.Meter;
 
+        // The graticule is an adornment: it is drawn over the finished map in screen
+        // space, as a grid of straight horizontal and vertical lines labelled with
+        // degrees. That is only true of a map looked at straight down and facing
+        // north. Turn the map and the lines no longer point along the meridians they
+        // are labelled with; lean it and the spacing is wrong as well. The grid
+        // cannot follow the camera, so on this sample the camera does not move.
+        map.IsRotationEnabled = false;
+        map.IsTiltEnabled = false;
+
         map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Light,
             new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
             {
@@ -28,13 +37,16 @@ public class DisplayGraticuleLines : SamplePage
         };
         graticuleLayer.GraticuleLineStyle.OuterPen.Color = GeoColor.FromArgb(125, GeoColors.Navy);
 
-        // On the adornment overlay the grid is redrawn on every pan tick and the degree
-        // labels stay pinned to the map's edges - it is drawn above the GPU basemap by
-        // the classic pipeline, which is the point: the two render paths compose.
+        // Drawn above the GPU basemap by the classic pipeline, which is the point: the
+        // two render paths compose.
         map.AdornmentOverlay.Layers.Add("graticule", graticuleLayer);
 
         map.CenterPoint = new PointShape(-10777200, 3911500);
         map.MapScale = 36200;
+
+
         _ = map.RefreshAsync();
     }
+
+
 }

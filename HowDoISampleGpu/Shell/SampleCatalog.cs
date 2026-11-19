@@ -35,38 +35,7 @@ public static class SampleCatalog
             "GpuBasemap", SampleDraws.Gpu, () => new FirstLight(),
             aliases: "hello, smoke test, style.json, getting started"),
 
-        // ---- Cloud Services ----
-        new("Cloud Services", "Color Utilities",
-            "Colour families from the ThinkGeo Cloud used as a choropleth ramp over Frisco's census blocks",
-            "ColorCloudClient", SampleDraws.Gpu, () => new ColorUtilities(),
-            aliases: "colour, color, palette, hue, analogous, complementary, triadic, choropleth, class break"),
-
-        new("Cloud Services", "Elevation",
-            "The ground's height from the ThinkGeo Cloud - under one point, or sampled along a line at a chosen interval",
-            "ElevationCloudClient", SampleDraws.Gpu, () => new Elevation(),
-            aliases: "elevation, height, terrain, profile, GetElevationOfLineAsync, cloud"),
-
-        new("Cloud Services", "Geocoding",
-            "Addresses to places and back - search for a place by name, or tap the map and ask what is there",
-            "GeocodingCloudClient", SampleDraws.Gpu, () => new Geocoding(),
-            aliases: "geocode, reverse geocode, address, search, place, ReverseGeocodingCloudClient"),
-
-        new("Cloud Services", "Routing",
-            "Driving directions from the ThinkGeo Cloud - through five stops in order, the same five in the shortest order, and how far one can drive in 15 to 60 minutes",
-            "RoutingCloudClient", SampleDraws.Gpu, () => new Routing(),
-            aliases: "routing, directions, TSP, optimized, service area, isochrone, drive time"),
-
-        new("Cloud Services", "Timezone",
-            "The time zone under a point, from the ThinkGeo Cloud, with the zone's own area drawn on the map",
-            "TimeZoneCloudClient", SampleDraws.Gpu, () => new Timezone(),
-            aliases: "time zone, UTC, daylight saving, DynamicSource, cloud, tap"),
-
         // ---- Map Navigation ----
-        new("Map Navigation", "Map Navigation",
-            "The map's own events as they happen - the extent changing, the scale changing, taps - while you pan, pinch, turn and tilt",
-            "CurrentExtentChanged", SampleDraws.Gpu, () => new MapNavigation(),
-            aliases: "events, pan, zoom, rotate, tilt, SingleTap, DoubleTap, RotationAngle, log"),
-
         new("Map Navigation", "Zoom to a Black Hole",
             "Ten real telescope pictures of M87, each inside the one before it, crossfaded by zoom - a powers-of-ten dive from the galaxy to its black hole",
             "ZoomToAsync", SampleDraws.Gpu, () => new ZoomToBlackHole(),
@@ -76,11 +45,6 @@ public static class SampleCatalog
             "A small map in the corner showing where the big one is looking - a red frame over the ground the main view covers, and a tap to go there",
             "DynamicSource", SampleDraws.SideBySide, () => new OverviewMap(),
             aliases: "overview, inset, locator, mini map, frame, ToWorldCoordinate, tilt"),
-
-        new("Map Navigation", "Resize the Map",
-            "What a map should keep when its view changes size - the scale, the scale and the centre, or the whole extent",
-            "SizeChanged", SampleDraws.Gpu, () => new ResizeTheMap(),
-            aliases: "resize, rotate, orientation, split screen, MapResizeMode, preserve scale, preserve extent"),
 
         new("Map Navigation", "Restrict Map Extent",
             "Keeping the map inside a box and between two scales - the three restrictions, each switchable, with the box drawn in red",
@@ -97,11 +61,6 @@ public static class SampleCatalog
             "A latitude and longitude grid over the map, drawn by the classic adornment pipeline above the GPU basemap",
             "GraticuleAdornmentLayer", SampleDraws.GpuAndOverlays, () => new DisplayGraticuleLines(),
             aliases: "graticule, grid, lat lon, degrees, AdornmentOverlay, adornment"),
-
-        new("Map Tools and Adornments", "Map Tool Controls",
-            "The controls the map itself offers - a coordinate readout that follows the finger, zoom buttons, and a logo in the corner",
-            "MapTools", SampleDraws.GpuAndOverlays, () => new MapToolControls(),
-            aliases: "map tools, coordinate, readout, zoom buttons, logo, adornment, IMapTool"),
 
         new("Map Tools and Adornments", "Legend",
             "A legend that cannot lie - the swatch in each row and the style that paints the state are the same object",
@@ -437,4 +396,7 @@ public sealed class SampleGroup : List<SampleEntry>
         => Title = title;
 
     public string Title { get; }
+
+    /// <summary>How many samples the heading is standing over, for the band's right edge.</summary>
+    public string Label => Count == 1 ? "1 sample" : $"{Count} samples";
 }

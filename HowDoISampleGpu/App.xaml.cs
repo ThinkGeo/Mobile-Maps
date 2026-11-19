@@ -1,7 +1,55 @@
+using ThinkGeo.UI.Maui;
+
 namespace HowDoISampleGpu;
 
 public partial class App
 {
+    /// <summary>
+    /// Gives back what a finished sample was holding. A MapView keeps GL textures and
+    /// a tile cache, which are native memory the collector does not account for, so
+    /// an unreferenced map is not a freed one - it has to be told.
+    /// </summary>
+    private static void ReleaseMaps(Page page)
+    {
+        if (page == null) return;
+
+        var maps = page.GetVisualTreeDescendants().OfType<MapView>().ToList();
+
+        foreach (var map in maps)
+        {
+            try
+            {
+                map.Basemap?.Dispose();
+                map.Basemap = null;
+                map.Dispose();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        (page as IDisposable)?.Dispose();
+
+        // MAUI does not take a handler apart when its page goes away - the native
+        // view keeps pointing back at the managed one, and the page stays alive with
+        // everything it holds. Disconnecting is the documented way to let go, and
+        // without it a popped page measured as STILL ALIVE after a full collection.
+        foreach (var element in page.GetVisualTreeDescendants().OfType<VisualElement>().Reverse())
+        {
+            try
+            {
+                element.Handler?.DisconnectHandler();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        page.Handler?.DisconnectHandler();
+
+    }
+
+
     public App()
     {
         InitializeComponent();
@@ -24,11 +72,18 @@ public partial class App
 
         var navigation = new NavigationPage(new MenuPage());
 
+        // Released here rather than in a page's own override: a sample is only
+        // sometimes a SamplePage - several build their own ContentPage - and the
+        // ones that did not inherit it were the ones holding the most. What is
+        // popped is what is finished with, whatever class it happens to be.
+        navigation.Popped += (_, e) => ReleaseMaps(e.Page);
+
         // Opening one sample straight away, for a run that is driven rather than
         // tapped: `simctl launch` passes SIMCTL_CHILD_HOWDOI_SAMPLE through as this
         // variable, and `devicectl` passes DEVICECTL_CHILD_HOWDOI_SAMPLE. It is how
         // every sample gets screenshotted without a hand on the screen; without it
         // the gallery opens on its menu as a person would find it.
+
         var wanted = Environment.GetEnvironmentVariable("HOWDOI_SAMPLE");
         if (!string.IsNullOrWhiteSpace(wanted))
         {
@@ -44,6 +99,7 @@ public partial class App
             {
                 Console.WriteLine($"[HowDoI] opening '{entry.Title}'");
                 navigation.PushAsync(entry.Create(), animated: false);
+
             }
         }
 

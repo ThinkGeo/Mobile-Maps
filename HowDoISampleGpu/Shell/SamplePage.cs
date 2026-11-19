@@ -29,6 +29,11 @@ public abstract class SamplePage : ContentPage
             MapUnit = GeographyUnit.Meter,
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.Fill,
+
+            // Off by default on MapView, because turning the map is not something
+            // every app wants. A gallery is the one place that does: two fingers
+            // twist to rotate, and slide together to tilt.
+            IsRotationEnabled = true,
         };
 
         // The map draws itself once it first has a size. Without this nothing is ever
@@ -114,5 +119,42 @@ public abstract class SamplePage : ContentPage
     /// Builds the sample, once the map has a real size. The counterpart of the desktop
     /// gallery's <c>Map_SizeChanged</c> body.
     /// </summary>
+    /// <summary>
+    /// A sample's map holds GPU textures and a tile cache, and leaving the page does
+    /// not free them: the managed object becomes unreachable but the native memory
+    /// behind it is not what the collector measures, so nothing hurries. Opening
+    /// sample after sample grew the footprint until iOS killed the process - a
+    /// SIGKILL, with no crash and no stack, which is what made it look like a bug
+    /// elsewhere. The page releases its own map on the way out instead.
+    /// </summary>
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        base.OnNavigatedFrom(args);
+
+        if (Navigation.NavigationStack.Contains(this))
+            return;   // pushed over, not popped - the page is coming back
+
+        ReleaseMap();
+    }
+
+    private void ReleaseMap()
+    {
+        if (_released)
+            return;
+
+        _released = true;
+
+        foreach (var map in this.GetVisualTreeDescendants().OfType<MapView>().ToList())
+        {
+            map.Basemap?.Dispose();
+            map.Basemap = null;
+            map.Dispose();
+        }
+
+        (this as IDisposable)?.Dispose();
+    }
+
+    private bool _released;
+
     protected abstract void BuildMap(MapView map);
 }

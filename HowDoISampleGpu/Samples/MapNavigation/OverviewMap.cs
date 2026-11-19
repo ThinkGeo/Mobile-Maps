@@ -30,6 +30,7 @@ public class OverviewMap : ContentPage
         _mainMap = new MapView
         {
             MapUnit = GeographyUnit.Meter,
+            IsRotationEnabled = true,
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.Fill,
             Behaviors = { new AutoLoadMapViewBehavior() },
@@ -38,6 +39,7 @@ public class OverviewMap : ContentPage
         _previewMap = new MapView
         {
             MapUnit = GeographyUnit.Meter,
+            IsRotationEnabled = true,
             WidthRequest = 150,
             HeightRequest = 150,
             Behaviors = { new AutoLoadMapViewBehavior() },
@@ -123,8 +125,12 @@ public class OverviewMap : ContentPage
     private void UpdateFrame()
     {
         var centerPoint = _mainMap.CenterPoint;
-        var width = _mainMap.CanvasWidth;
-        var height = _mainMap.CanvasHeight;
+        // The view's own size, not CanvasWidth. With rotation enabled the canvas is
+        // the square that holds the turned view, so reading it drew a frame for a
+        // square the main map never shows - the desktop reads ActualWidth here, and
+        // MapWidth/MapHeight are its counterparts.
+        var width = _mainMap.MapWidth;
+        var height = _mainMap.MapHeight;
         if (centerPoint == null || width <= 0 || height <= 0) return;
 
         var resolution = MapUtil.GetResolutionFromScale(_mainMap.MapScale, _mainMap.MapUnit);

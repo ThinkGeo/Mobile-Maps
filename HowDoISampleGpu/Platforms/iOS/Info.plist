@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- A ProMotion display runs at 120Hz, but iOS holds an app to 60 unless it
+	     says it can keep up. The map is drawn by the GPU and can, and at 60 on a
+	     120Hz phone a drag lands every other refresh - which is exactly what makes
+	     a map feel a beat behind the finger next to a photo, which is not capped. -->
+	<key>CADisableMinimumFrameDuration</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIDeviceFamily</key>
