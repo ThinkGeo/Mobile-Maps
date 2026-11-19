@@ -1,6 +1,7 @@
 Csv/Frisco_Mosquitos.csv
 Csv/vehicle-route.csv
 GeoJson/pittsburghpacity-designated-historic-districts.geojson
+Gpx/Hike_Bike.gpx
 historical_state_population_by_year.csv
 Mbtiles/maplibre.mbtiles
 Mbtiles/style.json
@@ -105,4 +106,10 @@ Shapefile/Zoning.idx
 Shapefile/Zoning.prj
 Shapefile/Zoning.shp
 Shapefile/Zoning.shx
+Tab/City_ETJ.dat
+Tab/City_ETJ.id
+Tab/City_ETJ.ids
+Tab/City_ETJ.idx
+Tab/City_ETJ.map
+Tab/City_ETJ.tab
 TinyGeo/Zoning.tgeo

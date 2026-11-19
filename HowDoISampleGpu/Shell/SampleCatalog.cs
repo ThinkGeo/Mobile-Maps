@@ -74,6 +74,11 @@ public static class SampleCatalog
             aliases: "scale bar, scale line, ScaleBarAdornmentLayer, UnitSystem, miles, kilometres"),
 
         // ---- Your Data ----
+        new("Your Data", "Vector File Formats",
+            "The same map from five vector file formats - shapefile, GeoJSON, GPX, MapInfo TAB and TinyGeo - with the style never learning which it was",
+            "FeatureSource", SampleDraws.Gpu, () => new VectorFileFormats(),
+            aliases: "shapefile, GeoJSON, KML, GPX, TAB, MapInfo, TinyGeo, formats, read"),
+
         new("Your Data", "Offline Tiles",
             "A map with no network at all: tiles read from an MBTiles or PMTiles archive on the device, vector or raster",
             "MbTilesVectorTileSource", SampleDraws.Gpu, () => new OfflineTiles(),
@@ -240,6 +245,7 @@ public static class SampleCatalog
         ("Print the Map", "The WPF printing stack has no mobile counterpart."),
         ("Markdown Document Viewer", "Built on AvalonEdit and WebView2, both Windows-only."),
         ("Databases - Oracle", "No OCI client ships for iOS or Android; the other databases are included."),
+        ("Vector File Formats - KML, CAD, GeoPDF", "Read through GDAL, whose natives ship for Windows and Linux but not for iOS or Android. The other five formats are included."),
     };
 }
 
