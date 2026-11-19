@@ -31,6 +31,11 @@ public static class SampleCatalog
             aliases: "hello, smoke test, style.json, getting started"),
 
         // ---- Cloud Services ----
+        new("Cloud Services", "Color Utilities",
+            "Colour families from the ThinkGeo Cloud used as a choropleth ramp over Frisco's census blocks",
+            "ColorCloudClient", SampleDraws.Gpu, () => new ColorUtilities(),
+            aliases: "colour, color, palette, hue, analogous, complementary, triadic, choropleth, class break"),
+
         new("Cloud Services", "Elevation",
             "The ground's height from the ThinkGeo Cloud - under one point, or sampled along a line at a chosen interval",
             "ElevationCloudClient", SampleDraws.Gpu, () => new Elevation(),
