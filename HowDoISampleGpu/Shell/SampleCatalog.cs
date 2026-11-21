@@ -120,10 +120,6 @@ public static class SampleCatalog
             "Two forecast grids over the same country - forty-four hours of sky cover played as an animation, and the surface wind as particles carried along it",
             "MapStyle.AddGridFill, MapStyle.AddParticleFlow", SampleDraws.Gpu, () => new WeatherGrids(),
             aliases: "weather, NDFD, forecast, sky, cloud, grid fill, animation, wind, particle, flow, vector field, advection, GRIB"),
-        new("Styling", "Dynamic Rendering",
-            "Two centuries of American state populations as circles that grow and change colour - geometry rewritten on every frame, with no tile cut",
-            "DynamicSource", SampleDraws.Gpu, () => new DynamicRendering(),
-            aliases: "DynamicSource, animation, population, census, circles, interpolate, no tiles"),
 
         // ---- Markers and Popups ----
         new("Markers and Popups", "Markers",
@@ -193,6 +189,15 @@ public static class SampleCatalog
     /// </summary>
     public static readonly IReadOnlyList<(string Title, string Reason)> NotOnMobile = new[]
     {
+        ("Styling - Dynamic Rendering",
+            "Built for this gallery and then cut from it, like Lane Level Navigation above. Its API was "
+            + "not its own: DynamicSource is used by nine samples here, and three of them tell this one's "
+            + "story better - Live Flights rewrites thousands of aircraft every frame from a live service, "
+            + "GPS Navigation carries the same source under a moving camera, and Shape Operations recomputes "
+            + "a shape's geometry as a parameter sweeps. What was left was the data: two centuries of state "
+            + "populations as circles that grow, which is a chart drawn over a map rather than a question "
+            + "anyone asks a map to answer, and which cost a phone's panel a year slider and a play control "
+            + "to show. The shapefile it shared stayed - Graticule Lines and Legend draws the same states."),
         ("Lane Level Navigation",
             "Built for this gallery and then cut from it. It told the same story as GPS Navigation - a follow "
             + "camera carried along a route - and the part that was its own, a lane-level OpenDRIVE HD map, is "
