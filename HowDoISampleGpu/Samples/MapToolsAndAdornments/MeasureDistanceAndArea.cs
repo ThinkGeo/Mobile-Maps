@@ -1,26 +1,41 @@
+using System.Globalization;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
+using ThinkGeo.Gpu;
 using ThinkGeo.UI.Maui;
 
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
 /// Measuring what a finger draws: tap to add vertices, and the line or the polygon
-/// reports its length or its area - measured on the ground rather than on the
-/// web-mercator plane, which grows areas away from the equator by about 40 per cent
-/// in Texas.
+/// reports its length or its area, where its centre is, and how far it is from a
+/// fixed landmark - all of it on the ground rather than on the web-mercator plane,
+/// which grows areas away from the equator by about forty per cent in Texas.
 /// </summary>
 /// <remarks>
-/// WPF has MeasureInteractiveOverlay, which is a TrackInteractiveOverlay that labels
-/// itself. MAUI has the TrackInteractiveOverlay but not the measuring subclass, so
-/// both modes here are plain tracking and the measurement is the sample's own - which
-/// is the part worth seeing anyway: the shape is converted to longitude and latitude
-/// first, and only then measured.
+/// The four questions a shape can be asked - GetLength, GetArea, GetCenterPoint and
+/// GetShortestLineTo - used to be a sample of their own, asked of parks and trails
+/// read from a file. They are the same four calls on a shape the finger made, and a
+/// shape the finger made is the one a phone can show them with.
+/// <para>
+/// WPF has MeasureInteractiveOverlay, a TrackInteractiveOverlay that labels itself.
+/// MAUI has the tracking overlay but not the measuring subclass, so both modes here
+/// are plain tracking and the measurement is the sample's own - which is the part
+/// worth seeing anyway: the shape is converted to longitude and latitude first, and
+/// only then measured.
+/// </para>
 /// </remarks>
 public class MeasureDistanceAndArea : SamplePage
 {
+    /// <summary>Toyota Stadium: the fixed end of the shortest-line measurement.</summary>
+    private static readonly PointShape Stadium = new(-10779651.5, 3915933.0);
+
+    /// <summary>The landmark and the line drawn to it, which no tracking overlay owns.</summary>
+    private readonly DynamicSource _landmark = new();
+
     private MapView _map;
-    private Label _status;
+    private Label _result;
+    private Label _detail;
     private bool _area;
 
     protected override void BuildMap(MapView map)
@@ -28,9 +43,12 @@ public class MeasureDistanceAndArea : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Dark,
-            new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
-            { VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder) }));
+        var style = new MapStyle(ThinkGeoVectorStyles.Dark, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
+        {
+            VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
+        });
+        style.AddDynamic(_landmark);
+        map.Basemap = new GpuBasemap(style);
 
         AddChoiceStrip(new[] { "Distance", "Area" }, 0, index =>
         {
@@ -42,7 +60,8 @@ public class MeasureDistanceAndArea : SamplePage
         clear.Clicked += (_, _) => Reset();
         AddToPanel(clear);
 
-        _status = AddStatusLabel();
+        _result = AddToPanel(new Label { FontSize = 13, FontAttributes = FontAttributes.Bold });
+        _detail = AddStatusLabel();
 
         map.CurrentExtent = new RectangleShape(-10_790_000, 3_925_000, -10_770_000, 3_905_000); // Frisco, TX
         Reset();
@@ -53,9 +72,13 @@ public class MeasureDistanceAndArea : SamplePage
     private void Reset()
     {
         _map.TrackOverlay = _area ? NewAreaOverlay() : NewRuler();
-        _status.Text = _area
+        _result.Text = string.Empty;
+        _detail.Text = _area
             ? "Tap to add corners, double-tap to close the polygon"
             : "Tap to add points, double-tap to end the line";
+
+        _landmark.Clear();
+        _landmark.SetPoint("stadium", new Feature(Stadium), color: GeoColors.Gold, sizeInPixel: 14f);
         _ = _map.RefreshAsync();
     }
 
@@ -75,7 +98,8 @@ public class MeasureDistanceAndArea : SamplePage
             var onGround = (LineShape)ToLonLat(line);
             var length = onGround.GetLength(GeographyUnit.DecimalDegree, DistanceUnit.Kilometer);
             Label(overlay, FormattableString.Invariant($"{length:N2} km"));
-            _status.Text = FormattableString.Invariant($"{length:N2} km on the ground");
+            _result.Text = FormattableString.Invariant($"{length:N2} km on the ground");
+            Describe(line);
             await overlay.RefreshAsync();
         };
 
@@ -101,11 +125,32 @@ public class MeasureDistanceAndArea : SamplePage
             var onGround = (PolygonShape)ToLonLat(polygon);
             var area = onGround.GetArea(GeographyUnit.DecimalDegree, AreaUnit.SquareKilometers);
             Label(overlay, FormattableString.Invariant($"{area:N2} km²"));
-            _status.Text = FormattableString.Invariant($"{area:N2} km² on the ground");
+            _result.Text = FormattableString.Invariant($"{area:N2} km² on the ground");
+            Describe(polygon);
             await overlay.RefreshAsync();
         };
 
         return overlay;
+    }
+
+    /// <summary>
+    /// The other two questions, asked of the same shape: where its centre is, and the
+    /// shortest line from it to the stadium - drawn, because a distance to somewhere
+    /// is easier to believe with the line on the map.
+    /// </summary>
+    private void Describe(BaseShape shape)
+    {
+        var centre = shape.GetCenterPoint();
+        var toStadium = shape.GetShortestLineTo(Stadium, GeographyUnit.Meter);
+        var gap = toStadium.GetLength(new Projection(3857), DistanceUnit.Kilometer);
+
+        var lonLat = (PointShape)ToLonLat(centre);
+
+        _landmark.SetPoint("centre", new Feature(centre), color: GeoColors.OrangeRed, sizeInPixel: 12f);
+        _landmark.SetLine("to-stadium", new Feature(toStadium), GeoColors.Gold, 3f);
+
+        _detail.Text = string.Create(CultureInfo.InvariantCulture,
+            $"centre {lonLat.Y:F4}, {lonLat.X:F4}  ·  {gap:N2} km to Toyota Stadium");
     }
 
     private static BaseShape ToLonLat(BaseShape shape)

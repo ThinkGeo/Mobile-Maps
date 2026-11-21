@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
 using ThinkGeo.UI.Maui;
@@ -7,9 +6,8 @@ namespace HowDoISampleGpu.Samples;
 
 /// <summary>
 /// Drawing and editing by hand: pick a mode and draw points, lines or polygons, or
-/// switch to editing and drag, resize, rotate and reshape what is there. Every event
-/// the two overlays raise is written to a log, and a measurement follows whatever is
-/// being moved.
+/// switch to editing and drag, resize, rotate and reshape what is there, with a
+/// measurement following whatever is being moved.
 /// <para>
 /// The two switches are the rest of the editing story, which the desktop gallery tells
 /// on pages of its own: a rule that refuses an edit, and a rule that corrects one.
@@ -25,17 +23,13 @@ public class EditFeatures : SamplePage
     /// <summary>How near the finger must come, in pixels, before a vertex snaps.</summary>
     private const float SnapTolerance = 25;
 
-    private readonly ObservableCollection<string> _log = new();
-
     private LayerOverlay _layerOverlay;
     private LayerOverlay _schoolsOverlay;
     private ShapeFileFeatureLayer _schoolsLayer;
     private MapView _map;
     private Label _measure;
-    private Label _logLabel;
     private Switch _constrain;
     private Switch _snap;
-    private int _logIndex;
 
     protected override void BuildMap(MapView map)
     {
@@ -65,7 +59,10 @@ public class EditFeatures : SamplePage
         var featureLayer = new InMemoryFeatureLayer();
         featureLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyle.CreateSimpleCircleStyle(GeoColors.Blue, 8, GeoColors.Black);
         featureLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyle.CreateSimpleLineStyle(GeoColors.Blue, 4, true);
-        featureLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(GeoColors.Blue, GeoColors.Black);
+        // Translucent, because the shapes sit here whenever they are not being edited
+        // and a solid fill covers the map it was drawn over.
+        featureLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(
+            GeoColor.FromArgb(70, GeoColors.Blue), GeoColors.Blue, 2);
         featureLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         _layerOverlay = new LayerOverlay();
@@ -83,30 +80,18 @@ public class EditFeatures : SamplePage
         map.EditOverlay.VertexMoving += EditOverlay_VertexMoving;
         map.EditOverlay.VertexMoved += EditOverlay_VertexMoved;
 
-        map.TrackOverlay.TrackStarted += (_, e) => AppendLog($"TrackOverlay.TrackStarted at ({e.StartedVertex.X:N0}, {e.StartedVertex.Y:N0})");
-        map.TrackOverlay.VertexAdded += (_, e) => AppendLog($"TrackOverlay.VertexAdded at ({e.AddedVertex.X:N0}, {e.AddedVertex.Y:N0})");
-        map.TrackOverlay.TrackEnded += (_, e) => AppendLog($"TrackOverlay.TrackEnded: {e.TrackShape.GetType().Name}");
-        map.EditOverlay.FeatureDragged += (_, e) => AppendLog($"EditOverlay.FeatureDragged: {e.DraggedFeature.GetShape().GetType().Name}");
-        map.EditOverlay.FeatureResized += (_, e) => AppendLog($"EditOverlay.FeatureResized: {e.ResizedFeature.GetShape().GetType().Name}");
-        map.EditOverlay.FeatureRotated += (_, e) => AppendLog($"EditOverlay.FeatureRotated: {e.RotatedFeature.GetShape().GetType().Name}");
-        map.EditOverlay.VertexAdded += (_, e) => AppendLog($"EditOverlay.VertexAdded at ({e.AddedVertex.X:N0}, {e.AddedVertex.Y:N0})");
-        map.EditOverlay.VertexMoved += (_, e) => AppendLog($"EditOverlay.VertexMoved to ({e.MovedVertex.X:N0}, {e.MovedVertex.Y:N0})");
-        map.EditOverlay.VertexRemoved += (_, e) => AppendLog($"EditOverlay.VertexRemoved at ({e.RemovedVertex.X:N0}, {e.RemovedVertex.Y:N0})");
-
         AddChoiceStrip(new[] { "Navigate", "Point", "Line", "Polygon", "Edit" }, 0, ChooseMode);
 
         AddToPanel(BuildRuleRow());
-
-        var clear = new Button { Text = "Clear the log", FontSize = 12, Padding = new Thickness(10, 4) };
-        clear.Clicked += (_, _) =>
-        {
-            _log.Clear();
-            _logLabel.Text = string.Empty;
-        };
-        AddToPanel(clear);
-
         _measure = AddStatusLabel();
-        _logLabel = AddToPanel(new Label { FontSize = 10, TextColor = Colors.Gray, MaxLines = 5 });
+
+        // The mode the strip opens on has to be the mode the map is in. The three
+        // shapes above are put into the edit overlay to exist at all, which is where
+        // the editing mode wants them and the only place they can be handed to it
+        // from - and left there, the sample opened under a full set of drag and vertex
+        // handles while the strip said Navigate, and a finger meaning to pan the map
+        // grabbed a control point instead.
+        ChooseMode(0);
 
         _ = map.RefreshAsync();
     }
@@ -307,13 +292,19 @@ public class EditFeatures : SamplePage
                 MoveEverythingTo(_layerOverlay);
                 _map.TrackOverlay.TrackMode = TrackMode.None;
                 break;
+            // Drawing is not editing: the shapes go back to the layer, because a
+            // control point under the finger takes the touch that was meant to put
+            // down the next vertex.
             case 1:
+                MoveEverythingTo(_layerOverlay);
                 _map.TrackOverlay.TrackMode = TrackMode.Point;
                 break;
             case 2:
+                MoveEverythingTo(_layerOverlay);
                 _map.TrackOverlay.TrackMode = TrackMode.Line;
                 break;
             case 3:
+                MoveEverythingTo(_layerOverlay);
                 _map.TrackOverlay.TrackMode = TrackMode.Polygon;
                 break;
             default:
@@ -386,12 +377,4 @@ public class EditFeatures : SamplePage
         };
     }
 
-    private void AppendLog(string message)
-    {
-        _log.Add($"{_logIndex++}: {message}");
-
-        // The desktop gallery has a list box down the side; the card shows the last
-        // few lines, which is what a phone has room for.
-        _logLabel.Text = string.Join("\n", _log.Skip(Math.Max(0, _log.Count - 5)));
-    }
 }

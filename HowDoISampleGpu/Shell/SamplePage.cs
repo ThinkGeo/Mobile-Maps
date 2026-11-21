@@ -200,6 +200,32 @@ public abstract class SamplePage : ContentPage
         return view;
     }
 
+    /// <summary>
+    /// Opens the map on an extent with the whole of it on screen.
+    /// <para>
+    /// A phone is tall and most extents worth opening on are wide. Handed one that
+    /// does not match the view's shape, the map fits it to the view's height and crops
+    /// the sides - which is how a map of the lower forty-eight loses both coasts. This
+    /// widens the extent to the view instead, and can only do it once the view has a
+    /// size, hence the one-shot handler rather than a constant.
+    /// </para>
+    /// </summary>
+    protected static void OpenOn(MapView map, RectangleShape extent)
+    {
+        map.CurrentExtent = extent;
+
+        void FitWhenSized(object sender, EventArgs e)
+        {
+            if (map.Width <= 0 || map.Height <= 0) return;
+
+            map.SizeChanged -= FitWhenSized;
+            map.CurrentExtent = MapUtil.GetDrawingExtent(extent, map.Width, map.Height);
+            _ = map.RefreshAsync();
+        }
+
+        map.SizeChanged += FitWhenSized;
+    }
+
     /// <summary>A one-line status label on the panel, for what a sample wants to say.</summary>
     protected Label AddStatusLabel()
         => AddToPanel(new Label { FontSize = 12, TextColor = Colors.DimGray, LineBreakMode = LineBreakMode.TailTruncation });

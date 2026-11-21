@@ -7,46 +7,49 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// What a shape can be asked to become: buffered, simplified, rotated, scaled,
-/// translated, hulled, enveloped, intersected, differenced or unioned.
+/// What a shape can be asked to become: buffered, simplified, rotated, scaled or
+/// translated - each of them running, not standing still.
 /// <para>
-/// The five that take a number take it from a slider, and the result is rebuilt on
-/// every move - the buffer grows under the finger rather than appearing at one
-/// fixed distance, which is what the operation actually looks like. The five that
-/// take no number hide the slider rather than show a dead one.
+/// Every operation here takes a number, and the number sweeps between its ends by
+/// itself and never settles: the buffer grows and shrinks, the shape turns through a
+/// full circle, the simplification coarsens and recovers. That is the whole point of
+/// the sample. A single frozen result at one arbitrary distance says very little
+/// about what an operation does, which is why the ones that take no number - the
+/// hull, the envelope, the intersection, the difference, the union - are not here:
+/// each of them is one picture, and one picture of a set operation is a screenshot,
+/// not a sample.
+/// </para>
+/// <para>
+/// A finger on the slider takes the sweep over for as long as it is there, and the
+/// sweep resumes a moment after it is let go, so the sample is never found stopped.
 /// </para>
 /// </summary>
 public class ShapeOperations : SamplePage
 {
-    /// <summary>The area the intersection and difference work against, drawn in blue.</summary>
-    private const string WestRegionWkt =
-        "POLYGON((-10780139 3918539, -10780206 3915600, -10780037 3913978, -10779176 3913336, " +
-        "-10778280 3911934, -10778263 3910684, -10778382 3909569, -10778280 3907356, " +
-        "-10785595 3904045, -10786034 3904822, -10786001 3908150, -10785933 3909315, " +
-        "-10786001 3911275, -10785832 3914485, -10785832 3917728, -10785460 3919012, " +
-        "-10782233 3918995, -10780139 3918539))";
-
     private static readonly GeoColor SourceColor = new(128, GeoColors.LightOrange);
     private static readonly GeoColor ResultColor = new(96, GeoColors.Green);
-    private static readonly GeoColor RegionColor = new(64, GeoColors.DodgerBlue);
 
-    private static readonly GeoColor[] PieceColors =
-    {
-        new(140, GeoColors.Crimson), new(140, GeoColors.Gold), new(140, GeoColors.MediumPurple),
-        new(140, GeoColors.LightCoral), new(140, GeoColors.Teal), new(140, GeoColors.Orange),
-    };
-
-    /// <summary>
-    /// The operations, and for the five that take a number, the range that number
-    /// moves over. A null <c>Parameter</c> is an operation with nothing to set.
-    /// </summary>
-    private sealed record Operation(string Name, Parameter Parameter = null);
+    /// <summary>An operation and the range its number moves over.</summary>
+    private sealed record Operation(string Name, Parameter Parameter);
 
     private sealed record Parameter(double Min, double Max, double Start, Func<double, string> Caption);
 
+    /// <summary>How long one sweep from one end of a parameter to the other takes.</summary>
+    private static readonly TimeSpan SweepDuration = TimeSpan.FromSeconds(2.5);
+
+    /// <summary>
+    /// How often the swept value moves. Not how often the map is redrawn: a buffer of
+    /// this polygon takes about fifty milliseconds, and Reapply coalesces, so what
+    /// actually arrives is one rebuild per computation with the newest value.
+    /// </summary>
+    private static readonly TimeSpan SweepInterval = TimeSpan.FromMilliseconds(50);
+
+    /// <summary>How long after a finger leaves the slider the sweep takes over again.</summary>
+    private static readonly TimeSpan ResumeDelay = TimeSpan.FromSeconds(1.5);
+
     private static readonly Operation[] Operations =
     {
-        new("Buffer", new Parameter(100, 5000, 1000,
+        new("Buffer", new Parameter(100, 3000, 1000,
             value => FormattableString.Invariant($"Distance {value:N0} m"))),
         new("Simplify", new Parameter(10, 2000, 500,
             value => FormattableString.Invariant($"Tolerance {value:N0} m"))),
@@ -54,25 +57,22 @@ public class ShapeOperations : SamplePage
             value => FormattableString.Invariant($"Angle {value:0}°"))),
         new("Scale", new Parameter(10, 200, 50,
             value => FormattableString.Invariant($"Scale {value:0}%"))),
-        new("Translate", new Parameter(0, 10000, 3000,
+        new("Translate", new Parameter(0, 5000, 3000,
             value => FormattableString.Invariant($"Offset {value:N0} m"))),
-        new("Convex hull"),
-        new("Envelope"),
-        new("Intersection"),
-        new("Difference"),
-        new("Union"),
     };
 
-    // What the operation reads, what it works against, and what it returned.
+    // What the operation reads, and what it returned.
     private readonly DynamicSource _sourceArea = new();
-    private readonly DynamicSource _regionArea = new();
     private readonly DynamicSource _resultArea = new();
 
-    private readonly PolygonShape _westRegion = new(WestRegionWkt);
     private Collection<Feature> _pieces;
     private MapView _map;
     private Label _caption;
     private Slider _slider;
+    private IDispatcherTimer _sweep;
+    private IDispatcherTimer _resume;
+    private int _sweepDirection = 1;
+    private bool _sweeping;
     private int _operation;
     private double _value = Operations[0].Parameter.Start;
     private bool _rebuilding;
@@ -88,12 +88,11 @@ public class ShapeOperations : SamplePage
         {
             VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
         });
-        style.AddDynamic(_sourceArea).AddDynamic(_regionArea).AddDynamic(_resultArea);
+        style.AddDynamic(_sourceArea).AddDynamic(_resultArea);
         map.Basemap = new GpuBasemap(style);
 
-        // The city limits arrive cut into pieces, which is what gives Union something
-        // to do. Read once and kept, then handed to whichever operation is chosen -
-        // ten polygons do not need a tile pipeline.
+        // Read once and kept: one polygon handed to whichever operation is chosen does
+        // not need a tile pipeline.
         var source = new ShapeFileFeatureSource(SampleShared.Shapefile("FriscoCityLimitsDivided.shp"))
         {
             ProjectionConverter = new ProjectionConverter(2276, 3857),
@@ -115,15 +114,39 @@ public class ShapeOperations : SamplePage
         _slider.ValueChanged += (_, e) =>
         {
             _value = e.NewValue;
-            _caption.Text = Operations[_operation].Parameter?.Caption(_value);
+            _caption.Text = Operations[_operation].Parameter.Caption(_value);
             Reapply();
         };
+
+        // A finger on the slider holds the sweep, and letting go hands it back. It is
+        // never left stopped: a stopped sweep is a sample with no animation in it,
+        // which is the one thing this sample is for.
+        _slider.DragStarted += (_, _) => StopSweep();
+        _slider.DragCompleted += (_, _) => _resume.Start();
+
+        _resume = Dispatcher.CreateTimer();
+        _resume.Interval = ResumeDelay;
+        _resume.Tick += (_, _) =>
+        {
+            _resume.Stop();
+            _sweep?.Start();
+        };
+
+        _sweep = Dispatcher.CreateTimer();
+        _sweep.Interval = SweepInterval;
+        _sweep.Tick += (_, _) => Step();
 
         AddToPanel(new VerticalStackLayout { Children = { _caption, _slider } });
         ShowParameter();
 
-        bounds.ScaleUp(50);
-        map.CurrentExtent = bounds;
+        // Room for the widest the sweep can get, not just for the shape as it is.
+        // The buffer grows to its maximum every few seconds, and an extent fitted to
+        // the polygon alone sends the result off the sides of the screen exactly when
+        // there is most to see.
+        var reach = Operations[0].Parameter.Max;
+        OpenOn(map, new RectangleShape(
+            bounds.UpperLeftPoint.X - reach, bounds.UpperLeftPoint.Y + reach,
+            bounds.LowerRightPoint.X + reach, bounds.LowerRightPoint.Y - reach));
 
         Reapply();
         _ = map.RefreshAsync();
@@ -140,16 +163,49 @@ public class ShapeOperations : SamplePage
     {
         var parameter = Operations[_operation].Parameter;
 
-        _caption.IsVisible = parameter != null;
-        _slider.IsVisible = parameter != null;
-        if (parameter == null) return;
-
         _slider.Minimum = 0;                  // below every range here, so the next line is legal
         _slider.Maximum = parameter.Max;
         _slider.Minimum = parameter.Min;
         _slider.Value = parameter.Start;
         _value = parameter.Start;
         _caption.Text = parameter.Caption(_value);
+
+        _sweepDirection = 1;
+        _sweep?.Start();
+    }
+
+    /// <summary>
+    /// Moves the parameter one step along and turns it round at either end, so the
+    /// operation runs back and forth instead of stopping at an extreme.
+    /// </summary>
+    private void Step()
+    {
+        var parameter = Operations[_operation].Parameter;
+        var step = (parameter.Max - parameter.Min) * (SweepInterval / SweepDuration);
+        var next = _value + (step * _sweepDirection);
+
+        if (next >= parameter.Max)
+        {
+            next = parameter.Max;
+            _sweepDirection = -1;
+        }
+        else if (next <= parameter.Min)
+        {
+            next = parameter.Min;
+            _sweepDirection = 1;
+        }
+
+        // Through the slider, so the control shows where the operation has got to -
+        // which is also how the slider's own event does the rest of the work.
+        _sweeping = true;
+        _slider.Value = next;
+        _sweeping = false;
+    }
+
+    private void StopSweep()
+    {
+        _resume?.Stop();
+        _sweep?.Stop();
     }
 
     /// <summary>
@@ -208,45 +264,15 @@ public class ShapeOperations : SamplePage
             1 => AreaBaseShape.Simplify((AreaBaseShape)shape, value, SimplificationType.DouglasPeucker),
             2 => BaseShape.Rotate(shape, shape.GetCenterPoint(), (float)value),
             3 => BaseShape.ScaleTo(shape, value / 100),
-            4 => BaseShape.TranslateByOffset(shape, value, value, GeographyUnit.Meter, DistanceUnit.Meter),
-            5 => first.GetConvexHull().GetShape(),
-            6 => shape.GetBoundingBox(),
-            7 => ((AreaBaseShape)shape).GetIntersection(_westRegion),
-            8 => ((AreaBaseShape)shape).GetDifference(_westRegion),
-            _ => AreaBaseShape.Union(_pieces),
+            _ => BaseShape.TranslateByOffset(shape, value, value, GeographyUnit.Meter, DistanceUnit.Meter),
         };
     }
 
-    /// <summary>Puts the operand, the second operand and the result on the map.</summary>
+    /// <summary>Puts the shape it worked on and the shape it returned on the map.</summary>
     private void Show(int operation, BaseShape result)
     {
-        var shape = _pieces[0].GetShape();
-        var union = operation == 9;
-        var paired = operation is 7 or 8;
-
-        // Union is the only one that reads more than one shape, and so the only one
-        // drawn with more than the polygon it worked on: its pieces get a colour each,
-        // because two shapes look like one blob otherwise and merging them would then
-        // look like nothing at all. The blue area appears for the two operations that
-        // have a second operand, and not otherwise.
         _sourceArea.Clear();
-        if (union)
-        {
-            for (var i = 0; i < _pieces.Count; i++)
-            {
-                _sourceArea.SetArea("piece-" + i, _pieces[i], PieceColors[i % PieceColors.Length]);
-            }
-        }
-        else
-        {
-            _sourceArea.SetArea("source", new Feature(shape), SourceColor);
-        }
-
-        _regionArea.Clear();
-        if (paired)
-        {
-            _regionArea.SetArea("region", new Feature(_westRegion), RegionColor);
-        }
+        _sourceArea.SetArea("source", new Feature(_pieces[0].GetShape()), SourceColor);
 
         _resultArea.Clear();
         if (result != null)
@@ -255,5 +281,11 @@ public class ShapeOperations : SamplePage
         }
 
         _ = _map.RefreshAsync();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        StopSweep();
     }
 }

@@ -6,10 +6,23 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The spatial relations, asked of Frisco's zoning polygons: tap the map and the
-/// ones containing, intersecting, disjoint from or within a distance of that point
-/// light up.
+/// Two questions asked of Frisco's zoning polygons: tap the map and either the one
+/// the point falls inside or everything within five hundred metres of it lights up,
+/// with what the highlighted zoning is named underneath.
 /// </summary>
+/// <remarks>
+/// Two, not four. A tap is a point, and a point intersecting a polygon is a point
+/// inside it, so Intersecting had the same answer as Containing every time - and
+/// Disjoint is "all the rest", which lights up the whole city and says nothing. What
+/// is worth showing is the one you are standing in and the ones you are near.
+/// <para>
+/// The names come from the same query: asking for the columns is a flag on the call,
+/// and once a feature is highlighted its data is already in hand - which is why
+/// there is no separate sample for reading a feature's attributes, and why only the
+/// one line of it that answers "what did I just tap" is shown rather than a table a
+/// phone has no room for.
+/// </para>
+/// </remarks>
 public class FindFeaturesBySpatialRelation : SamplePage
 {
     private const string ZoningStyle = """
@@ -27,12 +40,10 @@ public class FindFeaturesBySpatialRelation : SamplePage
 
     private static readonly string[] Relations =
     {
-        // Short enough for a cell a third of a phone wide; what they are all
+        // Short enough for a cell a third of a phone wide; what they are both
         // relative to - the point you tapped - is the sample.
         "Containing",
-        "Intersecting",
         "Within 500 m",
-        "Disjoint",
     };
 
     // Zoning is thousands of static polygons - the tile pipeline's case. The query
@@ -100,16 +111,14 @@ public class FindFeaturesBySpatialRelation : SamplePage
         if (point == null) return;
         _seed = point;
 
+        // With the columns, not without them: the data behind a feature comes back
+        // from the query that found it, and costs a flag rather than a second pass.
         _zoning.Open();
-        var (found, verb) = _relation switch
-        {
-            0 => (_zoningQuery.GetFeaturesContaining(point, ReturningColumnsType.NoColumns), "containing"),
-            1 => (_zoningQuery.GetFeaturesIntersecting(point, ReturningColumnsType.NoColumns), "intersecting"),
-            2 => (_zoningQuery.GetFeaturesWithinDistanceOf(
-                    point, GeographyUnit.Meter, DistanceUnit.Meter, 500, ReturningColumnsType.NoColumns),
-                  "within 500 m of"),
-            _ => (_zoningQuery.GetFeaturesDisjointed(point, ReturningColumnsType.NoColumns), "disjoint from"),
-        };
+        var found = _relation == 0
+            ? _zoningQuery.GetFeaturesContaining(point, ReturningColumnsType.AllColumns)
+            : _zoningQuery.GetFeaturesWithinDistanceOf(
+                point, GeographyUnit.Meter, DistanceUnit.Meter, 500, ReturningColumnsType.AllColumns);
+        var verb = _relation == 0 ? "containing" : "within 500 m of";
         var matches = found.ToList();
         _zoning.Close();
 
@@ -123,7 +132,26 @@ public class FindFeaturesBySpatialRelation : SamplePage
         _query.Clear();
         _query.SetPoint("seed", new Feature(point), sizeInPixel: 16f, iconName: "pin");
 
-        _status.Text = $"{matches.Count} zoning areas {verb} the point";
+        _status.Text = matches.Count == 0
+            ? $"no zoning areas {verb} the point"
+            : $"{matches.Count} zoning areas {verb} the point - {Describe(matches[0])}";
         _ = _map.RefreshAsync();
+    }
+
+    /// <summary>
+    /// The one line of a feature's data worth a phone's screen: what the zoning is
+    /// called, from whichever column the file happens to carry it in.
+    /// </summary>
+    private static string Describe(Feature feature)
+    {
+        foreach (var column in new[] { "ZONE_DESC", "ZONING", "ZONE", "DESCRIPT", "NAME" })
+        {
+            if (feature.ColumnValues.TryGetValue(column, out var value) && !string.IsNullOrWhiteSpace(value))
+            {
+                return value.Trim();
+            }
+        }
+
+        return feature.ColumnValues.Count + " columns";
     }
 }

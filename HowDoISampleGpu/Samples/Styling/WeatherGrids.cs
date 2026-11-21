@@ -7,42 +7,53 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// Forty-four forecast hours of NDFD sky cover, played as an animation over a grid
-/// fill, with five palettes and a slider that scrubs the hours.
+/// Two National Digital Forecast Database grids over the same country: forty-four
+/// forecast hours of sky cover played as an animation over a grid fill, and the
+/// surface wind drawn as sixty-five thousand particles advected along the field.
 /// </summary>
 /// <remarks>
-/// The desktop sample reads each hour out of the GRIB with GdalGrid, band by band.
-/// GDAL's natives are not published for iOS or Android, so the whole forecast is
-/// converted once on the desktop - a byte per cell, since sky cover is a percentage -
-/// and shipped as one flat file. The hours are still read one at a time, as the
-/// desktop reads bands: turning all forty-four into float grids up front is five
-/// million cells before anything is on screen, which a phone should not do and a
-/// simulator will not finish.
+/// One sample rather than two, because the two halves differ in one line each - the
+/// style registration - and are otherwise the same story: a forecast grid prepared
+/// off the device and read as numbers.
+/// <para>
+/// The desktop samples read the NDFD GRIB and GeoTIFFs with GdalGrid. GDAL's natives
+/// are not published for iOS or Android, so each forecast is converted once on the
+/// desktop and shipped as one flat file - a byte per cell for sky cover, which is a
+/// percentage - which is what a phone application does anyway. The sky hours are
+/// still read one at a time, as the desktop reads bands: turning all forty-four into
+/// float grids up front is five million cells before anything is on screen.
+/// </para>
 /// </remarks>
-public class NdfdSkyGridAnimation : SamplePage, IDisposable
+public class WeatherGrids : SamplePage, IDisposable
 {
-    private static readonly string[] Palettes =
-    {
-        "Rainbow", "Gray", "Warm", "Cool", "Viridis",
-    };
+    /// <summary>The ground both forecasts cover.</summary>
+    private static readonly RectangleShape Conus =
+        new(-14_100_000, 6_800_000, -7_300_000, 2_500_000);
 
     private GpuBasemap _basemap;
     private MapStyle _style;
+
+    // Sky cover: the hours, read as they are asked for.
     private InMemoryGridSource _grid;
     private IReadOnlyList<ColorStop> _palette;
     private IDispatcherTimer _timer;
-
     private float[][,] _frames;
     private string[] _frameTimes;
-    private MapView _map;
-    private Label _timeText;
-    private Slider _frameSlider;
     private bool _playing;
     private bool _loading;
     private int _wantedFrame;
     private int _rows;
     private int _columns;
     private long _bandsOffset;
+
+    // Wind: one hour, as a field the particles are carried along.
+    private VectorFieldSource _field;
+
+    private MapView _map;
+    private Label _timeText;
+    private Slider _frameSlider;
+    private View _hoursRow;
+    private bool _showingWind;
 
     protected override void BuildMap(MapView map)
     {
@@ -55,16 +66,16 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
         });
         _basemap = new GpuBasemap(_style);
         map.Basemap = _basemap;
-        map.CurrentExtent = new RectangleShape(-14_100_000, 6_800_000, -7_300_000, 2_500_000);
+        OpenOn(map, Conus);
 
-        // Two rows: when this frame is for, with the run of hours beside it, and the
-        // palettes under that.
+        // Two cells and, for the hours, one row under them. The palette chooser that
+        // used to sit here as a second strip is gone: two strips stacked read as a
+        // settings page, and a weather grid has one palette anyone expects.
         //
-        // No play button. It plays, and a finger on the slider is how you stop it -
-        // which is the gesture anyone tries first anyway, and it costs no card. What
-        // the button bought was a way to hold one hour still; letting go of the
-        // slider gives that back a second and a half later, which is long enough to
-        // read a frame and short enough not to feel stuck.
+        // No play button either. It plays, and a finger on the slider stops it, which
+        // is the gesture anyone tries first.
+        AddChoiceStrip(new[] { "Sky cover", "Wind" }, 0, index => _ = ShowAsync(index == 1));
+
         _timeText = new Label
         {
             FontSize = 13,
@@ -78,22 +89,13 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
         _frameSlider.DragStarted += (_, _) => _playing = false;
         _frameSlider.DragCompleted += (_, _) => _playing = true;
 
-        var timeRow = new Grid { ColumnSpacing = 12 };
-        timeRow.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
-        timeRow.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
-        timeRow.Children.Add(_timeText);
-        timeRow.Children.Add(_frameSlider);
+        var hours = new Grid { ColumnSpacing = 12 };
+        hours.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        hours.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        hours.Children.Add(_timeText);
+        hours.Children.Add(_frameSlider);
         Grid.SetColumn((BindableObject)_frameSlider, 1);
-        AddToPanel(timeRow);
-
-        AddChoiceStrip(Palettes, 0, index =>
-        {
-            _palette = CreatePalette(Palettes[index]);
-            if (_grid == null) return;
-
-            _style.RemoveGridFill(_grid).AddGridFill(_grid, new GridFillStyle { ColorStops = _palette });
-            _ = _basemap.SetStyleAsync(_style);
-        });
+        _hoursRow = AddToPanel(hours);
 
         _timer = Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromMilliseconds(150);
@@ -106,34 +108,57 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
             }
         };
 
-        _ = LoadAsync();
+        _ = ShowAsync(false);
     }
 
-    private async Task LoadAsync()
+    /// <summary>
+    /// Puts one of the two forecasts on the map and takes the other off. Each is read
+    /// from its file the first time it is asked for, so opening the sample costs one
+    /// of them rather than both.
+    /// </summary>
+    private async Task ShowAsync(bool wind)
     {
-        await _map.RefreshAsync();
+        _showingWind = wind;
+        _hoursRow.IsVisible = !wind;
 
         try
         {
-            await Task.Run(LoadForecast);
+            if (wind)
+            {
+                _playing = false;
+                _timer.Stop();
+                if (_grid != null) _style.RemoveGridFill(_grid);
+
+                if (_field == null) await Task.Run(LoadField);
+                _style.AddParticleFlow(_field);
+                await _basemap.SetStyleAsync(_style);
+                _timeText.Text = string.Empty;
+                return;
+            }
+
+            if (_field != null) _style.RemoveParticleFlow(_field);
+
+            if (_grid == null)
+            {
+                await Task.Run(LoadForecast);
+                _frames[0] = ReadBand(0);
+                _grid = new InMemoryGridSource(_frames[0], Extent, Projection);
+                _palette ??= CreatePalette("Weather Rainbow");
+                _frameSlider.Maximum = _frames.Length - 1;
+                _frameSlider.IsEnabled = true;
+            }
+
+            _style.AddGridFill(_grid, new GridFillStyle { ColorStops = _palette });
+            await _basemap.SetStyleAsync(_style);
+
+            ShowTime((int)_frameSlider.Value);
+            _playing = true;
+            _timer.Start();
         }
         catch (Exception exception)
         {
-            _timeText.Text = "Failed to load the NDFD grid: " + exception.Message;
-            return;
+            _timeText.Text = "Failed to load the forecast: " + exception.Message;
         }
-
-        _frames[0] = ReadBand(0);
-        _grid = new InMemoryGridSource(_frames[0], Extent, Projection);
-        _palette ??= CreatePalette("Weather Rainbow");
-        _style.AddGridFill(_grid, new GridFillStyle { ColorStops = _palette });
-        await _basemap.SetStyleAsync(_style);
-
-        ShowTime(0);
-        _frameSlider.Maximum = _frames.Length - 1;
-        _frameSlider.IsEnabled = true;
-        _playing = true;
-        _timer.Start();
     }
 
     private RectangleShape Extent { get; set; }
@@ -144,7 +169,7 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
     // thread and shown, and the hours dragged past on the way are skipped.
     private async void ShowFrame(int index)
     {
-        if (_grid == null || _frames == null) return;
+        if (_grid == null || _frames == null || _showingWind) return;
 
         _wantedFrame = Math.Max(0, Math.Min(_frames.Length - 1, index));
         if (_loading) return;
@@ -286,6 +311,59 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
             (byte)(stops[lo][0] + (t * (stops[hi][0] - stops[lo][0]))),
             (byte)(stops[lo][1] + (t * (stops[hi][1] - stops[lo][1]))),
             (byte)(stops[lo][2] + (t * (stops[hi][2] - stops[lo][2]))));
+    }
+
+    /// <summary>
+    /// Reads the packed forecast hour of speed and direction into one
+    /// VectorFieldSource, in the grid's own Lambert projection.
+    /// </summary>
+    private void LoadField()
+    {
+        using var stream = File.OpenRead(Path.Combine(SampleShared.DataFolder, "Ndfd", "ndfd-wind.bin"));
+        using var reader = new BinaryReader(stream);
+
+        if (new string(reader.ReadChars(4)) != "TGWF") throw new InvalidDataException("not a packed wind field");
+
+        var rows = reader.ReadInt32();
+        var columns = reader.ReadInt32();
+        var minX = reader.ReadDouble();
+        var minY = reader.ReadDouble();
+        var maxX = reader.ReadDouble();
+        var maxY = reader.ReadDouble();
+        var projection = new string(reader.ReadChars(reader.ReadInt32()));
+
+        var speed = ReadGrid(reader, rows, columns);
+        var from = ReadGrid(reader, rows, columns);
+
+        // A meteorological wind direction is where the wind comes FROM; the arrow
+        // points where it is going.
+        var flow = new FlowVector[rows, columns];
+        for (var row = 0; row < rows; row++)
+        {
+            for (var column = 0; column < columns; column++)
+            {
+                flow[row, column] = FlowVector.FromSpeedDirection(
+                    speed[row, column], (from[row, column] + 180f) % 360f);
+            }
+        }
+
+        _field = new VectorFieldSource(flow,
+            new RectangleShape(minX, maxY, maxX, minY),
+            new Projection(projection));
+    }
+
+    private static float[,] ReadGrid(BinaryReader reader, int rows, int columns)
+    {
+        var values = new float[rows, columns];
+        for (var row = 0; row < rows; row++)
+        {
+            for (var column = 0; column < columns; column++)
+            {
+                values[row, column] = reader.ReadSingle();
+            }
+        }
+
+        return values;
     }
 
     public void Dispose()
