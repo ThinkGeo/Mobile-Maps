@@ -65,7 +65,7 @@ public class MeasureDistanceAndArea : SamplePage
         clear.Clicked += (_, _) => Reset();
         AddToPanel(clear);
 
-        _result = AddToPanel(new Label { FontSize = 13, FontAttributes = FontAttributes.Bold });
+        _result = AddToPanel(new Label { FontSize = 13, TextColor = PanelInk, FontAttributes = FontAttributes.Bold });
         _detail = AddStatusLabel();
 
         map.CurrentExtent = new RectangleShape(-10_790_000, 3_925_000, -10_770_000, 3_905_000); // Frisco, TX

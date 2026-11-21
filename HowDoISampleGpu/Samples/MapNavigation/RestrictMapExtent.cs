@@ -84,6 +84,7 @@ public class RestrictMapExtent : SamplePage
                 "Tilt it, turn it, zoom it - it stays inside the red box, between 1:{0:N0} and 1:{1:N0}.",
                 MinZoomInScale, MaxZoomOutScale),
             FontSize = 13,
+            TextColor = PanelInk,
         });
 
         // Opened a little outside the box rather than on it, so the red border is on

@@ -79,6 +79,7 @@ public class WeatherGrids : SamplePage, IDisposable
         _timeText = new Label
         {
             FontSize = 13,
+            TextColor = PanelInk,
             FontAttributes = FontAttributes.Bold,
             VerticalTextAlignment = TextAlignment.Center,
             LineBreakMode = LineBreakMode.TailTruncation,

@@ -96,17 +96,32 @@ public class EditFeatures : SamplePage
         _ = map.RefreshAsync();
     }
 
-    /// <summary>The two editing rules, as switches rather than as pages of their own.</summary>
+    /// <summary>
+    /// The two editing rules, as switches rather than as pages of their own. Each one
+    /// is named for what it does to an edit rather than for the kind of rule it is -
+    /// "Constrain" and "Snap" are what the API calls them, and left at that nobody can
+    /// tell what either switch is about to do to their shape.
+    /// </summary>
     private View BuildRuleRow()
     {
         _constrain = new Switch();
+        _constrain.Toggled += (_, e) => _measure.Text = e.Value
+            ? "The square stays square, and new vertices keep 300 m apart"
+            : "Corners move freely again";
+
         _snap = new Switch();
-        _snap.Toggled += (_, _) => ShowSchools(_snap.IsToggled);
+        _snap.Toggled += (_, e) =>
+        {
+            ShowSchools(e.Value);
+            _measure.Text = e.Value
+                ? "Red dots are schools; a vertex within 25 px lands on one"
+                : "Vertices land where the finger leaves them";
+        };
 
         var row = new HorizontalStackLayout { Spacing = 8 };
-        row.Add(new Label { Text = "Constrain", FontSize = 12, VerticalOptions = LayoutOptions.Center });
+        row.Add(new Label { Text = "Keep square", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center });
         row.Add(_constrain);
-        row.Add(new Label { Text = "Snap", FontSize = 12, VerticalOptions = LayoutOptions.Center, Margin = new Thickness(8, 0, 0, 0) });
+        row.Add(new Label { Text = "Snap to schools", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center, Margin = new Thickness(8, 0, 0, 0) });
         row.Add(_snap);
 
         return row;

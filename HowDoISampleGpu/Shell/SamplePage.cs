@@ -241,6 +241,18 @@ public abstract class SamplePage : ContentPage
         map.SizeChanged += FitWhenSized;
     }
 
+    /// <summary>
+    /// The ink the panel's own text is written in.
+    /// <para>
+    /// The card the panel sits on is the same near white whatever the system theme is,
+    /// so a label left to MAUI's default colour is white on white in a dark theme - and
+    /// worse, a label built while the theme was dark keeps that resolved colour after
+    /// the theme is changed back, so the text stays invisible until the sample is
+    /// reopened. Every label on the card names its colour for that reason.
+    /// </para>
+    /// </summary>
+    protected static readonly Color PanelInk = Color.FromArgb("#1F2328");
+
     /// <summary>A one-line status label on the panel, for what a sample wants to say.</summary>
     protected Label AddStatusLabel()
         => AddToPanel(new Label { FontSize = 12, TextColor = Colors.DimGray, LineBreakMode = LineBreakMode.TailTruncation });

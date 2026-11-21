@@ -78,7 +78,7 @@ public class LiveFlights : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        _status = AddToPanel(new Label { FontSize = 12, MaxLines = 3 });
+        _status = AddToPanel(new Label { FontSize = 12, TextColor = PanelInk, MaxLines = 3 });
 
         AddSliderRow(new SliderSpec("Speed", 1, MaxSpeed, DefaultSpeed,
             value => _speed = value,

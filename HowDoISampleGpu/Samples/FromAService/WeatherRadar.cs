@@ -56,7 +56,7 @@ public class WeatherRadar : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        _status = AddToPanel(new Label { FontSize = 12, MaxLines = 2 });
+        _status = AddToPanel(new Label { FontSize = 12, TextColor = PanelInk, MaxLines = 2 });
 
         try
         {
