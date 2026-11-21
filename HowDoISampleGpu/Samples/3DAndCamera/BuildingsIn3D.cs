@@ -6,17 +6,20 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The smallest thing that proves the chain: a MAUI MapView whose basemap is drawn
-/// by the GPU pipeline. Everything specific to that is the one line that assigns the
-/// basemap - the map view, the camera and the gestures are the ordinary MAUI ones.
+/// The city with its real height. One fill-extrusion layer over a published style
+/// stands Manhattan up, and the map opens already leaning because the lean is what
+/// makes the height visible - the companion to Terrain and Hillshade, which does the
+/// same for the shape of the ground.
 /// <para>
-/// It opens close in and already leaning, because the one thing worth seeing first
-/// is that the city has height. The switch changes the whole map between the two
-/// themes the same server publishes, which is what a style URI being the only input
-/// actually buys: a different map is a different URI.
+/// The switch changes the whole map between the two themes the same server
+/// publishes, which is what a style URI being the only input actually buys: a
+/// different map is a different URI. It is also the shortest path onto a GPU map, and
+/// was this gallery's opening sample for that reason: everything specific to the GPU
+/// is the one line that assigns the basemap, and the map view, the camera and the
+/// gestures are the ordinary MAUI ones.
 /// </para>
 /// </summary>
-public class YourFirstMap : ContentPage
+public class BuildingsIn3D : ContentPage
 {
     /// <summary>
     /// The same map in two themes, published side by side by the same server and
@@ -60,9 +63,9 @@ public class YourFirstMap : ContentPage
     private readonly GpuBasemap _basemap;
     private bool _dark = true;
 
-    public YourFirstMap()
+    public BuildingsIn3D()
     {
-        Title = "Your First Map";
+        Title = "Buildings in 3D";
         Shell.SetNavBarIsVisible(this, false);
 
         // The map draws to the bottom edge of the screen rather than being inset

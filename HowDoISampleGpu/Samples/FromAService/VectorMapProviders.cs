@@ -33,15 +33,15 @@ public class VectorMapProviders : SamplePage
     }
     """;
 
-    private static readonly (string Name, string StyleUri)[] Providers =
+    private static readonly (string Name, string StyleUri, string Shows)[] Providers =
     {
-        ("Cloud Light", null),
-        ("Cloud Dark", null),
-        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty"),
-        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron"),
-        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark"),
-        ("WFS parcels", null),
-        ("OGC API places", null),
+        ("Cloud Light", null, "ThinkGeo's own streets, light"),
+        ("Cloud Dark", null, "The same tiles under a dark style"),
+        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap's Liberty, from OpenStreetMap data"),
+        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "Positron: a pale backdrop meant to be drawn over"),
+        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "The same OpenStreetMap data, dark"),
+        ("WFS parcels", null, "Cadastral parcels in Amsterdam, queried from the Kadaster"),
+        ("OGC API places", null, "Named places in Spain, queried from IGN"),
     };
 
     private const int WfsIndex = 5;
@@ -96,7 +96,11 @@ public class VectorMapProviders : SamplePage
             }
 
             Arrive(index);
-            _status.Text = provider.StyleUri ?? DescribeSource(index);
+
+            // What is on the screen, not the style's URL or the name of the class
+            // behind it: the URL is in the table above and the class follows from
+            // the cell that was tapped.
+            _status.Text = provider.Shows;
         }
         catch (Exception exception)
         {
@@ -172,10 +176,4 @@ public class VectorMapProviders : SamplePage
         }
     }
 
-    private static string DescribeSource(int index) => index switch
-    {
-        WfsIndex => nameof(WfsV2AsyncFeatureSource),
-        OgcApiIndex => nameof(OgcApiAsyncFeatureSource),
-        _ => nameof(ThinkGeoVectorTileSource),
-    };
 }

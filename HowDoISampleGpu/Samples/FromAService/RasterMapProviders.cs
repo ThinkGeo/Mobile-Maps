@@ -15,16 +15,28 @@ public class RasterMapProviders : SamplePage
     // OpenStreetMap's tile policy asks every application for a descriptive user agent.
     private const string UserAgent = "ThinkGeo HowDoI Sample (support@thinkgeo.com)";
 
-    private static readonly string[] Providers =
+    /// <summary>
+    /// Four raster services, and the only styled basemap among them is the one that
+    /// cannot be anything else.
+    /// <para>
+    /// ThinkGeo Cloud publishes Light, Dark and Hybrid as raster tiles as well, in a
+    /// v1 and a v2 of each, and cells for them used to stand here. They are the same
+    /// maps Vector Map Providers already shows, flattened to pixels on the server, so
+    /// what a reader got from tapping along the strip was the provider's catalogue
+    /// rather than anything about rasters. The aerial imagery is the one that has to
+    /// arrive as pixels: a photograph has no geometry to send.
+    /// </para>
+    /// </summary>
+    private static readonly (string Name, string Shows)[] Providers =
     {
-        "Cloud Light",
-        "Cloud Dark",
-        "Cloud Aerial",
-        "Cloud Hybrid",
-        "OpenStreetMap",
-        "WMS NASA",
-        "WMTS Swisstopo",
+        ("Cloud Aerial", "Aerial imagery over Frisco, Texas"),
+        ("OpenStreetMap", "The community's own street map, drawn to pixels"),
+        ("WMS NASA", "VIIRS true colour, the whole continent two days back"),
+        ("WMTS Swisstopo", "The Swiss national map, on the grid the server declares"),
     };
+
+    private const int NasaIndex = 2;
+    private const int SwisstopoIndex = 3;
 
     private MapView _map;
     private Label _status;
@@ -34,7 +46,7 @@ public class RasterMapProviders : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        AddChoiceStrip(Providers, 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Providers.Select(p => p.Name).ToList(), 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
@@ -43,12 +55,9 @@ public class RasterMapProviders : SamplePage
     /// <summary>The line that differs: which class serves the tiles.</summary>
     private static RasterTileSource OpenChosen(int index) => index switch
     {
-        0 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Light_V2_X1),
-        1 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Dark_V2_X1),
-        2 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X1),
-        3 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Hybrid_V2_X1),
-        4 => new OpenStreetMapRasterTileSource(UserAgent),
-        5 => OpenNasaImagery(),
+        0 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X1),
+        1 => new OpenStreetMapRasterTileSource(UserAgent),
+        NasaIndex => OpenNasaImagery(),
         _ => OpenSwisstopo(),
     };
 
@@ -114,7 +123,7 @@ public class RasterMapProviders : SamplePage
             var source = OpenChosen(index);
             MapStyle style;
 
-            if (index == 5)
+            if (index == NasaIndex)
             {
                 // The imagery goes into the basemap's own layers rather than over them -
                 // above the fills, below the lines and labels. Nothing is reordered: the
@@ -143,7 +152,11 @@ public class RasterMapProviders : SamplePage
             }
 
             await ArriveAsync(index, source);
-            _status.Text = source.GetType().Name;
+
+            // What is on the screen, not the name of the class that fetched it: the
+            // cell above already says which service this is, and the class follows
+            // from the cell.
+            _status.Text = Providers[index].Shows;
         }
         catch (Exception exception)
         {
@@ -156,7 +169,7 @@ public class RasterMapProviders : SamplePage
     /// <summary>Each service has somewhere worth looking; the tile providers share one.</summary>
     private async Task ArriveAsync(int index, RasterTileSource source)
     {
-        if (index == 5)
+        if (index == NasaIndex)
         {
             // North America, at a scale where a day of weather is the subject.
             _map.CenterPoint = new PointShape(-10500000, 4500000);
@@ -164,7 +177,7 @@ public class RasterMapProviders : SamplePage
             return;
         }
 
-        if (index == 6 && source is WmtsRasterTileSource wmts)
+        if (index == SwisstopoIndex && source is WmtsRasterTileSource wmts)
         {
             // Fit the view to the extent the server declares for this layer. Opening
             // the source is what reads the capabilities document that says so.

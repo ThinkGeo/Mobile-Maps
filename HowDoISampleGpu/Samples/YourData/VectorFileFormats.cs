@@ -36,15 +36,21 @@ public class VectorFileFormats : SamplePage
     }
     """;
 
-    private static readonly string[] Formats =
+    /// <summary>
+    /// The format is the choice; what is in the file is the line underneath. That
+    /// line used to print the name of the class that had just read the file, which
+    /// is the one thing on the screen the reader could already see - the cell above
+    /// it says the format, and the class follows from it. What they cannot see is
+    /// what they are looking at, so that is what it says now.
+    /// </summary>
+    private static readonly (string Format, string Holds)[] Formats =
     {
-        // The format is the choice; what is in each file is the status line's job.
-        "Shapefile",
-        "GeoJSON",
-        "GPX",
-        "MapInfo TAB",
-        "TinyGeo",
-        "SQLite",
+        ("Shapefile", "Frisco's parks"),
+        ("GeoJSON", "Pittsburgh's historic districts"),
+        ("GPX", "A recorded hike and bike route"),
+        ("MapInfo TAB", "Frisco's city limits and the land it governs beyond them"),
+        ("TinyGeo", "Frisco's zoning areas"),
+        ("SQLite", "Frisco's restaurants, a table at a time"),
     };
 
     // The basemap under the data. One source for the life of the sample: a restyle
@@ -64,7 +70,7 @@ public class VectorFileFormats : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        AddChoiceStrip(Formats, 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Formats.Select(f => f.Format).ToList(), 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
@@ -115,7 +121,7 @@ public class VectorFileFormats : SamplePage
     private async Task ShowAsync(int index)
     {
         var request = ++_request;
-        _status.Text = "opening " + Formats[index] + "…";
+        _status.Text = "opening " + Formats[index].Format + "…";
 
         try
         {
@@ -139,7 +145,7 @@ public class VectorFileFormats : SamplePage
             _map.Basemap = new GpuBasemap(style);
             bounds.ScaleUp(20);
             _map.CurrentExtent = bounds;
-            _status.Text = source.GetType().Name;
+            _status.Text = Formats[index].Holds;
         }
         catch (Exception exception)
         {

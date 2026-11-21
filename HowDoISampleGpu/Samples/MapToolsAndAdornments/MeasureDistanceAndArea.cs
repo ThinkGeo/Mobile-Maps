@@ -7,16 +7,24 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// Measuring what a finger draws: tap to add vertices, and the line or the polygon
-/// reports its length or its area, where its centre is, and how far it is from a
-/// fixed landmark - all of it on the ground rather than on the web-mercator plane,
-/// which grows areas away from the equator by about forty per cent in Texas.
+/// Measuring what a finger draws: tap to add vertices, double-tap or long-press to
+/// finish, and the line or the polygon reports its length or its area and where its
+/// centre is - on the ground rather than on the web-mercator plane, which grows
+/// areas away from the equator by about forty per cent in Texas.
 /// </summary>
 /// <remarks>
-/// The four questions a shape can be asked - GetLength, GetArea, GetCenterPoint and
-/// GetShortestLineTo - used to be a sample of their own, asked of parks and trails
-/// read from a file. They are the same four calls on a shape the finger made, and a
-/// shape the finger made is the one a phone can show them with.
+/// GetLength, GetArea and GetCenterPoint used to be a sample of their own, asked of
+/// parks and trails read from a file. They are the same calls on a shape the finger
+/// made, and a shape the finger made is the one a phone can show them with.
+/// GetShortestLineTo was here too, drawn from the shape to a fixed stadium, and it
+/// is gone: a second measurement to somewhere the reader never chose read as part of
+/// what they had just drawn rather than as another question being asked of it.
+/// <para>
+/// Two gestures end a shape, and both are the overlay's own: a double tap, which is
+/// the double click every desktop sketch tool ends on, and a long press, which is
+/// the one that survives a shaky thumb. Neither reaches the map underneath - the
+/// overlay reports the gesture handled - so the double tap does not also zoom.
+/// </para>
 /// <para>
 /// WPF has MeasureInteractiveOverlay, a TrackInteractiveOverlay that labels itself.
 /// MAUI has the tracking overlay but not the measuring subclass, so both modes here
@@ -27,11 +35,8 @@ namespace HowDoISampleGpu.Samples;
 /// </remarks>
 public class MeasureDistanceAndArea : SamplePage
 {
-    /// <summary>Toyota Stadium: the fixed end of the shortest-line measurement.</summary>
-    private static readonly PointShape Stadium = new(-10779651.5, 3915933.0);
-
-    /// <summary>The landmark and the line drawn to it, which no tracking overlay owns.</summary>
-    private readonly DynamicSource _landmark = new();
+    /// <summary>The centre dot, which no tracking overlay owns.</summary>
+    private readonly DynamicSource _centre = new();
 
     private MapView _map;
     private Label _result;
@@ -47,7 +52,7 @@ public class MeasureDistanceAndArea : SamplePage
         {
             VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
         });
-        style.AddDynamic(_landmark);
+        style.AddDynamic(_centre);
         map.Basemap = new GpuBasemap(style);
 
         AddChoiceStrip(new[] { "Distance", "Area" }, 0, index =>
@@ -73,12 +78,15 @@ public class MeasureDistanceAndArea : SamplePage
     {
         _map.TrackOverlay = _area ? NewAreaOverlay() : NewRuler();
         _result.Text = string.Empty;
+        // Short enough to fit the one line the panel gives it: the longer form of
+        // this - "Tap to add corners, then double-tap or long-press to close the
+        // polygon" - was cut off mid-word on a phone, which hid the half that was
+        // worth saying.
         _detail.Text = _area
-            ? "Tap to add corners, double-tap to close the polygon"
-            : "Tap to add points, double-tap to end the line";
+            ? "Tap corners, then double-tap or long-press to close"
+            : "Tap points, then double-tap or long-press to finish";
 
-        _landmark.Clear();
-        _landmark.SetPoint("stadium", new Feature(Stadium), color: GeoColors.Gold, sizeInPixel: 14f);
+        _centre.Clear();
         _ = _map.RefreshAsync();
     }
 
@@ -134,23 +142,18 @@ public class MeasureDistanceAndArea : SamplePage
     }
 
     /// <summary>
-    /// The other two questions, asked of the same shape: where its centre is, and the
-    /// shortest line from it to the stadium - drawn, because a distance to somewhere
-    /// is easier to believe with the line on the map.
+    /// The other question, asked of the same shape: where its centre is - marked, and
+    /// read back in degrees, which is where the shape was measured.
     /// </summary>
     private void Describe(BaseShape shape)
     {
         var centre = shape.GetCenterPoint();
-        var toStadium = shape.GetShortestLineTo(Stadium, GeographyUnit.Meter);
-        var gap = toStadium.GetLength(new Projection(3857), DistanceUnit.Kilometer);
-
         var lonLat = (PointShape)ToLonLat(centre);
 
-        _landmark.SetPoint("centre", new Feature(centre), color: GeoColors.OrangeRed, sizeInPixel: 12f);
-        _landmark.SetLine("to-stadium", new Feature(toStadium), GeoColors.Gold, 3f);
+        _centre.SetPoint("centre", new Feature(centre), color: GeoColors.OrangeRed, sizeInPixel: 12f);
 
         _detail.Text = string.Create(CultureInfo.InvariantCulture,
-            $"centre {lonLat.Y:F4}, {lonLat.X:F4}  ·  {gap:N2} km to Toyota Stadium");
+            $"centre {lonLat.Y:F4}, {lonLat.X:F4}");
     }
 
     private static BaseShape ToLonLat(BaseShape shape)

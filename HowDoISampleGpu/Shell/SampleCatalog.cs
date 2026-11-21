@@ -43,15 +43,21 @@ public static class SampleCatalog
     {
 
         // ---- Map Navigation ----
-        new("Map Navigation", "Your First Map",
-            "The smallest GPU map there is: a style URI on a MapView and nothing else, opening over Union Square and already leaning, with Midtown standing up behind it and a switch between the light and dark themes",
-            "GpuBasemap", SampleDraws.Gpu, () => new YourFirstMap(),
-            aliases: "hello, first light, smoke test, style.json, getting started, dark theme, light theme, "
-                   + "SetStyleAsync, fill-extrusion, 3D buildings, tilt"),
-        new("Map Navigation", "Restrict Map Extent",
-            "Keeping the map inside a box and between two scales - tilt it, turn it and zoom it as you like, it still cannot leave the red box",
-            "CurrentExtentChanging", SampleDraws.Gpu, () => new RestrictMapExtent(),
-            aliases: "restrict, bounds, clamp, MinScale, MaxScale, limit, pan, zoom, tilt, rotate"),
+        // The first row is the gallery's front door, so it is the one that needs no
+        // explaining: the whole world, turning. The two rows after it are a pair -
+        // the height of a city and the shape of the ground - and the last two are
+        // the camera being driven and the camera being fenced in.
+        new("Map Navigation", "Hello World",
+            "The world as a sphere and as three projections, morphing between them, from satellite imagery or vector streets - the projection is the camera's, so nothing is reprojected",
+            "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
+            aliases: "hello, hello world, globe, sphere, the globe, projection, Robinson, Mollweide, Web Mercator, "
+                   + "proj4, proj string, AnimateDisplayProjectionAsync, morph, raster, vector, "
+                   + "first light, smoke test, getting started"),
+        new("Map Navigation", "Buildings in 3D",
+            "A city with its real height: one extrusion layer over a published style stands Midtown up behind Union Square, and a switch moves the whole map between the light and dark themes",
+            "GpuBasemap, fill-extrusion", SampleDraws.Gpu, () => new BuildingsIn3D(),
+            aliases: "buildings, 3D buildings, extrusion, fill-extrusion, city, skyline, height, tilt, "
+                   + "style.json, SetStyleAsync, dark theme, light theme, first map, New York, Manhattan"),
         new("Map Navigation", "Terrain and Hillshade",
             "The ground with its real shape: satellite imagery draped over a terrain source and hill-shaded, over the Grand Canyon",
             "MapStyle.SetTerrain", SampleDraws.Gpu, () => new TerrainAndHillshade(),
@@ -60,11 +66,10 @@ public static class SampleCatalog
             "A drive along a recorded GPS track - the camera flies to each point, the vehicle rides the flight's progress, and the road behind turns green",
             "DynamicSource", SampleDraws.Gpu, () => new GpsNavigation(),
             aliases: "navigation, GPS, GPX, track, vehicle, follow camera, route, theme, tilt, turn by turn, live location"),
-        new("Map Navigation", "The Globe",
-            "The world as a sphere and as three projections, morphing between them, from satellite imagery or vector streets - the projection is the camera's, so nothing is reprojected",
-            "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
-            aliases: "globe, sphere, projection, Robinson, Mollweide, Web Mercator, proj4, proj string, "
-                   + "AnimateDisplayProjectionAsync, morph, raster, vector"),
+        new("Map Navigation", "Restrict Map Extent",
+            "Keeping the map inside a box and between two scales - tilt it, turn it and zoom it as you like, it still cannot leave the red box",
+            "CurrentExtentChanging", SampleDraws.Gpu, () => new RestrictMapExtent(),
+            aliases: "restrict, bounds, clamp, MinScale, MaxScale, limit, pan, zoom, tilt, rotate"),
 
         // ---- From a Service ----
         new("From a Service", "Vector Map Providers",
@@ -72,17 +77,21 @@ public static class SampleCatalog
             "ThinkGeoVectorTileSource", SampleDraws.Gpu, () => new VectorMapProviders(),
             aliases: "OpenFreeMap, Liberty, Positron, style.json, SetStyleAsync, restyle"),
         new("From a Service", "Raster Map Providers",
-            "The same map from several raster tile providers - the raster registration is swapped in place and the camera holds",
-            "RasterTileSource", SampleDraws.Gpu, () => new RasterMapProviders(),
-            aliases: "OpenStreetMap, XYZ, aerial, hybrid, ThinkGeoRasterTileSource"),
+            "Rasters nobody can send as vectors - aerial imagery, an open tile server, a WMS and a WMTS - each swapped in place with the camera holding",
+            "RasterTileSource, WmsRasterTileSource, WmtsRasterTileSource", SampleDraws.Gpu, () => new RasterMapProviders(),
+            aliases: "OpenStreetMap, XYZ, aerial, satellite, imagery, WMS, WMTS, NASA, Swisstopo, ThinkGeoRasterTileSource"),
         new("From a Service", "Live Flights",
             "Every aircraft airborne right now, from OpenSky, each dead-reckoned forward from its last report at fifty frames a second",
             "DynamicSource", SampleDraws.Gpu, () => new LiveFlights(),
             aliases: "OpenSky, flights, aircraft, live, dead reckoning, markers, animation, heading"),
-        new("From a Service", "NEXRAD Radar",
+        // Named for the data, not for the programme that collects it: the sample is
+        // how a radar mosaic reaches the map, and NEXRAD is whose mosaic it happens
+        // to be. The name stays in the aliases, where someone looking for it by it
+        // will still find this row.
+        new("From a Service", "Weather Radar",
             "The last half hour of American weather radar, looping - six images fetched once and switched by visibility, so nothing is re-fetched between frames",
-            "GeoImageRasterTileSource", SampleDraws.Gpu, () => new NexradRadar(),
-            aliases: "radar, NEXRAD, weather, Mesonet, animation, TransparentColor, SetLayerVisibility"),
+            "GeoImageRasterTileSource", SampleDraws.Gpu, () => new WeatherRadar(),
+            aliases: "radar, NEXRAD, nexrad, weather, reflectivity, Mesonet, animation, TransparentColor, SetLayerVisibility"),
 
         // ---- Your Data ----
         new("Your Data", "Vector File Formats",
@@ -143,12 +152,12 @@ public static class SampleCatalog
             "The map on screen written out as a true vector PDF - geometry as paths, labels as selectable text - and handed to the system to open, file or print",
             "PdfGeoCanvas, PrinterLayoutDocument, MvtTilesAsyncLayer", SampleDraws.GpuAndOverlays, () => new ExportToPdf(),
             aliases: "print, printing, PDF, export, vector, page, A4, letter, layout, share, AirPrint, PrinterLayoutDocument"),
-        new("Shapes and Editing", "Measure Distance and Area",
-            "Measuring what a finger draws - a line's length or a polygon's area, where its centre is and how far it is from a landmark, all taken on the ground",
-            "TrackInteractiveOverlay, GetArea, GetCenterPoint, GetShortestLineTo", SampleDraws.GpuAndOverlays, () => new MeasureDistanceAndArea(),
-            aliases: "measure, distance, area, ruler, track, draw, polygon, line, centre, centroid, shortest line, projection"),
 
         // ---- Shapes and Editing ----
+        new("Shapes and Editing", "Measure Distance and Area",
+            "Measuring what a finger draws - a line's length or a polygon's area and where its centre is, taken on the ground; double-tap or long-press to finish the shape",
+            "TrackInteractiveOverlay, GetLength, GetArea, GetCenterPoint", SampleDraws.GpuAndOverlays, () => new MeasureDistanceAndArea(),
+            aliases: "measure, distance, area, ruler, track, draw, polygon, line, centre, centroid, projection, double tap, long press"),
         new("Shapes and Editing", "Edit Features",
             "Drawing and editing by hand - draw points, lines and polygons or drag, resize, rotate and reshape what is there, with every overlay event logged",
             "TrackOverlay, EditOverlay", SampleDraws.GpuAndOverlays, () => new EditFeatures(),
@@ -208,7 +217,7 @@ public static class SampleCatalog
         ("From a Service - NOAA Weather",
             "Works on a phone; cut from this gallery during the trimming pass that took it from sixty-one "
             + "samples to thirty-four. The service samples that remain show the same thing - somebody else's "
-            + "server as a source - without a second live weather feed beside NEXRAD Radar and the two NDFD samples."),
+            + "server as a source - without a second live weather feed beside Weather Radar and Weather Grids."),
         ("Extending the SDK - Custom Adornment Layer, Custom Feature Sources, Handle Tile Failures",
             "All three work on a phone; the group was cut from this gallery during the same trimming pass. "
             + "They extend the SDK rather than show it, which is reference material for somebody already "

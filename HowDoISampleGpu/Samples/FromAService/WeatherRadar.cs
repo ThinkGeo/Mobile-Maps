@@ -9,7 +9,7 @@ namespace HowDoISampleGpu.Samples;
 /// The last half hour of American weather radar, looping - six images fetched once
 /// and switched by visibility, so nothing is re-fetched between frames.
 /// </summary>
-public class NexradRadar : SamplePage, IDisposable
+public class WeatherRadar : SamplePage, IDisposable
 {
     /// <summary>
     /// One frame of the composite, asked for at a size a phone can hold.
@@ -115,9 +115,9 @@ public class NexradRadar : SamplePage, IDisposable
     {
         var minutesAgo = (FrameCount - 1 - frame) * 5;
         _status.Text = minutesAgo == 0
-            ? "NEXRAD composite, courtesy of Iowa State Mesonet - now"
+            ? "Radar composite, courtesy of Iowa State Mesonet - now"
             : FormattableString.Invariant(
-                $"NEXRAD composite, courtesy of Iowa State Mesonet - {minutesAgo} minutes ago");
+                $"Radar composite, courtesy of Iowa State Mesonet - {minutesAgo} minutes ago");
     }
 
     private static string FrameId(int frame) => FormattableString.Invariant($"radar-{frame}");
