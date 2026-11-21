@@ -9,17 +9,15 @@ namespace HowDoISampleGpu.Samples;
 /// switch to editing and drag, resize, rotate and reshape what is there, with a
 /// measurement following whatever is being moved.
 /// <para>
-/// The two switches are the rest of the editing story, which the desktop gallery tells
-/// on pages of its own: a rule that refuses an edit, and a rule that corrects one.
-/// Both hang off the same overlay events, so they belong with the editing rather than
-/// beside it.
+/// The rest of the editing story, which the desktop gallery tells on pages of its own,
+/// is here as the two things a rule can do to an edit: move it somewhere else, which
+/// is what the snapping switch does, and correct it afterwards, which is what the blue
+/// rectangle does to itself. Both hang off the edit overlay's own events, so they
+/// belong with the editing rather than beside it.
 /// </para>
 /// </summary>
 public class EditFeatures : SamplePage
 {
-    /// <summary>No vertex may be added within this of one the shape already has.</summary>
-    private const double MinSpacingMeters = 300;
-
     /// <summary>How near the finger must come, in pixels, before a vertex snaps.</summary>
     private const float SnapTolerance = 25;
 
@@ -28,7 +26,6 @@ public class EditFeatures : SamplePage
     private ShapeFileFeatureLayer _schoolsLayer;
     private MapView _map;
     private Label _measure;
-    private Switch _constrain;
     private Switch _snap;
 
     protected override void BuildMap(MapView map)
@@ -47,7 +44,9 @@ public class EditFeatures : SamplePage
         var demoPoint = new Feature("POINT(-10773220 3913230)");
         var demoLine = new Feature("LINESTRING(-10780700 3916500, -10780700 3910040)");
 
-        // The rule below acts on whatever carries this; the other shapes are free.
+        // A shape can carry what it is, and a rule can read it back: this one is a
+        // rectangle and is corrected into one after every drag. The other two shapes
+        // say nothing about themselves and are free.
         demoPolygon.ColumnValues["constraint"] = "rectangle";
 
         map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
@@ -74,15 +73,14 @@ public class EditFeatures : SamplePage
         map.TrackOverlay.TouchMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
         map.EditOverlay.VertexMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
 
-        // The two rules. Both are always subscribed and both do nothing while their
-        // switch is off, which keeps the wiring in one place.
-        map.EditOverlay.VertexAdding += EditOverlay_VertexAdding;
+        // The two rules. Snapping does nothing while its switch is off; the rectangle
+        // reads the shape rather than a switch, so it needs none.
         map.EditOverlay.VertexMoving += EditOverlay_VertexMoving;
         map.EditOverlay.VertexMoved += EditOverlay_VertexMoved;
 
         AddChoiceStrip(new[] { "Navigate", "Point", "Line", "Polygon", "Edit" }, 0, ChooseMode);
 
-        AddToPanel(BuildRuleRow());
+        AddToPanel(BuildSnapRow());
         _measure = AddStatusLabel();
 
         // The mode the strip opens on has to be the mode the map is in. The three
@@ -97,18 +95,12 @@ public class EditFeatures : SamplePage
     }
 
     /// <summary>
-    /// The two editing rules, as switches rather than as pages of their own. Each one
-    /// is named for what it does to an edit rather than for the kind of rule it is -
-    /// "Constrain" and "Snap" are what the API calls them, and left at that nobody can
-    /// tell what either switch is about to do to their shape.
+    /// The one switch, named for what it does to an edit rather than for the kind of
+    /// rule it is - "Snap" is what the API calls it, and left at that nobody can tell
+    /// what the switch is about to do to their shape.
     /// </summary>
-    private View BuildRuleRow()
+    private View BuildSnapRow()
     {
-        _constrain = new Switch();
-        _constrain.Toggled += (_, e) => _measure.Text = e.Value
-            ? "The square stays square, and new vertices keep 300 m apart"
-            : "Corners move freely again";
-
         _snap = new Switch();
         _snap.Toggled += (_, e) =>
         {
@@ -119,9 +111,7 @@ public class EditFeatures : SamplePage
         };
 
         var row = new HorizontalStackLayout { Spacing = 8 };
-        row.Add(new Label { Text = "Keep square", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center });
-        row.Add(_constrain);
-        row.Add(new Label { Text = "Snap to schools", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center, Margin = new Thickness(8, 0, 0, 0) });
+        row.Add(new Label { Text = "Snap to schools", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center });
         row.Add(_snap);
 
         return row;
@@ -156,25 +146,6 @@ public class EditFeatures : SamplePage
         _ = _map.RefreshAsync();
     }
 
-    /// <summary>A rule that refuses an edit: no vertex closer than the spacing allows.</summary>
-    private void EditOverlay_VertexAdding(object sender, VertexAddingEditInteractiveOverlayEventArgs e)
-    {
-        if (_constrain?.IsToggled != true)
-        {
-            return;
-        }
-
-        foreach (var vertex in VerticesOf(e.AffectedFeature.GetShape()))
-        {
-            if (new LineShape(new[] { vertex, e.AddingVertex }).GetLength(3857, DistanceUnit.Meter) < MinSpacingMeters)
-            {
-                e.Cancel = true;
-                _measure.Text = "Too close to a vertex it already has";
-                return;
-            }
-        }
-    }
-
     /// <summary>A rule that moves an edit: a vertex near a school lands on it.</summary>
     private void EditOverlay_VertexMoving(object sender, VertexMovingEditInteractiveOverlayEventArgs e)
     {
@@ -207,11 +178,6 @@ public class EditFeatures : SamplePage
     /// <summary>A rule that corrects an edit: a shape marked rectangular stays one.</summary>
     private void EditOverlay_VertexMoved(object sender, VertexMovedEditInteractiveOverlayEventArgs e)
     {
-        if (_constrain?.IsToggled != true)
-        {
-            return;
-        }
-
         if (e.AffectedFeature.ColumnValues.TryGetValue("constraint", out var rule) && rule == "rectangle")
         {
             RestoreRectangle(e.AffectedFeature, e.MovedVertex);
@@ -255,7 +221,13 @@ public class EditFeatures : SamplePage
         ring.Vertices.Add(new Vertex(opposite.X, moved.Y));
         ring.Vertices.Add(moved);
 
-        ReplaceEditShape(feature, new PolygonShape(ring));
+        var corrected = new PolygonShape(ring);
+        ReplaceEditShape(feature, corrected);
+
+        // Otherwise the corner springs back to a right angle and nothing says why.
+        // The measurement is the corrected shape's, not the quadrilateral's, which is
+        // what the handler that ran before this one had already written.
+        _measure.Text = GetMeasureResult(corrected) + " - kept rectangular";
     }
 
     private void ReplaceEditShape(Feature original, BaseShape shape)
