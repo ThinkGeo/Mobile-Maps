@@ -1,4 +1,3 @@
-using System.Globalization;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
 using ThinkGeo.Gpu;
@@ -8,17 +7,22 @@ namespace HowDoISampleGpu.Samples;
 
 /// <summary>
 /// Measuring what a finger draws: tap to add vertices, double-tap or long-press to
-/// finish, and the line or the polygon reports its length or its area and where its
-/// centre is - on the ground rather than on the web-mercator plane, which grows
-/// areas away from the equator by about forty per cent in Texas.
+/// finish, and the line or the polygon reports its length or its area - on the
+/// ground rather than on the web-mercator plane, which grows areas away from the
+/// equator by about forty per cent in Texas.
 /// </summary>
 /// <remarks>
-/// GetLength, GetArea and GetCenterPoint used to be a sample of their own, asked of
-/// parks and trails read from a file. They are the same calls on a shape the finger
-/// made, and a shape the finger made is the one a phone can show them with.
-/// GetShortestLineTo was here too, drawn from the shape to a fixed stadium, and it
-/// is gone: a second measurement to somewhere the reader never chose read as part of
-/// what they had just drawn rather than as another question being asked of it.
+/// GetLength and GetArea used to be a sample of their own, asked of parks and trails
+/// read from a file. They are the same calls on a shape the finger made, and a shape
+/// the finger made is the one a phone can show them with.
+/// <para>
+/// Two other calls were here and are gone: GetShortestLineTo, drawn to a fixed
+/// stadium, and GetCenterPoint, marked with a dot and read out in degrees. Both
+/// answered questions the reader had not asked. A shape you have just drawn with
+/// your own finger has one obvious measurement - how long, or how big - and anything
+/// else put on top of it reads as part of the answer rather than as another
+/// question, which is the surest way to make a simple number look complicated.
+/// </para>
 /// <para>
 /// Two gestures end a shape, and both are the overlay's own: a double tap, which is
 /// the double click every desktop sketch tool ends on, and a long press, which is
@@ -35,9 +39,6 @@ namespace HowDoISampleGpu.Samples;
 /// </remarks>
 public class MeasureDistanceAndArea : SamplePage
 {
-    /// <summary>The centre dot, which no tracking overlay owns.</summary>
-    private readonly DynamicSource _centre = new();
-
     private MapView _map;
     private Label _result;
     private Label _detail;
@@ -52,7 +53,6 @@ public class MeasureDistanceAndArea : SamplePage
         {
             VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
         });
-        style.AddDynamic(_centre);
         map.Basemap = new GpuBasemap(style);
 
         AddChoiceStrip(new[] { "Distance", "Area" }, 0, index =>
@@ -86,7 +86,6 @@ public class MeasureDistanceAndArea : SamplePage
             ? "Tap corners, then double-tap or long-press to close"
             : "Tap points, then double-tap or long-press to finish";
 
-        _centre.Clear();
         _ = _map.RefreshAsync();
     }
 
@@ -107,7 +106,6 @@ public class MeasureDistanceAndArea : SamplePage
             var length = onGround.GetLength(GeographyUnit.DecimalDegree, DistanceUnit.Kilometer);
             Label(overlay, FormattableString.Invariant($"{length:N2} km"));
             _result.Text = FormattableString.Invariant($"{length:N2} km on the ground");
-            Describe(line);
             await overlay.RefreshAsync();
         };
 
@@ -134,26 +132,10 @@ public class MeasureDistanceAndArea : SamplePage
             var area = onGround.GetArea(GeographyUnit.DecimalDegree, AreaUnit.SquareKilometers);
             Label(overlay, FormattableString.Invariant($"{area:N2} km²"));
             _result.Text = FormattableString.Invariant($"{area:N2} km² on the ground");
-            Describe(polygon);
             await overlay.RefreshAsync();
         };
 
         return overlay;
-    }
-
-    /// <summary>
-    /// The other question, asked of the same shape: where its centre is - marked, and
-    /// read back in degrees, which is where the shape was measured.
-    /// </summary>
-    private void Describe(BaseShape shape)
-    {
-        var centre = shape.GetCenterPoint();
-        var lonLat = (PointShape)ToLonLat(centre);
-
-        _centre.SetPoint("centre", new Feature(centre), color: GeoColors.OrangeRed, sizeInPixel: 12f);
-
-        _detail.Text = string.Create(CultureInfo.InvariantCulture,
-            $"centre {lonLat.Y:F4}, {lonLat.X:F4}");
     }
 
     private static BaseShape ToLonLat(BaseShape shape)

@@ -35,6 +35,21 @@ public class ExportToPdf : SamplePage
         new("Letter", PrinterPageSize.AnsiA, PrinterOrientation.Portrait),
     };
 
+    /// <summary>
+    /// The city limits as a boundary rather than as a wash. It was a translucent
+    /// orange fill, which over a whole city on a sheet of paper reads as a stain
+    /// over the map rather than as where the city ends.
+    /// </summary>
+    private const string CityLimitStyle = """
+    {
+      "layers": [
+        { "type": "line",
+          "source-layer": "citylimits",
+          "paint": { "line-color": "#E0533C", "line-width": 2 } }
+      ]
+    }
+    """;
+
     /// <summary>Margin, title band and scale band on the sheet, in inches.</summary>
     private const double Margin = 0.5;
     private const double TitleHeight = 0.5;
@@ -50,9 +65,25 @@ public class ExportToPdf : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Light,
-            new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
-            { VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder) }));
+        // The screen gets the same two layers the sheet does: the published light
+        // style, and the city limits over it. They were only on the sheet, so the
+        // line under this map promised what you see is what is printed and the PDF
+        // came back with a boundary across it that had never been on the screen.
+        var style = new MapStyle();
+        style.AddStyle(ThinkGeoVectorStyles.Light, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
+        {
+            VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
+        });
+
+        var cityLimitTiles = new FeatureSourceVectorTileSource();
+        cityLimitTiles.FeatureSources.Add("citylimits", new ShapeFileFeatureSource(
+            SampleShared.Shapefile("FriscoCityLimits.shp"))
+        {
+            ProjectionConverter = new ProjectionConverter(2276, 3857),
+        });
+        style.AddStyle(CityLimitStyle, cityLimitTiles);
+
+        map.Basemap = new GpuBasemap(style);
 
         AddChoiceStrip(Sheets.Select(sheet => sheet.Name).ToList(), 0, index => _sheet = index);
 
@@ -63,8 +94,11 @@ public class ExportToPdf : SamplePage
         _status = AddStatusLabel();
         _status.Text = "What you see is what is printed.";
 
-        map.CenterPoint = new PointShape(-10778000, 3912000);
-        map.MapScale = 36200;
+        // The whole city, because the city limits are what this sample puts on the
+        // sheet beside the basemap: at the street scale this opened on, the boundary
+        // was off the screen and the sheet came back with a line nobody had seen.
+        map.CenterPoint = new PointShape(-10779000, 3915000);
+        map.MapScale = 180000;
         _ = map.RefreshAsync();
 
     }
@@ -181,8 +215,8 @@ public class ExportToPdf : SamplePage
         {
             FeatureSource = { ProjectionConverter = new ProjectionConverter(2276, 3857) },
         };
-        cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(
-            GeoColor.FromArgb(40, GeoColors.OrangeRed), GeoColors.OrangeRed, 2);
+        cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(
+            new GeoPen(GeoColor.FromHtml("#E0533C"), 2));
         cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
         return new LayerBase[] { streets, cityLimits };
