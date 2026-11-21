@@ -5,10 +5,19 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The same map from five vector file formats. The chosen file is read by whatever
+/// The same map from six vector file formats. The chosen file is read by whatever
 /// source understands it, cut into tiles and laid over the cloud basemap - the style
 /// never learns which format it was.
 /// </summary>
+/// <remarks>
+/// A spatial SQLite file is one of these, not a database sample: it is a file you
+/// carry with the app and open through <see cref="SqliteFeatureSource"/>, which is
+/// the same shape as every other row here. The servers it used to sit beside -
+/// PostgreSQL and SQL Server - are deliberately not offered: holding a database
+/// connection open from a phone over a mobile network is the wrong shape for the
+/// platform, and the mobile answer is a file you carry or a service you call. See
+/// <see cref="SampleCatalog.NotOnMobile"/>.
+/// </remarks>
 public class VectorFileFormats : SamplePage
 {
     private const string DataStyle = """
@@ -29,11 +38,13 @@ public class VectorFileFormats : SamplePage
 
     private static readonly string[] Formats =
     {
-        "Shapefile - Frisco parks",
-        "GeoJSON - Pittsburgh historic districts",
-        "GPX - hike and bike trails",
-        "MapInfo TAB - Frisco city limits",
-        "TinyGeo - Frisco zoning",
+        // The format is the choice; what is in each file is the status line's job.
+        "Shapefile",
+        "GeoJSON",
+        "GPX",
+        "MapInfo TAB",
+        "TinyGeo",
+        "SQLite",
     };
 
     // The basemap under the data. One source for the life of the sample: a restyle
@@ -52,12 +63,12 @@ public class VectorFileFormats : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
-        AddChoicePicker(Formats, 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Formats, 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
+
     }
 
     /// <summary>The line that differs: which class reads which file.</summary>
@@ -82,7 +93,15 @@ public class VectorFileFormats : SamplePage
         {
             ProjectionConverter = new ProjectionConverter(2276, 3857),
         },
-        _ => new TinyGeoFeatureSource(Data("TinyGeo", "Zoning.tgeo"))
+        4 => new TinyGeoFeatureSource(Data("TinyGeo", "Zoning.tgeo"))
+        {
+            ProjectionConverter = new ProjectionConverter(2276, 3857),
+        },
+        // A file like the rest, but named by a connection string rather than a path,
+        // and asked for a table, a key column and a geometry column within it.
+        _ => new SqliteFeatureSource(
+            "Data Source=" + Data("SQLite", "frisco-restaurants.sqlite") + ";",
+            "restaurants", "id", "geometry")
         {
             ProjectionConverter = new ProjectionConverter(2276, 3857),
         },

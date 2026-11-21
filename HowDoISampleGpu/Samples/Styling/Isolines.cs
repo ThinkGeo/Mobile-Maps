@@ -8,8 +8,14 @@ namespace HowDoISampleGpu.Samples;
 
 /// <summary>
 /// Contours drawn from scattered measurements: mosquito counts around Frisco turned
-/// into isolines, with the level count, line width, interpolation power and search
-/// radius all live.
+/// into isolines, with the number of levels live.
+/// <para>
+/// Two controls and no readouts. There were four - a search radius, a labels switch
+/// and a count of the measurements, besides the levels - and on a phone that is two
+/// rows of card over the one picture they are all about. The search radius went
+/// because its effect on this data is a change in smoothness that needs the two
+/// pictures side by side to see; the count went because it never changes.
+/// </para>
 /// </summary>
 public class Isolines : SamplePage
 {
@@ -36,14 +42,26 @@ public class Isolines : SamplePage
     private MapStyle _style;
     private PointValueSource _isolineSource;
     private MapView _map;
-    private Label _status;
 
     private bool _fillBands;
-    private bool _showLabels = true;
-    private double _searchRadius;   // 0 = every point
+    private bool _rebuilding;
+    private bool _moved;
     private int _levelCount = 25;
-    private float _lineWidth = 3f;
-    private double _power = 2.0;
+
+    /// <summary>Every point is in range; the radius was a slider and is now a decision.</summary>
+    private const double SearchRadius = 0;
+
+    /// <summary>Labelled contours, which is most of what makes a contour readable.</summary>
+    private const bool ShowLabels = true;
+
+    /// <summary>
+    /// Fixed, not sliders. Line width is cosmetic, and the inverse-distance power is
+    /// a number whose effect on this data a viewer cannot see moving. What is worth
+    /// a slider is what changes the contours: how many there are, and how far the
+    /// interpolation is allowed to look for a measurement.
+    /// </summary>
+    private const float LineWidth = 3f;
+    private const double Power = 2.0;
 
     public Isolines()
     {
@@ -57,7 +75,6 @@ public class Isolines : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         var pointTiles = new FeatureSourceVectorTileSource();
         pointTiles.FeatureSources.Add("points", new InMemoryFeatureSource(
@@ -76,42 +93,85 @@ public class Isolines : SamplePage
         start.ScaleUp(60);
         map.CurrentExtent = start;
 
-        _status = AddStatusLabel();
+        // One row: how many contours on the left, and whether they are drawn as lines
+        // or as filled bands between them, on the right. "Bands" was the word for the
+        // second one and it names the thing rather than what you see - "Filled" is
+        // what the map does when you press it.
+        var row = new Grid { ColumnSpacing = 14 };
+        row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
 
-        var toggles = new HorizontalStackLayout { Spacing = 10 };
-        toggles.Add(Toggle("Bands", _fillBands, value => { _fillBands = value; ApplyIsolines(); }));
-        toggles.Add(Toggle("Labels", _showLabels, value => { _showLabels = value; ApplyIsolines(); }));
-        AddToPanel(toggles);
-
-        AddSlider("Levels", 5, 60, _levelCount, value => { _levelCount = (int)value; ApplyIsolines(); });
-        AddSlider("Line width", 1, 8, _lineWidth, value => { _lineWidth = (float)value; ApplyIsolines(); });
-        AddSlider("Power", 0.5, 5, _power, value => { _power = value; ApplyIsolines(); });
-        AddSlider("Search radius", 0, 1, 0, value =>
+        var caption = new Label
         {
-            _searchRadius = value * _dataBounds.Width;
-            ApplyIsolines();
+            Text = FormattableString.Invariant($"Levels {_levelCount:0}"),
+            FontSize = 11,
+            TextColor = Colors.Gray,
+        };
+
+        var levels = new Slider { Minimum = 5, Maximum = 60, Value = _levelCount };
+        levels.ValueChanged += (_, e) =>
+        {
+            caption.Text = FormattableString.Invariant($"Levels {e.NewValue:0}");
+            _levelCount = (int)e.NewValue;
+            Reapply();
+        };
+
+        row.Children.Add(new VerticalStackLayout { Children = { caption, levels } });
+
+        var bands = new ChoiceStrip(new[] { "Lines", "Filled" }, 0, index =>
+        {
+            _fillBands = index == 1;
+            Reapply();
         });
+
+        row.Children.Add(bands);
+        Grid.SetColumn((BindableObject)bands, 1);
+        AddToPanel(row);
 
         ApplyIsolines();
         _ = map.RefreshAsync();
+
     }
 
-    private View Toggle(string name, bool value, Action<bool> changed)
+    /// <summary>
+    /// Rebuilds the isolines for the controls as they now stand, and - if they moved
+    /// again while it was working - once more for where they ended up.
+    /// <para>
+    /// Every move of a slider asks for this, which is the point: the desktop gallery
+    /// redraws while the mouse is down. One rebuild is interpolation, contouring and a
+    /// restyle, so a drag asks for far more of them than a frame can carry. Running
+    /// them in turn would queue a second of work behind a finger that stopped moving
+    /// half a second ago; this drops everything in the middle and draws where the
+    /// finger actually is.
+    /// </para>
+    /// </summary>
+    private async void Reapply()
     {
-        var row = new HorizontalStackLayout { Spacing = 6 };
-        var toggle = new Switch { IsToggled = value, Scale = 0.8 };
-        toggle.Toggled += (_, e) => changed(e.Value);
-        row.Add(new Label { Text = name, FontSize = 12, VerticalOptions = LayoutOptions.Center });
-        row.Add(toggle);
-        return row;
-    }
+        if (_rebuilding)
+        {
+            _moved = true;
+            return;
+        }
 
-    private void AddSlider(string name, double min, double max, double value, Action<double> changed)
-    {
-        AddToPanel(new Label { Text = name, FontSize = 11, TextColor = Colors.Gray });
-        var slider = new Slider { Minimum = min, Maximum = max, Value = value };
-        slider.DragCompleted += (_, _) => changed(slider.Value);
-        AddToPanel(slider);
+        _rebuilding = true;
+
+        try
+        {
+            do
+            {
+                _moved = false;
+                ApplyIsolines();
+
+                // Lets the frame the rebuild produced reach the screen before the next
+                // one is started, so a drag animates instead of landing in one jump.
+                await Task.Yield();
+            }
+            while (_moved);
+        }
+        finally
+        {
+            _rebuilding = false;
+        }
     }
 
     private void ApplyIsolines()
@@ -124,9 +184,9 @@ public class Isolines : SamplePage
         var display = new IsolineStyle
         {
             Levels = levels.Select((level, i) => new ColorStop(level, colors[i])).ToList(),
-            LineWidthInPixel = _lineWidth,
+            LineWidthInPixel = LineWidth,
             FillOpacity = _fillBands ? 0.45f : 0f,
-            ShowLabels = _showLabels,
+            ShowLabels = ShowLabels,
             LabelEveryNthLevel = 2,
             LabelColor = GeoColor.FromHtml("#E7E9EC"),
             LabelHaloColor = GeoColor.FromHtml("#1E2329"),
@@ -136,12 +196,10 @@ public class Isolines : SamplePage
         // registration; no tile is rebuilt.
         if (_isolineSource != null) _style.RemoveIsolines(_isolineSource);
 
-        _isolineSource = new PointValueSource(_points) { Power = _power, SearchRadius = _searchRadius };
+        _isolineSource = new PointValueSource(_points) { Power = Power, SearchRadius = SearchRadius };
         _style.AddIsolines(_isolineSource, display);
         _ = _basemap.SetStyleAsync(_style);
 
-        _status.Text = string.Format(CultureInfo.InvariantCulture,
-            "{0:N0} points, {1} levels", _points.Count, levels.Count);
         _ = _map.RefreshAsync();
     }
 

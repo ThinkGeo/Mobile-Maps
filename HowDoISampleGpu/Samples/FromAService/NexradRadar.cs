@@ -1,3 +1,4 @@
+using System.Globalization;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
 using ThinkGeo.UI.Maui;
@@ -10,11 +11,37 @@ namespace HowDoISampleGpu.Samples;
 /// </summary>
 public class NexradRadar : SamplePage, IDisposable
 {
-    private const string FrameUrlTemplate = "https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_{0}.png";
-    private const int FrameCount = 6;   // n0q_5 (25 minutes ago) .. n0q_0 (now), 5-minute steps
+    /// <summary>
+    /// One frame of the composite, asked for at a size a phone can hold.
+    /// <para>
+    /// The same mosaic is published as a flat file, and this sample used to fetch it:
+    /// <c>/data/gis/images/4326/USCOMP/n0q_0.png</c>. That file is 12200 x 5400 - a
+    /// quarter of a gigabyte once decoded to RGBA, and six frames of it is a gigabyte
+    /// and a half of texture for a map 1200 pixels wide. The page drew nothing at all
+    /// and said nothing about why. The server will cut the same product to any size
+    /// through its WMS, so the frames arrive at 2048 x 906: a quarter of a megabyte
+    /// each, already transparent where there is no echo, and more resolution than the
+    /// whole of the United States across a phone has anywhere to put.
+    /// </para>
+    /// </summary>
+    private const string FrameUrlTemplate =
+        "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0q.cgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap" +
+        "&LAYERS={0}&STYLES=&FORMAT=image/png&TRANSPARENT=TRUE&SRS=EPSG:4326" +
+        "&BBOX=-126,23,-65,50&WIDTH=2048&HEIGHT=906";
 
-    /// <summary>The published CONUS composite: 0.005-degree pixels from (-126, 50) down to (-65, 23).</summary>
+    private const int FrameCount = 6;   // 25 minutes ago .. now, in 5-minute steps
+
+    /// <summary>The CONUS composite's ground extent, which the request above asks for.</summary>
     private static readonly RectangleShape ImageExtent = new(-126, 50, -65, 23);
+
+    /// <summary>
+    /// The server publishes each five-minute step as a layer of its own - the newest
+    /// unsuffixed, the rest named by how far back they are - so a frame is a layer name
+    /// rather than a time parameter to get right.
+    /// </summary>
+    private static string LayerFor(int minutesAgo) => minutesAgo == 0
+        ? "nexrad-n0q-900913"
+        : FormattableString.Invariant($"nexrad-n0q-900913-m{minutesAgo:00}m");
 
     private static readonly HttpClient HttpClient = new();
 
@@ -29,7 +56,6 @@ public class NexradRadar : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
         _status = AddToPanel(new Label { FontSize = 12, MaxLines = 2 });
 
         try
@@ -47,13 +73,12 @@ public class NexradRadar : SamplePage, IDisposable
             {
                 var minutesAgo = (FrameCount - 1 - i) * 5;
                 _status.Text = FormattableString.Invariant($"Loading the radar, {i + 1} of {FrameCount}…");
-                var png = await HttpClient.GetByteArrayAsync(string.Format(FrameUrlTemplate, minutesAgo / 5));
+                var png = await HttpClient.GetByteArrayAsync(
+                    string.Format(CultureInfo.InvariantCulture, FrameUrlTemplate, LayerFor(minutesAgo)));
 
-                // The mosaic is a black-backed palette PNG; black is its "no echo".
-                _frames[i] = new GeoImageRasterTileSource(png, ImageExtent, new Projection(4326))
-                {
-                    TransparentColor = GeoColors.Black,
-                };
+                // Transparent where there is no echo already, so there is no colour to
+                // knock out: the WMS answers in RGBA.
+                _frames[i] = new GeoImageRasterTileSource(png, ImageExtent, new Projection(4326));
                 _style.AddRaster(_frames[i], new RasterPaint(0.75f), FrameId(i));
                 _style.SetLayerVisibility(FrameId(i), i == FrameCount - 1);
             }

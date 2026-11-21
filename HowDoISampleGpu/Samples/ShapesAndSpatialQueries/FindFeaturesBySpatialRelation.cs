@@ -27,10 +27,12 @@ public class FindFeaturesBySpatialRelation : SamplePage
 
     private static readonly string[] Relations =
     {
-        "containing the point",
-        "intersecting the point",
-        "within 500 m of the point",
-        "disjoint from the point",
+        // Short enough for a cell a third of a phone wide; what they are all
+        // relative to - the point you tapped - is the sample.
+        "Containing",
+        "Intersecting",
+        "Within 500 m",
+        "Disjoint",
     };
 
     // Zoning is thousands of static polygons - the tile pipeline's case. The query
@@ -78,7 +80,7 @@ public class FindFeaturesBySpatialRelation : SamplePage
         style.AddDynamic(_query);
         map.Basemap = new GpuBasemap(style);
 
-        AddChoicePicker(Relations, 0, index => { _relation = index; Run(_seed); });
+        AddChoiceStrip(Relations, 0, index => { _relation = index; Run(_seed); });
         _status = AddStatusLabel();
         AddToPanel(new Label { Text = "Tap the map to ask again.", FontSize = 11, TextColor = Colors.Gray });
 

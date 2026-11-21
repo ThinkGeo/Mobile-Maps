@@ -12,10 +12,10 @@ public class OfflineTiles : SamplePage
 {
     private static readonly string[] Archives =
     {
-        "MBTiles - vector (the world)",
-        "PMTiles - vector (Frisco)",
-        "MBTiles - raster",
-        "PMTiles - raster (Stamen Toner)",
+        "MBTiles vector",
+        "PMTiles vector",
+        "MBTiles raster",
+        "PMTiles raster",
     };
 
     private MapView _map;
@@ -26,7 +26,7 @@ public class OfflineTiles : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        AddChoicePicker(Archives, 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Archives, 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
@@ -40,23 +40,28 @@ public class OfflineTiles : SamplePage
     {
         try
         {
-            var (name, style, extent) = await OpenAsync(index);
+            var (style, extent) = await OpenAsync(index);
             _map.Basemap = new GpuBasemap(style);
             _map.CurrentExtent = extent;
-            _status.Text = name;
+
+            // Nothing to say when it worked. The line used to name the class that had
+            // just read the archive, which is a fact about the code the reader is
+            // looking at anyway - and a line of card on a phone is a line of map.
+            _status.IsVisible = false;
         }
         catch (Exception exception)
         {
             // Without the archive there is nothing to draw, and saying so beats an
-            // empty window.
+            // empty window. This is the only thing the line is for.
             _status.Text = "Unavailable: " + exception.Message.Split('\n')[0];
+            _status.IsVisible = true;
         }
 
         await _map.RefreshAsync();
     }
 
     /// <summary>The line that differs: which class reads which archive.</summary>
-    private static async Task<(string Name, MapStyle Style, RectangleShape Extent)> OpenAsync(int index)
+    private static async Task<(MapStyle Style, RectangleShape Extent)> OpenAsync(int index)
     {
         switch (index)
         {
@@ -64,7 +69,7 @@ public class OfflineTiles : SamplePage
             {
                 var tiles = new MbTilesVectorTileSource(Data("Mbtiles", "maplibre.mbtiles"));
                 await tiles.OpenAsync();
-                return (nameof(MbTilesVectorTileSource),
+                return (
                     new MapStyle(File.ReadAllText(Data("Mbtiles", "style.json")), tiles),
                     tiles.GetBoundingBox());
             }
@@ -73,7 +78,7 @@ public class OfflineTiles : SamplePage
             {
                 var tiles = new PmTilesVectorTileSource(Data("Pmtiles", "frisco.pmtiles"));
                 await tiles.OpenAsync();
-                return (nameof(PmTilesVectorTileSource),
+                return (
                     new MapStyle(File.ReadAllText(Data("Pmtiles", "style.json")), tiles),
                     tiles.GetBoundingBox());
             }
@@ -85,14 +90,14 @@ public class OfflineTiles : SamplePage
             {
                 var tiles = new MbTilesRasterTileSource(Data("Mbtiles", "test.mbtiles"));
                 await tiles.OpenAsync();
-                return (nameof(MbTilesRasterTileSource), new MapStyle().AddRaster(tiles), MaxExtents.SphericalMercator);
+                return (new MapStyle().AddRaster(tiles), MaxExtents.SphericalMercator);
             }
 
             default:
             {
                 var tiles = new PmTilesRasterTileSource(Data("Pmtiles", "stamen_toner.pmtiles"));
                 await tiles.OpenAsync();
-                return (nameof(PmTilesRasterTileSource), new MapStyle().AddRaster(tiles), MaxExtents.SphericalMercator);
+                return (new MapStyle().AddRaster(tiles), MaxExtents.SphericalMercator);
             }
         }
     }

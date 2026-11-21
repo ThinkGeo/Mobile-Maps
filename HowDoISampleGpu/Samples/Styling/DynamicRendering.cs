@@ -32,6 +32,9 @@ public class DynamicRendering : SamplePage
     private Dictionary<(string State, int Year), int> _population;
     private MapView _map;
     private Label _yearLabel;
+    private Slider _slider;
+    private IDispatcherTimer _timer;
+    private bool _playing = true;
 
     protected override void BuildMap(MapView map)
     {
@@ -58,11 +61,29 @@ public class DynamicRendering : SamplePage
 
         _yearLabel = AddToPanel(new Label { FontSize = 16, FontAttributes = FontAttributes.Bold });
         var years = _population.Keys.Select(key => key.Year).ToList();
-        var slider = new Slider { Minimum = years.Min(), Maximum = years.Max(), Value = years.Min() };
-        slider.ValueChanged += (_, e) => ShowYear(e.NewValue);
-        AddToPanel(slider);
+        _slider = new Slider { Minimum = years.Min(), Maximum = years.Max(), Value = years.Min() };
+        _slider.ValueChanged += (_, e) => ShowYear(e.NewValue);
 
-        ShowYear(slider.Value);
+        // A finger on the slider owns the year until it lets go.
+        _slider.DragStarted += (_, _) => _playing = false;
+        _slider.DragCompleted += (_, _) => _playing = true;
+        AddToPanel(_slider);
+
+        // It plays on arrival. A sample about geometry rewritten every frame that
+        // opens on one still frame, waiting to be scrubbed, has shown nothing - and
+        // the thing it has to show is the only reason to look at it.
+        _timer = Dispatcher.CreateTimer();
+        _timer.Interval = TimeSpan.FromMilliseconds(40);
+        _timer.Tick += (_, _) =>
+        {
+            if (!_playing) return;
+            _slider.Value = _slider.Value >= _slider.Maximum
+                ? _slider.Minimum
+                : Math.Min(_slider.Maximum, _slider.Value + YearsPerTick);
+        };
+        _timer.Start();
+
+        ShowYear(_slider.Value);
         _ = map.RefreshAsync();
     }
 
@@ -93,7 +114,24 @@ public class DynamicRendering : SamplePage
         }
 
         _yearLabel.Text = year.ToString();
-        _ = _map.RefreshAsync();
+
+        // No refresh. The circles are a DynamicSource, and writing to one asks for a
+        // frame by itself; a RefreshAsync on top of that is a second draw pass per
+        // tick that cancels the first - which at twenty-five ticks a second is the
+        // map spending its time starting over.
+    }
+
+    /// <summary>
+    /// Half a year per tick, so the century and a quarter of census data runs past in
+    /// about ten seconds - fast enough that the whole country fills in while you are
+    /// still looking at it.
+    /// </summary>
+    private const double YearsPerTick = 0.5;
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _timer?.Stop();
     }
 
     private static List<(double, double, string)> ReadStateCentres(string shapefilePath)

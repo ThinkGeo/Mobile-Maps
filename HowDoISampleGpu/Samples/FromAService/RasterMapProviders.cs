@@ -17,13 +17,13 @@ public class RasterMapProviders : SamplePage
 
     private static readonly string[] Providers =
     {
-        "ThinkGeo Cloud - Light",
-        "ThinkGeo Cloud - Dark",
-        "ThinkGeo Cloud - Aerial",
-        "ThinkGeo Cloud - Hybrid",
+        "Cloud Light",
+        "Cloud Dark",
+        "Cloud Aerial",
+        "Cloud Hybrid",
         "OpenStreetMap",
-        "WMS - NASA satellite imagery",
-        "WMTS - Swiss national map",
+        "WMS NASA",
+        "WMTS Swisstopo",
     };
 
     private MapView _map;
@@ -34,7 +34,7 @@ public class RasterMapProviders : SamplePage
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        AddChoicePicker(Providers, 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Providers, 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
@@ -54,11 +54,25 @@ public class RasterMapProviders : SamplePage
 
     /// <summary>
     /// A WMS server. The layer names, the output format and any extra parameters are
-    /// the server's own vocabulary, read from its capabilities document.
+    /// the server's own vocabulary, read from its capabilities document - or, as here,
+    /// known in advance and stated.
     /// </summary>
+    /// <remarks>
+    /// FastMode is what makes this one usable on a phone. Opening a WMS normally begins
+    /// by fetching GetCapabilities and adopting what it says; NASA's is 2.3 MB listing
+    /// 1,610 layers, and all of it has to arrive and parse before the first tile is
+    /// asked for. On a desktop that is a second nobody notices. On a mobile network it
+    /// can outlast the client's own twenty-second timeout, and then the open throws and
+    /// the sample reports a server that is in fact answering perfectly well - which is
+    /// exactly how it failed. Nothing in that document is needed here: the layer, the
+    /// format and the coordinate system are all known, so they are set and the fetch is
+    /// skipped. FastMode cannot learn the CRS from the server, so it is named.
+    /// </remarks>
     private static WmsRasterTileSource OpenNasaImagery()
     {
         var imagery = new WmsRasterTileSource(new Uri("https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi"));
+        imagery.Client.FastMode = true;
+        imagery.Client.Crs = "EPSG:3857";
         imagery.Client.OutputFormat = "image/png";
         imagery.Client.ActiveLayerNames.Add("VIIRS_NOAA20_CorrectedReflectance_TrueColor");
 
@@ -84,6 +98,13 @@ public class RasterMapProviders : SamplePage
             ActiveStyleName = "default",
             OutputFormat = "image/png",
             TileMatrixSetName = "3857_19",
+
+            // A WMTS has to read its capabilities - the tile matrix set is in them and
+            // nothing else knows it - and this server's is 1.8 MB describing 688 layers.
+            // That is a tenth of a second on a desk and can be most of a minute on a
+            // train, so the twenty seconds a desktop client defaults to is not a limit
+            // this server is failing to meet, it is a limit set for a different network.
+            TimeoutInSeconds = 60,
         };
 
     private async Task ShowAsync(int index)

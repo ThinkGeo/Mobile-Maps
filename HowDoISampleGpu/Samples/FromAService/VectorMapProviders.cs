@@ -35,13 +35,13 @@ public class VectorMapProviders : SamplePage
 
     private static readonly (string Name, string StyleUri)[] Providers =
     {
-        ("ThinkGeo Cloud - Light", null),
-        ("ThinkGeo Cloud - Dark", null),
-        ("OpenFreeMap - Liberty", "https://tiles.openfreemap.org/styles/liberty"),
-        ("OpenFreeMap - Positron", "https://tiles.openfreemap.org/styles/positron"),
-        ("OpenFreeMap - Dark", "https://tiles.openfreemap.org/styles/dark"),
-        ("WFS - Dutch cadastral parcels", null),
-        ("OGC API - Spanish named places", null),
+        ("Cloud Light", null),
+        ("Cloud Dark", null),
+        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty"),
+        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron"),
+        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark"),
+        ("WFS parcels", null),
+        ("OGC API places", null),
     };
 
     private const int WfsIndex = 5;
@@ -62,7 +62,7 @@ public class VectorMapProviders : SamplePage
         map.CenterPoint = new PointShape(-10779700, 3912000);
         map.MapScale = 18100;
 
-        AddChoicePicker(Providers.Select(p => p.Name).ToList(), 0, index => _ = ShowAsync(index));
+        AddChoiceStrip(Providers.Select(p => p.Name).ToList(), 0, index => _ = ShowAsync(index));
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);

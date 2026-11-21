@@ -6,56 +6,118 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// The world as a globe, as web mercator, and as Robinson - the same map morphing
-/// between the shapes it can be drawn in.
+/// The shape the world is drawn in. The same map morphs between a sphere and three
+/// projections, drawn either from satellite imagery or from vector streets - the
+/// projection is the camera's, not the data's, so nothing is reprojected and no tile
+/// is rebuilt to change it.
 /// </summary>
 public class TheGlobe : SamplePage
 {
-    private const double WorldHalfSize = 20037508.342789244;
+    private const double HalfWorld = 20037508.342789244;
+
     private static readonly TimeSpan MorphDuration = TimeSpan.FromMilliseconds(900);
 
-    // Italy, so zooming in lands on a coast. Open ocean has no detail to show:
-    // past zoom 8 the satellite tiles there are a flat, black sea.
-    private static readonly PointShape Center = new(1390000, 5160000);
+    /// <summary>
+    /// How much of the world the zoomed-out window holds, as a multiple of its width.
+    /// <para>
+    /// Above 1 for the flat shapes: fitting the world exactly crops the ones that are
+    /// not rectangles, because Mollweide's ellipse and Robinson's rounded edges reach
+    /// their widest at the equator and at 1.0 their left and right tips are off the
+    /// window. Well below 1 for the sphere, which is the one shape whose drawn size is
+    /// not the window's: a globe is the world wrapped round a ball a third of the
+    /// world's width across, so framing the full world leaves it a marble in the
+    /// middle of a black screen.
+    /// </para>
+    /// </summary>
+    private const double FlatMargin = 1.25;
+    private const double GlobeMargin = 0.60;
 
+    /// <summary>
+    /// Four shapes, not forty. A sphere, the projection every web map uses, and two
+    /// world projections that look nothing like it - enough to show that
+    /// <see cref="DisplayProjection.FromProjString"/> takes whatever proj can
+    /// describe, without turning the sample into a list of names.
+    /// </summary>
+    /// <remarks>
+    /// What each one gives up, which is the only thing a projection is a choice
+    /// about: a sphere gives up nothing and cannot be printed, which is why the other
+    /// three exist. Web Mercator keeps angles right everywhere, so a square mile is
+    /// square - and Greenland comes out the size of Africa. Robinson is right about
+    /// nothing in particular, which is what makes it look right. Mollweide gives
+    /// every country its true share of the page and pays for it at the edges, where
+    /// shapes shear.
+    /// <para>
+    /// This used to be four sentences on the card, one showing at a time. On a phone
+    /// the card is the map's screen space, and four lines of prose about a projection
+    /// cost more of it than the projection is worth looking at.
+    /// </para>
+    /// </remarks>
     private static readonly (string Name, string Definition)[] Choices =
     {
         ("Globe", "globe"),
         ("Web Mercator", "3857"),
         ("Robinson", "+proj=robin +datum=WGS84 +units=m +no_defs"),
+        ("Mollweide", "+proj=moll +datum=WGS84 +units=m +no_defs"),
     };
 
     private MapView _map;
-    private Label _status;
     private string _choice = "globe";
+    private bool _raster = true;
 
     protected override void BuildMap(MapView map)
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
-        AddChoicePicker(Choices.Select(c => c.Name).ToList(), 0, index => _ = MorphAsync(Choices[index].Definition));
-        _status = AddStatusLabel();
+        // Two rows and nothing else: which shape, and which map. Both are the
+        // gallery's own choice strip - see SamplePage.AddChoiceStrip.
+        AddChoiceStrip(Choices.Select(choice => choice.Name).ToList(), 0,
+            index => _ = MorphAsync(Choices[index].Definition));
+        AddChoiceStrip(new[] { "Satellite imagery", "Vector streets" }, 0,
+            index => _ = SetRendererAsync(index == 0));
 
-        try
+        map.Basemap = new GpuBasemap(BuildStyle()) { DisplayProjection = DisplayProjection.Globe };
+
+        FrameWorld(_choice);
+        _ = map.RefreshAsync();
+    }
+
+    /// <summary>
+    /// The two maps this sample can draw itself from. Rebuilt rather than patched: a
+    /// raster registration and a vector style have no source in common, so there is
+    /// nothing to keep.
+    /// </summary>
+    private MapStyle BuildStyle()
+    {
+        if (_raster)
         {
-            var source = new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2);
-            map.Basemap = new GpuBasemap(new MapStyle().AddRaster(source, sourceId: "thinkgeo"))
-            {
-                DisplayProjection = DisplayProjection.Globe,
-            };
-
-            map.CurrentExtent = new RectangleShape(
-                Center.X - WorldHalfSize, Center.Y + WorldHalfSize,
-                Center.X + WorldHalfSize, Center.Y - WorldHalfSize);
-
-            _status.Text = "Globe";
-            _ = map.RefreshAsync();
+            var imagery = new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2);
+            return new MapStyle().AddRaster(imagery, sourceId: "thinkgeo");
         }
-        catch (Exception exception)
+
+        // Light, not dark. The switch is between two drawings of the same world, and
+        // the one it replaces is daylit satellite imagery - a dark map in its place
+        // reads as the lights going out rather than as the same globe drawn another
+        // way, which is the one thing this switch is here to show.
+        return new MapStyle(ThinkGeoVectorStyles.Light, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
         {
-            _status.Text = "could not open the tile source: " + exception.Message.Split('\n')[0];
-        }
+            VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
+        });
+    }
+
+    /// <summary>
+    /// Swaps the map underneath without touching the camera or the shape it is drawn
+    /// in: the projection lives on the basemap, not in the style, so a restyle leaves
+    /// the globe a globe.
+    /// </summary>
+    private async Task SetRendererAsync(bool raster)
+    {
+        if (raster == _raster) return;
+        _raster = raster;
+
+        // No refresh behind it: SetStyleAsync redraws, and a second pass over the
+        // same view only supersedes the first one mid-build.
+        await _map.Basemap.SetStyleAsync(BuildStyle());
     }
 
     private async Task MorphAsync(string definition)
@@ -70,19 +132,18 @@ public class TheGlobe : SamplePage
             _ => DisplayProjection.FromProjString(definition),
         };
 
-        // Zoom-out stops where the world fills the window: a projected canvas is not
-        // cyclic, so there is nothing to show past its edge.
-        var before = _map.CurrentExtent;
-        _map.MaxScale = definition == "3857" ? double.MaxValue : WorldFillScale();
-        _map.CurrentExtent = before;
+        // Every shape opens on the whole world. Holding the camera still reads well
+        // between two outlines of similar proportion and badly between four: a view
+        // framed for a globe leaves Mollweide's ellipse in a corner of a black
+        // window, because the two do not cover the same ground at the same scale.
+        FrameWorld(definition);
         await _map.RefreshAsync();
 
         try
         {
-            // The camera does not move: the screen centre keeps the same ground point
-            // and only the shape under it changes.
+            // The morph itself - the shape under the camera changes rather than the
+            // map being redrawn.
             await _map.Basemap.AnimateDisplayProjectionAsync(target, MorphDuration);
-            _status.Text = Choices.First(c => c.Definition == definition).Name;
         }
         catch (OperationCanceledException)
         {
@@ -90,9 +151,29 @@ public class TheGlobe : SamplePage
         }
     }
 
-    private double WorldFillScale()
+    private double WorldFillScale(double margin)
     {
-        var world = new RectangleShape(-WorldHalfSize, WorldHalfSize, WorldHalfSize, -WorldHalfSize);
-        return MapUtil.GetScale(world, Math.Max(1, _map.CanvasWidth), GeographyUnit.Meter) * 1.05;
+        var world = new RectangleShape(-HalfWorld, HalfWorld, HalfWorld, -HalfWorld);
+        return MapUtil.GetScale(world, Math.Max(1, _map.CanvasWidth), GeographyUnit.Meter) * margin;
+    }
+
+    /// <summary>
+    /// The whole world, centred on its own origin, so every shape arrives whole and
+    /// in the middle of the window.
+    /// </summary>
+    /// <remarks>
+    /// Zoom-out stops where the world fills the window: a projected canvas is not
+    /// cyclic, so there is nothing to show past its edge, and zooming out further
+    /// only adds black. Web Mercator is cyclic, so it keeps its freedom.
+    /// </remarks>
+    private void FrameWorld(string definition)
+    {
+        var margin = definition == "globe" ? GlobeMargin : FlatMargin;
+        var widthInMeters = HalfWorld * 2 * margin;
+        var height = widthInMeters * _map.CanvasHeight / Math.Max(1, _map.CanvasWidth);
+
+        _map.MaxScale = definition == "3857" ? double.MaxValue : WorldFillScale(margin);
+        _map.CurrentExtent = new RectangleShape(
+            widthInMeters * -0.5, height * 0.5, widthInMeters * 0.5, height * -0.5);
     }
 }

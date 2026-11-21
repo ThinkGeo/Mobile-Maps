@@ -13,7 +13,7 @@ namespace HowDoISampleGpu.Samples;
 /// rides the flight's own progress, the road behind turns green as it is covered, and
 /// either theme can be swapped under the whole thing without losing any of it.
 /// </summary>
-public class VehicleNavigation : SamplePage, IDisposable
+public class GpsNavigation : SamplePage, IDisposable
 {
     private const double DefaultScale = 5000;
 
@@ -39,7 +39,6 @@ public class VehicleNavigation : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         _paths = new DynamicSource();
         _vehicle = new DynamicSource();
@@ -138,7 +137,20 @@ public class VehicleNavigation : SamplePage, IDisposable
         }
     }
 
-    private Task FollowVehicleAsync(int gpsPointIndex, CancellationToken cancellationToken)
+    /// <summary>
+    /// Flies the camera to one GPS point, then asks for the view it landed on.
+    /// <para>
+    /// That second step is what keeps the road on screen. An animated move draws its
+    /// overlays once, at the start, as DrawIfNotDrawn and concurrently with the
+    /// animation about to carry the camera away - so the tiles cut for it are the ones
+    /// under the camera when the flight BEGAN, and nothing asks for the ones ahead.
+    /// Measured over a minute of driving without this line: one tile scene loaded, and
+    /// fifteen hundred frames that drew nothing, with the vehicle still travelling
+    /// across an empty background. A landed flight is a committed view, so it is asked
+    /// for as one.
+    /// </para>
+    /// </summary>
+    private async Task FollowVehicleAsync(int gpsPointIndex, CancellationToken cancellationToken)
     {
         var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
@@ -149,7 +161,8 @@ public class VehicleNavigation : SamplePage, IDisposable
         var centerPoint = MapUtil.OffsetPointWithScreenOffset(
             new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, DefaultScale, _map.MapUnit);
 
-        return _map.ZoomToExtentAsync(centerPoint, DefaultScale, angle, cancellationToken: cancellationToken);
+        await _map.ZoomToExtentAsync(centerPoint, DefaultScale, angle, cancellationToken: cancellationToken);
+        if (!cancellationToken.IsCancellationRequested) await _map.RefreshAsync();
     }
 
     private void Map_CurrentExtentChangedInAnimation(object sender, CurrentExtentChangedInAnimationMapViewEventArgs e)

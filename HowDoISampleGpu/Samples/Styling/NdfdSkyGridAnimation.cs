@@ -23,7 +23,7 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
 {
     private static readonly string[] Palettes =
     {
-        "Weather Rainbow", "Cloud Gray", "Warm Tones", "Cool Tones", "Viridis",
+        "Rainbow", "Gray", "Warm", "Cool", "Viridis",
     };
 
     private GpuBasemap _basemap;
@@ -36,9 +36,7 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
     private string[] _frameTimes;
     private MapView _map;
     private Label _timeText;
-    private Label _hourText;
     private Slider _frameSlider;
-    private Button _playButton;
     private bool _playing;
     private bool _loading;
     private int _wantedFrame;
@@ -50,7 +48,6 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         _style = new MapStyle(ThinkGeoVectorStyles.Dark, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
         {
@@ -60,24 +57,36 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
         map.Basemap = _basemap;
         map.CurrentExtent = new RectangleShape(-14_100_000, 6_800_000, -7_300_000, 2_500_000);
 
-        _timeText = AddStatusLabel();
-        _hourText = AddStatusLabel();
-
-        var buttons = new HorizontalStackLayout { Spacing = 10 };
-        _playButton = new Button { Text = "Pause", FontSize = 12, Padding = new Thickness(10, 4) };
-        _playButton.Clicked += (_, _) =>
+        // Two rows: when this frame is for, with the run of hours beside it, and the
+        // palettes under that.
+        //
+        // No play button. It plays, and a finger on the slider is how you stop it -
+        // which is the gesture anyone tries first anyway, and it costs no card. What
+        // the button bought was a way to hold one hour still; letting go of the
+        // slider gives that back a second and a half later, which is long enough to
+        // read a frame and short enough not to feel stuck.
+        _timeText = new Label
         {
-            _playing = !_playing;
-            _playButton.Text = _playing ? "Pause" : "Play";
+            FontSize = 13,
+            FontAttributes = FontAttributes.Bold,
+            VerticalTextAlignment = TextAlignment.Center,
+            LineBreakMode = LineBreakMode.TailTruncation,
         };
-        buttons.Add(_playButton);
-        AddToPanel(buttons);
 
         _frameSlider = new Slider { Minimum = 0, Maximum = 1, Value = 0, IsEnabled = false };
         _frameSlider.ValueChanged += (_, e) => ShowFrame((int)e.NewValue);
-        AddToPanel(_frameSlider);
+        _frameSlider.DragStarted += (_, _) => _playing = false;
+        _frameSlider.DragCompleted += (_, _) => _playing = true;
 
-        AddChoicePicker(Palettes, 0, index =>
+        var timeRow = new Grid { ColumnSpacing = 12 };
+        timeRow.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        timeRow.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        timeRow.Children.Add(_timeText);
+        timeRow.Children.Add(_frameSlider);
+        Grid.SetColumn((BindableObject)_frameSlider, 1);
+        AddToPanel(timeRow);
+
+        AddChoiceStrip(Palettes, 0, index =>
         {
             _palette = CreatePalette(Palettes[index]);
             if (_grid == null) return;
@@ -164,12 +173,11 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
         }
     }
 
-    private void ShowTime(int index)
-    {
-        _timeText.Text = _frameTimes[index] ?? "(no time)";
-        _hourText.Text = string.Format(CultureInfo.InvariantCulture,
-            "forecast hour {0} of {1}", index + 1, _frames.Length);
-    }
+    /// <summary>
+    /// When this frame is for, and nothing else. "forecast hour 8 of 44" sat on a
+    /// line of its own saying what the slider's own position already says.
+    /// </summary>
+    private void ShowTime(int index) => _timeText.Text = _frameTimes[index] ?? "(no time)";
 
     /// <summary>
     /// Reads the header - the grid's shape, the ground it covers, its projection, and
@@ -249,9 +257,9 @@ public class NdfdSkyGridAnimation : SamplePage, IDisposable
             var ratio = v / 100d;
             table[v] = name switch
             {
-                "Cloud Gray" => Lerp(new[] { new byte[] { 200, 215, 230 }, new byte[] { 130, 145, 160 } }, ratio, (byte)(ratio * 210)),
-                "Warm Tones" => Lerp(new[] { new byte[] { 255, 245, 180 }, new byte[] { 255, 200, 0 }, new byte[] { 240, 100, 0 }, new byte[] { 180, 0, 0 } }, ratio, (byte)(40 + (ratio * 195))),
-                "Cool Tones" => Lerp(new[] { new byte[] { 190, 230, 255 }, new byte[] { 0, 190, 240 }, new byte[] { 0, 80, 200 }, new byte[] { 0, 10, 110 } }, ratio, (byte)(40 + (ratio * 195))),
+                "Gray" => Lerp(new[] { new byte[] { 200, 215, 230 }, new byte[] { 130, 145, 160 } }, ratio, (byte)(ratio * 210)),
+                "Warm" => Lerp(new[] { new byte[] { 255, 245, 180 }, new byte[] { 255, 200, 0 }, new byte[] { 240, 100, 0 }, new byte[] { 180, 0, 0 } }, ratio, (byte)(40 + (ratio * 195))),
+                "Cool" => Lerp(new[] { new byte[] { 190, 230, 255 }, new byte[] { 0, 190, 240 }, new byte[] { 0, 80, 200 }, new byte[] { 0, 10, 110 } }, ratio, (byte)(40 + (ratio * 195))),
                 "Viridis" => Lerp(new[] { new byte[] { 68, 1, 84 }, new byte[] { 59, 82, 139 }, new byte[] { 33, 145, 140 }, new byte[] { 94, 201, 98 }, new byte[] { 253, 231, 37 } }, ratio, (byte)(50 + (ratio * 185))),
                 _ => Lerp(new[] { new byte[] { 24, 64, 196 }, new byte[] { 0, 174, 239 }, new byte[] { 0, 186, 124 }, new byte[] { 246, 224, 52 }, new byte[] { 246, 143, 31 }, new byte[] { 214, 37, 35 } }, ratio, (byte)(48 + (ratio * 180))),
             };

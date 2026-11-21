@@ -20,10 +20,30 @@ namespace HowDoISampleGpu;
 public abstract class SamplePage : ContentPage
 {
     private readonly VerticalStackLayout _panelContent;
+    private readonly ScrollView _panelScroller;
     private readonly Border _panel;
 
     protected SamplePage()
     {
+        // A page insets its content inside the safe area by default on iOS, which is
+        // right for text and wrong for a map: it leaves a band of page background
+        // below the map on every sample - white, on a gallery whose maps are mostly
+        // dark. This asks for the inset to go; FillBottomSafeArea below is what
+        // actually removes it, because this ask does not reach the system.
+        Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetUseSafeArea(this, false);
+
+        // And the home indicator is asked to dim itself, since it is now a bar lying
+        // across a map rather than across a strip of page background. Dimming after a
+        // few idle seconds is all iOS allows; the bar cannot be removed.
+        //
+        // UIKit asks whichever controller is in charge of the screen, and inside a
+        // NavigationPage that is the navigation's own wrapper, not the page - measured
+        // on an iPad: PageViewController answered true to this, ParentingViewController
+        // above it answered false, and false is what the system acted on. So the ask is
+        // correct and currently has no effect here; it starts working the day a sample
+        // is shown outside the navigation stack.
+        Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetPrefersHomeIndicatorAutoHidden(this, true);
+
         Map = new MapView
         {
             MapUnit = GeographyUnit.Meter,
@@ -59,18 +79,24 @@ public abstract class SamplePage : ContentPage
             // white. iOS wrapped it and hid the difference. VerticalOptions.Start makes
             // the ScrollView ask for its content instead, and the cap on the card still
             // takes over when the content is taller than that.
-            Content = new ScrollView { Content = _panelContent, VerticalOptions = LayoutOptions.Start },
+            Content = _panelScroller = BuildPanelScroller(),
             MaximumHeightRequest = 260,
             BackgroundColor = Color.FromRgba(255, 255, 255, 235),
             StrokeThickness = 0,
             Padding = new Thickness(12, 10),
-            Margin = new Thickness(10, 0, 10, 12),
+            // Clear of the home indicator, now that the page no longer insets for it.
+            Margin = new Thickness(10, 0, 10, PanelBottomMargin),
             VerticalOptions = LayoutOptions.End,
             IsVisible = false,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 12 },
         };
 
+        _panelScroller.Content = _panelContent;
+
         Content = new Grid { Children = { Map, _panel } };
+
+        // The strip the safe area holds back at the bottom is given to the map.
+        Loaded += (_, _) => FillBottomSafeArea(Map);
 
         var built = false;
         Map.SizeChanged += (_, _) =>
@@ -81,15 +107,87 @@ public abstract class SamplePage : ContentPage
         };
     }
 
-    /// <summary>The map this page draws into.</summary>
-    protected MapView Map { get; }
+    /// <summary>
+    /// The card's scroller.
+    /// <para>
+    /// A UIScrollView delays the touches it hands to its content by about a sixth of
+    /// a second while it decides whether the finger meant to scroll. On a slider that
+    /// delay is the difference between a control that answers the finger and one that
+    /// looks broken, and the card here is usually shorter than its cap and has nothing
+    /// to scroll at all. It is told not to delay and not to take a touch back once a
+    /// control has it.
+    /// </para>
+    /// </summary>
+    private static ScrollView BuildPanelScroller()
+    {
+        var scroller = new ScrollView { VerticalOptions = LayoutOptions.Start };
+
+#if IOS || MACCATALYST
+        scroller.HandlerChanged += (sender, _) =>
+        {
+            if (((ScrollView)sender).Handler?.PlatformView is UIKit.UIScrollView platform)
+            {
+                platform.DelaysContentTouches = false;
+                platform.CanCancelContentTouches = false;
+            }
+        };
+#endif
+
+        return scroller;
+    }
 
     /// <summary>
-    /// Moves the control card to the top of the map. The default is the bottom, which
-    /// is where a thumb reaches; a sample whose own output lives down there - a scale
-    /// line, a scale bar, an attribution - moves it out of the way instead.
+    /// Gives the map the strip the bottom safe area holds back, by letting it hang
+    /// that far past the bottom of the page's content.
+    /// <para>
+    /// SetUseSafeArea(false) on the page is the documented way to ask for this and it
+    /// does nothing here - measured on an iPhone, with the page reporting 758 points
+    /// of height and its map arranged into 724, the missing 34 being exactly the
+    /// window's bottom inset. A page inside a NavigationPage is wrapped in a
+    /// controller of the navigation's own, and that is the controller holding the
+    /// inset; the same wrapper is why the page cannot dim the home indicator either.
+    /// What it leaves behind is a band of page background under every map - white,
+    /// 34 points tall, the thing that kept being reported as a bar across the bottom.
+    /// </para>
+    /// <para>
+    /// A negative margin is a blunt instrument and it is the one that fits: the map
+    /// is arranged past the end of its container, iOS does not clip it, and the band
+    /// is covered by the map that should have been there. The inset is read from the
+    /// window rather than written down, because it is 34 points on a phone and 21 on
+    /// an iPad.
+    /// </para>
     /// </summary>
-    protected void PutPanelAtTop() => _panel.VerticalOptions = LayoutOptions.Start;
+    public static void FillBottomSafeArea(View map)
+    {
+#if IOS
+        var inset = UIKit.UIApplication.SharedApplication.ConnectedScenes
+            .OfType<UIKit.UIWindowScene>()
+            .SelectMany(scene => scene.Windows)
+            .FirstOrDefault()?.SafeAreaInsets.Bottom ?? 0;
+
+        if (inset > 0)
+            map.Margin = new Thickness(0, 0, 0, -inset);
+#endif
+    }
+
+    /// <summary>
+    /// How far the control card sits above the bottom of the page's content.
+    /// <para>
+    /// Zero on iOS, because the content already ends one home indicator short of the
+    /// screen - the card then rests exactly on that line, which is where a sheet sits
+    /// on this platform. It was 34, which added a second indicator's worth of nothing
+    /// under the card: measured, 68 points of gap where 34 was intended.
+    /// </para>
+    /// </summary>
+    private const double PanelBottomMargin =
+#if IOS
+        0;
+#else
+        12;
+#endif
+
+    /// <summary>The map this page draws into.</summary>
+    protected MapView Map { get; }
 
     /// <summary>
     /// Adds a control to the card over the bottom of the map. The card appears with
@@ -107,19 +205,210 @@ public abstract class SamplePage : ContentPage
         => AddToPanel(new Label { FontSize = 12, TextColor = Colors.DimGray, LineBreakMode = LineBreakMode.TailTruncation });
 
     /// <summary>
-    /// A picker over named choices, the mobile shape of the desktop gallery's radio
-    /// button column. The callback runs on the UI thread with the chosen key.
+    /// One slider in a row: what it is called, the range it moves over, where it
+    /// starts and what to do when it moves. <paramref name="Caption"/> turns the
+    /// current value into the line above the slider, so the number is read off the
+    /// control that sets it rather than from a separate readout.
     /// </summary>
-    protected Picker AddChoicePicker(IReadOnlyList<string> choices, int selectedIndex, Action<int> chosen)
+    protected sealed record SliderSpec(
+        string Name, double Min, double Max, double Value, Action<double> Changed, Func<double, string> Caption = null);
+
+    /// <summary>
+    /// Named sliders side by side on one line, each as wide as its share of the panel.
+    /// <para>
+    /// A full-width slider with its caption on a line of its own costs two lines each,
+    /// and a card four lines tall over a phone screen is mostly card. Two of these fit
+    /// on one line and still read.
+    /// </para>
+    /// <para>
+    /// The callback runs on every move rather than on release. The desktop gallery
+    /// redraws while the mouse is down, and a slider that does nothing until it is let
+    /// go reads as a slider that does nothing - which is exactly what it looked like.
+    /// </para>
+    /// </summary>
+    protected Grid AddSliderRow(params SliderSpec[] sliders)
     {
-        var picker = new Picker { FontSize = 14 };
-        foreach (var choice in choices) picker.Items.Add(choice);
-        picker.SelectedIndex = selectedIndex;
-        picker.SelectedIndexChanged += (_, _) =>
+        var row = new Grid { ColumnSpacing = 14 };
+
+        for (var column = 0; column < sliders.Length; column++)
         {
-            if (picker.SelectedIndex >= 0) chosen(picker.SelectedIndex);
-        };
-        return AddToPanel(picker);
+            var spec = sliders[column];
+            row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+
+            var caption = new Label
+            {
+                Text = spec.Caption?.Invoke(spec.Value) ?? spec.Name,
+                FontSize = 11,
+                TextColor = Colors.Gray,
+                LineBreakMode = LineBreakMode.TailTruncation,
+            };
+
+            var slider = new Slider { Minimum = spec.Min, Maximum = spec.Max, Value = spec.Value };
+            slider.ValueChanged += (_, e) =>
+            {
+                if (spec.Caption != null) caption.Text = spec.Caption(e.NewValue);
+                spec.Changed(e.NewValue);
+            };
+
+            row.Add(new VerticalStackLayout { Children = { caption, slider } }, column);
+        }
+
+        return AddToPanel(row);
+    }
+
+    /// <summary>
+    /// Named choices on one line, the mobile shape of the desktop gallery's radio
+    /// button column.
+    /// <para>
+    /// Three or fewer and they are all on screen at once. More, and the line shows
+    /// three at a time - the choice in the middle with the one before and the one
+    /// after it either side - and tapping a side brings it to the middle, the line
+    /// sliding as it goes. Either way the choice is one tap and nothing covers the
+    /// map while it is made.
+    /// </para>
+    /// </summary>
+    protected ChoiceStrip AddChoiceStrip(IReadOnlyList<string> choices, int selectedIndex, Action<int> chosen)
+        => AddToPanel(new ChoiceStrip(choices, selectedIndex, chosen));
+
+    /// <summary>
+    /// The line of choices itself. There is no such control in MAUI, so it is a Grid
+    /// of tappable cells.
+    /// <para>
+    /// What it replaces is a Picker, which costs two taps and spends the first of
+    /// them covering the map with a list - and on these samples the map is the thing
+    /// the list is asking you to choose between.
+    /// </para>
+    /// <para>
+    /// Labels wrap to a second line rather than being cut off. A cell is a third of
+    /// a phone's width, which is about seventeen characters, and a name that does not
+    /// fit is better read over two lines than ending in an ellipsis - though the
+    /// names themselves were shortened first, because two lines of card is still card.
+    /// </para>
+    /// </summary>
+    protected sealed class ChoiceStrip : Grid
+    {
+        private static readonly Color SelectedFill = Color.FromArgb("#2D7FF9");
+        private static readonly Color SelectedText = Colors.White;
+
+        // A faint fill rather than none, for two reasons: a cell with nothing drawn
+        // in it does not read as something to press, and on iOS a fully transparent
+        // background is the kind of thing that stops hit-testing.
+        private static readonly Color RestingFill = Color.FromArgb("#12000000");
+        private static readonly Color RestingText = Color.FromArgb("#5A6672");
+
+        private readonly IReadOnlyList<string> _choices;
+        private readonly Action<int> _chosen;
+        private readonly Border[] _cells;
+        private readonly Label[] _labels;
+
+        /// <summary>True when there are more choices than cells, so the line scrolls.</summary>
+        private readonly bool _scrolls;
+
+        private int _index;
+
+        public ChoiceStrip(IReadOnlyList<string> choices, int selectedIndex, Action<int> chosen)
+        {
+            _choices = choices;
+            _chosen = chosen;
+            _index = selectedIndex;
+            _scrolls = choices.Count > 3;
+
+            var cells = _scrolls ? 3 : choices.Count;
+            _cells = new Border[cells];
+            _labels = new Label[cells];
+            ColumnSpacing = 6;
+
+            for (var cell = 0; cell < cells; cell++)
+            {
+                ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+
+                var label = new Label
+                {
+                    FontSize = 12,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Center,
+                    LineBreakMode = LineBreakMode.WordWrap,
+                    MaxLines = 2,
+                };
+
+                var pill = new Border
+                {
+                    Content = label,
+                    StrokeThickness = 0,
+                    Padding = new Thickness(4, 6),
+                    StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 8 },
+                };
+
+                var tapped = cell;
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += (_, _) => Choose(tapped);
+                pill.GestureRecognizers.Add(tap);
+
+                _labels[cell] = label;
+                _cells[cell] = pill;
+                Children.Add(pill);
+                SetColumn((BindableObject)pill, cell);
+            }
+
+            Show();
+        }
+
+        /// <summary>The choice the line is on.</summary>
+        public int SelectedIndex => _index;
+
+        private void Choose(int cell)
+        {
+            if (_scrolls)
+            {
+                // -1 for the cell on the left, +1 for the one on the right; the middle
+                // cell is already where it is going.
+                var step = cell - 1;
+                if (step == 0) return;
+
+                _index = ((_index + step) % _choices.Count + _choices.Count) % _choices.Count;
+                Show();
+                Slide(step);
+            }
+            else
+            {
+                if (cell == _index) return;
+                _index = cell;
+                Show();
+            }
+
+            _chosen(_index);
+        }
+
+        /// <summary>
+        /// The cells are relabelled first, which puts the tapped choice in the middle
+        /// straight away; the line is then placed back where that choice was standing
+        /// and animated to zero, so what the eye follows is the choice travelling to
+        /// the middle rather than three labels changing at once.
+        /// </summary>
+        private void Slide(int step)
+        {
+            var cellWidth = Width / 3d;
+            if (cellWidth <= 0) return;
+
+            TranslationX = step * cellWidth;
+            _ = this.TranslateTo(0, 0, 160, Easing.CubicOut);
+        }
+
+        private void Show()
+        {
+            for (var cell = 0; cell < _cells.Length; cell++)
+            {
+                var choice = _scrolls
+                    ? ((_index + cell - 1) % _choices.Count + _choices.Count) % _choices.Count
+                    : cell;
+                var selected = _scrolls ? cell == 1 : cell == _index;
+
+                _labels[cell].Text = _choices[choice];
+                _labels[cell].TextColor = selected ? SelectedText : RestingText;
+                _labels[cell].FontAttributes = selected ? FontAttributes.Bold : FontAttributes.None;
+                _cells[cell].BackgroundColor = selected ? SelectedFill : RestingFill;
+            }
+        }
     }
 
     /// <summary>

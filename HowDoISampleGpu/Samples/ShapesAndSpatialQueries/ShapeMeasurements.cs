@@ -30,10 +30,10 @@ public class ShapeMeasurements : SamplePage
 
     private static readonly string[] Measurements =
     {
-        "Area of a park",
-        "Length of a trail",
-        "Centre of a park",
-        "Shortest line to the stadium",
+        "Park area",
+        "Trail length",
+        "Park centre",
+        "Line to stadium",
     };
 
     private readonly DynamicSource _measured = new();
@@ -50,9 +50,8 @@ public class ShapeMeasurements : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
-        AddChoicePicker(Measurements, 0, index =>
+        AddChoiceStrip(Measurements, 0, index =>
         {
             _measurement = index;
             // The measurements do not all read the same file, so switching one
@@ -108,8 +107,9 @@ public class ShapeMeasurements : SamplePage
     {
         _measured.Clear();
         _result.Text = string.Empty;
+        // No refresh behind it: SetStyleAsync redraws, and a second pass over the
+        // same view only supersedes the first one mid-build.
         await _basemap.SetStyleAsync(ComposeStyle());
-        await _map.RefreshAsync();
     }
 
     private void Measure(PointShape at)

@@ -41,7 +41,6 @@ public class EditFeatures : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Light,
             new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
@@ -94,7 +93,7 @@ public class EditFeatures : SamplePage
         map.EditOverlay.VertexMoved += (_, e) => AppendLog($"EditOverlay.VertexMoved to ({e.MovedVertex.X:N0}, {e.MovedVertex.Y:N0})");
         map.EditOverlay.VertexRemoved += (_, e) => AppendLog($"EditOverlay.VertexRemoved at ({e.RemovedVertex.X:N0}, {e.RemovedVertex.Y:N0})");
 
-        AddChoicePicker(new[] { "Navigate", "Draw a point", "Draw a line", "Draw a polygon", "Edit what is there" }, 0, ChooseMode);
+        AddChoiceStrip(new[] { "Navigate", "Point", "Line", "Polygon", "Edit" }, 0, ChooseMode);
 
         AddToPanel(BuildRuleRow());
 

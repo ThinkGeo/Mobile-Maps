@@ -1,3 +1,4 @@
+using System.Globalization;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
 using ThinkGeo.Gpu;
@@ -6,29 +7,55 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// Keeping the map inside a box and between two scales: the three restrictions, each
-/// switchable, with the box drawn in red so what is being enforced is visible.
+/// Keeping the map inside a box and between two scales, with the box drawn in red so
+/// what is being enforced is visible.
+/// <para>
+/// Three properties and no code: <see cref="MapView.RestrictExtent"/>,
+/// <see cref="MapView.MinScale"/> and <see cref="MapView.MaxScale"/>, which is the
+/// same trio the WPF map has. They were switches at first, one per restriction, which
+/// asked the reader to turn a thing on before they could see what it did - and a
+/// restriction that is off is a map that behaves normally, which is not worth a
+/// control. The card says what the map will not let you do; the map then does not let
+/// you do it, and the red box shows where the first of the three bites.
+/// </para>
+/// <para>
+/// Restricted, not frozen: the map opens leaning and every gesture still works. Two
+/// fingers turn it, two fingers sliding together change the lean, and the box holds
+/// through all of it - the edge stops the pan under the finger rather than letting it
+/// out and pulling it back on release. A lean does let the camera SEE past the box,
+/// into the far field above the horizon; that is the view reaching further, not the
+/// map leaving the box, and a restriction that forbade it would be a restriction on
+/// the lens.
+/// </para>
 /// </summary>
 public class RestrictMapExtent : SamplePage
 {
-    // Dallas, TX: latitude 32.58 to 33.04, longitude -97.10 to -96.54, in EPSG:3857.
-    private readonly RectangleShape _restrictExtent = new(-10809000, 3900000, -10747000, 3840000);
+    /// <summary>
+    /// Downtown Dallas, TX: latitude 32.757 to 32.802, longitude -96.824 to -96.770,
+    /// in EPSG:3857 - about five kilometres a side, from Victory Park across to Deep
+    /// Ellum.
+    /// <para>
+    /// A city rather than a metroplex. The box was the whole of Dallas-Fort Worth
+    /// before, fifty kilometres across, and at that size the restriction is something
+    /// you have to go looking for: a thumb cannot reach the edge in one stroke, so the
+    /// sample read as an ordinary map with a red line somewhere off screen. Small
+    /// enough to hit is what makes it a demonstration.
+    /// </para>
+    /// </summary>
+    private readonly RectangleShape _restrictExtent = new(-10778400, 3869100, -10772400, 3863100);
 
-    private const double MaxZoomOutScale = 500000;
-    private const double MinZoomInScale = 10000;
+    // The scales are the box's: far enough out to see all of it with room around it,
+    // far enough in to read a street. They move with the box, so a smaller box gets
+    // tighter limits rather than keeping a metroplex's.
+    private const double MaxZoomOutScale = 50000;
+    private const double MinZoomInScale = 2000;
 
-    private MapView _map;
-    private Label _status;
-    private bool _restrictBox = true;
-    private bool _restrictMaximum = true;
-    private bool _restrictMinimum = true;
-    private bool _correcting;
+    /// <summary>Leaning enough to read as a camera rather than a sheet of paper.</summary>
+    private const double StartTilt = 45;
 
     protected override void BuildMap(MapView map)
     {
-        _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         // The red border is drawn with the basemap, so it stays sharp at every zoom.
         var boundary = new DynamicSource();
@@ -42,97 +69,41 @@ public class RestrictMapExtent : SamplePage
         // A border, not a shaded box - a fill is drawn unless one is asked not to be.
         boundary.SetArea("boundary", new Feature(_restrictExtent), GeoColors.Transparent, new GeoColor(180, GeoColors.Red), 2f);
 
-        // WPF has MapView.RestrictExtent; MAUI does not, and its CurrentExtentChanging
-        // hands over the move it is about to make with every field but IsCanceled set
-        // internally - so the move can be refused, not corrected. Refusing a pan leaves
-        // the map stuck rather than resting against the edge, so the box is enforced
-        // just after the move instead: CurrentExtentChanged, and the centre put back to
-        // the nearest one that fits. The guard is because putting it back is itself a
-        // move.
-        map.CurrentExtentChanged += (_, _) =>
+        // The three restrictions. RestrictExtent is the box; MaxScale stops zooming
+        // out beyond a scale (a larger number is further out) and MinScale stops
+        // zooming in past one.
+        map.RestrictExtent = _restrictExtent;
+        map.MaxScale = MaxZoomOutScale;
+        map.MinScale = MinZoomInScale;
+
+        // The one line on the card, written from the same two constants the map is
+        // given, so what it promises cannot drift from what it does.
+        AddToPanel(new Label
         {
-            if (!_restrictBox || _correcting) return;
+            Text = string.Format(CultureInfo.InvariantCulture,
+                "Tilt it, turn it, zoom it - it stays inside the red box, between 1:{0:N0} and 1:{1:N0}.",
+                MinZoomInScale, MaxZoomOutScale),
+            FontSize = 13,
+        });
 
-            var clamped = Clamp(_map.CurrentExtent);
-            var center = clamped.GetCenterPoint();
-            if (Math.Abs(center.X - _map.CenterPoint.X) < 1 && Math.Abs(center.Y - _map.CenterPoint.Y) < 1) return;
+        // Opened a little outside the box rather than on it, so the red border is on
+        // screen from the first frame: a sample that says "keep it inside the box"
+        // and opens with the box past all four edges has only the sentence. The
+        // restriction centres it, since a view this size cannot be held inside.
+        var opening = (RectangleShape)_restrictExtent.CloneDeep();
+        opening.ScaleUp(60);
+        map.CurrentExtent = opening;
 
-            _correcting = true;
-            _map.CenterPoint = center;
-            _correcting = false;
-            _ = _map.RefreshAsync();
-        };
+        // Leaning from the first frame, and free to be turned and leaned further. A
+        // restriction sample that opened flat and held still would never show that the
+        // box is the only thing being taken away.
+        //
+        // After the extent, not before it. The GPU camera levels its own tilt towards
+        // nothing while the view it is given is still the whole world - that is what
+        // keeps a globe from leaning - so a tilt set before the map has been told
+        // where to look is a tilt multiplied by nearly zero, and the map came up flat.
+        map.TiltAngle = StartTilt;
 
-        AddToPanel(Toggle("Keep it inside the red box", true, value => { _restrictBox = value; Apply(); }));
-        AddToPanel(Toggle("Stop zooming out at 1:500,000", true, value => { _restrictMaximum = value; Apply(); }));
-        AddToPanel(Toggle("Stop zooming in at 1:10,000", true, value => { _restrictMinimum = value; Apply(); }));
-        _status = AddStatusLabel();
-
-        Apply();
-        map.CurrentExtent = _restrictExtent;
         _ = map.RefreshAsync();
-    }
-
-    private View Toggle(string text, bool value, Action<bool> changed)
-    {
-        var row = new HorizontalStackLayout { Spacing = 8 };
-        var toggle = new Switch { IsToggled = value, Scale = 0.75 };
-        toggle.Toggled += (_, e) => changed(e.Value);
-        row.Add(toggle);
-        row.Add(new Label { Text = text, FontSize = 12, VerticalOptions = LayoutOptions.Center });
-        return row;
-    }
-
-    private void Apply()
-    {
-        // MaxScale stops zooming out beyond a scale (a larger number is further out);
-        // MinScale stops zooming in past one. Both are the map's own, as on the desktop.
-        _map.MaxScale = _restrictMaximum ? MaxZoomOutScale : double.MaxValue;
-        _map.MinScale = _restrictMinimum ? MinZoomInScale : 0;
-
-        if (_status == null) return;
-        _status.Text = $"box {(_restrictBox ? "on" : "off")} · out {(_restrictMaximum ? "1:500,000" : "free")} · in {(_restrictMinimum ? "1:10,000" : "free")}";
-        _ = _map.RefreshAsync();
-    }
-
-    /// <summary>
-    /// The nearest extent of the same size that lies inside the box. A view wider or
-    /// taller than the box cannot fit, so that dimension is centred on it instead -
-    /// which is what a map does when it is zoomed further out than the box allows.
-    /// </summary>
-    private RectangleShape Clamp(RectangleShape extent)
-    {
-        var allowed = _restrictExtent;
-        var width = extent.Width;
-        var height = extent.Height;
-
-        var centerX = extent.GetCenterPoint().X;
-        var centerY = extent.GetCenterPoint().Y;
-
-        if (width >= allowed.Width)
-        {
-            centerX = allowed.GetCenterPoint().X;
-        }
-        else
-        {
-            var minX = allowed.UpperLeftPoint.X + (width / 2);
-            var maxX = allowed.LowerRightPoint.X - (width / 2);
-            centerX = Math.Min(Math.Max(centerX, minX), maxX);
-        }
-
-        if (height >= allowed.Height)
-        {
-            centerY = allowed.GetCenterPoint().Y;
-        }
-        else
-        {
-            var minY = allowed.LowerRightPoint.Y + (height / 2);
-            var maxY = allowed.UpperLeftPoint.Y - (height / 2);
-            centerY = Math.Min(Math.Max(centerY, minY), maxY);
-        }
-
-        return new RectangleShape(
-            centerX - (width / 2), centerY + (height / 2),
-            centerX + (width / 2), centerY - (height / 2));
     }
 }

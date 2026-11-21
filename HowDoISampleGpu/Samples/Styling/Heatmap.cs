@@ -5,8 +5,8 @@ using ThinkGeo.UI.Maui;
 namespace HowDoISampleGpu.Samples;
 
 /// <summary>
-/// Coyote sightings as a heatmap, with the ramp, radius, intensity and opacity
-/// changed at run time - a paint change, not a restyle, so no tile is rebuilt.
+/// Coyote sightings as a heatmap, with the ramp, radius and intensity changed at
+/// run time - a paint change, not a restyle, so no tile is rebuilt.
 /// </summary>
 public class Heatmap : SamplePage
 {
@@ -41,7 +41,7 @@ public class Heatmap : SamplePage
     /// </summary>
     private static readonly (string Name, ColorStop[] Stops)[] ColorRamps =
     {
-        ("MapLibre default", new[]
+        ("MapLibre", new[]
         {
             new ColorStop(0.0, GeoColor.FromArgb(0, 0, 0, 255)),
             new ColorStop(0.1, GeoColor.FromArgb(255, 65, 105, 225)),
@@ -80,12 +80,19 @@ public class Heatmap : SamplePage
     private readonly FeatureSourceVectorTileSource _coyote = new();
     private MapStyle _style;
     private MapView _map;
-    private Label _readout;
 
     private (string Name, ColorStop[] Stops) _ramp = ColorRamps[0];
     private float _radius = 22f;
     private float _intensity = 0.55f;
-    private float _opacity = 0.85f;
+
+    /// <summary>
+    /// Fixed, not a slider. Opacity is the one heatmap number that does not say
+    /// anything about the data: it fades the whole layer, which every layer can do,
+    /// while radius and intensity are what a heatmap IS - how far a point spreads
+    /// and how much it counts. Three sliders on a phone panel also push the map off
+    /// the screen.
+    /// </summary>
+    private const float HeatOpacity = 0.85f;
 
     protected override void BuildMap(MapView map)
     {
@@ -105,27 +112,24 @@ public class Heatmap : SamplePage
         };
         _style = new MapStyle(ThinkGeoVectorStyles.Dark, cloud).AddStyle(HeatStyle, _coyote);
 
-        AddChoicePicker(ColorRamps.Select(r => r.Name).ToList(), 0, index =>
+        AddChoiceStrip(ColorRamps.Select(r => r.Name).ToList(), 0, index =>
         {
             _ramp = ColorRamps[index];
             ApplyPaint();
         });
-        _readout = AddStatusLabel();
-        AddSlider("Radius", 5, 60, _radius, value => { _radius = (float)value; ApplyPaint(); });
-        AddSlider("Intensity", 0.05, 2.0, _intensity, value => { _intensity = (float)value; ApplyPaint(); });
-        AddSlider("Opacity", 0.1, 1.0, _opacity, value => { _opacity = (float)value; ApplyPaint(); });
+        // Two rows in all: the ramp, then both numbers on one line. The readout that
+        // used to sit between them said what the two captions already say.
+        AddSliderRow(
+            new SliderSpec("Radius", 5, 60, _radius,
+                value => { _radius = (float)value; ApplyPaint(); },
+                value => FormattableString.Invariant($"Radius {value:0} px")),
+            new SliderSpec("Intensity", 0.05, 2.0, _intensity,
+                value => { _intensity = (float)value; ApplyPaint(); },
+                value => FormattableString.Invariant($"Intensity {value:0.00}")));
 
         ApplyPaint();
         map.Basemap = new GpuBasemap(_style);
         _ = map.RefreshAsync();
-    }
-
-    private void AddSlider(string name, double min, double max, double value, Action<double> changed)
-    {
-        var slider = new Slider { Minimum = min, Maximum = max, Value = value };
-        slider.ValueChanged += (_, e) => changed(e.NewValue);
-        AddToPanel(new Label { Text = name, FontSize = 11, TextColor = Colors.Gray });
-        AddToPanel(slider);
     }
 
     /// <summary>
@@ -135,9 +139,7 @@ public class Heatmap : SamplePage
     private void ApplyPaint()
     {
         _style?.SetHeatmapPaint(HeatLayerId, radius: _radius, intensity: _intensity,
-            opacity: _opacity, colorStops: _ramp.Stops);
-        _readout.Text = FormattableString.Invariant(
-            $"{_ramp.Name} · radius {_radius:0}px · intensity {_intensity:0.00} · opacity {_opacity:0.00}");
+            opacity: HeatOpacity, colorStops: _ramp.Stops);
         _ = _map?.RefreshAsync();
     }
 }

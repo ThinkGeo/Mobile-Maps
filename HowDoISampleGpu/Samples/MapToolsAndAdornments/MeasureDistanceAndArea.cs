@@ -27,13 +27,12 @@ public class MeasureDistanceAndArea : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Dark,
             new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
             { VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder) }));
 
-        AddChoicePicker(new[] { "Distance along a line", "Area of a polygon" }, 0, index =>
+        AddChoiceStrip(new[] { "Distance", "Area" }, 0, index =>
         {
             _area = index == 1;
             Reset();

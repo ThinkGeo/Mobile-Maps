@@ -24,15 +24,11 @@ public class Markers : SamplePage
     private readonly SimpleMarkerOverlay _markerOverlay = new();
 
     private MapView _map;
-    private Label _log;
-    private bool _removeMode;
-    private int _logIndex;
 
     protected override void BuildMap(MapView map)
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         var style = new MapStyle(ThinkGeoVectorStyles.Dark, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
         {
@@ -51,23 +47,26 @@ public class Markers : SamplePage
 
         _centerDot.SetPoint("center", new Feature(map.CenterPoint), sizeInPixel: 10f, iconName: "dot");
         _markerOverlay.AddMarker(Guid.NewGuid().ToString(), NewMarker(map.CenterPoint));
-        _markerOverlay.AddMarker(Guid.NewGuid().ToString(), NewAnimatedMarker(new PointShape(-10776790, 3908990)));
+        _markerOverlay.AddMarker(Guid.NewGuid().ToString(), NewAnimatedMarker(new PointShape(-10777000, 3908900)));
         map.Overlays.Add(_markerOverlay);
 
-        AddChoicePicker(new[] { "Tap the map to add a marker", "Tap a marker to remove it" }, 0,
-            index => _removeMode = index == 1);
-
+        // Tap the map to add one, tap a marker to take it away, and that is the whole
+        // sample. There was a two-cell strip to choose between the two and a running
+        // log of what had been added; both were the card telling you what you had
+        // just watched happen on the map.
+        //
+        // The ground point is asked for through the camera - ToWorldCoordinate with a
+        // height of zero - because a tap on a leaning map means where the ray meets
+        // the ground, not where a flat view of the same scale would put it.
         map.SingleTap += (_, e) =>
         {
-            if (_removeMode) return;
+            var world = _map.ToWorldCoordinate(e.X, e.Y, 0);
+            if (world == null) return;   // above the horizon
 
-            var world = _map.ToWorldCoordinate(e.X, e.Y);
             _markerOverlay.AddMarker(Guid.NewGuid().ToString(), NewMarker(world));
-            AppendLog($"Added: ({world.X:N0}, {world.Y:N0})");
             _ = _markerOverlay.RefreshAsync();
         };
 
-        _log = AddToPanel(new Label { FontSize = 10, TextColor = Colors.Gray, MaxLines = 4 });
         _ = map.RefreshAsync();
     }
 
@@ -134,24 +133,9 @@ public class Markers : SamplePage
 
     private void Remove(Marker marker)
     {
-        if (!_removeMode || marker == null) return;
+        if (marker == null) return;
 
-        foreach (var pair in _markerOverlay.Children.OfType<Marker>().ToList())
-        {
-            if (!ReferenceEquals(pair, marker)) continue;
-
-            _markerOverlay.Children.Remove(pair);
-            AppendLog($"Removed: ({marker.Position.X:N0}, {marker.Position.Y:N0})");
-            break;
-        }
-
+        _markerOverlay.Children.Remove(marker);
         _ = _markerOverlay.RefreshAsync();
-    }
-
-    private void AppendLog(string message)
-    {
-        var lines = (_log.Text ?? string.Empty).Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
-        lines.Add($"{_logIndex++}: {message}");
-        _log.Text = string.Join("\n", lines.Skip(Math.Max(0, lines.Count - 4)));
     }
 }

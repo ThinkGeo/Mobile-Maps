@@ -22,6 +22,11 @@ public class NdfdWindField : SamplePage
 {
     private GpuBasemap _basemap;
     private MapStyle _style;
+    // Particles only. The same field can be drawn as magnitude-scaled arrows and
+    // there was a control to switch to them, which cost a row of card to show a
+    // second picture of the thing already on screen - and the advected particles are
+    // the one of the two that a still image cannot convey, so they are what the
+    // sample is.
     private VectorFieldSource _field;
     private MapView _map;
     private Label _status;
@@ -30,7 +35,6 @@ public class NdfdWindField : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         try
         {
@@ -47,7 +51,6 @@ public class NdfdWindField : SamplePage
             map.Basemap = _basemap;
             map.CurrentExtent = new RectangleShape(-14026255, 6446275, -7235766, 2632018);
 
-            AddChoicePicker(new[] { "Particles", "Arrows" }, 0, ShowMode);
             _status = AddStatusLabel();
             _status.Text = "NDFD surface wind - 65k particles advected, colour is speed";
         }
@@ -58,24 +61,6 @@ public class NdfdWindField : SamplePage
         }
 
         _ = map.RefreshAsync();
-    }
-
-    private void ShowMode(int index)
-    {
-        if (_style == null) return;
-
-        if (index == 0)
-        {
-            _style.RemoveVectorField(_field).AddParticleFlow(_field);
-            _status.Text = "NDFD surface wind - 65k particles advected, colour is speed";
-        }
-        else
-        {
-            _style.RemoveParticleFlow(_field).AddVectorField(_field, new VectorFieldStyle { MaxArrows = 3000 });
-            _status.Text = "The same field as magnitude-scaled arrows";
-        }
-
-        _ = _basemap.SetStyleAsync(_style);
     }
 
     /// <summary>

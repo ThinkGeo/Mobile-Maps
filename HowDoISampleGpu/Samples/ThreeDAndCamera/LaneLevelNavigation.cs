@@ -20,27 +20,14 @@ public class LaneLevelNavigation : SamplePage, IDisposable
     // it is centred, the length of one camera flight, and the speed.
     private const double GroundHeightMeters = 60;
     private const double StretchMeters = 24;
-    // The desktop sample drives at 12.7 m/s, about 46 km/h, and that is what a device
-    // does here too. A simulator runs the app through the interpreter, and at full
-    // speed the lane tiles cannot be cut as fast as the camera flies over them, so the
-    // road ahead comes up empty - the geometry is right and the throughput is not.
-    // Hence the speed picker: on a simulator, drop to a walk and the whole interchange
-    // draws.
-    private static readonly (string Label, double MetersPerSecond)[] Speeds =
-    {
-        ("46 km/h", 12.7),
-        ("20 km/h", 5.6),
-        ("6 km/h - for a simulator", 1.6),
-    };
+    /// <summary>The speed the desktop sample drives at, about 46 km/h.</summary>
+    private const double GroundSpeedMetersPerSecond = 12.7;
 
-    private double _groundSpeedMetersPerSecond = Speeds[0].MetersPerSecond;
-
-    private static readonly AnimationSettings ViewChange = new()
-    {
-        Type = MapAnimationType.DrawWithAnimation,
-        Duration = 1800,
-        Easing = Easing.CubicInOut,
-    };
+    /// <summary>
+    /// How long the camera stays the user's after they stop touching it, before the
+    /// drive takes it back.
+    /// </summary>
+    private const double ResumeAfterSeconds = 5;
 
     private const string StyleJson = """
 {
@@ -97,14 +84,15 @@ public class LaneLevelNavigation : SamplePage, IDisposable
     };
 
     private MapView _map;
-    private Label _speedText;
-    private Label _statsText;
-    private Label _streetText;
-    private Label _instructionText;
-    private Label _nextText;
-    private Label _progressText;
-    private Button _overviewButton;
-    private Slider _pitchSlider;
+    private Label _guidanceText;
+    private Label _statusText;
+
+    // What the two HUD lines currently say, so an unchanged line is not written again.
+    private string _guidance;
+    private string _status;
+
+    /// <summary>The lean, fixed once the window's shape is known - see <see cref="BuildMap"/>.</summary>
+    private double _pitch;
 
     private bool _disposed;
     private LaneMap _laneMap;
@@ -114,6 +102,8 @@ public class LaneLevelNavigation : SamplePage, IDisposable
     private RoutePlayback _playback;
     private RoutePose _pose;
     private bool _trackingMode = true;
+    private bool _routeLineVisible;
+    private DateTime _lastTouchUtc;
     private double _cameraScale;
     private double _stretchStart;
     private double _stretchLength;
@@ -124,52 +114,48 @@ public class LaneLevelNavigation : SamplePage, IDisposable
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         _vehicleImage = RenderVehicleImage();
         map.CurrentExtentChangedInAnimation += Map_CurrentExtentChangedInAnimation;
 
-        // A drag while driving leaves tracking mode where the map is, so the next
-        // flight does not pull it back. WPF watches PreviewMouseMove with the left
-        // button down; a phone has TouchMove.
+        // A finger on the map takes the camera, and keeps it for five seconds after
+        // the finger lifts; then the drive flies it home on its own. WPF watches
+        // PreviewMouseMove with the left button down; a phone has TouchMove.
+        //
+        // That timer is the whole control surface. There was a button here, and a
+        // button is a thing to find, read and press on a sample whose point is the
+        // view through the windscreen - while the gesture that makes you want it, a
+        // drag, is the same gesture that says what you want. So the drag says it.
         map.TouchMove += (_, _) =>
         {
-            if (!_trackingMode || _playback == null) return;
+            if (_playback == null) return;
+
+            _lastTouchUtc = DateTime.UtcNow;
+            if (!_trackingMode) return;
+
             _trackingMode = false;
-            _overviewButton.Text = "Tracking mode";
             _flight?.Cancel();
         };
 
-        _streetText = AddStatusLabel();
-        _instructionText = AddStatusLabel();
-        _nextText = AddStatusLabel();
-        _progressText = AddStatusLabel();
-        _speedText = AddStatusLabel();
-        _statsText = AddStatusLabel();
-
-        AddChoicePicker(Speeds.Select(speed => speed.Label).ToList(), 0, index =>
+        // Two lines of text where there were six. A HUD is the next manoeuvre and
+        // where you are; the lane-marking count, the route length, the street, the
+        // speed and the progress each on a row of their own came to a third of a
+        // phone screen of card - on the one sample whose whole point is the view
+        // through the windscreen.
+        _guidanceText = AddToPanel(new Label
         {
-            _groundSpeedMetersPerSecond = Speeds[index].MetersPerSecond;
-            _speedText.Text = string.Format(CultureInfo.InvariantCulture, "{0:0} km/h", _groundSpeedMetersPerSecond * 3.6);
-            _flight?.Cancel();
+            FontSize = 15,
+            FontAttributes = FontAttributes.Bold,
+            LineBreakMode = LineBreakMode.TailTruncation,
         });
-
-        _overviewButton = new Button { Text = "Overview mode", FontSize = 12, Padding = new Thickness(10, 4) };
-        _overviewButton.Clicked += async (_, _) => await ToggleOverviewAsync();
-        AddToPanel(_overviewButton);
-
-        AddToPanel(new Label { Text = "Camera pitch", FontSize = 11, TextColor = Colors.Gray });
+        _statusText = AddStatusLabel();
 
         // The desktop sample opens at 58 degrees, which a wide window can take: the
         // horizon lands near the top and the road fills the screen. A phone held
         // upright is the other shape, and the same pitch puts the horizon a quarter of
-        // the way up with sky above it, so a tall view opens flatter.
-        _pitchSlider = new Slider { Minimum = 0, Maximum = 60, Value = IsPortrait ? 34 : 58 };
-        _pitchSlider.ValueChanged += (_, e) =>
-        {
-            if (_trackingMode) ApplyPitch(e.NewValue);
-        };
-        AddToPanel(_pitchSlider);
+        // the way up with sky above it, so a tall view opens flatter. No slider for it:
+        // two fingers sliding together is the gesture the map already has.
+        _pitch = IsPortrait ? 34 : 58;
 
         _ = LoadAsync();
     }
@@ -199,7 +185,7 @@ public class LaneLevelNavigation : SamplePage, IDisposable
         _pose = _playback.PoseAtDistance(0);
         _cameraScale = 0;
 
-        ApplyPitch(_pitchSlider.Value);
+        ApplyPitch(_pitch);
         var scale = CameraScale();
         var (center, rotation) = CameraTarget(_pose, scale);
         _map.MapRotation = rotation;
@@ -207,9 +193,7 @@ public class LaneLevelNavigation : SamplePage, IDisposable
         _map.MapScale = scale;
 
         ShowVehicle(_pose);
-        _speedText.Text = string.Format(CultureInfo.InvariantCulture, "{0:0} km/h", _groundSpeedMetersPerSecond * 3.6);
-        _statsText.Text = string.Format(CultureInfo.InvariantCulture, "{0} lane markings, {1:0.0} km route",
-            _laneMap.MarkingCount, _laneMap.RouteLength * _laneMap.GroundScale / 1000);
+        UpdateHud(_pose);
 
         await _map.RefreshAsync();
         if (_disposed) return;
@@ -311,7 +295,19 @@ public class LaneLevelNavigation : SamplePage, IDisposable
         _pose = at;
         var position = new Feature(at.Position.X, at.Position.Y);
         var heading = (float)(90 - at.HeadingDegrees);
-        _vehicle.SetPoint("vehicle", position, heading, GeoColors.White, 100f, "vehicle", lieOnMap: true);
+
+        // How the car and the route are drawn follows the camera, not the mode. A
+        // hundred pixels of car is right when the camera is a few metres above the
+        // bonnet and absurd when it is three kilometres up - over the whole drive it
+        // covered a tenth of the route - and lying on the ground is right down there
+        // too and pointless from above, where there is no perspective to lie in. The
+        // mode cannot answer that, because a user who nudges the map is at lane level
+        // and one who pinches right out is not, and both are the same mode.
+        var closeUp = _map.MapScale <= CameraScale() * 4;
+
+        _vehicle.SetPoint("vehicle", position, heading, GeoColors.White,
+            closeUp ? 100f : 26f, "vehicle", lieOnMap: closeUp);
+        ShowRouteLine(!closeUp);
         UpdateHud(at);
     }
 
@@ -330,7 +326,9 @@ public class LaneLevelNavigation : SamplePage, IDisposable
     /// </summary>
     private async Task DriveAsync(CancellationToken token)
     {
-        var metersPerSecond = _groundSpeedMetersPerSecond / _laneMap.GroundScale;
+        // The route is in Web Mercator, where a metre on the map is not a metre on the
+        // ground; the speed is a ground speed, so it is converted once.
+        var metersPerSecond = GroundSpeedMetersPerSecond / _laneMap.GroundScale;
 
         while (!token.IsCancellationRequested)
         {
@@ -358,7 +356,30 @@ public class LaneLevelNavigation : SamplePage, IDisposable
                 try
                 {
                     await _map.ZoomToExtentAsync(center, scale, rotation, settings, cancellationToken: _flight.Token);
-                    if (!token.IsCancellationRequested) ShowVehicle(target);
+                    // Not just the drive token: a flight that was cancelled was
+                    // cancelled by a finger on the map, which now owns the camera.
+                    // RefreshAsync starts a draw pass and cancels the one before it, so
+                    // refreshing here took the user's own move down with it - the mode
+                    // changed and the camera stayed where the drive had left it.
+                    if (!token.IsCancellationRequested && !_flight.IsCancellationRequested && _trackingMode)
+                    {
+                        ShowVehicle(target);
+
+                        // The road ahead is asked for here, and this line is what puts
+                        // it there. An animated move draws its overlays once, at the
+                        // start, as DrawIfNotDrawn, concurrently with the animation
+                        // that is about to carry the camera away - so the tiles cut for
+                        // it are the ones under the camera when the flight BEGAN. One
+                        // flight is 24 m and the tiles are 76 m, so the first few land
+                        // on tiles already loaded and the drive looks right; a hundred
+                        // metres along, the camera has left every tile it owns, nothing
+                        // asked for the next ones, and the map goes black with the
+                        // vehicle still driving across it. (Measured: one scene load
+                        // for a sixty-second drive, every frame after the twelfth
+                        // second drawing nothing.) A flight that has landed is a
+                        // committed view, and this asks for it as one.
+                        await _map.RefreshAsync();
+                    }
                 }
                 catch (OperationCanceledException)
                 {
@@ -372,11 +393,37 @@ public class LaneLevelNavigation : SamplePage, IDisposable
             }
             else
             {
+                // The camera is the user's. The vehicle drives on its own clock while
+                // they look around, and five seconds after the last touch the drive
+                // takes the camera back.
                 var clock = Stopwatch.StartNew();
                 var start = _pose.DistanceMeters;
-                while (!_trackingMode && !token.IsCancellationRequested)
+                var askedFor = DateTime.MinValue;
+
+                while (!token.IsCancellationRequested)
                 {
-                    var distance = start + (clock.Elapsed.TotalSeconds * (_groundSpeedMetersPerSecond / _laneMap.GroundScale));
+                    var idle = (DateTime.UtcNow - _lastTouchUtc).TotalSeconds;
+                    if (idle >= ResumeAfterSeconds)
+                    {
+                        ResumeTracking();
+                        break;
+                    }
+
+                    // The tiles for where the map has been dragged to, asked for once
+                    // per gesture. A pan moves the camera and nothing else: the
+                    // dynamic sources redraw themselves from their own geometry, so
+                    // the vehicle went on driving over the tiles that had been cut for
+                    // where the map used to be - which is a sample that is running and
+                    // reads as dead. The third of a second is for the finger to
+                    // settle, so a drag asks once at the end of itself rather than
+                    // sixty times along it.
+                    if (idle > 0.35 && askedFor < _lastTouchUtc)
+                    {
+                        askedFor = _lastTouchUtc;
+                        _ = _map.RefreshAsync();
+                    }
+
+                    var distance = start + (clock.Elapsed.TotalSeconds * metersPerSecond);
                     if (distance >= _playback.Length)
                     {
                         start = 0;
@@ -391,63 +438,99 @@ public class LaneLevelNavigation : SamplePage, IDisposable
         }
     }
 
-    private async Task ToggleOverviewAsync()
+    /// <summary>
+    /// Back to the follow camera. The lean comes back here and the next flight carries
+    /// the camera home from wherever the user left it - a flight like any other, so it
+    /// is animated like one however far it has to come.
+    /// </summary>
+    private void ResumeTracking()
     {
-        if (_playback == null) return;
+        _trackingMode = true;
+        ApplyPitch(_pitch);
+        ShowVehicle(_pose);
+    }
 
-        _trackingMode = !_trackingMode;
-        _overviewButton.Text = _trackingMode ? "Overview mode" : "Tracking mode";
-        _flight?.Cancel();
+    /// <summary>
+    /// The whole drive as one line, once the camera is far enough out to want it. The
+    /// route lane is painted into the tiles as well, but three and a half kilometres of
+    /// it on a phone screen is a lane a pixel or two wide among all the others: at that
+    /// distance the path has to be drawn as a path. It goes in the same DynamicSource
+    /// the vehicle is in, so it costs a rebuild of that one batch and no tile - and
+    /// only when it appears or goes, since this is asked on every frame.
+    /// </summary>
+    private void ShowRouteLine(bool visible)
+    {
+        if (visible == _routeLineVisible) return;
+        _routeLineVisible = visible;
 
-        if (_trackingMode)
+        if (!visible)
         {
-            // The next flight brings the camera home.
-            ApplyPitch(_pitchSlider.Value);
+            _vehicle.Remove("route");
+            return;
         }
-        else
+
+        var line = new LineShape();
+        foreach (var point in _laneMap.RouteTrace)
         {
-            _map.TiltAngle = 45;
-            var extent = _laneMap.OverviewExtent;
-            var scale = MapUtil.GetScale(_map.MapUnit, extent, _map.CanvasWidth, _map.CanvasHeight);
-            await _map.ZoomToExtentAsync(extent.GetCenterPoint(), scale, 0, ViewChange);
+            line.Vertices.Add(new Vertex(point.X, point.Y));
         }
+
+        _vehicle.SetLine("route", new Feature(line), GeoColor.FromHtml("#4EA8FF"), 4f);
     }
 
     // ------------------------------------------------------------------- HUD ----
 
+    /// <summary>
+    /// The two lines: the next manoeuvre, and where on the route this is.
+    /// <para>
+    /// Called on every frame of every camera flight, so neither line is written
+    /// unless it changed, and both are rounded coarsely enough that it rarely does -
+    /// distances to the nearest ten metres, progress to the nearest hundred. A
+    /// Label.Text assignment measures and arranges the card it is in; four of them
+    /// sixty times a second was the main thread laying out text instead of drawing
+    /// the road, and the road is what this sample is.
+    /// </para>
+    /// </summary>
     private void UpdateHud(RoutePose pose)
     {
         var scale = _laneMap.GroundScale;
-        _progressText.Text = string.Format(CultureInfo.InvariantCulture, "{0:0.0} of {1:0.0} km",
-            pose.DistanceMeters * scale / 1000, _laneMap.RouteLength * scale / 1000);
+        var legs = _laneMap.RouteLegs;
 
         // The leg the vehicle is on names the lane; the leg after it is the manoeuvre,
         // with the distance to it.
-        var legs = _laneMap.RouteLegs;
         var current = 0;
         while (current + 1 < legs.Count && pose.DistanceMeters >= legs[current + 1].StartDistance)
         {
             current++;
         }
 
-        _streetText.Text = legs[current].Label;
-
+        string guidance;
         if (current + 1 < legs.Count)
         {
             var upcoming = legs[current + 1];
-            var meters = Math.Max(0, upcoming.StartDistance - pose.DistanceMeters) * scale;
-            _instructionText.Text = upcoming.Instruction;
-            _nextText.Text = upcoming.Lane.Length == 0
-                ? string.Format(CultureInfo.InvariantCulture, "In {0:0} m", meters)
-                : string.Format(CultureInfo.InvariantCulture, "In {0:0} m, use the {1} lane", meters, upcoming.Lane);
+            var meters = Round10(Math.Max(0, upcoming.StartDistance - pose.DistanceMeters) * scale);
+            guidance = upcoming.Lane.Length == 0
+                ? string.Format(CultureInfo.InvariantCulture, "{0} in {1:0} m", upcoming.Instruction, meters)
+                : string.Format(CultureInfo.InvariantCulture, "{0} in {1:0} m - use the {2} lane",
+                    upcoming.Instruction, meters, upcoming.Lane);
         }
         else
         {
-            var remaining = Math.Max(0, _laneMap.RouteLength - pose.DistanceMeters) * scale;
-            _instructionText.Text = "Destination ahead";
-            _nextText.Text = string.Format(CultureInfo.InvariantCulture, "In {0:0} m", remaining);
+            var remaining = Round10(Math.Max(0, _laneMap.RouteLength - pose.DistanceMeters) * scale);
+            guidance = string.Format(CultureInfo.InvariantCulture, "Destination ahead in {0:0} m", remaining);
         }
+
+        var status = string.Format(CultureInfo.InvariantCulture, "{0} · {1:0.0} of {2:0.0} km · {3:0} km/h",
+            legs[current].Label,
+            pose.DistanceMeters * scale / 1000,
+            _laneMap.RouteLength * scale / 1000,
+            GroundSpeedMetersPerSecond * 3.6);
+
+        if (guidance != _guidance) _guidanceText.Text = _guidance = guidance;
+        if (status != _status) _statusText.Text = _status = status;
     }
+
+    private static double Round10(double meters) => Math.Round(meters / 10) * 10;
 
     // --------------------------------------------------------------- vehicle ----
 

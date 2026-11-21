@@ -15,7 +15,6 @@ public class Popups : SamplePage
     protected override void BuildMap(MapView map)
     {
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Dark,
             new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)

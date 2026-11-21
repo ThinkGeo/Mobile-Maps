@@ -39,7 +39,6 @@ public class GetDataFromFeatures : SamplePage
     {
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
-        PutPanelAtTop();
 
         var parks = new ShapeFileFeatureSource(SampleShared.Shapefile("Parks.shp"))
         {
