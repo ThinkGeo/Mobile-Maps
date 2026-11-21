@@ -64,6 +64,16 @@ public class TheGlobe : SamplePage
     private string _choice = "globe";
     private bool _raster = true;
 
+    /// <summary>
+    /// The two maps, each built once and kept. A MapStyle made from a URI has to fetch
+    /// that document, its sprite sheet and its glyph ranges and then compile it before
+    /// the map can draw a tile - and building a fresh one on every tap of the strip
+    /// paid all of that again each time, for documents that had not changed. Held
+    /// here, the first switch pays it and no later one does.
+    /// </summary>
+    private MapStyle _rasterStyle;
+    private MapStyle _vectorStyle;
+
     protected override void BuildMap(MapView map)
     {
         _map = map;
@@ -83,18 +93,29 @@ public class TheGlobe : SamplePage
     }
 
     /// <summary>
-    /// The two maps this sample can draw itself from. Rebuilt rather than patched: a
-    /// raster registration and a vector style have no source in common, so there is
-    /// nothing to keep.
+    /// The two maps this sample can draw itself from. Swapped whole rather than
+    /// patched: a raster registration and a vector style have no source in common, so
+    /// there is nothing to carry from one to the other - but each is kept, because
+    /// what a style costs to build it costs once.
     /// </summary>
     private MapStyle BuildStyle()
     {
         if (_raster)
         {
-            var imagery = new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2);
-            return new MapStyle().AddRaster(imagery, sourceId: "thinkgeo");
+            return _rasterStyle ??= BuildRasterStyle();
         }
 
+        return _vectorStyle ??= BuildVectorStyle();
+    }
+
+    private static MapStyle BuildRasterStyle()
+    {
+        var imagery = new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2);
+        return new MapStyle().AddRaster(imagery, sourceId: "thinkgeo");
+    }
+
+    private static MapStyle BuildVectorStyle()
+    {
         // Light, not dark. The switch is between two drawings of the same world, and
         // the one it replaces is daylit satellite imagery - a dark map in its place
         // reads as the lights going out rather than as the same globe drawn another
