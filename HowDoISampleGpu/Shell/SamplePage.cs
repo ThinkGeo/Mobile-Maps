@@ -214,13 +214,28 @@ public abstract class SamplePage : ContentPage
     {
         map.CurrentExtent = extent;
 
+        void Fit()
+        {
+            map.CurrentExtent = MapUtil.GetDrawingExtent(extent, map.Width, map.Height);
+            _ = map.RefreshAsync();
+        }
+
+        // BuildMap is itself called from a SizeChanged, so by the time this runs the
+        // view usually has its size already and no further event is owed - a handler
+        // on its own would wait for a layout pass that may never come, and did come
+        // on iOS only because MAUI happens to lay the page out more than once.
+        if (map.Width > 0 && map.Height > 0)
+        {
+            Fit();
+            return;
+        }
+
         void FitWhenSized(object sender, EventArgs e)
         {
             if (map.Width <= 0 || map.Height <= 0) return;
 
             map.SizeChanged -= FitWhenSized;
-            map.CurrentExtent = MapUtil.GetDrawingExtent(extent, map.Width, map.Height);
-            _ = map.RefreshAsync();
+            Fit();
         }
 
         map.SizeChanged += FitWhenSized;

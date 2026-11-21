@@ -60,10 +60,6 @@ public static class SampleCatalog
             "A drive along a recorded GPS track - the camera flies to each point, the vehicle rides the flight's progress, and the road behind turns green",
             "DynamicSource", SampleDraws.Gpu, () => new GpsNavigation(),
             aliases: "navigation, GPS, GPX, track, vehicle, follow camera, route, theme, tilt, turn by turn, live location"),
-        new("Map Navigation", "Lane Level Navigation",
-            "A drive through Wolfsburg at lane level - an OpenDRIVE HD map cut into vector tiles, a follow camera, and the city's buildings standing around it",
-            "DynamicSource", SampleDraws.Gpu, () => new LaneLevelNavigation(),
-            aliases: "navigation, lane, OpenDRIVE, HD map, follow camera, tilt, 3D buildings, route, turn by turn"),
         new("Map Navigation", "The Globe",
             "The world as a sphere and as three projections, morphing between them, from satellite imagery or vector streets - the projection is the camera's, so nothing is reprojected",
             "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
@@ -137,6 +133,10 @@ public static class SampleCatalog
             "The two scale adornments drawn over the GPU basemap, in imperial, metric or both",
             "ScaleLineAdornmentLayer", SampleDraws.GpuAndOverlays, () => new ScaleLineScaleBar(),
             aliases: "scale bar, scale line, ScaleBarAdornmentLayer, UnitSystem, miles, kilometres"),
+        new("Markers and Adornments", "Export the Map to PDF",
+            "The map on screen written out as a true vector PDF - geometry as paths, labels as selectable text - and handed to the system to open, file or print",
+            "PdfGeoCanvas, PrinterLayoutDocument, MvtTilesAsyncLayer", SampleDraws.GpuAndOverlays, () => new ExportToPdf(),
+            aliases: "print, printing, PDF, export, vector, page, A4, letter, layout, share, AirPrint, PrinterLayoutDocument"),
         new("Markers and Adornments", "Graticule Lines and Legend",
             "The two adornments that frame a map - a degree grid labelled down the edges and a legend whose swatches are the styles painting the states",
             "GraticuleAdornmentLayer, LegendAdornmentLayer", SampleDraws.GpuAndOverlays, () => new GraticuleLinesAndLegend(),
@@ -182,7 +182,12 @@ public static class SampleCatalog
     /// </summary>
     public static readonly IReadOnlyList<(string Title, string Reason)> NotOnMobile = new[]
     {
-        ("Print the Map", "The WPF printing stack has no mobile counterpart."),
+        ("Lane Level Navigation",
+            "Built for this gallery and then cut from it. It told the same story as GPS Navigation - a follow "
+            + "camera carried along a route - and the part that was its own, a lane-level OpenDRIVE HD map, is "
+            + "the part nobody can copy: the data is three and a half megabytes of Wolfsburg prepared in advance "
+            + "and carried in the package, and a reader with no OpenDRIVE of their own cannot do anything with "
+            + "what the sample shows. A sample that cannot be followed is a demonstration, not an example."),
         ("Map Tools and Adornments - Drag and Resize Adornments",
             "AdornmentLayer.DragMode and ResizeMode are Core properties and compile everywhere, but only the "
             + "desktop acts on them: ThinkGeo.UI.Desktop has an AdornmentResizeHandler that moves and resizes "

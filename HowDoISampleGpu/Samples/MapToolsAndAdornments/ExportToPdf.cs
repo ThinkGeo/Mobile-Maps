@@ -1,0 +1,190 @@
+using System.Diagnostics;
+using ThinkGeo.Core;
+using ThinkGeo.Core.Styling;
+using ThinkGeo.UI.Maui;
+
+namespace HowDoISampleGpu.Samples;
+
+/// <summary>
+/// The map on screen written out as a true vector PDF - geometry as PDF paths and
+/// labels as real, selectable text - and handed to the system to open, file or print.
+/// </summary>
+/// <remarks>
+/// The GPU draws triangles, and triangles cannot be a vector PDF. The same style
+/// document can be drawn a second way: <see cref="MvtTilesAsyncLayer"/> takes the
+/// style.json the GPU map is wearing, resolves it with the same compile every
+/// renderer shares, and draws it through the classic canvas styles onto whatever
+/// GeoCanvas it is handed - here <see cref="PdfGeoCanvas"/>, which is SkiaSharp and
+/// the BCL and nothing else, so this works on a phone exactly as it does on a server.
+/// <para>
+/// The desktop gallery wraps this in a layout designer: a preview you can zoom, page
+/// setup, draggable layout layers, tables. None of that belongs on a phone. What
+/// belongs is the one thing the designer is for - a sheet with the map, a title and a
+/// scale on it - and then the real PDF, opened in the system's own viewer, which is a
+/// better preview than any we could draw and is also the artifact itself.
+/// </para>
+/// </remarks>
+public class ExportToPdf : SamplePage
+{
+    private sealed record Sheet(string Name, PrinterPageSize Size, PrinterOrientation Orientation);
+
+    private static readonly Sheet[] Sheets =
+    {
+        new("A4 portrait", PrinterPageSize.A4, PrinterOrientation.Portrait),
+        new("A4 landscape", PrinterPageSize.A4, PrinterOrientation.Landscape),
+        new("Letter", PrinterPageSize.AnsiA, PrinterOrientation.Portrait),
+    };
+
+    /// <summary>Margin, title band and scale band on the sheet, in inches.</summary>
+    private const double Margin = 0.5;
+    private const double TitleHeight = 0.5;
+    private const double ScaleHeight = 0.45;
+
+    private MapView _map;
+    private Label _status;
+    private Button _export;
+    private int _sheet;
+
+    protected override void BuildMap(MapView map)
+    {
+        _map = map;
+        map.MapUnit = GeographyUnit.Meter;
+
+        map.Basemap = new GpuBasemap(new MapStyle(ThinkGeoVectorStyles.Light,
+            new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
+            { VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder) }));
+
+        AddChoiceStrip(Sheets.Select(sheet => sheet.Name).ToList(), 0, index => _sheet = index);
+
+        _export = new Button { Text = "Export PDF", FontSize = 13, Padding = new Thickness(14, 6) };
+        _export.Clicked += async (_, _) => await ExportAsync();
+        AddToPanel(_export);
+
+        _status = AddStatusLabel();
+        _status.Text = "What you see is what is printed.";
+
+        map.CenterPoint = new PointShape(-10778000, 3912000);
+        map.MapScale = 36200;
+        _ = map.RefreshAsync();
+
+    }
+
+    private async Task ExportAsync()
+    {
+        _export.IsEnabled = false;
+        _status.Text = "Drawing the sheet…";
+
+        try
+        {
+            var extent = _map.CurrentExtent;
+            var sheet = Sheets[_sheet];
+            var path = Path.Combine(FileSystem.CacheDirectory, "map.pdf");
+
+            var watch = Stopwatch.StartNew();
+            await Task.Run(() => ExportAsync(extent, sheet, path));
+            watch.Stop();
+
+            var size = new FileInfo(path).Length / 1024d;
+            _status.Text = FormattableString.Invariant(
+                $"{size:N0} KB of vector PDF in {watch.ElapsedMilliseconds:N0} ms - text and all");
+
+            // The system's own viewer: open it, file it, mail it, AirPrint it. A PDF
+            // that only ever existed inside the application would not have been worth
+            // making.
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = "Map PDF",
+                File = new ShareFile(path),
+            });
+        }
+        catch (Exception exception)
+        {
+            _status.Text = "Export failed: " + exception.Message;
+        }
+        finally
+        {
+            _export.IsEnabled = true;
+        }
+    }
+
+    /// <summary>
+    /// The layout and the export: one sheet, the map on it with a title over and a
+    /// scale under, written to a PDF.
+    /// </summary>
+    private static async Task ExportAsync(RectangleShape extent, Sheet sheet, string path)
+    {
+        var page = new PagePrinterLayoutAsyncLayer(sheet.Size, sheet.Orientation);
+        var paper = page.GetPosition(PrintingUnit.Inch);
+
+        var frameWidth = paper.Width - (Margin * 2);
+        var frameHeight = paper.Height - (Margin * 2) - TitleHeight - ScaleHeight;
+        var centerX = paper.GetCenterPoint().X;
+        var top = paper.UpperLeftPoint.Y - Margin;
+
+        var title = new LabelPrinterLayoutAsyncLayer(
+            "Frisco, Texas", new GeoFont("Arial", 16, DrawingFontStyles.Bold), GeoBrushes.Black);
+        title.SetPosition(frameWidth, TitleHeight, centerX, top - (TitleHeight / 2), PrintingUnit.Inch);
+
+        // The frame has a shape of its own, so the extent is widened to it the way the
+        // map widens one to the screen; handed over as it is, the sheet would print a
+        // crop of what was on screen.
+        var mapLayer = new MapPrinterLayoutAsyncLayer(
+            BuildPrintableLayers(),
+            MapUtil.GetDrawingExtent(extent, frameWidth, frameHeight),
+            GeographyUnit.Meter);
+        mapLayer.SetPosition(frameWidth, frameHeight, centerX,
+            top - TitleHeight - (frameHeight / 2), PrintingUnit.Inch);
+
+        // The neatline. A map on paper has an edge; without one the streets simply
+        // stop somewhere in the middle of the sheet.
+        mapLayer.BackgroundMask = new AreaStyle(new GeoPen(GeoColors.DimGray, 1));
+
+        var scale = new ScaleLinePrinterLayoutAsyncLayer(mapLayer);
+        scale.SetPosition(frameWidth / 2, ScaleHeight, centerX,
+            paper.LowerRightPoint.Y + Margin + (ScaleHeight / 2), PrintingUnit.Inch);
+
+        var layoutPage = new PrinterLayoutPage(page);
+        layoutPage.Layers.Add(mapLayer);
+        layoutPage.Layers.Add(title);
+        layoutPage.Layers.Add(scale);
+
+        var document = new PrinterLayoutDocument();
+        document.Pages.Add(layoutPage);
+
+        using var stream = File.Create(path);
+        await document.ExportPdfAsync(stream);
+    }
+
+    /// <summary>
+    /// The same map, drawn the other way: the style document the GPU is wearing, over
+    /// the same tiles, through the classic canvas styles - which is what can become a
+    /// vector page.
+    /// </summary>
+    private static IEnumerable<LayerBase> BuildPrintableLayers()
+    {
+        var streets = new MvtTilesAsyncLayer(ThinkGeoVectorStyles.Light);
+
+        // The published style's tile URL carries a {key} placeholder - the key is
+        // deliberately not baked into a public document - so it is filled in on the
+        // way out, which is what the web viewer's transformRequest does.
+        streets.SendingHttpRequest += (_, e) =>
+        {
+            var uri = e.HttpRequestMessage?.RequestUri;
+            if (uri != null && uri.OriginalString.Contains("{key}"))
+            {
+                e.HttpRequestMessage.RequestUri =
+                    new Uri(uri.OriginalString.Replace("{key}", SampleShared.CloudApiKey));
+            }
+        };
+
+        var cityLimits = new ShapeFileFeatureLayer(SampleShared.Shapefile("FriscoCityLimits.shp"))
+        {
+            FeatureSource = { ProjectionConverter = new ProjectionConverter(2276, 3857) },
+        };
+        cityLimits.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyle.CreateSimpleAreaStyle(
+            GeoColor.FromArgb(40, GeoColors.OrangeRed), GeoColors.OrangeRed, 2);
+        cityLimits.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+        return new LayerBase[] { streets, cityLimits };
+    }
+}
