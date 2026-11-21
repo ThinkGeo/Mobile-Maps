@@ -9,11 +9,13 @@ namespace HowDoISampleGpu.Samples;
 /// switch to editing and drag, resize, rotate and reshape what is there, with a
 /// measurement following whatever is being moved.
 /// <para>
-/// The rest of the editing story, which the desktop gallery tells on pages of its own,
-/// is here as the two things a rule can do to an edit: move it somewhere else, which
-/// is what the snapping switch does, and correct it afterwards, which is what the blue
-/// rectangle does to itself. Both hang off the edit overlay's own events, so they
-/// belong with the editing rather than beside it.
+/// A rule that moves an edit somewhere else - snapping - is here too, on the edit
+/// overlay's own event, because it belongs with the editing rather than beside it.
+/// A rule that CORRECTS an edit afterwards is not, and cannot be written against
+/// <c>VertexMoved</c> as it stands: the overlay writes its own moved feature into
+/// EditShapesLayer after the event has been raised, so whatever a handler puts there
+/// is overwritten before the next frame. Every platform does this, so it is the
+/// event's behaviour rather than a phone's.
 /// </para>
 /// </summary>
 public class EditFeatures : SamplePage
@@ -21,12 +23,16 @@ public class EditFeatures : SamplePage
     /// <summary>How near the finger must come, in pixels, before a vertex snaps.</summary>
     private const float SnapTolerance = 25;
 
+    /// <summary>The panel's ink for a control that is switched off for now.</summary>
+    private static readonly Color DimInk = Color.FromArgb("#9AA0A6");
+
     private LayerOverlay _layerOverlay;
     private LayerOverlay _schoolsOverlay;
     private ShapeFileFeatureLayer _schoolsLayer;
     private MapView _map;
     private Label _measure;
     private Switch _snap;
+    private Label _snapLabel;
 
     protected override void BuildMap(MapView map)
     {
@@ -43,11 +49,6 @@ public class EditFeatures : SamplePage
         var demoPolygon = new Feature("POLYGON((-10778500 3915600,-10778500 3910000,-10774040 3910000,-10774040 3915600,-10778500 3915600))");
         var demoPoint = new Feature("POINT(-10773220 3913230)");
         var demoLine = new Feature("LINESTRING(-10780700 3916500, -10780700 3910040)");
-
-        // A shape can carry what it is, and a rule can read it back: this one is a
-        // rectangle and is corrected into one after every drag. The other two shapes
-        // say nothing about themselves and are free.
-        demoPolygon.ColumnValues["constraint"] = "rectangle";
 
         map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPolygon);
         map.EditOverlay.EditShapesLayer.InternalFeatures.Add(demoPoint);
@@ -73,10 +74,7 @@ public class EditFeatures : SamplePage
         map.TrackOverlay.TouchMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
         map.EditOverlay.VertexMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
 
-        // The two rules. Snapping does nothing while its switch is off; the rectangle
-        // reads the shape rather than a switch, so it needs none.
         map.EditOverlay.VertexMoving += EditOverlay_VertexMoving;
-        map.EditOverlay.VertexMoved += EditOverlay_VertexMoved;
 
         AddChoiceStrip(new[] { "Navigate", "Point", "Line", "Polygon", "Edit" }, 0, ChooseMode);
 
@@ -110,8 +108,16 @@ public class EditFeatures : SamplePage
                 : "Vertices land where the finger leaves them";
         };
 
+        _snapLabel = new Label
+        {
+            Text = "Snap to schools",
+            FontSize = 12,
+            TextColor = PanelInk,
+            VerticalOptions = LayoutOptions.Center,
+        };
+
         var row = new HorizontalStackLayout { Spacing = 8 };
-        row.Add(new Label { Text = "Snap to schools", FontSize = 12, TextColor = PanelInk, VerticalOptions = LayoutOptions.Center });
+        row.Add(_snapLabel);
         row.Add(_snap);
 
         return row;
@@ -175,104 +181,21 @@ public class EditFeatures : SamplePage
         e.TargetVertex.Y = school.Y;
     }
 
-    /// <summary>A rule that corrects an edit: a shape marked rectangular stays one.</summary>
-    private void EditOverlay_VertexMoved(object sender, VertexMovedEditInteractiveOverlayEventArgs e)
-    {
-        if (e.AffectedFeature.ColumnValues.TryGetValue("constraint", out var rule) && rule == "rectangle")
-        {
-            RestoreRectangle(e.AffectedFeature, e.MovedVertex);
-        }
-    }
-
-    /// <summary>
-    /// Four corners, one of them dragged: the two beside it follow, so the shape is a
-    /// rectangle again rather than the quadrilateral the drag made of it.
-    /// </summary>
-    private void RestoreRectangle(Feature feature, Vertex movedTo)
-    {
-        if (feature.GetShape() is not PolygonShape polygon) return;
-
-        var corners = new List<Vertex>(VerticesOf(polygon));
-        if (corners.Count != 4) return;
-
-        var movedIndex = 0;
-        for (var i = 1; i < 4; i++)
-        {
-            if (Distance(corners[i], movedTo) < Distance(corners[movedIndex], movedTo)) movedIndex = i;
-        }
-
-        var others = new List<Vertex>();
-        for (var i = 0; i < 4; i++)
-        {
-            if (i != movedIndex) others.Add(corners[i]);
-        }
-
-        var opposite = others[0];
-        if (!SharesAxis(others[0], others[1])) opposite = others[2];
-        else if (!SharesAxis(others[0], others[2])) opposite = others[1];
-
-        var moved = corners[movedIndex];
-        if (Math.Abs(moved.X - opposite.X) < 1e-6 || Math.Abs(moved.Y - opposite.Y) < 1e-6) return;
-
-        var ring = new RingShape();
-        ring.Vertices.Add(moved);
-        ring.Vertices.Add(new Vertex(moved.X, opposite.Y));
-        ring.Vertices.Add(opposite);
-        ring.Vertices.Add(new Vertex(opposite.X, moved.Y));
-        ring.Vertices.Add(moved);
-
-        var corrected = new PolygonShape(ring);
-        ReplaceEditShape(feature, corrected);
-
-        // Otherwise the corner springs back to a right angle and nothing says why.
-        // The measurement is the corrected shape's, not the quadrilateral's, which is
-        // what the handler that ran before this one had already written.
-        _measure.Text = GetMeasureResult(corrected) + " - kept rectangular";
-    }
-
-    private void ReplaceEditShape(Feature original, BaseShape shape)
-    {
-        shape.Id = original.Id;
-        var replacement = new Feature(shape);
-        foreach (var column in original.ColumnValues)
-        {
-            replacement.ColumnValues[column.Key] = column.Value;
-        }
-
-        _map.EditOverlay.EditShapesLayer.InternalFeatures.Remove(original.Id);
-        _map.EditOverlay.EditShapesLayer.InternalFeatures.Add(replacement.Id, replacement);
-        _map.EditOverlay.CalculateAllControlPoints();
-
-        // MAUI's single-overlay RefreshAsync takes a CancellationToken, not an
-        // overlay; the collection overload is the one that redraws just this overlay.
-        _ = _map.RefreshAsync(new Overlay[] { _map.EditOverlay });
-    }
-
-    /// <summary>The corners of a shape, without a polygon's repeated closing vertex.</summary>
-    private static IEnumerable<Vertex> VerticesOf(BaseShape shape)
-    {
-        switch (shape)
-        {
-            case PolygonShape polygon:
-                var ring = polygon.OuterRing.Vertices;
-                var count = ring.Count > 1 && Distance(ring[0], ring[^1]) < 1e-9 ? ring.Count - 1 : ring.Count;
-                for (var i = 0; i < count; i++) yield return ring[i];
-                break;
-
-            case LineShape line:
-                foreach (var vertex in line.Vertices) yield return vertex;
-                break;
-        }
-    }
-
-    private static bool SharesAxis(Vertex a, Vertex b)
-        => Math.Abs(a.X - b.X) < 1e-6 || Math.Abs(a.Y - b.Y) < 1e-6;
-
-    private static double Distance(Vertex a, Vertex b)
-        => Math.Sqrt(((a.X - b.X) * (a.X - b.X)) + ((a.Y - b.Y) * (a.Y - b.Y)));
-
     private void ChooseMode(int index)
     {
+        // Snapping is a rule about moving a vertex, so it has nothing to say in any
+        // mode but editing. Left live, the switch read as something the map was
+        // ignoring; switched off for now, it says which mode it belongs to. The
+        // schools go with it - they are what there is to snap to, and in a mode that
+        // cannot snap they are red dots over the map for no reason.
+        var editing = index == 4;
+        if (_snap != null)
+        {
+            _snap.IsEnabled = editing;
+            _snapLabel.TextColor = editing ? PanelInk : DimInk;
+            ShowSchools(editing && _snap.IsToggled);
+        }
+
         switch (index)
         {
             case 0:

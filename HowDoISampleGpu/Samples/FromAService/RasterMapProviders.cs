@@ -55,7 +55,14 @@ public class RasterMapProviders : SamplePage
     /// <summary>The line that differs: which class serves the tiles.</summary>
     private static RasterTileSource OpenChosen(int index) => index switch
     {
-        0 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X1),
+        // X2, not X1. A phone's screen is two or three device pixels to the point,
+        // so the X1 tile - 512 pixels over the ground the X2 tile covers with 1024 -
+        // is magnified before it is ever shown and the imagery reads as soft. The
+        // tile is four times the bytes and worth it: this is the one provider here
+        // whose subject IS the pixels.
+        0 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2),
+        // No X2 counterpart: openstreetmap.org serves one 256-pixel tile set and
+        // nothing else, which is part of what the cell is showing.
         1 => new OpenStreetMapRasterTileSource(UserAgent),
         NasaIndex => OpenNasaImagery(),
         _ => OpenSwisstopo(),
