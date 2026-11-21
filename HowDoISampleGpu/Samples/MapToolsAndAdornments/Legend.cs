@@ -32,7 +32,10 @@ public class Legend : SamplePage
                 TextStyle = new TextStyle("Population 1990",
                     new GeoFont("Verdana", 10, DrawingFontStyles.Bold), GeoBrushes.Black),
             },
-            Location = AdornmentLocation.LowerRight,
+            // Upper right: the control card owns the bottom of every sample now.
+            Location = AdornmentLocation.UpperRight,
+            YOffsetInPixel = 12,
+            XOffsetInPixel = -12,
         };
 
         for (var i = 0; i < breaks.Length; i++)

@@ -35,7 +35,13 @@ public class DisplayGraticuleLines : SamplePage
         {
             Projection = new Projection(3857),
         };
-        graticuleLayer.GraticuleLineStyle.OuterPen.Color = GeoColor.FromArgb(125, GeoColors.Navy);
+        // Pen widths and type sizes are plain numbers of points and the canvas applies
+        // the screen's density, so these read the same here as they do on a desktop.
+        // The layer's default half-point hairline is a desktop number; on a phone held
+        // at arm's length a grid line wants to be seen.
+        graticuleLayer.GraticuleLineStyle.OuterPen.Color = GeoColor.FromArgb(150, GeoColors.Navy);
+        graticuleLayer.GraticuleLineStyle.OuterPen.Width = 1f;
+        graticuleLayer.GraticuleTextFont = new GeoFont("Noto Sans", 11f);
 
         // Drawn above the GPU basemap by the classic pipeline, which is the point: the
         // two render paths compose.
