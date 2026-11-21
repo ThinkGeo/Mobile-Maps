@@ -52,6 +52,9 @@ public class VectorMapProviders : SamplePage
         VectorTileCache = new FileTileCache(SampleShared.VectorTileCacheFolder),
     };
 
+    /// <summary>The style behind each entry, built on its first showing.</summary>
+    private readonly Dictionary<int, MapStyle> _styles = new();
+
     private MapView _map;
     private Label _status;
 
@@ -73,17 +76,22 @@ public class VectorMapProviders : SamplePage
         try
         {
             var provider = Providers[index];
-            MapStyle style;
 
-            if (index is WfsIndex or OgcApiIndex)
+            // Each entry keeps the style it built. A style that has been compiled once
+            // is handed back over without fetching its document or its sprite sheet
+            // again and without compiling it again - what is left is the re-styling of
+            // the tiles the map already holds, which is the part that cannot be
+            // avoided. Built fresh on every tap, going back to a style already seen
+            // costs the two downloads and the compile a second time.
+            if (!_styles.TryGetValue(index, out var style))
             {
-                style = BuildFeatureServiceStyle(index);
-            }
-            else
-            {
-                style = provider.StyleUri == null
-                    ? new MapStyle(index == 0 ? ThinkGeoVectorStyles.Light : ThinkGeoVectorStyles.Dark, _thinkGeo)
-                    : new MapStyle(provider.StyleUri);
+                style = index is WfsIndex or OgcApiIndex
+                    ? BuildFeatureServiceStyle(index)
+                    : provider.StyleUri == null
+                        ? new MapStyle(index == 0 ? ThinkGeoVectorStyles.Light : ThinkGeoVectorStyles.Dark, _thinkGeo)
+                        : new MapStyle(provider.StyleUri);
+
+                _styles[index] = style;
             }
 
             if (_map.Basemap == null)
