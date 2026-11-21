@@ -8,9 +8,10 @@ namespace HowDoISampleGpu;
 /// <para>
 /// The desktop gallery reads its data beside the executable. A mobile app has no
 /// such place - what it ships is inside the package, reachable only as a stream -
-/// so the files are copied out once, on first run, and every sample afterwards is
-/// written exactly as the desktop one is. The copy is skipped for files that are
-/// already there, so it costs nothing after the first launch.
+/// so the files are copied out on first run, and every sample afterwards is
+/// written exactly as the desktop one is. A file already there is left alone
+/// unless the package carries a different one, so the copy costs almost nothing
+/// after the first launch.
 /// </para>
 /// </summary>
 public static class SampleData
@@ -49,12 +50,24 @@ public static class SampleData
         foreach (var entry in entries)
         {
             var destination = Path.Combine(target, entry.Replace('/', Path.DirectorySeparatorChar));
-            if (File.Exists(destination)) continue;
 
             Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
             try
             {
                 using var source = await FileSystem.OpenAppPackageFileAsync(entry);
+
+                // Skipping every file that merely exists is what a first run needs and
+                // what every run after a data change gets wrong: an installed app kept
+                // the copy it made the first time, so a dataset that shrank or was
+                // corrected in the package never reached the samples - the old one was
+                // read for the life of the install. Length is enough to tell them
+                // apart here, and costs no reading.
+                if (File.Exists(destination) && TryGetLength(source, out var packaged)
+                    && new FileInfo(destination).Length == packaged)
+                {
+                    continue;
+                }
+
                 await using var file = File.Create(destination);
                 await source.CopyToAsync(file);
                 written++;
@@ -66,5 +79,27 @@ public static class SampleData
         }
 
         return written;
+    }
+
+    /// <summary>
+    /// The length of a packaged file, where the platform will say: iOS hands back a
+    /// file stream that knows it, and an Android asset stream usually does. When it
+    /// does not, the file already on disk is kept rather than rewritten on every
+    /// launch.
+    /// </summary>
+    private static bool TryGetLength(Stream stream, out long length)
+    {
+        length = 0;
+        if (!stream.CanSeek) return false;
+
+        try
+        {
+            length = stream.Length;
+            return true;
+        }
+        catch (NotSupportedException)
+        {
+            return false;
+        }
     }
 }

@@ -20,6 +20,19 @@ namespace HowDoISampleGpu.Samples;
 /// </remarks>
 public class VectorFileFormats : SamplePage
 {
+    /// <summary>
+    /// One style for six formats: fills, lines and circles over the same source
+    /// layer, so whichever shape the file happens to hold is drawn.
+    /// <para>
+    /// The circle layer is the one that needs a filter. A GPX file hands back every
+    /// track point as a point feature of its own, beside the line it belongs to, and
+    /// those points ARE the line's vertices - drawn as circles, a trail network
+    /// becomes a smear of dots with the trails buried under them. IsWayPoint is the
+    /// column GpxFeatureSource marks them with: "0" for a point inside a track, "1"
+    /// for a waypoint somebody dropped. Every other format's points have no such
+    /// column, so the filter passes them.
+    /// </para>
+    /// </summary>
     private const string DataStyle = """
     {
       "layers": [
@@ -31,6 +44,7 @@ public class VectorFileFormats : SamplePage
           "paint": { "line-color": "#F2A65A", "line-width": 2 } },
         { "type": "circle",
           "source-layer": "data",
+          "filter": ["!=", ["get", "IsWayPoint"], "0"],
           "paint": { "circle-radius": 3.5, "circle-color": "#F2A65A" } }
       ]
     }
@@ -47,7 +61,7 @@ public class VectorFileFormats : SamplePage
     {
         ("Shapefile", "Frisco's parks"),
         ("GeoJSON", "Pittsburgh's historic districts"),
-        ("GPX", "A recorded hike and bike route"),
+        ("GPX", "Frisco's hike and bike trails, track by track"),
         ("MapInfo TAB", "Frisco's city limits and the land it governs beyond them"),
         ("TinyGeo", "Frisco's zoning areas"),
         ("SQLite", "Frisco's restaurants, a table at a time"),

@@ -5,19 +5,8 @@ Glyphs/LICENSE-OpenSans-Apache-2.0.txt
 Glyphs/Open Sans Semibold/0-255.pbf
 Glyphs/Open Sans Semibold/256-511.pbf
 Gpx/Hike_Bike.gpx
-Images/generic-logo.png
 Images/marker.png
 Images/vehicle_location.png
-Jpg/m87_0.jpg
-Jpg/m87_1.jpg
-Jpg/m87_2.jpg
-Jpg/m87_3.jpg
-Jpg/m87_4.jpg
-Jpg/m87_5.jpg
-Jpg/m87_6.jpg
-Jpg/m87_7.jpg
-Jpg/m87_8.jpg
-Jpg/m87_9.jpg
 Mbtiles/maplibre.mbtiles
 Mbtiles/style.json
 Mbtiles/test.mbtiles
@@ -25,29 +14,9 @@ Ndfd/ndfd-sky.bin
 Ndfd/ndfd-wind.bin
 Ndfd/pack-ndfd-sky.py
 Ndfd/pack-ndfd-wind.py
-OpenDrive/LICENSE-Wolfsburg-CC-BY-4.0.txt
-OpenDrive/XodrWolfsburgLanes.geojson
-OpenDrive/XodrWolfsburgRoute.json
 Pmtiles/frisco.pmtiles
 Pmtiles/stamen_toner.pmtiles
 Pmtiles/style.json
-Shapefile/City_ETJ.dbf
-Shapefile/City_ETJ.ids
-Shapefile/City_ETJ.idx
-Shapefile/City_ETJ.prj
-Shapefile/City_ETJ.shp
-Shapefile/City_ETJ.shx
-Shapefile/Countries02.dbf
-Shapefile/Countries02.ids
-Shapefile/Countries02.idx
-Shapefile/Countries02.shp
-Shapefile/Countries02.shx
-Shapefile/Frisco 2010 Census Housing Units.dbf
-Shapefile/Frisco 2010 Census Housing Units.ids
-Shapefile/Frisco 2010 Census Housing Units.idx
-Shapefile/Frisco 2010 Census Housing Units.prj
-Shapefile/Frisco 2010 Census Housing Units.shp
-Shapefile/Frisco 2010 Census Housing Units.shx
 Shapefile/Frisco_Coyote_Sightings.cpg
 Shapefile/Frisco_Coyote_Sightings.dbf
 Shapefile/Frisco_Coyote_Sightings.ids
@@ -55,13 +24,6 @@ Shapefile/Frisco_Coyote_Sightings.idx
 Shapefile/Frisco_Coyote_Sightings.prj
 Shapefile/Frisco_Coyote_Sightings.shp
 Shapefile/Frisco_Coyote_Sightings.shx
-Shapefile/Frisco_Mosquitos.cpg
-Shapefile/Frisco_Mosquitos.dbf
-Shapefile/Frisco_Mosquitos.ids
-Shapefile/Frisco_Mosquitos.idx
-Shapefile/Frisco_Mosquitos.prj
-Shapefile/Frisco_Mosquitos.shp
-Shapefile/Frisco_Mosquitos.shx
 Shapefile/FriscoCityLimits.cpg
 Shapefile/FriscoCityLimits.dbf
 Shapefile/FriscoCityLimits.ids
@@ -75,13 +37,6 @@ Shapefile/FriscoCityLimitsDivided.ids
 Shapefile/FriscoCityLimitsDivided.idx
 Shapefile/FriscoCityLimitsDivided.shp
 Shapefile/FriscoCityLimitsDivided.shx
-Shapefile/Hike_Bike.dbf
-Shapefile/Hike_Bike.gpx
-Shapefile/Hike_Bike.ids
-Shapefile/Hike_Bike.idx
-Shapefile/Hike_Bike.prj
-Shapefile/Hike_Bike.shp
-Shapefile/Hike_Bike.shx
 Shapefile/Hotels.dbf
 Shapefile/Hotels.ids
 Shapefile/Hotels.idx
@@ -106,22 +61,11 @@ Shapefile/Streets.idx
 Shapefile/Streets.prj
 Shapefile/Streets.shp
 Shapefile/Streets.shx
-Shapefile/Subdivisions.dbf
-Shapefile/Subdivisions.ids
-Shapefile/Subdivisions.idx
-Shapefile/Subdivisions.prj
-Shapefile/Subdivisions.shp
-Shapefile/Subdivisions.shx
 Shapefile/USStates_3857.dbf
 Shapefile/USStates_3857.ids
 Shapefile/USStates_3857.idx
 Shapefile/USStates_3857.shp
 Shapefile/USStates_3857.shx
-Shapefile/WorldCapitals.dbf
-Shapefile/WorldCapitals.ids
-Shapefile/WorldCapitals.idx
-Shapefile/WorldCapitals.shp
-Shapefile/WorldCapitals.shx
 Shapefile/Zoning.dbf
 Shapefile/Zoning.ids
 Shapefile/Zoning.idx
