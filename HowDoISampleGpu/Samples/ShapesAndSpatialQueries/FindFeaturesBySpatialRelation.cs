@@ -93,7 +93,6 @@ public class FindFeaturesBySpatialRelation : SamplePage
 
         AddChoiceStrip(Relations, 0, index => { _relation = index; Run(_seed); });
         _status = AddStatusLabel();
-        AddToPanel(new Label { Text = "Tap the map to ask again.", FontSize = 11, TextColor = Colors.Gray });
 
         map.SingleTap += (_, e) => Run(map.ToWorldCoordinate(e.X, e.Y));
 
@@ -111,13 +110,14 @@ public class FindFeaturesBySpatialRelation : SamplePage
         if (point == null) return;
         _seed = point;
 
-        // With the columns, not without them: the data behind a feature comes back
-        // from the query that found it, and costs a flag rather than a second pass.
+        // The shapes alone, because the shapes are the answer. The data behind each
+        // feature comes back from the same query for ReturningColumnsType.AllColumns,
+        // a flag rather than a second pass, when there is something to show it on.
         _zoning.Open();
         var found = _relation == 0
-            ? _zoningQuery.GetFeaturesContaining(point, ReturningColumnsType.AllColumns)
+            ? _zoningQuery.GetFeaturesContaining(point, ReturningColumnsType.NoColumns)
             : _zoningQuery.GetFeaturesWithinDistanceOf(
-                point, GeographyUnit.Meter, DistanceUnit.Meter, 500, ReturningColumnsType.AllColumns);
+                point, GeographyUnit.Meter, DistanceUnit.Meter, 500, ReturningColumnsType.NoColumns);
         var verb = _relation == 0 ? "containing" : "within 500 m of";
         var matches = found.ToList();
         _zoning.Close();
@@ -132,26 +132,13 @@ public class FindFeaturesBySpatialRelation : SamplePage
         _query.Clear();
         _query.SetPoint("seed", new Feature(point), sizeInPixel: 16f, iconName: "pin");
 
+        // The count and the relation, and nothing after them. The first match's zoning
+        // code used to follow on the same line, and a code out of the file - "PD", "SF-7"
+        // - reads as a fragment of something rather than as an answer unless you already
+        // know the city's zoning ordinance.
         _status.Text = matches.Count == 0
             ? $"no zoning areas {verb} the point"
-            : $"{matches.Count} zoning areas {verb} the point - {Describe(matches[0])}";
+            : $"{matches.Count} zoning areas {verb} the point";
         _ = _map.RefreshAsync();
-    }
-
-    /// <summary>
-    /// The one line of a feature's data worth a phone's screen: what the zoning is
-    /// called, from whichever column the file happens to carry it in.
-    /// </summary>
-    private static string Describe(Feature feature)
-    {
-        foreach (var column in new[] { "ZONE_DESC", "ZONING", "ZONE", "DESCRIPT", "NAME" })
-        {
-            if (feature.ColumnValues.TryGetValue(column, out var value) && !string.IsNullOrWhiteSpace(value))
-            {
-                return value.Trim();
-            }
-        }
-
-        return feature.ColumnValues.Count + " columns";
     }
 }

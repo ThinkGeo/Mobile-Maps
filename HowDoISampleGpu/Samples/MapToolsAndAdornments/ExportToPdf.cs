@@ -28,11 +28,19 @@ public class ExportToPdf : SamplePage
 {
     private sealed record Sheet(string Name, PrinterPageSize Size, PrinterOrientation Orientation);
 
+    /// <summary>
+    /// Which way up, and nothing else. The strip used to mix two questions - A4
+    /// portrait, A4 landscape, Letter - so two of its cells differed by orientation
+    /// and the third by a paper size that is six millimetres narrower and eighteen
+    /// shorter, a difference nobody can see in a map on a sheet. Which way up is the
+    /// one choice that changes the picture. Letter is the same call with
+    /// <see cref="PrinterPageSize.AnsiA"/>, and every other size the printer knows is
+    /// a value of that enum.
+    /// </summary>
     private static readonly Sheet[] Sheets =
     {
-        new("A4 portrait", PrinterPageSize.A4, PrinterOrientation.Portrait),
-        new("A4 landscape", PrinterPageSize.A4, PrinterOrientation.Landscape),
-        new("Letter", PrinterPageSize.AnsiA, PrinterOrientation.Portrait),
+        new("Portrait", PrinterPageSize.A4, PrinterOrientation.Portrait),
+        new("Landscape", PrinterPageSize.A4, PrinterOrientation.Landscape),
     };
 
     /// <summary>

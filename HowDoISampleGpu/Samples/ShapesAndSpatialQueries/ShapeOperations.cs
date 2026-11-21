@@ -99,8 +99,12 @@ public class ShapeOperations : SamplePage
         };
         source.Open();
         _pieces = source.GetAllFeatures(ReturningColumnsType.NoColumns);
-        var bounds = source.GetBoundingBox();
         source.Close();
+
+        // The first piece, not the file. Every operation here works on that one piece
+        // and the file is the whole of Frisco cut up, so a view fitted to the file put
+        // the shape the sample is about off to one side with empty city beside it.
+        var bounds = _pieces[0].GetShape().GetBoundingBox();
 
         AddChoiceStrip(Operations.Select(operation => operation.Name).ToList(), 0, index =>
         {

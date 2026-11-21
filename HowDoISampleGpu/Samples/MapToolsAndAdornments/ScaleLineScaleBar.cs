@@ -65,8 +65,10 @@ public class ScaleLineScaleBar : SamplePage
         // fifth is worse than none.
         var projection = new Projection(3857);
 
-        // One in each top corner. They were stacked in the same corner, 58 pixels
-        // apart, which is close enough that they read as one broken control.
+        // Both along the left, one under the other. They were in opposite top corners,
+        // which on a phone is far enough apart that nothing says they are two answers
+        // to the same question - and this sample exists to be read as a comparison.
+        // Stacked, they are one group: same left edge, same plate, a clear gap.
         _scaleLine = new ScaleLineAdornmentLayer
         {
             Location = AdornmentLocation.UpperLeft,
@@ -111,9 +113,13 @@ public class ScaleLineScaleBar : SamplePage
 
         _scaleBar = new ScaleBarAdornmentLayer
         {
-            Location = AdornmentLocation.UpperRight,
-            XOffsetInPixel = -12,
-            YOffsetInPixel = 60,
+            Location = AdornmentLocation.UpperLeft,
+            XOffsetInPixel = 12,
+
+            // Below the scale line's plate with a gap the width of the plates' own
+            // padding, so the two read as a stack rather than as one control that has
+            // come apart.
+            YOffsetInPixel = 104,
             Projection = projection,
             BackgroundMask = Plate,
 
