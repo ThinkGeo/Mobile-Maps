@@ -32,7 +32,7 @@ public class RasterMapProviders : SamplePage
     /// </summary>
     private static readonly (string Name, string Shows, string Credit)[] Providers =
     {
-        ("Cloud Aerial", "Aerial imagery over Frisco, Texas",
+        ("ThinkGeo Aerial", "Aerial imagery over Frisco, Texas",
             "Imagery \u00a9 ThinkGeo"),
         ("OpenStreetMap", "The community's own street map, drawn to pixels",
             "\u00a9 OpenStreetMap contributors"),

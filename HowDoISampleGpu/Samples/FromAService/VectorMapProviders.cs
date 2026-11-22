@@ -38,8 +38,8 @@ public class VectorMapProviders : SamplePage
 
     private static readonly (string Name, string StyleUri, string Shows, string Credit)[] Providers =
     {
-        ("Cloud Light", null, "ThinkGeo's own streets, light", OpenStreetMapCredit),
-        ("Cloud Dark", null, "The same tiles under a dark style", OpenStreetMapCredit),
+        ("ThinkGeo Light", null, "ThinkGeo's own streets, light", OpenStreetMapCredit),
+        ("ThinkGeo Dark", null, "The same tiles under a dark style", OpenStreetMapCredit),
         ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap's Liberty, from OpenStreetMap data", OpenFreeMapCredit),
         ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "Positron: a pale backdrop meant to be drawn over", OpenFreeMapCredit),
         ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "The same OpenStreetMap data, dark", OpenFreeMapCredit),
