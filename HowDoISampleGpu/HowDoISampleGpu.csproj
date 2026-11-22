@@ -55,12 +55,14 @@
     <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">com.thinkgeo.ioshowdoi</ApplicationId>
     <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">com.thinkgeo.androidhowdoi</ApplicationId>
     <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
-    <!-- Has to beat the 13.1.0 already published, and a new engine on a new framework
-         is not a point release. -->
-    <ApplicationDisplayVersion>14.0.0</ApplicationDisplayVersion>
-    <!-- Build 2: build 1 of 14.0.0 is already uploaded, and App Store Connect takes
-         each version+build pair once. -->
-    <ApplicationVersion>2</ApplicationVersion>
+    <!-- Tracks the components it demonstrates, the way 13.1.0 tracked ThinkGeo 13:
+         this gallery is built against ThinkGeo 15.0.0, so a 14.x here would name a
+         version of the SDK that does not exist. It also has to beat the published
+         13.1.0, which it does. -->
+    <ApplicationDisplayVersion>15.0.0</ApplicationDisplayVersion>
+    <!-- Back to 1: build numbers only have to be unique within one version string,
+         and 15.0.0 has no builds yet. -->
+    <ApplicationVersion>1</ApplicationVersion>
 
     <!-- A floor, not a target: it decides how old a device may be and nothing else,
          and this app's job is to run on whatever a prospective customer is holding.
