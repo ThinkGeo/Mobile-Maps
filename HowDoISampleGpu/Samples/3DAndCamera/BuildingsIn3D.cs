@@ -119,8 +119,8 @@ public class BuildingsIn3D : ContentPage
 
         Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
 
-        // As on every sample page - see SamplePage.FillBottomSafeArea.
-        Loaded += (_, _) => SamplePage.FillBottomSafeArea(_map);
+        // As on every sample page - see SamplePage.FillSafeArea.
+        Loaded += (_, _) => SamplePage.FillSafeArea(_map);
     }
 
     /// <summary>

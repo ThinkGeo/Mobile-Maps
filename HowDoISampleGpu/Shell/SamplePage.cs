@@ -29,8 +29,8 @@ public abstract class SamplePage : ContentPage
         // A page insets its content inside the safe area by default on iOS, which is
         // right for text and wrong for a map: it leaves a band of page background
         // below the map on every sample - white, on a gallery whose maps are mostly
-        // dark. This asks for the inset to go; FillBottomSafeArea below is what
-        // actually removes it, because this ask does not reach the system.
+        // dark. This asks for the inset to go; FillSafeArea below is what actually
+        // removes it, because this ask does not reach the system.
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetUseSafeArea(this, false);
 
         // And the home indicator is asked to dim itself, since it is now a bar lying
@@ -122,8 +122,8 @@ public abstract class SamplePage : ContentPage
 
         Content = new Grid { Children = { Map, bottom } };
 
-        // The strip the safe area holds back at the bottom is given to the map.
-        Loaded += (_, _) => FillBottomSafeArea(Map);
+        // The strips the safe area holds back are given to the map.
+        Loaded += (_, _) => FillSafeArea(Map);
 
         var built = false;
         Map.SizeChanged += (_, _) =>
@@ -164,8 +164,8 @@ public abstract class SamplePage : ContentPage
     }
 
     /// <summary>
-    /// Gives the map the strip the bottom safe area holds back, by letting it hang
-    /// that far past the bottom of the page's content.
+    /// Gives the map the strips the safe area holds back, by letting it hang that far
+    /// past the sides and the bottom of the page's content.
     /// <para>
     /// SetUseSafeArea(false) on the page is the documented way to ask for this and it
     /// does nothing here - measured on an iPhone, with the page reporting 758 points
@@ -179,21 +179,35 @@ public abstract class SamplePage : ContentPage
     /// <para>
     /// A negative margin is a blunt instrument and it is the one that fits: the map
     /// is arranged past the end of its container, iOS does not clip it, and the band
-    /// is covered by the map that should have been there. The inset is read from the
-    /// window rather than written down, because it is 34 points on a phone and 21 on
-    /// an iPad.
+    /// is covered by the map that should have been there. The insets are read from
+    /// the window rather than written down, because there is no one set of them: 34
+    /// points below on a phone and 21 on an iPad, nothing at the sides in portrait,
+    /// and 84 down the right of an iPhone Duo's cover display, which is where this
+    /// stopped being about the home indicator. That display keeps a column beside the
+    /// app for the clock and the back affordance; a map that respects it ends in a
+    /// white gutter down the right of a black globe. Settings does the same thing and
+    /// gets away with it by letting its own background run under the column, which is
+    /// exactly what the map is being told to do here.
+    /// </para>
+    /// <para>
+    /// Only the map is moved. The control card and the credit are its siblings in the
+    /// page's Grid, so they stay inside the inset content and clear of the column -
+    /// which is the half of this that has to keep working.
+    /// </para>
+    /// <para>
+    /// Not the top: every sample either has a navigation bar over it or, in Buildings
+    /// in 3D, has deliberately given that space to its own controls.
     /// </para>
     /// </summary>
-    public static void FillBottomSafeArea(View map)
+    public static void FillSafeArea(View map)
     {
 #if IOS
-        var inset = UIKit.UIApplication.SharedApplication.ConnectedScenes
+        var insets = UIKit.UIApplication.SharedApplication.ConnectedScenes
             .OfType<UIKit.UIWindowScene>()
             .SelectMany(scene => scene.Windows)
-            .FirstOrDefault()?.SafeAreaInsets.Bottom ?? 0;
+            .FirstOrDefault()?.SafeAreaInsets ?? default;
 
-        if (inset > 0)
-            map.Margin = new Thickness(0, 0, 0, -inset);
+        map.Margin = new Thickness(-insets.Left, 0, -insets.Right, -insets.Bottom);
 #endif
     }
 
