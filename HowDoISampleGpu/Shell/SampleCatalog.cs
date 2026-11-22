@@ -43,16 +43,11 @@ public static class SampleCatalog
     {
 
         // ---- Map Navigation ----
-        // The first row is the gallery's front door, so it is the one that needs no
-        // explaining: the whole world, turning. The two rows after it are a pair -
-        // the height of a city and the shape of the ground - and the last two are
-        // the camera being driven and the camera being fenced in.
-        new("Map Navigation", "Hello World",
-            "The world as a sphere and as three projections, morphing between them, from satellite imagery or vector streets - the projection is the camera's, so nothing is reprojected",
-            "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
-            aliases: "hello, hello world, globe, sphere, the globe, projection, Robinson, Mollweide, Web Mercator, "
-                   + "proj4, proj string, AnimateDisplayProjectionAsync, morph, raster, vector, "
-                   + "first light, smoke test, getting started"),
+        // The first row is the gallery's front door, so it is a map that is on screen
+        // before anyone has decided to wait: a city standing up. The row after it is
+        // its pair - the height of a city and the shape of the ground - then the camera
+        // being driven and the camera being fenced in. The globe comes last, and the
+        // comment on it says why.
         new("Map Navigation", "Buildings in 3D",
             "A city with its real height: one extrusion layer over a published style stands Midtown up behind Union Square, and a switch moves the whole map between the light and dark themes",
             "GpuBasemap, fill-extrusion", SampleDraws.Gpu, () => new BuildingsIn3D(),
@@ -166,6 +161,20 @@ public static class SampleCatalog
             "Tap the zoning map and either the area you are standing in or everything within five hundred metres lights up, named from the same query",
             "QueryTools.GetFeaturesContaining", SampleDraws.Gpu, () => new FindFeaturesBySpatialRelation(),
             aliases: "spatial query, contains, within distance, zoning, QueryTools, attributes, columns, tap"),
+
+        // Last, and not where a reader would look for it. It used to open the gallery
+        // under the name "Hello World", which promised the simplest thing here and
+        // delivered the most expensive: a vector globe's first load is measured in
+        // seconds, so the first map anyone saw was the slowest one in the app, and the
+        // name gave them nothing to attribute the wait to. The name now says what the
+        // sample is about, and the row sits where someone who wants a globe will go
+        // looking rather than where everyone arrives.
+        new("Map Navigation", "Globe and Projections",
+            "The world as a sphere and as three projections, morphing between them, from satellite imagery or vector streets - the projection is the camera's, so nothing is reprojected",
+            "DisplayProjection", SampleDraws.Gpu, () => new TheGlobe(),
+            aliases: "hello, hello world, globe, sphere, the globe, projection, Robinson, Mollweide, Web Mercator, "
+                   + "proj4, proj string, AnimateDisplayProjectionAsync, morph, raster, vector, "
+                   + "first light, smoke test, getting started"),
 
     };
 
