@@ -58,11 +58,20 @@
     <!-- Has to beat the 13.1.0 already published, and a new engine on a new framework
          is not a point release. -->
     <ApplicationDisplayVersion>14.0.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Build 2: build 1 of 14.0.0 is already uploaded, and App Store Connect takes
+         each version+build pair once. -->
+    <ApplicationVersion>2</ApplicationVersion>
 
-    <!-- The GPU engine needs GLES 3.0: iOS 13 and Android 5 both carry it, but the
-         MAUI floor is what the referenced ThinkGeo.UI.Maui asks for. -->
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <!-- A floor, not a target: it decides how old a device may be and nothing else,
+         and this app's job is to run on whatever a prospective customer is holding.
+         The engine itself needs only GLES 3.0, which iOS 13 and Android 5 both carry.
+
+         15.0 rather than the 14.2 ThinkGeo.UI.Maui asks for because Apple stops
+         accepting uploads below 15.0 in April 2027 - and because it costs nothing:
+         iOS 15 runs on every device iOS 14 ran on, down to the iPhone 6s. Going
+         higher would start removing devices (16 drops the 6s and the 7, 26 drops
+         everything before the iPhone 11) to buy an API this app never calls. -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 
     <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
