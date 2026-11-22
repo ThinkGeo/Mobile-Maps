@@ -25,17 +25,32 @@
     <RootNamespace>HowDoISampleGpu</RootNamespace>
 
     <ApplicationTitle>ThinkGeo Maps</ApplicationTitle>
-    <!-- The id of ThinkGeo Maps, which is already on the App Store (id 1559817900)
-         and whose current version is the Xamarin gallery this one succeeds. Shipping
-         under it updates that listing instead of opening a second one beside it,
-         which keeps the name, the store URL and the ratings - and is the only way to
-         keep the name at all, since a new record cannot take a name the account is
-         already using. The id travels this way round because a record's bundle id is
-         fixed once it has a build: the app takes the record's id, never the reverse.
+    <!--
+      Per platform, because MAUI's single project feeds ApplicationId to two different
+      things: CFBundleIdentifier on iOS and the package name on Android. One value for
+      both would have named the Android build after iOS.
 
-         The ThinkGeo licence is validated against CFBundleIdentifier, so the licence
-         that keeps the watermark off a device build has to be issued for THIS id. -->
-    <ApplicationId>com.thinkgeo.ioshowdoi</ApplicationId>
+      iOS takes the id of ThinkGeo Maps, which is already on the App Store
+      (id 1559817900) and whose current version is the Xamarin gallery this one
+      succeeds, so a build goes to that listing as an update rather than opening a
+      second one beside it: the name, the store URL and the ratings carry over, and
+      the name is not available to a new record anyway, an account being unable to
+      reuse a name it already uses. The id travels this way round because a record's
+      bundle id is fixed once it has a build - the app takes the record's id, never
+      the reverse.
+
+      Android keeps its own. ThinkGeo's Android sample was published as
+      com.thinkgeo.androidhowdoi, but that listing is gone - the Play badge on
+      thinkgeo.com now 404s - so there is nothing to update and nothing this has to
+      match. If that listing turns out to be merely unpublished rather than removed,
+      this is the line to change.
+
+      The ThinkGeo licence is validated against the id on both platforms, so the
+      licence that keeps the watermark off a device build has to be issued for the id
+      that platform actually uses.
+    -->
+    <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">com.thinkgeo.ioshowdoi</ApplicationId>
+    <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">com.thinkgeo.mauihowdoi</ApplicationId>
     <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
     <!-- Has to beat the 13.1.0 already published, and a new engine on a new framework
          is not a point release. -->

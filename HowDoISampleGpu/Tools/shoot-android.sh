@@ -10,7 +10,7 @@
 # as an empty shell and exits on launch.
 set -u
 A=~/Library/Android/sdk/platform-tools/adb
-PKG="${HOWDOI_PKG:-com.thinkgeo.ioshowdoi}"
+PKG="${HOWDOI_PKG:-com.thinkgeo.mauihowdoi}"
 ACT="$PKG/$(${A} shell cmd package resolve-activity --brief "$PKG" | tail -1 | cut -d/ -f2 | tr -d "\r")"
 OUT="$(dirname "$0")"/../shots-android
 TITLE="$1"
