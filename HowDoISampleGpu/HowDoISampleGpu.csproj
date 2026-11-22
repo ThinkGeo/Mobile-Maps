@@ -25,13 +25,21 @@
     <RootNamespace>HowDoISampleGpu</RootNamespace>
 
     <ApplicationTitle>ThinkGeo Maps</ApplicationTitle>
-    <!-- Reuses the bundle id already registered to ThinkGeo LLC, so TestFlight needs
-         no new App Store Connect record. The ThinkGeo licence is validated against
-         CFBundleIdentifier, so a licence issued for this id is what keeps the
-         watermark off a device build. -->
-    <ApplicationId>com.thinkgeo.mauihowdoi</ApplicationId>
+    <!-- The id of ThinkGeo Maps, which is already on the App Store (id 1559817900)
+         and whose current version is the Xamarin gallery this one succeeds. Shipping
+         under it updates that listing instead of opening a second one beside it,
+         which keeps the name, the store URL and the ratings - and is the only way to
+         keep the name at all, since a new record cannot take a name the account is
+         already using. The id travels this way round because a record's bundle id is
+         fixed once it has a build: the app takes the record's id, never the reverse.
+
+         The ThinkGeo licence is validated against CFBundleIdentifier, so the licence
+         that keeps the watermark off a device build has to be issued for THIS id. -->
+    <ApplicationId>com.thinkgeo.ioshowdoi</ApplicationId>
     <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <!-- Has to beat the 13.1.0 already published, and a new engine on a new framework
+         is not a point release. -->
+    <ApplicationDisplayVersion>14.0.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
 
     <!-- The GPU engine needs GLES 3.0: iOS 13 and Android 5 both carry it, but the

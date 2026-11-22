@@ -9,7 +9,7 @@
 set -u
 # The simulator to run on. `xcrun simctl list devices` prints the ids.
 SIM="${HOWDOI_SIM:-booted}"
-APP="${HOWDOI_APP:-com.thinkgeo.mauihowdoi}"
+APP="${HOWDOI_APP:-com.thinkgeo.ioshowdoi}"
 OUT="$(dirname "$0")"/../shots
 TITLE="$1"
 WAIT="${2:-26}"
