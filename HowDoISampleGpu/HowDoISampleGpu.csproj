@@ -39,18 +39,21 @@
       bundle id is fixed once it has a build - the app takes the record's id, never
       the reverse.
 
-      Android keeps its own. ThinkGeo's Android sample was published as
-      com.thinkgeo.androidhowdoi, but that listing is gone - the Play badge on
-      thinkgeo.com now 404s - so there is nothing to update and nothing this has to
-      match. If that listing turns out to be merely unpublished rather than removed,
-      this is the line to change.
+      Android takes the id ITS store already knows, for the same reason and by the
+      same rule, which is also why the two ids are named after their platforms rather
+      than after the framework they share. ThinkGeo's Android sample was published as
+      com.thinkgeo.androidhowdoi; that listing 404s today, so there is nothing to
+      update yet, but if it is merely unpublished rather than deleted then this is
+      already the id that slots back into it. Only if Play has retired the name - a
+      deleted app's package name can never be used again - does this line have to
+      change.
 
       The ThinkGeo licence is validated against the id on both platforms, so the
       licence that keeps the watermark off a device build has to be issued for the id
       that platform actually uses.
     -->
     <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">com.thinkgeo.ioshowdoi</ApplicationId>
-    <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">com.thinkgeo.mauihowdoi</ApplicationId>
+    <ApplicationId Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">com.thinkgeo.androidhowdoi</ApplicationId>
     <ApplicationIdGuid>0d4f4f3e-7b64-4a0e-9d07-2d6c4b8a1f21</ApplicationIdGuid>
     <!-- Has to beat the 13.1.0 already published, and a new engine on a new framework
          is not a point release. -->
