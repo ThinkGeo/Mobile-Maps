@@ -33,15 +33,20 @@ public class VectorMapProviders : SamplePage
     }
     """;
 
-    private static readonly (string Name, string StyleUri, string Shows)[] Providers =
+    private const string OpenStreetMapCredit = "\u00a9 OpenStreetMap contributors";
+    private const string OpenFreeMapCredit = "\u00a9 OpenFreeMap \u00b7 \u00a9 OpenMapTiles \u00b7 \u00a9 OpenStreetMap contributors";
+
+    private static readonly (string Name, string StyleUri, string Shows, string Credit)[] Providers =
     {
-        ("Cloud Light", null, "ThinkGeo's own streets, light"),
-        ("Cloud Dark", null, "The same tiles under a dark style"),
-        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap's Liberty, from OpenStreetMap data"),
-        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "Positron: a pale backdrop meant to be drawn over"),
-        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "The same OpenStreetMap data, dark"),
-        ("WFS parcels", null, "Cadastral parcels in Amsterdam, queried from the Kadaster"),
-        ("OGC API places", null, "Named places in Spain, queried from IGN"),
+        ("Cloud Light", null, "ThinkGeo's own streets, light", OpenStreetMapCredit),
+        ("Cloud Dark", null, "The same tiles under a dark style", OpenStreetMapCredit),
+        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap's Liberty, from OpenStreetMap data", OpenFreeMapCredit),
+        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "Positron: a pale backdrop meant to be drawn over", OpenFreeMapCredit),
+        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "The same OpenStreetMap data, dark", OpenFreeMapCredit),
+        ("WFS parcels", null, "Cadastral parcels in Amsterdam, queried from the Kadaster",
+            "Parcels \u00a9 Kadaster \u00b7 " + OpenStreetMapCredit),
+        ("OGC API places", null, "Named places in Spain, queried from IGN",
+            "Places \u00a9 IGN Espa\u00f1a \u00b7 " + OpenStreetMapCredit),
     };
 
     private const int WfsIndex = 5;
@@ -109,6 +114,10 @@ public class VectorMapProviders : SamplePage
             // behind it: the URL is in the table above and the class follows from
             // the cell that was tapped.
             _status.Text = provider.Shows;
+
+            // Each provider carries its own terms, and all of them ask to be named
+            // on the map rather than on a page about the app.
+            SetAttribution(provider.Credit);
         }
         catch (Exception exception)
         {

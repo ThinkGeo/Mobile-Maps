@@ -117,7 +117,7 @@ public class BuildingsIn3D : ContentPage
         // MAUI animation - see Markers for the same trick on an ordinary pin.
         _map.Overlays.Add(_markers);
 
-        Content = new Grid { Children = { _map, BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
+        Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
 
         // As on every sample page - see SamplePage.FillBottomSafeArea.
         Loaded += (_, _) => SamplePage.FillBottomSafeArea(_map);
@@ -434,6 +434,32 @@ public class BuildingsIn3D : ContentPage
 
         _markers.AddMarker(Guid.NewGuid().ToString(), _puck);
         _ = _markers.RefreshAsync();
+    }
+
+    /// <summary>
+    /// Credit for the data, over the map and never hidden. Both published styles draw
+    /// OpenStreetMap, the building heights included, and the ODbL it is licensed under
+    /// asks for the credit to be on the map. This page is not a SamplePage, so it
+    /// carries its own rather than inheriting one.
+    /// </summary>
+    private View BuildAttribution()
+    {
+        var credit = new Label
+        {
+            Text = "\u00a9 OpenStreetMap contributors",
+            FontSize = 10,
+            Padding = new Thickness(6, 2),
+            HorizontalOptions = LayoutOptions.End,
+            VerticalOptions = LayoutOptions.End,
+            Margin = new Thickness(0, 0, 16, 68),
+        };
+
+        credit.SetAppThemeColor(VisualElement.BackgroundColorProperty,
+            Color.FromRgba(255, 255, 255, 190), Color.FromRgba(32, 33, 36, 190));
+        credit.SetAppThemeColor(Label.TextColorProperty,
+            Color.FromArgb("#3C4043"), Color.FromArgb("#E6E6E6"));
+
+        return credit;
     }
 
     /// <summary>A small card over the map, out of the way of the gestures.</summary>

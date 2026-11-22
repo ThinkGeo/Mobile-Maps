@@ -12,7 +12,7 @@ public class MenuPage : ContentPage
 
     public MenuPage()
     {
-        Title = "ThinkGeo GPU";
+        Title = "ThinkGeo Maps";
 
         _search = new SearchBar { Placeholder = "Search samples, APIs, tasks" };
         _search.TextChanged += (_, _) => Rebuild();
@@ -129,7 +129,7 @@ public class MenuPage : ContentPage
 
         // A sample holds a GL surface and tile sources, so it is built when opened
         // and torn down when left - never cached.
-        await Navigation.PushAsync(entry.Create());
+        await Navigation.PushAsync(entry.CreateTitledPage());
     }
 }
 

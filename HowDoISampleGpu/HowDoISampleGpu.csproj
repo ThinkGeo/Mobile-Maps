@@ -24,7 +24,7 @@
     <Nullable>disable</Nullable>
     <RootNamespace>HowDoISampleGpu</RootNamespace>
 
-    <ApplicationTitle>ThinkGeo GPU</ApplicationTitle>
+    <ApplicationTitle>ThinkGeo Maps</ApplicationTitle>
     <!-- Reuses the bundle id already registered to ThinkGeo LLC, so TestFlight needs
          no new App Store Connect record. The ThinkGeo licence is validated against
          CFBundleIdentifier, so a licence issued for this id is what keeps the
@@ -81,6 +81,15 @@
   <ItemGroup>
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
     <MauiFont Include="Resources\Fonts\*" />
+  </ItemGroup>
+
+  <!--
+    The privacy manifest, at the root of the bundle where the App Store looks for it.
+    Without it an upload is refused with ITMS-91053, because the .NET runtime uses
+    required-reason APIs whatever the linker strips.
+  -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
   </ItemGroup>
 
   <!--

@@ -34,8 +34,16 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>	
+	<!-- Specific, because App Review reads it: a purpose string that only restates
+	     the permission is a rejection under 5.1.1. One sample puts a dot where you
+	     are; nothing else in the gallery asks. -->
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need access to your location for providing current coordinates.</string>
+	<string>Buildings in 3D uses your location to put a marker where you are and move the map to it. Your location is never stored or sent anywhere.</string>
+
+	<!-- The gallery uses no encryption of its own beyond the HTTPS every app uses,
+	     which is exempt. Declared here so every upload stops asking. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

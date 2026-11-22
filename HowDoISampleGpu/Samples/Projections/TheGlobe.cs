@@ -88,6 +88,7 @@ public class TheGlobe : SamplePage
 
         map.Basemap = new GpuBasemap(BuildStyle()) { DisplayProjection = DisplayProjection.Globe };
 
+        SetAttribution("Imagery \u00a9 ThinkGeo");
         FrameWorld(_choice);
         _ = map.RefreshAsync();
     }
@@ -139,6 +140,10 @@ public class TheGlobe : SamplePage
         // No refresh behind it: SetStyleAsync redraws, and a second pass over the
         // same view only supersedes the first one mid-build.
         await _map.Basemap.SetStyleAsync(BuildStyle());
+
+        SetAttribution(_raster
+            ? "Imagery \u00a9 ThinkGeo"
+            : DefaultAttribution);
     }
 
     private async Task MorphAsync(string definition)

@@ -22,6 +22,7 @@ public abstract class SamplePage : ContentPage
     private readonly VerticalStackLayout _panelContent;
     private readonly ScrollView _panelScroller;
     private readonly Border _panel;
+    private readonly Label _attribution;
 
     protected SamplePage()
     {
@@ -85,7 +86,7 @@ public abstract class SamplePage : ContentPage
             StrokeThickness = 0,
             Padding = new Thickness(12, 10),
             // Clear of the home indicator, now that the page no longer insets for it.
-            Margin = new Thickness(10, 0, 10, PanelBottomMargin),
+            Margin = new Thickness(10, 0, 10, 0),
             VerticalOptions = LayoutOptions.End,
             IsVisible = false,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 12 },
@@ -93,7 +94,33 @@ public abstract class SamplePage : ContentPage
 
         _panelScroller.Content = _panelContent;
 
-        Content = new Grid { Children = { Map, _panel } };
+        // Credit for the data, over the map and never hidden behind anything. Every
+        // basemap this gallery draws is built from OpenStreetMap - ThinkGeo's own
+        // streets, OpenFreeMap's, the imagery's road network - and both the ODbL the
+        // data is licensed under and the tile servers' own terms ask for the credit to
+        // be shown on the map rather than filed on a page about the app. A sample
+        // drawing something else as well says so with SetAttribution.
+        _attribution = new Label
+        {
+            Text = DefaultAttribution,
+            FontSize = 10,
+            Padding = new Thickness(6, 2),
+            HorizontalOptions = LayoutOptions.End,
+            Margin = new Thickness(0, 0, 14, 4),
+            TextColor = Color.FromArgb("#3C4043"),
+            BackgroundColor = Color.FromRgba(255, 255, 255, 190),
+        };
+
+        // One group at the bottom so the credit always sits just over the card, and
+        // sits on the same line when a sample has no card at all.
+        var bottom = new VerticalStackLayout
+        {
+            VerticalOptions = LayoutOptions.End,
+            Margin = new Thickness(0, 0, 0, PanelBottomMargin),
+            Children = { _attribution, _panel },
+        };
+
+        Content = new Grid { Children = { Map, bottom } };
 
         // The strip the safe area holds back at the bottom is given to the map.
         Loaded += (_, _) => FillBottomSafeArea(Map);
@@ -186,8 +213,19 @@ public abstract class SamplePage : ContentPage
         12;
 #endif
 
+    /// <summary>What every map here is ultimately drawn from.</summary>
+    protected const string DefaultAttribution = "\u00a9 OpenStreetMap contributors";
+
     /// <summary>The map this page draws into.</summary>
     protected MapView Map { get; }
+
+    /// <summary>
+    /// Says who the data on screen belongs to. A sample that draws something beyond
+    /// the OpenStreetMap-derived basemap - imagery, a government service - names it
+    /// here, because the credit has to match what is actually being shown.
+    /// </summary>
+    protected void SetAttribution(string text)
+        => _attribution.Text = string.IsNullOrWhiteSpace(text) ? DefaultAttribution : text;
 
     /// <summary>
     /// Adds a control to the card over the bottom of the map. The card appears with

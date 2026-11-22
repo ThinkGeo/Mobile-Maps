@@ -70,6 +70,22 @@ public sealed class SampleEntry
     /// the question a customer actually types.</summary>
     public string Aliases { get; }
 
+    /// <summary>
+    /// Builds the page and gives it this row's name, so the bar over a sample says
+    /// what is open rather than standing empty with a back arrow in it. A page that
+    /// titles itself - the few that are not <c>SamplePage</c> - keeps its own.
+    /// </summary>
+    public Page CreateTitledPage()
+    {
+        var page = Create();
+        if (string.IsNullOrEmpty(page.Title))
+        {
+            page.Title = Title;
+        }
+
+        return page;
+    }
+
     /// <summary>True when the row matches the search text.</summary>
     public bool Matches(string text)
     {

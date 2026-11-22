@@ -81,7 +81,7 @@ public partial class App
             else
             {
                 Console.WriteLine($"[HowDoI] opening '{entry.Title}'");
-                navigation.PushAsync(entry.Create(), animated: false);
+                navigation.PushAsync(entry.CreateTitledPage(), animated: false);
 
             }
         }

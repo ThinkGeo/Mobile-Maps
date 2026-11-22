@@ -12,8 +12,11 @@ namespace HowDoISampleGpu.Samples;
 /// </summary>
 public class RasterMapProviders : SamplePage
 {
-    // OpenStreetMap's tile policy asks every application for a descriptive user agent.
-    private const string UserAgent = "ThinkGeo HowDoI Sample (support@thinkgeo.com)";
+    // OpenStreetMap's tile policy asks every application for a clear, unique user
+    // agent that names it - a library default is blocked. It also asks for the credit
+    // on the map, which the page carries, and forbids caching the tiles for offline
+    // use, which is why this one cell alone is given no FileTileCache.
+    private const string UserAgent = "ThinkGeo Maps sample gallery (support@thinkgeo.com)";
 
     /// <summary>
     /// Four raster services, and the only styled basemap among them is the one that
@@ -27,12 +30,16 @@ public class RasterMapProviders : SamplePage
     /// arrive as pixels: a photograph has no geometry to send.
     /// </para>
     /// </summary>
-    private static readonly (string Name, string Shows)[] Providers =
+    private static readonly (string Name, string Shows, string Credit)[] Providers =
     {
-        ("Cloud Aerial", "Aerial imagery over Frisco, Texas"),
-        ("OpenStreetMap", "The community's own street map, drawn to pixels"),
-        ("WMS NASA", "VIIRS true colour, the whole continent two days back"),
-        ("WMTS Swisstopo", "The Swiss national map, on the grid the server declares"),
+        ("Cloud Aerial", "Aerial imagery over Frisco, Texas",
+            "Imagery \u00a9 ThinkGeo"),
+        ("OpenStreetMap", "The community's own street map, drawn to pixels",
+            "\u00a9 OpenStreetMap contributors"),
+        ("WMS NASA", "VIIRS true colour, the whole continent two days back",
+            "VIIRS imagery courtesy NASA EOSDIS GIBS \u00b7 \u00a9 OpenStreetMap contributors"),
+        ("WMTS Swisstopo", "The Swiss national map, on the grid the server declares",
+            "\u00a9 swisstopo"),
     };
 
     private const int NasaIndex = 2;
@@ -164,6 +171,9 @@ public class RasterMapProviders : SamplePage
             // cell above already says which service this is, and the class follows
             // from the cell.
             _status.Text = Providers[index].Shows;
+
+            // The credit follows the cell: each of these four is somebody else's map.
+            SetAttribution(Providers[index].Credit);
         }
         catch (Exception exception)
         {
