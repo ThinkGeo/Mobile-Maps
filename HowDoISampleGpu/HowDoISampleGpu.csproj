@@ -172,18 +172,15 @@
   </ItemGroup>
 
   <!-- The engine is named directly, not left to arrive behind ThinkGeo.UI.Maui: the
-       samples name GpuBasemap, MapStyle and the tile sources themselves. -->
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+       samples name GpuBasemap, MapStyle and the tile sources themselves. One
+       reference per platform now - the platform hosts that used to be
+       ThinkGeo.Gpu.iOS and ThinkGeo.Gpu.Android are inside the engine. -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
     <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
-    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\ThinkGeo.Gpu.iOS.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
-    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.Android\ThinkGeo.Gpu.Android.csproj" />
   </ItemGroup>
 
   <!-- Embeds ANGLE and keeps the deprecated OpenGLES.framework out of the link. -->
-  <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu.iOS\IosHead.targets"
+  <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\IosHead.targets"
           Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
 
 </Project>
