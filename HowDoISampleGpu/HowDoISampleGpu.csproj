@@ -79,7 +79,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <!-- White, not the template's purple: the mark is #62B7E2 and #9E9E9C, two
+         mid-tones that only read as themselves on white, and iOS draws no border
+         of its own - the plate IS the icon's edge. -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFFFFF" />
     <MauiFont Include="Resources\Fonts\*" />
   </ItemGroup>
 
@@ -118,7 +121,7 @@
     that looks stretched and whose scale is wrong, with nothing in any log.
   -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFFFFF" />
   </ItemGroup>
 
   <ItemGroup>
