@@ -61,8 +61,8 @@
          13.1.0, which it does. -->
     <ApplicationDisplayVersion>15.0.0</ApplicationDisplayVersion>
     <!-- Build numbers only have to be unique within one version string. 15.0.0 (1)
-         is already uploaded, so the next upload is 2. -->
-    <ApplicationVersion>2</ApplicationVersion>
+         and (2) are already uploaded, so the next upload is 3. -->
+    <ApplicationVersion>3</ApplicationVersion>
 
     <!-- A floor, not a target: it decides how old a device may be and nothing else,
          and this app's job is to run on whatever a prospective customer is holding.
