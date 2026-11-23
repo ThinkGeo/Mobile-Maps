@@ -161,14 +161,31 @@
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFFFFF" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.UI\Maui\ThinkGeo.UI.Maui\ThinkGeo.UI.Maui.csproj" />
+  <!-- Source tree or published packages, chosen by one property:
+       
+         dotnet build                                           the sibling thinkgeosdk checkout
+         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta025   that version from nuget.org
+       
+       The version doubles as the switch, so there is no second knob to keep in step with
+       it. The source tree stays the default because that is what developing the samples
+       against an unreleased SDK needs; the package path exists because it is the only one
+       that tests what a customer gets. They are not the same build - buildTransitive and
+       build/ assets in a package do not flow through a ProjectReference, so the source
+       path silently skips ANGLE embedding, the OpenGLES removal and the licence check. -->
+  <PropertyGroup>
+    <ThinkGeoUseSource Condition="'$(ThinkGeoPackageVersion)' == ''">true</ThinkGeoUseSource>
+  </PropertyGroup>
 
+  <ItemGroup>
     <!-- No PostgreSQL or SQL Server provider: this gallery does not connect a phone to
          a database server, so Npgsql, Microsoft.Data.SqlClient and the MSAL broker they
          drag behind them are not in the app at all. The one database a phone genuinely
          holds is a spatial SQLite file, and SqliteFeatureSource is part of
          ThinkGeo.Core - see SampleCatalog.NotOnMobile. -->
+    <ProjectReference Condition="'$(ThinkGeoUseSource)' == 'true'"
+                      Include="..\..\thinkgeosdk\ThinkGeo.UI\Maui\ThinkGeo.UI.Maui\ThinkGeo.UI.Maui.csproj" />
+    <PackageReference Condition="'$(ThinkGeoUseSource)' != 'true'"
+                      Include="ThinkGeo.UI.Maui" Version="$(ThinkGeoPackageVersion)" />
   </ItemGroup>
 
   <!-- The engine is named directly, not left to arrive behind ThinkGeo.UI.Maui: the
@@ -176,11 +193,16 @@
        reference per platform now - the platform hosts that used to be
        ThinkGeo.Gpu.iOS and ThinkGeo.Gpu.Android are inside the engine. -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-    <ProjectReference Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
+    <ProjectReference Condition="'$(ThinkGeoUseSource)' == 'true'"
+                      Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
+    <PackageReference Condition="'$(ThinkGeoUseSource)' != 'true'"
+                      Include="ThinkGeo.Gpu" Version="$(ThinkGeoPackageVersion)" />
   </ItemGroup>
 
-  <!-- Embeds ANGLE and keeps the deprecated OpenGLES.framework out of the link. -->
+  <!-- Embeds ANGLE and keeps the deprecated OpenGLES.framework out of the link. Only for
+       the source path: the package ships the same work in buildTransitive, and importing
+       both would define the same target twice. -->
   <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\IosHead.targets"
-          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
+          Condition="'$(ThinkGeoUseSource)' == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
 
 </Project>
