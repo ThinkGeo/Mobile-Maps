@@ -35,20 +35,31 @@ public class BuildingsIn3D : ContentPage
     private const string BuildingSource = "planet_06-20-2026";
 
     /// <summary>
-    /// Over Union Square, looking north up Broadway at Midtown, in spherical mercator
-    /// metres.
+    /// Fifth Avenue in the eighties, where the Upper East Side meets Central Park, in
+    /// spherical mercator metres.
     /// <para>
     /// The vantage is the whole picture. A tilted camera sees the near side of the
     /// view at eye level and everything else behind it, so standing among towers -
     /// which is where this used to open, over Hudson Yards - puts three of them across
-    /// the screen and the city behind them is gone. From here the near side is the
-    /// Village and Union Square at six to fifteen storeys, the Flatiron blocks are
-    /// behind that, and Midtown stands along the top: the height rises away from the
-    /// camera instead of blocking it, which is the only arrangement in which a tilted
-    /// map shows more than a flat one.
+    /// the screen and the city behind them is gone. Union Square, which came after
+    /// that, solved the blocking but filled every corner with blocks that all stand
+    /// about the same height.
+    /// </para>
+    /// <para>
+    /// The park is what this view adds. It puts an empty half against a dense one, so
+    /// the city has an edge to be read against instead of running out of frame on all
+    /// four sides, and the reservoir gives the eye somewhere flat to measure the
+    /// skyline from. It is also the cheaper half: a park carries no buildings, so
+    /// roughly half the frame costs nothing to extrude, and the same tilt buys a
+    /// longer view for fewer features.
+    /// </para>
+    /// <para>
+    /// North stays up, so the park falls on the left of the frame and the avenues run
+    /// diagonally - that is Manhattan's grid, which is about 29 degrees off true
+    /// north, not a camera rotation.
     /// </para>
     /// </summary>
-    private static readonly PointShape HomeCenter = new(-8236529d, 4973874d);
+    private static readonly PointShape HomeCenter = new(-8233300d, 4980400d);
 
     /// <summary>
     /// Close enough that the buildings are the view rather than a texture on it, and
