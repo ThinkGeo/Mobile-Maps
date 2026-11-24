@@ -5,21 +5,13 @@ This repository is dedicated to providing samples and documentation for ThinkGeo
 We are continuously making improvements to the SDK / adding more samples. 
 
 ## ThinkGeo Maui HowDoI Sample:
-#### Design Philosophy: Streamlined for Simplicity
-1. Avoids the use of MVVM patterns
-2. Excludes third-party NuGet packages
-3. Initializes by copying sample data to the AppData folder on first run
-    - Ensures data consistency across platforms
-    - Optimizes compatibility with ThinkGeo APIs
-4. Implementation Notes:
-    - No modifications needed in the Platforms folder; stick to default settings.
-    - Retain default settings in MauiProgram.cs.
-    - Contains comments to suppress Resharper warnings.
+`HowDoISample/HowDoISample.sln` is the sample gallery: 25 samples, each drawing its map on the GPU through `GpuBasemap`.
 
+- Targets iOS and Android on .NET 10.
+- Builds against the published `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu` NuGet packages, so a clone of this repository is all it needs.
+- Each sample is one C# file under `HowDoISample/Samples`, with no MVVM and no third-party NuGet packages.
 
-### Development Environment Compatibility
-- **Visual Studio on Windows**: Target options include Windows, Android, and iOS (via a connected Mac machine).
-- **Rider on MacOS**: Supports targeting iOS, Android, and MacCatalyst.
+The earlier sample, which used the classic renderer and also targeted Windows and Mac Catalyst, was replaced by this gallery and remains in the repository history.
 
 ## ThinkGeo.UI.Maui Key Features 
 

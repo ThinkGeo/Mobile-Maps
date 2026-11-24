@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="456" height="456" fill="#512BD4" />
+<!--
+  The plate behind the mark. White, because the mark is two mid-tone colours that
+  only read as themselves on white - and because iOS draws no border of its own,
+  so whatever is here IS the icon's edge.
+-->
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="456" height="456" fill="#FFFFFF"/>
 </svg>
