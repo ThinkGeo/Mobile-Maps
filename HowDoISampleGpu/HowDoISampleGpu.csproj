@@ -7,10 +7,10 @@
     the GPU one - the two galleries answer different questions and a customer on
     the classic renderer still needs theirs.
 
-    Unlike HowDoISample this project builds against the SDK *sources*, not the
-    published packages: the MAUI GPU surface is newer than any package, so a
-    ProjectReference is the only way to run it. Switch to PackageReferences once
-    ThinkGeo.UI.Maui ships its GPU API.
+    Like HowDoISample it builds against the published ThinkGeo packages, so a clone
+    of this repository is all it needs. It can also build against a checkout of the
+    SDK sources, which is how the samples are developed ahead of a release - see
+    ThinkGeoUseSource further down.
   -->
 
   <PropertyGroup>
@@ -97,15 +97,12 @@
     AOT. This is the same opt-in PreludeMvtIos carries.
   -->
   <!--
-    Signing for a device build. The simulator needs none of this, so it is scoped to
-    the device runtime identifier. Automatic:AppStore asks Xcode's account for a
-    matching App Store profile rather than naming a file that expires.
+    Signing for the App Store build. The simulator needs none, and a development
+    build to a device names no identity here: it signs with whatever development
+    identity the machine has, or the one passed as -p:CodesignKey. Automatic:AppStore
+    asks Xcode's account for a matching App Store profile rather than naming a file
+    that expires.
   -->
-  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64' and '$(Configuration)' == 'Debug'">
-    <CodesignKey>Apple Development: Bai YiMing (549M2A94EH)</CodesignKey>
-    <CodesignProvision>Automatic</CodesignProvision>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64' and '$(Configuration)' == 'Release'">
     <CodesignKey>Apple Distribution: ThinkGeo LLC (LDJ2EKQRTJ)</CodesignKey>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
@@ -162,19 +159,21 @@
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFFFFF" />
   </ItemGroup>
 
-  <!-- Source tree or published packages, chosen by one property:
-       
-         dotnet build                                           the sibling thinkgeosdk checkout
-         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta027   that version from nuget.org
-       
-       The version doubles as the switch, so there is no second knob to keep in step with
-       it. The source tree stays the default because that is what developing the samples
-       against an unreleased SDK needs; the package path exists because it is the only one
-       that tests what a customer gets. They are not the same build - buildTransitive and
-       build/ assets in a package do not flow through a ProjectReference, so the source
-       path silently skips ANGLE embedding, the OpenGLES removal and the licence check. -->
+  <!-- Published packages or the SDK source tree:
+
+         dotnet build                                           the packages below, from nuget.org
+         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta027   another version of them
+         dotnet build -p:ThinkGeoUseSource=true                 a thinkgeosdk checkout beside this repository
+
+       Packages are the default because that is what a clone of this repository can
+       build, and what a customer gets. The source tree is for developing the samples
+       against an SDK that is not released yet, and needs that checkout. They are not
+       the same build - buildTransitive and build/ assets in a package do not flow
+       through a ProjectReference, so the source path skips the package's ANGLE
+       embedding, its OpenGLES removal and its licence check; IosHead.targets, imported
+       below, does the first two for it. -->
   <PropertyGroup>
-    <ThinkGeoUseSource Condition="'$(ThinkGeoPackageVersion)' == ''">true</ThinkGeoUseSource>
+    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta027</ThinkGeoPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
