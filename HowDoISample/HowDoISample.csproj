@@ -104,18 +104,11 @@
     AOT. This is the same opt-in PreludeMvtIos carries.
   -->
   <!--
-    Signing for the App Store build. The simulator needs none, and a development
-    build to a device names no identity here: it signs with whatever development
-    identity the machine has, or the one passed as -p:CodesignKey. Automatic:AppStore
-    asks Xcode's account for a matching App Store profile rather than naming a file
-    that expires.
+    No signing identity is named here. The simulator needs none, and a development
+    build to a device signs with whatever development identity the machine has. A
+    distribution build passes its own on the command line: -p:CodesignKey,
+    -p:CodesignProvision and -p:ArchiveOnBuild=true.
   -->
-  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'ios-arm64' and '$(Configuration)' == 'Release'">
-    <CodesignKey>Apple Distribution: ThinkGeo LLC (LDJ2EKQRTJ)</CodesignKey>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <ArchiveOnBuild>true</ArchiveOnBuild>
-  </PropertyGroup>
-
   <PropertyGroup Condition="$(RuntimeIdentifier.Contains('simulator'))">
     <UseInterpreter>true</UseInterpreter>
   </PropertyGroup>
