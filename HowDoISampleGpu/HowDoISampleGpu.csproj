@@ -162,7 +162,7 @@
   <!-- Published packages or the SDK source tree:
 
          dotnet build                                           the packages below, from nuget.org
-         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta027   another version of them
+         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta028   another version of them
          dotnet build -p:ThinkGeoUseSource=true                 a thinkgeosdk checkout beside this repository
 
        Packages are the default because that is what a clone of this repository can
@@ -170,10 +170,10 @@
        against an SDK that is not released yet, and needs that checkout. They are not
        the same build - buildTransitive and build/ assets in a package do not flow
        through a ProjectReference, so the source path skips the package's ANGLE
-       embedding, its OpenGLES removal and its licence check; IosHead.targets, imported
-       below, does the first two for it. -->
+       embedding, its OpenGLES removal, its framework thinning and its licence check;
+       IosHead.targets, imported below, does the first three for it. -->
   <PropertyGroup>
-    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta027</ThinkGeoPackageVersion>
+    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta028</ThinkGeoPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -199,34 +199,12 @@
                       Include="ThinkGeo.Gpu" Version="$(ThinkGeoPackageVersion)" />
   </ItemGroup>
 
-  <!-- Embeds ANGLE and keeps the deprecated OpenGLES.framework out of the link. Only for
-       the source path: the package ships the same work in buildTransitive, and importing
-       both would define the same target twice. -->
+  <!-- Embeds ANGLE, keeps the deprecated OpenGLES.framework out of the link, and thins
+       the embedded frameworks to arm64 for a device build (SkiaSharp's carries an x86_64
+       slice that App Store validation refuses). Only for the source path: the package
+       ships the same work in buildTransitive, and importing both would define the same
+       targets twice. -->
   <Import Project="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\IosHead.targets"
           Condition="'$(ThinkGeoUseSource)' == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
-
-  <!--
-    The other half of that file, which the package deliberately does not ship: thin every
-    embedded framework to arm64 before the bundle is signed.
-
-    SkiaSharp's package ships runtimes/ios/native/libSkiaSharp.framework as x86_64 + arm64,
-    so a device build embeds an x86_64 slice, and App Store validation refuses the upload
-    over it (ITMS-90087 unsupported architectures, 90209 segment alignment, 90125
-    LC_ENCRYPTION_INFO, 90080 not PIE - all four about that one slice). Built from source,
-    IosHead.targets takes it out. The package does not, because that would be a shell step
-    run over another vendor's framework inside a customer's build; an application that is
-    going to the store does it for itself, and this is where this one does.
-
-    Package builds only, so the two never both run. Device builds only: a simulator build
-    is never uploaded. Before _CodesignAppBundle, so the SDK signs what is left - the
-    signature is over the binary, and thinning afterwards would break it.
-
-    Backticks, not $(...): MSBuild reads $( as a property function and fails with MSB4184.
-  -->
-  <Target Name="HowDoIThinEmbeddedFrameworks" BeforeTargets="_CodesignAppBundle"
-          Condition="'$(ThinkGeoUseSource)' != 'true' And '$(RuntimeIdentifier)' == 'ios-arm64'">
-    <Exec Condition="Exists('$(AppBundleDir)/Frameworks')"
-          Command="for fw in &quot;$(AppBundleDir)/Frameworks&quot;/*.framework; do name=`basename &quot;$fw&quot; .framework`; bin=&quot;$fw/$name&quot;; [ -f &quot;$bin&quot; ] || continue; archs=`lipo -archs &quot;$bin&quot; 2>/dev/null` || continue; case &quot;$archs&quot; in *&quot; &quot;*) lipo -thin arm64 &quot;$bin&quot; -o &quot;$bin.thin&quot; &amp;&amp; mv &quot;$bin.thin&quot; &quot;$bin&quot; &amp;&amp; chmod +x &quot;$bin&quot; &amp;&amp; echo &quot;thinned $name: $archs -&gt; arm64&quot; ;; esac; done" />
-  </Target>
 
 </Project>
