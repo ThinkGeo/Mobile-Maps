@@ -54,9 +54,10 @@ public static class SampleCatalog
             aliases: "buildings, 3D buildings, extrusion, fill-extrusion, city, skyline, height, tilt, "
                    + "style.json, SetStyleAsync, dark theme, light theme, first map, New York, Manhattan"),
         new("Map Navigation", "Terrain and Hillshade",
-            "The ground with its real shape: satellite imagery draped over a terrain source and hill-shaded, over the Grand Canyon",
-            "MapStyle.SetTerrain", SampleDraws.Gpu, () => new TerrainAndHillshade(),
-            aliases: "terrain in 3D, terrain, DEM, hillshade, terrarium, elevation, drape, Grand Canyon, 3D"),
+            "The ground with its real shape: satellite imagery draped over a terrain source with roads drawn on the photograph, and a switch to a hill-shaded vector map, at Mount Rainier",
+            "MapStyle.SetTerrain, AddStyle", SampleDraws.Gpu, () => new TerrainAndHillshade(),
+            aliases: "terrain in 3D, terrain, DEM, hillshade, terrarium, elevation, drape, Mount Rainier, mountain, 3D, "
+                   + "hybrid, roads over imagery, shaded relief, buildings, onlyLayerTypes"),
         new("Map Navigation", "GPS Navigation",
             "A drive along a recorded GPS track - the camera flies to each point, the vehicle rides the flight's progress, and the road behind turns green",
             "DynamicSource", SampleDraws.Gpu, () => new GpsNavigation(),
