@@ -7,11 +7,11 @@ We are continuously making improvements to the SDK / adding more samples.
 ## ThinkGeo Maui HowDoI Sample:
 `HowDoISample/HowDoISample.sln` is the sample gallery: 25 samples, each drawing its map on the GPU through `GpuBasemap`.
 
-- Targets iOS and Android on .NET 10.
+- Targets iOS, Android and Windows on .NET 10. The Windows head is built only on a Windows machine: `dotnet build HowDoISample/HowDoISample.csproj -f net10.0-windows10.0.19041.0`, then run `HowDoISample.exe` from the build output, or F5 in Visual Studio.
 - Builds against the published `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu` NuGet packages, so a clone of this repository is all it needs.
 - Each sample is one C# file under `HowDoISample/Samples`, with no MVVM and no third-party NuGet packages.
 
-The earlier sample, which used the classic renderer and also targeted Windows and Mac Catalyst, was replaced by this gallery and remains in the repository history.
+The earlier sample, which used the classic renderer and also targeted Mac Catalyst, was replaced by this gallery and remains in the repository history.
 
 ## ThinkGeo.UI.Maui Key Features 
 

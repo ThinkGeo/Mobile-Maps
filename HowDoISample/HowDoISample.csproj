@@ -4,8 +4,8 @@
     The MAUI how-do-I gallery: the counterpart of samples/wpf/HowDoISample, whose
     every sample draws through GpuBasemap. It replaced the classic-renderer sample
     that lived in this folder under the same solution and project names. That one,
-    with its Mac Catalyst and Windows heads, is in the history before the
-    replacement; the heads here are iOS and Android.
+    with its Mac Catalyst head, is in the history before the replacement; the heads
+    here are iOS, Android and - on a Windows machine - Windows.
 
     It builds against the published ThinkGeo packages, so a clone
     of this repository is all it needs. It can also build against a checkout of the
@@ -15,6 +15,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>net10.0-ios;net10.0-android36.0</TargetFrameworks>
+    <!-- Windows only where it can be built, so a Mac building the phone heads never
+         restores it. Unpackaged: it runs straight from the build output, F5 or
+         dotnet run, with no MSIX to deploy first. -->
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+    <WindowsPackageType>None</WindowsPackageType>
     <OutputType>Exe</OutputType>
     <UseMaui>true</UseMaui>
     <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
@@ -76,13 +81,15 @@
          everything before the iPhone 11) to buy an API this app never calls. -->
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 
     <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
     <!-- ThinkGeo.UI.Maui multi-targets a windows head, and NuGet restores every
          target framework of a referenced project even when only one is built. On a
          Mac that head has no reference assemblies, so restore stops with NETSDK1100
-         unless it is told to tolerate the windows target. Nothing windows is built
-         here; this only lets its restore resolve. -->
+         unless it is told to tolerate the windows target. On a Mac nothing windows
+         is built; this only lets its restore resolve. -->
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <!-- Mono's concurrent GC crashes Android Release builds under heavy allocation:
          https://github.com/dotnet/runtime/issues/123537 -->
@@ -192,7 +199,7 @@
        samples name GpuBasemap, MapStyle and the tile sources themselves. One
        reference per platform now - the platform hosts that used to be
        ThinkGeo.Gpu.iOS and ThinkGeo.Gpu.Android are inside the engine. -->
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <ProjectReference Condition="'$(ThinkGeoUseSource)' == 'true'"
                       Include="..\..\thinkgeosdk\ThinkGeo.Gpu\ThinkGeo.Gpu\ThinkGeo.Gpu.csproj" />
     <PackageReference Condition="'$(ThinkGeoUseSource)' != 'true'"
