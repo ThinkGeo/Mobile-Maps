@@ -162,7 +162,7 @@
   <!-- Published packages or the SDK source tree:
 
          dotnet build                                           the packages below, from nuget.org
-         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta028   another version of them
+         dotnet build -p:ThinkGeoPackageVersion=15.1.0-beta029   another version of them
          dotnet build -p:ThinkGeoUseSource=true                 a thinkgeosdk checkout beside this repository
 
        Packages are the default because that is what a clone of this repository can
@@ -173,7 +173,7 @@
        embedding, its OpenGLES removal, its framework thinning and its licence check;
        IosHead.targets, imported below, does the first three for it. -->
   <PropertyGroup>
-    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta028</ThinkGeoPackageVersion>
+    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta029</ThinkGeoPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
