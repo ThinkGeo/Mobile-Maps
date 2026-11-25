@@ -35,8 +35,8 @@ GPU basemap, as they were above the earlier one.
 | Requires | .NET 10 with the MAUI workload. The samples set iOS 15, Android 5.0 (API 21) and Windows 10 version 1809 as their minimums. |
 
 The latest stable release, 15.0.1, draws its map with the earlier renderer, in which a map is a
-stack of overlays, and it has no `GpuBasemap`. The samples written for it are in this repository's
-history.
+stack of overlays, and it has no `GpuBasemap`. The samples written for it are kept at the tag
+[`v15.0.1`](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/v15.0.1).
 
 ## What is here
 
@@ -44,7 +44,6 @@ history.
 |---|---|
 | [`quick-start-guide`](quick-start-guide/QuickStartGuide_Maui_VS) | The place to start: a guide, with its finished project, that puts a map and a shapefile on a page in seven steps. |
 | [`HowDoISample`](HowDoISample) | The how-do-I gallery: 25 samples, one for each thing the map can do. |
-| [`Legacy/ThinkGeo.UI.iOS`](Legacy/ThinkGeo.UI.iOS) | The how-do-I sample for `ThinkGeo.UI.iOS`, the map control for native iOS apps that do not use MAUI. It draws with the earlier renderer. |
 
 ## The how-do-I gallery
 
@@ -87,6 +86,12 @@ dotnet build HowDoISample/HowDoISample.csproj -f net10.0-windows10.0.19041.0
 
 The samples carry a ThinkGeo Cloud key for evaluation. Sign up at
 [https://cloud.thinkgeo.com](https://cloud.thinkgeo.com) for a key of your own.
+
+## Native iOS and Android
+
+`ThinkGeo.UI.iOS` and `ThinkGeo.UI.Android`, the map controls for apps that do not use MAUI, are
+maintained and released alongside `ThinkGeo.UI.Maui`. Their samples are not in this branch; the
+native iOS how-do-I sample is at [`v15.0.1/Legacy/ThinkGeo.UI.iOS`](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/v15.0.1/Legacy/ThinkGeo.UI.iOS).
 
 ## More
 
