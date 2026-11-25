@@ -55,15 +55,13 @@ public class MeasureDistanceAndArea : SamplePage
         });
         map.Basemap = new GpuBasemap(style);
 
+        // Choosing the other measurement also clears the map, so there is no button
+        // for that.
         AddChoiceStrip(new[] { "Distance", "Area" }, 0, index =>
         {
             _area = index == 1;
             Reset();
         });
-
-        var clear = new Button { Text = "Clear", FontSize = 12, Padding = new Thickness(10, 4) };
-        clear.Clicked += (_, _) => Reset();
-        AddToPanel(clear);
 
         _result = AddToPanel(new Label { FontSize = 13, TextColor = PanelInk, FontAttributes = FontAttributes.Bold });
         _detail = AddStatusLabel();
