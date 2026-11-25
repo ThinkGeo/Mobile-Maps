@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using ThinkGeo.UI.Maui;
 
 namespace MauiSample
 {
@@ -9,6 +10,8 @@ namespace MauiSample
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                // Registers the GPU map surface. Without it the map has nothing to draw on.
+                .UseThinkGeoGpu()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
