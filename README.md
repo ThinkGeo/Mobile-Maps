@@ -5,31 +5,22 @@ This repository is dedicated to providing samples and documentation for ThinkGeo
 We are continuously making improvements to the SDK / adding more samples. 
 
 ## ThinkGeo Maui HowDoI Sample:
-#### Design Philosophy: Streamlined for Simplicity
-1. Avoids the use of MVVM patterns
-2. Excludes third-party NuGet packages
-3. Initializes by copying sample data to the AppData folder on first run
-    - Ensures data consistency across platforms
-    - Optimizes compatibility with ThinkGeo APIs
-4. Implementation Notes:
-    - No modifications needed in the Platforms folder; stick to default settings.
-    - Retain default settings in MauiProgram.cs.
-    - Contains comments to suppress Resharper warnings.
+`HowDoISample/HowDoISample.sln` is the sample gallery: 25 samples, each drawing its map on the GPU through `GpuBasemap`.
 
+- Targets iOS, Android and Windows on .NET 10. The Windows head is built only on a Windows machine: `dotnet build HowDoISample/HowDoISample.csproj -f net10.0-windows10.0.19041.0`, then run `HowDoISample.exe` from the build output, or F5 in Visual Studio.
+- Builds against the published `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu` NuGet packages, so a clone of this repository is all it needs.
+- Each sample is one C# file under `HowDoISample/Samples`, with no MVVM and no third-party NuGet packages.
 
-### Development Environment Compatibility
-- **Visual Studio on Windows**: Target options include Windows, Android, and iOS (via a connected Mac machine).
-- **Rider on MacOS**: Supports targeting iOS, Android, and MacCatalyst.
+The earlier sample, which used the classic renderer and also targeted Mac Catalyst, was replaced by this gallery and remains in the repository history.
 
 ## ThinkGeo.UI.Maui Key Features 
 
 ### 1. Comprehensive Support for Multiple Platforms
 
-1. Requires .Net 8.0
-2. Supports iOS, Android, Windows, and MacCatalyst platforms
+1. Requires .NET 10
+2. Supports iOS, Android, Windows, and MacCatalyst platforms. The GPU renderer, which the sample gallery above uses, runs on iOS, Android and Windows
 3. Relies on the same ThinkGeo.Core as other ThinkGeo products
 4. Easy to use, no need to write platform specific code. 
-5. Currently in beta. Version 13.3 will be aligned with other ThinkGeo products by May 1st, 2024.
 
 ### 2. Live XAML Updates (Visual Studio)
 Observe real-time changes in XAML during development.
