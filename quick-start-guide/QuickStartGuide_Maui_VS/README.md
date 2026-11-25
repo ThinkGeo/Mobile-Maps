@@ -6,6 +6,8 @@ drawn on the GPU, which is how ThinkGeo 15.1 draws maps.
 
 The project targets iOS, Android and, on a Windows machine, Windows.
 
+<img src="assets/quick_start_zoom.gif" width="300" alt="The finished quick start on an iPhone: the world's capitals over the base map, zooming in to Europe and back out">
+
 ## Step 1: Create a .NET MAUI project
 
 Create a new **.NET MAUI App** in Visual Studio, or with `dotnet new maui`.
@@ -105,7 +107,9 @@ app's data directory on first run, so the code above opens it by file path.
 ## Step 7: Run it
 
 Pick an Android emulator, an iOS simulator or Windows, and run: the world's capitals, as white
-circles, over the base map.
+circles, over the base map. Pinch to zoom, drag to pan and twist to rotate; the `+` and `-` buttons
+in the corner are the `ZoomMapTool`. The capitals are drawn with the map, so they stay sharp and in
+place at every zoom, as in the animation at the top of this page.
 
 ## More
 
