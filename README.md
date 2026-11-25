@@ -17,11 +17,10 @@ The earlier sample, which used the classic renderer and also targeted Mac Cataly
 
 ### 1. Comprehensive Support for Multiple Platforms
 
-1. Requires .Net 8.0
-2. Supports iOS, Android, Windows, and MacCatalyst platforms
+1. Requires .NET 10
+2. Supports iOS, Android, Windows, and MacCatalyst platforms. The GPU renderer, which the sample gallery above uses, runs on iOS, Android and Windows
 3. Relies on the same ThinkGeo.Core as other ThinkGeo products
 4. Easy to use, no need to write platform specific code. 
-5. Currently in beta. Version 13.3 will be aligned with other ThinkGeo products by May 1st, 2024.
 
 ### 2. Live XAML Updates (Visual Studio)
 Observe real-time changes in XAML during development.
