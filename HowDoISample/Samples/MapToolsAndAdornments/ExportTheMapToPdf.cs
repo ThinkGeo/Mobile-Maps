@@ -12,30 +12,21 @@ namespace HowDoISample.Samples;
 /// <remarks>
 /// The GPU draws triangles, and triangles cannot be a vector PDF. The same style
 /// document can be drawn a second way: <see cref="MvtTilesAsyncLayer"/> takes the
-/// style.json the GPU map is wearing, resolves it with the same compile every
-/// renderer shares, and draws it through the classic canvas styles onto whatever
-/// GeoCanvas it is handed - here <see cref="PdfGeoCanvas"/>, which is SkiaSharp and
-/// the BCL and nothing else, so this works on a phone exactly as it does on a server.
+/// style.json the GPU map is wearing and draws it through the classic canvas styles
+/// onto whatever GeoCanvas it is handed - here <see cref="PdfGeoCanvas"/>.
 /// <para>
-/// The desktop gallery wraps this in a layout designer: a preview you can zoom, page
-/// setup, draggable layout layers, tables. None of that belongs on a phone. What
-/// belongs is the one thing the designer is for - a sheet with the map, a title and a
-/// scale on it - and then the real PDF, opened in the system's own viewer, which is a
-/// better preview than any we could draw and is also the artifact itself.
+/// The sheet holds the map, a title and a scale. The PDF is then opened in the
+/// system's own viewer, which is the preview and the artifact at once.
 /// </para>
 /// </remarks>
-public class ExportToPdf : SamplePage
+public class ExportTheMapToPdf : SamplePage
 {
     private sealed record Sheet(string Name, PrinterPageSize Size, PrinterOrientation Orientation);
 
     /// <summary>
-    /// Which way up, and nothing else. The strip used to mix two questions - A4
-    /// portrait, A4 landscape, Letter - so two of its cells differed by orientation
-    /// and the third by a paper size that is six millimetres narrower and eighteen
-    /// shorter, a difference nobody can see in a map on a sheet. Which way up is the
-    /// one choice that changes the picture. Letter is the same call with
-    /// <see cref="PrinterPageSize.AnsiA"/>, and every other size the printer knows is
-    /// a value of that enum.
+    /// Which way up. Another paper size is the same call with a different
+    /// <see cref="PrinterPageSize"/>, for example <see cref="PrinterPageSize.AnsiA"/>
+    /// for Letter.
     /// </summary>
     private static readonly Sheet[] Sheets =
     {
@@ -43,11 +34,7 @@ public class ExportToPdf : SamplePage
         new("Landscape", PrinterPageSize.A4, PrinterOrientation.Landscape),
     };
 
-    /// <summary>
-    /// The city limits as a boundary rather than as a wash. It was a translucent
-    /// orange fill, which over a whole city on a sheet of paper reads as a stain
-    /// over the map rather than as where the city ends.
-    /// </summary>
+    /// <summary>The city limits, drawn as a boundary line.</summary>
     private const string CityLimitStyle = """
     {
       "layers": [
@@ -74,9 +61,7 @@ public class ExportToPdf : SamplePage
         map.MapUnit = GeographyUnit.Meter;
 
         // The screen gets the same two layers the sheet does: the published light
-        // style, and the city limits over it. They were only on the sheet, so the
-        // line under this map promised what you see is what is printed and the PDF
-        // came back with a boundary across it that had never been on the screen.
+        // style, and the city limits over it.
         var style = new MapStyle();
         style.AddStyle(ThinkGeoVectorStyles.Light, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
         {
@@ -102,9 +87,7 @@ public class ExportToPdf : SamplePage
         _status = AddStatusLabel();
         _status.Text = "What you see is what is printed.";
 
-        // The whole city, because the city limits are what this sample puts on the
-        // sheet beside the basemap: at the street scale this opened on, the boundary
-        // was off the screen and the sheet came back with a line nobody had seen.
+        // The whole city, so the city limits that go on the sheet are on screen too.
         map.CenterPoint = new PointShape(-10779000, 3915000);
         map.MapScale = 180000;
         _ = map.RefreshAsync();
@@ -130,9 +113,7 @@ public class ExportToPdf : SamplePage
             _status.Text = FormattableString.Invariant(
                 $"{size:N0} KB of vector PDF in {watch.ElapsedMilliseconds:N0} ms - text and all");
 
-            // The system's own viewer: open it, file it, mail it, AirPrint it. A PDF
-            // that only ever existed inside the application would not have been worth
-            // making.
+            // The system's own viewer: open it, file it, mail it, print it.
             await Share.Default.RequestAsync(new ShareFileRequest
             {
                 Title = "Map PDF",
@@ -206,9 +187,8 @@ public class ExportToPdf : SamplePage
     {
         var streets = new MvtTilesAsyncLayer(ThinkGeoVectorStyles.Light);
 
-        // The published style's tile URL carries a {key} placeholder - the key is
-        // deliberately not baked into a public document - so it is filled in on the
-        // way out, which is what the web viewer's transformRequest does.
+        // The published style's tile URL carries a {key} placeholder, so the key is
+        // filled in on the way out.
         streets.SendingHttpRequest += (_, e) =>
         {
             var uri = e.HttpRequestMessage?.RequestUri;

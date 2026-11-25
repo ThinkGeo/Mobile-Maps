@@ -2,8 +2,6 @@ namespace HowDoISample;
 
 /// <summary>
 /// The gallery's menu: every catalog row, grouped, with a search box over it.
-/// The desktop gallery prints the same list down its left edge; a phone has no
-/// left edge to spare, so it is a page the map returns to.
 /// </summary>
 public class MenuPage : ContentPage
 {
@@ -47,20 +45,16 @@ public class MenuPage : ContentPage
     }
 
     /// <summary>
-    /// A band, not a caption. The heading used to be grey 13pt text with the same
-    /// left edge and the same background as the rows under it, so a list of seventy
-    /// samples read as one undifferentiated column - nothing said where one group
-    /// ended and the next began.
-    /// </summary>
-    /// <summary>
-    /// A colour for each appearance. Hard-coding the light one and leaving the text
-    /// to its default painted white titles onto white rows in dark mode - the list
-    /// came up blank, with only the separators showing. Every colour below is stated
-    /// for both, so a row always contrasts with whatever it is sitting on.
+    /// A colour for each appearance, so a row contrasts with what it sits on in both
+    /// the light and the dark theme.
     /// </summary>
     private static void SetThemeColor(BindableObject target, BindableProperty property, string light, string dark)
         => target.SetAppThemeColor(property, Color.FromArgb(light), Color.FromArgb(dark));
 
+    /// <summary>
+    /// A band rather than a caption, so the list shows where one group ends and the
+    /// next begins.
+    /// </summary>
     private static object BuildGroupHeader()
     {
         var title = new Label
@@ -91,10 +85,8 @@ public class MenuPage : ContentPage
     }
 
     /// <summary>
-    /// The name, and nothing else. Every row used to carry two lines of summary under
-    /// its title, which made each one three times as tall, pushed the list to several
-    /// screens of scrolling, and buried the grouping - and a sentence that long in a
-    /// list is not read anyway. The summary belongs on the sample, not in the index.
+    /// The name and nothing else: the list is an index, and a sample's summary is
+    /// there for the search to match.
     /// </summary>
     private static object BuildRow()
     {

@@ -19,16 +19,8 @@ public class RasterMapProviders : SamplePage
     private const string UserAgent = "ThinkGeo Maps sample gallery (support@thinkgeo.com)";
 
     /// <summary>
-    /// Four raster services, and the only styled basemap among them is the one that
-    /// cannot be anything else.
-    /// <para>
-    /// ThinkGeo Cloud publishes Light, Dark and Hybrid as raster tiles as well, in a
-    /// v1 and a v2 of each, and cells for them used to stand here. They are the same
-    /// maps Vector Map Providers already shows, flattened to pixels on the server, so
-    /// what a reader got from tapping along the strip was the provider's catalogue
-    /// rather than anything about rasters. The aerial imagery is the one that has to
-    /// arrive as pixels: a photograph has no geometry to send.
-    /// </para>
+    /// Four raster services. The aerial imagery is the one that has to arrive as
+    /// pixels: a photograph has no geometry to send.
     /// </summary>
     private static readonly (string Name, string Shows, string Credit)[] Providers =
     {
@@ -62,14 +54,10 @@ public class RasterMapProviders : SamplePage
     /// <summary>The line that differs: which class serves the tiles.</summary>
     private static RasterTileSource OpenChosen(int index) => index switch
     {
-        // X2, not X1. A phone's screen is two or three device pixels to the point,
-        // so the X1 tile - 512 pixels over the ground the X2 tile covers with 1024 -
-        // is magnified before it is ever shown and the imagery reads as soft. The
-        // tile is four times the bytes and worth it: this is the one provider here
-        // whose subject IS the pixels.
+        // X2, not X1: a phone's screen is two or three device pixels to the point, so
+        // the 512-pixel X1 tile would be magnified and the imagery would read as soft.
         0 => new ThinkGeoRasterTileSource(SampleShared.CloudApiKey, ThinkGeoCloudRasterMapsMapType.Aerial_V2_X2),
-        // No X2 counterpart: openstreetmap.org serves one 256-pixel tile set and
-        // nothing else, which is part of what the cell is showing.
+        // openstreetmap.org serves one 256-pixel tile set.
         1 => new OpenStreetMapRasterTileSource(UserAgent),
         NasaIndex => OpenNasaImagery(),
         _ => OpenSwisstopo(),
@@ -81,15 +69,12 @@ public class RasterMapProviders : SamplePage
     /// known in advance and stated.
     /// </summary>
     /// <remarks>
-    /// FastMode is what makes this one usable on a phone. Opening a WMS normally begins
-    /// by fetching GetCapabilities and adopting what it says; NASA's is 2.3 MB listing
-    /// 1,610 layers, and all of it has to arrive and parse before the first tile is
-    /// asked for. On a desktop that is a second nobody notices. On a mobile network it
-    /// can outlast the client's own twenty-second timeout, and then the open throws and
-    /// the sample reports a server that is in fact answering perfectly well - which is
-    /// exactly how it failed. Nothing in that document is needed here: the layer, the
-    /// format and the coordinate system are all known, so they are set and the fetch is
-    /// skipped. FastMode cannot learn the CRS from the server, so it is named.
+    /// Opening a WMS normally begins by fetching GetCapabilities and adopting what it
+    /// says. This server's is 2.3 MB listing more than a thousand layers, which on a
+    /// mobile network can outlast the client's timeout. Nothing in that document is
+    /// needed here: the layer, the format and the coordinate system are known, so
+    /// they are set and FastMode skips the fetch. FastMode cannot learn the CRS from
+    /// the server, so it is named.
     /// </remarks>
     private static WmsRasterTileSource OpenNasaImagery()
     {
@@ -122,11 +107,9 @@ public class RasterMapProviders : SamplePage
             OutputFormat = "image/png",
             TileMatrixSetName = "3857_19",
 
-            // A WMTS has to read its capabilities - the tile matrix set is in them and
-            // nothing else knows it - and this server's is 1.8 MB describing 688 layers.
-            // That is a tenth of a second on a desk and can be most of a minute on a
-            // train, so the twenty seconds a desktop client defaults to is not a limit
-            // this server is failing to meet, it is a limit set for a different network.
+            // A WMTS has to read its capabilities - the tile matrix set is in them -
+            // and this server's is 1.8 MB, which a mobile network can take longer than
+            // the default timeout to deliver.
             TimeoutInSeconds = 60,
         };
 
@@ -167,9 +150,7 @@ public class RasterMapProviders : SamplePage
 
             await ArriveAsync(index, source);
 
-            // What is on the screen, not the name of the class that fetched it: the
-            // cell above already says which service this is, and the class follows
-            // from the cell.
+            // What is on the screen.
             _status.Text = Providers[index].Shows;
 
             // The credit follows the cell: each of these four is somebody else's map.

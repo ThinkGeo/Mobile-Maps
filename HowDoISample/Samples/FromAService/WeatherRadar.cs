@@ -12,17 +12,10 @@ namespace HowDoISample.Samples;
 public class WeatherRadar : SamplePage, IDisposable
 {
     /// <summary>
-    /// One frame of the composite, asked for at a size a phone can hold.
-    /// <para>
-    /// The same mosaic is published as a flat file, and this sample used to fetch it:
-    /// <c>/data/gis/images/4326/USCOMP/n0q_0.png</c>. That file is 12200 x 5400 - a
-    /// quarter of a gigabyte once decoded to RGBA, and six frames of it is a gigabyte
-    /// and a half of texture for a map 1200 pixels wide. The page drew nothing at all
-    /// and said nothing about why. The server will cut the same product to any size
-    /// through its WMS, so the frames arrive at 2048 x 906: a quarter of a megabyte
-    /// each, already transparent where there is no echo, and more resolution than the
-    /// whole of the United States across a phone has anywhere to put.
-    /// </para>
+    /// One frame of the composite, requested through the server's WMS at a size a
+    /// phone can hold: 2048 x 906, already transparent where there is no echo. The
+    /// same mosaic is also published as a flat file, at 12200 x 5400 - a quarter of a
+    /// gigabyte once decoded, for each of six frames.
     /// </summary>
     private const string FrameUrlTemplate =
         "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0q.cgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap" +

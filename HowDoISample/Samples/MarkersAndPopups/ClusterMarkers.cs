@@ -12,24 +12,10 @@ namespace HowDoISample.Samples;
 /// settles. Tapping a cluster zooms to what is inside it.
 /// </summary>
 /// <remarks>
-/// Drawn as geometry, not as views.
-/// <para>
-/// Every cluster used to be a MAUI Marker - a ContentView holding an Ellipse and a
-/// Label - and reclustering threw all of them away and built new ones. The clustering
-/// itself is one pass over a few thousand points and takes under a millisecond; the
-/// cost was several hundred native views being constructed, given handlers and laid
-/// out on the UI thread, which is the hitch after every pan.
-/// </para>
-/// <para>
-/// The gallery's other answer to "a lot of points that move" is a
-/// <see cref="DynamicSource"/>, and Live Flights measures it on this hardware at two
-/// thousand points published in under twenty milliseconds, sixty times a second. A
-/// cluster is a point with a size, a colour and a number on it, which is exactly what
-/// that source draws. So the sample uses it, and loses nothing but the freedom to put
-/// arbitrary MAUI content in a bubble - a freedom the Markers and Popups samples
-/// already demonstrate twice over, and the one freedom a clustering sample has no use
-/// for: you cluster because there are too many things to draw one at a time.
-/// </para>
+/// Drawn as geometry, not as views: a cluster is a point with a size, a colour and a
+/// number on it, which is what a <see cref="DynamicSource"/> draws. Reclustering is
+/// then one push of geometry, where a MAUI Marker per cluster would be several
+/// hundred native views built and laid out on the UI thread after every pan.
 /// </remarks>
 public class ClusterMarkers : SamplePage
 {
@@ -93,8 +79,7 @@ public class ClusterMarkers : SamplePage
         };
 
         // Geometry has no Tapped event of its own, so the tap is matched against the
-        // clusters by distance - which is what a marker's own hit test does, only
-        // written where the sample can see it.
+        // clusters by distance.
         map.SingleTap += (_, e) => TapAt(e.X, e.Y);
 
         Recluster();
@@ -147,13 +132,8 @@ public class ClusterMarkers : SamplePage
     }
 
     /// <summary>
-    /// Three steps, not a gradient.
-    /// <para>
-    /// A continuous ramp gives every cluster on screen its own slightly different
-    /// colour, which reads as noise rather than as information - the eye cannot tell
-    /// a 40 from a 55 by hue, and trying makes the map busy. Every clustering library
-    /// people recognise does the same thing: a few buckets, a few sizes.
-    /// </para>
+    /// Three steps, not a gradient: a continuous ramp gives every cluster its own
+    /// slightly different colour, and nobody can tell a 40 from a 55 by hue.
     /// </summary>
     private static (float Size, GeoColor Color, float TextSize) StepFor(int count) => count switch
     {
@@ -218,18 +198,11 @@ public class ClusterMarkers : SamplePage
 
     /// <summary>
     /// A solid disc inside a wider translucent halo of the same colour, rasterized
-    /// once and tinted per cluster.
-    /// <para>
-    /// This is the shape every clustering library settled on, and the reason is what
-    /// happens when two clusters overlap: hard-edged discs with a white ring collide
-    /// and argue, while a soft outer ring lets one sit over another and still read as
-    /// two. It also gives the marker an edge on a dark basemap without drawing a line
-    /// on it.
-    /// </para>
+    /// once and tinted per cluster. The soft outer ring lets one cluster sit over
+    /// another and still read as two, and gives the marker an edge on a dark basemap.
     /// <para>
     /// Both rings are drawn in white at different alphas, because the marker's colour
-    /// multiplies the image: paint them in colour and the tint lands on top of it. A
-    /// difference in alpha is the one thing that survives tinting.
+    /// multiplies the image: a difference in alpha is what survives tinting.
     /// </para>
     /// </summary>
     private static GeoImage ClusterDisc(int pixels)

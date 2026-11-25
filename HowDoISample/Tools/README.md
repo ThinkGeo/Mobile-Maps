@@ -1,11 +1,11 @@
 # Driving the gallery without a hand on the screen
 
-Every sample in this gallery was opened and screenshotted on a simulator before it
-was committed. These are the two scripts that did it.
+Two scripts that open a named sample on an iOS simulator or an Android emulator
+without anyone touching the screen:
 
 ```sh
-Tools/shoot-ios.sh      "Cross the Dateline" 45
-Tools/shoot-android.sh  "Cross the Dateline" 45
+Tools/shoot-ios.sh      "Buildings in 3D" 45
+Tools/shoot-android.sh  "Buildings in 3D" 45
 ```
 
 Each one launches the app straight into a named sample, waits, takes a screenshot
@@ -19,8 +19,7 @@ and prints what the log says:
 | `missing` | Android only: the title did not match a catalog row - a typo in the call |
 
 `opened=1 gl=1 crash=0` is a pass (with `missing=0` on Android). `opened=1 gl=0` means the page came up
-without a GPU map, which is right for the one or two samples that draw only with
-the classic pipeline and wrong for every other.
+without a GPU map, which is wrong for every sample in the gallery.
 
 ## How a sample gets opened
 

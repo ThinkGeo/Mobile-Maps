@@ -9,13 +9,6 @@ namespace HowDoISample.Samples;
 /// <summary>
 /// Contours drawn from scattered measurements: mosquito counts around Frisco turned
 /// into isolines, with the number of levels live.
-/// <para>
-/// Two controls and no readouts. There were four - a search radius, a labels switch
-/// and a count of the measurements, besides the levels - and on a phone that is two
-/// rows of card over the one picture they are all about. The search radius went
-/// because its effect on this data is a change in smoothness that needs the two
-/// pictures side by side to see; the count went because it never changes.
-/// </para>
 /// </summary>
 public class Isolines : SamplePage
 {
@@ -48,17 +41,16 @@ public class Isolines : SamplePage
     private bool _moved;
     private int _levelCount = 25;
 
-    /// <summary>Every point is in range; the radius was a slider and is now a decision.</summary>
+    /// <summary>Zero: every measurement is in range of every cell.</summary>
     private const double SearchRadius = 0;
 
     /// <summary>Labelled contours, which is most of what makes a contour readable.</summary>
     private const bool ShowLabels = true;
 
     /// <summary>
-    /// Fixed, not sliders. Line width is cosmetic, and the inverse-distance power is
-    /// a number whose effect on this data a viewer cannot see moving. What is worth
-    /// a slider is what changes the contours: how many there are, and how far the
-    /// interpolation is allowed to look for a measurement.
+    /// Fixed: line width is cosmetic, and the inverse-distance power changes this
+    /// data too little to see. The slider is kept for what changes the contours: how
+    /// many there are.
     /// </summary>
     private const float LineWidth = 3f;
     private const double Power = 2.0;
@@ -94,9 +86,7 @@ public class Isolines : SamplePage
         map.CurrentExtent = start;
 
         // One row: how many contours on the left, and whether they are drawn as lines
-        // or as filled bands between them, on the right. "Bands" was the word for the
-        // second one and it names the thing rather than what you see - "Filled" is
-        // what the map does when you press it.
+        // or as filled bands between them, on the right.
         var row = new Grid { ColumnSpacing = 14 };
         row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
         row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
@@ -137,12 +127,10 @@ public class Isolines : SamplePage
     /// Rebuilds the isolines for the controls as they now stand, and - if they moved
     /// again while it was working - once more for where they ended up.
     /// <para>
-    /// Every move of a slider asks for this, which is the point: the desktop gallery
-    /// redraws while the mouse is down. One rebuild is interpolation, contouring and a
-    /// restyle, so a drag asks for far more of them than a frame can carry. Running
-    /// them in turn would queue a second of work behind a finger that stopped moving
-    /// half a second ago; this drops everything in the middle and draws where the
-    /// finger actually is.
+    /// Every move of the slider asks for this. One rebuild is interpolation,
+    /// contouring and a restyle, so a drag asks for more of them than a frame can
+    /// carry; running them all in turn would leave work queued after the finger has
+    /// stopped. This drops the ones in the middle and draws where the finger is.
     /// </para>
     /// </summary>
     private async void Reapply()

@@ -1,9 +1,6 @@
 Csv/Frisco_Mosquitos.csv
 Csv/vehicle-route.csv
 GeoJson/pittsburghpacity-designated-historic-districts.geojson
-Glyphs/LICENSE-OpenSans-Apache-2.0.txt
-Glyphs/Open Sans Semibold/0-255.pbf
-Glyphs/Open Sans Semibold/256-511.pbf
 Gpx/Hike_Bike.gpx
 Images/marker.png
 Images/vehicle_location.png
@@ -12,8 +9,6 @@ Mbtiles/style.json
 Mbtiles/test.mbtiles
 Ndfd/ndfd-sky.bin
 Ndfd/ndfd-wind.bin
-Ndfd/pack-ndfd-sky.py
-Ndfd/pack-ndfd-wind.py
 Pmtiles/frisco.pmtiles
 Pmtiles/stamen_toner.pmtiles
 Pmtiles/style.json

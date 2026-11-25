@@ -10,20 +10,14 @@ namespace HowDoISample.Samples;
 /// styles that paint the states.
 /// </summary>
 /// <remarks>
-/// Both are drawn over the finished GPU basemap by the classic adornment pipeline,
-/// which is the point of putting them together: the two render paths compose, and
-/// they redraw with the gesture rather than after it.
+/// Both are drawn over the finished GPU basemap by the classic adornment pipeline:
+/// the two render paths compose, and the adornments redraw with the gesture.
 /// </remarks>
 public class GraticuleLinesAndLegend : SamplePage
 {
     /// <summary>
-    /// The lower forty-eight, in web mercator.
-    /// <para>
-    /// Not the shapefile's own bounding box: that one carries Alaska and Hawaii, so it
-    /// opens on a third of a hemisphere with the states themselves a smear in one
-    /// corner. These are the corners of the continental United States, which is what a
-    /// map of the fifty states is read at.
-    /// </para>
+    /// The lower forty-eight, in web mercator. Not the shapefile's own bounding box:
+    /// that one carries Alaska and Hawaii, and would open on a third of a hemisphere.
     /// </summary>
     private static readonly RectangleShape LowerFortyEight =
         new(-13914936, 6343008, -7402746, 2802226);
@@ -34,9 +28,7 @@ public class GraticuleLinesAndLegend : SamplePage
 
         // A graticule is a grid of straight horizontal and vertical lines labelled with
         // degrees, which is only true of a map looked at straight down and facing north.
-        // Turn the map and the lines no longer point along the meridians they are
-        // labelled with; lean it and the spacing is wrong as well. The grid cannot
-        // follow the camera, so here the camera does not move.
+        // The grid cannot follow the camera, so here the camera does not rotate or tilt.
         map.IsRotationEnabled = false;
         map.IsTiltEnabled = false;
 
@@ -101,10 +93,8 @@ public class GraticuleLinesAndLegend : SamplePage
             Projection = new Projection(3857),
         };
 
-        // Pen widths and type sizes are plain numbers of points and the canvas applies
-        // the screen's density, so these read the same here as they do on a desktop.
-        // The layer's default half-point hairline is a desktop number; on a phone held
-        // at arm's length a grid line wants to be seen.
+        // Pen widths and type sizes are in points. The layer's default half-point
+        // hairline is too faint on a phone, so the line is given a width.
         graticuleLayer.GraticuleLineStyle.OuterPen.Color = GeoColor.FromArgb(150, GeoColors.Navy);
         graticuleLayer.GraticuleLineStyle.OuterPen.Width = 1f;
         graticuleLayer.GraticuleTextFont = new GeoFont("Noto Sans", 11f);

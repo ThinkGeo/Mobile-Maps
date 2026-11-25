@@ -44,15 +44,13 @@ public class OfflineTiles : SamplePage
             _map.Basemap = new GpuBasemap(style);
             _map.CurrentExtent = extent;
 
-            // Nothing to say when it worked. The line used to name the class that had
-            // just read the archive, which is a fact about the code the reader is
-            // looking at anyway - and a line of card on a phone is a line of map.
+            // The status line is only for a failure.
             _status.IsVisible = false;
         }
         catch (Exception exception)
         {
             // Without the archive there is nothing to draw, and saying so beats an
-            // empty window. This is the only thing the line is for.
+            // empty window.
             _status.Text = "Unavailable: " + exception.Message.Split('\n')[0];
             _status.IsVisible = true;
         }

@@ -86,11 +86,9 @@ public class Heatmap : SamplePage
     private float _intensity = 0.55f;
 
     /// <summary>
-    /// Fixed, not a slider. Opacity is the one heatmap number that does not say
-    /// anything about the data: it fades the whole layer, which every layer can do,
-    /// while radius and intensity are what a heatmap IS - how far a point spreads
-    /// and how much it counts. Three sliders on a phone panel also push the map off
-    /// the screen.
+    /// Fixed: opacity fades the whole layer, which every layer can do. Radius and
+    /// intensity are the heatmap's own numbers - how far a point spreads and how much
+    /// it counts - so they get the sliders.
     /// </summary>
     private const float HeatOpacity = 0.85f;
 
@@ -117,8 +115,7 @@ public class Heatmap : SamplePage
             _ramp = ColorRamps[index];
             ApplyPaint();
         });
-        // Two rows in all: the ramp, then both numbers on one line. The readout that
-        // used to sit between them said what the two captions already say.
+        // Both numbers on one row.
         AddSliderRow(
             new SliderSpec("Radius", 5, 60, _radius,
                 value => { _radius = (float)value; ApplyPaint(); },

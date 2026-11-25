@@ -6,12 +6,10 @@ namespace HowDoISample;
 /// Puts the sample data where the samples expect it: in the app's own data
 /// directory, as plain files.
 /// <para>
-/// The desktop gallery reads its data beside the executable. A mobile app has no
-/// such place - what it ships is inside the package, reachable only as a stream -
-/// so the files are copied out on first run, and every sample afterwards is
-/// written exactly as the desktop one is. A file already there is left alone
-/// unless the package carries a different one, so the copy costs almost nothing
-/// after the first launch.
+/// What a mobile app ships is inside the package, reachable only as a stream, so
+/// the files are copied out on first run and the samples read them by path. A file
+/// already there is left alone unless the package carries a different one, so the
+/// copy costs almost nothing after the first launch.
 /// </para>
 /// </summary>
 public static class SampleData
@@ -56,12 +54,9 @@ public static class SampleData
             {
                 using var source = await FileSystem.OpenAppPackageFileAsync(entry);
 
-                // Skipping every file that merely exists is what a first run needs and
-                // what every run after a data change gets wrong: an installed app kept
-                // the copy it made the first time, so a dataset that shrank or was
-                // corrected in the package never reached the samples - the old one was
-                // read for the life of the install. Length is enough to tell them
-                // apart here, and costs no reading.
+                // A file that is already there with the packaged length is kept. A
+                // different length means the package carries a newer one, which
+                // replaces the copy made by an earlier install.
                 if (File.Exists(destination) && TryGetLength(source, out var packaged)
                     && new FileInfo(destination).Length == packaged)
                 {

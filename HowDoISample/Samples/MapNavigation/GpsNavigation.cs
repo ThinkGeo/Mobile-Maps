@@ -124,10 +124,8 @@ public class GpsNavigation : SamplePage, IDisposable
     /// <para>
     /// The clock also finishes any segment the flight did not. ZoomToExtentAsync
     /// returns when its flight ends, and a flight ends early - without an exception -
-    /// whenever something else moves the camera: every step of a pan or a pinch does
-    /// it. So "the call returned" does not mean "the vehicle has arrived". Taking it to
-    /// mean that moved the drive on one GPS point for every touch event, dozens a
-    /// second, and the vehicle shot down the route under a moving finger.
+    /// whenever something else moves the camera, as every step of a pan or a pinch
+    /// does. So the call returning does not mean the vehicle has arrived.
     /// </para>
     /// </summary>
     private async Task DriveAsync(CancellationToken token)
@@ -167,14 +165,9 @@ public class GpsNavigation : SamplePage, IDisposable
     /// <summary>
     /// Flies the camera to one GPS point, then asks for the view it landed on.
     /// <para>
-    /// That second step is what keeps the road on screen. An animated move draws its
-    /// overlays once, at the start, as DrawIfNotDrawn and concurrently with the
-    /// animation about to carry the camera away - so the tiles cut for it are the ones
-    /// under the camera when the flight BEGAN, and nothing asks for the ones ahead.
-    /// Measured over a minute of driving without this line: one tile scene loaded, and
-    /// fifteen hundred frames that drew nothing, with the vehicle still travelling
-    /// across an empty background. A landed flight is a committed view, so it is asked
-    /// for as one.
+    /// An animated move draws its overlays once, at the start, for the view the camera
+    /// is leaving. The refresh after a landed flight asks for the tiles of the view it
+    /// arrived at, which keeps the road ahead on screen.
     /// </para>
     /// </summary>
     private async Task FollowVehicleAsync(int gpsPointIndex, CancellationToken cancellationToken)
@@ -182,8 +175,7 @@ public class GpsNavigation : SamplePage, IDisposable
         var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
         // The GPS point sits below the centre, so more of the road ahead is in view.
-        // The desktop offsets by a fixed 200 pixels; a phone's screen is a different
-        // size, so this is a share of its height.
+        // The offset is a share of the screen's height.
         var offset = _map.CanvasHeight * 0.27;
         var centerPoint = MapUtil.OffsetPointWithScreenOffset(
             new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, DefaultScale, _map.MapUnit);

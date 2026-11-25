@@ -10,13 +10,8 @@ namespace HowDoISample.Samples;
 /// never learns which format it was.
 /// </summary>
 /// <remarks>
-/// A spatial SQLite file is one of these, not a database sample: it is a file you
-/// carry with the app and open through <see cref="SqliteFeatureSource"/>, which is
-/// the same shape as every other row here. The servers it used to sit beside -
-/// PostgreSQL and SQL Server - are deliberately not offered: holding a database
-/// connection open from a phone over a mobile network is the wrong shape for the
-/// platform, and the mobile answer is a file you carry or a service you call. See
-/// <see cref="SampleCatalog.NotOnMobile"/>.
+/// A spatial SQLite file is one of these: it is a file carried with the app and
+/// opened through <see cref="SqliteFeatureSource"/>, like every other entry here.
 /// </remarks>
 public class VectorFileFormats : SamplePage
 {
@@ -24,13 +19,11 @@ public class VectorFileFormats : SamplePage
     /// One style for six formats: fills, lines and circles over the same source
     /// layer, so whichever shape the file happens to hold is drawn.
     /// <para>
-    /// The circle layer is the one that needs a filter. A GPX file hands back every
-    /// track point as a point feature of its own, beside the line it belongs to, and
-    /// those points ARE the line's vertices - drawn as circles, a trail network
-    /// becomes a smear of dots with the trails buried under them. IsWayPoint is the
-    /// column GpxFeatureSource marks them with: "0" for a point inside a track, "1"
-    /// for a waypoint somebody dropped. Every other format's points have no such
-    /// column, so the filter passes them.
+    /// The circle layer needs a filter. A GPX file hands back every track point as a
+    /// point feature of its own, beside the line it belongs to; drawn as circles they
+    /// would bury the trails. IsWayPoint is the column GpxFeatureSource marks them
+    /// with: "0" for a point inside a track, "1" for a waypoint. Every other format's
+    /// points have no such column, so the filter passes them.
     /// </para>
     /// </summary>
     private const string DataStyle = """
@@ -50,13 +43,7 @@ public class VectorFileFormats : SamplePage
     }
     """;
 
-    /// <summary>
-    /// The format is the choice; what is in the file is the line underneath. That
-    /// line used to print the name of the class that had just read the file, which
-    /// is the one thing on the screen the reader could already see - the cell above
-    /// it says the format, and the class follows from it. What they cannot see is
-    /// what they are looking at, so that is what it says now.
-    /// </summary>
+    /// <summary>Each format, and what the file read through it holds.</summary>
     private static readonly (string Format, string Holds)[] Formats =
     {
         ("Shapefile", "Frisco's parks"),
@@ -88,7 +75,6 @@ public class VectorFileFormats : SamplePage
         _status = AddStatusLabel();
 
         _ = ShowAsync(0);
-
     }
 
     /// <summary>The line that differs: which class reads which file.</summary>
@@ -102,9 +88,8 @@ public class VectorFileFormats : SamplePage
         {
             ProjectionConverter = new ProjectionConverter(4326, 3857),
         },
-        // KML is read through KmlGdalFeatureSource, which needs the GDAL natives.
-        // Those ship for Windows and Linux, not for iOS or Android, so the format is
-        // left out here rather than offered and failing - see SampleCatalog.NotOnMobile.
+        // KML is not offered: it is read through KmlGdalFeatureSource, which needs
+        // the GDAL natives, and those are not available on iOS or Android.
         2 => new GpxFeatureSource(Data("Gpx", "Hike_Bike.gpx"))
         {
             ProjectionConverter = new ProjectionConverter(4326, 3857),

@@ -11,17 +11,12 @@ namespace HowDoISample.Samples;
 /// translated - each of them running, not standing still.
 /// <para>
 /// Every operation here takes a number, and the number sweeps between its ends by
-/// itself and never settles: the buffer grows and shrinks, the shape turns through a
-/// full circle, the simplification coarsens and recovers. That is the whole point of
-/// the sample. A single frozen result at one arbitrary distance says very little
-/// about what an operation does, which is why the ones that take no number - the
-/// hull, the envelope, the intersection, the difference, the union - are not here:
-/// each of them is one picture, and one picture of a set operation is a screenshot,
-/// not a sample.
+/// itself: the buffer grows and shrinks, the shape turns through a full circle, the
+/// simplification coarsens and recovers.
 /// </para>
 /// <para>
 /// A finger on the slider takes the sweep over for as long as it is there, and the
-/// sweep resumes a moment after it is let go, so the sample is never found stopped.
+/// sweep resumes a moment after it is let go.
 /// </para>
 /// </summary>
 public class ShapeOperations : SamplePage
@@ -72,7 +67,6 @@ public class ShapeOperations : SamplePage
     private IDispatcherTimer _sweep;
     private IDispatcherTimer _resume;
     private int _sweepDirection = 1;
-    private bool _sweeping;
     private int _operation;
     private double _value = Operations[0].Parameter.Start;
     private bool _rebuilding;
@@ -101,9 +95,8 @@ public class ShapeOperations : SamplePage
         _pieces = source.GetAllFeatures(ReturningColumnsType.NoColumns);
         source.Close();
 
-        // The first piece, not the file. Every operation here works on that one piece
-        // and the file is the whole of Frisco cut up, so a view fitted to the file put
-        // the shape the sample is about off to one side with empty city beside it.
+        // The view is fitted to the first piece, not the file: every operation here
+        // works on that one piece, and the file is the whole of Frisco cut up.
         var bounds = _pieces[0].GetShape().GetBoundingBox();
 
         AddChoiceStrip(Operations.Select(operation => operation.Name).ToList(), 0, index =>
@@ -122,9 +115,7 @@ public class ShapeOperations : SamplePage
             Reapply();
         };
 
-        // A finger on the slider holds the sweep, and letting go hands it back. It is
-        // never left stopped: a stopped sweep is a sample with no animation in it,
-        // which is the one thing this sample is for.
+        // A finger on the slider holds the sweep, and letting go hands it back.
         _slider.DragStarted += (_, _) => StopSweep();
         _slider.DragCompleted += (_, _) => _resume.Start();
 
@@ -143,10 +134,8 @@ public class ShapeOperations : SamplePage
         AddToPanel(new VerticalStackLayout { Children = { _caption, _slider } });
         ShowParameter();
 
-        // Room for the widest the sweep can get, not just for the shape as it is.
-        // The buffer grows to its maximum every few seconds, and an extent fitted to
-        // the polygon alone sends the result off the sides of the screen exactly when
-        // there is most to see.
+        // Room for the widest the sweep can get, not just for the shape as it is, so
+        // the buffer at its maximum is still on screen.
         var reach = Operations[0].Parameter.Max;
         OpenOn(map, new RectangleShape(
             bounds.UpperLeftPoint.X - reach, bounds.UpperLeftPoint.Y + reach,
@@ -199,11 +188,9 @@ public class ShapeOperations : SamplePage
             _sweepDirection = 1;
         }
 
-        // Through the slider, so the control shows where the operation has got to -
-        // which is also how the slider's own event does the rest of the work.
-        _sweeping = true;
+        // Through the slider, so the control shows where the operation has got to;
+        // the slider's own event does the rest of the work.
         _slider.Value = next;
-        _sweeping = false;
     }
 
     private void StopSweep()
@@ -216,11 +203,10 @@ public class ShapeOperations : SamplePage
     /// Runs the chosen operation for the slider where it now is, and - if it moved
     /// again while that was happening - once more for where it ended up.
     /// <para>
-    /// The operation itself runs off the UI thread. Buffering this polygon takes about
-    /// fifty milliseconds, which on the thread the slider lives on is three frames the
-    /// slider cannot answer the finger in: the shape kept up and the control it was
-    /// dragged from did not. Everything that touches the map is back on the UI thread
-    /// by the time it is drawn.
+    /// The operation itself runs off the UI thread: buffering this polygon takes
+    /// about fifty milliseconds, which on the UI thread would be three frames the
+    /// slider cannot answer the finger in. Everything that touches the map is back on
+    /// the UI thread.
     /// </para>
     /// </summary>
     private async void Reapply()

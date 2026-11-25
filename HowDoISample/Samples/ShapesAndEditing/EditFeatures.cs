@@ -9,13 +9,11 @@ namespace HowDoISample.Samples;
 /// switch to editing and drag, resize, rotate and reshape what is there, with a
 /// measurement following whatever is being moved.
 /// <para>
-/// A rule that moves an edit somewhere else - snapping - is here too, on the edit
-/// overlay's own event, because it belongs with the editing rather than beside it.
-/// A rule that CORRECTS an edit afterwards is not, and cannot be written against
-/// <c>VertexMoved</c> as it stands: the overlay writes its own moved feature into
-/// EditShapesLayer after the event has been raised, so whatever a handler puts there
-/// is overwritten before the next frame. Every platform does this, so it is the
-/// event's behaviour rather than a phone's.
+/// Snapping - a rule that moves an edit somewhere else - is here too, on the edit
+/// overlay's <c>VertexMoving</c> event. A rule that corrects an edit afterwards
+/// cannot be written against <c>VertexMoved</c>: the overlay writes its own moved
+/// feature into EditShapesLayer after the event has been raised, so whatever a
+/// handler puts there is overwritten.
 /// </para>
 /// </summary>
 public class EditFeatures : SamplePage
@@ -69,8 +67,7 @@ public class EditFeatures : SamplePage
         _layerOverlay.Layers.Add("featureLayer", featureLayer);
         map.Overlays.Add("layerOverlay", _layerOverlay);
 
-        // WPF watches MouseMoved on the track overlay to keep the measurement live;
-        // a finger has TouchMoved instead.
+        // TouchMoved on the track overlay keeps the measurement live while drawing.
         map.TrackOverlay.TouchMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
         map.EditOverlay.VertexMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
 
@@ -81,22 +78,15 @@ public class EditFeatures : SamplePage
         AddToPanel(BuildSnapRow());
         _measure = AddStatusLabel();
 
-        // The mode the strip opens on has to be the mode the map is in. The three
-        // shapes above are put into the edit overlay to exist at all, which is where
-        // the editing mode wants them and the only place they can be handed to it
-        // from - and left there, the sample opened under a full set of drag and vertex
-        // handles while the strip said Navigate, and a finger meaning to pan the map
-        // grabbed a control point instead.
+        // The mode the strip opens on has to be the mode the map is in: the three
+        // shapes above were added through the edit overlay, and ChooseMode moves them
+        // back to the layer so that the map opens without edit handles.
         ChooseMode(0);
 
         _ = map.RefreshAsync();
     }
 
-    /// <summary>
-    /// The one switch, named for what it does to an edit rather than for the kind of
-    /// rule it is - "Snap" is what the API calls it, and left at that nobody can tell
-    /// what the switch is about to do to their shape.
-    /// </summary>
+    /// <summary>The snapping switch, with a caption that says what it does to an edit.</summary>
     private View BuildSnapRow()
     {
         _snap = new Switch();
@@ -183,11 +173,8 @@ public class EditFeatures : SamplePage
 
     private void ChooseMode(int index)
     {
-        // Snapping is a rule about moving a vertex, so it has nothing to say in any
-        // mode but editing. Left live, the switch read as something the map was
-        // ignoring; switched off for now, it says which mode it belongs to. The
-        // schools go with it - they are what there is to snap to, and in a mode that
-        // cannot snap they are red dots over the map for no reason.
+        // Snapping is a rule about moving a vertex, so the switch is only live while
+        // editing, and the schools - what there is to snap to - are only drawn then.
         var editing = index == 4;
         if (_snap != null)
         {

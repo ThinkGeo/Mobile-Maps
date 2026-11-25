@@ -11,10 +11,8 @@ namespace HowDoISample.Samples;
 /// a red dot drawn by the renderer at the same place for contrast.
 /// </summary>
 /// <remarks>
-/// A MAUI Marker is a ContentView, so anything MAUI can draw can be a marker - the
-/// animated icon here is a MAUI animation rather than WPF's storyboard. Dragging is
-/// the one thing that does not carry over: the desktop overlay has a DragMode and
-/// MarkerDragging events, and the MAUI SimpleMarkerOverlay has add, remove and tap.
+/// A Marker is a ContentView, so anything MAUI can draw can be a marker. The
+/// SimpleMarkerOverlay offers add, remove and tap.
 /// </remarks>
 public class Markers : SamplePage
 {
@@ -50,13 +48,10 @@ public class Markers : SamplePage
         _markerOverlay.AddMarker(Guid.NewGuid().ToString(), NewAnimatedMarker(new PointShape(-10777000, 3908900)));
         map.Overlays.Add(_markerOverlay);
 
-        // Tap the map to add one, tap a marker to take it away, and that is the whole
-        // sample. There was a two-cell strip to choose between the two and a running
-        // log of what had been added; both were the card telling you what you had
-        // just watched happen on the map.
+        // Tap the map to add a marker, tap a marker to take it away.
         //
         // The ground point is asked for through the camera - ToWorldCoordinate with a
-        // height of zero - because a tap on a leaning map means where the ray meets
+        // height of zero - because a tap on a tilted map means where the ray meets
         // the ground, not where a flat view of the same scale would put it.
         map.SingleTap += (_, e) =>
         {
@@ -80,8 +75,7 @@ public class Markers : SamplePage
             HeightRequest = 34,
 
             // The image is 20 by 34 with the point at the bottom, so the view is
-            // lifted by half its height to put the tip on the ground point - the
-            // counterpart of the desktop's YOffset.
+            // lifted by half its height to put the tip on the ground point.
             TranslationY = -17,
             Content = new Image
             {
@@ -96,8 +90,8 @@ public class Markers : SamplePage
     }
 
     /// <summary>
-    /// The animated one. WPF hands the marker a UserControl with a storyboard; a MAUI
-    /// marker is a ContentView, so the animation is a MAUI one on an ordinary ellipse.
+    /// The animated one: a marker is a ContentView, so the animation is an ordinary
+    /// MAUI animation on an ellipse.
     /// </summary>
     private Marker NewAnimatedMarker(PointShape position)
     {
@@ -122,8 +116,8 @@ public class Markers : SamplePage
         {
             while (marker.IsLoaded)
             {
-                await ring.ScaleTo(1.6, 700, Easing.SinOut);
-                await ring.ScaleTo(1.0, 700, Easing.SinIn);
+                await ring.ScaleToAsync(1.6, 700, Easing.SinOut);
+                await ring.ScaleToAsync(1.0, 700, Easing.SinIn);
             }
         };
 

@@ -82,12 +82,9 @@ public class VectorMapProviders : SamplePage
         {
             var provider = Providers[index];
 
-            // Each entry keeps the style it built. A style that has been compiled once
-            // is handed back over without fetching its document or its sprite sheet
-            // again and without compiling it again - what is left is the re-styling of
-            // the tiles the map already holds, which is the part that cannot be
-            // avoided. Built fresh on every tap, going back to a style already seen
-            // costs the two downloads and the compile a second time.
+            // Each entry keeps the style it built: going back to a style already shown
+            // then costs no second download of its document and sprite sheet, and no
+            // second compile.
             if (!_styles.TryGetValue(index, out var style))
             {
                 style = index is WfsIndex or OgcApiIndex
@@ -110,13 +107,11 @@ public class VectorMapProviders : SamplePage
 
             Arrive(index);
 
-            // What is on the screen, not the style's URL or the name of the class
-            // behind it: the URL is in the table above and the class follows from
-            // the cell that was tapped.
+            // What is on the screen.
             _status.Text = provider.Shows;
 
             // Each provider carries its own terms, and all of them ask to be named
-            // on the map rather than on a page about the app.
+            // on the map.
             SetAttribution(provider.Credit);
         }
         catch (Exception exception)
@@ -150,7 +145,7 @@ public class VectorMapProviders : SamplePage
             // The service's own CRS is EPSG:28992, but it also publishes EPSG:3857 - ask it
             // for web mercator rather than converting afterwards: the server holds the datum
             // transformation for its national grid, and a generic client-side conversion
-            // lands the parcels about 170 m off the basemap.
+            // would land the parcels about 170 m off the basemap.
             parcels.FeatureSources.Add("parcels", new WfsV2AsyncFeatureSource(
                 "https://service.pdok.nl/kadaster/kadastralekaart/wfs/v5_0",
                 "kadastralekaart:Perceel")
@@ -192,5 +187,4 @@ public class VectorMapProviders : SamplePage
                 break;
         }
     }
-
 }

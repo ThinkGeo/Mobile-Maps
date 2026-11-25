@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<!-- A ProMotion display runs at 120Hz, but iOS holds an app to 60 unless it
-	     says it can keep up. The map is drawn by the GPU and can, and at 60 on a
-	     120Hz phone a drag lands every other refresh - which is exactly what makes
-	     a map feel a beat behind the finger next to a photo, which is not capped. -->
+	     says it can keep up. The map is drawn by the GPU and can. -->
 	<key>CADisableMinimumFrameDuration</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
@@ -34,14 +32,12 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>	
-	<!-- Specific, because App Review reads it: a purpose string that only restates
-	     the permission is a rejection under 5.1.1. One sample puts a dot where you
-	     are; nothing else in the gallery asks. -->
+	<!-- One sample puts a dot where you are; nothing else in the gallery asks. -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Buildings in 3D uses your location to put a marker where you are and move the map to it. Your location is never stored or sent anywhere.</string>
 
 	<!-- The gallery uses no encryption of its own beyond the HTTPS every app uses,
-	     which is exempt. Declared here so every upload stops asking. -->
+	     which is exempt. -->
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>UIApplicationSceneManifest</key>

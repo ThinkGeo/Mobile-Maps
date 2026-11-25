@@ -8,20 +8,11 @@ namespace HowDoISample.Samples;
 /// <summary>
 /// Two questions asked of Frisco's zoning polygons: tap the map and either the one
 /// the point falls inside or everything within five hundred metres of it lights up,
-/// with what the highlighted zoning is named underneath.
+/// with the number of matches underneath.
 /// </summary>
 /// <remarks>
-/// Two, not four. A tap is a point, and a point intersecting a polygon is a point
-/// inside it, so Intersecting had the same answer as Containing every time - and
-/// Disjoint is "all the rest", which lights up the whole city and says nothing. What
-/// is worth showing is the one you are standing in and the ones you are near.
-/// <para>
-/// The names come from the same query: asking for the columns is a flag on the call,
-/// and once a feature is highlighted its data is already in hand - which is why
-/// there is no separate sample for reading a feature's attributes, and why only the
-/// one line of it that answers "what did I just tap" is shown rather than a table a
-/// phone has no room for.
-/// </para>
+/// A tap is a point, so the two relations worth asking are the polygon the point is
+/// inside and the polygons it is near.
 /// </remarks>
 public class FindFeaturesBySpatialRelation : SamplePage
 {
@@ -40,8 +31,7 @@ public class FindFeaturesBySpatialRelation : SamplePage
 
     private static readonly string[] Relations =
     {
-        // Short enough for a cell a third of a phone wide; what they are both
-        // relative to - the point you tapped - is the sample.
+        // Both are relative to the point that was tapped.
         "Containing",
         "Within 500 m",
     };
@@ -110,9 +100,8 @@ public class FindFeaturesBySpatialRelation : SamplePage
         if (point == null) return;
         _seed = point;
 
-        // The shapes alone, because the shapes are the answer. The data behind each
-        // feature comes back from the same query for ReturningColumnsType.AllColumns,
-        // a flag rather than a second pass, when there is something to show it on.
+        // The shapes alone. The data behind each feature comes back from the same
+        // query when it is asked for with ReturningColumnsType.AllColumns.
         _zoning.Open();
         var found = _relation == 0
             ? _zoningQuery.GetFeaturesContaining(point, ReturningColumnsType.NoColumns)
@@ -132,10 +121,6 @@ public class FindFeaturesBySpatialRelation : SamplePage
         _query.Clear();
         _query.SetPoint("seed", new Feature(point), sizeInPixel: 16f, iconName: "pin");
 
-        // The count and the relation, and nothing after them. The first match's zoning
-        // code used to follow on the same line, and a code out of the file - "PD", "SF-7"
-        // - reads as a fragment of something rather than as an answer unless you already
-        // know the city's zoning ordinance.
         _status.Text = matches.Count == 0
             ? $"no zoning areas {verb} the point"
             : $"{matches.Count} zoning areas {verb} the point";

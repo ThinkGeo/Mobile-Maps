@@ -38,8 +38,7 @@ public class Popups : SamplePage
         {
             var point = feature.GetShape().GetCenterPoint();
 
-            // WPF takes the position and the content in the constructor; a MAUI Popup
-            // is a ContentView, so it takes its Position and its Text as properties.
+            // A Popup is a ContentView: its Position and its Text are properties.
             _popupOverlay.Add(new Popup
             {
                 Position = point,

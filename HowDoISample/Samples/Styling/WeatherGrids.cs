@@ -13,15 +13,13 @@ namespace HowDoISample.Samples;
 /// </summary>
 /// <remarks>
 /// One sample rather than two, because the two halves differ in one line each - the
-/// style registration - and are otherwise the same story: a forecast grid prepared
-/// off the device and read as numbers.
+/// style registration - and are otherwise the same: a forecast grid read as numbers.
 /// <para>
-/// The desktop samples read the NDFD GRIB and GeoTIFFs with GdalGrid. GDAL's natives
-/// are not published for iOS or Android, so each forecast is converted once on the
-/// desktop and shipped as one flat file - a byte per cell for sky cover, which is a
-/// percentage - which is what a phone application does anyway. The sky hours are
-/// still read one at a time, as the desktop reads bands: turning all forty-four into
-/// float grids up front is five million cells before anything is on screen.
+/// NDFD publishes GRIB, and reading GRIB needs GDAL, whose natives are not available
+/// on iOS or Android. Each forecast is therefore converted ahead of time and shipped
+/// as one flat file - a byte per cell for sky cover, which is a percentage. The sky
+/// hours are read one at a time: turning all forty-four into float grids up front
+/// would be five million cells before anything is on screen.
 /// </para>
 /// </remarks>
 public class WeatherGrids : SamplePage, IDisposable
@@ -49,7 +47,6 @@ public class WeatherGrids : SamplePage, IDisposable
     // Wind: one hour, as a field the particles are carried along.
     private VectorFieldSource _field;
 
-    private MapView _map;
     private Label _timeText;
     private Slider _frameSlider;
     private View _hoursRow;
@@ -57,7 +54,6 @@ public class WeatherGrids : SamplePage, IDisposable
 
     protected override void BuildMap(MapView map)
     {
-        _map = map;
         map.MapUnit = GeographyUnit.Meter;
 
         _style = new MapStyle(ThinkGeoVectorStyles.Dark, new ThinkGeoVectorTileSource(SampleShared.CloudApiKey)
@@ -68,12 +64,7 @@ public class WeatherGrids : SamplePage, IDisposable
         map.Basemap = _basemap;
         OpenOn(map, Conus);
 
-        // Two cells and, for the hours, one row under them. The palette chooser that
-        // used to sit here as a second strip is gone: two strips stacked read as a
-        // settings page, and a weather grid has one palette anyone expects.
-        //
-        // No play button either. It plays, and a finger on the slider stops it, which
-        // is the gesture anyone tries first.
+        // It plays by itself, and a finger on the slider stops it.
         AddChoiceStrip(new[] { "Sky cover", "Wind" }, 0, index => _ = ShowAsync(index == 1));
 
         _timeText = new Label
@@ -199,10 +190,7 @@ public class WeatherGrids : SamplePage, IDisposable
         }
     }
 
-    /// <summary>
-    /// When this frame is for, and nothing else. "forecast hour 8 of 44" sat on a
-    /// line of its own saying what the slider's own position already says.
-    /// </summary>
+    /// <summary>When this frame is for.</summary>
     private void ShowTime(int index) => _timeText.Text = _frameTimes[index] ?? "(no time)";
 
     /// <summary>

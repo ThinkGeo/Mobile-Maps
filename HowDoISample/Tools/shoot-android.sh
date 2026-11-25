@@ -4,7 +4,7 @@
 # MainActivity puts it into the environment before MAUI starts - which is what lets
 # the one line in App.xaml.cs drive both platforms.
 #
-#   Tools/shoot-android.sh "Cross the Dateline" 45
+#   Tools/shoot-android.sh "Buildings in 3D" 45
 #
 # The APK must have been built with -p:EmbedAssembliesIntoApk=true, or it installs
 # as an empty shell and exits on launch.

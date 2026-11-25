@@ -7,14 +7,12 @@ namespace HowDoISample;
 /// What every sample page shares: a full-bleed MapView that has a size before the
 /// sample touches it, and a place to put the sample's own controls.
 /// <para>
-/// The desktop gallery repeats a <c>Map_SizeChanged</c> guard in each sample, because
-/// a MapView is configured once it first has a size. Here the wait is in one place
-/// and a sample only writes <see cref="BuildMap"/>.
+/// A MapView is configured once it first has a size. The wait for that is here, so a
+/// sample only writes <see cref="BuildMap"/>.
 /// </para>
 /// <para>
-/// The desktop gallery also gives each sample a panel down the right-hand edge. A
-/// phone has no edge to spare, so <see cref="Panel"/> is a card over the bottom of
-/// the map instead - same controls, same order, somewhere they fit.
+/// A phone has no edge to spare for a side panel, so <see cref="AddToPanel{T}"/> puts
+/// a sample's controls on a card over the bottom of the map.
 /// </para>
 /// </summary>
 public abstract class SamplePage : ContentPage
@@ -28,21 +26,14 @@ public abstract class SamplePage : ContentPage
     {
         // A page insets its content inside the safe area by default on iOS, which is
         // right for text and wrong for a map: it leaves a band of page background
-        // below the map on every sample - white, on a gallery whose maps are mostly
-        // dark. This asks for the inset to go; FillSafeArea below is what actually
-        // removes it, because this ask does not reach the system.
+        // below the map. This asks for the inset to go; inside a NavigationPage the
+        // ask does not reach the system, so FillSafeArea below is what removes it.
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetUseSafeArea(this, false);
 
-        // And the home indicator is asked to dim itself, since it is now a bar lying
-        // across a map rather than across a strip of page background. Dimming after a
-        // few idle seconds is all iOS allows; the bar cannot be removed.
-        //
-        // UIKit asks whichever controller is in charge of the screen, and inside a
-        // NavigationPage that is the navigation's own wrapper, not the page - measured
-        // on an iPad: PageViewController answered true to this, ParentingViewController
-        // above it answered false, and false is what the system acted on. So the ask is
-        // correct and currently has no effect here; it starts working the day a sample
-        // is shown outside the navigation stack.
+        // The home indicator is asked to dim itself, since it lies across the map.
+        // Inside a NavigationPage UIKit asks the navigation's own controller rather
+        // than the page, so this takes effect only when a sample is shown outside the
+        // navigation stack.
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetPrefersHomeIndicatorAutoHidden(this, true);
 
         Map = new MapView
@@ -71,21 +62,15 @@ public abstract class SamplePage : ContentPage
         _panelContent = new VerticalStackLayout { Spacing = 6 };
         _panel = new Border
         {
-            // Scrolled and capped: a sample whose controls are a list - every layer of
-            // a style, say - would otherwise grow the card over the whole map.
-            //
-            // The cap is on the card and the ScrollView is told to wrap. A ScrollView
-            // left to itself asks for all the height there is on Android, so the card
-            // stood at the full 260 whatever it held - a third of a phone screen of
-            // white. iOS wrapped it and hid the difference. VerticalOptions.Start makes
-            // the ScrollView ask for its content instead, and the cap on the card still
-            // takes over when the content is taller than that.
+            // Scrolled and capped: a sample whose controls are a list would otherwise
+            // grow the card over the whole map. The cap is on the card and the
+            // ScrollView is told to wrap its content (VerticalOptions.Start): left to
+            // itself a ScrollView asks for all the height there is on Android.
             Content = _panelScroller = BuildPanelScroller(),
             MaximumHeightRequest = 260,
             BackgroundColor = Color.FromRgba(255, 255, 255, 235),
             StrokeThickness = 0,
             Padding = new Thickness(12, 10),
-            // Clear of the home indicator, now that the page no longer insets for it.
             Margin = new Thickness(10, 0, 10, 0),
             VerticalOptions = LayoutOptions.End,
             IsVisible = false,
@@ -95,11 +80,10 @@ public abstract class SamplePage : ContentPage
         _panelScroller.Content = _panelContent;
 
         // Credit for the data, over the map and never hidden behind anything. Every
-        // basemap this gallery draws is built from OpenStreetMap - ThinkGeo's own
-        // streets, OpenFreeMap's, the imagery's road network - and both the ODbL the
+        // basemap the gallery draws is built from OpenStreetMap, and both the ODbL the
         // data is licensed under and the tile servers' own terms ask for the credit to
-        // be shown on the map rather than filed on a page about the app. A sample
-        // drawing something else as well says so with SetAttribution.
+        // be shown on the map. A sample drawing something else as well says so with
+        // SetAttribution.
         _attribution = new Label
         {
             Text = DefaultAttribution,
@@ -167,36 +151,21 @@ public abstract class SamplePage : ContentPage
     /// Gives the map the strips the safe area holds back, by letting it hang that far
     /// past the sides and the bottom of the page's content.
     /// <para>
-    /// SetUseSafeArea(false) on the page is the documented way to ask for this and it
-    /// does nothing here - measured on an iPhone, with the page reporting 758 points
-    /// of height and its map arranged into 724, the missing 34 being exactly the
-    /// window's bottom inset. A page inside a NavigationPage is wrapped in a
-    /// controller of the navigation's own, and that is the controller holding the
-    /// inset; the same wrapper is why the page cannot dim the home indicator either.
-    /// What it leaves behind is a band of page background under every map - white,
-    /// 34 points tall, the thing that kept being reported as a bar across the bottom.
+    /// SetUseSafeArea(false) on the page does not do this for a page inside a
+    /// NavigationPage: the navigation wraps the page in a controller of its own, and
+    /// that controller holds the inset. What is left is a band of page background
+    /// under the map.
     /// </para>
     /// <para>
-    /// A negative margin is a blunt instrument and it is the one that fits: the map
-    /// is arranged past the end of its container, iOS does not clip it, and the band
-    /// is covered by the map that should have been there. The insets are read from
-    /// the window rather than written down, because there is no one set of them: 34
-    /// points below on a phone and 21 on an iPad, nothing at the sides in portrait,
-    /// and 84 down the right of an iPhone Duo's cover display, which is where this
-    /// stopped being about the home indicator. That display keeps a column beside the
-    /// app for the clock and the back affordance; a map that respects it ends in a
-    /// white gutter down the right of a black globe. Settings does the same thing and
-    /// gets away with it by letting its own background run under the column, which is
-    /// exactly what the map is being told to do here.
+    /// With a negative margin the map is arranged past the end of its container, iOS
+    /// does not clip it, and the band is covered by map. The insets are read from the
+    /// window because they differ by device and orientation: below the map for the
+    /// home indicator, and down a side on displays that keep a column beside the app.
     /// </para>
     /// <para>
     /// Only the map is moved. The control card and the credit are its siblings in the
-    /// page's Grid, so they stay inside the inset content and clear of the column -
-    /// which is the half of this that has to keep working.
-    /// </para>
-    /// <para>
-    /// Not the top: every sample either has a navigation bar over it or, in Buildings
-    /// in 3D, has deliberately given that space to its own controls.
+    /// page's Grid, so they stay inside the safe area. The top is left alone: the
+    /// navigation bar is there.
     /// </para>
     /// </summary>
     public static void FillSafeArea(View map)
@@ -212,13 +181,8 @@ public abstract class SamplePage : ContentPage
     }
 
     /// <summary>
-    /// How far the control card sits above the bottom of the page's content.
-    /// <para>
-    /// Zero on iOS, because the content already ends one home indicator short of the
-    /// screen - the card then rests exactly on that line, which is where a sheet sits
-    /// on this platform. It was 34, which added a second indicator's worth of nothing
-    /// under the card: measured, 68 points of gap where 34 was intended.
-    /// </para>
+    /// How far the control card sits above the bottom of the page's content. Zero on
+    /// iOS, where the content already ends one home indicator short of the screen.
     /// </summary>
     private const double PanelBottomMargin =
 #if IOS
@@ -272,10 +236,8 @@ public abstract class SamplePage : ContentPage
             _ = map.RefreshAsync();
         }
 
-        // BuildMap is itself called from a SizeChanged, so by the time this runs the
-        // view usually has its size already and no further event is owed - a handler
-        // on its own would wait for a layout pass that may never come, and did come
-        // on iOS only because MAUI happens to lay the page out more than once.
+        // BuildMap is itself called from a SizeChanged, so the view usually has its
+        // size already and no further event is owed.
         if (map.Width > 0 && map.Height > 0)
         {
             Fit();
@@ -320,16 +282,8 @@ public abstract class SamplePage : ContentPage
 
     /// <summary>
     /// Named sliders side by side on one line, each as wide as its share of the panel.
-    /// <para>
-    /// A full-width slider with its caption on a line of its own costs two lines each,
-    /// and a card four lines tall over a phone screen is mostly card. Two of these fit
-    /// on one line and still read.
-    /// </para>
-    /// <para>
-    /// The callback runs on every move rather than on release. The desktop gallery
-    /// redraws while the mouse is down, and a slider that does nothing until it is let
-    /// go reads as a slider that does nothing - which is exactly what it looked like.
-    /// </para>
+    /// The callback runs on every move rather than on release, so the map follows the
+    /// slider.
     /// </summary>
     protected Grid AddSliderRow(params SliderSpec[] sliders)
     {
@@ -362,8 +316,7 @@ public abstract class SamplePage : ContentPage
     }
 
     /// <summary>
-    /// Named choices on one line, the mobile shape of the desktop gallery's radio
-    /// button column.
+    /// Named choices on one line.
     /// <para>
     /// Three or fewer and they are all on screen at once. More, and the line shows
     /// three at a time - the choice in the middle with the one before and the one
@@ -379,15 +332,12 @@ public abstract class SamplePage : ContentPage
     /// The line of choices itself. There is no such control in MAUI, so it is a Grid
     /// of tappable cells.
     /// <para>
-    /// What it replaces is a Picker, which costs two taps and spends the first of
-    /// them covering the map with a list - and on these samples the map is the thing
-    /// the list is asking you to choose between.
+    /// A Picker would cost two taps and spend the first of them covering the map with
+    /// a list, and on these samples the map is what is being chosen between.
     /// </para>
     /// <para>
-    /// Labels wrap to a second line rather than being cut off. A cell is a third of
-    /// a phone's width, which is about seventeen characters, and a name that does not
-    /// fit is better read over two lines than ending in an ellipsis - though the
-    /// names themselves were shortened first, because two lines of card is still card.
+    /// Labels wrap to a second line rather than being cut off: a cell is a third of a
+    /// phone's width, which is about seventeen characters.
     /// </para>
     /// </summary>
     protected sealed class ChoiceStrip : Grid
@@ -458,9 +408,6 @@ public abstract class SamplePage : ContentPage
             Show();
         }
 
-        /// <summary>The choice the line is on.</summary>
-        public int SelectedIndex => _index;
-
         private void Choose(int cell)
         {
             if (_scrolls)
@@ -496,7 +443,7 @@ public abstract class SamplePage : ContentPage
             if (cellWidth <= 0) return;
 
             TranslationX = step * cellWidth;
-            _ = this.TranslateTo(0, 0, 160, Easing.CubicOut);
+            _ = this.TranslateToAsync(0, 0, 160, Easing.CubicOut);
         }
 
         private void Show()
@@ -517,16 +464,9 @@ public abstract class SamplePage : ContentPage
     }
 
     /// <summary>
-    /// Builds the sample, once the map has a real size. The counterpart of the desktop
-    /// gallery's <c>Map_SizeChanged</c> body.
-    /// </summary>
-    /// <summary>
-    /// A sample's map holds GPU textures and a tile cache, and leaving the page does
-    /// not free them: the managed object becomes unreachable but the native memory
-    /// behind it is not what the collector measures, so nothing hurries. Opening
-    /// sample after sample grew the footprint until iOS killed the process - a
-    /// SIGKILL, with no crash and no stack, which is what made it look like a bug
-    /// elsewhere. The page releases its own map on the way out instead.
+    /// A sample's map holds GPU textures and a tile cache, which are native memory the
+    /// garbage collector does not measure, so leaving the page does not free them
+    /// promptly. The page releases its own map on the way out instead.
     /// </summary>
     protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
     {
@@ -557,5 +497,6 @@ public abstract class SamplePage : ContentPage
 
     private bool _released;
 
+    /// <summary>Builds the sample, once the map has a real size.</summary>
     protected abstract void BuildMap(MapView map);
 }

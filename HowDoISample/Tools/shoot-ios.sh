@@ -3,7 +3,7 @@
 # reports what the log says. The app reads HOWDOI_SAMPLE, and `simctl launch` passes
 # SIMCTL_CHILD_* through as the child's environment.
 #
-#   Tools/shoot-ios.sh "Cross the Dateline" 45
+#   Tools/shoot-ios.sh "Buildings in 3D" 45
 #
 # HOWDOI_SIM picks the simulator; the default is whichever is booted.
 set -u

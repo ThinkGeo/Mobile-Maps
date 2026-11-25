@@ -2,11 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
 	What the app reaches for that Apple asks to be declared, and what it collects,
-	which is nothing. App Store Connect refuses a build that uses a required-reason
-	API without a manifest naming it (ITMS-91053), and the .NET runtime and base
-	class library use three of them whatever the linker is told to strip - so these
-	three are the floor for every .NET MAUI app rather than anything this gallery
-	asked for.
+	which is nothing. The three required-reason APIs below are used by the .NET
+	runtime and base class library, so every .NET MAUI app declares them.
 
 	Nothing here is tracking and nothing is collected: the gallery has no account,
 	no analytics and no identifier of its own. A location fix is used in the one

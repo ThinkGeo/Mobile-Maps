@@ -1,6 +1,5 @@
 using System.Text.Json.Nodes;
 using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Devices.Sensors;
 using ThinkGeo.Core;
 using ThinkGeo.Core.Styling;
 using ThinkGeo.UI.Maui;
@@ -9,15 +8,12 @@ namespace HowDoISample.Samples;
 
 /// <summary>
 /// The city with its real height. One fill-extrusion layer over a published style
-/// stands Manhattan up, and the map opens already leaning because the lean is what
-/// makes the height visible - the companion to Terrain and Hillshade, which does the
-/// same for the shape of the ground.
+/// stands Manhattan up, and the map opens already tilted because the tilt is what
+/// makes the height visible.
 /// <para>
 /// The switch changes the whole map between the two themes the same server
-/// publishes, which is what a style URI being the only input actually buys: a
-/// different map is a different URI. It is also the shortest path onto a GPU map, and
-/// was this gallery's opening sample for that reason: everything specific to the GPU
-/// is the one line that assigns the basemap, and the map view, the camera and the
+/// publishes: a different map is a different style URI. Everything specific to the
+/// GPU is the one line that assigns the basemap; the map view, the camera and the
 /// gestures are the ordinary MAUI ones.
 /// </para>
 /// </summary>
@@ -36,40 +32,18 @@ public class BuildingsIn3D : ContentPage
 
     /// <summary>
     /// Fifth Avenue in the eighties, where the Upper East Side meets Central Park, in
-    /// spherical mercator metres.
-    /// <para>
-    /// The vantage is the whole picture. A tilted camera sees the near side of the
-    /// view at eye level and everything else behind it, so standing among towers -
-    /// which is where this used to open, over Hudson Yards - puts three of them across
-    /// the screen and the city behind them is gone. Union Square, which came after
-    /// that, solved the blocking but filled every corner with blocks that all stand
-    /// about the same height.
-    /// </para>
-    /// <para>
-    /// The park is what this view adds. It puts an empty half against a dense one, so
-    /// the city has an edge to be read against instead of running out of frame on all
-    /// four sides, and the reservoir gives the eye somewhere flat to measure the
-    /// skyline from. It is also the cheaper half: a park carries no buildings, so
-    /// roughly half the frame costs nothing to extrude, and the same tilt buys a
-    /// longer view for fewer features.
-    /// </para>
-    /// <para>
-    /// North stays up, so the park falls on the left of the frame and the avenues run
-    /// diagonally - that is Manhattan's grid, which is about 29 degrees off true
-    /// north, not a camera rotation.
-    /// </para>
+    /// spherical mercator metres. The park puts an open half against a built one, so
+    /// the skyline has an edge to be read against.
     /// </summary>
     private static readonly PointShape HomeCenter = new(-8233300d, 4980400d);
 
     /// <summary>
-    /// Close enough that the buildings are the view rather than a texture on it, and
-    /// far enough that there is a view to be had. A level further in is a street
-    /// canyon: whatever stands in the first block fills the screen, and the three
-    /// kilometres of city that make the picture are behind it.
+    /// Close enough that the buildings are the view, and far enough that the view
+    /// reaches past the first block.
     /// </summary>
     private static readonly double HomeScale = new ThinkGeoCloudMapsZoomLevelSet().GetScales()[15];
 
-    /// <summary>Flat, the extrusions are just roofs.</summary>
+    /// <summary>The tilt the map opens at; seen from straight above, the extrusions are just roofs.</summary>
     private const double HomeTilt = 60;
 
     /// <summary>Where the camera goes once it knows where you are: a few blocks.</summary>
@@ -90,14 +64,10 @@ public class BuildingsIn3D : ContentPage
     public BuildingsIn3D()
     {
         Title = "Buildings in 3D";
-        Shell.SetNavBarIsVisible(this, false);
-
         // The map draws to the bottom edge of the screen rather than being inset
-        // above the home indicator, as on every other sample page.
+        // above the home indicator, and the home indicator is asked to dim itself -
+        // see SamplePage, which does the same for every other sample.
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetUseSafeArea(this, false);
-
-        // And the home indicator is asked to dim itself, as on every sample page - see
-        // SamplePage for what a NavigationPage does with that ask.
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page.SetPrefersHomeIndicatorAutoHidden(this, true);
 
         _map = new MapView
@@ -110,18 +80,16 @@ public class BuildingsIn3D : ContentPage
             VerticalOptions = LayoutOptions.Fill,
         };
 
-        // A style URI and nothing else. GpuBasemap is the whole public surface of the
-        // GPU story on MAUI as it is on the desktop, and a basemap is not one of the
-        // Overlays - it is the ground they sit on.
+        // A style and nothing else. A basemap is not one of the Overlays - it is the
+        // ground they sit on.
         _basemap = new GpuBasemap(StyleFor(_dark));
         _map.Basemap = _basemap;
 
-        // The map opens already leaning so the first thing it shows is the thing worth
-        // showing. Two fingers sliding together change it from here.
+        // The map opens already tilted. Two fingers sliding together change it from
+        // here.
         _map.TiltAngle = HomeTilt;
 
-        // The map draws itself once it first has a size. Without this nothing is ever
-        // asked to draw, and the page comes up empty with nothing in the log.
+        // The map draws itself once it first has a size.
         _map.Behaviors.Add(new AutoLoadMapViewBehavior());
 
         // The puck is a view on the map rather than a drawing in it, so it can be a
@@ -130,9 +98,20 @@ public class BuildingsIn3D : ContentPage
 
         Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
 
-        // As on every sample page - see SamplePage.FillSafeArea.
+        // See SamplePage.FillSafeArea.
         Loaded += (_, _) => SamplePage.FillSafeArea(_map);
     }
+
+    /// <summary>
+    /// The two themes, each built once and kept: a MapStyle made from a URI fetches
+    /// and parses that document before the map can draw it, so a style built on every
+    /// flip would pay for that each time.
+    /// </summary>
+    private MapStyle StyleFor(bool dark)
+        => dark ? _darkStyle ??= BuildStyle(true) : _lightStyle ??= BuildStyle(false);
+
+    private MapStyle _darkStyle;
+    private MapStyle _lightStyle;
 
     /// <summary>
     /// One of the two published styles, with a 3D building layer added on top of it.
@@ -143,21 +122,6 @@ public class BuildingsIn3D : ContentPage
     /// so the layer waits for it.
     /// </para>
     /// </summary>
-    /// <summary>
-    /// The two themes, each built once and kept.
-    /// <para>
-    /// A MapStyle made from a URI has to fetch and parse that document before the map
-    /// can draw it - measured at 659 ms on an iPad for this one - and building a fresh
-    /// one on every flip paid that again each time, for a document that had not
-    /// changed. Held here, the first flip pays it and no later one does.
-    /// </para>
-    /// </summary>
-    private MapStyle StyleFor(bool dark)
-        => dark ? _darkStyle ??= BuildStyle(true) : _lightStyle ??= BuildStyle(false);
-
-    private MapStyle _darkStyle;
-    private MapStyle _lightStyle;
-
     private static MapStyle BuildStyle(bool dark)
     {
         var style = new MapStyle(dark ? DarkStyleUri : LightStyleUri);
@@ -185,14 +149,10 @@ public class BuildingsIn3D : ContentPage
     }
 
     /// <summary>
-    /// The round button in the bottom right corner, the one every map has: it asks the
-    /// phone where it is and takes the camera there.
+    /// The round button in the bottom right corner: it asks the phone where it is and
+    /// takes the camera there. The icon is drawn rather than loaded - a ring, a dot
+    /// and four ticks - so the page carries no image file.
     /// </summary>
-    /// <remarks>
-    /// The icon is drawn rather than loaded - a ring, a dot and four ticks, which is
-    /// what this button looks like everywhere - so the page carries no image file and
-    /// the colour follows the theme like everything else on it.
-    /// </remarks>
     private View BuildLocateButton()
     {
         var ring = new Ellipse
@@ -296,13 +256,12 @@ public class BuildingsIn3D : ContentPage
     }
 
     /// <summary>
-    /// Ask the phone where it is, and put the camera and the puck there.
+    /// Asks the phone where it is, and puts the camera and the puck there.
     /// </summary>
     /// <remarks>
     /// The permission is asked for rather than assumed, and a refusal is an answer
     /// rather than an error: the button says so and the map stays where it was. The
-    /// manifest and the Info.plist declare what is being asked for, which is what makes
-    /// the ask legal to make at all.
+    /// Android manifest and the Info.plist declare what is being asked for.
     /// </remarks>
     private async Task LocateAsync()
     {
@@ -344,8 +303,7 @@ public class BuildingsIn3D : ContentPage
             var world = ToMercator(location.Longitude, location.Latitude);
             ShowPuck(world);
 
-            // The lean is kept: this map's subject is the height, and arriving flat
-            // would throw that away to show the same thing every other map shows.
+            // The tilt is kept: this map's subject is the height.
             _map.CenterPoint = world;
             _map.MapScale = LocatedScale;
             await _map.RefreshAsync();
@@ -428,8 +386,7 @@ public class BuildingsIn3D : ContentPage
         };
 
         // Out and away to nothing, then again from the dot: the halo is a wave leaving
-        // the fix rather than a circle changing size, which is the difference between
-        // "it is here" and "something is blinking".
+        // the fix rather than a circle changing size.
         _puck.Loaded += async (_, _) =>
         {
             while (_puck != null && _puck.IsLoaded)
@@ -437,8 +394,8 @@ public class BuildingsIn3D : ContentPage
                 halo.Scale = 1;
                 halo.Opacity = 0.9;
                 await Task.WhenAll(
-                    halo.ScaleTo(2.6, 1100, Easing.SinOut),
-                    halo.FadeTo(0, 1100, Easing.SinOut));
+                    halo.ScaleToAsync(2.6, 1100, Easing.SinOut),
+                    halo.FadeToAsync(0, 1100, Easing.SinOut));
                 await Task.Delay(400);
             }
         };
@@ -483,14 +440,8 @@ public class BuildingsIn3D : ContentPage
             _dark = e.Value;
 
             // The camera is not touched: the style is what changes, so the view holds
-            // its place, its scale and its lean across the swap.
-            //
-            // And nothing is asked for after it. SetStyleAsync already redraws; a
-            // RefreshAsync behind it starts a SECOND pass over the same view, which
-            // supersedes the first one mid-build - measured on this swap: two tile
-            // generations instead of one, six tile builds cancelled after they had
-            // been started, and a fetch abandoned. The swap gets slower by being
-            // hurried.
+            // its place, its scale and its tilt across the swap. SetStyleAsync redraws
+            // the map itself, so no RefreshAsync follows it.
             await _basemap.SetStyleAsync(StyleFor(_dark));
         };
 

@@ -10,16 +10,10 @@ namespace HowDoISample;
 public class MainActivity : MauiAppCompatActivity
 {
     /// <summary>
-    /// Carries the driven-run sample name from the launch intent into the environment
-    /// the shared App reads.
+    /// Carries the name of a sample to open from the launch intent into the
+    /// environment variable the shared App reads: `am start --es HOWDOI_SAMPLE` is
+    /// Android's counterpart of an environment variable passed at launch on iOS.
     /// </summary>
-    /// <remarks>
-    /// iOS has `simctl launch`, which sets a child process's environment directly, so
-    /// App just reads HOWDOI_SAMPLE. Android has no such thing: `am start --es` passes
-    /// an intent extra instead. Putting it into the environment here is what lets the
-    /// same one line in App drive both platforms, and so the same sweep script
-    /// screenshot every sample on either.
-    /// </remarks>
     protected override void OnCreate(Bundle savedInstanceState)
     {
         var wanted = Intent?.GetStringExtra("HOWDOI_SAMPLE");
