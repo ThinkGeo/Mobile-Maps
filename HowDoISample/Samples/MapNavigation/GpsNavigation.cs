@@ -12,10 +12,25 @@ namespace HowDoISample.Samples;
 /// A drive along a recorded GPS track: the camera flies to each point and the vehicle
 /// rides the flight's own progress, the road behind turns green as it is covered, and
 /// either theme can be swapped under the whole thing without losing any of it.
+/// <para>
+/// The map stays free to pan, pinch and rotate during the drive. A finger on the map
+/// takes the camera; the vehicle keeps its pace on a clock meanwhile, and a moment
+/// after the finger lifts the camera flies back to it, at the scale it was left at.
+/// </para>
 /// </summary>
 public class GpsNavigation : SamplePage, IDisposable
 {
     private const double DefaultScale = 5000;
+
+    // How long the vehicle takes from one GPS point to the next: the length of a
+    // camera flight while tracking, and a shorter hop in the overview.
+    private const int FlightMilliseconds = 1500;
+    private const int OverviewMilliseconds = 1000;
+
+    // How long the camera is left alone after the last touch. A pan glides on for up
+    // to a second and a half after the finger lifts, and a double-tap zoom takes as
+    // long as a flight; this covers both.
+    private const int HandsOffMilliseconds = 2000;
 
     private readonly List<Vertex> _visitedVertices = new();
 
@@ -24,7 +39,15 @@ public class GpsNavigation : SamplePage, IDisposable
     private DynamicSource _paths;
     private DynamicSource _vehicle;
     private CancellationTokenSource _drive;
-    private CancellationTokenSource _segment;
+
+    // The flight to the next GPS point, while there is one in the air.
+    private CancellationTokenSource _flight;
+    private PointShape _flightTarget;
+    private double _flightProgress;
+
+    private readonly Stopwatch _sinceLastTouch = new();
+    private bool _userMovedCamera;
+    private double _followScale = DefaultScale;
 
     private MapView _map;
     private Button _overviewButton;
@@ -74,6 +97,9 @@ public class GpsNavigation : SamplePage, IDisposable
         _vehicle.SetPoint("vehicle", new Feature(_gpsPoints[0].X, _gpsPoints[0].Y), 0f, GeoColors.White, 26f, "vehicle", lieOnMap: true);
 
         map.CurrentExtentChangedInAnimation += Map_CurrentExtentChangedInAnimation;
+        map.TouchDown += (_, _) => UserTouchedMap();
+        map.TouchMove += (_, _) => UserTouchedMap();
+        map.TouchUp += (_, _) => UserTouchedMap();
         map.CenterPoint = new PointShape(_gpsPoints[0]);
         map.MapScale = DefaultScale;
 
@@ -96,44 +122,47 @@ public class GpsNavigation : SamplePage, IDisposable
     /// <summary>
     /// One segment per GPS point. Tracking mode flies the camera to each point and the
     /// vehicle follows the flight's progress; overview mode holds the camera and moves
-    /// the vehicle on its own clock.
+    /// the vehicle on a clock.
+    /// <para>
+    /// The clock also finishes any segment the flight did not. ZoomToExtentAsync
+    /// returns when its flight ends, and a flight ends early - without an exception -
+    /// whenever something else moves the camera: every step of a pan or a pinch does
+    /// it. So "the call returned" does not mean "the vehicle has arrived". Taking it to
+    /// mean that moved the drive on one GPS point for every touch event, dozens a
+    /// second, and the vehicle shot down the route under a moving finger.
+    /// </para>
     /// </summary>
     private async Task DriveAsync(CancellationToken token)
     {
         await _map.RefreshAsync();
 
-        for (_currentGpsPointIndex = 0; _currentGpsPointIndex < _gpsPoints.Count; _currentGpsPointIndex++)
+        try
         {
-            _segment = CancellationTokenSource.CreateLinkedTokenSource(token);
-            try
+            for (_currentGpsPointIndex = 0; _currentGpsPointIndex < _gpsPoints.Count; _currentGpsPointIndex++)
             {
-                if (_showOverview)
+                _flightProgress = 0;
+                if (!_showOverview && !UserHasCamera)
                 {
-                    var clock = Stopwatch.StartNew();
-                    while (clock.ElapsedMilliseconds < 1000)
-                    {
-                        UpdateRoutesAndMarker(clock.ElapsedMilliseconds / 1000.0);
-                        await Task.Delay(16, _segment.Token);
-                    }
-
-                    UpdateRoutesAndMarker(1);
+                    await FollowVehicleAsync(_currentGpsPointIndex, token);
                 }
-                else
+
+                // Whatever is left of the segment, at the pace it would have had.
+                var duration = _showOverview ? OverviewMilliseconds : FlightMilliseconds;
+                var flown = _flightProgress;
+                var clock = Stopwatch.StartNew();
+                for (var progress = flown; progress < 1; progress = flown + (clock.Elapsed.TotalMilliseconds / duration))
                 {
-                    await FollowVehicleAsync(_currentGpsPointIndex, _segment.Token);
+                    UpdateRoutesAndMarker(progress);
+                    await Task.Delay(16, token);
                 }
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            finally
-            {
-                _segment.Dispose();
-                _segment = null;
-            }
 
-            ShowProgress();
-            if (token.IsCancellationRequested) return;
+                UpdateRoutesAndMarker(1);
+                ShowProgress();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // The page was closed.
         }
     }
 
@@ -152,6 +181,13 @@ public class GpsNavigation : SamplePage, IDisposable
     /// </summary>
     private async Task FollowVehicleAsync(int gpsPointIndex, CancellationToken cancellationToken)
     {
+        // Follow at the scale the user left the map at, not the one the drive began with.
+        if (_userMovedCamera)
+        {
+            _followScale = _map.MapScale;
+            _userMovedCamera = false;
+        }
+
         var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
         // The GPS point sits below the centre, so more of the road ahead is in view.
@@ -159,15 +195,60 @@ public class GpsNavigation : SamplePage, IDisposable
         // size, so this is a share of its height.
         var offset = _map.CanvasHeight * 0.27;
         var centerPoint = MapUtil.OffsetPointWithScreenOffset(
-            new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, DefaultScale, _map.MapUnit);
+            new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, _followScale, _map.MapUnit);
 
-        await _map.ZoomToExtentAsync(centerPoint, DefaultScale, angle, cancellationToken: cancellationToken);
-        if (!cancellationToken.IsCancellationRequested) await _map.RefreshAsync();
+        using var flight = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        _flight = flight;
+        _flightTarget = centerPoint;
+        _flightProgress = 0;
+        try
+        {
+            await _map.ZoomToExtentAsync(centerPoint, _followScale, angle, cancellationToken: flight.Token);
+
+            if (_flightProgress >= 1)
+            {
+                await _map.RefreshAsync();
+            }
+            else if (!flight.IsCancellationRequested)
+            {
+                // Cut short, and not from here: a mouse wheel or a double tap took the
+                // camera, which raise no touch event of their own.
+                UserTouchedMap();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // The flight was called off; the clock takes the vehicle the rest of the way.
+        }
+        finally
+        {
+            _flight = null;
+            _flightTarget = null;
+        }
     }
+
+    /// <summary>
+    /// A finger on the map takes the camera at once, and keeps it for a moment after
+    /// the last touch.
+    /// </summary>
+    private void UserTouchedMap()
+    {
+        if (_showOverview) return;
+
+        _sinceLastTouch.Restart();
+        _userMovedCamera = true;
+        _flight?.Cancel();
+    }
+
+    private bool UserHasCamera => _sinceLastTouch.IsRunning && _sinceLastTouch.ElapsedMilliseconds < HandsOffMilliseconds;
 
     private void Map_CurrentExtentChangedInAnimation(object sender, CurrentExtentChangedInAnimationMapViewEventArgs e)
     {
-        if (!MapUtil.IsSameDouble(e.FromResolution, e.ToResolution)) return;
+        // Every animated camera move raises this - the flight to the overview and a
+        // double-tap zoom too. Only the flight to the next GPS point carries the vehicle.
+        if (!ReferenceEquals(e.ToCenterPoint, _flightTarget)) return;
+
+        _flightProgress = e.Progress;
         UpdateRoutesAndMarker(e.Progress);
     }
 
@@ -202,7 +283,12 @@ public class GpsNavigation : SamplePage, IDisposable
     {
         _showOverview = !_showOverview;
         _overviewButton.Text = _showOverview ? "Tracking mode" : "Overview mode";
-        _segment?.Cancel();
+        _flight?.Cancel();
+
+        // Back in tracking mode the camera returns to the vehicle straight away, at the
+        // scale it last followed at.
+        _sinceLastTouch.Reset();
+        _userMovedCamera = false;
 
         try
         {
@@ -214,6 +300,7 @@ public class GpsNavigation : SamplePage, IDisposable
                 // around it.
                 var scale = MapUtil.GetScale(_map.MapUnit, boundingBox, _map.CanvasWidth, _map.CanvasHeight) * 1.5;
                 await _map.ZoomToExtentAsync(boundingBox.GetCenterPoint(), scale, 0);
+                await _map.RefreshAsync();
             }
             else if (_currentGpsPointIndex >= _gpsPoints.Count)
             {
