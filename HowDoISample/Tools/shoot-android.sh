@@ -25,7 +25,7 @@ sleep "$WAIT"
 $A exec-out screencap -p > "$OUT/$SLUG.png" 2>/dev/null
 $A logcat -d > "$OUT/$SLUG.log" 2>/dev/null
 
-crash=$(grep -cE "FATAL|AndroidRuntime: *Unhandled|SIGSEGV" "$OUT/$SLUG.log")
+crash=$(grep -cE "FATAL|AndroidRuntime: *Unhandled|SIGSEGV|Fatal signal|$PKG.*has died|exited due to signal 11" "$OUT/$SLUG.log")
 opened=$(grep -c "opening '" "$OUT/$SLUG.log")
 gl=$(grep -c "GLES up" "$OUT/$SLUG.log")
 missing=$(grep -c "no sample titled" "$OUT/$SLUG.log")
