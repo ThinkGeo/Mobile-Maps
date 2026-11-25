@@ -15,7 +15,7 @@ namespace HowDoISample.Samples;
 /// <para>
 /// The map stays free to pan, pinch and rotate during the drive. A finger on the map
 /// takes the camera; the vehicle keeps its pace on a clock meanwhile, and a moment
-/// after the finger lifts the camera flies back to it, at the scale it was left at.
+/// after the finger lifts the camera flies back to it and to the scale it follows at.
 /// </para>
 /// </summary>
 public class GpsNavigation : SamplePage, IDisposable
@@ -46,8 +46,6 @@ public class GpsNavigation : SamplePage, IDisposable
     private double _flightProgress;
 
     private readonly Stopwatch _sinceLastTouch = new();
-    private bool _userMovedCamera;
-    private double _followScale = DefaultScale;
 
     private MapView _map;
     private Button _overviewButton;
@@ -181,13 +179,6 @@ public class GpsNavigation : SamplePage, IDisposable
     /// </summary>
     private async Task FollowVehicleAsync(int gpsPointIndex, CancellationToken cancellationToken)
     {
-        // Follow at the scale the user left the map at, not the one the drive began with.
-        if (_userMovedCamera)
-        {
-            _followScale = _map.MapScale;
-            _userMovedCamera = false;
-        }
-
         var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
         // The GPS point sits below the centre, so more of the road ahead is in view.
@@ -195,7 +186,7 @@ public class GpsNavigation : SamplePage, IDisposable
         // size, so this is a share of its height.
         var offset = _map.CanvasHeight * 0.27;
         var centerPoint = MapUtil.OffsetPointWithScreenOffset(
-            new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, _followScale, _map.MapUnit);
+            new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, DefaultScale, _map.MapUnit);
 
         using var flight = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         _flight = flight;
@@ -203,7 +194,7 @@ public class GpsNavigation : SamplePage, IDisposable
         _flightProgress = 0;
         try
         {
-            await _map.ZoomToExtentAsync(centerPoint, _followScale, angle, cancellationToken: flight.Token);
+            await _map.ZoomToExtentAsync(centerPoint, DefaultScale, angle, cancellationToken: flight.Token);
 
             if (_flightProgress >= 1)
             {
@@ -236,7 +227,6 @@ public class GpsNavigation : SamplePage, IDisposable
         if (_showOverview) return;
 
         _sinceLastTouch.Restart();
-        _userMovedCamera = true;
         _flight?.Cancel();
     }
 
@@ -285,10 +275,8 @@ public class GpsNavigation : SamplePage, IDisposable
         _overviewButton.Text = _showOverview ? "Tracking mode" : "Overview mode";
         _flight?.Cancel();
 
-        // Back in tracking mode the camera returns to the vehicle straight away, at the
-        // scale it last followed at.
+        // Back in tracking mode the camera returns to the vehicle straight away.
         _sinceLastTouch.Reset();
-        _userMovedCamera = false;
 
         try
         {
