@@ -9,16 +9,16 @@ Tools/shoot-android.sh  "Cross the Dateline" 45
 ```
 
 Each one launches the app straight into a named sample, waits, takes a screenshot
-and prints four numbers from the log:
+and prints what the log says:
 
 | | |
 |---|---|
 | `opened` | the app reached the sample and said so |
 | `gl` | a GL context came up (2 for the samples that run two maps) |
-| `crash` | SIGSEGV, an unhandled exception, or a FATAL line |
-| `missing` | the title did not match a catalog row - a typo in the call |
+| `crash` | SIGSEGV or an unhandled exception; on Android also a `FATAL` line, `Fatal signal`, `exited due to signal 11`, or the package reported as `has died` |
+| `missing` | Android only: the title did not match a catalog row - a typo in the call |
 
-`opened=1 gl=1 crash=0 missing=0` is a pass. `opened=1 gl=0` means the page came up
+`opened=1 gl=1 crash=0` is a pass (with `missing=0` on Android). `opened=1 gl=0` means the page came up
 without a GPU map, which is right for the one or two samples that draw only with
 the classic pipeline and wrong for every other.
 
@@ -37,8 +37,8 @@ line in `App.xaml.cs` then works on both.
 
 ```sh
 # every title in the catalog, one after another
-grep -oE 'new\("[^"]+",\s*"[^"]+"' Shell/SampleCatalog.cs \
-  | sed 's/.*,\s*"//' \
+grep -oE 'new\("[^"]+",[[:space:]]*"[^"]+"' Shell/SampleCatalog.cs \
+  | sed -E 's/.*,[[:space:]]*"//; s/"$//' \
   | while IFS= read -r t; do Tools/shoot-android.sh "$t" 26 </dev/null; done
 ```
 
@@ -49,7 +49,7 @@ swallows the rest of the list and the sweep quietly stops after one sample.
 
 ```sh
 dotnet build HowDoISample.csproj -f net10.0-android36.0 -p:RuntimeIdentifier=android-arm64 -p:EmbedAssembliesIntoApk=true
-adb install -r bin/Debug/net10.0-android36.0/com.thinkgeo.androidhowdoi-Signed.apk
+adb install -r bin/Debug/net10.0-android36.0/android-arm64/com.thinkgeo.androidhowdoi-Signed.apk
 ```
 
 A default Android debug build leaves the assemblies out of the APK for the IDE to
