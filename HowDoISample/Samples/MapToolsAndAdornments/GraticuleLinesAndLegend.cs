@@ -62,10 +62,10 @@ public class GraticuleLinesAndLegend : SamplePage
                     new GeoFont("Verdana", 10, DrawingFontStyles.Bold), GeoBrushes.Black),
             },
 
-            // The bottom corner, because the graticule has the other three: its
-            // meridians are labelled along the top edge and its parallels down the left.
-            Location = AdornmentLocation.LowerRight,
-            XOffsetInPixel = -12,
+            // The bottom left corner: the bottom right one belongs to the basemap's
+            // attribution, and the graticule labels its meridians along the top edge.
+            Location = AdornmentLocation.LowerLeft,
+            XOffsetInPixel = 12,
             YOffsetInPixel = -12,
         };
 
