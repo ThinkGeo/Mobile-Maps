@@ -52,7 +52,7 @@ its map through `GpuBasemap`.
 
 | Buildings in 3D | Terrain and Hillshade | Weather Grids | Heatmap |
 |---|---|---|---|
-| <img src="HowDoISample/Screenshots/Buildings-in-3D.jpg" width="180" alt="Buildings in 3D"> | <img src="HowDoISample/Screenshots/Terrain-and-Hillshade.jpg" width="180" alt="Terrain and Hillshade"> | <img src="HowDoISample/Screenshots/Weather-Grids.jpg" width="180" alt="Weather Grids"> | <img src="HowDoISample/Screenshots/Heatmap.jpg" width="180" alt="Heatmap"> |
+| <img src="HowDoISample/Screenshots/Buildings-in-3D.gif" width="180" alt="Buildings in 3D"> | <img src="HowDoISample/Screenshots/Terrain-and-Hillshade.gif" width="180" alt="Terrain and Hillshade"> | <img src="HowDoISample/Screenshots/Weather-Grids.gif" width="180" alt="Weather Grids"> | <img src="HowDoISample/Screenshots/Heatmap.gif" width="180" alt="Heatmap"> |
 
 More screenshots, and a link to each sample's source, are in the gallery's
 [README](HowDoISample/README.md).
@@ -98,7 +98,8 @@ The samples carry a ThinkGeo Cloud key for evaluation. Sign up at
 
 `ThinkGeo.UI.iOS` and `ThinkGeo.UI.Android`, the map controls for apps that do not use MAUI, are
 maintained and released alongside `ThinkGeo.UI.Maui`. Their samples are not in this branch; the
-native iOS how-do-I sample is at [`v15.0.1/Legacy/ThinkGeo.UI.iOS`](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/v15.0.1/Legacy/ThinkGeo.UI.iOS).
+how-do-I sample for native iOS is kept with the 15.0.1 samples:
+[ThinkGeo.UI.iOS how-do-I sample](https://gitlab.com/thinkgeo/public/thinkgeo-mobile-maps/-/tree/v15.0.1/Legacy/ThinkGeo.UI.iOS).
 
 ## More
 

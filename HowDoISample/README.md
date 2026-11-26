@@ -6,7 +6,7 @@ sample draws its map on the GPU, through `GpuBasemap`, with `ThinkGeo.UI.Maui` a
 
 | Buildings in 3D | Terrain and Hillshade | Weather Grids | Heatmap |
 |---|---|---|---|
-| <img src="Screenshots/Buildings-in-3D.jpg" width="200" alt="Buildings in 3D"> | <img src="Screenshots/Terrain-and-Hillshade.jpg" width="200" alt="Terrain and Hillshade"> | <img src="Screenshots/Weather-Grids.jpg" width="200" alt="Weather Grids"> | <img src="Screenshots/Heatmap.jpg" width="200" alt="Heatmap"> |
+| <img src="Screenshots/Buildings-in-3D.gif" width="200" alt="Buildings in 3D"> | <img src="Screenshots/Terrain-and-Hillshade.gif" width="200" alt="Terrain and Hillshade"> | <img src="Screenshots/Weather-Grids.gif" width="200" alt="Weather Grids"> | <img src="Screenshots/Heatmap.gif" width="200" alt="Heatmap"> |
 | **Weather Radar** | **Cluster Markers** | **Edit Features** | **Vector Map Providers** |
 | <img src="Screenshots/Weather-Radar.jpg" width="200" alt="Weather Radar"> | <img src="Screenshots/Cluster-Markers.jpg" width="200" alt="Cluster Markers"> | <img src="Screenshots/Edit-Features.jpg" width="200" alt="Edit Features"> | <img src="Screenshots/Vector-Map-Providers.jpg" width="200" alt="Vector Map Providers"> |
 
