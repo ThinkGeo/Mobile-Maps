@@ -22,6 +22,9 @@ public class GpsNavigation : SamplePage, IDisposable
 {
     private const double DefaultScale = 5000;
 
+    /// <summary>How far below the centre the vehicle sits, as a share of the map's height, on a tall screen and on a wide one.</summary>
+    private const double VehicleDropTall = 0.2, VehicleDropWide = 0.1;
+
     // How long the vehicle takes from one GPS point to the next: the length of a
     // camera flight while tracking, and a shorter hop in the overview.
     private const int FlightMilliseconds = 1500;
@@ -175,8 +178,11 @@ public class GpsNavigation : SamplePage, IDisposable
         var angle = GetRotationAngle(gpsPointIndex, _gpsPoints);
 
         // The GPS point sits below the centre, so more of the road ahead is in view.
-        // The offset is a share of the screen's height.
-        var offset = _map.CanvasHeight * 0.27;
+        // The offset is a share of the map's own height - not CanvasHeight, which with
+        // rotation on is the side of the square the map turns in, the screen's
+        // diagonal: on a phone on its side that put the vehicle off the bottom of the
+        // screen. Less of a share on a wide screen, where the card takes the bottom.
+        var offset = _map.Height * (_map.Width > _map.Height ? VehicleDropWide : VehicleDropTall);
         var centerPoint = MapUtil.OffsetPointWithScreenOffset(
             new PointShape(_gpsPoints[gpsPointIndex]), 0, offset, angle, DefaultScale, _map.MapUnit);
 

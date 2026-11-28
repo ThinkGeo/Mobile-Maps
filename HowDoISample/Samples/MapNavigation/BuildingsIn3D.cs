@@ -96,7 +96,10 @@ public class BuildingsIn3D : ContentPage
         // MAUI animation - see Markers for the same trick on an ordinary pin.
         _map.Overlays.Add(_markers);
 
-        Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
+        // No navigation bar, as on every sample: see SamplePage.
+        NavigationPage.SetHasNavigationBar(this, false);
+
+        Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus(), SamplePage.BuildBackChip(this) } };
 
         // See SamplePage.FillSafeArea and SamplePage.KeepLayersToEdges: again whenever
         // the page changes shape, since the strips move when the phone turns.

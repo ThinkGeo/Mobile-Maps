@@ -110,7 +110,11 @@ public abstract class SamplePage : ContentPage
             Children = { _attribution, _panel },
         };
 
-        _backChip = BuildBackChip();
+        // No navigation bar: a sample is a map, and the bar took a band off the top
+        // of it for a title and a back arrow. A small back button with the title
+        // stands in for it, over the map.
+        NavigationPage.SetHasNavigationBar(this, false);
+        _backChip = BuildBackChip(this);
 
         Content = new Grid { Children = { Map, bottom, _backChip } };
 
@@ -163,10 +167,9 @@ public abstract class SamplePage : ContentPage
 
     /// <summary>
     /// Lays the page out for its shape. A phone on its side has a few hundred points
-    /// of height, and the navigation bar and the card took more than half of them, so
-    /// on its side the bar goes - a small back button with the title stands in for it,
-    /// over the map - and the card keeps to the left and to less of the height, so
-    /// the map shows beside and above it.
+    /// of height, and a card the width of the screen took a good part of them, so on
+    /// its side the card keeps to the left and to less of the height, and the map
+    /// shows beside and above it.
     /// </summary>
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -189,8 +192,6 @@ public abstract class SamplePage : ContentPage
             return;
 
         _compact = compact;
-        NavigationPage.SetHasNavigationBar(this, !compact);
-        _backChip.IsVisible = compact;
         _panel.HorizontalOptions = compact ? LayoutOptions.Start : LayoutOptions.Fill;
     }
 
@@ -201,10 +202,10 @@ public abstract class SamplePage : ContentPage
     private const double CompactPanelWidth = 440;
 
     /// <summary>
-    /// The back button and title that stand in for the navigation bar while the
-    /// phone is on its side.
+    /// The back button and title that stand in for the navigation bar, at the top
+    /// left over the map.
     /// </summary>
-    private Border BuildBackChip()
+    public static Border BuildBackChip(Page page)
     {
         var title = new Label
         {
@@ -213,7 +214,7 @@ public abstract class SamplePage : ContentPage
             VerticalOptions = LayoutOptions.Center,
             LineBreakMode = LineBreakMode.TailTruncation,
         };
-        title.SetBinding(Label.TextProperty, new Binding(nameof(Title), source: this));
+        title.SetBinding(Label.TextProperty, new Binding(nameof(Page.Title), source: page));
 
         var chip = new Border
         {
@@ -240,11 +241,10 @@ public abstract class SamplePage : ContentPage
             Margin = new Thickness(10, 10, 0, 0),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Start,
-            IsVisible = false,
         };
 
         var tap = new TapGestureRecognizer();
-        tap.Tapped += async (_, _) => await Navigation.PopAsync();
+        tap.Tapped += async (_, _) => await page.Navigation.PopAsync();
         chip.GestureRecognizers.Add(tap);
         return chip;
     }
@@ -276,7 +276,7 @@ public abstract class SamplePage : ContentPage
 
     /// <summary>
     /// Gives the map the strips the safe area holds back, by letting it hang that far
-    /// past the sides and the bottom of the page's content.
+    /// past the edges of the page's content.
     /// <para>
     /// SetUseSafeArea(false) on the page does not do this for a page inside a
     /// NavigationPage: the navigation wraps the page in a controller of its own, and
@@ -286,13 +286,13 @@ public abstract class SamplePage : ContentPage
     /// <para>
     /// With a negative margin the map is arranged past the end of its container, iOS
     /// does not clip it, and the band is covered by map. The insets are read from the
-    /// window because they differ by device and orientation: below the map for the
-    /// home indicator, and down a side on displays that keep a column beside the app.
+    /// window because they differ by device and orientation: above the map for the
+    /// status bar, below it for the home indicator, and down a side on displays that
+    /// keep a column beside the app.
     /// </para>
     /// <para>
     /// Only the map is moved. The control card and the credit are its siblings in the
-    /// page's Grid, so they stay inside the safe area. The top is left alone: the
-    /// navigation bar is there.
+    /// page's Grid, so they stay inside the safe area.
     /// </para>
     /// </summary>
     public static void FillSafeArea(View map)
@@ -303,7 +303,7 @@ public abstract class SamplePage : ContentPage
             .SelectMany(scene => scene.Windows)
             .FirstOrDefault()?.SafeAreaInsets ?? default;
 
-        map.Margin = new Thickness(-insets.Left, 0, -insets.Right, -insets.Bottom);
+        map.Margin = new Thickness(-insets.Left, -insets.Top, -insets.Right, -insets.Bottom);
 #endif
     }
 
