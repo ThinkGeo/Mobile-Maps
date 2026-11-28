@@ -102,9 +102,9 @@ public class GpsNavigation : SamplePage, IDisposable
         map.MapScale = DefaultScale;
 
         var buttons = new HorizontalStackLayout { Spacing = 10 };
-        _overviewButton = new Button { Text = "Overview mode", FontSize = 12, Padding = new Thickness(10, 4) };
+        _overviewButton = PanelButton("Overview mode", 12, new Thickness(10, 4));
         _overviewButton.Clicked += async (_, _) => await ToggleOverviewAsync();
-        _themeButton = new Button { Text = "Light theme", FontSize = 12, Padding = new Thickness(10, 4) };
+        _themeButton = PanelButton("Light theme", 12, new Thickness(10, 4));
         _themeButton.Clicked += async (_, _) => await ToggleThemeAsync();
         buttons.Add(_overviewButton);
         buttons.Add(_themeButton);

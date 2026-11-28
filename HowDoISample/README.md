@@ -2,7 +2,7 @@
 
 One .NET MAUI app with a menu of 25 samples, each showing one thing a ThinkGeo map can do. Every
 sample draws its map on the GPU, through `GpuBasemap`, with `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu`
-**15.1.0-beta030**. It runs on iOS, Android and Windows.
+**15.1.0-beta034**. It runs on iOS, Android and Windows.
 
 | Buildings in 3D | Terrain and Hillshade | Weather Grids | Heatmap |
 |---|---|---|---|

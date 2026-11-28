@@ -15,8 +15,8 @@ Create a new **.NET MAUI App** in Visual Studio, or with `dotnet new maui`.
 ## Step 2: Add the NuGet packages
 
 ```xml
-<PackageReference Include="ThinkGeo.UI.Maui" Version="15.1.0-beta030" />
-<PackageReference Include="ThinkGeo.Gpu" Version="15.1.0-beta030" />
+<PackageReference Include="ThinkGeo.UI.Maui" Version="15.1.0-beta034" />
+<PackageReference Include="ThinkGeo.Gpu" Version="15.1.0-beta034" />
 ```
 
 `ThinkGeo.UI.Maui` is the map control and `ThinkGeo.Gpu` is the engine that draws it. Both are

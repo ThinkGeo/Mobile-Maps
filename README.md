@@ -30,7 +30,7 @@ GPU basemap, as they were above the earlier one.
 
 | | |
 |---|---|
-| Packages | `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu`, on [nuget.org](https://www.nuget.org/packages/ThinkGeo.UI.Maui). 15.1 is a prerelease, so include prerelease versions when looking for it. Everything in this repository is built against **15.1.0-beta030**. |
+| Packages | `ThinkGeo.UI.Maui` and `ThinkGeo.Gpu`, on [nuget.org](https://www.nuget.org/packages/ThinkGeo.UI.Maui). 15.1 is a prerelease, so include prerelease versions when looking for it. Everything in this repository is built against **15.1.0-beta034**. |
 | Platforms | The GPU map runs on iOS, Android and Windows. |
 | Requires | .NET 10 with the MAUI workload. The samples set iOS 15, Android 5.0 (API 21) and Windows 10 version 1809 as their minimums. |
 

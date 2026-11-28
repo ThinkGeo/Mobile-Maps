@@ -108,12 +108,12 @@
   <!-- The ThinkGeo packages, from nuget.org:
 
          dotnet build HowDoISample.csproj
-         dotnet build HowDoISample.csproj -p:ThinkGeoPackageVersion=15.1.0-beta030
+         dotnet build HowDoISample.csproj -p:ThinkGeoPackageVersion=15.1.0-beta034
 
        ThinkGeoUseSource=true builds against a checkout of the SDK sources beside
        this repository instead of the packages. -->
   <PropertyGroup>
-    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta030</ThinkGeoPackageVersion>
+    <ThinkGeoPackageVersion Condition="'$(ThinkGeoPackageVersion)' == ''">15.1.0-beta034</ThinkGeoPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

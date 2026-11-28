@@ -66,6 +66,7 @@ public class EditFeatures : SamplePage
         _layerOverlay = new LayerOverlay();
         _layerOverlay.Layers.Add("featureLayer", featureLayer);
         map.Overlays.Add("layerOverlay", _layerOverlay);
+        AddSchools(map);
 
         // TouchMoved on the track overlay keeps the measurement live while drawing.
         map.TrackOverlay.TouchMoved += (_, e) => ShowMeasure(e.AffectedFeature.GetShape());
@@ -114,32 +115,42 @@ public class EditFeatures : SamplePage
     }
 
     /// <summary>
-    /// The schools are what there is to snap to, so they are only loaded - and only
-    /// drawn - while snapping is on.
+    /// The schools are what there is to snap to, so they are only drawn while snapping
+    /// is on. They are loaded when the sample opens, though, in the background: opening
+    /// the shapefile the first time the switch is turned costs seconds on a slow phone,
+    /// and the switch looked as though it had done nothing.
+    /// </summary>
+    private void AddSchools(MapView map)
+    {
+        _schoolsLayer = new ShapeFileFeatureLayer(SampleShared.Shapefile("Schools.shp"));
+
+        // The shapefile is in the Texas state plane; the map is in web mercator.
+        _schoolsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
+        _schoolsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle =
+            PointStyle.CreateSimpleCircleStyle(GeoColors.DarkRed, 7, GeoColors.White);
+        _schoolsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+        _schoolsOverlay = new LayerOverlay { IsVisible = false };
+        _schoolsOverlay.Layers.Add(_schoolsLayer);
+        map.Overlays.Add("schools", _schoolsOverlay);
+
+        // Open is safe to race with the overlay's own: both take the layer's lock.
+        _ = Task.Run(() => _schoolsLayer.Open());
+    }
+
+    /// <summary>
+    /// Shows or hides the schools. Only their overlay is refreshed; the shapes already
+    /// on the map have not changed.
     /// </summary>
     private void ShowSchools(bool show)
     {
-        if (show && _schoolsOverlay == null)
+        if (_schoolsOverlay == null || _schoolsOverlay.IsVisible == show)
         {
-            _schoolsLayer = new ShapeFileFeatureLayer(SampleShared.Shapefile("Schools.shp"));
-
-            // The shapefile is in the Texas state plane; the map is in web mercator.
-            _schoolsLayer.FeatureSource.ProjectionConverter = new ProjectionConverter(2276, 3857);
-            _schoolsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle =
-                PointStyle.CreateSimpleCircleStyle(GeoColors.DarkRed, 7, GeoColors.White);
-            _schoolsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-
-            _schoolsOverlay = new LayerOverlay();
-            _schoolsOverlay.Layers.Add(_schoolsLayer);
-            _map.Overlays.Add("schools", _schoolsOverlay);
+            return;
         }
 
-        if (_schoolsOverlay != null)
-        {
-            _schoolsOverlay.IsVisible = show;
-        }
-
-        _ = _map.RefreshAsync();
+        _schoolsOverlay.IsVisible = show;
+        _ = _map.RefreshAsync(new[] { _schoolsOverlay });
     }
 
     /// <summary>A rule that moves an edit: a vertex near a school lands on it.</summary>

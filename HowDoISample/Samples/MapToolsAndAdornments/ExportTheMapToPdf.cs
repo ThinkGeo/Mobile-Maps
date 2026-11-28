@@ -80,7 +80,7 @@ public class ExportTheMapToPdf : SamplePage
 
         AddChoiceStrip(Sheets.Select(sheet => sheet.Name).ToList(), 0, index => _sheet = index);
 
-        _export = new Button { Text = "Export PDF", FontSize = 13, Padding = new Thickness(14, 6) };
+        _export = PanelButton("Export PDF", 13, new Thickness(14, 6));
         _export.Clicked += async (_, _) => await ExportAsync();
         AddToPanel(_export);
 

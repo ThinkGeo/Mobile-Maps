@@ -78,8 +78,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<!-- ThinkGeo.UI.Maui is the map control; ThinkGeo.Gpu is the engine that draws it. -->
-		<PackageReference Include="ThinkGeo.UI.Maui" Version="15.1.0-beta030" />
-		<PackageReference Include="ThinkGeo.Gpu" Version="15.1.0-beta030" />
+		<PackageReference Include="ThinkGeo.UI.Maui" Version="15.1.0-beta034" />
+		<PackageReference Include="ThinkGeo.Gpu" Version="15.1.0-beta034" />
 	</ItemGroup>
 
 </Project>

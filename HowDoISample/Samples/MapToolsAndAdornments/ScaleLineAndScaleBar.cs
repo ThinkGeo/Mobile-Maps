@@ -16,11 +16,11 @@ public class ScaleLineAndScaleBar : SamplePage
     private static readonly (string Name, ScaleLineUnitSystem Line, UnitSystem Bar, string Reads)[] UnitSystems =
     {
         ("Metric", ScaleLineUnitSystem.Default, UnitSystem.Metric,
-            "kilometres and metres, with miles underneath"),
+            "Metric on top, feet and miles underneath"),
         ("Imperial", ScaleLineUnitSystem.ImperialAndMetric, UnitSystem.Imperial,
-            "miles and feet, with kilometres underneath"),
+            "Feet and miles on top, metric underneath"),
         ("Nautical", ScaleLineUnitSystem.NauticalMileAndImperial, UnitSystem.NauticalMile,
-            "nautical miles, with statute miles underneath"),
+            "Nautical miles on top, feet and miles underneath"),
     };
 
     /// <summary>
@@ -116,7 +116,7 @@ public class ScaleLineAndScaleBar : SamplePage
         var chosen = UnitSystems[index];
         _scaleLine.UnitSystem = chosen.Line;
         _scaleBar.UnitFamily = chosen.Bar;
-        _status.Text = "Measured in " + chosen.Reads;
+        _status.Text = chosen.Reads;
         _ = _map.AdornmentOverlay.RefreshAsync();
     }
 }

@@ -267,6 +267,32 @@ public abstract class SamplePage : ContentPage
     /// </summary>
     protected static readonly Color PanelInk = Color.FromArgb("#1F2328");
 
+    /// <summary>
+    /// A button for the panel, in the panel's own colours. Left to the platform, a
+    /// button in a dark theme is drawn dark with light text, which on the near-white
+    /// card reads as a black block on Android; for the same reason as
+    /// <see cref="PanelInk"/>, the colours are named here. Named colours also stop the
+    /// platform greying a disabled button, so it is dimmed instead.
+    /// </summary>
+    protected static Button PanelButton(string text, double fontSize, Thickness padding)
+    {
+        var button = new Button
+        {
+            Text = text,
+            FontSize = fontSize,
+            Padding = padding,
+            TextColor = Colors.White,
+            BackgroundColor = Color.FromArgb("#2D7FF9"),
+            CornerRadius = 8,
+        };
+        button.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(Button.IsEnabled))
+                button.Opacity = button.IsEnabled ? 1 : 0.5;
+        };
+        return button;
+    }
+
     /// <summary>A one-line status label on the panel, for what a sample wants to say.</summary>
     protected Label AddStatusLabel()
         => AddToPanel(new Label { FontSize = 12, TextColor = Colors.DimGray, LineBreakMode = LineBreakMode.TailTruncation });
