@@ -48,10 +48,10 @@ public class VectorFileFormats : SamplePage
     {
         ("Shapefile", "Frisco's parks"),
         ("GeoJSON", "Pittsburgh's historic districts"),
-        ("GPX", "Frisco's hike and bike trails, track by track"),
-        ("MapInfo TAB", "Frisco's city limits and the land it governs beyond them"),
+        ("GPX", "Frisco's hike and bike trails"),
+        ("MapInfo TAB", "Frisco's city limits"),
         ("TinyGeo", "Frisco's zoning areas"),
-        ("SQLite", "Frisco's restaurants, a table at a time"),
+        ("SQLite", "Frisco's restaurants"),
     };
 
     // The basemap under the data. One source for the life of the sample: a restyle

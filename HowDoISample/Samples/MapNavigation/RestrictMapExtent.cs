@@ -65,7 +65,7 @@ public class RestrictMapExtent : SamplePage
         AddToPanel(new Label
         {
             Text = string.Format(CultureInfo.InvariantCulture,
-                "Tilt it, turn it, zoom it - it stays inside the red box, between 1:{0:N0} and 1:{1:N0}.",
+                "Stays inside the red box, 1:{0:N0} to 1:{1:N0}",
                 MinZoomInScale, MaxZoomOutScale),
             FontSize = 13,
             TextColor = PanelInk,

@@ -61,8 +61,8 @@ public class MeasureDistanceAndArea : SamplePage
         _result.Text = string.Empty;
         // Short enough to fit the one line the panel gives it.
         _detail.Text = _area
-            ? "Tap corners, then double-tap or long-press to close"
-            : "Tap points, then double-tap or long-press to finish";
+            ? "Tap corners, double-tap to close"
+            : "Tap points, double-tap to finish";
 
         _ = _map.RefreshAsync();
     }

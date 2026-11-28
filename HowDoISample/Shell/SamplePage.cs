@@ -21,6 +21,10 @@ public abstract class SamplePage : ContentPage
     private readonly ScrollView _panelScroller;
     private readonly Border _panel;
     private readonly Label _attribution;
+    private readonly Border _backChip;
+
+    /// <summary>True while the page is a phone turned on its side.</summary>
+    private bool? _compact;
 
     protected SamplePage()
     {
@@ -48,6 +52,8 @@ public abstract class SamplePage : ContentPage
             IsRotationEnabled = true,
         };
 
+        KeepLayersToEdges(Map);
+
         // The map draws itself once it first has a size. Without this nothing is ever
         // asked to draw, and the page comes up empty with nothing in the log.
         Map.Behaviors.Add(new AutoLoadMapViewBehavior());
@@ -59,7 +65,7 @@ public abstract class SamplePage : ContentPage
         Map.OverlayDrawFailed += (_, e) =>
             Console.WriteLine($"[Sample] {e.Overlay?.GetType().Name} failed to draw: {e.Error}");
 
-        _panelContent = new VerticalStackLayout { Spacing = 6 };
+        _panelContent = new VerticalStackLayout { Spacing = 5 };
         _panel = new Border
         {
             // Scrolled and capped: a sample whose controls are a list would otherwise
@@ -67,10 +73,10 @@ public abstract class SamplePage : ContentPage
             // ScrollView is told to wrap its content (VerticalOptions.Start): left to
             // itself a ScrollView asks for all the height there is on Android.
             Content = _panelScroller = BuildPanelScroller(),
-            MaximumHeightRequest = 260,
+            MaximumHeightRequest = PanelMaxHeight,
             BackgroundColor = Color.FromRgba(255, 255, 255, 235),
             StrokeThickness = 0,
-            Padding = new Thickness(12, 10),
+            Padding = new Thickness(10, 8),
             Margin = new Thickness(10, 0, 10, 0),
             VerticalOptions = LayoutOptions.End,
             IsVisible = false,
@@ -104,7 +110,9 @@ public abstract class SamplePage : ContentPage
             Children = { _attribution, _panel },
         };
 
-        Content = new Grid { Children = { Map, bottom } };
+        _backChip = BuildBackChip();
+
+        Content = new Grid { Children = { Map, bottom, _backChip } };
 
         // The strips the safe area holds back are given to the map.
         Loaded += (_, _) => FillSafeArea(Map);
@@ -145,6 +153,125 @@ public abstract class SamplePage : ContentPage
 #endif
 
         return scroller;
+    }
+
+    /// <summary>
+    /// The tallest a page can be and still count as a phone on its side. Phones in
+    /// landscape are 320 to 440 high; the smallest tablet is over 700.
+    /// </summary>
+    private const double CompactHeight = 500;
+
+    /// <summary>
+    /// Lays the page out for its shape. A phone on its side has a few hundred points
+    /// of height, and the navigation bar and the card took more than half of them, so
+    /// on its side the bar goes - a small back button with the title stands in for it,
+    /// over the map - and the card keeps to the left and to less of the height, so
+    /// the map shows beside and above it.
+    /// </summary>
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+        if (width <= 0 || height <= 0)
+            return;
+
+        // Again whenever the page changes shape, because the strips move when the
+        // phone turns - and after the layout pass, because while it is turning the
+        // window still reports the insets of the orientation it is leaving.
+        Dispatcher.Dispatch(() => FillSafeArea(Map));
+
+        var compact = width > height && height < CompactHeight;
+        _panel.MaximumHeightRequest = compact ? Math.Min(PanelMaxHeight, height * 0.45) : PanelMaxHeight;
+
+        // A width, not a cap: held to the left, a card measured by its content comes
+        // out as narrow as its narrowest row, and a strip of choices folds in half.
+        _panel.WidthRequest = compact ? Math.Min(CompactPanelWidth, width - 20) : -1;
+        if (compact == _compact)
+            return;
+
+        _compact = compact;
+        NavigationPage.SetHasNavigationBar(this, !compact);
+        _backChip.IsVisible = compact;
+        _panel.HorizontalOptions = compact ? LayoutOptions.Start : LayoutOptions.Fill;
+    }
+
+    /// <summary>The card's cap: past it the controls scroll.</summary>
+    private const double PanelMaxHeight = 260;
+
+    /// <summary>How wide the card is on a phone on its side: room for a strip of three.</summary>
+    private const double CompactPanelWidth = 440;
+
+    /// <summary>
+    /// The back button and title that stand in for the navigation bar while the
+    /// phone is on its side.
+    /// </summary>
+    private Border BuildBackChip()
+    {
+        var title = new Label
+        {
+            FontSize = 13,
+            TextColor = PanelInk,
+            VerticalOptions = LayoutOptions.Center,
+            LineBreakMode = LineBreakMode.TailTruncation,
+        };
+        title.SetBinding(Label.TextProperty, new Binding(nameof(Title), source: this));
+
+        var chip = new Border
+        {
+            Content = new HorizontalStackLayout
+            {
+                Spacing = 6,
+                Children =
+                {
+                    new Label
+                    {
+                        Text = "\u2039",
+                        FontSize = 22,
+                        TextColor = PanelInk,
+                        VerticalOptions = LayoutOptions.Center,
+                        Margin = new Thickness(0, -3, 0, 0),
+                    },
+                    title,
+                },
+            },
+            BackgroundColor = Color.FromRgba(255, 255, 255, 235),
+            StrokeThickness = 0,
+            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 16 },
+            Padding = new Thickness(10, 4, 14, 4),
+            Margin = new Thickness(10, 10, 0, 0),
+            HorizontalOptions = LayoutOptions.Start,
+            VerticalOptions = LayoutOptions.Start,
+            IsVisible = false,
+        };
+
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += async (_, _) => await Navigation.PopAsync();
+        chip.GestureRecognizers.Add(tap);
+        return chip;
+    }
+
+    /// <summary>
+    /// Lets the map's own layers reach the strips the safe area holds back.
+    /// <para>
+    /// A MAUI layout keeps its children out of the unsafe areas by default, and the
+    /// map and every layer inside it is a layout. With the map hung past the safe area
+    /// (see <see cref="FillSafeArea"/>) each of them would push its contents back in:
+    /// on a phone on its side the map drew a band short of the edge by the notch.
+    /// </para>
+    /// </summary>
+    public static void KeepLayersToEdges(MapView map)
+    {
+        static void Release(Element element)
+        {
+            if (element is Layout layout)
+                layout.SafeAreaEdges = SafeAreaEdges.None;
+            else if (element is ContentView view)
+                view.SafeAreaEdges = SafeAreaEdges.None;
+        }
+
+        Release(map);
+        map.DescendantAdded += (_, e) => Release(e.Element);
+        foreach (var element in map.GetVisualTreeDescendants().OfType<Element>())
+            Release(element);
     }
 
     /// <summary>
@@ -211,6 +338,18 @@ public abstract class SamplePage : ContentPage
     /// </summary>
     protected T AddToPanel<T>(T view) where T : View
     {
+        // A label with nothing to say takes no line: a result that is not there yet,
+        // or a status that has been cleared, would otherwise hold a blank row open.
+        if (view is Label label)
+        {
+            label.IsVisible = !string.IsNullOrEmpty(label.Text);
+            label.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(Label.Text))
+                    label.IsVisible = !string.IsNullOrEmpty(label.Text);
+            };
+        }
+
         _panelContent.Add(view);
         _panel.IsVisible = true;
         return view;
@@ -416,7 +555,7 @@ public abstract class SamplePage : ContentPage
                 {
                     Content = label,
                     StrokeThickness = 0,
-                    Padding = new Thickness(4, 6),
+                    Padding = new Thickness(4, 5),
                     StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 8 },
                 };
 

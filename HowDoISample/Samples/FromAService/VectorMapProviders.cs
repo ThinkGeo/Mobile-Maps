@@ -38,14 +38,14 @@ public class VectorMapProviders : SamplePage
 
     private static readonly (string Name, string StyleUri, string Shows, string Credit)[] Providers =
     {
-        ("ThinkGeo Light", null, "ThinkGeo's own streets, light", OpenStreetMapCredit),
-        ("ThinkGeo Dark", null, "The same tiles under a dark style", OpenStreetMapCredit),
-        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap's Liberty, from OpenStreetMap data", OpenFreeMapCredit),
-        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "Positron: a pale backdrop meant to be drawn over", OpenFreeMapCredit),
-        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "The same OpenStreetMap data, dark", OpenFreeMapCredit),
-        ("WFS parcels", null, "Cadastral parcels in Amsterdam, queried from the Kadaster",
+        ("ThinkGeo Light", null, "ThinkGeo streets, light", OpenStreetMapCredit),
+        ("ThinkGeo Dark", null, "ThinkGeo streets, dark", OpenStreetMapCredit),
+        ("OFM Liberty", "https://tiles.openfreemap.org/styles/liberty", "OpenFreeMap Liberty", OpenFreeMapCredit),
+        ("OFM Positron", "https://tiles.openfreemap.org/styles/positron", "OpenFreeMap Positron, a pale backdrop", OpenFreeMapCredit),
+        ("OFM Dark", "https://tiles.openfreemap.org/styles/dark", "OpenFreeMap, dark", OpenFreeMapCredit),
+        ("WFS parcels", null, "Amsterdam parcels, Kadaster WFS",
             "Parcels \u00a9 Kadaster \u00b7 " + OpenStreetMapCredit),
-        ("OGC API places", null, "Named places in Spain, queried from IGN",
+        ("OGC API places", null, "Places in Spain, IGN OGC API",
             "Places \u00a9 IGN Espa\u00f1a \u00b7 " + OpenStreetMapCredit),
     };
 

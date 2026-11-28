@@ -85,7 +85,7 @@ public class ExportTheMapToPdf : SamplePage
         AddToPanel(_export);
 
         _status = AddStatusLabel();
-        _status.Text = "What you see is what is printed.";
+        _status.Text = "Prints what you see";
 
         // The whole city, so the city limits that go on the sheet are on screen too.
         map.CenterPoint = new PointShape(-10779000, 3915000);

@@ -16,11 +16,11 @@ public class ScaleLineAndScaleBar : SamplePage
     private static readonly (string Name, ScaleLineUnitSystem Line, UnitSystem Bar, string Reads)[] UnitSystems =
     {
         ("Metric", ScaleLineUnitSystem.Default, UnitSystem.Metric,
-            "Metric on top, feet and miles underneath"),
+            "Metric over imperial"),
         ("Imperial", ScaleLineUnitSystem.ImperialAndMetric, UnitSystem.Imperial,
-            "Feet and miles on top, metric underneath"),
+            "Imperial over metric"),
         ("Nautical", ScaleLineUnitSystem.NauticalMileAndImperial, UnitSystem.NauticalMile,
-            "Nautical miles on top, feet and miles underneath"),
+            "Nautical miles over imperial"),
     };
 
     /// <summary>

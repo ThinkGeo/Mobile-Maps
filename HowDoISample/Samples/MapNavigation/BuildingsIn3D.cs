@@ -98,8 +98,11 @@ public class BuildingsIn3D : ContentPage
 
         Content = new Grid { Children = { _map, BuildAttribution(), BuildThemeToggle(), BuildLocateButton(), BuildLocateStatus() } };
 
-        // See SamplePage.FillSafeArea.
+        // See SamplePage.FillSafeArea and SamplePage.KeepLayersToEdges: again whenever
+        // the page changes shape, since the strips move when the phone turns.
+        SamplePage.KeepLayersToEdges(_map);
         Loaded += (_, _) => SamplePage.FillSafeArea(_map);
+        SizeChanged += (_, _) => Dispatcher.Dispatch(() => SamplePage.FillSafeArea(_map));
     }
 
     /// <summary>
@@ -296,7 +299,7 @@ public class BuildingsIn3D : ContentPage
 
             if (location == null)
             {
-                ShowLocateStatus("No fix yet - try again with a view of the sky");
+                ShowLocateStatus("No fix yet - try under open sky");
                 return;
             }
 
@@ -314,7 +317,7 @@ public class BuildingsIn3D : ContentPage
         }
         catch (FeatureNotSupportedException)
         {
-            ShowLocateStatus("This device has no location service");
+            ShowLocateStatus("No location service on this device");
         }
         catch (Exception exception)
         {

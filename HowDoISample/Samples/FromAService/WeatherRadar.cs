@@ -50,6 +50,7 @@ public class WeatherRadar : SamplePage, IDisposable
         _map = map;
         map.MapUnit = GeographyUnit.Meter;
         _status = AddToPanel(new Label { FontSize = 12, TextColor = PanelInk, MaxLines = 2 });
+        SetAttribution("Radar \u00a9 Iowa State Mesonet \u00b7 " + DefaultAttribution);
 
         try
         {
@@ -108,9 +109,9 @@ public class WeatherRadar : SamplePage, IDisposable
     {
         var minutesAgo = (FrameCount - 1 - frame) * 5;
         _status.Text = minutesAgo == 0
-            ? "Radar composite, courtesy of Iowa State Mesonet - now"
+            ? "Radar: now"
             : FormattableString.Invariant(
-                $"Radar composite, courtesy of Iowa State Mesonet - {minutesAgo} minutes ago");
+                $"Radar: {minutesAgo} min ago");
     }
 
     private static string FrameId(int frame) => FormattableString.Invariant($"radar-{frame}");

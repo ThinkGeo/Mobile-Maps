@@ -24,13 +24,13 @@ public class RasterMapProviders : SamplePage
     /// </summary>
     private static readonly (string Name, string Shows, string Credit)[] Providers =
     {
-        ("ThinkGeo Aerial", "Aerial imagery over Frisco, Texas",
+        ("ThinkGeo Aerial", "Aerial imagery of Frisco, Texas",
             "Imagery \u00a9 ThinkGeo"),
-        ("OpenStreetMap", "The community's own street map, drawn to pixels",
+        ("OpenStreetMap", "OpenStreetMap's standard tiles",
             "\u00a9 OpenStreetMap contributors"),
-        ("WMS NASA", "VIIRS true colour, the whole continent two days back",
+        ("WMS NASA", "NASA VIIRS true colour, two days ago",
             "VIIRS imagery courtesy NASA EOSDIS GIBS \u00b7 \u00a9 OpenStreetMap contributors"),
-        ("WMTS Swisstopo", "The Swiss national map, on the grid the server declares",
+        ("WMTS Swisstopo", "Swiss national map, Switzerland only",
             "\u00a9 swisstopo"),
     };
 

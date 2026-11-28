@@ -97,14 +97,14 @@ public class LiveFlights : SamplePage, IDisposable
         }
         catch (Exception exception)
         {
-            _status.Text = "OpenSky did not answer, so there are no aircraft to show. ("
+            _status.Text = "OpenSky did not answer ("
                 + exception.Message.Split('\n')[0] + ")";
             return;
         }
 
         if (_flights.Length == 0)
         {
-            _status.Text = "OpenSky answered without any aircraft. Try again later.";
+            _status.Text = "No aircraft reported. Try again later.";
             return;
         }
 

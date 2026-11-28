@@ -95,8 +95,8 @@ public class EditFeatures : SamplePage
         {
             ShowSchools(e.Value);
             _measure.Text = e.Value
-                ? "Red dots are schools; a vertex within 25 px lands on one"
-                : "Vertices land where the finger leaves them";
+                ? "Vertices snap to schools (red dots)"
+                : "Vertices land where you drop them";
         };
 
         _snapLabel = new Label
